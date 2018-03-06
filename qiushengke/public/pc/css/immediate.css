@@ -1,0 +1,1112 @@
+﻿body{
+	padding-top: 90px;
+}
+
+#Con{
+	margin-top: 20px;
+}
+#Con .ConInner{
+	padding-top: 72px;
+	position: relative; z-index: 20;
+}
+
+/*浮动区域*/
+#Date{
+	position: fixed; top: 110px; left: 0; right: 0;
+}
+#Date .abox{
+	max-width: 1460px; min-width: 1260px;
+	margin: 0 auto;
+}
+#Date .abox ul{
+	width: 90px;
+	margin-left: 20px;
+	border-radius: 8px;
+	background: #fff;
+	box-shadow: 0px 4px 5px 0px rgba(0, 64, 36, 0.4);
+	transition: transform 0.5s; -moz-transition: transform 0.5s; -webkit-transition: transform 0.5s; -o-transition: transform 0.5s;
+	overflow: hidden;
+}
+#Date .abox ul.fixed{
+	transform: translateY(20px); -ms-transform: translateY(20px); -webkit-transform: translateY(20px); -o-transform: translateY(20px); -moz-transform: translateY(20px);
+}
+#Date .abox ul a.li{
+	height: 50px;
+	font-size: 15px; line-height: 50px; text-align: center;
+	position: relative;
+	display: block;
+}
+#Date .abox ul a.li:hover{
+	color: #2b9968;
+}
+#Date .abox ul a.li + a.li:before{
+	height: 1px;
+	background: #e0e0e0;
+	position: absolute; top: 0; left: 15px; right: 15px;
+	content: '';
+}
+#Date .abox ul a.on{
+	background: #2b9968;
+	color: #fff;
+}
+#Date .abox ul a.on:hover{
+	color: #fff;
+}
+#Date .abox ul a.on:before, #Date .abox ul a.on + a.li:before{
+	display: none;
+}
+
+/*控制区域*/
+#Control{
+	height: 40px;
+	padding: 15px 0 17px;
+	border-radius: 8px 8px 0 0;
+	background: #fff;
+	position: absolute; top: 0; left: 0; right: 0;
+}
+#Control.fixed{
+	border-radius: 0;
+	position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+}
+#Control .inbox{
+	height: 40px;
+}
+#Control.fixed .inbox{
+	max-width: 1200px; min-width: 1000px;
+    padding: 0 130px; margin: 0 auto;
+}
+#Control p{
+	display: inline-block;
+	vertical-align: top;
+}
+#Control p.save{
+	height: 40px;
+	padding-left: 40px;
+	background: url(../img/entrance_down_n.png) no-repeat 5px center #fff; background-size: 30px;
+}
+#Control p.save button{
+	width: 40px; height: 40px;
+	border-radius: 4px;
+	background: #efefef;
+	font-size: 12px; text-align: center;
+}
+#Control p.save button:hover{
+	background: #2b9968;
+	color: #fff;
+}
+#Control p.save button + button{
+	margin-left: 10px;
+}
+#Control p.column{
+	height: 30px;
+	padding: 5px 0 5px 50px;
+	overflow: hidden;
+}
+#Control p.column button{
+	height: 30px; width: 60px;
+	background: #efefef;
+	font-size: 12px; text-align: center;
+	position: relative;
+}
+#Control p.column button:first-child{
+	border-radius: 4px 0 0 4px;
+}
+#Control p.column button:last-child{
+	border-radius: 0 4px 4px 0;
+}
+#Control p.column button + button:before{
+	width: 1px;
+	background: #ddd;
+	position: absolute; top: 5px; bottom: 5px; left: 0;
+	content: '';
+}
+#Control p.column button.on, #Control p.column button:hover{
+	background: #2b9968;
+	color: #fff;
+}
+#Control p.column button.on:before,
+#Control p.column button:hover:before,
+#Control p.column button.on + button:before,
+#Control p.column button:hover + button:before{
+	display: none;
+}
+#Control p.number{
+	height: 40px;
+	padding-left: 30px;
+	font-size: 12px; line-height: 40px;
+}
+#Control p.number b{
+	padding: 0 5px;
+	color: #b5493c;
+}
+#Control p.number span{
+	color: #adadad;
+	cursor: pointer;
+}
+#Control p.number span:hover{
+	color: #2b9968;
+}
+#Control div.sound{
+	height: 30px;
+	padding: 5px 0; margin-left: 40px;
+	display: inline-block;
+	position: relative;
+}
+#Control div.sound:before{
+	width: 30px; height: 30px;
+	border-radius: 4px 0 0 4px;
+	background: url(../img/entrance_sound_n.png) no-repeat center #006c3c; background-size: 30px;
+	position: absolute; top: 5px; left: 0;
+	content: '';
+}
+#Control div.sound button{
+	width: 100px; height: 30px;
+	padding: 0 24px 0 30px;
+	border-radius: 4px;
+	background: url(../img/entrance_icon_down_n.png) no-repeat right 10px center #2b9968; background-size: 10px;
+	background: url(../img/entrance_icon_down_n.png) no-repeat 82px center #2b9968\0/; 
+	font-size: 12px; text-align: center; color: #fff;
+}
+#Control div.sound ul{
+	border-radius: 8px;
+	background: #fff;
+	box-shadow: 0px 0px 10px 0px rgba(0, 64, 36, 0.4);
+	position: absolute; top: 40px; left: 0; right: 0; z-index: 30;
+	overflow: hidden;
+	display: none;
+}
+#Control div.sound ul.show{
+	display: block;
+}
+#Control div.sound ul li{
+	height: 24px;
+	font-size: 12px; line-height: 24px; text-align: center; color: #2b9968;
+	cursor: pointer;
+}
+#Control div.sound ul li.on{
+	background: #2b9968;
+	color: #fff;
+}
+#Control p.filter{
+	height: 30px;
+	padding: 5px 40px 5px 0;
+	float: right;
+}
+#Control p.filter button{
+	height: 30px; width: 80px;
+	border-radius: 4px;
+	background: #efefef;
+	font-size: 12px; text-align: center;
+}
+#Control p.filter button + button{
+	margin-left: 10px;
+}
+#Control p.filter button:hover{
+	background: #2b9968;
+	color: #fff;
+}
+
+/*table*/
+#Con table{
+	width: 100%;
+	position: relative;
+}
+#Con table thead th{
+	height: 36px;
+	border-bottom: 2px solid #2b9968;
+	background: #fff;
+	font-size: 12px; line-height: 24px; text-align: center; color: #b4b4b4;
+}
+#Con table tbody th{
+	height: 40px;
+	padding: 20px 0 0 12px;
+	font-size: 18px; line-height: 40px; text-align: left; color: #fff;
+	position: relative;
+}
+#Con > .ConInner > table > tbody > tr > th:before{
+	width: 32px; height: 50px;
+	border-radius: 20px 0 0 0;
+	background: url(../img/separated_image_n.png) no-repeat left top; background-size: 32px;
+	position: absolute; top: 20px; left: 0; z-index: 1;
+	content: '';
+}
+#Con table tbody th p{
+	height: 40px;
+	padding: 0 12px 0 20px;
+	border-radius: 20px 0 0 0;
+	background: #2b9968;
+	display: inline-block;
+}
+#Con table tbody td{
+	height: 44px;
+	border-bottom: 1px solid #dbdbdb;
+	background: #fff;
+	font-size: 12px; line-height: 18px; text-align: center;
+	position: relative;
+}
+#Con table tbody tr:hover td{
+	background: #e0e0e0 !important;
+}
+#Con table tbody tr:nth-child(odd) td, #Top tr:nth-child(even) td{
+	background: #f5f5f5;
+}
+#Top tr:nth-child(odd) td{
+	background: #fff !important;
+}
+#Con table tbody td:nth-child(1){
+
+}
+#Con table tbody td:nth-child(2){
+	padding-left: 27px;
+	text-align: left;
+}
+#Con table tbody td:nth-child(3){
+	
+}
+#Con table tbody td:nth-child(4){
+	color: #adadad;
+}
+#Con table tbody td:nth-child(5){
+	
+}
+#Con table tbody td:nth-child(6){
+	text-align: right;
+}
+#Con table tbody td:nth-child(7){
+	
+}
+#Con table tbody td:nth-child(8){
+	text-align: left;	
+}
+#Con table tbody td:nth-child(9){
+	
+}
+#Con table tbody td:nth-child(10){
+	
+}
+#Con table tbody td:nth-child(11){
+	
+}
+#Con table tbody td:nth-child(12){
+	padding: 0 5px;
+}
+#Con table tbody td:nth-child(13){
+	
+}
+#Con table tbody td:nth-child(14){
+	
+}
+#Con table tbody td:nth-child(13) a:hover{
+	color: #2b9968;
+}
+
+/*选择按钮*/
+#Con table button.choose{
+	width: 12px; height: 12px;
+	border: 1px solid #c5c5c5; border-radius: 50%;
+	position: relative;
+}
+#Con table button.choose[value='1']{
+	border-color: #2b9968;
+}
+#Con table button.choose[value='1']:before{
+	width: 6px; height: 6px;
+	margin: -3px 0 0 -3px;
+	border-radius: 50%;
+	background: #2b9968;
+	position: absolute; top: 50%; left: 50%;
+	content: '';
+}
+
+/*第二格赛事*/
+#Con table p.leagueLine{
+	width: 4px; height: 20px;
+	border-radius: 2px;
+	position: absolute; top: 12px; left: 5px;
+}
+
+/*第三格状态*/
+#Con table p.time{
+	color: #c52601;
+}
+#Con table p.time span{
+	padding-left: 2px;
+	-moz-animation: minute 1s cubic-bezier(0.5,0.1,0.25,1) infinite;
+	-webkit-animation: minute 1s cubic-bezier(0.5,0.1,0.25,1) infinite;
+	-o-animation: minute 1s cubic-bezier(0.5,0.1,0.25,1) infinite;
+	animation: minute 1s cubic-bezier(0.5,0.1,0.25,1) infinite;
+}
+@keyframes minute{
+	from {opacity: 100;}
+	to {opacity: 0;}
+}
+
+/*球队*/
+a.team{
+	max-height: 32px;
+	line-height: 16px;
+	overflow: hidden;
+	display: inline-block;
+	position: relative;
+}
+a.team:hover{
+	color: #2b9968;
+}
+#Con td.host{
+	padding-left: 5px;
+	text-align: right;
+	position: relative;
+}
+#Con td.away{
+	padding-right: 5px;
+	text-align: left;
+	position: relative;
+}
+#Con td.host:before{
+	width: 1px; height: 28px;
+	background: #dbdbdb;
+	position: absolute; top: 8px; left: 0;
+	content: '';
+}
+#Con td.away:before{
+	width: 1px; height: 28px;
+	background: #dbdbdb;
+	position: absolute; top: 8px; right: 0;
+	content: '';
+}
+#Con td.host a.team{
+	padding-left: 30px;
+}
+#Con td.away a.team{
+	padding-right: 30px;
+}
+a.team span.yellowCard, a.team span.redCard{
+	width: 10px; height: 14px;
+	margin-top: -7px;
+	border-radius: 2px;
+	line-height: 14px; text-align: center; color: #fff;
+	position: absolute; top: 50%;
+}
+#Con td.host a.team span.yellowCard, #Con td.host a.team span.redCard{
+	left: 3px;
+}
+#Con td.away a.team span.yellowCard, #Con td.away a.team span.redCard{
+	right: 3px;
+}
+a.team span.yellowCard{
+	background: #f9b30e;
+}
+a.team span.redCard{
+	background: #c52601;
+}
+#Con td.host a.team span.redCard + span.yellowCard{
+	left: 16px;
+}
+#Con td.away a.team span.redCard + span.yellowCard{
+	right: 16px;
+}
+a.team span.name{
+	display: block;
+}
+#Con td.host a.team span.name:first-child{
+	margin-left: -30px;
+}
+#Con td.away a.team span.name:first-child{
+	margin-right: -30px;
+}
+#Con td.host a.team span:first-child + span.name{ 
+	margin-left: -12px;
+}
+#Con td.away a.team span:first-child + span.name{ 
+	margin-right: -12px;
+}
+
+/*队徽*/
+#Con td img.icon{
+	max-width: 28px;
+}
+
+/*比分*/
+#Con td p.fullScore{
+	font-size: 14px; color: #c52601; font-weight: bold;
+}
+#Con td p.halfScore{
+	font-size: 12px; color: #adadad;
+}
+
+/*直播*/
+#Con td .live{
+	width: 50px; height: 22px;
+	margin: 0 auto;
+	border-radius: 2px;
+	line-height: 22px; color: #fff;
+	display: block;
+}
+#Con td .video{
+	background: #c52601;
+}
+#Con td .flash{
+	background: #2b9968;
+}
+#Con td .live img{
+	width: 20px; height: 20px;
+}
+
+/*指数*/
+#Con td p.asia{
+	line-height: 18px; color: #adadad;
+}
+#Con td p.goal{
+	line-height: 18px;
+}
+#Con td p.asia span, #Con td p.goal span{
+	width: 40px;
+	position: relative;
+	display: inline-block;
+}
+#Con td p.asia span.up, #Con td p.goal span.up{
+	color: #2b9968;
+}
+#Con td p.asia span.up:before, #Con td p.goal span.up:before{
+	width: 14px; height: 14px;
+	margin-top: -7px;
+	background: url(../img/bas_icon_up_n.png) no-repeat center; background-size: 14px;
+	position: absolute; top: 50%; right: -7px;
+	content: '';
+}
+#Con td p.asia span.down, #Con td p.goal span.down{
+	color: #1661c7;
+}
+#Con td p.asia span.down:before, #Con td p.goal span.down:before{
+	width: 14px; height: 14px;
+	margin-top: -7px;
+	background: url(../img/bas_icon_down_n.png) no-repeat center; background-size: 14px;
+	position: absolute; top: 50%; right: -7px;
+	content: '';
+}
+#Con td p.asia span.odd, #Con td p.goal span.odd{
+	width: 80px;
+	margin: 0 3px;
+	font-size: 12px;
+	display: inline-block;
+}
+#Con td p.asia span.odd:before, #Con td p.goal span.odd:before{
+	right: -2px;
+}
+
+/*置顶*/
+#Con table button.top{
+	width: 16px; height: 16px;
+	background: url(../img/icon_top_n.png) no-repeat center; background-size: 16px;
+}
+#Con table button.top:hover{
+	background: url(../img/icon_top_hover.png) no-repeat center; background-size: 16px;
+}
+#Con table button.top[value='1']{
+	background: url(../img/icon_top_s.png) no-repeat center; background-size: 16px;
+}
+
+/*事件弹层*/
+#Con table div.even{
+	width: 310px; height: 0;
+	margin-left: -200px; padding: 0 45px;
+	border-radius: 8px;
+	background: rgb(24, 80, 55)\0/; background: rgba(24, 80, 55, 0.94);
+	position: absolute; top: 44px; left: 50%; z-index: 101;
+	transform: translateY(10px); -ms-transform: translateY(10px); -webkit-transform: translateY(10px); -o-transform: translateY(10px); -moz-transform: translateY(10px);
+	visibility: hidden;
+	overflow: hidden;
+}
+#Con table td:hover div.even{
+	height: auto;
+	transform: translateY(0); -ms-transform: translateY(0); -webkit-transform: translateY(0); -o-transform: translateY(0); -moz-transform: translateY(0);
+	transition: transform 0.5s; -moz-transition: transform 0.5s; -webkit-transition: transform 0.5s; -o-transition: transform 0.5s;
+	visibility: visible;
+	overflow: visible;
+}
+#Con table div.even:before{
+	width: 16px; height: 8px;
+	margin-left: -8px;
+	background: url(../img/icon_triangle_up_n.png) no-repeat center; background-size: 16px;
+	position: absolute; top: -8px; left: 50%;
+	content: '';
+}
+#Con table div.even.top{
+	top: auto; bottom: 44px;
+}
+#Con table div.even.top:before{
+	background: url(../img/icon_triangle_down_n.png) no-repeat center; background-size: 16px;
+	top: auto; bottom: -8px;
+}
+#Con table div.even p.team{
+	height: 30px;
+	margin: 0 -45px;
+	font-size: 14px; line-height: 30px; text-align: center; color: #fff;
+}
+#Con table div.even p.team span{
+	width: 48%; height: 30px;
+	overflow: hidden;
+	display: inline-block;
+}
+#Con table div.even dl{
+	padding-bottom: 20px;
+	border-top: 1px solid #000;
+}
+#Con table div.even dl dt{
+	height: 20px;
+	padding: 5px 0;
+	border-top: 1px solid #77eeb9;
+	font-size: 12px; line-height: 20px; text-align: center; color: #fff;
+}
+#Con table div.even dl dt p{
+	height: 20px;
+	padding: 0 8px;
+	border-radius: 10px;
+	background: #074128;
+	display: inline-block;
+}
+#Con table div.even dl dd{
+	height: 30px;
+	margin: 0 -35px;
+}
+#Con table div.even dl.ebox dd + dd{
+	padding-top: 10px;
+}
+#Con table div.even dl dd.host{
+	padding-right: 190px;
+}
+#Con table div.even dl dd.away{
+	padding-left: 190px;
+}
+#Con table div.even dl dd p.time{
+	width: 60px; height: 30px;
+	font-size: 12px; line-height: 30px; text-align: center; color: #fff;
+}
+#Con table div.even dl dd.host p.time{
+	margin-right: -30px;
+	float: right;
+}
+#Con table div.even dl dd.away p.time{
+	margin-left: -30px;
+	float: left;
+}
+#Con table div.even dl dd p.time span{
+	position: absolute;
+}
+#Con table div.even dl dd p.img{
+	width: 30px; height: 30px;
+	border-radius: 50%;
+	background: #fff;
+}
+#Con table div.even dl dd p.img img{
+	width: 30px; height: 30px;
+}
+#Con table div.even dl dd.host p.img{
+	float: right;
+}
+#Con table div.even dl dd.away p.img{
+	float: left;
+}
+#Con table div.even dl dd p.name{
+	height: 30px;
+	font-size: 12px; line-height: 30px; color: #fff;
+	overflow: hidden;
+}
+#Con table div.even dl dd.host p.name{
+	padding-right: 10px;
+	text-align: right;
+}
+#Con table div.even dl dd.away p.name{
+	padding-left: 10px;
+	text-align: left;
+}
+#Con table div.even dl dd.total{
+	font-size: 12px; line-height: 30px; text-align: center; color: #fff; vertical-align: middle;
+}
+#Con table div.even dl dd.total p{
+	display: inline-block;
+}
+#Con table div.even dl dd.total p.item{
+	height: 30px; width: 60px;
+}
+#Con table div.even dl dd.total p.percent{
+	height: 8px; width: 100px;
+	border-radius: 4px;
+	background: #074128;
+	overflow: hidden;
+	position: relative;
+}
+#Con table div.even dl dd.total p.percent span{
+	width: 0;
+	border-radius: 4px;
+	background: #28cc83;
+	position: absolute; top: 0; bottom: 0;
+	transition: width 0.5s; -moz-transition: width 0.5s; -webkit-transition: width 0.5s; -o-transition: width 0.5s;
+}
+#Con table div.even dl dd.total p.percent span.host{
+	right: 0;
+}
+#Con table div.even dl dd.total p.percent span.away{
+	left: 0;
+}
+#Con table div.even dl dd.total p.num{
+	height: 30px; width: 35px;
+}
+#Con table div.even dl dd.total p.num.host{
+	padding-right: 10px;
+	text-align: right;
+}
+#Con table div.even dl dd.total p.num.away{
+	padding-left: 10px;
+	text-align: left;
+}
+
+/*盘口弹层*/
+#Con table div.odd{
+	width: 490px; height: 0;
+	margin-left: -245px; padding-bottom: 20px;
+	border-radius: 8px;
+	background: #fff;
+	box-shadow: 0px 0px 10px 0px rgba(0, 64, 36, 0.4);
+	position: absolute; top: 44px; left: 50%; z-index: 1;
+	transform: translateY(10px); -ms-transform: translateY(10px); -webkit-transform: translateY(10px); -o-transform: translateY(10px); -moz-transform: translateY(10px);
+	overflow: hidden;
+	visibility: hidden;
+}
+#Con table div.odd.top{
+	top: auto; bottom: 44px;
+}
+#Con table td:hover div.odd{
+	height: auto;
+	transform: translateY(0); -ms-transform: translateY(0); -webkit-transform: translateY(0); -o-transform: translateY(0); -moz-transform: translateY(0);
+	transition: transform 0.5s; -moz-transition: transform 0.5s; -webkit-transition: transform 0.5s; -o-transition: transform 0.5s;
+	visibility: visible;
+}
+#Con table div.odd p.league{
+	height: 30px;
+	background: #2b9968;
+	font-size: 12px; line-height: 30px; text-align: center; color: #fff;
+}
+#Con table div.odd table{
+
+}
+#Con table div.odd table th{
+	height: 16px;
+	padding: 0;
+	border-bottom: none;
+	font-size: 12px; line-height: 16px; text-align: center; color: #adadad;
+}
+#Con table div.odd table td{
+	height: 40px;
+	padding: 0 !important;
+	border-left: 1px solid #dbdbdb; border-bottom: none;
+	font-size: 12px; text-align: center; color: #666; vertical-align: middle;
+}
+#Con table div.odd table td:before{
+	display: none;
+}
+#Con table div.odd table tr:nth-child(odd) td{
+	background: #e8f6f0!important;
+}
+#Con table div.odd table tr:nth-child(even) td{
+	background: #f7fffb !important;
+}
+#Con table div.odd table tr td[colspan='5']{
+	height: 10px;
+	border-left: none;
+	background: #fff !important;
+}
+#Con table div.odd table td[rowspan='2']{
+	border-left: none;
+	font-size: 14px;
+}
+#Con table div.odd table tr:nth-child(1) td:nth-child(2),
+#Con table div.odd table tr:nth-child(2) td:nth-child(1){
+	text-align: center; color: #adadad;
+}
+#Con table div.odd table td p{
+	width: 33%;
+	display: inline-block;
+	text-align: center;
+}
+#Con table div.odd table tr:nth-child(1) td:nth-child(3) p,
+#Con table div.odd table tr:nth-child(2) td:nth-child(2) p{
+	width: 22%;
+}
+#Con table div.odd table tr:nth-child(1) td:nth-child(3) p.od,
+#Con table div.odd table tr:nth-child(2) td:nth-child(2) p.od{
+	width: 54%;
+}
+
+/*模拟*/
+#Simulation{
+	border-top: 1px solid #dbdbdb;
+	background: #fff;
+	box-shadow: 0px 2px 9px 0px rgba(0, 64, 36, 0.3);
+	position: fixed; top: 72px; left: 0; right: 0; z-index: 99;
+	visibility: hidden;
+}
+#Simulation.fixed{
+	visibility: visible;	
+}
+#Simulation table{
+	margin: 0 auto;
+}
+#Simulation table thead th{
+	border-bottom: none;
+}
+
+/*弹层*/
+.filterBox{
+	position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 500;
+}
+.filterBox .inner{
+	max-height: 70%; width: 760px;
+	margin-left: -380px; padding: 60px 0;
+	border-radius: 4px;
+	background: #fff;
+	box-shadow: 0px 0px 29px 0px rgba(8, 96, 57, 0.6);
+	position: absolute; top: 14%; left: 50%;
+	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; -o-box-sizing: border-box; -ms-box-sizing: border-box; box-sizing: border-box; 
+	overflow: hidden;
+}
+.filterBox .inner .topBar{
+	height: 60px;
+	background: #2b9968;
+	padding: 0 80px 0 25px;
+	font-size: 18px; line-height: 60px; color: #fff;
+	position: absolute; top: 0; left: 0; right: 0;
+}
+.filterBox .inner .topBar button.close{
+	width: 24px; height: 24px;
+	margin-top: -12px;
+	border-radius: 50%;
+	background: url(../img/icon_delete_n.png) no-repeat center rgba(255, 255, 255, 0.7); background-size: 24px;
+	background: url(../img/icon_delete_n.png) no-repeat center #fff\0/;
+	position: absolute; right: 28px; top: 50%;
+}
+.filterBox .inner .topBar button.close:hover{
+	background: url(../img/icon_delete_n.png) no-repeat center #fff; background-size: 24px;
+}
+.filterBox .inner .topBar button.league{
+	width: 88px; height: 32px;
+	margin: 14px 0 0 30px;
+	border: 1px solid #fff;
+	background: none;
+	font-size: 14px; text-align: center; color: #fff;
+	float: right;
+}
+.filterBox .inner .topBar button.league[value='1'], .filterBox .inner .topBar button.league:hover{
+	background: #fff;
+	color: #2b9968;
+}
+.filterBox .inner .topBar button.odd{
+	width: 80px; height: 44px;
+	margin-top: 16px;
+	background: #006c3c;
+	font-size: 16px; text-align: center; color: #adadad;
+	float: right;
+}
+.filterBox .inner .topBar button.odd.goal{
+	border-radius: 0 6px 0 0;
+}
+.filterBox .inner .topBar button.odd.asia{
+	border-radius: 6px 0 0 0;
+}
+.filterBox .inner .topBar button.odd:hover{
+	background: #73ae93;
+	color: #fff;
+}
+.filterBox .inner .topBar button.odd[value='1']{
+	background: #fff;
+	color: #2b9968;
+}
+.filterBox .inner .bottomBar{
+	height: 30px;
+	padding: 15px 62px 15px 34px;
+	background: #fff;
+	position: absolute; bottom: 0; left: 0; right: 0;
+}
+.filterBox .inner .bottomBar button.all{
+	height: 30px; width: 58px;
+	margin-right: 10px;
+	border-radius: 4px; border: 1px solid #adadad;
+	background: #fff;
+	font-size: 14px; text-align: center;
+}
+.filterBox .inner .bottomBar button.opposite{
+	height: 30px; width: 58px;
+	border-radius: 4px;
+	background: #2b9968;
+	font-size: 14px; text-align: center; color: #fff;
+}
+.filterBox .inner .bottomBar button.comfirm{
+	height: 30px; width: 98px;
+	border-radius: 4px;
+	background: #2b9968;
+	font-size: 14px; text-align: center; color: #fff;
+	float: right;
+}
+.filterBox .inner .bottomBar button.comfirm:disabled{
+	background: #adadad;
+}
+/*赛事筛选*/
+#LeagueFilter .inner{
+	height: 612px;
+}
+#LeagueFilter .inner ul{
+	padding-left: 90px;
+	background: #eee;
+	position: absolute; top: 60px; bottom: 60px; left: 0; right: 0;
+	overflow-x: hidden; overflow-y: auto;
+}
+#LeagueFilter .inner ul li{
+	padding: 24px 0 12px;
+	position: relative;
+}
+#LeagueFilter .inner ul li:after{
+	display: block;
+	clear: both;
+	content: '';
+}
+#LeagueFilter .inner ul li + li{
+	border-top: 1px solid #c5d0d8;
+}
+#LeagueFilter .inner ul li button{
+	width: 136px; height: 30px;
+	margin: 0 20px 12px 0; padding-left: 30px;
+	border-radius: 4px;
+	background: #fff;
+	font-size: 14px; text-align: left;
+	position: relative;
+	float: left;
+}
+#LeagueFilter .inner ul li button:hover{
+	background: rgba(43, 153, 104, 0.6); background: #2b9968\0/;
+	color: #fff;
+}
+#LeagueFilter .inner ul li button[value='1']{
+	background: #2b9968;
+	color: #fff;
+}
+#LeagueFilter .inner ul li button:before{
+	width: 12px; height: 12px;
+	margin-top: -7px;
+	border-radius: 4px; border: 1px solid #adadad;
+	background: #fff;
+	position: absolute; top: 50%; left: 8px;
+	content: '';
+}
+#LeagueFilter .inner ul li button:hover:before{
+	border-color: #fff;
+}
+#LeagueFilter .inner ul li button[value='1']:before{
+	background: url(../img/icon_g_n.png) no-repeat center #fff; background-size: 14px;
+	border-color: #fff;
+}
+#LeagueFilter .inner ul li b.letter{
+	width: 40px; height: 40px;
+	margin-top: -20px;
+	border-radius: 4px;
+	background: #cfd7cd;
+	font-size: 28px; line-height: 40px; text-align: center; color: #fff;
+	position: absolute; top: 50%; left: -65px;
+}
+#LeagueFilter .inner ul li button + button + button + button + button ~ b.letter{
+	top: 60px;
+}
+/*盘口筛选*/
+#OddFilter .inner{
+	height: 420px;
+}
+#OddFilter .inner .item{
+	background: #eee;
+	position: absolute; top: 60px; bottom: 60px; left: 0; right: 0;
+	overflow-x: hidden; overflow-y: auto;
+}
+#OddFilter .inner ul{
+	padding: 46px 0 46px 12px;
+	transition: transform 0.5s; -moz-transition: transform 0.5s; -webkit-transition: transform 0.5s; -o-transition: transform 0.5s;
+	position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+}
+#OddFilter .inner .item[type=asia] ul.asia, #OddFilter .inner .item[type=goal] ul.goal{
+	transform: translateX(0); -ms-transform: translateX(0); -webkit-transform: translateX(0); -o-transform: translateX(0); -moz-transform: translateX(0);
+	display: block\0/;
+}
+#OddFilter .inner .item[type=goal] ul.asia{
+	transform: translateX(-100%); -ms-transform: translateX(-100%); -webkit-transform: translateX(-100%); -o-transform: translateX(-100%); -moz-transform: translateX(-100%);
+	display: none\0/;
+}
+#OddFilter .inner .item[type=asia] ul.goal{
+	transform: translateX(100%); -ms-transform: translateX(100%); -webkit-transform: translateX(100%); -o-transform: translateX(100%); -moz-transform: translateX(100%);	
+	display: none\0/;
+}
+#OddFilter .inner ul:after{
+	display: block;
+	clear: both;
+	content: '';
+}
+#OddFilter .inner ul li{
+	width: 25%; height: 30px;
+	margin-bottom: 12px;
+	display: inline-block;
+	float: left;
+}
+#OddFilter .inner ul li button{
+	min-width: 136px; height: 30px;
+	padding: 0 10px 0 30px; margin-left: 12px;
+	border-radius: 4px;
+	background: #fff;
+	font-size: 14px; text-align: left;
+	position: relative;
+}
+#OddFilter .inner ul li button:hover{
+	background: rgba(43, 153, 104, 0.6); background: #2b9968\0/;
+	color: #fff;
+}
+#OddFilter .inner ul li button[value='1']{
+	background: #2b9968;
+	color: #fff;
+}
+#OddFilter .inner ul li button:before{
+	width: 12px; height: 12px;
+	margin-top: -7px;
+	border-radius: 4px; border: 1px solid #adadad;
+	background: #fff;
+	position: absolute; top: 50%; left: 8px;
+	content: '';
+}
+#OddFilter .inner ul li button:hover:before{
+	border-color: #fff;
+}
+#OddFilter .inner ul li button[value='1']:before{
+	background: url(../img/icon_g_n.png) no-repeat center #fff; background-size: 14px;
+	border-color: #fff;
+}
+#OddFilter .inner ul p.clear{
+	padding-top: 12px; margin-left: 12px;
+	border-top: 1px solid #e0e0e0;
+}
+
+/*进球提醒*/
+#GoalUl{
+	width: 520px;
+	margin-left: -260px;
+	position: fixed; top: 8%; left: 50%; z-index: 600;
+	transition: transform 0.5s; -moz-transition: transform 0.5s; -webkit-transition: transform 0.5s; -o-transition: transform 0.5s;
+}
+#GoalUl.close{
+	transform: scale(0,1); -ms-transform: scale(0,1); -webkit-transform: scale(0,1); -o-transform: scale(0,1); -moz-transform: scale(0,1);
+}
+#GoalUl li{
+	width: 440px; height: 70px;
+	padding: 0 40px;
+	background: url(../img/bg_goal.jpg) no-repeat center #2b9968; background-size: cover;
+	box-shadow: 0px 0px 29px 0px rgba(8, 96, 57, 0.6);
+	font-size: 16px; line-height: 70px; text-align: center; color: #fff;
+	position: relative;
+
+	transform: translateY(-1000px); -ms-transform: translateY(-1000px); -webkit-transform: translateY(-1000px); -o-transform: translateY(-1000px); -moz-transform: translateY(-1000px);
+	transition: transform 0.5s, margin-top 0.5s, height 0.5s, opacity 0.5s;
+	-moz-transition: transform 0.5s, margin-top 0.5s, height 0.5s, opacity 0.5s;
+	-webkit-transition: transform 0.5s, margin-top 0.5s, height 0.5s, opacity 0.5s;
+	-o-transition: transform 0.5s, margin-top 0.5s, height 0.5s, opacity 0.5s;
+}
+#GoalUl li + li{
+	margin-top: 14px;
+}
+#GoalUl li.show{
+	transform: translateY(0); -ms-transform: translateY(0); -webkit-transform: translateY(0); -o-transform: translateY(0); -moz-transform: translateY(0);
+}
+#GoalUl li.close{
+	opacity: 0;
+	/*overflow: hidden;*/
+}
+#GoalUl li.height{
+	height: 0;
+}
+#GoalUl li.height + li{
+	margin-top: 0;
+}
+#GoalUl li.host{
+	border-radius: 8px 70px 0 8px;
+}
+#GoalUl li.away{
+	border-radius: 0 8px 8px 70px;
+}
+#GoalUl li .icon{
+	width: 52px; height: 52px;
+	padding: 10px;
+	border-radius: 50%; border: 4px solid #fabd36;
+	background: #fff;
+	position: absolute; top: -5px;
+	overflow: hidden;
+}
+#GoalUl li.host .icon{
+	left: -40px;
+}
+#GoalUl li.away .icon{
+	right: -40px;
+}
+#GoalUl li .icon img{
+	width: 52px; height: 52px;
+}
+#GoalUl li p{
+	height: 70px;
+	font-size: 16px; line-height: 70px;
+	overflow: hidden;
+	display: inline-block;
+}
+#GoalUl li p.score{
+	width: 76px;
+}
+#GoalUl li p.score span{
+	padding: 0 4px;
+}
+#GoalUl li p.team{
+	width: 170px;
+}
+#GoalUl li p.team span{
+	max-width: 120px; min-width: 80px; height: 70px;
+	overflow: hidden;
+}
+#GoalUl li p.team.host span{
+	text-align: right;
+	float: right;
+}
+#GoalUl li p.team.away span{
+	text-align: left;
+	float: left;
+}
+#GoalUl li.host .host, #GoalUl li.away .away{
+	color: #fabd36;
+}
+#GoalUl button.close{
+	width: 20px; height: 20px;
+	margin-left: -10px;
+	border-radius: 50%;
+	background: url(../img/icon_delete_white_n.png) no-repeat center rgba(11, 79, 48, 0.7); background-size: 20px;
+	position: absolute; right: -70px; top: 25px;
+}
+
+
+/*宽度适配*/
+@media screen and (min-width: 1400px){
+	#Control p.save button, #Control p.column button{
+		font-size: 14px;
+	}
+	#Con table thead th, #Con table tbody td{
+		font-size: 14px;
+	}
+	#Con table tbody td p.asia, #Con table tbody td p.goal{
+		font-size: 12px;
+	}
+	#Con > .ConInner > table > colgroup > col:nth-child(4){
+		width: 60px !important;
+	}
+}
+
+
+
+
+

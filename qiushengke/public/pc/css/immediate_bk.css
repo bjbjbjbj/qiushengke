@@ -1,0 +1,608 @@
+﻿body{
+	padding-top: 90px;
+}
+
+#Con{
+	margin-top: 20px;
+}
+#Con .ConInner{
+	position: relative; z-index: 20;
+}
+
+/*浮动区域*/
+#Date{
+	position: fixed; top: 110px; left: 0; right: 0;
+}
+#Date .abox{
+	max-width: 1460px; min-width: 1260px;
+	margin: 0 auto;
+}
+#Date .abox ul{
+	width: 90px;
+	margin-left: 20px;
+	border-radius: 8px;
+	background: #fff;
+	box-shadow: 0px 4px 5px 0px rgba(0, 64, 36, 0.4);
+	transition: transform 0.5s; -moz-transition: transform 0.5s; -webkit-transition: transform 0.5s; -o-transition: transform 0.5s;
+	overflow: hidden;
+}
+#Date .abox ul.fixed{
+	transform: translateY(20px); -ms-transform: translateY(20px); -webkit-transform: translateY(20px); -o-transform: translateY(20px); -moz-transform: translateY(20px);
+}
+#Date .abox ul a.li{
+	height: 50px;
+	font-size: 15px; line-height: 50px; text-align: center;
+	position: relative;
+	display: block;
+}
+#Date .abox ul a.li:hover{
+	color: #2b9968;
+}
+#Date .abox ul a.li + a.li:before{
+	height: 1px;
+	background: #e0e0e0;
+	position: absolute; top: 0; left: 15px; right: 15px;
+	content: '';
+}
+#Date .abox ul a.on{
+	background: #2b9968;
+	color: #fff;
+}
+#Date .abox ul a.on:hover{
+	color: #fff;
+}
+#Date .abox ul a.on:before, #Date .abox ul a.on + a.li:before{
+	display: none;
+}
+
+/*日期区域*/
+#Calendar{
+	height: 50px;
+	margin-bottom: 20px; padding-right: 140px;
+	border-radius: 4px;
+	background: #fff;
+	position: relative;
+}
+#Calendar ul a.li{
+	width: 14%; height: 42px;
+	padding: 4px 0; 
+	text-align: center; color: #adadad;
+	float: left;
+	cursor: pointer;
+}
+#Calendar ul a.li.on{
+	color: #2b9968;
+}
+#Calendar ul a.li p.date{
+	font-size: 16px; line-height: 24px;
+}
+#Calendar ul a.li p.week{
+	font-size: 12px; line-height: 18px;
+}
+#Calendar input{
+	width: 70px; height: 50px;
+	padding: 0 30px 0 40px;
+	border: none;
+	background: url(../img/icon_triangle_down.png) no-repeat right 12px center; background-size: 12px;
+	font-size: 12px; line-height: 50px\0/;
+	position: absolute; top: 0; right: 0;
+	cursor: pointer;
+}
+#Calendar:after{
+	width: 24px; height: 50px;
+	background: url(../img/icon_calendar_n.png) no-repeat center; background-size: 24px;
+	position: absolute; top: 0; right: 110px;
+	content: '';
+}
+
+
+/*控制区域*/
+#Control{
+	height: 40px;
+	padding: 15px 0 17px;
+	border-radius: 8px 8px 0 0;
+	background: #fff;
+	position: relative;
+}
+#Control.fixed{
+	box-shadow: 0px 2px 9px 0px rgba(0, 64, 36, 0.3);
+	position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+}
+#Control .inbox{
+	height: 40px;
+}
+#Control.fixed .inbox{
+	max-width: 1200px; min-width: 1000px;
+    padding: 0 130px; margin: 0 auto;
+}
+#Control p{
+	display: inline-block;
+	vertical-align: top;
+}
+#Control p.save{
+	height: 40px;
+	padding-left: 40px;
+	background: url(../img/entrance_down_n.png) no-repeat 5px center #fff; background-size: 30px;
+}
+#Control p.save button{
+	width: 40px; height: 40px;
+	border-radius: 4px;
+	background: #efefef;
+	font-size: 12px; text-align: center;
+}
+#Control p.save button:hover{
+	background: #2b9968;
+	color: #fff;
+}
+#Control p.save button + button{
+	margin-left: 10px;
+}
+#Control p.array{
+	height: 30px;
+	padding: 5px 0 5px 50px;
+	overflow: hidden;
+}
+#Control p.array:first-child{
+	margin-left: -20px;
+}
+#Control p.array button{
+	height: 30px; width: 90px;
+	background: #efefef;
+	font-size: 12px; text-align: center;
+	position: relative;
+}
+#Control p.array button:first-child{
+	border-radius: 4px 0 0 4px;
+}
+#Control p.array button:last-child{
+	border-radius: 0 4px 4px 0;
+}
+#Control p.array button.on, #Control p.array button:hover{
+	background: #2b9968;
+	color: #fff;
+}
+#Control p.column{
+	height: 30px;
+	padding: 5px 0 5px 20px;
+	overflow: hidden;
+}
+#Control p.column button{
+	height: 30px; width: 60px;
+	background: #efefef;
+	font-size: 12px; text-align: center;
+	position: relative;
+}
+#Control p.column button:first-child{
+	border-radius: 4px 0 0 4px;
+}
+#Control p.column button:last-child{
+	border-radius: 0 4px 4px 0;
+}
+#Control p.column button + button:before{
+	width: 1px;
+	background: #ddd;
+	position: absolute; top: 5px; bottom: 5px; left: 0;
+	content: '';
+}
+#Control p.column button.on, #Control p.column button:hover{
+	background: #2b9968;
+	color: #fff;
+}
+#Control p.column button.on:before,
+#Control p.column button:hover:before,
+#Control p.column button.on + button:before,
+#Control p.column button:hover + button:before{
+	display: none;
+}
+#Control p.number{
+	height: 40px;
+	padding-left: 30px;
+	font-size: 12px; line-height: 40px;
+}
+#Control p.number b{
+	padding: 0 5px;
+	color: #b5493c;
+}
+#Control p.number span{
+	color: #adadad;
+	cursor: pointer;
+}
+#Control p.number span:hover{
+	color: #2b9968;
+}
+#Control p.filter{
+	height: 30px;
+	padding: 5px 40px 5px 0;
+	float: right;
+}
+#Control p.filter button{
+	height: 30px; width: 80px;
+	border-radius: 4px;
+	background: #efefef;
+	font-size: 12px; text-align: center;
+}
+#Control p.filter button + button{
+	margin-left: 10px;
+}
+#Control p.filter button:hover{
+	background: #2b9968;
+	color: #fff;
+}
+
+/*表格*/
+#Con table{
+	width: 100%;
+	border-radius: 4px; border: 1px solid #2b9968;
+	box-shadow: 0px 4px 6px 0px rgba(8, 96, 57, 0.4);
+	overflow: hidden;
+	position: relative;
+}
+#Con table + table{
+	margin-top: 10px;
+}
+#Con table thead th{
+	height: 30px;
+	background: #f5f7f6;
+	font-size: 12px; line-height: 30px; text-align: center; color: #adadad;
+	position: relative; z-index: 2;
+}
+#Con table thead th.league{
+	width: 130px;
+	text-align: left;
+}
+#Con table thead th.team{
+	width: 150px;
+	padding-left: 10px;
+	text-align: left;
+}
+#Con table thead th.team span{
+	color: #c52601;
+}
+#Con table thead th.half{
+	width: 60px;
+}
+#Con table thead th.full{
+	width: 40px;
+}
+#Con table thead th.difference{
+	width: 50px;
+}
+#Con table thead th.total{
+	width: 70px;
+}
+#Con table thead th.europe{
+	width: 50px;
+}
+#Con table thead th.asia{
+	width: 90px;
+}
+#Con table thead th.goal{
+	width: 110px;
+}
+#Con table thead th.data{
+	width: 100px;
+}
+#Con table thead th.league p{
+	height: 30px;
+	padding-left: 13px;
+	border-radius: 0 30px 0 0;
+	background: #adadad;
+	color: #fff;
+	position: relative;
+}
+#Con table thead th.league p.live{
+	background: #95ccb3;
+}
+
+/*选择按钮*/
+#Con table button.choose{
+	width: 12px; height: 12px;
+	margin-right: 13px;
+	border: 1px solid #666; border-radius: 50%;
+}
+#Con table button.choose[value='1'], #Con table p.live button.choose{
+	border-color: #2b9968;
+}
+#Con table button.choose[value='1']:before{
+	width: 6px; height: 6px;
+	margin: -3px 0 0 -3px;
+	border-radius: 50%;
+	background: #2b9968;
+	position: absolute; top: 50%; left: 50%;
+	content: '';
+}
+
+/*表格内容*/
+#Con table tbody:before{
+	width: 100%; height: 1px;
+	box-shadow: 0px 0px 8px 0px rgba(0, 64, 36, 0.8);
+	position: absolute; top: 29px; left: 0; z-index: 1;
+	content: '';
+}
+#Con table tbody td{
+	height: 34px;
+	background: #fff;
+	font-size: 12px; line-height: 16px; text-align: center;
+	overflow: hidden;
+	position: relative;
+}
+#Con table tbody tr + tr td{
+	border-top: 1px solid #dbdbdb;
+}
+#Con table td p.time{
+	position: relative;
+}
+#Con table td p.time:before{
+	width: 4px; height: 4px;
+	margin-top: -2px;
+	border-radius: 50%;
+	background: #2b9968;
+	position: absolute; top: 50%; left: 10px;
+	content: '';
+}
+#Con table td .live{
+	width: 50px; height: 22px;
+	margin: 8px auto 0;
+	line-height: 22px; color: #fff;
+	display: block;
+}
+#Con table td .live span{
+	width: 50px; height: 22px;
+	border-radius: 2px;
+	background-color: #c52601;
+	display: inline-block;
+}
+#Con table td .live img{
+	width: 20px; height: 20px;
+}
+#Con table tbody td.team{
+	padding-left: 44px;
+	text-align: left;
+}
+#Con table tbody td.team p{
+	height: 16px;
+	overflow: hidden;
+}
+#Con table tbody td.team img{
+	width: 24px; height: 24px;
+	position: absolute; left: 10px; top: 5px;
+}
+#Con table tbody td.score{
+	background: #e8efec;
+}
+#Con table tbody td.score.fullScore{
+	color: #2b9968;
+}
+#Con table tbody td.fullScore ~ td:before{
+	width: 1px; height: 20px;
+	background: #dbdbdb;
+	position: absolute; top: 7px; left: 0;
+	content: '';
+}
+#Con table tbody td.fullScore + td:before, #Con table tbody td.fullScore ~ td[rowspan]:before{
+	display: none;
+}
+#Con table tbody td.asia{
+	padding-left: 44px;
+	text-align: left;
+}
+#Con table tbody td.asia span{
+	height: 34px; width: 34px;
+	line-height: 34px; text-align: right; color: #fabd36;
+	position: absolute; top: 0; left: 0;
+}
+#Con table tbody td.goal{
+	padding-left: 64px;
+	text-align: left;
+}
+#Con table tbody td.goal span{
+	height: 34px; width: 56px;
+	line-height: 34px; text-align: right; color: #fabd36;
+	position: absolute; top: 0; left: 0;
+}
+#Con table tbody td.asia p.up, #Con table tbody td.goal p.up{
+	color: #2b9968;
+	position: relative;
+}
+#Con table tbody td.asia p.up:before, table tbody td.goal p.up:before{
+	width: 14px; height: 14px;
+	margin-top: -7px;
+	background: url(../img/bas_icon_up_n.png) no-repeat center; background-size: 14px;
+	position: absolute; top: 50%; left: 28px;
+	content: '';
+}
+#Con table tbody td.asia p.down, #Con table tbody td.goal p.down{
+	color: #1661c7;
+	position: relative;
+}
+#Con table tbody td.asia p.down:before, table tbody td.goal p.down:before{
+	width: 14px; height: 14px;
+	margin-top: -7px;
+	background: url(../img/bas_icon_down_n.png) no-repeat center; background-size: 14px;
+	position: absolute; top: 50%; left: 28px;
+	content: '';
+}
+#Con table tbody td:last-child a:hover{
+	color: #2b9968;
+}
+
+
+
+/*弹层*/
+.filterBox{
+	position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 500;
+}
+.filterBox .inner{
+	max-height: 70%; width: 760px;
+	margin-left: -380px; padding: 60px 0;
+	border-radius: 4px;
+	background: #fff;
+	box-shadow: 0px 0px 29px 0px rgba(8, 96, 57, 0.6);
+	position: absolute; top: 14%; left: 50%;
+	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; -o-box-sizing: border-box; -ms-box-sizing: border-box; box-sizing: border-box; 
+	overflow: hidden;
+}
+.filterBox .inner .topBar{
+	height: 60px;
+	background: #2b9968;
+	padding: 0 80px 0 25px;
+	font-size: 18px; line-height: 60px; color: #fff;
+	position: absolute; top: 0; left: 0; right: 0;
+}
+.filterBox .inner .topBar button.close{
+	width: 24px; height: 24px;
+	margin-top: -12px;
+	border-radius: 50%;
+	background: url(../img/icon_delete_n.png) no-repeat center rgba(255, 255, 255, 0.7); background-size: 24px;
+	background: url(../img/icon_delete_n.png) no-repeat center #fff;
+	position: absolute; right: 28px; top: 50%;
+}
+.filterBox .inner .topBar button.close:hover{
+	background: url(../img/icon_delete_n.png) no-repeat center #fff; background-size: 24px;
+}
+.filterBox .inner .bottomBar{
+	height: 30px;
+	padding: 15px 62px 15px 34px;
+	background: #fff;
+	position: absolute; bottom: 0; left: 0; right: 0;
+}
+.filterBox .inner .bottomBar button.all{
+	height: 30px; width: 58px;
+	margin-right: 10px;
+	border-radius: 4px; border: 1px solid #adadad;
+	background: #fff;
+	font-size: 14px; text-align: center;
+}
+.filterBox .inner .bottomBar button.opposite{
+	height: 30px; width: 58px;
+	border-radius: 4px;
+	background: #2b9968;
+	font-size: 14px; text-align: center; color: #fff;
+}
+.filterBox .inner .bottomBar button.comfirm{
+	height: 30px; width: 98px;
+	border-radius: 4px;
+	background: #2b9968;
+	font-size: 14px; text-align: center; color: #fff;
+	float: right;
+}
+.filterBox .inner .bottomBar button.comfirm:disabled{
+	background: #adadad;
+}
+/*赛事筛选*/
+#LeagueFilter .inner{
+	height: 400px;
+}
+#LeagueFilter .inner ul{
+	padding-left: 90px;
+	background: #eee;
+	position: absolute; top: 60px; bottom: 60px; left: 0; right: 0;
+	overflow-x: hidden; overflow-y: auto;
+}
+#LeagueFilter .inner ul li{
+	padding: 24px 0 12px;
+	position: relative;
+}
+#LeagueFilter .inner ul li:after{
+	display: block;
+	clear: both;
+	content: '';
+}
+#LeagueFilter .inner ul li + li{
+	border-top: 1px solid #c5d0d8;
+}
+#LeagueFilter .inner ul li button{
+	width: 136px; height: 30px;
+	margin: 0 20px 12px 0; padding-left: 30px;
+	border-radius: 4px;
+	background: #fff;
+	font-size: 14px; text-align: left;
+	position: relative;
+	float: left;
+}
+#LeagueFilter .inner ul li button:hover{
+	background: rgba(43, 153, 104, 0.6); background: #2b9968\0/;
+	color: #fff;
+}
+#LeagueFilter .inner ul li button[value='1']{
+	background: #2b9968;
+	color: #fff;
+}
+#LeagueFilter .inner ul li button:before{
+	width: 12px; height: 12px;
+	margin-top: -7px;
+	border-radius: 4px; border: 1px solid #adadad;
+	background: #fff;
+	position: absolute; top: 50%; left: 8px;
+	content: '';
+}
+#LeagueFilter .inner ul li button:hover:before{
+	border-color: #fff;
+}
+#LeagueFilter .inner ul li button[value='1']:before{
+	background: url(../img/icon_g_n.png) no-repeat center #fff; background-size: 14px;
+	border-color: #fff;
+}
+#LeagueFilter .inner ul li b.letter{
+	width: 40px; height: 40px;
+	margin-top: -20px;
+	border-radius: 4px;
+	background: #cfd7cd;
+	font-size: 28px; line-height: 40px; text-align: center; color: #fff;
+	position: absolute; top: 50%; left: -65px;
+}
+#LeagueFilter .inner ul li button + button + button + button + button ~ b.letter{
+	top: 60px;
+}
+
+/*宽度适配*/
+@media screen and (min-width: 1400px){
+	#Control p.save button, #Control p.column button{
+		font-size: 14px;
+	}
+	#Con table thead th.half{
+		width: 80px;
+	}
+	#Con table thead th.full{
+		width: 50px;
+	}
+	#Con table thead th.difference{
+		width: 60px;
+	}
+	#Con table thead th.total{
+		width: 85px;
+	}
+	#Con table thead th.europe{
+		width: 60px;
+	}
+	#Con table thead th.asia{
+		width: 110px;
+	}
+	#Con table thead th.goal{
+		width: 140px;
+	}
+	#Con table thead th.data{
+		width: 120px;
+	}
+	#Con table tbody td.team,#Con table tbody td.score{
+		font-size: 14px;
+	}
+	#Con table tbody td.asia{
+		padding-left: 60px;
+	}
+	#Con table tbody td.asia span{
+		width: 45px;
+	}
+	#Con table tbody td.goal{
+		padding-left: 80px;
+	}
+	#Con table tbody td.goal span{
+		width: 70px;
+	}
+
+}
+
+
+
+
+

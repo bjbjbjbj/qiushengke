@@ -1,0 +1,167 @@
+﻿@charset "utf-8";
+/* CSS Document */
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, font, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td ,button { margin: 0; padding: 0; border: 0; outline: 0; font-style: inherit; font-size: 100%; font-family: inherit; }
+:focus { outline: 0; }
+table { border-collapse: separate; border-spacing: 0; overflow: auto; table-layout: fixed;}
+caption, th, td { font-weight: normal;}
+a img, iframe { border: none; padding: 0px;}
+ol, ul { list-style: none; }
+input, textarea, select, button { font-size: 100%; box-shadow:none; margin: 0; padding: 0; line-height: normal;}
+input:focus, textarea:focus{ border-color: rgba(222,32,55,0.5) !important;}
+select { margin: 0; appearance:none; -moz-appearance:none; -webkit-appearance:none;}
+select::-ms-expand { display: none; }
+em{ font-style:normal; }
+a{text-decoration:none; -webkit-tap-highlight-color: rgba(255,255,255,0);}
+a,a:link,a:visited,a:active{ color: inherit; cursor: pointer; -webkit-tap-highlight-color:rgba(0,0,0,0);}
+button{ text-align: center; border: 0px; cursor: pointer; -webkit-tap-highlight-color:rgba(0,0,0,0); color: #666;}
+input:-webkit-autofill { background-color: none; } 
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{ -webkit-appearance: none !important; margin: 0; }
+input[type="number"]{-moz-appearance:textfield;}
+label{cursor: pointer;}
+
+/*body高度适配*/
+html{height: 100%;}
+body{
+	min-height: 100%;
+	padding: 60px 0 100px;
+	margin: 0 auto;
+	background: url(../img/bg_image_n.jpg) no-repeat top center #ececec; background-size: 100% auto; color: #666; font-weight: normal; font: 12px/20px 'PingFang','PingFangSC-Regular','苹方',Tahoma, Helvetica, Arial,'微软雅黑',sans-serif;
+	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; -o-box-sizing: border-box; -ms-box-sizing: border-box; box-sizing: border-box; 
+	-webkit-text-size-adjust: none;
+	position: relative;
+}
+
+/*基础样式*/
+.hidden{visibility: hidden;}
+.clear{clear: both;}
+
+
+/*顶部*/
+#Nav{
+	min-height: 60px;
+	background: #fff;
+	position: absolute; top: 0; left: 0; right: 0; z-index: 20;
+}
+#Nav .home{
+	position: absolute; top: 0; left: 0; right: 0;
+}
+#Nav .home .abox{
+	max-width: 1200px; min-width: 1000px;
+	padding: 0 130px; margin: 0 auto;
+}
+#Nav .home .abox a{
+	height: 60px;
+	float: left;
+}
+#Nav .home .abox a img{
+	height: 60px;
+}
+#Nav .Column{
+	padding: 0 160px;
+	box-shadow: 0px 2px 9px 0px rgba(0, 64, 36, 0.3);
+	text-align: center;
+}
+#Nav .Column a.home img{
+	height: 60px;
+}
+#Nav .Column a{
+	height: 60px;
+	padding: 0 18px;
+	font-size: 18px; line-height: 60px; text-align: center;
+	position: relative;
+	display: inline-block;
+}
+#Nav .Column a.on, #Nav .Column a:hover{
+	color: #2b9968;
+}
+#Nav .Column a + a{
+	margin-left: 30px;
+}
+#Nav .Column a.on:after{
+	width: 30px; height: 3px;
+	margin-left: -15px;
+	border-radius: 1px;
+	background: #2b9968;
+	position: absolute; bottom: 6px; left: 50%;
+	content: '';
+}
+#Nav .Link{
+	height: 30px;
+	background: url(../img/entrance_bg_n.jpg) no-repeat center #2b9968; background-size: auto 30px;
+	text-align: center;
+}
+#Nav .Link a{
+	height: 30px;
+	padding: 0 16px;
+	font-size: 14px; line-height: 30px; text-align: center; color: #fff;
+	display: inline-block;
+}
+#Nav .Link a:hover{
+	background: #0c6c3e;
+}
+#Nav .Link a + a{
+	margin-left: 16px;
+}
+
+/*中间内容区域*/
+#Con{
+	max-width: 1200px; min-width: 1000px;
+	padding: 0 130px; margin: 0 auto 100px;
+	position: relative;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*回到顶部*/
+#Totop{
+	position: fixed; bottom: 120px; left: 0; right: 0;
+}
+#Totop .abox{
+	max-width: 1460px; min-width: 1260px;
+	margin: 0 auto;
+}
+#Totop .abox .totop{
+	width: 50px; height: 50px;
+	margin-right: 40px;
+	border-radius: 8px;
+	background: url(../img/icon_Ztop_n.png) no-repeat center rgb(43, 153, 104)\0/; background: url(../img/icon_Ztop_n.png) no-repeat center rgba(43, 153, 104, 0.3); background-size: 50px;
+	float: right;
+}
+#Totop .abox .totop:hover{
+	background: url(../img/icon_Ztop_n.png) no-repeat center rgb(43, 153, 104)
+}
+
+
+/*底部*/
+#Bottom{
+	height: 75px;
+	padding-top: 25px;
+	background: url(../img/bottom_image_n.jpg) no-repeat center top; background-size: cover;
+	font-size: 12px; line-height: 16px; text-align: center; color: #fff;
+	position: absolute; bottom: 0; left: 0; right: 0; z-index: 0;
+}
+#Bottom p + p{
+	margin-top: 15px;
+}
+#Bottom a{
+	margin-left: 12px;
+}
+#Bottom a + a{
+	margin-left: 24px;
+}
+#Bottom a:hover{
+	color: #38e799;
+}
+

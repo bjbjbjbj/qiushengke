@@ -21,7 +21,7 @@ Route::group([], function () {
     Route::any("/error", "HomeController@error");
 
     //即时比赛列表
-    Route::get("/match/immediate.html", "MatchController@immediate"); //今天
-    Route::get("/match/result.html", "MatchController@result"); //完赛比分
-    Route::get("/match/schedule.html", "MatchController@schedule"); //下日赛程
+    Route::get("/match/{sport}/immediate.html", "MatchController@immediate"); //今天
+    Route::get("/match/{sport}/result_{dateStr}.html", "MatchController@result"); //完赛比分
+    Route::get("/match/{sport}/schedule_{dateStr}.html", "MatchController@schedule"); //下日赛程
 });

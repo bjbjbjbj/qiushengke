@@ -1,0 +1,803 @@
+﻿
+body{
+	padding-top: 90px;
+}
+
+#Con{
+	margin-top: 20px;
+}
+#Con:after{
+	display: block;
+	clear: both;
+	content: '';
+}
+
+/*左边内容*/
+#Con .lbox{
+	margin-right: 320px;
+	position: relative; z-index: 20;
+}
+#Con .lbox .title{
+	height: 40px;
+	padding-left: 12px;
+	position: relative;
+}
+#Con .lbox .title:before{
+	width: 32px; height: 50px;
+    border-radius: 20px 0 0 0;
+    background: url(../img/separated_image_n.png) no-repeat left top; background-size: 32px;
+    position: absolute; top: 0; left: 0; z-index: 1;
+    content: '';
+}
+#Con .lbox .title p{
+	height: 40px;
+	padding: 0 12px 0 20px;
+    border-radius: 20px 0 0 0;
+    background: #2b9968;
+	font-size: 18px; line-height: 40px; text-align: left; color: #fff;
+	display: inline-block;
+}
+#Con .lbox .title .inbox{
+	height: 28px;
+	border: 1px solid #2b9968; border-radius: 2px;
+	position: absolute; top: 5px; right: 0;
+	overflow: hidden;
+}
+#Con .lbox .title .inbox input{
+	width: 100px; height: 28px;
+	padding: 0; border: none;
+	font-size: 12px; line-height: 28px; text-align: center; color: #666; vertical-align: top;
+}
+#Con .lbox .title .inbox button{
+	width: 40px; height: 28px;
+	background: url(../img/icon_calendar_white.png) no-repeat center #2b9968; background-size: 22px; vertical-align: top;
+}
+
+/*比赛相关*/
+table.match{
+	width: 100%;
+	padding-top: 16px;
+	background: #fafafa;
+}
+table.match th{
+	height: 24px;
+	font-size: 12px; line-height: 18px; text-align: center; color: #adadad;
+}
+table.match td{
+	height: 50px;
+	font-size: 12px; line-height: 14px; text-align: center;
+}
+table.match tr:nth-child(odd) td{
+	background: #f6f6f6;
+}
+table.match td:nth-child(1){
+	padding-left: 20px;
+	text-align: left;
+	position: relative;
+}
+table.match td:nth-child(2){
+	text-align: right;
+}
+table.match td:nth-child(3){
+	padding-left: 2px;
+}
+table.match td:nth-child(4){
+
+}
+table.match td:nth-child(5){
+	padding-right: 2px;	
+}
+table.match td:nth-child(6){
+	text-align: left;	
+}
+table.match td:nth-child(7){
+	
+}
+table.match td:nth-child(8){
+	
+}
+table.match td:nth-child(8) a:hover{
+	color: #2b9968;
+}
+
+table.match td:nth-child(1):before{
+	width: 4px; height: 4px;
+	border-radius: 50%;
+	background: #2b9968;
+	position: absolute; top: 16px; left: 10px;
+	content: '';
+}
+table.match td img{
+	width: 30px; height: 30px;
+	margin: 0 auto;
+	display: block;
+}
+
+/*球队*/
+.match a.team{
+	max-height: 32px;
+	line-height: 16px;
+	overflow: hidden;
+	display: inline-block;
+	position: relative;
+}
+.match a.team:hover{
+	color: #2b9968;
+}
+
+/*比分*/
+.match td p.fullScore{
+	font-size: 14px; line-height: 18px; color: #c52601; font-weight: bold;
+}
+.match td p.halfScore{
+	font-size: 12px; line-height: 18px; color: #adadad;
+}
+
+/*指数*/
+.match td p.asia{
+	line-height: 18px; color: #adadad;
+}
+.match td p.goal{
+	line-height: 18px;
+}
+.match td p.asia span, .match td p.goal span{
+	width: 40px;
+	position: relative;
+	display: inline-block;
+}
+.match td p.asia span.up, .match td p.goal span.up{
+	color: #2b9968;
+}
+.match td p.asia span.up:before, .match td p.goal span.up:before{
+	width: 14px; height: 14px;
+	margin-top: -7px;
+	background: #000;
+	position: absolute; top: 50%; right: -7px;
+	content: '';
+}
+.match td p.asia span.down, .match td p.goal span.down{
+	color: #1661c7;
+}
+.match td p.asia span.down:before, .match td p.goal span.down:before{
+	width: 14px; height: 14px;
+	margin-top: -7px;
+	background: #000;
+	position: absolute; top: 50%; right: -7px;
+	content: '';
+}
+.match td p.asia span.odd, .match td p.goal span.odd{
+	width: 80px;
+	margin: 0 3px;
+	display: inline-block;
+}
+.match td p.asia span.odd{
+	font-size: 12px;
+}
+.match td p.asia span.odd:before, .match td p.goal span.odd:before{
+	right: -2px;
+}
+
+/*杯赛*/
+#Cup{
+	margin-bottom: 20px;
+}
+#Cup ul{
+	height: 6px;
+	margin-bottom: 10px; padding: 34px 0 10px;
+	background: #e7e9e5;
+	font-size: 0px;
+	overflow: hidden;
+}
+#Cup ul li{
+	height: 6px;
+	background: #adadad;
+	position: relative;
+	display: inline-block;
+}
+#Cup ul li.last:after{
+	height: 6px; width: 10px;
+	background: #fff;
+	position: absolute; top: 0; right: -10px;
+	content: '';
+}
+#Cup ul li.last.now:after{
+	background: #2b9968;
+}
+#Cup ul li.now{
+	background: #2b9968;
+}
+#Cup ul li.now ~ li{
+	background: #fff;
+}
+#Cup ul li p.name{
+	font-size: 12px; line-height: 24px; text-align: center; color: #adadad;
+	position: relative; top: -30px;
+}
+#Cup ul li.now p.name{
+	color: #2b9968;
+}
+#Cup ul li.now ~ li p.name{
+	color: #666;
+}
+#Cup ul li p.round{
+	width: 22px; height: 22px;
+	margin-left: -11px;
+	border-radius: 50%;
+	background: #adadad;
+	font-size: 12px; line-height: 22px; text-align: center; color: #fff;
+	position: absolute; top: -8px; left: 50%;
+	cursor: pointer;
+}
+#Cup ul li p.round:hover, #Cup ul li.on p.round{
+	background: #fabd36;
+}
+#Cup ul li.now p.round{
+	background: #fff;
+	color: #2b9968;
+}
+#Cup ul li.now.on p.round, #Cup ul li.now p.round:hover{
+	background: #2b9968;
+	color: #fff;
+}
+#Cup ul li.now ~ li p.round{
+	background: #fff;
+	color: #666;
+}
+#Cup ul li.now ~ li p.round:hover, #Cup ul li.now ~ li.on p.round{
+	background: #2b9968;
+	color: #fff;
+}
+#Cup table.match{
+	padding-top: 6px;
+}
+#Cup table.match tbody tr.total + tr td{
+	background: #fafafa;
+}
+#Cup table.match tbody tr.total + tr + tr td{
+	background: #f6f6f6;
+}
+#Cup table.match tbody th{
+	height: 40px;
+	background: #fff;
+	vertical-align: bottom;
+}
+#Cup table.match tbody tr:first-child th{
+	height: 30px;
+}
+#Cup table.match tbody th p{
+	height: 30px;
+	border-radius: 4px 4px 0 0;
+	background: url(../img/score_bg.jpg) no-repeat center; background-size: cover; background-size: 100%\0/;
+	font-size: 12px; line-height: 30px; color: #fff;
+	position: relative;
+}
+#Cup table.match tbody th p:before{
+	width: 20px;
+	margin-left: -10px;
+	color: #fabd36; font-weight: bold;
+	position: absolute; top: 0; left: 50%;
+	content: '-';
+
+}
+#Cup table.match tbody th p:after{
+	width: 10px; height: 10px;
+	margin-left: -5px;
+	background: #5a9179;
+	position: absolute; bottom: -5px; left: 50%;
+	transform: rotate(45deg); -ms-transform: rotate(45deg);	-webkit-transform: rotate(45deg); -o-transform: rotate(45deg); -moz-transform: rotate(45deg);
+	display: none\0/;
+	content: '';
+}
+#Cup table.match tbody th p span{
+	width: 50%;
+	display: inline-block;
+}
+#Cup table.match tbody th p span.host{
+	text-align: right;
+	float: left;
+}
+#Cup table.match tbody th p span.away{
+	text-align: left;
+	float: right;
+}
+#Cup table.match tbody th p span b{
+	width: 30px;
+	color: #fabd36;
+	display: inline-block;
+}
+#Cup table.match tbody th p span.host b{
+	padding-right: 10px;
+	float: right;
+}
+#Cup table.match tbody th p span.away b{
+	padding-left: 10px;
+	float: left;
+}
+
+/*杯赛分组赛*/
+#Group{
+	background: #fff;
+}
+#Group .tabLine{
+	height: 50px;
+	padding-left: 20px;
+	font-size: 0px; text-align: left;
+}
+#Group .tabLine button{
+	height: 50px; width: 70px;
+	font-size: 14px; text-align: center;
+}
+#Group .tabLine button.on{
+	border-bottom: 4px solid #2b9968;
+	color: #2b9968;
+}
+#Group .tabLine button:hover{
+	color: #2b9968;
+}
+#Group table.group{
+	width: 100%;
+}
+#Group table.group thead th{
+	height: 30px;
+	border-top: 1px solid #dbdbdb;
+	background: #fafafa;
+	font-size: 12px; line-height: 30px; text-align: center; color: #adadad;
+}
+#Group table.group tbody th{
+	height: 30px;
+	vertical-align: bottom;
+}
+#Group table.group tbody + tbody th{
+	height: 40px;
+}
+#Group table.group tbody th p{
+	height: 30px;
+	border-radius: 4px 4px 0 0;
+	background: url(../img/score_bg.jpg) no-repeat center; background-size: cover; background-size: 100%\0/;
+	font-size: 12px; line-height: 30px; text-align: center; color: #fabd36;
+	position: relative;
+}
+#Group table.group tbody th p:after{
+	width: 10px; height: 10px;
+	margin-left: -5px;
+	background: #5a9179;
+	position: absolute; bottom: -5px; left: 50%;
+	transform: rotate(45deg); -ms-transform: rotate(45deg);	-webkit-transform: rotate(45deg); -o-transform: rotate(45deg); -moz-transform: rotate(45deg);
+	display: none\0/;
+	content: '';
+}
+#Group table.group td{
+	height: 40px;
+	background: #fafafa;
+	font-size: 12px; line-height: 20px; text-align: center;
+}
+#Group table.group tr:nth-child(odd) td{
+	background: #f6f6f6;
+}
+#Group table.group td:first-child + td{
+	padding-left: 10px;
+	text-align: left;
+}
+#Group table.group td span{
+	width: 20px; height: 20px;
+	border-radius: 2px;
+	display: inline-block;
+}
+#Group table.group tr:nth-child(2) td span{
+	background: #2b9968;
+	color: #fff;
+}
+#Group table.group tr:nth-child(3) td span{
+	background: rgba(43, 153, 104, 0.6);
+	color: #fff;
+}
+#Group table.group tr:nth-child(4) td span{
+	background: rgba(43, 153, 104, 0.3);
+	color: #fff;
+}
+
+#Group table.group + table.match{
+	margin-top: 10px; padding-top: 16px;
+	border-top: 2px solid #2b9968;
+}
+
+/*赛程*/
+#Match{
+	margin-bottom: 20px;
+}
+#Match div.con{
+	padding-top: 20px;
+	background: #fff;
+}
+#Match div.con ul{
+	margin: 0 60px;
+	border-right: 1px solid #2b9968; border-bottom: 1px solid #2b9968;
+}
+#Match div.con ul li{
+	width: 6.25%; width: 6.2%\0/; height: 30px;
+	border-top: 1px solid #2b9968; border-left: 1px solid #2b9968;
+	background: rgba(41, 148, 100, 0.7); background: #6ab795\0/;
+	font-size: 12px; line-height: 30px; text-align: center; color: #fff;
+	box-sizing: border-box;
+	cursor: pointer;
+	display: inline-block;
+}
+#Match div.con ul li.on{
+	background: #fff;
+	color: #2b9968;
+} 
+#Match div.con ul li:hover{
+	background: rgba(41, 148, 100, 0.5); background: #2b9968\0/;
+}
+#Match div.con ul li.on:hover{
+	background: #fff;
+	color: #2b9968;	
+}
+#Match table.match:first-child{
+	margin-top: -20px;
+}
+
+/*排行榜*/
+#Rank{
+	margin-bottom: 20px;
+}
+#Rank .title .tabLine{
+	height: 30px;
+	text-align: center;
+	position: absolute; top: 5px; left: 150px; right: 150px;
+}
+#Rank .title .tabLine button{
+	width: 100px; height: 30px;
+	border: 1px solid #2b9968;
+	background: none;
+	font-size: 14px; color: #2b9968;
+}
+#Rank .title .tabLine button:first-child{
+	border-radius: 2px 0 0 2px; border-radius: 0\0/;
+}
+#Rank .title .tabLine button:last-child{
+	border-radius: 0 2px 2px 0;
+}
+#Rank .title .tabLine button.on{
+	background: #2b9968;
+	color: #fff;
+}
+#Rank .con{
+	
+}
+#Rank .con p.area{
+	height: 20px;
+	padding-top: 6px;
+	border-bottom: 2px solid #2b9968;
+	background: #fff;
+	font-size: 12px; line-height: 20px; text-align: center;
+}
+#Rank .con p.area.west{
+	border-bottom: 2px solid #fabd36;
+}
+#Rank .con table + p.area{
+	padding-top: 16px;
+}
+#Rank .con table{
+	width: 100%;
+	padding-top: 16px;
+	background: #fafafa;
+}
+#Rank div.con table th{
+	height: 24px;
+	font-size: 12px; line-height: 18px; text-align: center; color: #adadad;
+}
+#Rank div.con table td{
+	height: 30px;
+	font-size: 12px; line-height: 18px; text-align: center;
+}
+#Rank div.con table tr:nth-child(odd) td{
+	background: #f6f6f6;
+}
+#Rank div.con table td a.team{
+	height: 18px;
+	text-align: left;
+	overflow: hidden;
+	display: block;
+}
+#Rank div.con table td p{
+	width: 20px; height: 20px;
+	border-radius: 2px;
+	line-height: 20px;
+	display: inline-block;
+}
+#Rank div.con table tr:nth-child(1) td p{
+	background: #2b9968;
+	color: #fff;
+}
+#Rank div.con table tr:nth-child(2) td p{
+	background: rgba(43, 153, 104, 0.6);
+	color: #fff;
+}
+#Rank div.con table tr:nth-child(3) td p{
+	background: rgba(43, 153, 104, 0.3);	
+	color: #fff;
+}
+#Rank div.con[type=direction] table tr:nth-child(1) td p,
+#Rank div.con[type=direction] table tr:nth-child(2) td p,
+#Rank div.con[type=direction] table tr:nth-child(3) td p,
+#Rank div.con[type=direction] table tr:nth-child(4) td p,
+#Rank div.con[type=direction] table tr:nth-child(5) td p,
+#Rank div.con[type=direction] table tr:nth-child(6) td p,
+#Rank div.con[type=direction] table tr:nth-child(7) td p,
+#Rank div.con[type=direction] table tr:nth-child(8) td p,
+#Rank div.con[type=province] table tr:nth-child(1) td p,
+#Rank div.con[type=province] table tr:nth-child(2) td p,
+#Rank div.con[type=province] table tr:nth-child(3) td p{
+	background: #2b9968;
+	color: #fff;
+}
+#Rank div.con[type=direction] table.west tr:nth-child(1) td p,
+#Rank div.con[type=direction] table.west tr:nth-child(2) td p,
+#Rank div.con[type=direction] table.west tr:nth-child(3) td p,
+#Rank div.con[type=direction] table.west tr:nth-child(4) td p,
+#Rank div.con[type=direction] table.west tr:nth-child(5) td p,
+#Rank div.con[type=direction] table.west tr:nth-child(6) td p,
+#Rank div.con[type=direction] table.west tr:nth-child(7) td p,
+#Rank div.con[type=direction] table.west tr:nth-child(8) td p,
+#Rank div.con[type=province] table.west tr:nth-child(1) td p,
+#Rank div.con[type=province] table.west tr:nth-child(2) td p,
+#Rank div.con[type=province] table.west tr:nth-child(3) td p{
+	background: #fabd36;
+	color: #fff;
+}
+#Rank div.con table td span{
+	padding: 0 1px;
+}
+
+/*资讯*/
+#News{
+	margin-bottom: 20px;
+}
+#News .con{
+	padding: 20px 0;
+	background: #fff;
+}
+#News .con:after{
+	display: block;
+	clear: both;
+	content: '';
+}
+#News .con ul{
+
+}
+#News .con ul a.li{
+	width: 50%; height: 22px;
+	font-size: 12px; line-height: 22px; text-align: left;
+	float: left;
+}
+#News .con ul a.li p{
+	height: 22px;
+	padding-left: 30px;
+	overflow: hidden;
+	position: relative;
+}
+#News .con ul a.li p:before{
+	width: 4px; height: 4px;
+	margin-top: -2px;
+	border-radius: 50%;
+	background: #2b9968;
+	position: absolute; top: 50%; left: 20px;
+	content: '';
+}
+#News .con ul a.li p img{
+	width: 156px; height: 90px;
+	position: absolute; top: 0; left: 20px;
+	display: none;
+}
+#News .con ul a.li:first-child, #News .con ul a.li:first-child + a.li{
+	height: 90px;
+	margin-bottom: 15px;
+}
+#News .con ul a.li:first-child p, #News .con ul a.li:first-child + a.li p{
+	height: 58px;
+	padding: 16px 16px 16px 186px;
+	background: #f6f6f6;
+}
+#News .con ul a.li:first-child p:before, #News .con ul a.li:first-child + a.li p:before{
+	width: 20px; height: auto;
+	margin: 0;
+	border-radius: 0;
+	background: #fff;
+	top: 0; bottom: 0; left: 0;
+}
+#News .con ul a.li:first-child img, #News .con ul a.li:first-child + a.li img{
+	display: block;
+}
+
+
+
+/*右边内容*/
+#Con .right{
+	width: 300px;
+	position: relative; z-index: 20;
+	float: right;
+}
+#Con .rbox{
+	margin-bottom: 20px;
+}
+#Con .rbox p.title{
+	height: 40px;
+	padding-left: 16px;
+	font-size: 16px; line-height: 40px; text-align: left; color: #2b9968;
+	position: relative;
+}
+#Con .rbox p.title:before{
+	width: 4px; height: 20px;
+	margin-top: -10px;
+	background: #2b9968;
+	position: absolute; top: 50%; left: 0;
+	content: '';
+}
+
+/*赛事介绍*/
+#Info div.con{
+	max-height: 218px;
+	padding: 100px 20px 5px;
+	border-bottom: 1px solid #dbdbdb;
+	background: #fff;
+	overflow: hidden;
+	position: relative;
+}
+#Info.open div.con{
+	max-height: none;
+}
+#Info div.con p.info{
+	padding-top: 62px;
+	font-size: 14px; line-height: 28px; text-align: center;
+	position: absolute; top: 0; left: 0; right: 0;
+}
+#Info div.con p.info img{
+	width: 40px; height: 40px;
+	padding: 4px; margin-left: -25px;
+	border-radius: 50%; border: 1px solid #2b9968;
+	background: #fff;
+	position: absolute; top: 10px; left: 50%;
+}
+#Info div.con p.info span{
+	height: 20px;
+	margin-left: 36px; padding: 0 5px 0 12px;
+	border-radius: 0 4px 4px 20px;
+	background: #2b9968;
+	font-size: 12px; line-height: 20px; text-align: center; color: #fff;
+	position: absolute; left: 50%; top: 42px;
+}
+#Info div.con p.text{
+	font-size: 12px; line-height: 20px; text-indent: 24px;
+}
+#Info button.open{
+	height: 30px; width: 100%;
+	background: #fff;
+	font-size: 12px; line-height: 30px; text-align: center; color: #adadad;
+}
+#Info button.open:hover{
+	background: #6ab795;
+	color: #fff;
+}
+#Info button.open:after{
+	width: 10px; height: 10px;
+	margin: 10px 0 0 10px;
+	background: url(../img/infor_icon_down_n.png) no-repeat center; background-size: 10px;
+	position: absolute;
+	content: '';
+}
+#Info button.open:hover:after{
+	background: url(../img/infor_icon_down_white.png) no-repeat center; background-size: 10px;
+}
+
+/*精彩视频*/
+#Video{
+
+}
+#Video ul{
+	margin-right: -8px;
+}
+#Video ul a.li{
+	width: 50%; height: 90px;
+	margin-bottom: 10px;
+	display: block;
+	position: relative;
+	float: left;
+}
+#Video ul a.li p.img{
+	height: 90px;
+	margin-right: 8px;
+	overflow: hidden;
+}
+#Video ul a.li p.img img{
+	width: 100%; min-height: 90px;
+}
+#Video ul a.li p.text{
+	height: 24px;
+	background: rgba(0,0,0,0.5); filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr=#88000000,endColorstr=#88000000)\0/;
+	line-height: 24px; text-align: center;
+	position: absolute; bottom: 0; left: 0; right: 8px;
+	transition: all 0.4s; -moz-transition: all 0.4s; -webkit-transition: all 0.4s; -o-transition: all 0.4s;
+	overflow: hidden;
+}
+#Video ul a.li:hover p.text{
+	height: 90px;
+	background: rgba(5, 39, 24, 0.9); filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr=#882b9968,endColorstr=#882b9968)\0/;
+	line-height: 90px;
+}
+#Video ul a.li p.text:before, #Video ul a.li p.text:after{
+	height: 24px; width: 5px;
+	vertical-align: middle;
+	transition: all 0.4s; -moz-transition: all 0.4s; -webkit-transition: all 0.4s; -o-transition: all 0.4s;
+	display: inline-block;
+	content: '';
+}
+#Video ul a.li:hover p.text:before, #Video ul a.li:hover p.text:after{
+	height: 90px;
+}
+#Video ul a.li p.text span{
+	max-width: 90%;
+	line-height: 24px; color: #fff; vertical-align: middle;
+	transition: all 0.4s; -moz-transition: all 0.4s; -webkit-transition: all 0.4s; -o-transition: all 0.4s;
+	display: inline-block;
+}
+#Video ul a.li:hover p.text span{
+	line-height: 18px;
+}
+
+
+@media screen and (min-width: 1400px){
+	#Con .right{
+		width: 350px;
+	}
+	#Info div.con p.text{
+		font-size: 13px;	
+	}
+	#Con .lbox{
+		margin-right: 370px;
+	}
+	table.match td{
+		font-size: 14px; line-height: 18px;
+	}
+	#Rank div.con table td{
+		height: 40px;
+		font-size: 14px;
+	}
+	#News .con ul a.li{
+		height: 24px;
+		font-size: 14px; line-height: 24px;
+	}
+	#Group table.group td{
+		font-size: 14px;
+	}
+	#Rank .con p.area{
+		height: 24px;
+		font-size: 14px; line-height: 24px;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

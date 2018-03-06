@@ -1,0 +1,863 @@
+﻿body{
+	padding-top: 90px;
+}
+
+#Con{
+	margin-top: 20px;
+}
+#Con .ConInner{
+	position: relative; z-index: 20;
+}
+
+/*浮动区域*/
+#Date{
+	position: fixed; top: 110px; left: 0; right: 0;
+}
+#Date .abox{
+	max-width: 1460px; min-width: 1260px;
+	margin: 0 auto;
+}
+#Date .abox ul{
+	width: 90px;
+	margin-left: 20px;
+	border-radius: 8px;
+	background: #fff;
+	box-shadow: 0px 4px 5px 0px rgba(0, 64, 36, 0.4);
+	transition: transform 0.5s; -moz-transition: transform 0.5s; -webkit-transition: transform 0.5s; -o-transition: transform 0.5s;
+	overflow: hidden;
+}
+#Date .abox ul.fixed{
+	transform: translateY(20px); -ms-transform: translateY(20px); -webkit-transform: translateY(20px); -o-transform: translateY(20px); -moz-transform: translateY(20px);
+}
+#Date .abox ul a.li{
+	height: 50px;
+	font-size: 15px; line-height: 50px; text-align: center;
+	position: relative;
+	display: block;
+}
+#Date .abox ul a.li:hover{
+	color: #2b9968;
+}
+#Date .abox ul a.li + a.li:before{
+	height: 1px;
+	background: #e0e0e0;
+	position: absolute; top: 0; left: 15px; right: 15px;
+	content: '';
+}
+#Date .abox ul a.on{
+	background: #2b9968;
+	color: #fff;
+}
+#Date .abox ul a.on:hover{
+	color: #fff;
+}
+#Date .abox ul a.on:before, #Date .abox ul a.on + a.li:before{
+	display: none;
+}
+
+/*日期区域*/
+#Calendar{
+	height: 50px;
+	margin-bottom: 20px; padding-right: 140px;
+	border-radius: 4px;
+	background: #fff;
+	position: relative;
+}
+#Calendar ul a.li{
+	width: 14%; height: 42px;
+	padding: 4px 0; 
+	text-align: center; color: #adadad;
+	float: left;
+	cursor: pointer;
+}
+#Calendar ul a.li.on{
+	color: #2b9968;
+}
+#Calendar ul a.li p.date{
+	font-size: 16px; line-height: 24px;
+}
+#Calendar ul a.li p.week{
+	font-size: 12px; line-height: 18px;
+}
+#Calendar input{
+	width: 70px; height: 50px;
+	padding: 0 30px 0 40px;
+	border: none;
+	background: url(../img/icon_triangle_down.png) no-repeat right 12px center; background-size: 12px;
+	background: url(../img/icon_triangle_down.png) no-repeat 110px center\0/;
+	font-size: 12px; line-height: 50px\0/;
+	position: absolute; top: 0; right: 0;
+	cursor: pointer;
+}
+#Calendar:after{
+	width: 24px; height: 50px;
+	background: url(../img/icon_calendar_n.png) no-repeat center; background-size: 24px;
+	position: absolute; top: 0; right: 110px;
+	content: '';
+}
+
+/*控制区域*/
+#Control{
+	height: 40px;
+	border-radius: 8px 8px 0 0;
+	padding: 15px 0 17px;
+	background: #fff;
+	position: relative;
+}
+#Control.fixed{
+	position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+}
+#Control .inbox{
+	height: 40px;
+}
+#Control.fixed .inbox{
+	max-width: 1200px; min-width: 1000px;
+    padding: 0 130px; margin: 0 auto;
+}
+#Control p{
+	display: inline-block;
+	vertical-align: top;
+}
+#Control p.column{
+	height: 30px;
+	padding: 5px 0 5px 40px;
+	overflow: hidden;
+}
+#Control p.column button{
+	height: 30px; width: 60px;
+	background: #efefef;
+	font-size: 12px; text-align: center;
+	position: relative;
+}
+#Control p.column button:first-child{
+	border-radius: 4px 0 0 4px;
+}
+#Control p.column button:last-child{
+	border-radius: 0 4px 4px 0;
+}
+#Control p.column button + button:before{
+	width: 1px;
+	background: #ddd;
+	position: absolute; top: 5px; bottom: 5px; left: 0;
+	content: '';
+}
+#Control p.column button.on, #Control p.column button:hover{
+	background: #2b9968;
+	color: #fff;
+}
+#Control p.column button.on:before,
+#Control p.column button:hover:before,
+#Control p.column button.on + button:before,
+#Control p.column button:hover + button:before{
+	display: none;
+}
+#Control p.number{
+	height: 40px;
+	padding-left: 30px;
+	font-size: 12px; line-height: 40px;
+}
+#Control p.number b{
+	padding: 0 5px;
+	color: #b5493c;
+}
+#Control p.number span{
+	color: #adadad;
+	cursor: pointer;
+}
+#Control p.number span:hover{
+	color: #2b9968;
+}
+#Control p.filter{
+	height: 30px;
+	padding: 5px 40px 5px 0;
+	float: right;
+}
+#Control p.filter button{
+	height: 30px; width: 80px;
+	border-radius: 4px;
+	background: #efefef;
+	font-size: 12px; text-align: center;
+}
+#Control p.filter button + button{
+	margin-left: 10px;
+}
+#Control p.filter button:hover{
+	background: #2b9968;
+	color: #fff;
+}
+
+/*table*/
+#Con table{
+	width: 100%;
+	position: relative;
+}
+#Control.fixed + table{
+	margin-top: 92px;
+}
+#Con table thead th{
+	height: 36px;
+	border-bottom: 2px solid #2b9968;
+	background: #fff;
+	font-size: 12px; line-height: 24px; text-align: center; color: #b4b4b4;
+}
+#Con table tbody th{
+	height: 40px;
+	padding: 20px 0 0 32px;
+	font-size: 18px; line-height: 40px; text-align: left; color: #fff;
+	position: relative;
+}
+#Con > table > tbody > tr > th:before{
+	width: 32px; height: 50px;
+	border-radius: 20px 0 0 0;
+	background: #2b9968;
+	position: absolute; top: 20px; left: 0; z-index: 1;
+	content: '';
+}
+#Con table tbody th p{
+	height: 40px;
+	padding-right: 12px;
+	background: #2b9968;
+	display: inline-block;
+}
+#Con table tbody td{
+	height: 44px;
+	border-bottom: 1px solid #dbdbdb;
+	background: #fff;
+	font-size: 12px; line-height: 18px; text-align: center;
+	position: relative;
+}
+#Con table tbody tr:hover td{
+	background: #e0e0e0 !important;
+}
+#Con table tbody tr:nth-child(odd) td, #Top tr:nth-child(even) td{
+	background: #f5f5f5;
+}
+#Top tr:nth-child(odd) td{
+	background: #fff !important;
+}
+#Con table tbody td:nth-child(1), #Con table tbody td:first-child{
+	padding-left: 27px;
+	text-align: left;
+}
+#Con table tbody td:nth-child(2){
+	
+}
+#Con table tbody td:nth-child(3){
+	
+}
+#Con table tbody td:nth-child(4){
+	text-align: right;
+}
+#Con table tbody td:nth-child(5){
+	
+}
+#Con table tbody td:nth-child(6){
+	text-align: left;	
+}
+#Con table tbody td:nth-child(7){
+	
+}
+#Con table tbody td:nth-child(8){
+	
+}
+#Con table tbody td:nth-child(9){
+	
+}
+#Con table tbody td:nth-child(10){
+	
+}
+#Con table tbody td:nth-child(11){
+	
+}
+#Con table tbody td:nth-child(12){
+	
+}
+#Con table tbody td:nth-child(12) a:hover{
+	color: #2b9968;
+}
+
+/*第二格赛事*/
+#Con table p.leagueLine{
+	width: 4px; height: 20px;
+	border-radius: 2px;
+	position: absolute; top: 12px; left: 5px;
+}
+
+/*第三格状态*/
+#Con table p.time{
+	color: #c52601;
+}
+#Con table p.time span{
+	padding-left: 2px;
+	-moz-animation: minute 1s cubic-bezier(0.5,0.1,0.25,1) infinite;
+	-webkit-animation: minute 1s cubic-bezier(0.5,0.1,0.25,1) infinite;
+	-o-animation: minute 1s cubic-bezier(0.5,0.1,0.25,1) infinite;
+	animation: minute 1s cubic-bezier(0.5,0.1,0.25,1) infinite;
+}
+@keyframes minute{
+	from {opacity: 100;}
+	to {opacity: 0;}
+}
+
+
+/*球队*/
+#Con td.host{
+	padding-left: 5px;
+	text-align: right;
+	position: relative;
+}
+#Con td.away{
+	padding-right: 5px;
+	text-align: left;
+	position: relative;
+}
+#Con td.host:before{
+	width: 1px; height: 28px;
+	background: #dbdbdb;
+	position: absolute; top: 8px; left: 0;
+	content: '';
+}
+#Con td.away:before{
+	width: 1px; height: 28px;
+	background: #dbdbdb;
+	position: absolute; top: 8px; right: 0;
+	content: '';
+}
+#Con a.team{
+	height: 24px; max-width: 100%;
+	line-height: 24px;
+	display: inline-block;
+	position: relative;
+}
+#Con a.team p.name{
+	overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+#Con a.team:hover p.name{
+	color: #2b9968;
+}
+#Con a.team p.fullname{
+	height: 24px; width: 500px;
+	margin-left: -250px;
+	font-size: 12px; line-height: 24px; text-align: center;
+	position: absolute; top: -30px; left: 50%; z-index: 20;
+	display: none;
+}
+#Con a.team:hover p.fullname{
+	display: block;
+}
+#Con a.team p.fullname span{
+	height: 24px;
+	padding: 0 7px;
+	border-radius: 2px;
+	background: #fff;
+	box-shadow: 0px 2px 7px 0px rgba(0, 0, 0, 0.3);
+	display: inline-block;
+}
+
+/*队徽*/
+#Con td img.icon{
+	max-width: 28px;
+}
+
+/*比分*/
+#Con td p.fullScore{
+	font-size: 14px; color: #c52601; font-weight: bold;
+}
+#Con td p.halfScore{
+	font-size: 12px; color: #adadad;
+}
+
+/*直播*/
+#Con td p.live{
+	width: 50px; height: 22px;
+	margin: 0 auto;
+	border-radius: 2px;
+	line-height: 22px; color: #fff;
+}
+#Con td p.video{
+	background: #c52601;
+}
+#Con td p.flash{
+	background: #2b9968;
+}
+#Con td p.live img{
+	width: 20px; height: 20px;
+}
+
+/*指数*/
+#Con td p.start{
+	line-height: 18px; color: #adadad;
+}
+#Con td p.now{
+	line-height: 18px;
+}
+#Con td p.start span, #Con td p.now span{
+	width: 40px;
+	display: inline-block;
+}
+#Con td p.start span.odd, #Con td p.now span.odd{
+	width: 100px;
+	margin: 0 3px;
+	font-size: 12px;
+	display: inline-block;
+}
+
+/*事件弹层*/
+#Con table div.even{
+	width: 310px; height: 0;
+	margin-left: -200px; padding: 0 45px;
+	border-radius: 8px;
+	background: rgb(24, 80, 55)\0/; background: rgba(24, 80, 55, 0.94);
+	position: absolute; top: 44px; left: 50%; z-index: 100;
+	transform: translateY(10px); -ms-transform: translateY(10px); -webkit-transform: translateY(10px); -o-transform: translateY(10px); -moz-transform: translateY(10px);
+	visibility: hidden;
+	overflow: hidden;
+}
+#Con table td:hover div.even{
+	height: auto;
+	transform: translateY(0); -ms-transform: translateY(0); -webkit-transform: translateY(0); -o-transform: translateY(0); -moz-transform: translateY(0);
+	transition: transform 0.5s; -moz-transition: transform 0.5s; -webkit-transition: transform 0.5s; -o-transition: transform 0.5s;
+	visibility: visible;
+}
+#Con table div.even:before{
+	width: 16px; height: 8px;
+	margin-left: -8px;
+	background: #000;
+	position: absolute; top: -8px; left: 50%;
+	content: '';
+}
+#Con table div.even.top{
+	top: auto; bottom: 44px;
+}
+#Con table div.even.top:before{
+	top: auto; bottom: -8px;
+}
+#Con table div.even p.team{
+	height: 30px;
+	margin: 0 -45px;
+	font-size: 14px; line-height: 30px; text-align: center; color: #fff;
+}
+#Con table div.even p.team span{
+	width: 48%; height: 30px;
+	overflow: hidden;
+	display: inline-block;
+}
+#Con table div.even dl{
+	padding-bottom: 20px;
+	border-top: 1px solid #000;
+}
+#Con table div.even dl dt{
+	height: 20px;
+	padding: 5px 0;
+	border-top: 1px solid #77eeb9;
+	font-size: 12px; line-height: 20px; text-align: center; color: #fff;
+}
+#Con table div.even dl dt p{
+	height: 20px;
+	padding: 0 8px;
+	border-radius: 10px;
+	background: #074128;
+	display: inline-block;
+}
+#Con table div.even dl dd{
+	height: 30px;
+	margin: 0 -35px;
+}
+#Con table div.even dl.ebox dd + dd{
+	padding-top: 10px;
+}
+#Con table div.even dl dd.host{
+	padding-right: 190px;
+}
+#Con table div.even dl dd.away{
+	padding-left: 190px;
+}
+#Con table div.even dl dd p.time{
+	width: 60px; height: 30px;
+	font-size: 12px; line-height: 30px; text-align: center; color: #fff;
+}
+#Con table div.even dl dd.host p.time{
+	margin-right: -30px;
+	float: right;
+}
+#Con table div.even dl dd.away p.time{
+	margin-left: -30px;
+	float: left;
+}
+#Con table div.even dl dd p.time span{
+	position: absolute;
+}
+#Con table div.even dl dd p.img{
+	width: 30px; height: 30px;
+	border-radius: 50%;
+	background: #fff;
+}
+#Con table div.even dl dd.host p.img{
+	float: right;
+}
+#Con table div.even dl dd.away p.img{
+	float: left;
+}
+#Con table div.even dl dd p.name{
+	height: 30px;
+	font-size: 12px; line-height: 30px; color: #fff;
+	overflow: hidden;
+}
+#Con table div.even dl dd.host p.name{
+	padding-right: 10px;
+	text-align: right;
+}
+#Con table div.even dl dd.away p.name{
+	padding-left: 10px;
+	text-align: left;
+}
+#Con table div.even dl dd.total{
+	font-size: 12px; line-height: 30px; text-align: center; color: #fff; vertical-align: middle;
+}
+#Con table div.even dl dd.total p{
+	display: inline-block;
+}
+#Con table div.even dl dd.total p.item{
+	height: 30px; width: 60px;
+}
+#Con table div.even dl dd.total p.percent{
+	height: 8px; width: 100px;
+	border-radius: 4px;
+	background: #074128;
+	overflow: hidden;
+	position: relative;
+}
+#Con table div.even dl dd.total p.percent span{
+	width: 0;
+	border-radius: 4px;
+	background: #28cc83;
+	position: absolute; top: 0; bottom: 0;
+	transition: width 0.5s; -moz-transition: width 0.5s; -webkit-transition: width 0.5s; -o-transition: width 0.5s;
+}
+#Con table div.even dl dd.total p.percent span.host{
+	right: 0;
+}
+#Con table div.even dl dd.total p.percent span.away{
+	left: 0;
+}
+#Con table div.even dl dd.total p.num{
+	height: 30px; width: 35px;
+}
+#Con table div.even dl dd.total p.num.host{
+	padding-right: 10px;
+	text-align: right;
+}
+#Con table div.even dl dd.total p.num.away{
+	padding-left: 10px;
+	text-align: left;
+}
+
+/*盘口*/
+#Con table p.odd{
+	color: #adadad;
+}
+#Con table p.odd span{
+	width: 18px; height: 18px;
+	margin: 0 5px;
+	border-radius: 2px;
+	line-height: 18px; color: #fff;
+	display: inline-block;
+}
+#Con table p.odd span.win{
+	background: #2b9968;
+}
+#Con table p.odd span.draw{
+	background: #adadad;
+}
+#Con table p.odd span.lose{
+	background: #e0a210;
+}
+#Con table p.odd span.big{
+	border-radius: 50%;
+	background: #c52601;
+}
+#Con table p.odd span.goaldraw{
+	border-radius: 50%;
+	background: #adadad;
+}
+#Con table p.odd span.small{
+	border-radius: 50%;
+	background: #1661c7;
+}
+
+/*模拟*/
+#Simulation{
+	border-top: 1px solid #dbdbdb;
+	background: #fff;
+	box-shadow: 0px 2px 9px 0px rgba(0, 64, 36, 0.3);
+	position: fixed; top: 72px; left: 0; right: 0; z-index: 99;
+	visibility: hidden;
+}
+#Simulation.fixed{
+	visibility: visible;	
+}
+#Simulation table{
+	margin: 0 auto;
+}
+#Simulation table thead th{
+	border-bottom: none;
+}
+
+/*弹层*/
+.filterBox{
+	position: fixed; top: 0; left: 0; right: 0; bottom: 0; z-index: 500;
+}
+.filterBox .inner{
+	max-height: 70%; width: 760px;
+	margin-left: -380px; padding: 60px 0;
+	border-radius: 4px;
+	background: #fff;
+	box-shadow: 0px 0px 29px 0px rgba(8, 96, 57, 0.6);
+	position: absolute; top: 14%; left: 50%;
+	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; -o-box-sizing: border-box; -ms-box-sizing: border-box; box-sizing: border-box; 
+	overflow: hidden;
+}
+.filterBox .inner .topBar{
+	height: 60px;
+	background: #2b9968;
+	padding: 0 80px 0 25px;
+	font-size: 18px; line-height: 60px; color: #fff;
+	position: absolute; top: 0; left: 0; right: 0;
+}
+.filterBox .inner .topBar button.close{
+	width: 24px; height: 24px;
+	margin-top: -12px;
+	border-radius: 50%;
+	background: url(../img/icon_delete_n.png) no-repeat center rgba(255, 255, 255, 0.7); background-size: 24px;
+	background: url(../img/icon_delete_n.png) no-repeat center #fff\0/;
+	position: absolute; right: 28px; top: 50%;
+}
+.filterBox .inner .topBar button.close:hover{
+	background: url(../img/icon_delete_n.png) no-repeat center #fff; background-size: 24px;
+}
+.filterBox .inner .topBar button.league{
+	width: 88px; height: 32px;
+	margin: 14px 0 0 30px;
+	border: 1px solid #fff;
+	background: none;
+	font-size: 14px; text-align: center; color: #fff;
+	float: right;
+}
+.filterBox .inner .topBar button.league[value='1'], .filterBox .inner .topBar button.league:hover{
+	background: #fff;
+	color: #2b9968;
+}
+.filterBox .inner .topBar button.odd{
+	width: 80px; height: 44px;
+	margin-top: 16px;
+	background: #006c3c;
+	font-size: 16px; text-align: center; color: #adadad;
+	float: right;
+}
+.filterBox .inner .topBar button.odd.goal{
+	border-radius: 0 6px 0 0;
+}
+.filterBox .inner .topBar button.odd.asia{
+	border-radius: 6px 0 0 0;
+}
+.filterBox .inner .topBar button.odd:hover{
+	background: #73ae93;
+	color: #fff;
+}
+.filterBox .inner .topBar button.odd[value='1']{
+	background: #fff;
+	color: #2b9968;
+}
+.filterBox .inner .bottomBar{
+	height: 30px;
+	padding: 15px 62px 15px 34px;
+	background: #fff;
+	position: absolute; bottom: 0; left: 0; right: 0;
+}
+.filterBox .inner .bottomBar button.all{
+	height: 30px; width: 58px;
+	margin-right: 10px;
+	border-radius: 4px; border: 1px solid #adadad;
+	background: #fff;
+	font-size: 14px; text-align: center;
+}
+.filterBox .inner .bottomBar button.opposite{
+	height: 30px; width: 58px;
+	border-radius: 4px;
+	background: #2b9968;
+	font-size: 14px; text-align: center; color: #fff;
+}
+.filterBox .inner .bottomBar button.comfirm{
+	height: 30px; width: 98px;
+	border-radius: 4px;
+	background: #2b9968;
+	font-size: 14px; text-align: center; color: #fff;
+	float: right;
+}
+.filterBox .inner .bottomBar button.comfirm:disabled{
+	background: #adadad;
+}
+/*赛事筛选*/
+#LeagueFilter .inner{
+	height: 612px;
+}
+#LeagueFilter .inner ul{
+	padding-left: 90px;
+	background: #eee;
+	position: absolute; top: 60px; bottom: 60px; left: 0; right: 0;
+	overflow-x: hidden; overflow-y: auto;
+}
+#LeagueFilter .inner ul li{
+	padding: 24px 0 12px;
+	position: relative;
+}
+#LeagueFilter .inner ul li:after{
+	display: block;
+	clear: both;
+	content: '';
+}
+#LeagueFilter .inner ul li + li{
+	border-top: 1px solid #c5d0d8;
+}
+#LeagueFilter .inner ul li button{
+	width: 136px; height: 30px;
+	margin: 0 20px 12px 0; padding-left: 30px;
+	border-radius: 4px;
+	background: #fff;
+	font-size: 14px; text-align: left;
+	position: relative;
+	float: left;
+}
+#LeagueFilter .inner ul li button:hover{
+	background: rgba(43, 153, 104, 0.6); background: #2b9968\0/;
+	color: #fff;
+}
+#LeagueFilter .inner ul li button[value='1']{
+	background: #2b9968;
+	color: #fff;
+}
+#LeagueFilter .inner ul li button:before{
+	width: 12px; height: 12px;
+	margin-top: -7px;
+	border-radius: 4px; border: 1px solid #adadad;
+	background: #fff;
+	position: absolute; top: 50%; left: 8px;
+	content: '';
+}
+#LeagueFilter .inner ul li button:hover:before{
+	border-color: #fff;
+}
+#LeagueFilter .inner ul li button[value='1']:before{
+	background: url(../img/icon_g_n.png) no-repeat center #fff; background-size: 14px;
+	border-color: #fff;
+}
+#LeagueFilter .inner ul li b.letter{
+	width: 40px; height: 40px;
+	margin-top: -20px;
+	border-radius: 4px;
+	background: #cfd7cd;
+	font-size: 28px; line-height: 40px; text-align: center; color: #fff;
+	position: absolute; top: 50%; left: -65px;
+}
+#LeagueFilter .inner ul li button + button + button + button + button ~ b.letter{
+	top: 60px;
+}
+/*盘口筛选*/
+#OddFilter .inner{
+	height: 420px;
+}
+#OddFilter .inner .item{
+	background: #eee;
+	position: absolute; top: 60px; bottom: 60px; left: 0; right: 0;
+	overflow-x: hidden; overflow-y: scroll;
+}
+#OddFilter .inner ul{
+	padding: 46px 0 46px 12px;
+	transition: transform 0.5s; -moz-transition: transform 0.5s; -webkit-transition: transform 0.5s; -o-transition: transform 0.5s;
+	position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+}
+#OddFilter .inner .item[type=asia] ul.asia, #OddFilter .inner .item[type=goal] ul.goal{
+	transform: translateX(0); -ms-transform: translateX(0); -webkit-transform: translateX(0); -o-transform: translateX(0); -moz-transform: translateX(0);
+	display: block\0/;
+}
+#OddFilter .inner .item[type=goal] ul.asia{
+	transform: translateX(-100%); -ms-transform: translateX(-100%); -webkit-transform: translateX(-100%); -o-transform: translateX(-100%); -moz-transform: translateX(-100%);
+	display: none\0/;
+}
+#OddFilter .inner .item[type=asia] ul.goal{
+	transform: translateX(100%); -ms-transform: translateX(100%); -webkit-transform: translateX(100%); -o-transform: translateX(100%); -moz-transform: translateX(100%);	
+	display: none\0/;
+}
+#OddFilter .inner ul:after{
+	display: block;
+	clear: both;
+	content: '';
+}
+#OddFilter .inner ul li{
+	width: 25%; height: 30px;
+	margin-bottom: 12px;
+	display: inline-block;
+	float: left;
+}
+#OddFilter .inner ul li button{
+	min-width: 136px; height: 30px;
+	padding: 0 10px 0 30px; margin-left: 12px;
+	border-radius: 4px;
+	background: #fff;
+	font-size: 14px; text-align: left;
+	position: relative;
+}
+#OddFilter .inner ul li button:hover{
+	background: rgba(43, 153, 104, 0.6); background: #2b9968\0/;
+	color: #fff;
+}
+#OddFilter .inner ul li button[value='1']{
+	background: #2b9968;
+	color: #fff;
+}
+#OddFilter .inner ul li button:before{
+	width: 12px; height: 12px;
+	margin-top: -7px;
+	border-radius: 4px; border: 1px solid #adadad;
+	background: #fff;
+	position: absolute; top: 50%; left: 8px;
+	content: '';
+}
+#OddFilter .inner ul li button:hover:before{
+	border-color: #fff;
+}
+#OddFilter .inner ul li button[value='1']:before{
+	background: url(../img/icon_g_n.png) no-repeat center #fff; background-size: 14px;
+	border-color: #fff;
+}
+#OddFilter .inner ul p.clear{
+	padding-top: 12px; margin-left: 12px;
+	border-top: 1px solid #e0e0e0;
+}
+
+/*宽度适配*/
+@media screen and (min-width: 1400px){
+	#Control p.save button, #Control p.column button{
+		font-size: 14px;
+	}
+	#Con table thead th, #Con table tbody td{
+		font-size: 14px;
+	}
+	#Con > .ConInner > table > colgroup > col:nth-child(9), #Simulation > table > colgroup > col:nth-child(5){
+		width: 250px !important;
+	}
+	#Con > .ConInner > table > colgroup > col:nth-child(10), #Simulation > table > colgroup > col:nth-child(6){
+		width: 180px !important;
+	}
+	#Con > .ConInner > table > colgroup > col:nth-child(11), #Simulation > table > colgroup > col:nth-child(7){
+		width: 120px !important;
+	}
+	#Con td p.start span, #Con td p.now span{
+		width: 54px;
+	}
+}
+
+
+
+
+
