@@ -112,7 +112,7 @@ $hasLive = $match['pc_live'];
 ?>
 <tr isMatch="1" class="{{$show?'show':'hide'}}" id="m_tr_{{$mid}}" match="{{$mid}}" league="{{$lid}}" asiaOdd="{{$asiaOdd}}" ouOdd="{{$ouOdd}}" first="{{$isFirst?"first":""}}" lottery="{{$isLottery?"lottery":""}}" live="{{$hasLive?"live":""}}">
     <td><button name="match" class="choose" value="0" mid="{{$mid}}" name="match" id="match_{{$mid}}" onclick="clickMatchBtn(this)"></button></td>
-    <td><p class="leagueLine" style="background: #bc1c25;"></p>{{$match['league']}}</td>
+    <td><p class="leagueLine" style="background: rgb({{$r}}, {{$g}}, {{$b}});"></p>{{$match['league']}}</td>
     <td>{{date('H:i', $match['time'])}}
     </td>
     <td id="time_{{$mid}}">{!! $matchTime !!}</td>

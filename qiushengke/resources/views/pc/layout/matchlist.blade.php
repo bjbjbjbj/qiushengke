@@ -26,6 +26,24 @@
 @section('js')
     @yield('js_match_list')
     <script type="text/javascript">
+        var htmlPathType = 'immediate';
+        if (window.location.pathname.indexOf('result') != -1){
+            var str = window.location.pathname;
+            var index = str .lastIndexOf("\/");
+            str  = str .substring(index + 1, str .length);
+            str = str.replace('.html','');
+            var params = str.split("_")[1];
+            htmlPathType = params;
+        }
+        if (window.location.pathname.indexOf('schedule') != -1){
+            var str = window.location.pathname;
+            var index = str .lastIndexOf("\/");
+            str  = str .substring(index + 1, str .length);
+            str = str.replace('.html','');
+            var params = str.split("_")[1];
+            htmlPathType = params;
+        }
+
         $('#hideMatchCount').html($('table#Table tr.hide').length);
 
         updateMatch();
@@ -38,16 +56,21 @@
                 bodys[i].className = 'hide';
             }
             //精选 竞彩 直播 全部
-            var filter = getCookie('filter');
-            _matchFilter(filter);
+            var filter = getCookie(htmlPathType + '_' + 'filter');
+            if (filter != null){
+                _matchFilter(filter);
+            }
+            else{
+                _matchFilter('first');
+            }
             //选择赛事
-            filter = getCookie('filter_league');
+            filter = getCookie(htmlPathType + '_' + 'filter_league');
             if (filter != null){
                 _updateMatchFilterBtn('null');
                 _updateConfirmFilter('league',filter,false);
             }
             //选择盘口
-            filter = getCookie('filter_odd');
+            filter = getCookie(htmlPathType + '_' + 'filter_odd');
             if (filter != null){
                 _updateMatchFilterBtn('null');
                 _updateConfirmFilter('odd',filter,false);
@@ -89,19 +112,19 @@
         //比赛类型 竞彩 直播 完整
         function matchFilter(type) {
             //清空
-            delCookie('filter');
-            delCookie('filter_odd');
-            delCookie('filter_league');
-            delCookie('filter_hide');
-            delCookie('filter_show');
-            setCookie('filter',type);
+            delCookie(htmlPathType + '_' + 'filter');
+            delCookie(htmlPathType + '_' + 'filter_odd');
+            delCookie(htmlPathType + '_' + 'filter_league');
+            delCookie(htmlPathType + '_' + 'filter_hide');
+            delCookie(htmlPathType + '_' + 'filter_show');
+            setCookie(htmlPathType + '_' + 'filter',type);
             _matchFilter(type);
         }
 
         //更新点击filter后的UI,初始化用版
         function _matchFilter(type) {
             _updateMatchFilterBtn(type);
-            var matches = $('table#Table:first')[0].getElementsByTagName('tr');
+            var matches = $('table#Table tr[isMatch=1]');
             for (var j = 0; j < matches.length; j++) {
                 //跳过广告
                 if (matches[j].getAttribute('match') == null) continue;
@@ -259,11 +282,11 @@
         //还原保留删除
         function _resetFilterUser() {
             var type = 'match';
-            var hideIds = getCookie('filter_hide');
+            var hideIds = getCookie(htmlPathType + '_' + 'filter_hide');
             if (null == hideIds){
                 hideIds = '';
             }
-            var showIds = getCookie('filter_show');
+            var showIds = getCookie(htmlPathType + '_' + 'filter_show');
             if (null == showIds){
                 showIds = '';
             }
@@ -299,23 +322,23 @@
                 inputs = $("table#Table tr[isMatch=1] td button[name=match][value=1]");
             } else if (type == 'league'){
                 inputs = $("#LeagueFilter div.inner ul li button[value=1]");
-                delCookie('filter_league');
-                delCookie('filter_odd');
+                delCookie(htmlPathType + '_' + 'filter_league');
+                delCookie(htmlPathType + '_' + 'filter_odd');
             } else if (type == 'odd'){
                 inputs = $("#OddFilter div.inner div.item button[value=1]");
-                delCookie('filter_league');
-                delCookie('filter_odd');
+                delCookie(htmlPathType + '_' + 'filter_league');
+                delCookie(htmlPathType + '_' + 'filter_odd');
             }
 
             //没有返回
             if (inputs.length == 0) return;
 
             var valueStrs = '';
-            var hideIds = getCookie('filter_hide');
+            var hideIds = getCookie(htmlPathType + '_' + 'filter_hide');
             if (null == hideIds){
                 hideIds = '';
             }
-            var showIds = getCookie('filter_show');
+            var showIds = getCookie(htmlPathType + '_' + 'filter_show');
             if (null == showIds){
                 showIds = '';
             }
@@ -339,10 +362,10 @@
             if ('match' == type){
                 //删除
                 if (isDelete){
-                    setCookie('filter_hide',hideIds);
+                    setCookie(htmlPathType + '_' + 'filter_hide',hideIds);
                 }
                 else{
-                    setCookie('filter_show',showIds);
+                    setCookie(htmlPathType + '_' + 'filter_show',showIds);
                 }
             }
             var matches;
@@ -355,7 +378,7 @@
                 }
             }
 
-            setCookie('filter_' + type,valueStrs);
+            setCookie(htmlPathType + '_' + 'filter_' + type,valueStrs);
             matches = $('table#Table tr[isMatch=1]');
             for (var j = 0; j < matches.length; j++) {
                 var trAttr = '';
@@ -404,11 +427,11 @@
                     }
                 }
                 else{
-                    delCookie('filter_show');
-                    delCookie('filter_hide');
+                    delCookie(htmlPathType + '_' + 'filter_show');
+                    delCookie(htmlPathType + '_' + 'filter_hide');
                 }
             }
-            $('#hideMatchCount').html($('table#Table tr.hide').length);
+            $('#hideMatchCount').html($('table#Table tr[isMatch=1].hide').length);
             _closeFilter();
             _updateSection();
             //精简的按钮不能选中

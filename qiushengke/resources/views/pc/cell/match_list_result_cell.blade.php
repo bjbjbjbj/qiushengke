@@ -110,8 +110,8 @@ $show = (array_key_exists('hide',$match) && $match['hide']) ? false : true;
 
 $hasLive = $match['pc_live'];
 ?>
-<tr>
-    <td><p class="leagueLine" style="background: #e9a400;"></p>{{$match['league']}}</td>
+<tr  isMatch="1" class="{{$show?'show':'hide'}}" id="m_tr_{{$mid}}" match="{{$mid}}" league="{{$lid}}" asiaOdd="{{$asiaOdd}}" ouOdd="{{$ouOdd}}" first="{{$isFirst?"first":""}}" lottery="{{$isLottery?"lottery":""}}" live="{{$hasLive?"live":""}}">
+    <td><p class="leagueLine" style="background: rgb({{$r}}, {{$g}}, {{$b}});"></p>{{$match['league']}}</td>
     <td>{{date('H:i', $match['time'])}}</td>
     <td class="host">
         <a class="team" href="{{$matchUrl}}" target="_blank">

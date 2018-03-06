@@ -15,15 +15,9 @@
         <div id="Control">
             <div class="inbox">
                 <p class="column">
-                    <button class="on">
-                        精简</button><button>
-                        竞彩</button><button>
-                        直播</button><button>
-                        英超</button><button>
-                        西甲</button><button>
-                        完整</button>
+                    <button id="column_first" class="on" onclick="matchFilter('first')">精简</button><button id="column_lottery" onclick="matchFilter('lottery')">竞彩</button><button id="column_live" onclick="matchFilter('live')">直播</button><button id="column_all" onclick="matchFilter('all')">完整</button>
                 </p>
-                <p class="number">共<b>251</b>场&nbsp;隐藏<b>52</b>场<span>【显示】</span></p>
+                <p class="number">共<b>{{$total}}</b>场&nbsp;隐藏<b id="hideMatchCount">-</b>场<span>【显示】</span></p>
                 <p class="filter"><button class="league">选择赛事</button><button class="odd">选择盘路</button></p>
             </div>
         </div>
@@ -64,7 +58,7 @@
             @endif
         </table>
         <div id="Simulation">
-            <table id="Table">
+            <table>
                 <colgroup>
                     <col num="1" width="90px">
                     <col num="2" width="50px">
