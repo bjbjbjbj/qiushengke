@@ -467,7 +467,101 @@
                 buttons[j].value = button.value;
             }
         }
-        </script>
+
+    </script>
+    {{--动态加载--}}
+    <script type="text/javascript">
+        var ct;
+        //动态比赛统计
+        function refreshMatchTech(ID){
+            window.clearInterval(ct);
+            ID = ID + '';
+            var first = ID.substr(0,2);
+            var second = ID.substr(2,2);
+            $.ajax({
+                "url": '{{env('MATCH_URL')}}' + "/static/terminal/1/"+first+"/"+second+"/"+ID+"/tech.json",
+//                "url":"/static/terminal/1/"+first+"/"+second+"/"+ID+"/tech.json",
+                "dataType": "json",
+                "success": function (json) {
+                    window.clearInterval(ct);
+                    //事件
+                    var event = document.getElementById(ID+'_eboxCon');
+                    if (typeof(event) != 'undefined') {
+                        var content = '';
+                        var events = json['event']['events'];
+                        for (var i = 0 ; i < events.length ; i++){
+                            var item = events[i];
+                            var icon = '';
+                            switch (item.kind){
+                                case 1:
+                                case 7:
+                                    icon = '/pc/img/icon_goal_n.png';
+                                    break;
+                                case 2:
+                                    icon = '/pc/img/icon_redcard_n.png';
+                                    break;
+                                case 3:
+                                    icon = '/pc/img/icon_yellowcard_n.png';
+                                    break;
+                                case 8:
+                                    icon = '/pc/img/icon_goal_n.png';
+                                    break;
+                                case 11:
+                                    icon = '/pc/img/icon_xchange_n.png';
+                                    break;
+                            }
+                            if(item.kind == 11){
+                                content = content +
+                                        '<dd class="'+ (item['is_home'] == 1 ? 'host' : 'away') +'">'+
+                                        '<p class="time">'+item['happen_time']+'\'</p>'+
+                                        '<p class="img"><img src="' + icon + '"></p>'+
+                                        '<p class="name exchange">'+item['player_name_j'] + '</br>' + item['player_name_j2']+'</p>'+
+                                        '</dd>';
+                            }
+                            else{
+                                content = content +
+                                        '<dd class="'+ (item['is_home'] == 1 ? 'host' : 'away') +'">'+
+                                        '<p class="time">'+item['happen_time']+'\'</p>'+
+                                        '<p class="img"><img src="' + icon + '"></p>'+
+                                        '<p class="name">'+item['player_name_j']+'</p>'+
+                                        '</dd>';
+                            }
+                        }
+                        var html = '<dl class="ebox"><dt><p>事件</p></dt>' +
+                                content +
+                                '</dl>';
+                        event.innerHTML = html;
+                    }
+                    //统计
+                    var event = document.getElementById(ID+'_tboxCon');
+                    if (typeof(event) != 'undefined') {
+                        var events = json['tech'];
+                        var content = '';
+                        for (var i = 0 ; i < events.length ; i++) {
+                            var item = events[i];
+                            if (!(item.h_p == 0 && item.a_p == 0)){
+                                content = content +
+                                        '<dd class="total">' +
+                                        '<p class="num host">' + item.h + '</p>' +
+                                        '<p class="percent"><span class="host" width="' + item.h_p * 100 + '%"></span></p>' +
+                                        '<p class="item">' + item.name + '</p>' +
+                                        '<p class="percent"><span class="away" width="' + item.a_p * 100 + '%"></span></p>' +
+                                        '<p class="num away">' + item.a + '</p>' +
+                                        '</dd>';
+                            }
+                        }
+                        var html = '<dl class="tbox"> <dt><p>统计</p></dt>' +
+                                content +
+                                '</dl>';
+                        event.innerHTML = html;
+                    }
+                },
+                "error": function () {
+                    window.clearInterval(ct);
+                }
+            });
+        }
+    </script>
     @endsection
 @section('content')
     <div id="Con">

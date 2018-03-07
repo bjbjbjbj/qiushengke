@@ -2,7 +2,9 @@
 function setPage() {
     $('#Table .even').parent('').mouseover(function(){
         getMousePos(this);
-        $(this).find('dl.tbox span').css('width',$(this).find('dl.tbox span').attr('width'));
+        $(this).find('dl.tbox span').each(function(){
+            $(this).width($(this).attr('width'))
+        })
     })
     $('#Table .even').parent('').mouseout(function(){
         $(this).find('dl.tbox span').removeAttr('style');

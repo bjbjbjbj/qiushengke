@@ -129,7 +129,11 @@ $hasLive = $match['pc_live'];
     </td>
     <td><a href="{{$matchUrl}}" target="_blank"><img alt="{{$match['hname']}}" class="icon" src="{{strlen($match['hicon'])>0?$match['hicon'] : (env('CDN_URL') . '/pc/img/icon_teamDefault.png')}}"></a></td>
     <td>
-        <a href="{{$matchUrl}}" target="_blank">
+        <a href="{{$matchUrl}}" target="_blank"
+           @if($match['status'] == -1 || $match['status'] > 0)
+           onmouseover="getMousePos(this); ct=window.setInterval('refreshMatchTech(\'{{$mid}}\')',200)" onmouseout="window.clearInterval(ct)"
+                @endif
+        >
             <p class="fullScore">
                 @if($status == 0)
                     VS
@@ -148,6 +152,12 @@ $hasLive = $match['pc_live'];
                 <span>{{$match['hname']}}</span>
                 <span>{{$match['aname']}}</span>
             </p>
+            <div id="{{$mid}}_eboxCon">
+
+            </div>
+            <div id="{{$mid}}_tboxCon">
+
+            </div>
         </div>
     </td>
     <td><a href="{{$matchUrl}}" target="_blank"><img alt="{{$match['aname']}}" class="icon" src="{{strlen($match['aicon'])>0?$match['aicon'] : (env('CDN_URL') . '/pc/img/icon_teamDefault.png')}}"></a></td>

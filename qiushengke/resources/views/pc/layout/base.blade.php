@@ -10,6 +10,7 @@
     <meta name="baidu-site-verification" content="nEdUlBWvbw">
     <link rel="Shortcut Icon" data-ng-href="/pc/img/ico.ico" href="/pc/img/ico.ico">
     <link rel="stylesheet" type="text/css" href="/pc/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/pc/css/jquery-ui.css">
     @yield('css')
 </head>
 <body>

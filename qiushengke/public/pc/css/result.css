@@ -517,6 +517,9 @@ a.team span.name{
 	font-size: 12px; line-height: 30px; color: #fff;
 	overflow: hidden;
 }
+#Con table div.even dl dd p.name.exchange{
+	line-height: 15px;
+}
 #Con table div.even dl dd.host p.name{
 	padding-right: 10px;
 	text-align: right;

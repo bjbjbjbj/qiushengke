@@ -20,6 +20,8 @@ Route::group([], function () {
     });
     Route::any("/error", "HomeController@error");
 
+    Route::any('/static/terminal/1/{first}/{second}/{mid}/tech.json',"MatchController@test");
+
     //即时比赛列表
     Route::get("/match/{sport}/immediate.html", "MatchController@immediate"); //今天
     Route::get("/match/{sport}/result_{dateStr}.html", "MatchController@result"); //完赛比分
