@@ -70,36 +70,36 @@ if (isset($cell_odd['all']['3']['middle2'])) {
     <th>大</th>
 </tr>
 </thead>
-<tbody>
+<tbody id="{{$mid}}_odd_all">
 <tr>
     <td rowspan="2">全场</td>
     <td>初盘指数</td>
-    <td><p>{{$asiaUp1}}</p><p class="od">{{$asiaMiddle1}}</p><p>{{$asiaDown1}}</p></td>
-    <td><p>{{$ouUp1}}</p><p>{{$ouMiddle1}}</p><p>{{$ouDown1}}</p></td>
-    <td><p>{{$goalUp1}}</p><p>{{$goalMiddle1}}</p><p>{{$goalDown1}}</p></td>
+    <td><p class="aup1">{{$asiaUp1}}</p><p class="od amid1">{{$asiaMiddle1}}</p><p class="adown1">{{$asiaDown1}}</p></td>
+    <td><p class="oup1">{{$ouUp1}}</p><p class="omid1">{{$ouMiddle1}}</p><p class="odown1">{{$ouDown1}}</p></td>
+    <td><p class="gup1">{{$goalUp1}}</p><p class="gmid1">{{$goalMiddle1}}</p><p class="gdown1">{{$goalDown1}}</p></td>
 </tr>
 <tr>
     <td>即时指数</td>
-    <td><p>{{$asiaUp2}}</p><p class="od">{{$asiaMiddle2}}</p><p>{{$asiaDown2}}</p></td>
-    <td><p>{{$ouUp2}}</p><p>{{$ouMiddle2}}</p><p>{{$ouDown2}}</p></td>
-    <td><p>{{$goalUp2}}</p><p>{{$goalMiddle2}}</p><p>{{$goalDown2}}</p></td>
+    <td><p class="aup2">{{$asiaUp2}}</p><p class="od amid2">{{$asiaMiddle2}}</p><p class="adown2">{{$asiaDown2}}</p></td>
+    <td><p class="oup2">{{$ouUp2}}</p><p class="omid2">{{$ouMiddle2}}</p><p class="odown2">{{$ouDown2}}</p></td>
+    <td><p class="gup2">{{$goalUp2}}</p><p class="gmid2">{{$goalMiddle2}}</p><p class="gdown2">{{$goalDown2}}</p></td>
 </tr>
 <tr>
     <td colspan="5"></td>
 </tr>
 </tbody>
-<tbody>
+<tbody id="{{$mid}}_odd_half">
 <tr>
     <td rowspan="2">半场</td>
     <td>初盘指数</td>
-    <td><p>0.91</p><p class="od">平手</p><p>0.85</p></td>
-    <td><p>3.20</p><p>3.75</p><p>1.85</p></td>
-    <td><p>0.91</p><p>3</p><p>0.85</p></td>
+    <td><p class="aup1">-</p><p class="od amid1">-</p><p class="adown1">-</p></td>
+    <td><p class="oup1">-</p><p class="omid1">-</p><p class="odown1">-</p></td>
+    <td><p class="gup1">-</p><p class="gmid1">-</p><p class="gdown1">-</p></td>
 </tr>
 <tr>
     <td>即时指数</td>
-    <td><p>0.91</p><p class="od">平手/半球</p><p>0.85</p></td>
-    <td><p>3.20</p><p>3.75</p><p>1.85</p></td>
-    <td><p>0.91</p><p>3</p><p>0.85</p></td>
+    <td><p class="aup2">-</p><p class="od amid2">-</p><p class="adown2">-</p></td>
+    <td><p class="oup2">-</p><p class="omid2">-</p><p class="odown2">-</p></td>
+    <td><p class="gup2">-</p><p class="gmid2">-</p><p class="gdown2">-</p></td>
 </tr>
 </tbody>

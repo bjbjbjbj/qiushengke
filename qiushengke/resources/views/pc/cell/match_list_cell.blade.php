@@ -212,6 +212,9 @@ $hasLive = $match['pc_live'];
         @endif
     </td>
     <td>
+        <a
+                onmouseover="getMousePos(this); ct2=window.setInterval('refreshOddByMid(\'{{$mid}}\')',200)" onmouseout="window.clearInterval(ct2)"
+        >
         <p class="asia">
             <span class="" value="{{$asiaUp}}">{{$asiaUp}}</span><span class="odd" value="{{$match['asiamiddle2']}}">{{$asiaMiddle}}</span><span class="" value="{{$asiaDown}}">{{$asiaDown}}</span>
         </p>
@@ -221,10 +224,11 @@ $hasLive = $match['pc_live'];
         <div class="odd">
             <p class="league">{{$match['league']}}&nbsp;{{isset($match['round'])?'&nbsp;第'.$match['round'].'轮':''}}</p>
             <table>
-                @component('pc.cell.match_list_cell_odd',['cell_odd'=>$cell_odd])
+                @component('pc.cell.match_list_cell_odd',['cell_odd'=>$cell_odd,'mid'=>$mid])
                 @endcomponent
             </table>
         </div>
+        </a>
     </td>
     <td>
         <a href="">析</a>

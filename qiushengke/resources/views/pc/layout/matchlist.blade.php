@@ -600,7 +600,12 @@
                     isDown = true;
                 }
                 else{
-                    span.setAttribute('class', '');
+                    if (isMiddle) {
+                        span.setAttribute('class', 'odd');
+                    }
+                    else{
+                        span.setAttribute('class', '');
+                    }
                 }
                 var text = odd;
                 if (isMiddle) {
@@ -730,7 +735,7 @@
                             else
                                 timeItem.html(dataItem.time);
                         }
-                        if (scoreItem) {
+                        if (scoreItem && scoreItem.length > 0) {
                             var lastScore = scoreItem.html();
                             var currentScore = dataItem.hscore + ' - ' + dataItem.ascore;
                             var isHost = true;
@@ -742,8 +747,8 @@
                                 }
                             }
                             var icon = isHost ? $('#'+ID+'_h_icon')[0].src : $('#'+ID+'_a_icon')[0].src;
-                            if (currentScore != lastScore) {
-                                Goal(dataItem.hname, dataItem.aname, dataItem.hscore, dataItem.ascore, icon, isHost?'host':'away');
+                            if (currentScore != lastScore && (dataItem.hscore + dataItem.ascore) > 0) {
+                                Goal(dataItem.hname, dataItem.aname, dataItem.hscore, dataItem.ascore, icon,dataItem.time.replace('\'',''), isHost?'host':'away');
                             }
                             scoreItem.html(currentScore);
                         }
@@ -780,8 +785,8 @@
             });
         }
         if (htmlPathType == 'immediate') {
-            window.setInterval('refresh()', 5000);
-            window.setInterval('refreshRoll()',5000);
+//            window.setInterval('refresh()', 5000);
+//            window.setInterval('refreshRoll()',5000);
         }
 
         //最终用盘口版本
@@ -905,6 +910,57 @@
                 return prefix + text;
             }
             return text;
+        }
+
+        //比赛对应赔率详情
+        var ct2;
+        //动态比赛统计
+        function refreshOddByMid(ID){
+            window.clearInterval(ct2);
+            ID = ID + '';
+            var first = ID.substr(0,2);
+            var second = ID.substr(2,2);
+            $.ajax({
+{{--                "url": '{{env('MATCH_URL')}}' + "/static/terminal/1/"+first+"/"+second+"/"+ID+"/tech.json",--}}
+                "url":"/static/terminal/1/10/70/1070722/roll.json",
+                "dataType": "json",
+                "success": function (json) {
+                    window.clearInterval(ct2);
+                    //全场/半场
+                    _updateOddBody('all',ID,json);
+                    _updateOddBody('half',ID,json);
+                },
+                "error": function () {
+                    window.clearInterval(ct2);
+                }
+            });
+        }
+
+        function _updateOddBody(key,ID,json) {
+            var tbody = $('#'+ID + '_odd_'+key);
+            _updateOdd(tbody,'a','1',json[key]['1'],'1');
+            _updateOdd(tbody,'o','1',json[key]['3'],'1');
+            _updateOdd(tbody,'g','1',json[key]['2'],'1');
+            _updateOdd(tbody,'a','2',json[key]['1'],json[key]['1']['middle'] == null?'2':'');
+            _updateOdd(tbody,'o','2',json[key]['3'],json[key]['2']['middle'] == null?'2':'');
+            _updateOdd(tbody,'g','2',json[key]['2'],json[key]['3']['middle'] == null?'2':'');
+        }
+
+        //更新赔率小框 tbody全场半场 key类型a亚盘o欧赔g大小球 key21初盘2即时 data数据 key3数据拿那个
+        function _updateOdd (tbody,key,key2,data,key3) {
+            var p = tbody.find('p.' + key + 'up' + key2)[0];
+            p.innerHTML = data['up'+key3];
+            var p = tbody.find('p.' + key + 'mid' + key2)[0];
+            var middle = data['middle'+key3];
+            if ('a' == key){
+                middle = getHandicapCn(middle, '',1,1,true);
+            }
+            else if('g' == key){
+                middle = getHandicapCn(middle, '',2,1,true);
+            }
+            p.innerHTML = middle;
+            var p = tbody.find('p.' + key + 'down' + key2)[0];
+            p.innerHTML = data['down'+key3];
         }
     </script>
     @endsection
