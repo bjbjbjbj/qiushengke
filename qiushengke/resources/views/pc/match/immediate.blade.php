@@ -49,15 +49,15 @@
                 <th>顶</th>
             </tr>
             </thead>
-            @if(isset($topMatches) && count($topMatches))
+{{--            @if(isset($topMatches) && count($topMatches))--}}
                 <tbody id="Top" name="match" class="hide">
                 @foreach($topMatches as $match)
                     @component('pc.cell.match_list_cell',['match'=>$match,'sport'=>$sport,'isTop'=>1])
                     @endcomponent
                 @endforeach
                 </tbody>
-            @endif
-            @if(isset($liveMatches) && count($liveMatches))
+            {{--@endif--}}
+{{--            @if(isset($liveMatches) && count($liveMatches))--}}
                 <tbody id="Live" name="match" class="hide">
                 <tr>
                     <th colspan="14"><p>正在比赛</p></th>
@@ -67,8 +67,8 @@
                     @endcomponent
                 @endforeach
                 </tbody>
-            @endif
-            @if(isset($afterMatches) && count($afterMatches))
+            {{--@endif--}}
+{{--            @if(isset($afterMatches) && count($afterMatches))--}}
                 <tbody id="After" name="match" class="hide">
                 <tr>
                     <th colspan="14"><p>稍后比赛</p></th>
@@ -78,8 +78,8 @@
                     @endcomponent
                 @endforeach
                 </tbody>
-            @endif
-            @if(isset($endMatches) && count($endMatches))
+            {{--@endif--}}
+            {{--@if(isset($endMatches) && count($endMatches))--}}
                 <tbody id="End" name="match" class="hide">
                 <tr>
                     <th colspan="14"><p>完场赛事</p></th>
@@ -89,7 +89,7 @@
                     @endcomponent
                 @endforeach
                 </tbody>
-            @endif
+            {{--@endif--}}
         </table>
         <div id="Simulation">
             <table>
