@@ -468,6 +468,19 @@
             }
         }
 
+        //声音开关
+        function SoundControl () {
+            var SoundBtn = $('div#Control .sound button')[0];
+
+            var checked = false;
+            if (SoundBtn.innerHTML == '进球声') {
+                checked = true;
+            }else{
+
+            }
+            setCookie('sound',checked);
+        }
+
     </script>
     {{--动态加载--}}
     <script type="text/javascript">
@@ -561,6 +574,102 @@
                 }
             });
         }
+
+        function refresh() {
+            if (htmlPathType !='immediate')
+                return;
+            $.ajax({
+                "url": "http://localhost:8000/static/score.json?" + (new Date().getTime()),
+                "dataType": "json",
+                "success": function (json) {
+                    var ups = $('span.up');
+                    for (var i = 0 ; i < ups.length; i++){
+                        var up = ups[i];
+                        up.setAttribute('class','');
+                    }
+                    var downs = $('span.down');
+                    for (var i = 0 ; i < downs.length; i++){
+                        var down = downs[i]
+                        down.setAttribute('class','');
+                    }
+
+                    for (var ID in json) {
+                        var dataItem = json[ID];
+                        var timeItem = $('#time_' + ID);
+                        var scoreItem = $('#score_' + ID);
+                        var halfScoreItem = $('#half_score_' + ID);
+                        var chScoreItem = $('#ch_score_' + ID);
+                        var liveItem = $('#live_' + ID);
+
+                        //红黄牌
+                        var hrItem = $('#'+ID+'_h_red')[0];
+                        var hyItem = $('#'+ID+'_h_yellow')[0];
+                        var arItem = $('#'+ID+'_a_red')[0];
+                        var ayItem = $('#'+ID+'_a_yellow')[0];
+
+                        if (hrItem && dataItem.h_red > 0){
+                            hrItem.innerHTML = dataItem.h_red;
+                            hrItem.className = 'redCard';
+                        }
+                        if (hyItem && dataItem.h_yellow > 0){
+                            hyItem.innerHTML = dataItem.h_yellow;
+                            hyItem.className = 'yellowCard';
+                        }
+                        if (arItem && dataItem.a_red > 0){
+                            arItem.innerHTML = dataItem.a_red;
+                            arItem.className = 'redCard';
+                        }
+                        if (ayItem && dataItem.a_yellow > 0){
+                            ayItem.innerHTML = dataItem.a_yellow;
+                            ayItem.className = 'yellowCard';
+                        }
+
+                        if (timeItem) {
+                            if(dataItem.status > 0)
+                                timeItem.html('<p class=\'time\'>' + dataItem.time + '</p>');
+                            else
+                                timeItem.html(dataItem.time);
+                        }
+                        if (scoreItem) {
+                            var lastScore = scoreItem.html();
+                            var currentScore = dataItem.hscore + ' - ' + dataItem.ascore;
+                            var isHost = true;
+                            if (lastScore.indexOf(' - ') != -1) {
+                                var lh = lastScore.split(' - ')[0];
+                                var ah = lastScore.split(' - ')[1];
+                                if (lh == dataItem.hscore){
+                                    isHost = false;
+                                }
+                            }
+                            var icon = isHost ? $('#'+ID+'_h_icon')[0].src : $('#'+ID+'_a_icon')[0].src;
+                            if (currentScore != lastScore) {
+                                Goal(dataItem.hname, dataItem.aname, dataItem.hscore, dataItem.ascore, icon, isHost?'host':'away');
+                            }
+                            scoreItem.html(currentScore);
+                        }
+                        if (chScoreItem) {
+                            chScoreItem.html(dataItem.h_corner + ' - ' + dataItem.a_corner);
+                        }
+                        if (halfScoreItem) {
+                            halfScoreItem.html(dataItem.hscorehalf + ' - ' + dataItem.ascorehalf);
+                        }
+                        if (liveItem && liveItem.length > 0){
+                            if(liveItem[0].src == "{{env('CDN_URL')}}/pc/img/icon_living.png") {
+                                liveItem[0].src = "{{env('CDN_URL')}}/pc/img/icon_living.gif";
+                            }
+                            if (timeItem == '已结束'){
+                                liveItem[0].src = "{{env('CDN_URL')}}/pc/img/icon_lived.png";
+                            }
+                        }
+                    }
+                },
+                "error": function () {
+
+                }
+            });
+        }
+//        window.setInterval('refresh()',5000);
+        refresh();
     </script>
     @endsection
 @section('content')

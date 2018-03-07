@@ -113,28 +113,36 @@ $hasLive = $match['pc_live'];
 <tr isMatch="1" class="{{$show?'show':'hide'}}" id="m_tr_{{$mid}}" match="{{$mid}}" league="{{$lid}}" asiaOdd="{{$asiaOdd}}" ouOdd="{{$ouOdd}}" first="{{$isFirst?"first":""}}" lottery="{{$isLottery?"lottery":""}}" live="{{$hasLive?"live":""}}">
     <td><button name="match" class="choose" value="0" mid="{{$mid}}" name="match" id="match_{{$mid}}" onclick="clickMatchBtn(this)"></button></td>
     <td><p class="leagueLine" style="background: rgb({{$r}}, {{$g}}, {{$b}});"></p>{{$match['league']}}</td>
-    <td>{{date('H:i', $match['time'])}}
+    <td id="time_{{$mid}}">{{date('H:i', $match['time'])}}
     </td>
     <td id="time_{{$mid}}">{!! $matchTime !!}</td>
     <td id="h_team_{{$mid}}" class="host">
         <a class="team" href="{{$matchUrl}}" target="_blank">
-            @if($match['h_red'] > 0)
-                <span class="redCard">{{$match['h_red']}}</span>
-            @endif
-            @if($match['h_yellow'] > 0)
-                <span class="yellowCard">{{$match['h_yellow']}}</span>
-            @endif
+                <span
+                        @if($match['h_red'] > 0)
+                        class="redCard"
+                        @else
+                        class="redCard hide"
+                        @endif
+                        id="{{$mid}}_h_red">{{$match['h_red']}}</span>
+                <span
+                        @if($match['h_yellow'] > 0)
+                        class="yellowCard"
+                        @else
+                        class="yellowCard hide"
+                        @endif
+                        id="{{$mid}}_h_yellow">{{$match['h_yellow']}}</span>
             <span class="name">{{$match['hname']}}</span>
         </a>
     </td>
-    <td><a href="{{$matchUrl}}" target="_blank"><img alt="{{$match['hname']}}" class="icon" src="{{strlen($match['hicon'])>0?$match['hicon'] : (env('CDN_URL') . '/pc/img/icon_teamDefault.png')}}"></a></td>
+    <td><a href="{{$matchUrl}}" target="_blank"><img alt="{{$match['hname']}}" id="{{$mid}}_h_icon" class="icon" src="{{strlen($match['hicon'])>0?$match['hicon'] : (env('CDN_URL') . '/pc/img/icon_teamDefault.png')}}"></a></td>
     <td>
         <a href="{{$matchUrl}}" target="_blank"
            @if($match['status'] == -1 || $match['status'] > 0)
            onmouseover="getMousePos(this); ct=window.setInterval('refreshMatchTech(\'{{$mid}}\')',200)" onmouseout="window.clearInterval(ct)"
                 @endif
         >
-            <p class="fullScore">
+            <p class="fullScore" id="score_{{$mid}}">
                 @if($status == 0)
                     VS
                 @elseif($status == -1 || $status > 0)
@@ -144,7 +152,7 @@ $hasLive = $match['pc_live'];
                 @endif
             </p>
             @if($status == -1 || $status > 0)
-                <p class="halfScore">半 {{$match['hscorehalf'] .' - '. $match['ascorehalf']}}</p>
+                <p class="halfScore" id="half_score_{{$mid}}">半 {{$match['hscorehalf'] .' - '. $match['ascorehalf']}}</p>
             @endif
         </a>
         <div class="even">
@@ -160,15 +168,23 @@ $hasLive = $match['pc_live'];
             </div>
         </div>
     </td>
-    <td><a href="{{$matchUrl}}" target="_blank"><img alt="{{$match['aname']}}" class="icon" src="{{strlen($match['aicon'])>0?$match['aicon'] : (env('CDN_URL') . '/pc/img/icon_teamDefault.png')}}"></a></td>
+    <td><a href="{{$matchUrl}}" target="_blank"><img alt="{{$match['aname']}}"id="{{$mid}}_a_icon"  class="icon" src="{{strlen($match['aicon'])>0?$match['aicon'] : (env('CDN_URL') . '/pc/img/icon_teamDefault.png')}}"></a></td>
     <td class="away">
         <a class="team" href="{{$matchUrl}}" target="_blank">
-            @if($match['a_red'] > 0)
-                <span class="redCard">{{$match['a_red']}}</span>
-            @endif
-            @if($match['a_yellow'] > 0)
-                <span class="yellowCard">{{$match['a_yellow']}}</span>
-            @endif
+                <span
+                        @if($match['a_red'] > 0)
+                        class="redCard"
+                        @else
+                        class="redCard hide"
+                        @endif
+                        id="{{$mid}}_a_red">{{$match['a_red']}}</span>
+            <span
+                    @if($match['a_yellow'] > 0)
+                    class="yellowCard"
+                    @else
+                    class="yellowCard hide"
+                    @endif
+                    id="{{$mid}}_a_yellow">{{$match['a_yellow']}}</span>
             <span class="name">{{$match['aname']}}</span>
         </a>
     </td>

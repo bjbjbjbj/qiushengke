@@ -9,7 +9,7 @@
                 </p>
                 <p class="number">共<b>{{$total}}</b>场&nbsp;隐藏<b id="hideMatchCount">-</b>场<span>【显示】</span></p>
                 <div class="sound">
-                    <button>进球声</button>
+                    <button onclick="SoundControl()">进球声</button>
                     <ul>
                         <li class="on">进球声</li>
                         <li>静音</li>
