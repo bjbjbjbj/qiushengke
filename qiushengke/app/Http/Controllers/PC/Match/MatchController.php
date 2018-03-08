@@ -71,7 +71,7 @@ class MatchController extends BaseController
         }
         else{
             $order = 'league';
-        } 
+        }
 
         $ch = curl_init();
         $url = 'http://match.liaogou168.com/static/schedule/'.$startDate.'/'.$sport.'/'.$order.'.json';
@@ -180,7 +180,6 @@ class MatchController extends BaseController
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function schedule(Request $request,$sport, $dateStr,$order = 't'){
-        dump($sport,$dateStr,$order);
         if ('basket' == $sport) {
             $sport = 2;
             $hour = 12;
@@ -215,7 +214,6 @@ class MatchController extends BaseController
             );
         }
 
-        dump($order);
         if ($order == 't'){
             $order = 'all';
         }
@@ -225,7 +223,6 @@ class MatchController extends BaseController
 
         $ch = curl_init();
         $url = 'http://match.liaogou168.com/static/schedule/'.$startDate.'/'.$sport.'/'.$order.'.json';
-        dump($url);
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);//5秒超时

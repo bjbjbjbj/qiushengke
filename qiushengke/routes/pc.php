@@ -31,5 +31,5 @@ Route::group([], function () {
     //篮球 按联赛排序
     Route::get("/match/basket/immediate_{order}.html", "MatchController@immediate_bk"); //今天
     Route::get("/match/basket/result_{dateStr}_{order}.html", "MatchController@result_bk"); //完赛比分
-    Route::get("/match/bakset/schedule_{dateStr}_{order}.html", "MatchController@schedule_bk"); //下日赛程
+    Route::get("/match/basket/schedule_{dateStr}_{order}.html", "MatchController@schedule_bk"); //下日赛程
 });
