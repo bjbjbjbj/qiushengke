@@ -21,8 +21,14 @@ Route::group([], function () {
     Route::any("/error", "HomeController@error");
 
     Route::any('/static/terminal/1/{first}/{second}/{mid}/tech.json',"MatchController@test");
+    Route::any('/change/live.json',"MatchController@test2");
 
-    //即时比赛列表
+    //足球
+    Route::get("/match/{sport}/immediate.html", "MatchController@immediate"); //今天
+    Route::get("/match/{sport}/result_{dateStr}.html", "MatchController@result"); //完赛比分
+    Route::get("/match/{sport}/schedule_{dateStr}.html", "MatchController@schedule"); //下日赛程
+
+    //篮球
     Route::get("/match/{sport}/immediate.html", "MatchController@immediate"); //今天
     Route::get("/match/{sport}/result_{dateStr}.html", "MatchController@result"); //完赛比分
     Route::get("/match/{sport}/schedule_{dateStr}.html", "MatchController@schedule"); //下日赛程

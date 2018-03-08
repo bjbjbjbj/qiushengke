@@ -363,4 +363,136 @@ class CommonTool
         $matchOdds['typeValue'] = $typeValue;
         return $matchOdds;
     }
+
+    //=============篮球================================================
+
+    //获取篮球比赛的即时时间
+    public static function getBasketCurrentTime($status, $liveStr, $isHalfFormat = false) {
+        switch ($status) {
+            case -1:
+                $timeStr = '已结束';
+                break;
+            case 0:
+                $timeStr = '';
+                break;
+            case 1:
+                $timeStr = ($isHalfFormat ? '上半场 ' : '第一节 ').$liveStr;
+                break;
+            case 2:
+                $timeStr = '第二节 '.$liveStr;
+                break;
+            case 3:
+                $timeStr = ($isHalfFormat ? '下半场 ' : '第三节 ').$liveStr;
+                break;
+            case 4:
+                $timeStr = '第四节 '.$liveStr;
+                break;
+            case 5:
+                $timeStr = '加时1 '.$liveStr;
+                break;
+            case 6:
+                $timeStr = '加时2 '.$liveStr;
+                break;
+            case 7:
+                $timeStr = '加时3 '.$liveStr;
+                break;
+            case 8:
+                $timeStr = '加时4 '.$liveStr;
+                break;
+            case 50:
+            default:
+                $timeStr = self::getStatusTextCnBK($status);
+                break;
+        }
+        return $timeStr;
+    }
+
+    //获取篮球分数(默认'')
+    public static function getBasketScore($score) {
+        if (isset($score)) return $score;
+        return '';
+    }
+
+    //获取篮球比赛 单个球队的半场分数
+    public static function getBasketHalfScoreTxt($match, $isHome = true) {
+        $status = $match['status'];
+        if ($isHome) {
+            $halfScore = $status == -1 ? (($match['hscore_1st'] + $match['hscore_2nd']) . " / " . ($match['hscore_3rd'] + $match['hscore_4th'])) : ($status > 2 ? (($match['hscore_1st'] + $match['hscore_2nd']) . " / " . ($match['hscore_3rd'] + $match['hscore_4th'])) : ($status > 0 ? ($match['hscore_1st'] + $match['hscore_2nd']) . ' / -' : ''));
+        } else {
+            $halfScore = $status == -1 ? (($match['ascore_1st'] + $match['ascore_2nd']) . " / " . ($match['ascore_3rd'] + $match['ascore_4th'])) : ($status > 2 ? (($match['ascore_1st'] + $match['ascore_2nd']) . " / " . ($match['ascore_3rd'] + $match['ascore_4th'])) : ($status > 0 ? ($match['ascore_1st'] + $match['ascore_2nd']) . ' / -' : ''));
+        }
+
+        return $halfScore;
+    }
+
+    //获取篮球比赛 半全场分差(总分)
+    public static function getBasketScoreTxt($match, $isHalf = false, $isDiff = true) {
+        $status = $match['status'];
+        if ($isHalf) {
+            if ($isDiff) {
+                $txt = ($status == -1 || $status > 2) ? '半：' . ($match['hscore_1st'] + $match['hscore_2nd'] - $match['ascore_1st'] - $match['ascore_2nd']) : '';
+            } else {
+                $txt = ($status == -1 || $status > 2) ? '半：'.($match['hscore_1st']+$match['hscore_2nd']+$match['ascore_1st']+$match['ascore_2nd']) : '';
+            }
+        } else {
+            if ($isDiff) {
+                $txt = $status == -1 ? '全：' . ($match['hscore'] - $match['ascore']) : '';
+            } else {
+                $txt = $status == -1 ? '全：'.($match['hscore']+$match['ascore']) : '';
+            }
+        }
+        return $txt;
+    }
+
+    //获取篮球比赛的加时
+    public static function getBasketOtScore($ots) {
+        return (!is_null($ots) && strlen($ots)>0) ? explode(',', $ots) : [];
+    }
+
+    public static function getStatusTextCnBK($status) {
+        switch ($status) {
+            case 0:
+                return "未开始";
+            case 1:
+                return "第一节";
+            case 2:
+                return "第二节";
+            case 3:
+                return "第三节";
+            case 4:
+                return "第四节";
+            case 5:
+                return "加时1";
+            case 6:
+                return "加时2";
+            case 7:
+                return "加时3";
+            case 50:
+                return "中场";
+            case -1:
+                return "已结束";
+            case -5:
+                return "推迟";
+            case -2:
+                return "待定";
+            case -12:
+                return "腰斩";
+            case -10:
+                return "退赛";
+            case -99:
+                return "异常";
+        }
+        return '';
+    }
+
+    public static function getIconBK($icon) {
+        if (isset($icon) && strlen($icon) > 0 && !str_contains($icon, '/files/team/noflag.gif')) {
+            if (str_contains($icon, '.gif') && str_contains($icon, 'team/images/2005')) {
+                return env('CDN_URL') . '/pc/img/icon_teamDefault.png';
+            }
+            return $icon;
+        } else {
+            return env('CDN_URL') . '/pc/img/icon_teamDefault.png';
+        }
+    }
 }
