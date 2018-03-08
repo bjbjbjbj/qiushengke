@@ -4,7 +4,7 @@
         <div id="Control">
             <div class="inbox">
                 <p class="save"><button onclick="confirmFilter('match',false)">保留</button><button onclick="confirmFilter('match',true)">删除</button></p>
-                <p class="array"><button class="on">按时间排序</button><button>按联赛排序</button></p>
+                <p class="array"><button id="array_time" class="on" onclick="changeBKFilter('time')">按时间排序</button><button id="array_league" onclick="changeBKFilter('league')">按联赛排序</button></p>
                 <p class="column">
                     <button id="column_nba" class="on" onclick="matchFilter('nba')">NBA</button><button id="column_live" onclick="matchFilter('live')">直播</button><button id="column_all" onclick="matchFilter('all')">完整</button>
                 </p>
@@ -23,8 +23,8 @@
     <div class="abox">
         <ul>
             <a class="li on">即时比分</a>
-            <a class="li" href="/match/basket/result_{{$lastDate}}.html">完场赛果</a>
-            <a class="li" href="/match/basket/schedule_{{$nextDate}}.html">未来赛程</a>
+            <a class="li" href="/match/basket/result_{{$lastDate}}_t.html">完场赛果</a>
+            <a class="li" href="/match/basket/schedule_{{$nextDate}}_t.html">未来赛程</a>
         </ul>
     </div>
 @endsection

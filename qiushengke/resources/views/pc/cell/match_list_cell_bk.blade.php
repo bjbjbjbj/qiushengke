@@ -13,7 +13,7 @@ $asiaUp = "";
 $asiaMiddle = "";
 $asiaDown = "";
 //    $oddAsia = $match->oddAsian();
-if (isset($match->asiaMiddle)) {
+if (isset($match['asiamiddle2'])) {
     $asiaUp = \App\Http\Controllers\PC\CommonTool::float2Decimal($match['asiaup2']);
     $asiaDown = \App\Http\Controllers\PC\CommonTool::float2Decimal($match['asiadown2']);
     $asiaMiddle = \App\Http\Controllers\PC\CommonTool::float2Decimal($match['asiamiddle2'], true);
@@ -79,7 +79,15 @@ $hasLive = $match['live'];
                 <button name="match" class="choose" value="0" mid="{{$mid}}" name="match" id="match_{{$mid}}" class="choose" onclick="clickMatchBtn(this)"></button>
                 @endif
                 {{$league_name}}</p></th>
-        <th class="team"><span id="time_{{$mid}}">{{$matchTime}}</span></th>
+        <th class="team">
+            @if($status == 0)
+                <span id="time_{{$mid}}">未开始</span>
+            @elseif($status == -1)
+                <span id="time_{{$mid}}">已结束</span>
+            @else
+                <span id="time_{{$mid}}">{{$matchTime}}</span>
+            @endif
+        </th>
         @if($isHalfFormat)
             <th>上半场</th>
             <th>下半场</th>

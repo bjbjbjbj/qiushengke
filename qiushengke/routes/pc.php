@@ -20,16 +20,16 @@ Route::group([], function () {
     });
     Route::any("/error", "HomeController@error");
 
-    Route::any('/static/terminal/1/{first}/{second}/{mid}/tech.json',"MatchController@test");
-    Route::any('/change/live.json',"MatchController@test2");
+    Route::any('/static/score.json',"MatchController@test");
+    Route::any('/static/roll.json',"MatchController@test2");
 
     //足球
-    Route::get("/match/{sport}/immediate.html", "MatchController@immediate"); //今天
-    Route::get("/match/{sport}/result_{dateStr}.html", "MatchController@result"); //完赛比分
-    Route::get("/match/{sport}/schedule_{dateStr}.html", "MatchController@schedule"); //下日赛程
+    Route::get("/match/foot/immediate.html", "MatchController@immediate_f"); //今天
+    Route::get("/match/foot/result_{dateStr}.html", "MatchController@result_f"); //完赛比分
+    Route::get("/match/foot/schedule_{dateStr}.html", "MatchController@schedule_f"); //下日赛程
 
-    //篮球
-    Route::get("/match/{sport}/immediate.html", "MatchController@immediate"); //今天
-    Route::get("/match/{sport}/result_{dateStr}.html", "MatchController@result"); //完赛比分
-    Route::get("/match/{sport}/schedule_{dateStr}.html", "MatchController@schedule"); //下日赛程
+    //篮球 按联赛排序
+    Route::get("/match/basket/immediate_{order}.html", "MatchController@immediate_bk"); //今天
+    Route::get("/match/basket/result_{dateStr}_{order}.html", "MatchController@result_bk"); //完赛比分
+    Route::get("/match/bakset/schedule_{dateStr}_{order}.html", "MatchController@schedule_bk"); //下日赛程
 });

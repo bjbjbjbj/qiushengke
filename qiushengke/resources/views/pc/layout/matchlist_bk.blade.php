@@ -29,30 +29,66 @@
 @section('js')
     @yield('js_match_list')
     <script type="text/javascript">
-        var htmlPathType = 'immediate';
+        function changeBKFilter(type) {
+            var url = window.location.href;
+            if (type == 'league'){
+                url = url.replace('_t.html','_l.html');
+            }
+            else{
+                url = url.replace('_l.html','_t.html');
+            }
+            window.location.href = url;
+        }
+        
+        var htmlPathType = 'bk_immediate';
         if (window.location.pathname.indexOf('result') != -1){
             var str = window.location.pathname;
             var index = str .lastIndexOf("\/");
             str  = str .substring(index + 1, str .length);
             str = str.replace('.html','');
-            var params = str.split("_")[1];
-            htmlPathType = params;
+            htmlPathType = str;
         }
         if (window.location.pathname.indexOf('schedule') != -1){
             var str = window.location.pathname;
             var index = str .lastIndexOf("\/");
             str  = str .substring(index + 1, str .length);
             str = str.replace('.html','');
-            var params = str.split("_")[1];
-            htmlPathType = params;
+            htmlPathType = str;
         }
 
         $('#hideMatchCount').html($('div.ConInner table[isMatch=1].hide').length);
 
         updateMatch();
 
+        function _updateTimeLeagueFilterBtn(type) {
+            var buttons = $('p.array button');
+            for (var i = 0 ; i < buttons.length ; i++){
+                var button = buttons[i];
+                button.className = '';
+            }
+            var button = $('p.array button#array_'+type)[0];
+            if (button)
+                button.className = 'on';
+        }
+
         //初始化比赛列表,哪些显示,哪些不显示
         function updateMatch() {
+            //按时间 按赛事
+            var type = 'time';
+            var str = window.location.pathname;
+            var index = str .lastIndexOf("\/");
+            str  = str .substring(index + 1, str .length);
+            str = str.replace('.html','');
+            str = str.split('_');
+            str = str[str.length - 1];
+            if (str == 'l'){
+                type = 'league';
+            }
+            else{
+                type = 'time';
+            }
+            _updateTimeLeagueFilterBtn(type);
+
             //隐藏全部
             var bodys = $('div.ConInner table[isMatch=1]');
             for (var i = 0 ; i < bodys.length ; i++){
@@ -494,40 +530,25 @@
                 var isUp = false;
                 var isDown = false;
                 if (odd > span.getAttribute('value')) {
-                    if (isMiddle) {
-                        span.setAttribute('class', 'odd up');
-                    }
-                    else{
-                        span.setAttribute('class', 'up');
-                    }
+                    span.setAttribute('class', 'up');
                     isUp = true;
                 }
                 else if (odd < span.getAttribute('value')) {
-                    if (isMiddle) {
-                        span.setAttribute('class', 'odd down');
-                    }
-                    else{
-                        span.setAttribute('class', 'down');
-                    }
+                    span.setAttribute('class', 'down');
                     isDown = true;
                 }
                 else{
-                    if (isMiddle) {
-                        span.setAttribute('class', 'odd');
-                    }
-                    else{
-                        span.setAttribute('class', '');
-                    }
+                    span.setAttribute('class', '');
                 }
                 var text = odd;
                 if (isMiddle) {
                     //亚盘
                     if (isAsia) {
-                        text = getHandicapCn(odd, '',1,1,true);
+                        text = getHandicapCn(odd, '',1,2,true);
                     }
                     //大小球
                     else {
-                        text = getHandicapCn(odd, '',2,1,true);
+                        text = getHandicapCn(odd, '',2,2,true);
                     }
                 }
                 else{
@@ -546,41 +567,53 @@
         //赔率刷新
         function refreshRoll() {
             $.ajax({
-                "url": "/static/change/1/roll.json?" + (new Date().getTime()),
+//                "url": "/static/change/2/roll.json?" + (new Date().getTime()),
+                "url":"/static/roll.json",
                 "dataType": "json",
                 "success": function (json) {
                     for (var ID in json) {
                         var dataItem = json[ID];
                         var asia = dataItem['all']['1'];
                         var goal = dataItem['all']['2'];
-                        var asiaP = $('tr#m_tr_' + ID + ' p.asia')[0];
-                        var goalP = $('tr#m_tr_' + ID + ' p.goal')[0];
-                        var timeItem = $('#time_' + ID)[0];
-                        if (timeItem && (timeItem.innerHTML == '' || timeItem.innerHTML == '已结束' || timeItem.innerHTML == '推迟')){
+                        var table = $('#m_table_' + ID);
 
-                        }
-                        else {
-                            if (asia) {
-                                var value = asia['up'];
-                                var span = $(asiaP).find('span')[0];
-                                changeSpanOdd(span, value,true,false);
-                                var value = asia['middle'];
-                                var span = $(asiaP).find('span')[1];
-                                changeSpanOdd(span, value,true,true);
-                                var value = asia['down'];
-                                var span = $(asiaP).find('span')[2];
-                                changeSpanOdd(span, value,true,false);
+                        if (table && table.length > 0) {
+
+                            var timeItem = $('#time_' + ID)[0];
+                            if (timeItem && (timeItem.innerHTML == '' || timeItem.innerHTML == '已结束' || timeItem.innerHTML == '推迟')) {
+
                             }
-                            if (goal) {
-                                var value = goal['up'];
-                                var span = $(goalP).find('span')[0];
-                                changeSpanOdd(span, value,false,false);
-                                var value = goal['middle'];
-                                var span = $(goalP).find('span')[1];
-                                changeSpanOdd(span, value,false,true);
-                                var value = goal['down'];
-                                var span = $(goalP).find('span')[2];
-                                changeSpanOdd(span, value,false,false);
+                            else {
+                                if (asia) {
+                                    var value = asia['up'];
+                                    var span = table.find('td.asia p')[0];
+                                    changeSpanOdd(span, value, true, false);
+                                    var value = asia['middle'];
+                                    var span = table.find('td.asia span')[0];
+                                    console.log(span);
+                                    changeSpanOdd(span, value, true, true);
+                                    var value = asia['down'];
+                                    var span = table.find('td.asia p')[1];
+                                    changeSpanOdd(span, value, true, false);
+                                }
+                                if (goal) {
+                                    var value = goal['up'];
+                                    var span = table.find('td.goal p')[0];
+                                    changeSpanOdd(span, value, false, false);
+                                    //主队
+                                    var value = goal['middle'];
+                                    var span = table.find('td.goal span')[0];
+                                    changeSpanOdd(span, value, false, true);
+                                    $(span).html('大 ' + span.innerHTML);
+                                    //客队
+                                    var value = goal['middle'];
+                                    var span = table.find('td.goal span')[1];
+                                    changeSpanOdd(span, value, false, true);
+                                    $(span).html('小 ' + span.innerHTML);
+                                    var value = goal['down'];
+                                    var span = table.find('td.goal p')[1];
+                                    changeSpanOdd(span, value, false, false);
+                                }
                             }
                         }
                     }
@@ -661,10 +694,11 @@
 
         //比分刷新
         function refresh() {
-            if (htmlPathType !='immediate')
+            if (htmlPathType !='bk_immediate')
                 return;
             $.ajax({
-                "url": "/static/change/2/score.json?" + (new Date().getTime()),
+//                "url": "/static/change/2/score.json?" + (new Date().getTime()),
+                "url":"/static/score.json",
                 "dataType": "json",
                 "success": function (json) {
                     var ups = $('span.up');
@@ -681,14 +715,14 @@
                     for (var ID in json) {
                         var dataItem = json[ID];
                         var timeItem = $('#time_' + ID);
-                        var statusItem = $('#status_' + ID);
+                        var statusItem = $('#status_' + ID)[0];
                         var liveItem = $('#live_' + ID);
 
                         if (statusItem) {
                             if (dataItem.status > 0)
-                                statusItem[0].className = 'live';
+                                statusItem.className = 'live';
                             else{
-                                statusItem[0].className = '';
+                                statusItem.className = '';
                             }
                         }
                         if (timeItem) {
@@ -731,8 +765,10 @@
                         if (dataItem.status == -1) {
                             var tbody = $('div.ConInner')[0];
                             var matchTr = document.getElementById('m_table_' + ID);
-                            tbody.appendChild(matchTr);
-                            _updateSection();
+                            if (tbody && matchTr && matchTr.length > 0) {
+                                tbody.appendChild(matchTr);
+                            }
+//                            _updateSection();
                         }
                     }
                 },
@@ -741,12 +777,10 @@
                 }
             });
         }
-        if (htmlPathType == 'immediate') {
-//            window.setInterval('refresh()', 5000);
-//            window.setInterval('refreshRoll()',5000);
+        if (htmlPathType == 'bk_immediate') {
+            window.setInterval('refresh()', 5000);
+            window.setInterval('refreshRoll()',5000);
         }
-
-        refresh();
 
         //最终用盘口版本
         function getHandicapCn(handicap, defaultString, type, sport, isHome)
@@ -808,9 +842,9 @@
                 prefix = "";
             } else{
                 if (isAway){
-                    prefix = middle < 0 ? "让" : "受让";
+                    prefix = middle < 0 ? "" : "-";
                 }else{
-                    prefix = middle < 0 ? "受让" : "让";
+                    prefix = middle < 0 ? "-" : "";
                 }
             }
             return prefix + Math.abs(middle) + '分';
@@ -871,30 +905,6 @@
             return text;
         }
 
-        //比赛对应赔率详情
-        var ct2;
-        //动态比赛统计
-        function refreshOddByMid(ID){
-            window.clearInterval(ct2);
-            ID = ID + '';
-            var first = ID.substr(0,2);
-            var second = ID.substr(2,2);
-            $.ajax({
-{{--                "url": '{{env('MATCH_URL')}}' + "/static/terminal/1/"+first+"/"+second+"/"+ID+"/tech.json",--}}
-                "url":"/static/terminal/1/10/70/1070722/roll.json",
-                "dataType": "json",
-                "success": function (json) {
-                    window.clearInterval(ct2);
-                    //全场/半场
-                    _updateOddBody('all',ID,json);
-                    _updateOddBody('half',ID,json);
-                },
-                "error": function () {
-                    window.clearInterval(ct2);
-                }
-            });
-        }
-
         function _updateOddBody(key,ID,json) {
             var tbody = $('#'+ID + '_odd_'+key);
             _updateOdd(tbody,'a','1',json[key]['1'],'1');
@@ -912,10 +922,10 @@
             var p = tbody.find('p.' + key + 'mid' + key2)[0];
             var middle = data['middle'+key3];
             if ('a' == key){
-                middle = getHandicapCn(middle, '',1,1,true);
+                middle = getHandicapCn(middle, '',1,2,true);
             }
             else if('g' == key){
-                middle = getHandicapCn(middle, '',2,1,true);
+                middle = getHandicapCn(middle, '',2,2,true);
             }
             p.innerHTML = middle;
             var p = tbody.find('p.' + key + 'down' + key2)[0];

@@ -3,7 +3,7 @@
     <div class="home"><p class="abox"><a href="index.html"><img src="/pc/img/logo_image_n.png"></a></p></div>
     <div class="Column">
         <a class="on">足球</a>
-        <a href="/match/basket/immediate.html">篮球</a>
+        <a href="/match/basket/immediate_t.html">篮球</a>
         <a href="">主播</a>
         <a href="">手机APP</a>
     </div>
@@ -39,16 +39,14 @@
             var index = str .lastIndexOf("\/");
             str  = str .substring(index + 1, str .length);
             str = str.replace('.html','');
-            var params = str.split("_")[1];
-            htmlPathType = params;
+            htmlPathType = str;
         }
         if (window.location.pathname.indexOf('schedule') != -1){
             var str = window.location.pathname;
             var index = str .lastIndexOf("\/");
             str  = str .substring(index + 1, str .length);
             str = str.replace('.html','');
-            var params = str.split("_")[1];
-            htmlPathType = params;
+            htmlPathType = str;
         }
 
         $('#hideMatchCount').html($('table#Table tr.hide').length);
