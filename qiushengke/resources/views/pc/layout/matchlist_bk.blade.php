@@ -2,21 +2,17 @@
 @section('navContent')
     <div class="home"><p class="abox"><a href="index.html"><img src="/pc/img/logo_image_n.png"></a></p></div>
     <div class="Column">
-        <a class="on">足球</a>
-        <a href="/match/basket/immediate.html">篮球</a>
+        <a href="/match/foot/immediate.html">足球</a>
+        <a class="on">篮球</a>
         <a href="">主播</a>
         <a href="">手机APP</a>
     </div>
     <div class="Link">
-        <a href="league.html">中超</a>
-        <a href="league.html">英超</a>
-        <a href="league.html">西甲</a>
-        <a href="league.html">意甲</a>
-        <a href="league.html">法甲</a>
-        <a href="league.html">德甲</a>
-        <a href="league.html">亚冠</a>
-        <a href="league.html">欧冠</a>
-        <a href="league.html">世界杯</a>
+        <a href="league_bk.html">NBA</a>
+        <a href="league_bk.html">CBA</a>
+        <a href="league_bk.html">NCAA</a>
+        <a href="league_bk.html">WNBA</a>
+        <a href="league_bk.html">欧锦赛</a>
     </div>
 @endsection
 @section('css')
@@ -51,14 +47,14 @@
             htmlPathType = params;
         }
 
-        $('#hideMatchCount').html($('table#Table tr.hide').length);
+        $('#hideMatchCount').html($('div.ConInner table[isMatch=1].hide').length);
 
         updateMatch();
 
         //初始化比赛列表,哪些显示,哪些不显示
         function updateMatch() {
             //隐藏全部
-            var bodys = $('table#Table tbody[name=match]');
+            var bodys = $('div.ConInner table[isMatch=1]');
             for (var i = 0 ; i < bodys.length ; i++){
                 bodys[i].className = 'hide';
             }
@@ -68,7 +64,7 @@
                 _matchFilter(filter);
             }
             else{
-                _matchFilter('first');
+                _matchFilter('nba');
             }
             //选择赛事
             filter = getCookie(htmlPathType + '_' + 'filter_league');
@@ -77,11 +73,11 @@
                 _updateConfirmFilter('league',filter,false);
             }
             //选择盘口
-            filter = getCookie(htmlPathType + '_' + 'filter_odd');
-            if (filter != null){
-                _updateMatchFilterBtn('null');
-                _updateConfirmFilter('odd',filter,false);
-            }
+//            filter = getCookie(htmlPathType + '_' + 'filter_odd');
+//            if (filter != null){
+//                _updateMatchFilterBtn('null');
+//                _updateConfirmFilter('odd',filter,false);
+//            }
             //选择保留删除
             _resetFilterUser('match',filter);
         }
@@ -131,7 +127,7 @@
         //更新点击filter后的UI,初始化用版
         function _matchFilter(type) {
             _updateMatchFilterBtn(type);
-            var matches = $('table#Table tr[isMatch=1]');
+            var matches = $('div.ConInner table[isMatch=1]');
             for (var j = 0; j < matches.length; j++) {
                 //跳过广告
                 if (matches[j].getAttribute('match') == null) continue;
@@ -146,7 +142,7 @@
                     }
                 }
             }
-            $('#hideMatchCount').html($('table#Table tr.hide').length);
+            $('#hideMatchCount').html($('div.ConInner table[isMatch=1].hide').length);
 //            $('#totalMatchCount').html(totalMatchCount);
 
             //还原列表类型 进行中 稍后等显示方式
@@ -229,7 +225,7 @@
 
         //根据选中赛事 赔率大小 保留筛选还原
         function _updateConfirmFilter(type,valueStrs,isDelete) {
-            var matches = $('table#Table tr[isMatch=1]');
+            var matches = $('div.ConInner table[isMatch=1]');
             for (var j = 0; j < matches.length; j++) {
                 var trAttr = '';
 
@@ -305,7 +301,7 @@
 
             _updateMatchFilterBtn('null');
 
-            var matches = $('table#Table tr[isMatch=1]');
+            var matches = $('div.ConInner table[isMatch=1]');
             for (var j = 0; j < matches.length; j++) {
                 ///先算保留
                 var trAttr = type + "_" + matches[j].getAttribute(type) + ',';
@@ -326,7 +322,7 @@
             //选中的条件
             var inputs;
             if (type == 'match') {
-                inputs = $("table#Table tr[isMatch=1] td button[name=match][value=1]");
+                inputs = $("div.ConInner table[isMatch=1] button[name=match][value=1]");
             } else if (type == 'league'){
                 inputs = $("#LeagueFilter div.inner ul li button[value=1]");
                 delCookie(htmlPathType + '_' + 'filter_league');
@@ -379,14 +375,14 @@
             //非保留删除的,先重置所有比赛是显示
             if (type != 'match' && valueStrs == '') {
                 //重置
-                matches = $('table#Table tr[isMatch=1]');
+                matches = $('div.ConInner table[isMatch=1]');
                 for (var j = 0; j < matches.length; j++) {
                     matches[j].className = 'show';
                 }
             }
 
             setCookie(htmlPathType + '_' + 'filter_' + type,valueStrs);
-            matches = $('table#Table tr[isMatch=1]');
+            matches = $('div.ConInner table[isMatch=1]');
             for (var j = 0; j < matches.length; j++) {
                 var trAttr = '';
 
@@ -438,7 +434,7 @@
                     delCookie(htmlPathType + '_' + 'filter_hide');
                 }
             }
-            $('#hideMatchCount').html($('table#Table tr[isMatch=1].hide').length);
+            $('#hideMatchCount').html($('div.ConInner table[isMatch=1].hide').length);
             _closeFilter();
             _updateSection();
             //精简的按钮不能选中
@@ -491,97 +487,6 @@
     </script>
     {{--动态加载--}}
     <script type="text/javascript">
-        var ct;
-        //动态比赛统计
-        function refreshMatchTech(ID){
-            window.clearInterval(ct);
-            ID = ID + '';
-            var first = ID.substr(0,2);
-            var second = ID.substr(2,2);
-            $.ajax({
-                "url": '{{env('MATCH_URL')}}' + "/static/terminal/1/"+first+"/"+second+"/"+ID+"/tech.json",
-//                "url":"/static/terminal/1/"+first+"/"+second+"/"+ID+"/tech.json",
-                "dataType": "json",
-                "success": function (json) {
-                    window.clearInterval(ct);
-                    //事件
-                    var event = document.getElementById(ID+'_eboxCon');
-                    if (typeof(event) != 'undefined') {
-                        var content = '';
-                        var events = json['event']['events'];
-                        for (var i = 0 ; i < events.length ; i++){
-                            var item = events[i];
-                            var icon = '';
-                            switch (item.kind){
-                                case 1:
-                                case 7:
-                                    icon = '/pc/img/icon_goal_n.png';
-                                    break;
-                                case 2:
-                                    icon = '/pc/img/icon_redcard_n.png';
-                                    break;
-                                case 3:
-                                    icon = '/pc/img/icon_yellowcard_n.png';
-                                    break;
-                                case 8:
-                                    icon = '/pc/img/icon_goal_n.png';
-                                    break;
-                                case 11:
-                                    icon = '/pc/img/icon_xchange_n.png';
-                                    break;
-                            }
-                            if(item.kind == 11){
-                                content = content +
-                                        '<dd class="'+ (item['is_home'] == 1 ? 'host' : 'away') +'">'+
-                                        '<p class="time">'+item['happen_time']+'\'</p>'+
-                                        '<p class="img"><img src="' + icon + '"></p>'+
-                                        '<p class="name exchange">'+item['player_name_j'] + '</br>' + item['player_name_j2']+'</p>'+
-                                        '</dd>';
-                            }
-                            else{
-                                content = content +
-                                        '<dd class="'+ (item['is_home'] == 1 ? 'host' : 'away') +'">'+
-                                        '<p class="time">'+item['happen_time']+'\'</p>'+
-                                        '<p class="img"><img src="' + icon + '"></p>'+
-                                        '<p class="name">'+item['player_name_j']+'</p>'+
-                                        '</dd>';
-                            }
-                        }
-                        var html = '<dl class="ebox"><dt><p>事件</p></dt>' +
-                                content +
-                                '</dl>';
-                        event.innerHTML = html;
-                    }
-                    //统计
-                    var event = document.getElementById(ID+'_tboxCon');
-                    if (typeof(event) != 'undefined') {
-                        var events = json['tech'];
-                        var content = '';
-                        for (var i = 0 ; i < events.length ; i++) {
-                            var item = events[i];
-                            if (!(item.h_p == 0 && item.a_p == 0)){
-                                content = content +
-                                        '<dd class="total">' +
-                                        '<p class="num host">' + item.h + '</p>' +
-                                        '<p class="percent"><span class="host" width="' + item.h_p * 100 + '%"></span></p>' +
-                                        '<p class="item">' + item.name + '</p>' +
-                                        '<p class="percent"><span class="away" width="' + item.a_p * 100 + '%"></span></p>' +
-                                        '<p class="num away">' + item.a + '</p>' +
-                                        '</dd>';
-                            }
-                        }
-                        var html = '<dl class="tbox"> <dt><p>统计</p></dt>' +
-                                content +
-                                '</dl>';
-                        event.innerHTML = html;
-                    }
-                },
-                "error": function () {
-                    window.clearInterval(ct);
-                }
-            });
-        }
-
         function changeSpanOdd(span,odd,isAsia,isMiddle) {
             if (span == null)
                 return;
@@ -686,12 +591,80 @@
             });
         }
 
+        //主客比分刷新
+        function _refreshBasketScore(dataItem,key,ID) {
+            //比分
+            var score = dataItem[key + 'scores'];
+            var score1 = $('#'+ key + '_score1_' + ID);
+            if (score1 && score1.length > 0) {
+                score1.html(score[0]);
+            }
+            var score2 = $('#'+ key + '_score2_' + ID);
+            if (score2 && score2.length > 0) {
+                score2.html(score[1]);
+            }
+            var score3 = $('#'+ key + '_score3_' + ID);
+            if (score3 && score3.length > 0) {
+                score3.html(score[2]);
+            }
+            var score4 = $('#'+ key + '_score4_' + ID);
+            if (score4 && score4.length > 0) {
+                score4.html(score[3]);
+            }
+
+            //半全场
+            var half = $('#'+key+'_score_half_' + ID);
+            if (half && half.length > 0){
+                half.html((parseInt(score[0]) + parseInt(score[1])) + ' / ' + (parseInt(score[2]) + parseInt(score[3])));
+            }
+            var full = $('#'+key+'_score_full_' + ID);
+            if (full && full.length > 0){
+                full.html((parseInt(score[0]) + parseInt(score[1])) + (parseInt(score[2]) + parseInt(score[3])));
+            }
+
+            //ot
+            var h_ots = dataItem['h_ots'];
+            var a_ots = dataItem['a_ots'];
+            if (h_ots && a_ots) {
+                var otCount = Math.min(h_ots.length, a_ots.length);
+                if (otCount > 1) {
+                    //改标题
+                    var ths = $('#m_table_' + ID + ' th.th_name');
+                    $(ths[0]).html('一');
+                    $(ths[1]).html('二');
+                    $(ths[2]).html('三');
+                    $(ths[3]).html('四');
+                }
+                else if (otCount > 0) {
+                }
+                if (otCount > 0) {
+                    var ots = dataItem[key + '_ots'];
+                    var ot1 = $('#' + key + '_ot1_' + ID);
+                    var th1 = $('#m_table_' + ID + ' th[name=ot_1]');
+                    var th2 = $('#m_table_' + ID + ' th[name=ot_2]');
+                    ot1.html(ots[0]);
+                    ot1[0].className = 'score';
+                    th1[0].className = '';
+                    if (otCount > 1) {
+                        var ot2 = $('#' + key + '_ot2_' + ID);
+                        var tmp = 0;
+                        for (var i = 1; i < ots.length; i++) {
+                            tmp = parseInt(ots[i]);
+                        }
+                        ot2.html(tmp);
+                        ot2[0].className = 'score';
+                        th2[0].className = '';
+                    }
+                }
+            }
+        }
+
         //比分刷新
         function refresh() {
             if (htmlPathType !='immediate')
                 return;
             $.ajax({
-                "url": "/static/change/1/score.json?" + (new Date().getTime()),
+                "url": "/static/change/2/score.json?" + (new Date().getTime()),
                 "dataType": "json",
                 "success": function (json) {
                     var ups = $('span.up');
@@ -708,80 +681,57 @@
                     for (var ID in json) {
                         var dataItem = json[ID];
                         var timeItem = $('#time_' + ID);
-                        var scoreItem = $('#score_' + ID);
-                        var halfScoreItem = $('#half_score_' + ID);
-                        var chScoreItem = $('#ch_score_' + ID);
+                        var statusItem = $('#status_' + ID);
                         var liveItem = $('#live_' + ID);
 
-                        //红黄牌
-                        var hrItem = $('#'+ID+'_h_red')[0];
-                        var hyItem = $('#'+ID+'_h_yellow')[0];
-                        var arItem = $('#'+ID+'_a_red')[0];
-                        var ayItem = $('#'+ID+'_a_yellow')[0];
-
-                        if (hrItem && dataItem.h_red > 0){
-                            hrItem.innerHTML = dataItem.h_red;
-                            hrItem.className = 'redCard';
+                        if (statusItem) {
+                            if (dataItem.status > 0)
+                                statusItem[0].className = 'live';
+                            else{
+                                statusItem[0].className = '';
+                            }
                         }
-                        if (hyItem && dataItem.h_yellow > 0){
-                            hyItem.innerHTML = dataItem.h_yellow;
-                            hyItem.className = 'yellowCard';
-                        }
-                        if (arItem && dataItem.a_red > 0){
-                            arItem.innerHTML = dataItem.a_red;
-                            arItem.className = 'redCard';
-                        }
-                        if (ayItem && dataItem.a_yellow > 0){
-                            ayItem.innerHTML = dataItem.a_yellow;
-                            ayItem.className = 'yellowCard';
-                        }
-
                         if (timeItem) {
-                            if(dataItem.status > 0)
-                                timeItem.html('<p class=\'time\'>' + dataItem.time + '</p>');
-                            else
-                                timeItem.html(dataItem.time);
+                            timeItem.html(dataItem.time);
                         }
-                        if (scoreItem && scoreItem.length > 0) {
-                            var lastScore = scoreItem.html();
-                            var currentScore = dataItem.hscore + ' - ' + dataItem.ascore;
-                            var isHost = true;
-                            if (lastScore.indexOf(' - ') != -1) {
-                                var lh = lastScore.split(' - ')[0];
-                                var ah = lastScore.split(' - ')[1];
-                                if (lh == dataItem.hscore){
-                                    isHost = false;
-                                }
-                            }
-                            var icon = isHost ? $('#'+ID+'_h_icon')[0].src : $('#'+ID+'_a_icon')[0].src;
-                            if (currentScore != lastScore && (dataItem.hscore + dataItem.ascore) > 0) {
-                                Goal(dataItem.hname, dataItem.aname, dataItem.hscore, dataItem.ascore, icon,dataItem.time.replace('\'',''), isHost?'host':'away');
-                            }
-                            scoreItem.html(currentScore);
-                        }
-                        if (chScoreItem) {
-                            chScoreItem.html(dataItem.h_corner + ' - ' + dataItem.a_corner);
-                        }
-                        if (halfScoreItem) {
-                            halfScoreItem.html(dataItem.hscorehalf + ' - ' + dataItem.ascorehalf);
-                        }
+                        _refreshBasketScore(dataItem,'h',ID);
+                        _refreshBasketScore(dataItem,'a',ID);
                         if (liveItem && liveItem.length > 0){
-                            if(liveItem[0].src == "{{env('CDN_URL')}}/pc/img/icon_living.png") {
-                                liveItem[0].src = "{{env('CDN_URL')}}/pc/img/icon_living.gif";
+                            //有直播
+                            if(liveItem.find('img').length > 0 && dataItem.status > 0) {
+                                liveItem[0].html('<span>直播中</span>');
                             }
-                            if (timeItem == '已结束'){
-                                liveItem[0].src = "{{env('CDN_URL')}}/pc/img/icon_lived.png";
+                            //已结束
+                            if (liveItem.find('img').length > 0 && dataItem.status == -1){
+                                liveItem[0].html('<img src="/pc/img/icon_living.png">');
                             }
                         }
 
-                        if (dataItem.time == '已结束') {
-                            var tbody = $('tbody#End')[0];
-                            var matchTr = document.getElementById('m_tr_' + ID);
+                        //分差
+                        var hscore = dataItem['hscores'];
+                        var ascore = dataItem['ascores'];
+                        var hd = $('#score_half_diff_' + ID);
+                        if (hd && hd.length > 0) {
+                            hd.html('半：' + (parseInt(hscore[0]) + parseInt(hscore[1]) - parseInt(ascore[0]) - parseInt(ascore[1])));
+                        }
+                        var ht = $('#score_half_total_' + ID);
+                        if (ht && ht.length > 0) {
+                            ht.html('半：' + (parseInt(hscore[0]) + parseInt(hscore[1]) + parseInt(ascore[0]) + parseInt(ascore[1])));
+                        }
+                        var wd = $('#score_whole_diff_' + ID);
+                        if (wd && wd.length > 0) {
+                            wd.html('全：' + (parseInt(dataItem['hscore']) - parseInt(dataItem['ascore'])));
+                        }
+                        var wt = $('#score_whole_total_' + ID);
+                        if (wt && wt.length > 0) {
+                            wt.html('全：' + (parseInt(dataItem['hscore']) + parseInt(dataItem['ascore'])));
+                        }
+
+                        //迁移
+                        if (dataItem.status == -1) {
+                            var tbody = $('div.ConInner')[0];
+                            var matchTr = document.getElementById('m_table_' + ID);
                             tbody.appendChild(matchTr);
-                            var liveItem = $('#live_' + ID);
-                            if (liveItem && liveItem.length > 0){
-                                liveItem[0].src = "{{env('CDN_URL')}}/img/icon_lived.png";
-                            }
                             _updateSection();
                         }
                     }
@@ -795,6 +745,8 @@
 //            window.setInterval('refresh()', 5000);
 //            window.setInterval('refreshRoll()',5000);
         }
+
+        refresh();
 
         //最终用盘口版本
         function getHandicapCn(handicap, defaultString, type, sport, isHome)
@@ -989,7 +941,7 @@
                 @foreach($filter as $key=>$leagues)
                     <li>
                         @foreach($leagues as $league)
-                            <?php $leagueClass = ($league["isFive"] ? "five " : "").($league["isFirst"] ? "first" : "") ?>
+                            <?php $leagueClass = ($league["isNBA"] ? "nba " : "")?>
                                 <button mid="{{$league['id']}}" league="{{$leagueClass}}" class="item">{{$league["name"]}}({{$league["count"]}})</button>
                         @endforeach
                         <b class="letter">{{$key}}</b>
@@ -998,69 +950,12 @@
             </ul>
             <div class="topBar">
                 选择赛事
-                <button class="league" value="0" onclick="leagueFilter('first')">一级联赛</button><!--套界面时添加这里的事件-->
-                <button class="league" value="0" onclick="leagueFilter('five')">五大联赛</button><!--套界面时添加这里的事件-->
                 <button class="close"></button>
             </div>
             <div class="bottomBar">
                 <button class="all">全选</button>
                 <button class="opposite">反选</button>
                 <button class="comfirm" onclick="confirmFilter('league', false)">确认</button><!--选项为空时有disabled效果--><!--套界面时添加这里的事件-->
-            </div>
-        </div>
-    </div>
-    <div id="OddFilter" class="filterBox" style="display: none;">
-        <div class="inner">
-            <div class="item" type="asia">
-                @if(count($odd['asiaOdds']['up']) > 0 || count($odd['asiaOdds']['middle'])> 0 || count($odd['asiaOdds']['down']) > 0)
-                    <ul class="asia">
-                        @if(count($odd['asiaOdds']['middle']) > 0)
-                            @foreach($odd['asiaOdds']['middle'] as $item)
-                                <li><button mid="{{'asiaMiddle_'.$item['sort']}}">{{$item['typeCn']}}({{$item['count']}})</button></li>
-                            @endforeach
-                            <p class="clear"></p>
-                        @endif
-                        @if(count($odd['asiaOdds']['up']) > 0)
-                            @foreach($odd['asiaOdds']['up'] as $item)
-                                <li><button mid="{{'asiaUp_'.$item['sort']}}">{{$item['typeCn']}}({{$item['count']}})</button></li>
-                            @endforeach
-                            <p class="clear"></p>
-                        @endif
-                        @if(count($odd['asiaOdds']['down']) > 0)
-                            @foreach($odd['asiaOdds']['down'] as $item)
-                                <li><button mid="{{'asiaDown_'.$item['sort']}}">{{$item['typeCn']}}({{$item['count']}})</button></li>
-                            @endforeach
-                            <p class="clear"></p>
-                        @endif
-                    </ul>
-                @endif
-                @if(count($odd['ouOdds']) > 0)
-                    <ul class="goal">
-                        @if(isset($odd['ouOdds']['-1']))
-                            <?php
-                            $item = $odd['ouOdds']['-1'];
-                            ?>
-                            <li><button mid="{{'ou_'.$item['sort']}}">{{$item['typeCn']}}({{$item['count']}})</button></li>
-                            <p class="clear"></p>
-                        @endif
-                        @foreach($odd['ouOdds'] as $key=>$item)
-                            @if($key != '-1')
-                                <li><button mid="{{'ou_'.$item['sort']}}">{{$item['typeCn']}}({{$item['count']}})</button></li>
-                            @endif
-                        @endforeach
-                    </ul>
-                @endif
-            </div>
-            <div class="topBar">
-                选择盘路
-                <button class="odd goal" value="0">大小球</button>
-                <button class="odd asia" value="1">让球</button>
-                <button class="close"></button>
-            </div>
-            <div class="bottomBar">
-                <button class="all">全选</button>
-                <button class="opposite">反选</button>
-                <button class="comfirm" onclick="confirmFilter('odd', false)">确认</button><!--选项为空时有disabled效果-->
             </div>
         </div>
     </div>

@@ -15,13 +15,6 @@
 </head>
 <body>
 <div id="Nav">
-    <div class="home"><p class="abox"><a href="index.html"><img src="img/logo_image_n.png"></a></p></div>
-    <div class="Column">
-        <a class="on">足球</a>
-        <a href="immediate_bk.html">篮球</a>
-        <a href="">主播</a>
-        <a href="">手机APP</a>
-    </div>
     @yield('navContent')
 </div>
 @yield('content')
