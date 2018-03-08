@@ -236,5 +236,5 @@ $hasLive = $match['pc_live'];
         <a href="">欧</a>
         <a href="">大</a>
     </td>
-    <td><button class="top" value="{{$isTop}}"></button></td>
+    {{--<td><button class="top" value="{{$isTop}}"></button></td>--}}
 </tr>

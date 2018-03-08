@@ -33,7 +33,7 @@
                 <col num="11" width="60px">
                 <col num="12" width="186px">
                 <col num="13" width="80px">
-                <col num="14" width="40px">
+                {{--<col num="14" width="40px">--}}
             </colgroup>
             <thead>
             <tr>
@@ -46,7 +46,7 @@
                 <th>直播</th>
                 <th>指数</th>
                 <th>分析</th>
-                <th>顶</th>
+                {{--<th>顶</th>--}}
             </tr>
             </thead>
 {{--            @if(isset($topMatches) && count($topMatches))--}}
@@ -60,7 +60,7 @@
 {{--            @if(isset($liveMatches) && count($liveMatches))--}}
                 <tbody id="Live" name="match" class="hide">
                 <tr>
-                    <th colspan="14"><p>正在比赛</p></th>
+                    <th colspan="13"><p>正在比赛</p></th>
                 </tr>
                 @foreach($liveMatches as $match)
                     @component('pc.cell.match_list_cell',['match'=>$match,'sport'=>$sport,'isTop'=>0])
@@ -71,7 +71,7 @@
 {{--            @if(isset($afterMatches) && count($afterMatches))--}}
                 <tbody id="After" name="match" class="hide">
                 <tr>
-                    <th colspan="14"><p>稍后比赛</p></th>
+                    <th colspan="13"><p>稍后比赛</p></th>
                 </tr>
                 @foreach($afterMatches as $match)
                     @component('pc.cell.match_list_cell',['match'=>$match,'sport'=>$sport,'isTop'=>0])
@@ -82,7 +82,7 @@
             {{--@if(isset($endMatches) && count($endMatches))--}}
                 <tbody id="End" name="match" class="hide">
                 <tr>
-                    <th colspan="14"><p>完场赛事</p></th>
+                    <th colspan="13"><p>完场赛事</p></th>
                 </tr>
                 @foreach($endMatches as $match)
                     @component('pc.cell.match_list_cell',['match'=>$match,'sport'=>$sport,'isTop'=>0])
@@ -103,7 +103,7 @@
                     <col num="11" width="60px">
                     <col num="12" width="186px">
                     <col num="13" width="80px">
-                    <col num="14" width="40px">
+                    {{--<col num="14" width="40px">--}}
                 </colgroup>
                 <thead>
                 <tr>
@@ -116,7 +116,7 @@
                     <th>直播</th>
                     <th>指数</th>
                     <th>分析</th>
-                    <th>顶</th>
+                    {{--<th>顶</th>--}}
                 </tr>
                 </thead>
             </table>
