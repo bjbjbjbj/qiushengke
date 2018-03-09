@@ -26,7 +26,9 @@
                 @if(array_key_exists('matches',$stage))
                     @component('pc.cell.cup_league_list_table',['stage'=>$stage,'num'=>($i+1),'show'=>($stage['status'] == 1)])
                     @endcomponent
-                @elseif(array_key_exists('groupMatches',$stage))
+                @elseif(array_key_exists('groupMatch',$stage))
+                    @component('pc.cell.cup_league_list_table_group',['stage'=>$stage,'num'=>($i+1),'show'=>($stage['status'] == 1)])
+                    @endcomponent
                 @elseif(array_key_exists('combo',$stage))
                     @component('pc.cell.cup_league_list_table_combo',['stage'=>$stage,'num'=>($i+1),'show'=>($stage['status'] == 1)])
                     @endcomponent
