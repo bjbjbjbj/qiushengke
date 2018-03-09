@@ -1,0 +1,448 @@
+﻿
+body{
+	padding-top: 110px;
+}
+
+#Con{
+	margin-top: 20px;
+}
+#Con:after{
+	display: block;
+	clear: both;
+	content: '';
+}
+
+#Info{
+	height: 250px;
+	margin-bottom: 20px;
+	position: relative;
+}
+#Info .name{
+	width: 250px; height: 98px;
+	margin-right: 10px; padding-top: 150px;
+	border-top: 2px solid #2b9968; border-radius: 2px;
+	background: #fff;
+	position: relative;
+	float: left;
+}
+#Info .name img{
+	width: 100px; height: 100px;
+	margin-left: -50px;
+	position: absolute; top: 32px; left: 50%;
+}
+#Info .name p.team{
+	font-size: 18px; line-height: 18px; text-align: center;
+}
+#Info .name p.eng{
+	font-size: 12px; line-height: 24px; text-align: center;
+}
+#Info .name p.rank{
+	padding-top: 5px;
+	font-size: 14px; line-height: 22px; text-align: center;
+}
+
+#Info .info{
+	width: 160px; height: 208px;
+	padding: 40px 20px 0;
+	border-top: 2px solid #2b9968; border-radius: 2px;
+	background: #fff;
+	position: relative;
+	float: left;
+}
+#Info .info p{
+	font-size: 12px; line-height: 24px;
+}
+#Info .info p.title{
+	font-size: 14px; line-height: 40px; color: #2b9968;
+	position: absolute; top: 0; left: 20px;
+}
+
+#Info .introduction{
+	padding: 40px 0 6px 20px;
+	border-top: 2px solid #2b9968;
+	background: #fff;
+	position: absolute; top: 0; bottom: 0; right: 0; left: 470px;
+}
+#Info .introduction p{
+	font-size: 12px; line-height: 24px;
+}
+#Info .introduction p.title{
+	font-size: 14px; line-height: 40px; color: #2b9968;
+	position: absolute; top: 0; left: 20px;
+}
+#Info .introduction .text{
+	width: 100%; height: 100%;
+	overflow-x: hidden; overflow-y: auto;
+}
+
+#Features{
+	padding: 50px 60px 10px; margin-bottom: 20px;
+	background: #fff;
+	font-size: 0px;
+	position: relative;
+}
+#Features dt{
+	height: 30px;
+	position: absolute; top: 0; left: 0;
+}
+#Features dt button{
+	height: 30px; width: 80px;
+	background: #fff;
+	font-size: 14px;
+}
+#Features dt button.on{
+	border-top: 2px solid #2b9968;
+	color: #2b9968;
+}
+#Features dt button:hover{
+	color: #2b9968;
+}
+#Features dd p.tab{
+	min-width: 72px; height: 40px;
+	padding: 0 14px; margin: 0 10px 10px 0;
+	border-radius: 2px 18px 2px 2px;
+	background: #2b9968;
+	font-size: 12px; line-height: 40px; text-align: center; color: #fff;
+	display: inline-block;
+}
+
+/*左边内容*/
+#Con .lbox{
+	margin-right: 320px;
+	position: relative; z-index: 20;
+}
+#Con .lbox .title{
+	height: 40px;
+	padding-left: 12px;
+	position: relative;
+}
+#Con .lbox .title:before{
+	width: 32px; height: 50px;
+    border-radius: 20px 0 0 0;
+    background: url(../img/separated_image_n.png) no-repeat left top; background-size: 32px;
+    position: absolute; top: 0; left: 0; z-index: 1;
+    content: '';
+}
+#Con .lbox .title p{
+	height: 40px;
+	padding: 0 12px 0 20px;
+    border-radius: 20px 0 0 0;
+    background: #2b9968;
+	font-size: 18px; line-height: 40px; text-align: left; color: #fff;
+	display: inline-block;
+}
+
+/*赛程赛果*/
+#Match{
+	margin-bottom: 20px;
+}
+/*比赛相关*/
+#Match table{
+	width: 100%;
+	padding-top: 16px;
+	background: #fafafa;
+}
+#Match table th{
+	height: 24px;
+	font-size: 12px; line-height: 18px; text-align: center; color: #adadad;
+}
+#Match table td{
+	height: 50px;
+	font-size: 12px; line-height: 14px; text-align: center;
+}
+#Match table tr:nth-child(odd) td{
+	background: #f6f6f6;
+}
+#Match table td:nth-child(1){
+	padding-left: 18px;
+	text-align: left;
+	position: relative;
+}
+#Match table td:nth-child(2){
+	padding-left: 20px;
+	text-align: left;
+	position: relative;
+}
+#Match table td:nth-child(3){
+	text-align: right;
+}
+#Match table td:nth-child(4){
+	padding-left: 2px;
+}
+#Match table td:nth-child(5){
+
+}
+#Match table td:nth-child(6){
+	padding-right: 2px;	
+}
+#Match table td:nth-child(7){
+	text-align: left;	
+}
+#Match table td:nth-child(8){
+	
+}
+#Match table td:nth-child(9){
+	
+}
+#Match table td:nth-child(9) a:hover{
+	color: #2b9968;
+}
+
+#Match table td:nth-child(2):before{
+	width: 4px; height: 4px;
+	border-radius: 50%;
+	background: #2b9968;
+	position: absolute; top: 16px; left: 10px;
+	content: '';
+}
+#Match table td img{
+	width: 30px; height: 30px;
+	margin: 0 auto;
+	display: block;
+}
+
+/*第一格赛事*/
+#Con table p.leagueLine{
+	width: 4px; height: 20px;
+	border-radius: 2px;
+	position: absolute; top: 15px; left: 5px;
+}
+
+/*球队*/
+#Match table a.team{
+	max-height: 32px;
+	line-height: 16px;
+	overflow: hidden;
+	display: inline-block;
+	position: relative;
+}
+#Match table a.team:hover{
+	color: #2b9968;
+}
+
+/*比分*/
+#Match table td p.fullScore{
+	font-size: 14px; line-height: 18px; color: #c52601; font-weight: bold;
+}
+#Match table td p.halfScore{
+	font-size: 12px; line-height: 18px; color: #adadad;
+}
+
+/*指数*/
+#Match table td p.asia{
+	line-height: 18px; color: #adadad;
+}
+#Match table td p.goal{
+	line-height: 18px;
+}
+#Match table td p.asia span, #Match table td p.goal span{
+	width: 40px;
+	position: relative;
+	display: inline-block;
+}
+#Match table td p.asia span.up, #Match table td p.goal span.up{
+	color: #2b9968;
+}
+#Match table td p.asia span.up:before, #Match table td p.goal span.up:before{
+	width: 14px; height: 14px;
+	margin-top: -7px;
+	background: #000;
+	position: absolute; top: 50%; right: -7px;
+	content: '';
+}
+#Match table td p.asia span.down, #Match table td p.goal span.down{
+	color: #1661c7;
+}
+#Match table td p.asia span.down:before, #Match table td p.goal span.down:before{
+	width: 14px; height: 14px;
+	margin-top: -7px;
+	background: #000;
+	position: absolute; top: 50%; right: -7px;
+	content: '';
+}
+#Match table td p.asia span.odd, #Match table td p.goal span.odd{
+	width: 80px;
+	margin: 0 3px;
+	display: inline-block;
+}
+#Match table td p.asia span.odd{
+	font-size: 12px;
+}
+#Match table td p.asia span.odd:before, #Match table td p.goal span.odd:before{
+	right: -2px;
+}
+
+/*翻页*/
+#Match .page{
+	height: 26px;
+	padding: 18px 0;
+	background: #fff;
+	font-size: 0px; text-align: center;
+}
+#Match .page a{
+	height: 24px; min-width: 14px;
+	padding: 0 5px;
+	border-radius: 2px; border: 1px solid #adadad;
+	font-size: 12px; line-height: 24px; text-align: center; color: #adadad;
+	display: inline-block;
+}
+#Match .page a + a{
+	margin-left: 14px;
+}
+#Match .page a.up + a{
+	margin-left: 50px;
+}
+#Match .page a:hover{
+	border-color: #2b9968;
+	color: #2b9968;
+}
+#Match .page a.up, #Match .page a.down{
+	width: 54px;
+}
+#Match .page a.on{
+	border-color: #2b9968;
+	background: #2b9968;
+	color: #fff;
+}
+#Match .page p{
+	width: 50px; height: 26px;
+	font-size: 12px; line-height: 26px; text-align: center; color: #adadad;
+	display: inline-block;
+}
+#Match .page p span{
+	color: #2b9968;
+}
+
+
+
+
+
+/*右边内容*/
+#Con .right{
+	width: 300px;
+	position: relative; z-index: 20;
+	float: right;
+}
+#Con .rbox{
+	margin-bottom: 20px;
+}
+#Con .rbox p.title{
+	height: 40px;
+	padding-left: 16px;
+	font-size: 16px; line-height: 40px; text-align: left; color: #2b9968;
+	position: relative;
+}
+#Con .rbox p.title:before{
+	width: 4px; height: 20px;
+	margin-top: -10px;
+	background: #2b9968;
+	position: absolute; top: 50%; left: 0;
+	content: '';
+}
+
+/*数据统计*/
+#Data{
+	margin-bottom: 20px;
+}
+#Data p.title select{
+	width: 98px; height: 18px;
+	margin-top: 10px; padding: 0 2%;
+	border-radius: 2px; border: 1px solid #2b9968;
+	background: #f6f6f6;
+	font-size: 12px; line-height: 18px; text-align: center; color: #adadad;
+	float: right;
+}
+#Data p.title option{
+	text-align: center;
+}
+#Data table{
+	width: 100%;
+	background: #fff;
+}
+#Data table th{
+	height: 26px; width: 25%;
+	font-size: 12px; line-height: 24px; text-align: center; color: #adadad;
+}
+#Data table tr + tr th{
+	padding-top: 20px;
+}
+#Data table td{
+	height: 30px;
+	background: #f6f6f6;
+	font-size: 12px; line-height: 24px; text-align: center;
+}
+
+/*球队荣誉*/
+#Honor{
+	margin-bottom: 20px;
+}
+#Honor ul li{
+	padding: 40px 0px 6px 8px;
+	background: #2b9968;
+	font-size: 0px; line-height: 0px;
+	position: relative;
+}
+#Honor ul li + li{
+	margin-top: 10px;
+}
+#Honor ul li p.name{
+	font-size: 12px; line-height: 36px; text-align: center; color: #fff;
+	position: absolute; top: 0; left: 0; right: 0;
+}
+#Honor ul li p.tab{
+	width: 25%; height: 26px;
+	padding-bottom: 8px;
+	display: inline-block;
+}
+#Honor ul li p.tab span{
+	height: 26px;
+	margin-right: 8px;
+	border-radius: 2px;
+	background: #fff;
+	font-size: 12px; line-height: 26px; text-align: center;
+	display: block;
+}
+
+
+
+@media screen and (min-width: 1400px){
+	#Con .right{
+		width: 350px;
+	}
+	#Con .lbox{
+		margin-right: 370px;
+	}
+	#Info .info p, #Info .introduction p{
+		font-size: 13px;
+	}
+	#Match table td{
+		font-size: 14px; line-height: 18px;
+	}
+	#Features dd p.tab, #Data table td, #Honor ul li p.name, #Honor ul li p.tab span{
+		font-size: 14px;
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

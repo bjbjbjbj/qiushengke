@@ -7,17 +7,8 @@
         <a href="">主播</a>
         <a href="">手机APP</a>
     </div>
-    <div class="Link">
-        <a href="league.html">中超</a>
-        <a href="league.html">英超</a>
-        <a href="league.html">西甲</a>
-        <a href="league.html">意甲</a>
-        <a href="league.html">法甲</a>
-        <a href="league.html">德甲</a>
-        <a href="league.html">亚冠</a>
-        <a href="league.html">欧冠</a>
-        <a href="league.html">世界杯</a>
-    </div>
+    @component('pc.cell.top_leagues',['links'=>$footLeagues])
+    @endcomponent
 @endsection
 @section('css')
     @yield('css_match_list')

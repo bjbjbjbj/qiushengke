@@ -45,7 +45,7 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapPCRoutes()
     {
-        Route::namespace($this->namespace.'\PC\Match')
+        Route::namespace($this->namespace.'\PC')
             ->group(base_path('routes/pc.php'));
     }
 

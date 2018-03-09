@@ -1,0 +1,307 @@
+﻿
+body{
+	padding-top: 110px;
+}
+
+#Con{
+	margin-top: 20px;
+}
+#Con:after{
+	display: block;
+	clear: both;
+	content: '';
+}
+
+#Info{
+	height: 250px;
+	margin-bottom: 20px;
+	position: relative;
+}
+#Info .name{
+	width: 250px; height: 98px;
+	margin-right: 10px; padding-top: 150px;
+	border-top: 2px solid #2b9968; border-radius: 2px;
+	background: #fff;
+	position: relative;
+	float: left;
+}
+#Info .name img{
+	width: 100px; height: 100px;
+	margin-left: -50px;
+	position: absolute; top: 32px; left: 50%;
+}
+#Info .name p.team{
+	font-size: 18px; line-height: 18px; text-align: center;
+}
+#Info .name p.eng{
+	font-size: 12px; line-height: 24px; text-align: center;
+}
+#Info .name p.rank{
+	padding-top: 5px;
+	font-size: 14px; line-height: 22px; text-align: center;
+}
+
+#Info .info{
+	width: 160px; height: 208px;
+	padding: 40px 20px 0;
+	border-top: 2px solid #2b9968; border-radius: 2px;
+	background: #fff;
+	position: relative;
+	float: left;
+}
+#Info .info p{
+	font-size: 12px; line-height: 24px;
+}
+#Info .info p.title{
+	font-size: 14px; line-height: 40px; color: #2b9968;
+	position: absolute; top: 0; left: 20px;
+}
+
+#Info .player{
+	padding-top: 40px;
+	border-top: 2px solid #2b9968;
+	background: #fff;
+	position: absolute; top: 0; bottom: 0; right: 280px; left: 470px;
+}
+#Info .player p.title{
+	font-size: 14px; line-height: 40px; color: #2b9968;
+	position: absolute; top: 0; left: 20px;
+}
+#Info .player .tabBox{
+	height: 24px; 
+	padding: 12px 0 10px;
+	font-size: 0px; text-align: center;
+}
+#Info .player .tabBox button{
+	width: 36px; height: 24px;
+	border-radius: 2px;
+	font-size: 12px; text-align: center; color: #242526;
+}
+#Info .player .tabBox button.on{
+	background: #e8f1ed;
+}
+#Info .player .tabBox button + button{
+	margin-left: 10px;
+}
+#Info .player table{
+	width: 100%;
+	position: absolute; bottom: 0; left: 0; right: 0;
+}
+#Info .player table td{
+	height: 32px;
+	font-size: 12px; line-height: 16px; text-align: center;
+}
+#Info .player table tr:nth-child(odd) td{
+	background: #f6f6f6;
+}
+#Info .player table td:first-child + td{
+	padding-left: 6px;
+	text-align: left;
+}
+#Info .player table td span{
+	width: 20px; height: 20px;
+	border-radius: 2px;
+	background: #2b9968;
+	line-height: 20px; color: #fff;
+	display: inline-block;
+}
+
+/*近期赛程*/
+#Info .match{
+	width: 270px;
+	padding-top: 40px;
+	border-top: 2px solid #2b9968;
+	background: #fff;
+	position: absolute; top: 0; bottom: 0; right: 0;
+}
+#Info .match p.title{
+	font-size: 14px; line-height: 40px; color: #2b9968;
+	position: absolute; top: 0; left: 20px;
+}
+#Info .match ul{
+	position: absolute; bottom: 0; left: 0; right: 0;
+}
+#Info .match ul li{
+	height: 32px;
+	font-size: 0px; line-height: 32px;
+}
+#Info .match ul li:nth-child(odd){
+	background: #f6f6f6;
+}
+#Info .match ul li p{
+	font-size: 12px; line-height: 32px; text-align: center;
+	display: inline-block;
+}
+#Info .match ul li.future p{
+	color: #2b9968;
+}
+#Info .match ul li p.time{
+	width: 27.5%;
+}
+#Info .match ul li p.team{
+	width: 45%;
+}
+#Info .match ul li p.score{
+	width: 27.5%;
+}
+
+/*内容*/
+.table, #Season, #Player{
+	margin-bottom: 20px;
+}
+.table .title{
+	height: 40px;
+	padding-left: 12px;
+	position: relative;
+}
+.table .title:before{
+	width: 32px; height: 50px;
+    border-radius: 20px 0 0 0;
+    background: url(../img/separated_image_n.png) no-repeat left top; background-size: 32px;
+    position: absolute; top: 0; left: 0; z-index: 1;
+    content: '';
+}
+.table .title p{
+	height: 40px;
+	padding: 0 12px 0 20px;
+    border-radius: 20px 0 0 0;
+    background: #2b9968;
+	font-size: 18px; line-height: 40px; text-align: left; color: #fff;
+	display: inline-block;
+}
+.table .title .tabLine{
+    height: 30px;
+    text-align: center;
+    position: absolute; top: 5px; left: 150px; right: 150px;
+}
+.table .title .tabLine button{
+    width: 80px; height: 30px;
+    border: 1px solid #2b9968;
+    background: none;
+    font-size: 14px; color: #2b9968;
+}
+.table .title .tabLine button + button{
+	border-left: none;
+}
+.table .title .tabLine button.on{
+    background: #2b9968;
+    color: #fff;
+}
+.table .title .tabLine button:first-child{
+    border-radius: 2px 0 0 2px;
+    border-radius: 0\0/;
+}
+.table .title .tabLine button:last-child{
+    border-radius: 0 2px 2px 0;
+}
+.table .con{
+	padding-top: 4px;
+	background: #fff;
+}
+.table table{
+	width: 100%;
+}
+.table table th{
+	height: 46px;
+	font-size: 12px; line-height: 16px; text-align: center; color: #adadad;
+}
+.table table td{
+	height: 50px;
+	background: #fefefe;
+	font-size: 12px; line-height: 16px; text-align: center;	
+}
+.table table tr:hover td{
+	background: #e0ece7;
+}
+.table table tr td:hover{
+	background: #b6d5c8 !important;
+}
+.table table tr:nth-child(even) td{
+	background: #f6f6f6;
+}
+.table table td span, .table table td a:hover{
+	color: #2b9968;
+}
+.table table[choose='1'] td:nth-child(1),
+.table table[choose='2'] td:nth-child(2),
+.table table[choose='3'] td:nth-child(3),
+.table table[choose='4'] td:nth-child(4),
+.table table[choose='5'] td:nth-child(5),
+.table table[choose='6'] td:nth-child(6),
+.table table[choose='7'] td:nth-child(7),
+.table table[choose='8'] td:nth-child(8),
+.table table[choose='9'] td:nth-child(9),
+.table table[choose='10'] td:nth-child(10),
+.table table[choose='11'] td:nth-child(11),
+.table table[choose='12'] td:nth-child(12),
+.table table[choose='13'] td:nth-child(13),
+.table table[choose='14'] td:nth-child(14),
+.table table[choose='15'] td:nth-child(15){
+	background: #e0ece7;
+}
+/*翻页*/
+.table .page{
+	height: 26px;
+	padding: 18px 0;
+	background: #fff;
+	font-size: 0px; text-align: center;
+}
+.table .page a{
+	height: 24px; min-width: 14px;
+	padding: 0 5px;
+	border-radius: 2px; border: 1px solid #adadad;
+	font-size: 12px; line-height: 24px; text-align: center; color: #adadad;
+	display: inline-block;
+}
+.table .page a + a{
+	margin-left: 14px;
+}
+.table .page a.up + a{
+	margin-left: 50px;
+}
+.table .page a:hover{
+	border-color: #2b9968;
+	color: #2b9968;
+}
+.table .page a.up, .table .page a.down{
+	width: 54px;
+}
+.table .page a.on{
+	border-color: #2b9968;
+	background: #2b9968;
+	color: #fff;
+}
+.table .page p{
+	width: 50px; height: 26px;
+	font-size: 12px; line-height: 26px; text-align: center; color: #adadad;
+	display: inline-block;
+}
+.table .page p span{
+	color: #2b9968;
+}
+
+#Player td:first-child span{
+	width: 20px; height: 20px;
+	border-radius: 2px;
+	background: #2b9968;
+	line-height: 20px; color: #fff;
+	display: inline-block;
+}
+
+
+
+@media screen and (min-width: 1400px){
+	#Info .player{
+		right: 360px;
+	}
+	#Info .match{
+		width: 350px;
+	}
+	#Info .player .tabBox button{
+		width: 40px;
+	}
+	.table table td{
+		font-size: 14px;
+	}
+}
+

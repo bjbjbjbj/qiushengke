@@ -245,7 +245,7 @@
 	position: relative;
 }
 #Con table tbody tr:hover td{
-	background: #e0e0e0 !important;
+	background: #e0ece7 !important;
 }
 #Con table tbody tr:nth-child(odd) td, #Top tr:nth-child(even) td{
 	background: #f5f5f5;

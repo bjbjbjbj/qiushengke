@@ -185,14 +185,14 @@ table.match td img{
 	height: 6px;
 	margin-bottom: 10px; padding: 34px 0 10px;
 	background: #e7e9e5;
-	font-size: 0px;
+	font-size: 0px; line-height: 6px;
 	overflow: hidden;
 }
 #Cup ul li{
 	height: 6px;
 	background: #adadad;
 	position: relative;
-	display: inline-block;
+	float: left;
 }
 #Cup ul li.last:after{
 	height: 6px; width: 10px;
@@ -288,28 +288,28 @@ table.match td img{
 	display: none\0/;
 	content: '';
 }
-#Cup table.match tbody th p span{
+#Cup table.match tbody th p a{
 	width: 50%;
 	display: inline-block;
 }
-#Cup table.match tbody th p span.host{
+#Cup table.match tbody th p a.host{
 	text-align: right;
 	float: left;
 }
-#Cup table.match tbody th p span.away{
+#Cup table.match tbody th p a.away{
 	text-align: left;
 	float: right;
 }
-#Cup table.match tbody th p span b{
+#Cup table.match tbody th p a b{
 	width: 30px;
 	color: #fabd36;
 	display: inline-block;
 }
-#Cup table.match tbody th p span.host b{
+#Cup table.match tbody th p a.host b{
 	padding-right: 10px;
 	float: right;
 }
-#Cup table.match tbody th p span.away b{
+#Cup table.match tbody th p a.away b{
 	padding-left: 10px;
 	float: left;
 }
@@ -325,6 +325,7 @@ table.match td img{
 }
 #Group .tabLine button{
 	height: 50px; width: 70px;
+	background: #fff;
 	font-size: 14px; text-align: center;
 }
 #Group .tabLine button.on{
@@ -378,6 +379,9 @@ table.match td img{
 	padding-left: 10px;
 	text-align: left;
 }
+#Group table.group td:first-child + td a:hover{
+	color: #2b9968;
+}
 #Group table.group td span{
 	width: 20px; height: 20px;
 	border-radius: 2px;
@@ -414,7 +418,7 @@ table.match td img{
 	border-right: 1px solid #2b9968; border-bottom: 1px solid #2b9968;
 }
 #Match div.con ul li{
-	width: 6.25%; width: 6.2%\0/; height: 30px;
+	width: 6.25%; height: 30px;
 	border-top: 1px solid #2b9968; border-left: 1px solid #2b9968;
 	background: rgba(41, 148, 100, 0.7); background: #6ab795\0/;
 	font-size: 12px; line-height: 30px; text-align: center; color: #fff;
@@ -500,6 +504,9 @@ table.match td img{
 	overflow: hidden;
 	display: block;
 }
+#Rank div.con table td a.team:hover{
+	color: #2b9968;
+}
 #Rank div.con table td p{
 	width: 20px; height: 20px;
 	border-radius: 2px;
@@ -517,6 +524,29 @@ table.match td img{
 #Rank div.con table tr:nth-child(3) td p{
 	background: rgba(43, 153, 104, 0.3);	
 	color: #fff;
+}
+#Rank div.con table tr:hover td{
+	background: #e0ece7;
+}
+#Rank div.con table tr td:hover{
+	background: #b6d5c8 !important;
+}
+#Rank div.con table[choose='1'] td:nth-child(1),
+#Rank div.con table[choose='2'] td:nth-child(2),
+#Rank div.con table[choose='3'] td:nth-child(3),
+#Rank div.con table[choose='4'] td:nth-child(4),
+#Rank div.con table[choose='5'] td:nth-child(5),
+#Rank div.con table[choose='6'] td:nth-child(6),
+#Rank div.con table[choose='7'] td:nth-child(7),
+#Rank div.con table[choose='8'] td:nth-child(8),
+#Rank div.con table[choose='9'] td:nth-child(9),
+#Rank div.con table[choose='10'] td:nth-child(10),
+#Rank div.con table[choose='11'] td:nth-child(11),
+#Rank div.con table[choose='12'] td:nth-child(12),
+#Rank div.con table[choose='13'] td:nth-child(13),
+#Rank div.con table[choose='14'] td:nth-child(14),
+#Rank div.con table[choose='15'] td:nth-child(15){
+	background: #e0ece7;
 }
 #Rank div.con[type=direction] table tr:nth-child(1) td p,
 #Rank div.con[type=direction] table tr:nth-child(2) td p,
@@ -570,6 +600,9 @@ table.match td img{
 	width: 50%; height: 22px;
 	font-size: 12px; line-height: 22px; text-align: left;
 	float: left;
+}
+#News .con ul a.li:hover{
+	color: #2b9968;
 }
 #News .con ul a.li p{
 	height: 22px;
@@ -676,8 +709,7 @@ table.match td img{
 	font-size: 12px; line-height: 30px; text-align: center; color: #adadad;
 }
 #Info button.open:hover{
-	background: #6ab795;
-	color: #fff;
+	color: #2b9968;
 }
 #Info button.open:after{
 	width: 10px; height: 10px;
@@ -687,7 +719,7 @@ table.match td img{
 	content: '';
 }
 #Info button.open:hover:after{
-	background: url(../img/infor_icon_down_white.png) no-repeat center; background-size: 10px;
+	background: url(../img/infor_icon_down_green.png) no-repeat center; background-size: 10px;
 }
 
 /*精彩视频*/
@@ -714,7 +746,7 @@ table.match td img{
 }
 #Video ul a.li p.text{
 	height: 24px;
-	background: rgba(0,0,0,0.5); filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr=#88000000,endColorstr=#88000000)\0/;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr=#88000000,endColorstr=#88000000)\0/; background: rgba(0,0,0,0.5);
 	line-height: 24px; text-align: center;
 	position: absolute; bottom: 0; left: 0; right: 8px;
 	transition: all 0.4s; -moz-transition: all 0.4s; -webkit-transition: all 0.4s; -o-transition: all 0.4s;
@@ -722,7 +754,7 @@ table.match td img{
 }
 #Video ul a.li:hover p.text{
 	height: 90px;
-	background: rgba(5, 39, 24, 0.9); filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr=#882b9968,endColorstr=#882b9968)\0/;
+	filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr=#882b9968,endColorstr=#882b9968)\0/; background: rgba(5, 39, 24, 0.9);
 	line-height: 90px;
 }
 #Video ul a.li p.text:before, #Video ul a.li p.text:after{

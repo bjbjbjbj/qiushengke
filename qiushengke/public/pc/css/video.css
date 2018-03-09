@@ -36,11 +36,11 @@ body{
 	content: '';
 }
 #Match .mbox:before{
-	background-color: rgba(224, 240, 217, 0.3); background: url(../img/image_arrow_right.png) no-repeat right center\0/;
+	background: url(../img/image_arrow_right.png) no-repeat right center\0/; background-color: rgba(224, 240, 217, 0.3);
 	left: 124px;
 }
 #Match .mbox:after{
-	background-color: rgba(241, 226, 218, 0.3);  background: url(../img/image_arrow_left.png) no-repeat left center\0/;
+	background: url(../img/image_arrow_left.png) no-repeat left center\0/; background-color: rgba(241, 226, 218, 0.3);
 	right: 124px;
 }
 #Match .mbox div.adorn{
@@ -64,11 +64,11 @@ body{
 	content: '';
 }
 #Match .mbox div.adorn.host:before{
-	background: #e0f0d9; display: none\0/;
+	background: rgba(224,240,217,100);
 	right: -36px;
 }
 #Match .mbox div.adorn.away:before{
-	background: #f1e2da; display: none\0/;
+	background: rgba(241,226,218,100);
 	left: -36px;
 }
 
@@ -576,7 +576,6 @@ body{
 	border-radius: 30px 0 30px 0;
 	background: #2b9968;
 	position: relative;
-	overflow: hidden;
 }
 #Event p.title{
 	width: 18px;
@@ -590,6 +589,179 @@ body{
 	background: #fff;
 	position: relative;
 }
+#Event div.con p.start{
+	width: 30px; height: 24px;
+	margin-top: -12px;
+	font-size: 12px; line-height: 24px; text-align: center; color: #adadad;
+	position: absolute; top: 50%; left: 26px;
+}
+#Event div.con p.end{
+	width: 40px; height: 24px;
+	margin-top: -12px;
+	font-size: 12px; line-height: 24px; text-align: left; color: #adadad;
+	position: absolute; top: 50%; right: 0;
+}
+#Event div.con img.host, #Event div.con img.away{
+	width: 30px; height: 30px;
+	position: absolute; left: 26px;
+}
+#Event div.con img.host{
+	top: 40px;
+}
+#Event div.con img.away{
+	bottom: 40px;
+}
+#Event div.con dl.line{
+	height: 60px;
+	margin-top: -30px;
+	border-radius: 4px;
+	background: #cfd7cd;
+	position: absolute; top: 50%; left: 56px; right: 50px;
+}
+#Event div.con dl.line:before{
+	height: 1px;
+	background: #dae0d9;
+	position: absolute; top: 50%; left: 0; right: 0;
+	content: '';
+}
+#Event div.con dl.line dt{
+	height: 60px;
+	border-radius: 4px 0 0 4px;
+	background: #2b9968;
+	position: absolute; top: 0; left: 0;
+}
+#Event div.con dl.line dt:before{
+	height: 1px;
+	background: #fabd36;
+	position: absolute; top: 50%; left: 0; right: 0;
+	content: '';	
+}
+#Event div.con dl.line dt:after{
+	width: 32px; height: 32px;
+	margin-top: -16px;
+	border-radius: 50%;
+	background: rgb(250, 189, 54)\0/; background: rgba(250, 189, 54, 0.6);
+	position: absolute; top: 50%; right: -16px; z-index: 1;
+	content: '';
+}
+#Event div.con dl.line dt p{
+	width: 26px; height: 26px;
+	margin-top: -13px;
+	border-radius: 50%;
+	background: #fff;
+	font-size: 12px; line-height: 26px; text-align: center; color: #2b9968;
+	position: absolute; top: 50%; right: -13px; z-index: 2;
+}
+#Event div.con dl.line dd{
+	height: 60px;
+	position: absolute; top: 0; z-index: 1;
+}
+#Event div.con dl.line dd:hover{
+	z-index: 2;
+}
+#Event div.con dl.line dd p.minute{
+	width: 60px; height: 24px;
+	margin-left: -30px;
+	font-size: 12px; line-height: 24px; text-align: center; color: #adadad;
+	position: absolute; left: 50%; 
+}
+#Event div.con dl.line dd.after p.minute{
+	color: #f4f4f4;
+}
+#Event div.con dl.line dd[minute="15"] p.minute,
+#Event div.con dl.line dd[minute="45"] p.minute,
+#Event div.con dl.line dd[minute="75"] p.minute,
+#Event div.con dl.line dd[minute="105"] p.minute{
+	bottom: 50%;
+}
+#Event div.con dl.line dd[minute="30"] p.minute,
+#Event div.con dl.line dd[minute="60"] p.minute,
+#Event div.con dl.line dd[minute="90"] p.minute{
+	top: 50%;
+}
+#Event div.con dl.line dd[minute="15"]:before,
+#Event div.con dl.line dd[minute="30"]:before,
+#Event div.con dl.line dd[minute="45"]:before,
+#Event div.con dl.line dd[minute="60"]:before,
+#Event div.con dl.line dd[minute="75"]:before,
+#Event div.con dl.line dd[minute="90"]:before,
+#Event div.con dl.line dd[minute="105"]:before{
+	width: 5px; height: 5px;
+	margin: -2px 0 0 -2.5px;
+	border-radius: 50%;
+	background: #bababa;
+	position: absolute; top: 50%; left: 50%;
+	content: '';
+}
+#Event div.con dl.line dd.after:before{
+	background: #f4f4f4;
+}
+#Event div.con dl.line dd ul.host{
+	width: 100%;
+	position: absolute; left: 0; bottom: 64px;
+}
+#Event div.con dl.line dd ul.away{
+	width: 100%;
+	position: absolute; left: 0; top: 64px;
+}
+#Event div.con dl.line dd li{
+	height: 16px;
+	margin: 0 -5px;
+	position: relative;
+}
+#Event div.con dl.line dd ul.host li{
+	padding-top: 8px;
+}
+#Event div.con dl.line dd ul.away li{
+	padding-bottom: 8px;
+}
+#Event div.con dl.line dd img{
+	height: 16px; width: 16px;
+	margin: 0 auto;
+	display: block;
+}
+#Event div.con dl.line dd li:hover img{
+	transform: scale(1.4); -ms-transform: scale(1.4); -webkit-transform: scale(1.4); -o-transform: scale(1.4); -moz-transform: scale(1.4);
+}
+#Event div.con dl.line dd li p{
+	width: 240px;
+	text-align: center;
+	position: absolute; z-index: 1;
+	visibility: hidden;
+}
+#Event div.con dl.line dd li:hover p{
+	visibility: visible;
+}
+#Event div.con dl.line dd ul.host li p{
+	margin-left: -120px;
+	bottom: 20px; left: 50%;
+}
+#Event div.con dl.line dd ul.away li p{
+	margin-left: -120px;
+	top: 20px; left: 50%;
+}
+#Event div.con dl.line dd li p span{
+	padding-right: 10px;
+	border-radius: 2px;
+	background: #fff;
+	box-shadow: 0px 1px 6px 0px rgba(0, 44, 24, 0.3);
+	font-size: 12px; line-height: 26px; 
+	display: inline-block;
+}
+#Event div.con dl.line dd li p span i{
+	height: 26px; width: 36px;
+	color: #c52601; text-align: center;
+	display: inline-block;
+}
+
+
+
+
+
+
+
+
+
 
 /*篮球比分统计*/
 #Score{

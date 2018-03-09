@@ -11,7 +11,7 @@
 |
 */
 
-Route::group([], function () {
+Route::group(['namespace'=>'Match'], function () {
     Route::any("/", function (){
         return redirect('/match/immediate.html');
     });
@@ -32,4 +32,12 @@ Route::group([], function () {
     Route::get("/match/basket/immediate_{order}.html", "MatchController@immediate_bk"); //今天
     Route::get("/match/basket/result_{dateStr}_{order}.html", "MatchController@result_bk"); //完赛比分
     Route::get("/match/basket/schedule_{dateStr}_{order}.html", "MatchController@schedule_bk"); //下日赛程
+});
+
+Route::group(['namespace'=>'League'], function () {
+    //赛事专题
+    Route::get("/league/{sport}/{season}/{lid}.html", "LeagueController@leagueSeason");//联赛
+    Route::get("/league/{sport}/{lid}.html", "LeagueController@league");//联赛
+    Route::get("/cup_league/{sport}/{season}/{lid}.html", "LeagueController@leagueSeason");//杯赛
+    Route::get("/cup_league/{sport}/{lid}.html", "LeagueController@league");//杯赛
 });

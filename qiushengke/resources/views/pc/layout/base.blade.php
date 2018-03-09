@@ -18,6 +18,11 @@
     @yield('navContent')
 </div>
 @yield('content')
+<div id="Totop">
+    <div class="abox">
+        <a class="totop" href="javascript:void(0)"></a>
+    </div>
+</div>
 <div id="Bottom">
     <p>友情链接：<a href="">料狗商城</a><a href="">cctv5在线直播</a><a href="">258直播网</a><a href="">料狗TV</a><a href="">世界杯直播</a><a href="">5播体育</a></p>
     <p>免责声明：本站所有直播和视频链接均由网友提供，如有侵权问题，请及时联系，我们将尽快处理。</p>

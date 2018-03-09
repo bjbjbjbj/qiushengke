@@ -1,0 +1,310 @@
+﻿
+#Con{
+	padding-top: 20px;
+}
+#Con:after{
+	display: block;
+	clear: both;
+	content: '';
+}
+
+
+
+/*左边内容*/
+#Con .lbox{
+	margin-right: 320px;
+	position: relative; z-index: 20;
+}
+#Con .lbox .title{
+	height: 40px;
+	padding-left: 12px;
+	position: relative;
+}
+#Con .lbox .title:before{
+	width: 32px; height: 50px;
+    border-radius: 20px 0 0 0;
+    background: url(../img/separated_image_n.png) no-repeat left top; background-size: 32px;
+    position: absolute; top: 0; left: 0; z-index: 1;
+    content: '';
+}
+#Con .lbox .title p{
+	height: 40px;
+	padding: 0 12px 0 20px;
+    border-radius: 20px 0 0 0;
+    background: #2b9968;
+	font-size: 18px; line-height: 40px; text-align: left; color: #fff;
+	display: inline-block;
+}
+
+/*正在直播*/
+#Live{
+	margin-bottom: 20px;
+}
+#Live ul{
+	padding: 20px 15px 0 45px;
+	background: #fff;
+	font-size: 0px;
+}
+#Live ul a.li{
+	width: 33.3%;
+	padding-bottom: 40px;
+	position: relative;
+	display: inline-block;
+}
+#Live ul a.li div.img{
+	padding-right: 30px;
+	position: relative;
+}
+#Live ul a.li div.img:before{
+	border-radius: 4px;
+	background: rgba(0,0,0,0.5);
+	position: absolute; top: 0; bottom: 0; left: 0; right: 30px;
+	display: none;
+	content: '';
+}
+#Live ul a.li:hover div.img:before{
+	display: block;
+}
+#Live ul a.li div.img img{
+	width: 100%;
+	border-radius: 4px;
+}
+#Live ul a.li img.face{
+	width: 38px; height: 38px;
+	border-radius: 50%; border: 1px solid #fabd36;
+	background: #fff;
+	position: absolute; bottom: 20px; left: 0; z-index: 2;
+}
+#Live ul a.li p{
+	height: 30px;
+	font-size: 12px; line-height: 30px;
+	overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+	position: absolute; bottom: 10px; left: 50px;
+}
+#Live ul a.li:hover p{
+	color: #2b9968;
+}
+
+/*主播推荐*/
+#Anchor{
+	margin-bottom: 20px;
+}
+#Anchor ul{
+	padding: 20px 16px 4px 30px;
+	background: #96bbab;
+	font-size: 0px;
+}
+#Anchor ul a.li{
+	width: 20%;
+	padding-top: 20px; margin-bottom: 20px;
+	transition: transform 0.3s; -moz-transition: transform 0.3s; -webkit-transition: transform 0.3s; -o-transition: transform 0.3s;
+	position: relative;
+	display: inline-block;
+}
+#Anchor ul a.li[href]:hover{
+	transform: scale(1.1); -ms-transform: scale(1.1); -webkit-transform: scale(1.1); -o-transform: scale(1.1); -moz-transform: scale(1.1);
+}
+#Anchor ul a.li:hover{
+	transform: scale(1); -ms-transform: scale(1); -webkit-transform: scale(1); -o-transform: scale(1); -moz-transform: scale(1);
+}
+#Anchor ul a.li p{
+	height: 50px;
+	padding-top: 40px; margin-right: 14px;
+	border-radius: 4px;
+	background: #b9bebb\0/; background: rgba(190, 190, 190, 0.85);
+	color: #fff;
+}
+#Anchor ul a.li[href]:hover p{
+	color: #2b9968;
+}
+#Anchor ul a.li[href] p{
+	background: #eff5f2\0/; background: rgba(255, 255, 255, 0.85);
+	color: #666;
+}
+#Anchor ul a.li p:before, #Anchor ul a.li p:after{
+	width: 5%; height: 50px;
+	vertical-align: middle;
+	display: inline-block;
+	content: '';
+}
+#Anchor ul a.li p span{
+	width: 90%; max-height: 36px;
+	font-size: 12px; line-height: 18px; text-align: center;
+	vertical-align: middle;
+	display: inline-block;
+	overflow: hidden;
+}
+#Anchor ul a.li img{
+	width: 38px; height: 38px;
+	margin-left: -27px;
+	border-radius: 50%; border: 1px solid #fff;
+	background: #fff;
+	position: absolute; top: 10px; left: 50%;
+}
+#Anchor ul a.li[href] img{
+	width: 58px; height: 58px;
+	margin-left: -37px;
+	border-color: #fabd36;
+	top: 0;
+}
+
+
+
+
+/*右边内容*/
+#Con .right{
+	width: 300px;
+	position: relative; z-index: 20;
+	float: right;
+}
+#Con .rbox{
+	margin-bottom: 20px;
+}
+#Con .rbox p.title{
+	height: 40px;
+	padding-left: 16px;
+	font-size: 16px; line-height: 40px; text-align: left; color: #2b9968;
+	position: relative;
+}
+#Con .rbox p.title:before{
+	width: 4px; height: 20px;
+	margin-top: -10px;
+	background: #2b9968;
+	position: absolute; top: 50%; left: 0;
+	content: '';
+}
+
+/*赛事推荐*/
+#Match{
+
+}
+#Match .tabLine{
+	height: 30px;
+	padding: 0 10px;
+	background: #2b9968;
+	font-size: 0px;
+}
+#Match .tabLine button{
+	height: 30px; width: 16.6%;
+	background: #2b9968;
+	font-size: 14px; text-align: center; color: #fff;
+}
+#Match .tabLine button.on{
+	background: #fff;
+	color: #2b9968;
+}
+#Match ul{
+	background: #f6f6f6;
+}
+#Match ul li{
+	padding-top: 10px;
+	background: #fff;
+	position: relative;
+}
+#Match ul li + li{
+	margin-top: 10px;
+}
+#Match ul li p.time{
+	height: 20px;
+	font-size: 12px; line-height: 20px; text-align: center; color: #adadad;
+	position: relative;
+}
+#Match ul li p.time span{
+	height: 20px;
+	padding: 0 20px;
+	border-radius: 0 20px 0 0;
+	background: #95ccb3;
+	color: #fff;
+	position: absolute; left: 0;
+}
+#Match ul li div.team{
+	height: 110px;
+	border-bottom: 1px solid #dbdbdb;
+}
+#Match ul li div.team p{
+	width: 50%;
+	padding-top: 70px;
+	font-size: 12px; line-height: 20px; text-align: center;
+	position: relative;
+	display: inline-block;
+}
+#Match ul li div.team p.host{
+	float: left;
+}
+#Match ul li div.team p.away{
+	float: right;
+}
+#Match ul li div.team p img{
+	width: 50px; height: 50px;
+	border-radius: 50%;
+	position: absolute; top: 10px; left: 50%;
+}
+#Match ul li div.team p.host img{
+	margin-left: -38px;
+}
+#Match ul li div.team p.away img{
+	margin-left: -12px;
+}
+#Match ul li div.team p span{
+	display: inline-block;
+}
+#Match ul li div.team p.host span{
+	padding-right: 27px;
+}
+#Match ul li div.team p.away span{
+	padding-left: 27px;
+}
+#Match ul li div.team a{
+	width: 52px; height: 20px;
+	margin-left: -27px;
+	border-radius: 2px; border: 1px solid #c52601;
+	background: #c52601;
+	font-size: 12px; line-height: 20px; text-align: center; color: #f1e2da;
+	position: absolute; top: 54px; left: 50%; z-index: 1;
+}
+#Match ul li div.team a:hover{
+	background: #fff;
+	color: #c52601;
+}
+#Match ul li .anchor{
+	min-height: 26px;
+	padding: 12px 20px 4px 50px;
+	font-size: 0px;
+	position: relative;
+}
+#Match ul li .anchor:before{
+	width: 50px; height: 50px;
+	font-size: 12px; line-height: 50px; text-align: center; color: #2b9968;
+	position: absolute; top: 0; left: 0;
+	content: '主播：';
+}
+#Match ul li .anchor a{
+	height: 24px;
+	padding: 0 15px; margin: 0 10px 8px 0;
+	border-radius: 13px; border: 1px solid #2b9968;
+	box-shadow: 0px 2px 6px 0px rgba(43, 153, 104, 0.5);
+	font-size: 12px; line-height: 24px; text-align: center; color: #2b9968;
+	display: inline-block;
+}
+#Match ul li .anchor a:hover{
+	background: #2b9968;
+	color: #fff;
+}
+
+
+
+
+
+@media screen and (min-width: 1400px){
+	#Con .right{
+		width: 350px;
+	}
+	#Con .lbox{
+		margin-right: 370px;
+	}
+}
+
+
+
+
+

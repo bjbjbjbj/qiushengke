@@ -10,4 +10,31 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+    protected $html_var = [];
+
+    function __construct()
+    {
+        $footLeague = [
+            array('id'=>'46','name'=>'中超','type'=>1),
+            array('id'=>'31','name'=>'英超','type'=>1),
+            array('id'=>'26','name'=>'西甲','type'=>1),
+            array('id'=>'33','name'=>'意甲','type'=>1),
+            array('id'=>'11','name'=>'法甲','type'=>1),
+            array('id'=>'8','name'=>'德甲','type'=>1),
+            array('id'=>'139','name'=>'亚冠','type'=>2),
+            array('id'=>'46','name'=>'欧冠','type'=>2),
+            array('id'=>'46','name'=>'世界杯','type'=>2)
+        ];
+        $links = array();
+        foreach ($footLeague as $link) {
+            if ($link['type'] == 1) {
+                $link['url'] = '/league/foot/' . $link['id'] . '.html';
+            }
+            elseif ($link['type'] == 2) {
+                $link['url'] = '/cup_league/foot/' . $link['id'] . '.html';
+            }
+            $links[] = $link;
+        }
+        $this->html_var['footLeagues'] = $links;
+    }
 }
