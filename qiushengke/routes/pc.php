@@ -36,8 +36,11 @@ Route::group(['namespace'=>'Match'], function () {
 
 Route::group(['namespace'=>'League'], function () {
     //赛事专题
-    Route::get("/league/{sport}/{season}/{lid}.html", "LeagueController@leagueSeason");//联赛
-    Route::get("/league/{sport}/{lid}.html", "LeagueController@league");//联赛
-    Route::get("/cup_league/{sport}/{season}/{lid}.html", "LeagueController@leagueSeason");//杯赛
-    Route::get("/cup_league/{sport}/{lid}.html", "LeagueController@league");//杯赛
+    Route::get("/league/foot/{season}/{lid}.html", "LeagueController@leagueSeason");//联赛
+    Route::get("/league/foot/{lid}.html", "LeagueController@league");//联赛
+    Route::get("/cup_league/foot/{season}/{lid}.html", "LeagueController@leagueSeason");//杯赛
+    Route::get("/cup_league/foot/{lid}.html", "LeagueController@league");//杯赛
+    //篮球
+    Route::get("/league/basket/{lid}.html", "LeagueController@leagueBK");//赛程
+    Route::get("/league/basket/schedule/{lid}.html", "LeagueController@leagueBKWithDate");//赛程by时间
 });

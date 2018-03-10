@@ -17,6 +17,7 @@
             setPage();
         }
     </script>
+    @yield('league_js')
 @endsection
 @section('css')
     <link rel="stylesheet" type="text/css" href="/pc/css/league.css">
