@@ -7,13 +7,8 @@
         <a href="">主播</a>
         <a href="">手机APP</a>
     </div>
-    <div class="Link">
-        <a href="league_bk.html">NBA</a>
-        <a href="league_bk.html">CBA</a>
-        <a href="league_bk.html">NCAA</a>
-        <a href="league_bk.html">WNBA</a>
-        <a href="league_bk.html">欧锦赛</a>
-    </div>
+    @component('pc.cell.top_leagues',['links'=>$basketLeagues])
+    @endcomponent
 @endsection
 @section('css')
     @yield('css_match_list')

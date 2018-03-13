@@ -22,8 +22,8 @@ class Controller extends BaseController
             array('id'=>'11','name'=>'法甲','type'=>1),
             array('id'=>'8','name'=>'德甲','type'=>1),
             array('id'=>'139','name'=>'亚冠','type'=>2),
-            array('id'=>'46','name'=>'欧冠','type'=>2),
-            array('id'=>'46','name'=>'世界杯','type'=>2)
+            array('id'=>'73','name'=>'欧冠','type'=>2),
+            array('id'=>'57','name'=>'世界杯','type'=>2)
         ];
         $links = array();
         foreach ($footLeague as $link) {
@@ -36,5 +36,18 @@ class Controller extends BaseController
             $links[] = $link;
         }
         $this->html_var['footLeagues'] = $links;
+
+        $basketLeague = [
+            array('id'=>'1','name'=>'NBA','type'=>1),
+            array('id'=>'4','name'=>'CBA','type'=>1),
+            array('id'=>'2','name'=>'WNBA','type'=>1),
+            array('id'=>'89','name'=>'欧锦赛','type'=>1),
+        ];
+        $links = array();
+        foreach ($basketLeague as $link) {
+            $link['url'] = '/league/basket/' . $link['id'] . '.html';
+            $links[] = $link;
+        }
+        $this->html_var['basketLeagues'] = $links;
     }
 }

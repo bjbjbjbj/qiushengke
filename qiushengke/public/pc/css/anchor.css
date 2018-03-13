@@ -62,7 +62,16 @@
 	display: none;
 	content: '';
 }
-#Live ul a.li:hover div.img:before{
+#Live ul a.li div.img:after{
+	width: 30px; height: 30px;
+	margin: -16px 0 0 -30px;
+	border-radius: 50%; border: 1px solid #fff;
+	background: url(../img/icon_retangle.png) no-repeat center; background-size: 32px;
+	position: absolute; top: 50%; left: 50%;
+	display: none;
+	content: '';
+}
+#Live ul a.li:hover div.img:before, #Live ul a.li:hover div.img:after{
 	display: block;
 }
 #Live ul a.li div.img img{
@@ -91,7 +100,7 @@
 }
 #Anchor ul{
 	padding: 20px 16px 4px 30px;
-	background: #96bbab;
+	background: url(../img/image_bg_anchor.png) no-repeat center top #96bbab; background-size: 100% auto;
 	font-size: 0px;
 }
 #Anchor ul a.li{

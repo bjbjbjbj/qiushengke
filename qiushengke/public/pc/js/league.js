@@ -4,7 +4,7 @@ function setPage() {
     setCup();
     setDateInput();
     setRank();
-
+    setTable();
 
 
 
@@ -36,8 +36,7 @@ function setMatch() {
 function setCup() {
     $('#Cup p.round').click(function(){
         $('#Cup .con').css('display','none');
-        console.log($('#Cup .con[num="' + $(this).html() + '"]')[0])
-        $('#Cup .con[num="' + $(this).html() + '"]').css('display','');
+        $('#Cup .con[num="' + parseInt($(this).html()) + '"]').css('display','');
         $('#Cup li').removeClass('on');
         $(this).parents('li').addClass('on');
     })
@@ -60,6 +59,11 @@ function setRank() {
 }
 
 function setDateInput() {
+    $('#Match .inbox').mouseover(function(){
+        $('#Match .inbox input')[0].focus();
+    }).mouseout(function(){
+        $('#Match .inbox input')[0].blur();
+    })
     $('#Match .inbox input').datepicker({format:"yyyy-mm-dd",language: "zh-CN"});
     if(!placeholderSupport()){   // 判断浏览器是否支持 placeholder
         $('[placeholder]').focus(function() {
@@ -81,7 +85,33 @@ function placeholderSupport() {
     return 'placeholder' in document.createElement('input');
 }
 
+function setTable() {
+    function setTB (obj) {
+        var TR = obj.parentNode;
+        var Num = false;
+        for (var i = 0; i < TR.getElementsByTagName('td').length; i++) {
+            if (obj == TR.getElementsByTagName('td')[i]) {
+                Num = i + 1;
+                break;
+            }
+        }
 
+        if (Num) {
+            $(obj).parents('table').attr('choose',Num);
+        }
+    }
+
+    function cleanTB (obj) {
+        $('#Rank table').removeAttr('choose');
+    }
+
+    $('#Rank td').mouseover(function(){
+        setTB(this);
+    })
+    $('#Rank table').mouseout(function(){
+        cleanTB(this);
+    })
+}
 
 
 

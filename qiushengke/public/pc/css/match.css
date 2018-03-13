@@ -1,0 +1,2078 @@
+﻿
+body{
+	padding-top: 110px;
+}
+
+/*浮动区域*/
+#Play{
+	position: absolute; top: 580px; left: 0; right: 0;
+}
+#Play.fixed{
+	position: fixed; top: 20px;
+}
+#Play .abox{
+	max-width: 1460px; min-width: 1260px;
+	margin: 0 auto;
+}
+#Play .abox ul{
+	width: 90px;
+	margin-left: 20px;
+	border-radius: 8px;
+	background: #fff;
+	box-shadow: 0px 4px 5px 0px rgba(0, 64, 36, 0.4);
+	overflow: hidden;
+}
+#Play .abox ul li{
+	height: 50px;
+	font-size: 15px; line-height: 50px; text-align: center;
+	position: relative;
+	cursor: pointer;
+}
+#Play .abox ul li:hover{
+	color: #2b9968;
+}
+#Play .abox ul li + li:before{
+	height: 1px;
+	background: #e0e0e0;
+	position: absolute; top: 0; left: 15px; right: 15px;
+	content: '';
+}
+#Play .abox ul li.on{
+	background: #2b9968;
+	color: #fff;
+}
+#Play .abox ul li.on:hover{
+	color: #fff;
+}
+#Play .abox ul li.on:before, #Play .abox ul a.on + li:before{
+	display: none;
+}
+
+
+/*信息区域*/
+#Info{
+	height: 80px;
+	padding: 66px 0 96px;
+	border-radius: 50px 50px 0 0;
+	position: relative;
+}
+#Info.football{
+	background: url(../img/bg_football.jpg) no-repeat center top; background-size: cover;
+}
+#Info.basketball{
+	background: url(../img/bg_basketball.jpg) no-repeat center top; background-size: cover;
+}
+#Info p.info{
+	font-size: 12px; line-height: 18px; text-align: center; color: #fff;
+	position: absolute; top: 18px; left: 0; right: 0;
+}
+#Info p.team{
+	height: 80px;
+	font-size: 16px; line-height: 80px; color: #fff;
+	position: absolute;
+	display: inline-block;
+}
+#Info p.team.host{
+	padding-left: 90px;
+	text-align: left;
+	left: 12%;
+}
+#Info p.team.away{
+	padding-right: 90px;
+	text-align: right;
+	right: 12%;
+}
+#Info p.team .img{
+	width: 70px; height: 70px;
+	padding: 5px;
+	border-radius: 50%;
+	background: #fff;
+	position: absolute; top: 0;
+	overflow: hidden;
+}
+#Info p.team.host .img{
+	left: 0;
+}
+#Info p.team.away .img{
+	right: 0;
+}
+#Info p.team .img img{
+	width: 70px; height: 70px;
+}
+#Info p.team em{
+	min-width: 60px;
+	margin-top: 20px;
+	font-size: 12px; line-height: 12px; text-align: center;
+	position: absolute; top: 50%;
+}
+#Info p.team.host em{
+	left: 90px; right: 0;
+}
+#Info p.team.away em{
+	left: 0; right: 90px;
+}
+#Info p.score{
+	font-size: 24px; line-height: 80px; text-align: center; color: #fff;
+}
+#Info .odd{
+	height: 22px;
+	padding: 4px 0;
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#0Dffffff,endColorstr=#0Dffffff)\0/; background: rgba(255,255,255,0.2);
+	text-align: center;
+	position: absolute; bottom: 0; left: 0; right: 0;
+}
+#Info .odd p{
+	height: 22px;
+	padding: 0 20px;
+	font-size: 12px; line-height: 22px; text-align: center; color: #fff;
+	display: inline-block;
+}
+#Info .odd p + p{
+	border-left: 1px solid #fff;
+}
+#Info .sameOdd{
+	width: 320px; height: 32px;
+	margin-left: -160px;
+	border-radius: 30px 0px 30px 0px;
+	background: #2b9968;
+	box-shadow: 0px 5px 10px 0px rgba(0, 36, 20, 0.7);
+	font-size: 14px; line-height: 32px; text-align: center; color: #fff;
+	position: absolute; bottom: 50px; left: 50%;
+}
+#Info .sameOdd span{
+	width: 100px;
+	font-size: 12px; line-height: 32px; color: #adadad;
+	position: absolute; left: 330px; top: 0;
+	cursor: pointer;
+}
+#Info .sameOdd span:hover{
+	color: #fff;
+}
+
+/*预测*/
+#Prediction{
+	height: 210px;
+	padding: 0 290px; margin-bottom: 20px;
+	background: #fff;
+	position: relative; z-index: 2;
+}
+#Prediction p.name{
+	padding: 24px 0 17px;
+	font-size: 14px; line-height: 14px; text-align: center;
+}
+#Prediction .pbox{
+	font-size: 12px; line-height: 12px; text-align: center; color: #808488;
+	position: relative;
+}
+#Prediction .pbox + .pbox{
+	margin-top: 40px;
+}
+#Prediction .pbox p.wdl{
+	color: #666;
+}
+#Prediction .pbox p.wdl.host{
+	text-align: left;
+	float: left;
+}
+#Prediction .pbox p.wdl.away{
+	text-align: right;
+	float: right;
+}
+#Prediction .pbox p.wdl span{
+	color: #bc1c25;
+}
+#Prediction .pbox .line{
+	height: 8px;
+	margin-top: 13px;
+	border-radius: 4px;
+	background: #dedede;
+	overflow: hidden;
+}
+#Prediction .pbox .line .host{
+	height: 8px;
+	background: #2b9968;
+	float: left;
+}
+#Prediction .pbox .line .away{
+	height: 8px;
+	background: #fabd36;
+	float: right;
+}
+#Prediction .pbox .percent{
+	height: 24px;
+	font-size: 14px; line-height: 24px;
+	position: absolute; bottom: -8px; 
+	overflow: hidden;
+}
+#Prediction .pbox .percent.host{
+	margin-right: 16px;
+	color: #2b9968;
+	right: 100%;
+}
+#Prediction .pbox .percent.away{
+	margin-left: 16px;
+	color: #fabd36;
+	left: 100%;
+}
+#Prediction .cbox{
+	width: 114px; height: 114px;
+	border-radius: 50%;
+	background: #dedede;
+	position: absolute; top: 55px;
+	overflow: hidden;
+}
+#Prediction .cbox.host{
+	left: 76px;
+}
+#Prediction .cbox.away{
+	right: 76px;
+}
+#Prediction .cbox canvas{
+	width: 114px; height: 114px;
+}
+#Prediction .cbox .cover{
+	width: 94px; height: 70px;
+	padding-top: 24px;
+	border-radius: 50%;
+	background: #fff;
+	position: absolute; top: 10px; left: 10px;
+}
+#Prediction .cbox .cover p{
+	font-size: 18px; line-height: 24px; text-align: center; color: #808488;
+}
+#Prediction .cbox .cover p b{
+	font-size: 22px; color: #666;
+}
+
+/*比赛赛况*/
+#Match{
+
+}
+
+/*首发*/
+#Match .first{
+	padding: 40px 50px 22px; margin-bottom: 20px;
+	border-top: 2px solid #2b9968;
+	background: #fff;
+}
+#Match .first:after{
+	display: block;
+	clear: both;
+	content: '';
+}
+#Match .first .part{
+	width: 46.7%;
+}
+#Match .first .part.host{
+	text-align: left;
+	float: left;
+}
+#Match .first .part.away{
+	text-align: right;
+	float: right;
+}
+#Match .first p.name{
+	font-size: 18px; line-height: 18px;
+}
+#Match .first p.name span{
+	padding: 0 10px;
+	font-size: 12px; color: #adadad;
+}
+#Match .first .percent{
+	padding: 40px 0 24px;
+	display: inline-block;
+}
+#Match .first .percent p{
+	font-size: 14px; line-height: 14px; color: #808488;
+}
+#Match .first .percent p b{
+	color: #bc1c25;
+}
+#Match .first .percent .line{
+	height: 9px; width: 210px;
+	margin-top: 16px;
+	border-radius: 3px;
+	background: #dbdbdb;
+	position: relative;
+	display: inline-block;
+}
+#Match .first .percent .line span{
+	height: 9px;
+	border-radius: 3px;
+}
+#Match .first .part.host .percent .line span{
+	background: #2b9968;
+	float: left;
+}
+#Match .first .part.away .percent .line span{
+	background: #fabd36;
+	float: right;
+}
+#Match .first .percent .num{
+	font-size: 16px; line-height: 16px;
+	position: absolute; bottom: -3px;
+}
+#Match .first .part.host .percent .num{
+	color: #2b9968;
+	left: 230px;
+}
+#Match .first .part.away .percent .num{
+	color: #fabd36;
+	right: 230px;
+}
+#Match .first table{
+	width: 100%;
+}
+#Match .first table th{
+	height: 42px;
+	font-size: 14px; height: 24px; text-align: center; color: #adadad;
+}
+#Match .first table tbody{
+	background: #fafafa;
+}
+#Match .first table td{
+	height: 40px;
+	padding-left: 46px;
+	font-size: 14px; line-height: 24px; text-align: center;
+	position: relative;
+}
+#Match .first table tr:nth-child(odd) td{
+	background: #f6f6f6;
+}
+#Match .first table td:first-child + td{
+	color: #adadad;
+}
+#Match .first table td p{
+	width: 20px; height: 20px;
+	margin-top: -10px;
+	border-radius: 2px;
+	font-size: 12px; line-height: 20px; color: #fff;
+	position: absolute; top: 50%; left: 26px;
+}
+#Match .first table td:first-child + td p{
+	opacity: 0.5; filter:Alpha(opacity=50);
+}
+#Match .first .host table td p{
+	background: #2b9968;
+}
+#Match .first .away table td p{
+	background: #fabd36;
+}
+
+/*统计*/
+#Match .total{
+	padding: 12px 10px 24px; margin-bottom: 20px;
+	border-top: 2px solid #2b9968;
+	background: #fff;
+}
+#Match .total .title{
+	height: 30px;
+	padding-left: 10px;
+	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+}
+#Match .total ul{
+	font-size: 0px; text-align: left;
+}
+#Match .total ul li{
+	width: 33.33%; height: 14px;
+	margin-top: 30px;
+	font-size: 12px; line-height: 14px; text-align: center; color: #adadad;
+	position: relative;
+	display: inline-block;
+}
+#Match .total ul li .line{
+	height: 8px;
+	margin-top: -4px;
+	border-radius: 4px;
+	background: #eee;
+	position: absolute; top: 50%;
+}
+#Match .total ul li .line.host{
+	left: 55px; right: 60%;
+}
+#Match .total ul li .line.away{
+	left: 60%; right: 55px;
+}
+#Match .total ul li .line span{
+	height: 8px;
+	border-radius: 4px;
+	display: block;
+}
+#Match .total ul li .line.host span{
+	background: #2b9968;
+	float: right;
+}
+#Match .total ul li .line.away span{
+	background: #fabd36;
+	float: left;
+}
+#Match .total ul li .line p{
+	height: 12px;
+	margin-top: -6px;
+	font-size: 12px; line-height: 12px;
+	position: absolute; top: 50%;
+}
+#Match .total ul li .line.host p{
+	margin-right: 10px;
+	right: 100%;
+}
+#Match .total ul li .line.away p{
+	margin-left: 10px;
+	left: 100%;
+}
+
+/*足球事件*/
+#Match .event{
+	height: 200px;
+	margin-bottom: 20px; padding: 12px 10px 0;
+	border-top: 2px solid #2b9968;
+	background: #fff;
+	position: relative;
+}
+#Match .event p.title{
+	height: 30px;
+	padding-left: 10px;
+	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+}
+#Match .event div.con{
+	height: 200px;
+	position: relative; top: -20px;
+}
+#Match .event div.con p.start{
+	width: 30px; height: 24px;
+	margin-top: -12px;
+	font-size: 12px; line-height: 24px; text-align: center; color: #adadad;
+	position: absolute; top: 50%; left: 26px;
+}
+#Match .event div.con p.end{
+	width: 40px; height: 24px;
+	margin-top: -12px;
+	font-size: 12px; line-height: 24px; text-align: left; color: #adadad;
+	position: absolute; top: 50%; right: 0;
+}
+#Match .event div.con img.host, #Match .event div.con img.away{
+	width: 30px; height: 30px;
+	position: absolute; left: 26px;
+}
+#Match .event div.con img.host{
+	top: 40px;
+}
+#Match .event div.con img.away{
+	bottom: 40px;
+}
+#Match .event div.con dl.line{
+	height: 60px;
+	margin-top: -30px;
+	border-radius: 4px;
+	background: #cfd7cd;
+	position: absolute; top: 50%; left: 56px; right: 50px;
+}
+#Match .event div.con dl.line:before{
+	height: 1px;
+	background: #dae0d9;
+	position: absolute; top: 50%; left: 0; right: 0;
+	content: '';
+}
+#Match .event div.con dl.line dt{
+	height: 60px;
+	border-radius: 4px 0 0 4px;
+	background: #2b9968;
+	position: absolute; top: 0; left: 0;
+}
+#Match .event div.con dl.line dt:before{
+	height: 1px;
+	background: #fabd36;
+	position: absolute; top: 50%; left: 0; right: 0;
+	content: '';	
+}
+#Match .event div.con dl.line dt:after{
+	width: 32px; height: 32px;
+	margin-top: -16px;
+	border-radius: 50%;
+	background: rgb(250, 189, 54)\0/; background: rgba(250, 189, 54, 0.6);
+	position: absolute; top: 50%; right: -16px; z-index: 1;
+	content: '';
+}
+#Match .event div.con dl.line dt p{
+	width: 26px; height: 26px;
+	margin-top: -13px;
+	border-radius: 50%;
+	background: #fff;
+	font-size: 12px; line-height: 26px; text-align: center; color: #2b9968;
+	position: absolute; top: 50%; right: -13px; z-index: 2;
+}
+#Match .event div.con dl.line dd{
+	height: 60px;
+	position: absolute; top: 0; z-index: 1;
+}
+#Match .event div.con dl.line dd:hover{
+	z-index: 2;
+}
+#Match .event div.con dl.line dd p.minute{
+	width: 60px; height: 24px;
+	margin-left: -30px;
+	font-size: 12px; line-height: 24px; text-align: center; color: #adadad;
+	position: absolute; left: 50%; 
+}
+#Match .event div.con dl.line dd.after p.minute{
+	color: #f4f4f4;
+}
+#Match .event div.con dl.line dd[minute="15"] p.minute,
+#Match .event div.con dl.line dd[minute="45"] p.minute,
+#Match .event div.con dl.line dd[minute="75"] p.minute,
+#Match .event div.con dl.line dd[minute="105"] p.minute{
+	bottom: 50%;
+}
+#Match .event div.con dl.line dd[minute="30"] p.minute,
+#Match .event div.con dl.line dd[minute="60"] p.minute,
+#Match .event div.con dl.line dd[minute="90"] p.minute{
+	top: 50%;
+}
+#Match .event div.con dl.line dd[minute="15"]:before,
+#Match .event div.con dl.line dd[minute="30"]:before,
+#Match .event div.con dl.line dd[minute="45"]:before,
+#Match .event div.con dl.line dd[minute="60"]:before,
+#Match .event div.con dl.line dd[minute="75"]:before,
+#Match .event div.con dl.line dd[minute="90"]:before,
+#Match .event div.con dl.line dd[minute="105"]:before{
+	width: 5px; height: 5px;
+	margin: -2px 0 0 -2.5px;
+	border-radius: 50%;
+	background: #bababa;
+	position: absolute; top: 50%; left: 50%;
+	content: '';
+}
+#Match .event div.con dl.line dd.after:before{
+	background: #f4f4f4;
+}
+#Match .event div.con dl.line dd ul.host{
+	width: 100%;
+	position: absolute; left: 0; bottom: 64px;
+}
+#Match .event div.con dl.line dd ul.away{
+	width: 100%;
+	position: absolute; left: 0; top: 64px;
+}
+#Match .event div.con dl.line dd li{
+	height: 16px;
+	margin: 0 -5px;
+	position: relative;
+}
+#Match .event div.con dl.line dd ul.host li{
+	padding-top: 8px;
+}
+#Match .event div.con dl.line dd ul.away li{
+	padding-bottom: 8px;
+}
+#Match .event div.con dl.line dd img{
+	height: 16px; width: 16px;
+	margin: 0 auto;
+	display: block;
+}
+#Match .event div.con dl.line dd li:hover img{
+	transform: scale(1.4); -ms-transform: scale(1.4); -webkit-transform: scale(1.4); -o-transform: scale(1.4); -moz-transform: scale(1.4);
+}
+#Match .event div.con dl.line dd li p{
+	width: 240px;
+	text-align: center;
+	position: absolute; z-index: 1;
+	visibility: hidden;
+}
+#Match .event div.con dl.line dd li:hover p{
+	visibility: visible;
+}
+#Match .event div.con dl.line dd ul.host li p{
+	margin-left: -120px;
+	bottom: 20px; left: 50%;
+}
+#Match .event div.con dl.line dd ul.away li p{
+	margin-left: -120px;
+	top: 20px; left: 50%;
+}
+#Match .event div.con dl.line dd li p span{
+	padding-right: 10px;
+	border-radius: 2px;
+	background: #fff;
+	box-shadow: 0px 1px 6px 0px rgba(0, 44, 24, 0.3);
+	font-size: 12px; line-height: 26px; 
+	display: inline-block;
+}
+#Match .event div.con dl.line dd li p span i{
+	height: 26px; width: 36px;
+	color: #c52601; text-align: center;
+	display: inline-block;
+}
+
+/*特色数据*/
+#Character{
+	position: relative; z-index: 2;
+}
+#Character .strength{
+	padding: 40px 50px 25px; margin-bottom: 20px;
+	border-top: 2px solid #2b9968;
+	background: #fff;
+}
+#Character .strength:after{
+	display: block;
+	clear: both;
+	content: '';
+}
+#Character .strength .part{
+	width: 46.7%;
+	text-align: center;
+}
+#Character .strength .part.host{
+	float: left;
+}
+#Character .strength .part.away{
+	float: right;
+}
+#Character .strength p.name{
+	padding-bottom: 16px;
+	font-size: 18px; line-height: 18px;
+}
+#Character .strength p.name span{
+	padding: 0 10px;
+	font-size: 12px; color: #adadad;
+}
+#Character .strength p.item{
+	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+}
+#Character .strength ul{
+	margin-bottom: 10px;
+	background: #fafafa;
+}
+#Character .strength ul li{
+	height: 42px;
+	padding: 0 230px 0 20px;
+	font-size: 12px; line-height: 42px; text-align: left;
+	position: relative;
+	overflow: hidden;
+}
+#Character .strength ul li:nth-child(odd){
+	background: #f6f6f6;
+}
+#Character .strength ul li p.level{
+	height: 42px;
+	font-size: 12px; line-height: 42px; text-align: right;
+	position: absolute; right: 0; top: 0;
+}
+#Character .strength ul li p.level:after{
+	width: 62px; height: 42px;
+	text-align: center;
+	display: inline-block;
+}
+#Character .strength ul li p.level[level="5"]:after{
+	content: '非常强';
+}
+#Character .strength ul li p.level[level="4"]:after{
+	content: '很强';
+}
+#Character .strength ul li p.level[level="3"]:after{
+	content: '强';
+}
+#Character .strength ul li p.level[level="2"]:after{
+	color: #1661c7;
+	content: '弱';
+}
+#Character .strength ul li p.level[level="1"]:after{
+	color: #1661c7;
+	content: '很弱';
+}
+#Character .strength .part.host ul li p.level[level="5"]:after,
+#Character .strength .part.host ul li p.level[level="4"]:after,
+#Character .strength .part.host ul li p.level[level="3"]:after{
+	color: #2b9968;
+}
+#Character .strength .part.away ul li p.level[level="5"]:after,
+#Character .strength .part.away ul li p.level[level="4"]:after,
+#Character .strength .part.away ul li p.level[level="3"]:after{
+	color: #fabd36;
+}
+#Character .strength .part ul li p.level span{
+	width: 25px; height: 10px;
+	margin-right: 5px;
+	background: #adadad;
+	display: inline-block;
+}
+#Character .strength .part ul li p.level[level="1"] span[level="1"],
+#Character .strength .part ul li p.level[level="2"] span[level="1"],
+#Character .strength .part ul li p.level[level="2"] span[level="2"]{
+	background: #1661c7;
+}
+#Character .strength .part.host ul li p.level[level="3"] span[level="1"],
+#Character .strength .part.host ul li p.level[level="3"] span[level="2"],
+#Character .strength .part.host ul li p.level[level="3"] span[level="1"],
+#Character .strength .part.host ul li p.level[level="3"] span[level="2"],
+#Character .strength .part.host ul li p.level[level="3"] span[level="3"],
+#Character .strength .part.host ul li p.level[level="4"] span[level="1"],
+#Character .strength .part.host ul li p.level[level="4"] span[level="2"],
+#Character .strength .part.host ul li p.level[level="4"] span[level="3"],
+#Character .strength .part.host ul li p.level[level="4"] span[level="4"],
+#Character .strength .part.host ul li p.level[level="5"] span[level="1"],
+#Character .strength .part.host ul li p.level[level="5"] span[level="2"],
+#Character .strength .part.host ul li p.level[level="5"] span[level="3"],
+#Character .strength .part.host ul li p.level[level="5"] span[level="4"],
+#Character .strength .part.host ul li p.level[level="5"] span[level="5"]{
+	background: #2b9968;
+}
+#Character .strength .part.away ul li p.level[level="3"] span[level="1"],
+#Character .strength .part.away ul li p.level[level="3"] span[level="2"],
+#Character .strength .part.away ul li p.level[level="3"] span[level="1"],
+#Character .strength .part.away ul li p.level[level="3"] span[level="2"],
+#Character .strength .part.away ul li p.level[level="3"] span[level="3"],
+#Character .strength .part.away ul li p.level[level="4"] span[level="1"],
+#Character .strength .part.away ul li p.level[level="4"] span[level="2"],
+#Character .strength .part.away ul li p.level[level="4"] span[level="3"],
+#Character .strength .part.away ul li p.level[level="4"] span[level="4"],
+#Character .strength .part.away ul li p.level[level="5"] span[level="1"],
+#Character .strength .part.away ul li p.level[level="5"] span[level="2"],
+#Character .strength .part.away ul li p.level[level="5"] span[level="3"],
+#Character .strength .part.away ul li p.level[level="5"] span[level="4"],
+#Character .strength .part.away ul li p.level[level="5"] span[level="5"]{
+	background: #fabd36;
+}
+#Character .strength ul.style li{
+	padding: 0;
+	text-align: center;
+}
+
+/*场面预测*/
+#Character .prediction{
+	padding: 12px 0 20px; margin-bottom: 20px;
+	border-top: 2px solid #2b9968;
+	background: #fff;
+}
+#Character .prediction .title{
+	height: 30px;
+	padding-left: 20px;
+	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+}
+#Character .prediction table{
+	width: 600px;
+	margin: 0 auto;
+}
+#Character .prediction table th{
+	height: 30px;
+	font-size: 12px; line-height: 30px; color: #adadad;
+}
+#Character .prediction table th:first-child,
+#Character .prediction table td:first-child{
+	text-align: left;
+}
+#Character .prediction table td{
+	height: 30px;
+	padding-left: 20px;
+	background: #fafafa;
+	font-size: 12px; line-height: 30px; text-align: center;
+}
+#Character .prediction table tr:nth-child(even) td{
+	background: #f6f6f6;
+}
+#Character .prediction table td:after{
+	width: 80px; height: 12px;
+	line-height: 12px; color: #2b9968;
+	display: inline-block;
+}
+#Character .prediction table td[level="1"]:after{
+	content: '（可能）';
+}
+#Character .prediction table td[level="2"]:after{
+	content: '（很可能）';
+}
+#Character .prediction table td[level="3"]:after{
+	content: '（非常可能）';
+}
+#Character .prediction table td span{
+	width: 45px; height: 12px;
+	margin-right: 10px;
+	background: #adadad;
+	display: inline-block;
+}
+#Character .prediction table td[level="1"] span[level="1"],
+#Character .prediction table td[level="2"] span[level="1"],
+#Character .prediction table td[level="2"] span[level="2"],
+#Character .prediction table td[level="3"] span[level="1"],
+#Character .prediction table td[level="3"] span[level="2"],
+#Character .prediction table td[level="3"] span[level="3"]{
+	background: #2b9968;
+}
+
+/*裁判*/
+#Character .referee{
+	padding: 12px 0 20px; margin-bottom: 20px;
+	border-top: 2px solid #2b9968;
+	background: #fff;
+}
+#Character .referee .title{
+	height: 30px;
+	padding-left: 20px;
+	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+}
+#Character .referee table{
+	width: 700px;
+	margin: 0 auto;
+}
+#Character .referee table th{
+	height: 30px;
+	font-size: 12px; line-height: 30px; text-align: center; color: #adadad;
+}
+#Character .referee table td{
+	height: 30px;
+	background: #fafafa;
+	font-size: 12px; line-height: 30px; text-align: center;
+}
+#Character .referee table td:nth-child(even){
+	background: #f6f6f6;
+}
+
+/*裁判*/
+#Character .sameOdd{
+	padding-top: 12px; margin-bottom: 20px;
+	border-top: 2px solid #2b9968;
+	background: #fff;
+}
+#Character .sameOdd .title{
+	height: 30px;
+	padding-left: 20px;
+	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+}
+#Character .sameOdd .tabBox{
+	height: 28px; width: 240px;
+	margin: 10px auto 20px;
+	border-radius: 2px; border: 1px solid #2b9968;
+}
+#Character .sameOdd .tabBox button{
+	width: 80px; height: 28px;
+	background: #fff;
+	font-size: 14px; text-align: center; color: #2b9968;
+}
+#Character .sameOdd .tabBox button.on, #Character .sameOdd .tabBox button:hover{
+	background: #2b9968;
+	color: #fff;
+}
+#Character .sameOdd .con{
+	position: relative;
+}
+#Character .sameOdd .con p.result{
+	padding-bottom: 34px;
+	font-size: 14px; line-height: 14px; text-align: center;
+}
+#Character .sameOdd .con .num{
+	height: 28px;
+	text-align: right;
+	position: absolute; right: 56px; top: -14px;
+}
+#Character .sameOdd .con .num button{
+	height: 28px; width: 50px;
+	margin-left: 35px;
+	font-size: 14px; color: #adadad;
+}
+#Character .sameOdd .con .num button.on{
+	border-bottom: 2px solid #2b9968;
+	color: #2b9968;
+}
+#Character .sameOdd .con .num button:hover{
+	color: #2b9968;
+}
+#Character .sameOdd table{
+	width: 100%;
+}
+#Character .sameOdd table th{
+	height: 30px;
+	font-size: 12px; line-height: 20px; text-align: center; color: #adadad;
+}
+#Character .sameOdd table td{
+	height: 30px;
+	background: #fafafa;
+	font-size: 12px; line-height: 20px; text-align: center;
+}
+#Character .sameOdd table tr:nth-child(odd) td{
+	background: #f6f6f6;
+}
+#Character .sameOdd table td:hover{
+	background: #b6d5c8 !important;
+}
+#Character .sameOdd table tr:hover td,
+#Character .sameOdd table[choose="1"] td:nth-child(1),
+#Character .sameOdd table[choose="2"] td:nth-child(2),
+#Character .sameOdd table[choose="3"] td:nth-child(3),
+#Character .sameOdd table[choose="4"] td:nth-child(4),
+#Character .sameOdd table[choose="5"] td:nth-child(5),
+#Character .sameOdd table[choose="6"] td:nth-child(6),
+#Character .sameOdd table[choose="7"] td:nth-child(7),
+#Character .sameOdd table[choose="8"] td:nth-child(8),
+#Character .sameOdd table[choose="9"] td:nth-child(9),
+#Character .sameOdd table[choose="10"] td:nth-child(10),
+#Character .sameOdd table[choose="11"] td:nth-child(11),
+#Character .sameOdd table[choose="12"] td:nth-child(12){
+	background: #e0ece7;
+}
+#Character .sameOdd table td.green{
+	color: #2b9968;
+}
+#Character .sameOdd table td.blue{
+	color: #1661c7;
+}
+#Character .sameOdd table td.gray{
+	color: #adadad;
+}
+
+/*数据分析*/
+#Data{
+	position: relative; z-index: 2;
+}
+
+/*攻防能力*/
+#Data .attack{
+	padding: 12px 0 30px; margin-bottom: 20px;
+	border-top: 2px solid #2b9968;
+	background: #fff;
+}
+#Data .attack .title{
+	height: 30px;
+	padding-left: 20px;
+	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+}
+#Data .attack .tabBox{
+	height: 28px; width: 160px;
+	margin: 10px auto;
+	border-radius: 2px; border: 1px solid #2b9968;
+}
+#Data .attack .tabBox button{
+	width: 80px; height: 28px;
+	background: #fff;
+	font-size: 14px; text-align: center; color: #2b9968;
+}
+#Data .attack .tabBox button.on, #Data .attack .tabBox button:hover{
+	background: #2b9968;
+	color: #fff;
+}
+#Data .attack table{
+	width: 100%;
+}
+#Data .attack table th{
+	height: 38px;
+	font-size: 12px; line-height: 14px; text-align: center;
+	position: relative;
+}
+#Data .attack table tr:first-child th{
+	height: 32px;
+	font-size: 14px;
+}
+#Data .attack table tr + tr th{
+	color: #adadad;
+}
+#Data .attack table th.green:after{
+	height: 2px;
+	background: #2b9968;
+	position: absolute; bottom: 0; left: 0; right: 0;
+	content: '';
+}
+#Data .attack table th.yellow:after{
+	height: 2px;
+	background: #fabd36;
+	position: absolute; bottom: 0; left: 0; right: 0;
+	content: '';
+}
+#Data .attack table td{
+	height: 30px;
+	background: #fafafa;
+	font-size: 12px; line-height: 20px; text-align: center;
+}
+#Data .attack table td:first-child{
+	padding-left: 10px;
+	text-align: left;
+}
+#Data .attack table tr:nth-child(odd) td{
+	background: #f6f6f6;
+}
+
+/*指数*/
+#Data .odd{
+	padding: 12px 0 30px; margin-bottom: 20px;
+	border-top: 2px solid #2b9968;
+	background: #fff;
+}
+#Data .odd .title{
+	height: 30px;
+	padding-left: 20px;
+	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+}
+#Data .odd .abox{
+	height: 30px;
+	margin: 0 20px 15px 0; padding: 0 10px 0 20px;
+	border-radius: 2px 2px 2px 28px;
+	background: #f6f6f6;
+	text-align: center;
+	float: right;
+}
+#Data .odd .abox a{
+	width: 40px;
+	font-size: 12px; line-height: 30px; color: #2b9968;
+	display: inline-block;
+}
+#Data .odd .abox a:hover{
+	text-decoration: underline;
+}
+#Data .odd table{
+	width: 100%;
+}
+#Data .odd table th{
+	height: 30px;
+	font-size: 12px; line-height: 20px; text-align: center; color: #adadad;
+}
+#Data .odd table tr:first-child th{
+	height: 28px;
+	font-size: 14px; color: #666;
+}
+#Data .odd table td{
+	height: 30px;
+	background: #fafafa;
+	text-align: center;
+}
+#Data .odd table tr:nth-child(4n + 1) td,
+#Data .odd table tr:nth-child(4n + 1) + tr td{
+	background: #f6f6f6;
+}
+#Data .odd table td[rowspan]{
+	padding-left: 10px;
+	text-align: left; color: #c52601;
+}
+
+/*联赛排名*/
+#Data .league{
+	padding: 12px 20px 30px; margin-bottom: 20px;
+	border-top: 2px solid #2b9968;
+	background: #fff;
+}
+#Data .league:after{
+	display: block;
+	clear: both;
+	content: '';
+}
+#Data .league .title{
+	height: 30px;
+	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+}
+#Data .league .part{
+	width: 48.5%;
+	padding-top: 8px;
+	text-align: center;
+}
+#Data .league .part.host{
+	float: left;
+}
+#Data .league .part.away{
+	float: right;
+}
+#Data .league p.name{
+	padding-bottom: 16px;
+	font-size: 18px; line-height: 18px;
+}
+#Data .league p.name span{
+	padding: 0 10px;
+	font-size: 12px; color: #adadad;
+}
+#Data .league table{
+	width: 100%;
+}
+#Data .league table th{
+	height: 30px; width: 9.2%;
+	font-size: 12px; line-height: 20px; text-align: center; color: #adadad;
+}
+#Data .league table th:first-child{
+	width: 8%;
+}
+#Data .league table td{
+	height: 30px;
+	background: #fafafa;
+	font-size: 12px; line-height: 20px; text-align: center;
+}
+#Data .league table tr:nth-child(odd) td{
+	background: #f6f6f6;
+}
+#Data .league table td.gray{
+	color: #adadad;
+}
+
+/*对赛往绩*/
+#Data .battle{
+	padding-top: 12px; margin-bottom: 20px;
+	border-top: 2px solid #2b9968;
+	background: #fff;
+}
+#Data .battle .title{
+	height: 30px;
+	padding-left: 20px;
+	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+}
+#Data .battle .cbox{
+	height: 14px;
+	margin: 8px 0 36px;
+	line-height: 14px; text-align: center;
+	position: relative;
+}
+#Data .battle .cbox button[name=ha], #Data .battle .cbox button[name=ma]{
+	height: 14px;
+	padding-left: 22px;
+	background: #fff;
+	font-size: 12px; line-height: 14px; color: #adadad;
+	position: relative;
+}
+#Data .battle .cbox button[name=ha]:hover, #Data .battle .cbox button[name=ma]:hover{
+	color: #2b9968;
+}
+#Data .battle .cbox button[name=ha]{
+	margin-left: 40px;
+}
+#Data .battle .cbox button[name=ha]:before, #Data .battle .cbox button[name=ma]:before{
+	width: 12px; height: 12px;
+	border-radius: 2px; border: 1px solid #adadad;
+	position: absolute; left: 0; top: 0;
+	content: '';
+}
+#Data .battle .cbox button.on[name=ha]:before, #Data .battle .cbox button.on[name=ma]:before{
+	background: url(../img/icon_g_n.png) no-repeat center; background-size: 12px;
+}
+#Data .battle .cbox .num{
+	height: 28px;
+	text-align: right;
+	position: absolute; right: 43px; top: -14px;
+}
+#Data .battle .cbox .num button{
+	height: 28px; width: 50px;
+	margin-left: 35px;
+	font-size: 14px; color: #adadad;
+}
+#Data .battle .cbox .num button.on{
+	border-bottom: 2px solid #2b9968;
+	color: #2b9968;
+}
+#Data .battle .cbox .num button:hover{
+	color: #2b9968;
+}
+#Data .battle .con{
+	display: none;
+}
+#Data .battle[ha="0"][ma="0"] .con[ha="0"][ma="0"],
+#Data .battle[ha="1"][ma="0"] .con[ha="1"][ma="0"],
+#Data .battle[ha="0"][ma="1"] .con[ha="0"][ma="1"],
+#Data .battle[ha="1"][ma="1"] .con[ha="1"][ma="1"]{
+	display: block;
+}
+#Data .battle .con .canBox{
+	height: 80px;
+	padding: 5px 0 30px 50px;
+	text-align: center;
+}
+#Data .battle .con .canBox dl{
+	width: 125px;
+	padding: 6px 0 6px 65px; margin-left: 105px;
+	border-radius: 0px 40px 0px 0px;
+	background: #f6f6f6;
+	display: inline-block;
+	position: relative;
+}
+#Data .battle .con .canBox dl.europe{
+	margin-left: 0;
+}
+#Data .battle .con .canBox dl dd{
+	padding-left: 16px;
+	font-size: 12px; line-height: 20px; text-align: left;
+	position: relative;
+}
+#Data .battle .con .canBox dl dd:before{
+	width: 6px; height: 6px;
+	margin-top: -3px;
+	border-radius: 50%;
+	position: absolute; top: 50%; left: 0;
+	content: '';
+}
+#Data .battle .con .canBox dl dd.win{
+	color: #2b9968;
+}
+#Data .battle .con .canBox dl dd.draw{
+	color: #adadad;
+}
+#Data .battle .con .canBox dl dd.lose{
+	color: #1661c7;
+}
+#Data .battle .con .canBox dl.goal dd.lose{
+	color: #fabd36;
+}
+#Data .battle .con .canBox dl dd.win:before{
+	background: #2b9968;
+}
+#Data .battle .con .canBox dl dd.draw:before{
+	background: #adadad;
+}
+#Data .battle .con .canBox dl dd.lose:before{
+	background: #1661c7;
+}
+#Data .battle .con .canBox dl.goal dd.lose:before{
+	background: #fabd36;
+}
+#Data .battle .con .canBox dl dt{
+	width: 90px; height: 90px;
+	margin: -45px 0 0 -45px;
+	border-radius: 50%;
+	position: absolute; top: 50%; left: 0;
+	overflow: hidden;
+}
+#Data .battle .con .canBox dl dt canvas{
+	background: #dbdbdb;
+}
+#Data .battle table{
+	width: 100%;
+}
+#Data .battle table th{
+	height: 20px;
+	font-size: 12px; line-height: 18px; text-align: center; color: #adadad;
+}
+#Data .battle table th.green{
+	background: #2b9968;
+	color: #fff;
+}
+#Data .battle table th.yellow{
+	background: #fabd36;
+	color: #fff;
+}
+#Data .battle table th select{
+	padding: 0 16px;
+	border: none;
+	background: url(../img/icon_triangle_down.png) no-repeat right center #fff; background-size: 10px;
+	color: #adadad;
+}
+#Data .battle table td{
+	height: 30px;
+	background: #fafafa;
+	font-size: 12px; line-height: 14px; text-align: center;
+}
+#Data .battle table tr:nth-child(odd) td{
+	background: #f6f6f6;
+}
+#Data .battle table td:hover{
+	background: #b6d5c8 !important;
+}
+#Data .battle table tr:hover td,
+#Data .battle table[choose="1"] td:nth-child(1),
+#Data .battle table[choose="2"] td:nth-child(2),
+#Data .battle table[choose="3"] td:nth-child(3),
+#Data .battle table[choose="4"] td:nth-child(4),
+#Data .battle table[choose="5"] td:nth-child(5),
+#Data .battle table[choose="6"] td:nth-child(6),
+#Data .battle table[choose="7"] td:nth-child(7),
+#Data .battle table[choose="8"] td:nth-child(8),
+#Data .battle table[choose="9"] td:nth-child(9),
+#Data .battle table[choose="10"] td:nth-child(10),
+#Data .battle table[choose="11"] td:nth-child(11),
+#Data .battle table[choose="12"] td:nth-child(12),
+#Data .battle table[choose="13"] td:nth-child(13),
+#Data .battle table[choose="14"] td:nth-child(14),
+#Data .battle table[choose="15"] td:nth-child(15),
+#Data .battle table[choose="16"] td:nth-child(16),
+#Data .battle table[choose="17"] td:nth-child(17){
+	background: #e0ece7;
+}
+#Data .battle table td:first-child{
+	padding-left: 22px;
+	text-align: left;
+	position: relative;
+}
+#Data .battle table td p.line{
+	width: 4px; height: 20px;
+	margin-top: -10px;
+	border-radius: 2px;
+	position: absolute; top: 50%; left: 9px;
+}
+#Data .battle table td p.half{
+	color: #adadad;
+}
+#Data .battle table td.green, #Data .battle table td p.green{
+	color: #2b9968;
+}
+#Data .battle table td.gray, #Data .battle table td p.gray{
+	color: #adadad;
+}
+#Data .battle table td.blue, #Data .battle table td p.blue{
+	color: #1661c7;
+}
+#Data .battle table td p.yellow{
+	color: #fabd36;
+}
+
+/*最近战绩*/
+#Data .history{
+	padding-top: 12px; margin-bottom: 20px;
+	border-top: 2px solid #2b9968;
+	background: #fff;
+}
+#Data .history .title{
+	height: 30px;
+	padding-left: 20px;
+	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+}
+#Data .history .team{
+	height: 40px;
+	padding-bottom: 10px;
+	text-align: center;
+}
+#Data .history .team button{
+	min-width: 200px; height: 40px;
+	padding: 0 25px;
+	border-radius: 4px; border: 1px solid #2b9968;
+	font-size: 12px; text-align: center; color: #2b9968;
+}
+#Data .history .team button.away{
+	margin-left: 80px;
+}
+#Data .history .team button.on{
+	background: #2b9968;
+	color: #fff;
+}
+#Data .history .cbox{
+	height: 14px;
+	margin: 8px 0 36px;
+	line-height: 14px; text-align: center;
+	position: relative;
+}
+#Data .history .cbox button[name=ha], #Data .history .cbox button[name=ma]{
+	height: 14px;
+	padding-left: 22px;
+	background: #fff;
+	font-size: 12px; line-height: 14px; color: #adadad;
+	position: relative;
+}
+#Data .history .cbox button[name=ha]:hover, #Data .history .cbox button[name=ma]:hover{
+	color: #2b9968;
+}
+#Data .history .cbox button[name=ha]{
+	margin-left: 40px;
+}
+#Data .history .cbox button[name=ha]:before, #Data .history .cbox button[name=ma]:before{
+	width: 12px; height: 12px;
+	border-radius: 2px; border: 1px solid #adadad;
+	position: absolute; left: 0; top: 0;
+	content: '';
+}
+#Data .history .cbox button.on[name=ha]:before, #Data .history .cbox button.on[name=ma]:before{
+	background: url(../img/icon_g_n.png) no-repeat center; background-size: 12px;
+}
+#Data .history .cbox .num{
+	height: 28px;
+	text-align: right;
+	position: absolute; right: 43px; top: -14px;
+}
+#Data .history .cbox .num button{
+	height: 28px; width: 50px;
+	margin-left: 35px;
+	font-size: 14px; color: #adadad;
+}
+#Data .history .cbox .num button.on{
+	border-bottom: 2px solid #2b9968;
+	color: #2b9968;
+}
+#Data .history .cbox .num button:hover{
+	color: #2b9968;
+}
+#Data .history .con{
+	display: none;
+}
+#Data .history[ha="0"][ma="0"] .con[ha="0"][ma="0"],
+#Data .history[ha="1"][ma="0"] .con[ha="1"][ma="0"],
+#Data .history[ha="0"][ma="1"] .con[ha="0"][ma="1"],
+#Data .history[ha="1"][ma="1"] .con[ha="1"][ma="1"]{
+	display: block;
+}
+#Data .history .con .svgBox{
+	height: 120px;
+	padding: 5px 0 30px 50px;
+	text-align: center;
+}
+#Data .history .con .svgBox dl{
+	width: 232px; height: 118px;
+	margin-left: 70px; padding: 0 10px;
+	border-top: 1px dashed #dbdbdb; border-bottom: 1px dashed #dbdbdb;
+	font-size: 0; text-align: left;
+	display: inline-block;
+	position: relative;
+}
+#Data .history .con .svgBox dl.europe{
+	margin-left: 0;
+}
+#Data .history .con .svgBox dl:before{
+	border-top: 1px dashed #dbdbdb;
+	position: absolute; top: 50%; left: 0; right: 0;
+	content: '';
+}
+#Data .history .con .svgBox dl dt{
+	height: 12px; width: 50px;
+	margin-top: -6px; padding-right: 6px;
+	font-size: 12px; line-height: 12px; text-align: right;
+	position: absolute; right: 100%;
+}
+#Data .history .con .svgBox dl dt.win{
+	top: 0;
+}
+#Data .history .con .svgBox dl dt.draw{
+	top: 50%;
+}
+#Data .history .con .svgBox dl dt.lose{
+	top: 100%;
+}
+#Data .history .con .svgBox dl dd{
+	width: 6px; height: 126px;
+	margin-top: -4px;
+	display: inline-block;
+	position: relative;
+}
+#Data .history .con .svgBox[num="10"] dl dd + dd{
+	margin-left: 19px;
+}
+#Data .history .con .svgBox[num="5"] dl dd + dd{
+	margin-left: 50px;
+}
+#Data .history .con .svgBox[num="5"] dl dd:first-child + dd + dd + dd + dd ~ dd{
+	display: none;
+}
+#Data .history .con .svgBox dl dd:after{
+	width: 6px; height: 6px;
+	border-radius: 50%;
+	background: #2b9968;
+	position: absolute; left: 0; z-index: 2;
+}
+#Data .history .con .svgBox dl dd[result=win]:after{
+	top: 0;
+	content: '';
+}
+#Data .history .con .svgBox dl dd[result=draw]:after{
+	margin-top: -3px;
+	top: 50%;
+	content: '';
+}
+#Data .history .con .svgBox dl dd[result=lose]:after{
+	bottom: 0;
+	content: '';
+}
+#Data .history .con .svgBox svg{
+	height: 120px;
+	margin-top: -1px;
+	position: absolute; top: 0px; left: 13px;
+}
+#Data .history .con .svgBox[num="10"] svg{
+	width: 225px;
+}
+#Data .history .con .svgBox[num="5"] svg{
+	width: 224px;
+}
+#Data .history table{
+	width: 100%;
+}
+#Data .history table th{
+	height: 20px;
+	font-size: 12px; line-height: 18px; text-align: center; color: #adadad;
+}
+#Data .history table th.green{
+	background: #2b9968;
+	color: #fff;
+}
+#Data .history table th.yellow{
+	background: #fabd36;
+	color: #fff;
+}
+#Data .history table th select{
+	padding: 0 16px;
+	border: none;
+	background: url(../img/icon_triangle_down.png) no-repeat right center #fff; background-size: 10px;
+	color: #adadad;
+}
+#Data .history table td{
+	height: 30px;
+	background: #fafafa;
+	font-size: 12px; line-height: 14px; text-align: center;
+}
+#Data .history table tr:nth-child(odd) td{
+	background: #f6f6f6;
+}
+#Data .history table td:hover{
+	background: #b6d5c8 !important;
+}
+#Data .history table tr:hover td,
+#Data .history table[choose="1"] td:nth-child(1),
+#Data .history table[choose="2"] td:nth-child(2),
+#Data .history table[choose="3"] td:nth-child(3),
+#Data .history table[choose="4"] td:nth-child(4),
+#Data .history table[choose="5"] td:nth-child(5),
+#Data .history table[choose="6"] td:nth-child(6),
+#Data .history table[choose="7"] td:nth-child(7),
+#Data .history table[choose="8"] td:nth-child(8),
+#Data .history table[choose="9"] td:nth-child(9),
+#Data .history table[choose="10"] td:nth-child(10),
+#Data .history table[choose="11"] td:nth-child(11),
+#Data .history table[choose="12"] td:nth-child(12),
+#Data .history table[choose="13"] td:nth-child(13),
+#Data .history table[choose="14"] td:nth-child(14),
+#Data .history table[choose="15"] td:nth-child(15),
+#Data .history table[choose="16"] td:nth-child(16),
+#Data .history table[choose="17"] td:nth-child(17){
+	background: #e0ece7;
+}
+#Data .history table td:first-child{
+	padding-left: 22px;
+	text-align: left;
+	position: relative;
+}
+#Data .history table td p.line{
+	width: 4px; height: 20px;
+	margin-top: -10px;
+	border-radius: 2px;
+	position: absolute; top: 50%; left: 9px;
+}
+#Data .history table td p.half{
+	color: #adadad;
+}
+#Data .history table td.green, #Data .history table td p.green{
+	color: #2b9968;
+}
+#Data .history table td.gray, #Data .history table td p.gray{
+	color: #adadad;
+}
+#Data .history table td.blue, #Data .history table td p.blue{
+	color: #1661c7;
+}
+#Data .history table td p.yellow{
+	color: #fabd36;
+}
+
+/*赛事盘路*/
+#Data .trend{
+	padding: 12px 20px 30px; margin-bottom: 20px;
+	border-top: 2px solid #2b9968;
+	background: #fff;
+}
+#Data .trend:after{
+	display: block;
+	clear: both;
+	content: '';
+}
+#Data .trend .title{
+	height: 30px;
+	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+}
+#Data .trend .part{
+	width: 48.5%;
+	padding-top: 8px;
+	text-align: center;
+}
+#Data .trend .part.host{
+	float: left;
+}
+#Data .trend .part.away{
+	float: right;
+}
+#Data .trend p.name{
+	padding-bottom: 16px;
+	font-size: 18px; line-height: 18px;
+}
+#Data .trend p.name span{
+	padding: 0 10px;
+	font-size: 12px; color: #adadad;
+}
+#Data .trend table{
+	width: 100%;
+}
+#Data .trend table th{
+	height: 30px; width: 9.2%;
+	font-size: 12px; line-height: 20px; text-align: center; color: #adadad;
+}
+#Data .trend table th:first-child{
+	width: 8%;
+}
+#Data .trend table td{
+	height: 30px;
+	background: #fafafa;
+	font-size: 12px; line-height: 20px; text-align: center;
+}
+#Data .trend table tr:nth-child(odd) td{
+	background: #f6f6f6;
+}
+
+/*未来赛程*/
+#Data .future{
+	padding: 12px 20px 30px; margin-bottom: 20px;
+	border-top: 2px solid #2b9968;
+	background: #fff;
+}
+#Data .future:after{
+	display: block;
+	clear: both;
+	content: '';
+}
+#Data .future .title{
+	height: 30px;
+	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+}
+#Data .future .part{
+	width: 48.5%;
+	padding-top: 8px;
+	text-align: center;
+}
+#Data .future .part.host{
+	float: left;
+}
+#Data .future .part.away{
+	float: right;
+}
+#Data .future p.name{
+	padding-bottom: 16px;
+	font-size: 18px; line-height: 18px;
+}
+#Data .future p.name span{
+	padding: 0 10px;
+	font-size: 12px; color: #adadad;
+}
+#Data .future table{
+	width: 100%;
+}
+#Data .future table th{
+	height: 30px; width: 9.2%;
+	font-size: 12px; line-height: 20px; text-align: center; color: #adadad;
+}
+#Data .future table th:first-child{
+	width: 8%;
+}
+#Data .future table td{
+	height: 30px;
+	background: #fafafa;
+	font-size: 12px; line-height: 20px; text-align: center;
+}
+#Data .future table tr:nth-child(odd) td{
+	background: #f6f6f6;
+}
+#Data .future table td:first-child{
+	padding-left: 22px;
+	text-align: left;
+	position: relative;
+}
+#Data .future table td p.line{
+	width: 4px; height: 20px;
+	margin-top: -10px;
+	border-radius: 2px;
+	position: absolute; top: 50%; left: 9px;
+}
+#Data .future table td.green{
+	color: #2b9968;
+}
+
+/*角球数据*/
+#Corner{
+	position: relative; z-index: 2;
+}
+
+/*角球指数*/
+#Corner .odd{
+	padding: 12px 0 30px; margin-bottom: 20px;
+	border-top: 2px solid #2b9968;
+	background: #fff;
+}
+#Corner .odd .title{
+	height: 30px;
+	padding: 0 0 20px 20px;
+	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+}
+#Corner .odd table{
+	width: 840px;
+	margin: 0 auto;
+}
+#Corner .odd table th{
+	height: 30px;
+	font-size: 12px; line-height: 20px; text-align: center; color: #adadad;
+}
+#Corner .odd table td{
+	height: 30px;
+	background: #fafafa;
+	font-size: 12px; line-height: 20px; text-align: center;
+}
+#Corner .odd table tr:nth-child(even) td{
+	background: #f6f6f6;
+}
+
+/*数据统计*/
+#Corner .data{
+	padding: 12px 50px 30px; margin-bottom: 20px;
+	border-top: 2px solid #2b9968;
+	background: #fff;
+}
+#Corner .data .title{
+	height: 30px;
+	padding-bottom: 20px; margin-left: -30px;
+	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+}
+#Corner .data .tabBox{
+	height: 28px; width: 160px;
+	margin: 10px auto 28px;
+	border-radius: 2px; border: 1px solid #2b9968;
+}
+#Corner .data .tabBox button{
+	width: 80px; height: 28px;
+	background: #fff;
+	font-size: 14px; text-align: center; color: #2b9968;
+}
+#Corner .data .tabBox button.on, #Data .attack .tabBox button:hover{
+	background: #2b9968;
+	color: #fff;
+}
+#Corner .data table{
+	width: 100%;
+}
+#Corner .data table th{
+	height: 30px;
+	font-size: 12px; line-height: 20px; text-align: center; color: #adadad;
+}
+#Corner .data table th:first-child{
+	width: 24%;
+}
+#Corner .data table td{
+	height: 30px;
+	background: #fafafa;
+	font-size: 12px; line-height: 20px; text-align: center;
+}
+#Corner .data table tr:nth-child(even) td{
+	background: #f6f6f6;
+}
+
+/*对赛往绩*/
+#Corner .battle{
+	padding: 12px 50px 30px; margin-bottom: 20px;
+	border-top: 2px solid #2b9968;
+	background: #fff;
+}
+#Corner .battle .title{
+	height: 30px;
+	padding-bottom: 20px; margin-left: -30px;
+	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+}
+#Corner .battle .cbox{
+	height: 14px;
+	margin: 8px 0 20px;
+	line-height: 14px; text-align: center;
+	position: relative;
+}
+#Corner .battle .cbox button[name=ha], #Corner .battle .cbox button[name=ma]{
+	height: 14px;
+	padding-left: 22px;
+	background: #fff;
+	font-size: 12px; line-height: 14px; color: #adadad;
+	position: relative;
+}
+#Corner .battle .cbox button[name=ha]:hover, #Corner .battle .cbox button[name=ma]:hover{
+	color: #2b9968;
+}
+#Corner .battle .cbox button[name=ha]{
+	margin-left: 40px;
+}
+#Corner .battle .cbox button[name=ha]:before, #Corner .battle .cbox button[name=ma]:before{
+	width: 12px; height: 12px;
+	border-radius: 2px; border: 1px solid #adadad;
+	position: absolute; left: 0; top: 0;
+	content: '';
+}
+#Corner .battle .cbox button.on[name=ha]:before, #Corner .battle .cbox button.on[name=ma]:before{
+	background: url(../img/icon_g_n.png) no-repeat center; background-size: 12px;
+}
+#Corner .battle .cbox .num{
+	height: 28px;
+	margin-right: -50px;
+	text-align: right;
+	position: absolute; right: 43px; top: -14px;
+}
+#Corner .battle .cbox .num button{
+	height: 28px; width: 50px;
+	margin-left: 35px;
+	font-size: 14px; color: #adadad;
+}
+#Corner .battle .cbox .num button.on{
+	border-bottom: 2px solid #2b9968;
+	color: #2b9968;
+}
+#Corner .battle .cbox .num button:hover{
+	color: #2b9968;
+}
+#Corner .battle .con{
+	display: none;
+}
+#Corner .battle[ha="0"][ma="0"] .con[ha="0"][ma="0"],
+#Corner .battle[ha="1"][ma="0"] .con[ha="1"][ma="0"],
+#Corner .battle[ha="0"][ma="1"] .con[ha="0"][ma="1"],
+#Corner .battle[ha="1"][ma="1"] .con[ha="1"][ma="1"]{
+	display: block;
+}
+#Corner .battle .con dl{
+	width: 360px;
+	margin: 0 auto 20px; padding-top: 18px;
+	position: relative;
+}
+#Corner .battle .con dl dt{
+	width: 100px;
+	font-size: 12px; line-height: 18px;
+	position: absolute; top: 0;
+}
+#Corner .battle .con dl dt.win{
+	text-align: left;
+	left: 5px;
+}
+#Corner .battle .con dl dt.draw{
+	margin-left: -50px;
+	text-align: center;
+	left: 50%;
+}
+#Corner .battle .con dl dt.lose{
+	text-align: right;
+	right: 5px;
+}
+#Corner .battle .con dl dd{
+	height: 6px;
+	border-radius: 3px;
+	background: #f6f6f6;
+	font-size: 0px;
+	overflow: hidden;
+}
+#Corner .battle .con dl dd p{
+	height: 6px;
+	display: inline-block;
+}
+#Corner .battle .con dl dd p.win{
+	background: #2b9968;
+}
+#Corner .battle .con dl dd p.draw{
+	background: #dbdbdb;
+}
+#Corner .battle .con dl dd p.lose{
+	background: #fabd36;
+}
+#Corner .battle table{
+	width: 100%;
+}
+#Corner .battle table th{
+	height: 24px;
+	font-size: 12px; line-height: 18px; text-align: center; color: #adadad;
+}
+#Corner .battle table td{
+	height: 30px;
+	background: #fafafa;
+	font-size: 12px; line-height: 14px; text-align: center;
+}
+#Corner .battle table tr:nth-child(odd) td{
+	background: #f6f6f6;
+}
+#Corner .battle table td:first-child{
+	padding-left: 22px;
+	text-align: left;
+	position: relative;
+}
+#Corner .battle table td p.line{
+	width: 4px; height: 20px;
+	margin-top: -10px;
+	border-radius: 2px;
+	position: absolute; top: 50%; left: 9px;
+}
+#Corner .battle table td span.half{
+	color: #adadad;
+}
+#Corner .battle table td.green{
+	color: #2b9968;
+}
+#Corner .battle table td.gray{
+	color: #adadad;
+}
+#Corner .battle table td.yellow{
+	color: #fabd36;
+}
+
+/*对赛往绩*/
+#Corner .history{
+	padding: 12px 50px 30px; margin-bottom: 20px;
+	border-top: 2px solid #2b9968;
+	background: #fff;
+}
+#Corner .history .title{
+	height: 30px;
+	padding-bottom: 20px; margin-left: -30px;
+	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+}
+#Corner .history .team{
+	height: 40px;
+	padding-bottom: 10px;
+	text-align: center;
+}
+#Corner .history .team button{
+	min-width: 200px; height: 40px;
+	padding: 0 25px;
+	border-radius: 4px; border: 1px solid #2b9968;
+	font-size: 12px; text-align: center; color: #2b9968;
+}
+#Corner .history .team button.away{
+	margin-left: 80px;
+}
+#Corner .history .team button.on{
+	background: #2b9968;
+	color: #fff;
+}
+#Corner .history .cbox{
+	height: 14px;
+	margin: 8px 0 20px;
+	line-height: 14px; text-align: center;
+	position: relative;
+}
+#Corner .history .cbox button[name=ha], #Corner .history .cbox button[name=ma]{
+	height: 14px;
+	padding-left: 22px;
+	background: #fff;
+	font-size: 12px; line-height: 14px; color: #adadad;
+	position: relative;
+}
+#Corner .history .cbox button[name=ha]:hover, #Corner .history .cbox button[name=ma]:hover{
+	color: #2b9968;
+}
+#Corner .history .cbox button[name=ha]{
+	margin-left: 40px;
+}
+#Corner .history .cbox button[name=ha]:before, #Corner .history .cbox button[name=ma]:before{
+	width: 12px; height: 12px;
+	border-radius: 2px; border: 1px solid #adadad;
+	position: absolute; left: 0; top: 0;
+	content: '';
+}
+#Corner .history .cbox button.on[name=ha]:before, #Corner .history .cbox button.on[name=ma]:before{
+	background: url(../img/icon_g_n.png) no-repeat center; background-size: 12px;
+}
+#Corner .history .cbox .num{
+	height: 28px;
+	margin-right: -50px;
+	text-align: right;
+	position: absolute; right: 43px; top: -14px;
+}
+#Corner .history .cbox .num button{
+	height: 28px; width: 50px;
+	margin-left: 35px;
+	font-size: 14px; color: #adadad;
+}
+#Corner .history .cbox .num button.on{
+	border-bottom: 2px solid #2b9968;
+	color: #2b9968;
+}
+#Corner .history .cbox .num button:hover{
+	color: #2b9968;
+}
+#Corner .history .con{
+	display: none;
+}
+#Corner .history[ha="0"][ma="0"] .con[ha="0"][ma="0"],
+#Corner .history[ha="1"][ma="0"] .con[ha="1"][ma="0"],
+#Corner .history[ha="0"][ma="1"] .con[ha="0"][ma="1"],
+#Corner .history[ha="1"][ma="1"] .con[ha="1"][ma="1"]{
+	display: block;
+}
+#Corner .history .con dl{
+	width: 360px;
+	margin: 0 auto 20px; padding-top: 18px;
+	position: relative;
+}
+#Corner .history .con dl dt{
+	width: 100px;
+	font-size: 12px; line-height: 18px;
+	position: absolute; top: 0;
+}
+#Corner .history .con dl dt.win{
+	text-align: left;
+	left: 5px;
+}
+#Corner .history .con dl dt.draw{
+	margin-left: -50px;
+	text-align: center;
+	left: 50%;
+}
+#Corner .history .con dl dt.lose{
+	text-align: right;
+	right: 5px;
+}
+#Corner .history .con dl dd{
+	height: 6px;
+	border-radius: 3px;
+	background: #f6f6f6;
+	font-size: 0px;
+	overflow: hidden;
+}
+#Corner .history .con dl dd p{
+	height: 6px;
+	display: inline-block;
+}
+#Corner .history .con dl dd p.win{
+	background: #2b9968;
+}
+#Corner .history .con dl dd p.draw{
+	background: #dbdbdb;
+}
+#Corner .history .con dl dd p.lose{
+	background: #fabd36;
+}
+#Corner .history table{
+	width: 100%;
+}
+#Corner .history table th{
+	height: 24px;
+	font-size: 12px; line-height: 18px; text-align: center; color: #adadad;
+}
+#Corner .history table td{
+	height: 30px;
+	background: #fafafa;
+	font-size: 12px; line-height: 14px; text-align: center;
+}
+#Corner .history table tr:nth-child(odd) td{
+	background: #f6f6f6;
+}
+#Corner .history table td:first-child{
+	padding-left: 22px;
+	text-align: left;
+	position: relative;
+}
+#Corner .history table td p.line{
+	width: 4px; height: 20px;
+	margin-top: -10px;
+	border-radius: 2px;
+	position: absolute; top: 50%; left: 9px;
+}
+#Corner .history table td span.half{
+	color: #adadad;
+}
+#Corner .history table td.green{
+	color: #2b9968;
+}
+#Corner .history table td.gray{
+	color: #adadad;
+}
+#Corner .history table td.yellow{
+	color: #fabd36;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

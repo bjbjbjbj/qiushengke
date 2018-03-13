@@ -1,4 +1,8 @@
 @extends('pc.layout.league_base')
+@section('league_link')
+    @component('pc.cell.top_leagues',['links'=>$footLeagues])
+    @endcomponent
+    @endsection
 @section('league_content')
     <?php
     $lis = '';

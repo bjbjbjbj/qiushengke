@@ -32,6 +32,9 @@ Route::group(['namespace'=>'Match'], function () {
     Route::get("/match/basket/immediate_{order}.html", "MatchController@immediate_bk"); //今天
     Route::get("/match/basket/result_{dateStr}_{order}.html", "MatchController@result_bk"); //完赛比分
     Route::get("/match/basket/schedule_{dateStr}_{order}.html", "MatchController@schedule_bk"); //下日赛程
+
+    //比赛终端
+    Route::get("/match/foot/match_detail_{mid}.html", "MatchDetailController@matchDetail"); //今天
 });
 
 Route::group(['namespace'=>'League'], function () {

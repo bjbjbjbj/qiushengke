@@ -299,6 +299,7 @@
 	width: 12px; height: 12px;
 	margin-right: 13px;
 	border: 1px solid #666; border-radius: 50%;
+	position: relative;
 }
 #Con table button.choose[value='1'], #Con table p.live button.choose{
 	border-color: #2b9968;

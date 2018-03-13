@@ -1,0 +1,25 @@
+﻿
+body{padding: 0;}
+
+#Con{
+	min-width: auto; max-width: none;
+	margin: 0; padding: 0;
+	background: url(../img/phone_bg.jpg) no-repeat center top; background-size: cover;
+	position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+}
+#Bottom{
+	background: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+

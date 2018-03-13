@@ -1,4 +1,4 @@
-@extends('pc.layout.league_base')
+@extends('pc.layout.league_base_bk')
 @section('league_js')
     <script type="text/javascript">
         function changeDate(input) {

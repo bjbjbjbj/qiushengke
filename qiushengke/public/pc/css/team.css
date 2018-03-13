@@ -348,7 +348,7 @@ body{
 	width: 98px; height: 18px;
 	margin-top: 10px; padding: 0 2%;
 	border-radius: 2px; border: 1px solid #2b9968;
-	background: #f6f6f6;
+	background: url(../img/icon_updown.png) no-repeat right center #f6f6f6; background-size: 20px;
 	font-size: 12px; line-height: 18px; text-align: center; color: #adadad;
 	float: right;
 }

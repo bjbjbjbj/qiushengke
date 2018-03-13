@@ -677,6 +677,12 @@ table.match td img{
 	overflow: hidden;
 	position: relative;
 }
+#Info.football div.con{
+	background: url(../img/image_football.png) no-repeat left top #fff;
+}
+#Info.basketball div.con{
+	background: url(../img/image_basketball.png) no-repeat left top #fff;
+}
 #Info.open div.con{
 	max-height: none;
 }
