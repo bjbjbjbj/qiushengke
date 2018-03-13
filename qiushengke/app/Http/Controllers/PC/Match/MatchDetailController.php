@@ -64,6 +64,15 @@ class MatchDetailController extends BaseController{
         $lineup = json_decode($lineup,true);
         $result['lineup'] = $lineup;
 
+        $url = 'http://match.liaogou168.com/static/terminal/1/'.$first.'/'.$second.'/'.$mid.'/analyse.json';
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 20);//5秒超时
+        $analyse = curl_exec ($ch);
+        curl_close ($ch);
+        $analyse = json_decode($analyse,true);
+        $result['analyse'] = $analyse;
 
         dump($result);
 

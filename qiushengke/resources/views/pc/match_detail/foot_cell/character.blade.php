@@ -1,657 +1,122 @@
+<?php
+$ws = $analyse['ws'];
+$rank = $analyse['rank'];
+$sameOdd = $analyse['sameOdd'];
+?>
 <div id="Character" style="display: none;">
-    <div class="strength">
-        <div class="part host">
-            <p class="name">休斯顿迪纳摩<span>[美职业4]</span></p>
-            <p class="item">强/弱项：</p>
-            <ul>
-                <li>
-                    边路进攻（两翼）
-                    <p class="level" level="5">
-                        <span level="1"></span><span level="2"></span><span level="3"></span><span level="4"></span><span level="5"></span>
-                    </p>
-                </li>
-                <li>
-                    边路进攻（两翼）
-                    <p class="level" level="4">
-                        <span level="1"></span><span level="2"></span><span level="3"></span><span level="4"></span><span level="5"></span>
-                    </p>
-                </li>
-                <li>
-                    边路进攻（两翼）
-                    <p class="level" level="3">
-                        <span level="1"></span><span level="2"></span><span level="3"></span><span level="4"></span><span level="5"></span>
-                    </p>
-                </li>
-                <li>
-                    边路进攻（两翼）
-                    <p class="level" level="2">
-                        <span level="1"></span><span level="2"></span><span level="3"></span><span level="4"></span><span level="5"></span>
-                    </p>
-                </li>
-                <li>
-                    边路进攻（两翼）
-                    <p class="level" level="1">
-                        <span level="1"></span><span level="2"></span><span level="3"></span><span level="4"></span><span level="5"></span>
-                    </p>
-                </li>
-            </ul>
-            <p class="item">球队风格：</p>
-            <ul class="style">
-                <li>利用球场宽度</li>
-                <li>利用球场宽度</li>
-            </ul>
+    @if(isset($ws) && (isset($ws['home']) || isset($ws['away'])))
+        <div class="strength">
+            <?php
+            //强弱项总行数
+            $items = $ws['home'];
+            $strengthCount = isset($items['strengths']) ? count($items['strengths']) : 0;
+            $weaknessCount = isset($items['weaknesses']) ? count($items['weaknesses']) : 0;
+            $stylesCount = isset($items['styles']) ? count($items['styles']) : 0;
+            $items2 = $ws['away'];
+            $strengthCount2 = isset($items2['strengths']) ? count($items2['strengths']) : 0;
+            $weaknessCount2 = isset($items2['weaknesses']) ? count($items2['weaknesses']) : 0;
+            $stylesCount2 = isset($items2['styles']) ? count($items2['styles']) : 0;
+            $scount = max($stylesCount2,$stylesCount);
+            $count = max($strengthCount + $weaknessCount,$strengthCount2 + $weaknessCount2);
+            ?>
+            @component('pc.match_detail.foot_cell.character_item',['scount'=>$scount,'count'=>$count,'items'=>$ws['home'],'key'=>'host','tname'=>$match['hname'],'rank'=>$rank['leagueRank']['hLeagueRank'],'rankLeague'=>$rank['leagueRank']['hLeagueName']])
+            @endcomponent
+            @component('pc.match_detail.foot_cell.character_item',['scount'=>$scount,'count'=>$count,'items'=>$ws['away'],'key'=>'away','tname'=>$match['hname'],'rank'=>$rank['leagueRank']['hLeagueRank'],'rankLeague'=>$rank['leagueRank']['hLeagueName']])
+            @endcomponent
         </div>
-        <div class="part away">
-            <p class="name">休斯顿迪纳摩<span>[美职业4]</span></p>
-            <p class="item">强/弱项：</p>
-            <ul>
-                <li>
-                    边路进攻（两翼）
-                    <p class="level" level="5">
-                        <span level="1"></span><span level="2"></span><span level="3"></span><span level="4"></span><span level="5"></span>
-                    </p>
-                </li>
-                <li>
-                    边路进攻（两翼）
-                    <p class="level" level="4">
-                        <span level="1"></span><span level="2"></span><span level="3"></span><span level="4"></span><span level="5"></span>
-                    </p>
-                </li>
-                <li>
-                    边路进攻（两翼）
-                    <p class="level" level="3">
-                        <span level="1"></span><span level="2"></span><span level="3"></span><span level="4"></span><span level="5"></span>
-                    </p>
-                </li>
-                <li>
-                    边路进攻（两翼）
-                    <p class="level" level="2">
-                        <span level="1"></span><span level="2"></span><span level="3"></span><span level="4"></span><span level="5"></span>
-                    </p>
-                </li>
-                <li>
-                    边路进攻（两翼）
-                    <p class="level" level="1">
-                        <span level="1"></span><span level="2"></span><span level="3"></span><span level="4"></span><span level="5"></span>
-                    </p>
-                </li>
-            </ul>
-            <p class="item">球队风格：</p>
-            <ul class="style">
-                <li>利用球场宽度</li>
-                <li>利用球场宽度</li>
-            </ul>
-        </div>
-    </div>
-    <div class="prediction">
-        <p class="title">场面预测</p>
-        <table>
-            <tr>
-                <th>预测项</th>
-                <th>可能性</th>
-            </tr>
-            <tr>
-                <td>水晶宫通过定位球得分</td>
-                <td level="1"><span level="1"></span><span level="2"></span><span level="3"></span></td>
-            </tr>
-            <tr>
-                <td>水晶宫通过定位球得分</td>
-                <td level="2"><span level="1"></span><span level="2"></span><span level="3"></span></td>
-            </tr>
-            <tr>
-                <td>水晶宫通过定位球得分</td>
-                <td level="3"><span level="1"></span><span level="2"></span><span level="3"></span></td>
-            </tr>
-        </table>
-    </div>
-    <div class="referee">
-        <p class="title">裁判</p>
-        <table>
-            <tr>
-                <th>姓名</th>
-                <th>休斯顿迪纳摩</th>
-                <th>西雅图音速</th>
-                <th>近10场执法赛事</th>
-                <th>近10场均出示黄牌</th>
-            </tr>
-            <tr>
-                <td>阿曼多·比拉瑞尔</td>
-                <td>3胜1平1负</td>
-                <td>3胜1平1负</td>
-                <td>上盘率70%</td>
-                <td>2.9张</td>
-            </tr>
-        </table>
-    </div>
-    <div class="sameOdd">
-        <p class="title">历史同赔</p>
-        <div class="tabBox">
-            <button class="on" value="asia">亚盘</button><button value="goal">大小</button><button value="europe">欧盘</button>
-        </div>
-        <div class="con asia">
-            <p class="result" num="10">主赢：50%&nbsp;&nbsp;走水：0%&nbsp;&nbsp;主输：0%</p>
-            <p class="result" num="5" style="display: none;">主赢：50%&nbsp;&nbsp;走水：0%&nbsp;&nbsp;主输：0%</p>
-            <p class="num"><button class="on" value="10">近10场</button><button value="5">近5场</button></p>
+    @endif
+    @if(isset($ws) && isset($ws['case']))
+        <div class="prediction">
+            <p class="title">场面预测</p>
             <table>
-                <colgroup>
-                    <col num="1" width="12%">
-                    <col num="2" width="9.4%">
-                    <col num="3" width="">
-                    <col num="4" width="8%">
-                    <col num="5" width="">
-                    <col num="6" width="60px">
-                    <col num="7" width="8.5%">
-                    <col num="8" width="60px">
-                    <col num="9" width="60px">
-                    <col num="10" width="8.5%">
-                    <col num="11" width="60px">
-                    <col num="12" width="50px">
-                </colgroup>
-                <thead>
                 <tr>
-                    <th>赛事</th>
-                    <th>日期</th>
-                    <th>主队</th>
-                    <th>比分（半场）</th>
-                    <th>客队</th>
-                    <th colspan="3">初盘</th>
-                    <th colspan="3">终盘</th>
-                    <th>结果</th>
+                    <th>预测项</th>
+                    <th>可能性</th>
                 </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>0.99</td>
-                    <td>让一球/球半</td>
-                    <td>0.81</td>
-                    <td>0.99</td>
-                    <td>让一球/球半</td>
-                    <td>0.81</td>
-                    <td class="green">赢</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>0.99</td>
-                    <td>让一球/球半</td>
-                    <td>0.81</td>
-                    <td>0.99</td>
-                    <td>让一球/球半</td>
-                    <td>0.81</td>
-                    <td class="blue">输</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>0.99</td>
-                    <td>让一球/球半</td>
-                    <td>0.81</td>
-                    <td>0.99</td>
-                    <td>让一球/球半</td>
-                    <td>0.81</td>
-                    <td class="green">赢</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>0.99</td>
-                    <td>让一球/球半</td>
-                    <td>0.81</td>
-                    <td>0.99</td>
-                    <td>让一球/球半</td>
-                    <td>0.81</td>
-                    <td class="green">赢</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>0.99</td>
-                    <td>让一球/球半</td>
-                    <td>0.81</td>
-                    <td>0.99</td>
-                    <td>让一球/球半</td>
-                    <td>0.81</td>
-                    <td class="gray">走</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>0.99</td>
-                    <td>让一球/球半</td>
-                    <td>0.81</td>
-                    <td>0.99</td>
-                    <td>让一球/球半</td>
-                    <td>0.81</td>
-                    <td class="green">赢</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>0.99</td>
-                    <td>让一球/球半</td>
-                    <td>0.81</td>
-                    <td>0.99</td>
-                    <td>让一球/球半</td>
-                    <td>0.81</td>
-                    <td class="green">赢</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>0.99</td>
-                    <td>让一球/球半</td>
-                    <td>0.81</td>
-                    <td>0.99</td>
-                    <td>让一球/球半</td>
-                    <td>0.81</td>
-                    <td class="green">赢</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>0.99</td>
-                    <td>让一球/球半</td>
-                    <td>0.81</td>
-                    <td>0.99</td>
-                    <td>让一球/球半</td>
-                    <td>0.81</td>
-                    <td class="green">赢</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>0.99</td>
-                    <td>让一球/球半</td>
-                    <td>0.81</td>
-                    <td>0.99</td>
-                    <td>让一球/球半</td>
-                    <td>0.81</td>
-                    <td class="green">赢</td>
-                </tr>
-                </tbody>
+                @foreach($ws['case'] as $item)
+                    <tr>
+                        <td>{{$item['sentence']}}</td>
+                        @if(3 <= $item['score'])
+                            <td level="3">
+                        @elseif(2 == $item['score'])
+                            <td level="2">
+                        @elseif(1 >= $item['score'])
+                            <td level="1">
+                                @endif
+                                <span level="1"></span><span level="2"></span><span level="3"></span>
+                            </td>
+                    </tr>
+                @endforeach
             </table>
         </div>
-        <div class="con goal" style="display: none;">
-            <p class="result" num="10">大球：50%&nbsp;&nbsp;走水：0%&nbsp;&nbsp;小球：0%</p>
-            <p class="result" num="5" style="display: none;">大球：50%&nbsp;&nbsp;走水：0%&nbsp;&nbsp;小球：0%</p>
-            <p class="num"><button class="on" value="10">近10场</button><button value="5">近5场</button></p>
+    @endif
+    @if(isset($analyse['referee']))
+        <?php
+        $referee = $analyse['referee'];
+        ?>
+        <div class="referee">
+            <p class="title">裁判</p>
             <table>
-                <colgroup>
-                    <col num="1" width="12%">
-                    <col num="2" width="9.4%">
-                    <col num="3" width="">
-                    <col num="4" width="8%">
-                    <col num="5" width="">
-                    <col num="6" width="60px">
-                    <col num="7" width="8.5%">
-                    <col num="8" width="60px">
-                    <col num="9" width="60px">
-                    <col num="10" width="8.5%">
-                    <col num="11" width="60px">
-                    <col num="12" width="50px">
-                </colgroup>
-                <thead>
                 <tr>
-                    <th>赛事</th>
-                    <th>日期</th>
-                    <th>主队</th>
-                    <th>比分（半场）</th>
-                    <th>客队</th>
-                    <th colspan="3">初盘</th>
-                    <th colspan="3">终盘</th>
-                    <th>结果</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>0.99</td>
-                    <td>2.5</td>
-                    <td>0.81</td>
-                    <td>0.99</td>
-                    <td>2.5</td>
-                    <td>0.81</td>
-                    <td class="green">大</td>
+                    <th>姓名</th>
+                    <th>{{$referee['hname']}}</th>
+                    <th>{{$referee['aname']}}</th>
+                    <th>近10场执法赛事</th>
+                    <th>近10场均出示黄牌</th>
                 </tr>
                 <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>0.99</td>
-                    <td>2.5</td>
-                    <td>0.81</td>
-                    <td>0.99</td>
-                    <td>2.5</td>
-                    <td>0.81</td>
-                    <td class="blue">小</td>
+                    <td>{{$referee['name']}}</td>
+                    <td>{{$referee['h_wdl']}}</td>
+                    <td>{{$referee['a_wdl']}}</td>
+                    <td>上盘率{{$referee['win_percent']}}%</td>
+                    <td>{{$referee['yellow_avg']}}张</td>
                 </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>0.99</td>
-                    <td>2.5</td>
-                    <td>0.81</td>
-                    <td>0.99</td>
-                    <td>2.5</td>
-                    <td>0.81</td>
-                    <td class="green">大</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>0.99</td>
-                    <td>2.5</td>
-                    <td>0.81</td>
-                    <td>0.99</td>
-                    <td>2.5</td>
-                    <td>0.81</td>
-                    <td class="green">大</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>0.99</td>
-                    <td>2.5</td>
-                    <td>0.81</td>
-                    <td>0.99</td>
-                    <td>2.5</td>
-                    <td>0.81</td>
-                    <td class="gray">走</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>0.99</td>
-                    <td>2.5</td>
-                    <td>0.81</td>
-                    <td>0.99</td>
-                    <td>2.5</td>
-                    <td>0.81</td>
-                    <td class="green">大</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>0.99</td>
-                    <td>2.5</td>
-                    <td>0.81</td>
-                    <td>0.99</td>
-                    <td>2.5</td>
-                    <td>0.81</td>
-                    <td class="green">大</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>0.99</td>
-                    <td>2.5</td>
-                    <td>0.81</td>
-                    <td>0.99</td>
-                    <td>2.5</td>
-                    <td>0.81</td>
-                    <td class="green">大</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>0.99</td>
-                    <td>2.5</td>
-                    <td>0.81</td>
-                    <td>0.99</td>
-                    <td>2.5</td>
-                    <td>0.81</td>
-                    <td class="green">大</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>0.99</td>
-                    <td>2.5</td>
-                    <td>0.81</td>
-                    <td>0.99</td>
-                    <td>2.5</td>
-                    <td>0.81</td>
-                    <td class="green">大</td>
-                </tr>
-                </tbody>
             </table>
         </div>
-        <div class="con europe" style="display: none;">
-            <p class="result" num="10">胜：50%&nbsp;&nbsp;平：0%&nbsp;&nbsp;负：0%</p>
-            <p class="result" num="5" style="display: none;">胜：50%&nbsp;&nbsp;平：0%&nbsp;&nbsp;负：0%</p>
-            <p class="num"><button class="on" value="10">近10场</button><button value="5">近5场</button></p>
-            <table>
-                <colgroup>
-                    <col num="1" width="12%">
-                    <col num="2" width="9.4%">
-                    <col num="3" width="">
-                    <col num="4" width="8%">
-                    <col num="5" width="">
-                    <col num="6" width="60px">
-                    <col num="7" width="8.5%">
-                    <col num="8" width="60px">
-                    <col num="9" width="60px">
-                    <col num="10" width="8.5%">
-                    <col num="11" width="60px">
-                    <col num="12" width="50px">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th>赛事</th>
-                    <th>日期</th>
-                    <th>主队</th>
-                    <th>比分（半场）</th>
-                    <th>客队</th>
-                    <th colspan="3">初盘</th>
-                    <th colspan="3">终盘</th>
-                    <th>结果</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>1.99</td>
-                    <td>3.52</td>
-                    <td>2.81</td>
-                    <td>1.99</td>
-                    <td>3.52</td>
-                    <td>2.81</td>
-                    <td class="green">胜</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>1.99</td>
-                    <td>3.52</td>
-                    <td>2.81</td>
-                    <td>1.99</td>
-                    <td>3.52</td>
-                    <td>2.81</td>
-                    <td class="blue">负</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>1.99</td>
-                    <td>3.52</td>
-                    <td>2.81</td>
-                    <td>1.99</td>
-                    <td>3.52</td>
-                    <td>2.81</td>
-                    <td class="green">胜</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>1.99</td>
-                    <td>3.52</td>
-                    <td>2.81</td>
-                    <td>1.99</td>
-                    <td>3.52</td>
-                    <td>2.81</td>
-                    <td class="green">胜</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>1.99</td>
-                    <td>3.52</td>
-                    <td>2.81</td>
-                    <td>1.99</td>
-                    <td>3.52</td>
-                    <td>2.81</td>
-                    <td class="gray">平</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>1.99</td>
-                    <td>3.52</td>
-                    <td>2.81</td>
-                    <td>1.99</td>
-                    <td>3.52</td>
-                    <td>2.81</td>
-                    <td class="green">胜</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>1.99</td>
-                    <td>3.52</td>
-                    <td>2.81</td>
-                    <td>1.99</td>
-                    <td>3.52</td>
-                    <td>2.81</td>
-                    <td class="green">胜</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>1.99</td>
-                    <td>3.52</td>
-                    <td>2.81</td>
-                    <td>1.99</td>
-                    <td>3.52</td>
-                    <td>2.81</td>
-                    <td class="green">胜</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>1.99</td>
-                    <td>3.52</td>
-                    <td>2.81</td>
-                    <td>1.99</td>
-                    <td>3.52</td>
-                    <td>2.81</td>
-                    <td class="green">胜</td>
-                </tr>
-                <tr>
-                    <td>亚洲杯</td>
-                    <td>17.11.08</td>
-                    <td>大分三神</td>
-                    <td>2-1（0-0）</td>
-                    <td>马特斯宝</td>
-                    <td>1.99</td>
-                    <td>3.52</td>
-                    <td>2.81</td>
-                    <td>1.99</td>
-                    <td>3.52</td>
-                    <td>2.81</td>
-                    <td class="green">胜</td>
-                </tr>
-                </tbody>
-            </table>
+    @endif
+    @if(isset($sameOdd) && (isset($sameOdd['asia']) || isset($sameOdd['goal']) || isset($sameOdd['ou'])))
+        <div class="sameOdd">
+            <p class="title">历史同赔</p>
+            <div class="tabBox">
+                <?php
+                $index = 0;
+                if (!array_key_exists('asia',$sameOdd)){
+                    $index = 1;
+                    if (!array_key_exists('goal',$sameOdd)){
+                        $index = 2;
+                    }
+                }
+                $html = '';
+                foreach($sameOdd as $key=>$odds){
+                    if($key == 'asia')
+                        $html = '<button class="on" value="asia">亚盘</button>';
+                    if($key == 'goal')
+                        if($index == 1)
+                            $html = $html .'<button class="on" value="goal">大小</button>';
+                        else
+                            $html = $html .'<button value="goal">大小</button>';
+                    if($key == 'ou')
+                        if($index == 2)
+                            $html = $html .'<button class="on" value="europe">欧盘</button>';
+                        else
+                            $html = $html .'<button value="europe">欧盘</button>';
+                }
+                ?>
+                {!! $html !!}
+            </div>
+            @foreach($sameOdd as $key=>$odds)
+                <?php
+                $show = false;
+                if ($key == 'asia' && $index == 0)
+                    $show = true;
+                else if ($key == 'goal' && $index == 1)
+                    $show = true;
+                else if ($key == 'ou' && $index == 2)
+                    $show = true;
+                ?>
+                @component('pc.match_detail.foot_cell.character_sameodd',['show'=>$show,'key'=>$key,'odds'=>$odds])
+                @endcomponent
+            @endforeach
         </div>
-    </div>
+    @endif
 </div>

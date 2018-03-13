@@ -16,7 +16,7 @@
         @endcomponent
         @component('pc.match_detail.foot_cell.base',['match'=>$match,'rank'=>$analyse['rank'],'tech'=>$tech,'lineup'=>$lineup])
         @endcomponent
-        @component('pc.match_detail.foot_cell.character')
+        @component('pc.match_detail.foot_cell.character',['match'=>$match,'analyse'=>$analyse])
         @endcomponent
         @component('pc.match_detail.foot_cell.data')
         @endcomponent
