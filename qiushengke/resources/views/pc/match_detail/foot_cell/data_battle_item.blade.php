@@ -166,8 +166,9 @@ foreach ($keys as $key){
         </tr>
         </thead>
         <tbody>
-        @foreach($matches as $match)
+        @for($i = 0 ; $i < min(10,count($matches)); $i++)
             <?php
+            $match = $matches[$i];
             //赛事背景色
             $bgRgb = \App\Http\Controllers\PC\CommonTool::getLeagueBgRgb($match['lid']);
             $r = $bgRgb['r'];
@@ -241,7 +242,7 @@ foreach ($keys as $key){
                     <p class="end {{$resultg2 == 3?'green':($resultg2 == 1 ? 'gray' :'blue')}}" style="display: none;">{{$resultg2 == 3?'green':($resultg1 == 1 ? 'gray' :'blue')}}</p>
                 </td>
             </tr>
-        @endforeach
+        @endfor
         </tbody>
     </table>
 </div>
