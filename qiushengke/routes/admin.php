@@ -23,6 +23,13 @@ Route::group([], function () {
     });
 });
 
+Route::group(['middleware' => 'admin_auth'], function () {
+    Route::get('/links', 'LinkController@links');//外链列表
+    Route::post('/links/save', 'LinkController@saveLink');//保存外链
+    Route::get('/links/del', 'LinkController@deleteLink');//删除友链
+
+});
+
 /**
  * 用户、权限操作
  */
