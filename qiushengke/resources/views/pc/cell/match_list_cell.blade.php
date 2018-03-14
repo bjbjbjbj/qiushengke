@@ -109,6 +109,8 @@ $isLottery = isset($match['betting_num']);
 $show = true;
 
 $hasLive = $match['pc_live'];
+
+$liveUrl = \App\Http\Controllers\PC\CommonTool::matchLivePathWithId($match['mid']);
 ?>
 <tr isMatch="1" class="{{$show?'show':'hide'}}" id="m_tr_{{$mid}}" match="{{$mid}}" league="{{$lid}}" asiaOdd="{{$asiaOdd}}" ouOdd="{{$ouOdd}}" first="{{$isFirst?"first":""}}" lottery="{{$isLottery?"lottery":""}}" live="{{$hasLive?"live":""}}">
     <td><button name="match" class="choose" value="0" mid="{{$mid}}" name="match" id="match_{{$mid}}" onclick="clickMatchBtn(this)"></button></td>
@@ -193,9 +195,9 @@ $hasLive = $match['pc_live'];
         {{--比赛状态 直播方式--}}
         @if($status == 0)
             @if($hasLive)
-                <a class="live" href="{{$matchUrl}}" target="_blank"><img id="live_{{$match['mid']}}" src="{{env('CDN_URL')}}/pc/img/icon_living.png"></a>
+                <a class="live" href="{{$liveUrl}}" target="_blank"><img id="live_{{$match['mid']}}" src="{{env('CDN_URL')}}/pc/img/icon_living.png"></a>
             @else
-                <a class="live" href="{{$matchUrl}}" target="_blank"><img id="live_{{$match['mid']}}" src="{{env('CDN_URL')}}/pc/img/icon_action_light.png"></a>
+                <a class="live" href="{{$liveUrl}}" target="_blank"><img id="live_{{$match['mid']}}" src="{{env('CDN_URL')}}/pc/img/icon_action_light.png"></a>
             @endif
         @elseif($status == -1)
             @if($hasLive)
@@ -205,9 +207,9 @@ $hasLive = $match['pc_live'];
             @endif
         @else
             @if($hasLive)
-                <a class="live video" href="{{$matchUrl}}" target="_blank">直播中</a>
+                <a class="live video" href="{{$liveUrl}}" target="_blank">直播中</a>
             @else
-                <a class="live flash" href="{{$matchUrl}}" target="_blank">动画</a>
+                <a class="live flash" href="{{$liveUrl}}" target="_blank">动画</a>
             @endif
         @endif
     </td>

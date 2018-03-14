@@ -37,6 +37,26 @@ class CommonTool
     }
 
     /**
+     * 根据比赛id返回live path
+     * @param $mid
+     * @param int $sport
+     * @return string
+     */
+    public static function matchLivePathWithId($mid,$sport=CommonTool::kSportFootball){
+        $path = '';
+        if ($mid > 1000) {
+            $first = substr($mid,0,2);
+            $second = substr($mid,2,2);
+            if ($sport == 2) {
+                $path = '/live/basket/' . $first . '/'. $second . '/' . $mid . '.html';
+            } else {
+                $path = '/live/foot/' . $first . '/'. $second . '/' . $mid . '.html';
+            }
+        }
+        return $path;
+    }
+
+    /**
      * 根据比赛id返回path
      * @param $mid
      * @param int $sport

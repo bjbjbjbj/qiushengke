@@ -14,6 +14,11 @@ function setPage() {
 }
 
 function setItemData() {
+    var Length = 3 - $('#Live .data ul li').length % 3 == 3 ? 0 : 3 - $('#Live .data ul li').length % 3;
+    for (var i = 0; i < Length; i++) {
+        $('#Live .data ul').append('<li></li>');
+    }
+
     $('#Live button.open').click(function(){
         if ($('#Live .data').hasClass('show')) {
             $('#Live .data').removeClass('show');

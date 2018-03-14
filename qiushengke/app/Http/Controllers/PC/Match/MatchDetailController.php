@@ -95,7 +95,6 @@ class MatchDetailController extends BaseController{
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
-
         return $json;
     }
 }

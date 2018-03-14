@@ -39,6 +39,9 @@ Route::group(['namespace'=>'Match'], function () {
 
     //赔率终端
     Route::get("/match/foot/odd.html", "MatchDetailController@oddDetail"); //足球
+
+    //直播终端
+    Route::get("/live/foot/{first}/{second}/{mid}.html", "LiveController@liveDetail"); //足球
 });
 
 Route::group(['namespace'=>'League'], function () {
