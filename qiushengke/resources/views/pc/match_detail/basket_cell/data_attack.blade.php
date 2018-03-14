@@ -1,0 +1,93 @@
+<div class="attack">
+    <p class="title">技术统计</p>
+    <div class="part host">
+        <p class="name">休斯顿迪纳摩</p>
+        <table>
+            <thead>
+            <tr>
+                <th></th>
+                <th>投篮命中率</th>
+                <th>三分命中率</th>
+                <th>平均篮板</th>
+                <th>平均助攻</th>
+                <th>平均抢断</th>
+                <th>平均失误</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>季前赛</td>
+                <td>48.5%</td>
+                <td>37.5%</td>
+                <td>44.2</td>
+                <td>27.2</td>
+                <td>8.8</td>
+                <td>8.8</td>
+            </tr>
+            <tr>
+                <td>常规赛</td>
+                <td>48.5%</td>
+                <td>37.5%</td>
+                <td>44.2</td>
+                <td>27.2</td>
+                <td>8.8</td>
+                <td>8.8</td>
+            </tr>
+            <tr>
+                <td class="gray">近10场</td>
+                <td>48.5%</td>
+                <td>37.5%</td>
+                <td>44.2</td>
+                <td>27.2</td>
+                <td>8.8</td>
+                <td>8.8</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="part away">
+        <p class="name">休斯顿迪纳摩</p>
+        <table>
+            <thead>
+            <tr>
+                <th></th>
+                <th>投篮命中率</th>
+                <th>三分命中率</th>
+                <th>平均篮板</th>
+                <th>平均助攻</th>
+                <th>平均抢断</th>
+                <th>平均失误</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>季前赛</td>
+                <td>48.5%</td>
+                <td>37.5%</td>
+                <td>44.2</td>
+                <td>27.2</td>
+                <td>8.8</td>
+                <td>8.8</td>
+            </tr>
+            <tr>
+                <td>常规赛</td>
+                <td>48.5%</td>
+                <td>37.5%</td>
+                <td>44.2</td>
+                <td>27.2</td>
+                <td>8.8</td>
+                <td>8.8</td>
+            </tr>
+            <tr>
+                <td class="gray">近10场</td>
+                <td>48.5%</td>
+                <td>37.5%</td>
+                <td>44.2</td>
+                <td>27.2</td>
+                <td>8.8</td>
+                <td>8.8</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

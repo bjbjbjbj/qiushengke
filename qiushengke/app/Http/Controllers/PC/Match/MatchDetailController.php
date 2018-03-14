@@ -74,6 +74,13 @@ class MatchDetailController extends BaseController{
         //球员统计
         $result['players'] = $this->matchDetailData($mid, 'player', 2);
 
+        //赔率
+        $odds = $this->matchDetailData($mid, 'odd', 2);
+        if (isset($odds) && count($odds) > 0) {
+            ksort($odds);
+        }
+        $result['odds'] = $odds;
+
         $this->html_var = array_merge($this->html_var,$result);
 //        dump($this->html_var);
         return view('pc.match_detail.match_detail_bk',$this->html_var);
@@ -96,5 +103,20 @@ class MatchDetailController extends BaseController{
         curl_close ($ch);
         $json = json_decode($json, true);
         return $json;
+    }
+
+    const locations = ['G' => '后卫', 'F' => '前锋', 'C' => '中锋'];
+
+    /**
+     * 篮球位置转换
+     * @param $index
+     * @return mixed|string
+     */
+    public static function getPlayerLocationCn($index) {
+        $locationStr = "";
+        if (array_key_exists($index, self::locations)) {
+            $locationStr = self::locations[$index];
+        }
+        return $locationStr;
     }
 }

@@ -1,8 +1,11 @@
 <?php
 $hasTech = false;
-foreach($tech as $t)
-    if($t['h'] > 0 || $t['a'] > 0)
-        $hasTech = true;
+if (isset($tech) && isset($tech['tech'])){
+    $tech = $tech['tech'];
+    foreach($tech as $t)
+        if($t['h'] > 0 || $t['a'] > 0)
+            $hasTech = true;
+}
 ?>
 @if($hasTech)
     <div class="total">
