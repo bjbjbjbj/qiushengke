@@ -1,3 +1,5 @@
 .env
 .idea/*
 qiushengke/.idea/*
+qiushengke/vendor
+qiushengke/composer.lock
