@@ -15,51 +15,71 @@ class MatchDetailController extends BaseController{
         if (is_null($mid)) {
             return abort(404);
         }
-
-        $mfirst = substr($mid,0,2);
-        $msecond = substr($mid,2,2);
-        if ($first != $mfirst || $second != $msecond){
-            return abort(404);
-        }
-
-        $url = 'http://match.liaogou168.com/static/terminal/1/'.$first.'/'.$second.'/'.$mid.'/match.json';
-        $data = $this->_getDataWithUrl($url);
-        if (empty($data)) {
+        $match = $this->matchDetailData($mid, 'match');
+        if (empty($match)) {
             abort(404);
         }
         $result = array();
-        $result['match'] = $data;
+        $result['match'] = $match;
 
         //基本数据
-        $url = 'http://match.liaogou168.com/static/terminal/1/'.$first.'/'.$second.'/'.$mid.'/analyse.json';
-        $data = $this->_getDataWithUrl($url);
-        $result['analyse'] = $data;
+        $result['analyse'] = $this->matchDetailData($mid, 'analyse');
 
         //统计
-        $url = 'http://match.liaogou168.com/static/terminal/1/'.$first.'/'.$second.'/'.$mid.'/tech.json';
-        $data = $this->_getDataWithUrl($url);
-        $result['tech'] = $data;
+        $result['tech'] = $this->matchDetailData($mid, 'tech');
 
-        //阵容
-        $url = 'http://match.liaogou168.com/static/terminal/1/'.$first.'/'.$second.'/'.$mid.'/lineup.json';
-        $data = $this->_getDataWithUrl($url);
-        $result['lineup'] = $data;
+        //阵容;
+        $result['lineup'] = $this->matchDetailData($mid, 'lineup');
 
-        $url = 'http://match.liaogou168.com/static/terminal/1/'.$first.'/'.$second.'/'.$mid.'/analyse.json';
-        $data = $this->_getDataWithUrl($url);
-        $result['analyse'] = $data;
+        dump($result);
+
         $this->html_var = array_merge($this->html_var,$result);
+//        dump($this->html_var);
         return view('pc.match_detail.match_detail',$this->html_var);
     }
 
-    private function _getDataWithUrl($url){
+    public function basketDetail(Request $request,$first,$second,$mid) {
+        if (is_null($mid)) {
+            return abort(404);
+        }
+        $match = $this->matchDetailData($mid, 'match', 2);
+        if (empty($match)) {
+            abort(404);
+        }
+        $result = array();
+        $result['match'] = $match;
+
+        //基本数据
+        $result['analyse'] = $this->matchDetailData($mid, 'analyse', 2);
+
+        //统计
+        $result['tech'] = $this->matchDetailData($mid, 'tech', 2);
+
+        //球员统计
+        $result['players'] = $this->matchDetailData($mid, 'player', 2);
+
+        $this->html_var = array_merge($this->html_var,$result);
+//        dump($this->html_var);
+        return view('pc.match_detail.match_detail_bk',$this->html_var);
+    }
+
+    /**
+     * 终端页数据
+     * @param $id
+     * @param $name
+     * @param $sport
+     * @return array
+     */
+    private function matchDetailData($id, $name, $sport = 1){
         $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$url);
+        $url = env('MATCH_URL')."/static/terminal/$sport/".substr($id,0,2)."/".substr($id,2,2)."/$id/$name.json";
+        curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 20);//5秒超时
-        $analyse = curl_exec ($ch);
+        $json = curl_exec ($ch);
         curl_close ($ch);
-        $analyse = json_decode($analyse,true);
-        return $analyse;
+        $json = json_decode($json, true);
+
+        return $json;
     }
 }

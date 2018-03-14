@@ -41,30 +41,19 @@ class MatchController extends BaseController
     /**
      * 即时列表
      * @param Request $request
-     * @param $sport foot basket
+     * @param String $sport foot basket
      * @param string $order 篮球用 t按时间l按赛事
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     private function immediate(Request $request,$sport,$order = 't'){
         if ('basket' == $sport) {
             $sport = 2;
-            $hour = 12;
-        }
-        else{
+        } else{
             $sport = 1;
-            $hour = 10;
         }
-
-        //完场 未来
-        if (date('H') < $hour) {
-            $startDate = date('Ymd', strtotime('-1 day'));
-            $nextDate = date('Ymd');
-            $lastDate = date('Ymd', strtotime('-2 day'));
-        } else {
-            $startDate = date('Ymd');
-            $nextDate = date('Ymd',strtotime('1 day'));
-            $lastDate = date('Ymd', strtotime('-1 day'));
-        }
+        $startDate = date('Ymd');
+        $nextDate = date('Ymd',strtotime('1 day'));
+        $lastDate = date('Ymd', strtotime('-1 day'));
 
         if ($order == 't'){
             $order = 'all';
@@ -110,24 +99,14 @@ class MatchController extends BaseController
     public function result(Request $request,$sport, $dateStr,$order = 't'){
         if ('basket' == $sport) {
             $sport = 2;
-            $hour = 12;
-        }
-        else{
+        } else{
             $sport = 1;
-            $hour = 10;
         }
         $startDate = $dateStr;
 
-        //完场 未来
-        if (date('H') < $hour) {
-            $nextDate = date('Ymd');
-            $lastDate = date('Ymd', strtotime('-2 day'));
-            $today = date('Ymd', strtotime('-2 day'));
-        } else {
-            $nextDate = date('Ymd',strtotime('1 day'));
-            $lastDate = date('Ymd', strtotime('-1 day'));
-            $today = date('Ymd', strtotime('-1 day'));
-        }
+        $nextDate = date('Ymd',strtotime('1 day'));
+        $lastDate = date('Ymd', strtotime('-1 day'));
+        $today = date('Ymd');
 
         //日期
         $calendar = array();
@@ -184,24 +163,14 @@ class MatchController extends BaseController
     public function schedule(Request $request,$sport, $dateStr,$order = 't'){
         if ('basket' == $sport) {
             $sport = 2;
-            $hour = 12;
-        }
-        else{
+        } else{
             $sport = 1;
-            $hour = 10;
         }
         $startDate = $dateStr;
 
-        //完场 未来
-        if (date('H') < $hour) {
-            $nextDate = date('Ymd');
-            $lastDate = date('Ymd', strtotime('-2 day'));
-            $today = date('Ymd', strtotime('+0 day'));
-        } else {
-            $nextDate = date('Ymd',strtotime('1 day'));
-            $lastDate = date('Ymd', strtotime('-1 day'));
-            $today = date('Ymd', strtotime('+1 day'));
-        }
+        $nextDate = date('Ymd',strtotime('1 day'));
+        $lastDate = date('Ymd', strtotime('-1 day'));
+        $today = date('Ymd');
 
         //日期
         $calendar = array();

@@ -62,8 +62,8 @@ $half_total = \App\Http\Controllers\PC\CommonTool::getBasketScoreTxt($match, tru
 $whole_total = \App\Http\Controllers\PC\CommonTool::getBasketScoreTxt($match, false, false);
 
 //加时
-$h_ots = $match['h_ot'];
-$a_ots = $match['a_ot'];
+$h_ots = is_array($match['h_ot']) ? $match['h_ot'] : array();
+$a_ots = is_array($match['a_ot']) ? $match['h_ot'] : array();
 $otCount = min(count($h_ots), count($a_ots));
 
 //默认是否显示
@@ -168,7 +168,7 @@ $hasLive = $match['live'];
             <p class="">{{$ouUp}}</p>
         </td>
         <td rowspan="2">
-            <a href="">析</a>
+            <a href="/match/basket/{{substr($mid, 0, 2)}}/{{substr($mid, 2, 2)}}/{{$mid}}.html">析</a>
             <a href="">亚</a>
             <a href="">欧</a>
             <a href="">大</a>

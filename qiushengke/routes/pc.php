@@ -35,6 +35,7 @@ Route::group(['namespace'=>'Match'], function () {
 
     //比赛终端
     Route::get("/match/foot/{first}/{second}/{mid}.html", "MatchDetailController@matchDetail"); //今天
+    Route::get("/match/basket/{first}/{second}/{mid}.html", "MatchDetailController@basketDetail"); //今天
 });
 
 Route::group(['namespace'=>'League'], function () {

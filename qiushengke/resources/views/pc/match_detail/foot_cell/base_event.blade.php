@@ -5,9 +5,9 @@
         ?>
         <?php
         //获取足球比赛的即时时间
-        $time = date(isset($match['timehalf'])? $match['timehalf'] : $match['time']);
-        $timehalf = date($match['timehalf']);
-        $now = date_create();
+        $time = isset($match['timehalf'])? $match['timehalf'] : $match['time'];
+        $timehalf = $match['timehalf'];
+        $now = time();
         $status = $match['status'];
         $matchTime = 20;
         if ($status == 4){
