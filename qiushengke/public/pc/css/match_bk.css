@@ -426,7 +426,7 @@ body{
 #Data .odd table tr:nth-child(4n + 1) + tr td{
 	background: #f6f6f6;
 }
-#Data .odd table td[rowspan]{
+#Data .odd table td[rowspan]:nth-child(1){
 	padding-left: 20px;
 	text-align: left; color: #c52601;
 }
@@ -535,6 +535,7 @@ body{
 #Data .battle .cbox .num button{
 	height: 28px; width: 50px;
 	margin-left: 35px;
+	background: #fff;
 	font-size: 14px; color: #adadad;
 }
 #Data .battle .cbox .num button.on{
@@ -679,6 +680,7 @@ body{
 #Data .history .team button{
 	min-width: 200px; height: 40px;
 	padding: 0 25px;
+	background: #fff;
 	border-radius: 4px; border: 1px solid #2b9968;
 	font-size: 12px; text-align: center; color: #2b9968;
 }
@@ -726,6 +728,7 @@ body{
 #Data .history .cbox .num button{
 	height: 28px; width: 50px;
 	margin-left: 35px;
+	background: #fff;
 	font-size: 14px; color: #adadad;
 }
 #Data .history .cbox .num button.on{
@@ -902,6 +905,7 @@ body{
 #Total .asia .part .fh button.full, #Total .asia .part .fh button.half{
 	width: 80px; height: 30px;
 	border: 1px solid #2b9968;
+	background: #fff;
 	font-size: 12px; text-align: center; color: #2b9968;
 }
 #Total .asia .part .fh button.full{
@@ -922,6 +926,7 @@ body{
 #Total .asia .part .fh .num button{
 	height: 26px; width: 46px;
 	margin-left: 16px;
+	background: #fff;
 	font-size: 14px; color: #adadad;
 }
 #Total .asia .part .fh .num button.on{
@@ -1007,6 +1012,7 @@ body{
 #Total .goal .part .fh button.full, #Total .goal .part .fh button.half{
 	width: 80px; height: 30px;
 	border: 1px solid #2b9968;
+	background: #fff;
 	font-size: 12px; text-align: center; color: #2b9968;
 }
 #Total .goal .part .fh button.full{
@@ -1110,6 +1116,7 @@ body{
 #Total .average .part .name .num button{
 	height: 26px; width: 46px;
 	margin-left: 16px;
+	background: #fff;
 	font-size: 14px; color: #adadad;
 }
 #Total .average .part .name .num button.on{
@@ -1192,6 +1199,7 @@ body{
 #Total .total .part .name .num button{
 	height: 26px; width: 46px;
 	margin-left: 16px;
+	background: #fff;
 	font-size: 14px; color: #adadad;
 }
 #Total .total .part .name .num button.on{
@@ -1259,6 +1267,7 @@ body{
 #Total .difference .part .name .num button{
 	height: 26px; width: 46px;
 	margin-left: 16px;
+	background: #fff;
 	font-size: 14px; color: #adadad;
 }
 #Total .difference .part .name .num button.on{

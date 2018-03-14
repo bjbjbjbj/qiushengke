@@ -18,40 +18,24 @@ $sortData = [
                 ],
 ];
 //逻辑没做优惠,先完成功能
+$keys = ['asia','goal','result'];
+$middles = ['1','2'];
 for ($i = 0 ; $i < min(10,count($matches));$i++){
     $match = $matches[$i];
-    //初盘
-    //亚盘
-    $result = \App\Http\Controllers\PC\OddCalculateTool::getMatchAsiaOddResult($match['hscore'],$match['ascore'],$match['asiamiddle1'],$match['hid'] == $tid);
-    $key = 'asia';
-    $middle = '1';
-    $sortData[$key][$middle][] = $result;
-    //大小球
-    $result = \App\Http\Controllers\PC\OddCalculateTool::getMatchSizeOddResult($match['hscore'],$match['ascore'],$match['goalmiddle1'],$match['hid'] == $tid);
-    $key = 'goal';
-    $middle = '1';
-    $sortData[$key][$middle][] = $result;
-    //胜负
-    $result = \App\Http\Controllers\PC\OddCalculateTool::getMatchResult($match['hscore'],$match['ascore'],$match['hid'] == $tid);
-    $key = 'result';
-    $middle = '1';
-    $sortData[$key][$middle][] = $result;
-    //终盘
-    //亚盘
-    $result = \App\Http\Controllers\PC\OddCalculateTool::getMatchAsiaOddResult($match['hscore'],$match['ascore'],$match['asiamiddle2'],$match['hid'] == $tid);
-    $key = 'asia';
-    $middle = '2';
-    $sortData[$key][$middle][] = $result;
-    //大小球
-    $result = \App\Http\Controllers\PC\OddCalculateTool::getMatchSizeOddResult($match['hscore'],$match['ascore'],$match['goalmiddle2'],$match['hid'] == $tid);
-    $key = 'goal';
-    $middle = '2';
-    $sortData[$key][$middle][] = $result;
-    //胜负
-    $result = \App\Http\Controllers\PC\OddCalculateTool::getMatchResult($match['hscore'],$match['ascore'],$match['hid'] == $tid);
-    $key = 'result';
-    $middle = '2';
-    $sortData[$key][$middle][] = $result;
+    foreach ($keys as $key){
+        foreach ($middles as $middle){
+            if ($key == 'asia'){
+                $result = \App\Http\Controllers\PC\OddCalculateTool::getMatchAsiaOddResult($match['hscore'],$match['ascore'],($middle == '1'?$match['asiamiddle1']:$match['asiamiddle2']),$match['hid'] == $tid);
+            }
+            elseif ($key == 'goal'){
+                $result = \App\Http\Controllers\PC\OddCalculateTool::getMatchSizeOddResult($match['hscore'],$match['ascore'],($middle == '1'?$match['goalmiddle1']:$match['goalmiddle2']),$match['hid'] == $tid);
+            }
+            else{
+                $result = \App\Http\Controllers\PC\OddCalculateTool::getMatchResult($match['hscore'],$match['ascore'],$match['hid'] == $tid);
+            }
+            $sortData[$key][$middle][] = $result;
+        }
+    }
 }
 ?>
 <div class="con {{$className}}" ma="{{$ma}}" ha="{{$ha}}" @if($show == 0) style="display: none;" @endif>

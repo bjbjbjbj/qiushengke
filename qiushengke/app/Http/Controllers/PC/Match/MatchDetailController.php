@@ -31,8 +31,6 @@ class MatchDetailController extends BaseController{
         //阵容;
         $result['lineup'] = $this->matchDetailData($mid, 'lineup');
 
-        dump($result);
-
         $this->html_var = array_merge($this->html_var,$result);
 //        dump($this->html_var);
         return view('pc.match_detail.match_detail',$this->html_var);
