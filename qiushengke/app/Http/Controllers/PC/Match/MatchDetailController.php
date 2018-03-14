@@ -11,60 +11,48 @@ use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Http\Request;
 
 class MatchDetailController extends BaseController{
-    public function matchDetail(Request $request,$mid){
+    public function matchDetail(Request $request,$first,$second,$mid){
         if (is_null($mid)) {
             return abort(404);
         }
-        $ch = curl_init();
-        $first = substr($mid,0,2);
-        $second = substr($mid,2,2);
+
+        $mfirst = substr($mid,0,2);
+        $msecond = substr($mid,2,2);
+        if ($first != $mfirst || $second != $msecond){
+            return abort(404);
+        }
+
         $url = 'http://match.liaogou168.com/static/terminal/1/'.$first.'/'.$second.'/'.$mid.'/match.json';
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 20);//5秒超时
-        $match = curl_exec ($ch);
-        curl_close ($ch);
-        $match = json_decode($match,true);
-        if (empty($match)) {
+        $data = $this->_getDataWithUrl($url);
+        if (empty($data)) {
             abort(404);
         }
         $result = array();
-        $result['match'] = $match;
+        $result['match'] = $data;
 
         //基本数据
         $url = 'http://match.liaogou168.com/static/terminal/1/'.$first.'/'.$second.'/'.$mid.'/analyse.json';
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 20);//5秒超时
-        $analyse = curl_exec ($ch);
-        curl_close ($ch);
-        $analyse = json_decode($analyse,true);
-        $result['analyse'] = $analyse;
+        $data = $this->_getDataWithUrl($url);
+        $result['analyse'] = $data;
 
         //统计
         $url = 'http://match.liaogou168.com/static/terminal/1/'.$first.'/'.$second.'/'.$mid.'/tech.json';
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 20);//5秒超时
-        $tech = curl_exec ($ch);
-        curl_close ($ch);
-        $tech = json_decode($tech,true);
-        $result['tech'] = $tech;
+        $data = $this->_getDataWithUrl($url);
+        $result['tech'] = $data;
 
         //阵容
         $url = 'http://match.liaogou168.com/static/terminal/1/'.$first.'/'.$second.'/'.$mid.'/lineup.json';
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 20);//5秒超时
-        $lineup = curl_exec ($ch);
-        curl_close ($ch);
-        $lineup = json_decode($lineup,true);
-        $result['lineup'] = $lineup;
+        $data = $this->_getDataWithUrl($url);
+        $result['lineup'] = $data;
 
         $url = 'http://match.liaogou168.com/static/terminal/1/'.$first.'/'.$second.'/'.$mid.'/analyse.json';
+        $data = $this->_getDataWithUrl($url);
+        $result['analyse'] = $data;
+        $this->html_var = array_merge($this->html_var,$result);
+        return view('pc.match_detail.match_detail',$this->html_var);
+    }
+
+    private function _getDataWithUrl($url){
         $ch = curl_init();
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -72,12 +60,6 @@ class MatchDetailController extends BaseController{
         $analyse = curl_exec ($ch);
         curl_close ($ch);
         $analyse = json_decode($analyse,true);
-        $result['analyse'] = $analyse;
-
-        dump($result);
-
-        $this->html_var = array_merge($this->html_var,$result);
-//        dump($this->html_var);
-        return view('pc.match_detail.match_detail',$this->html_var);
+        return $analyse;
     }
 }

@@ -192,10 +192,10 @@ function setBattle () {
         }
     })
     $('#Data .battle select').change(function(){
-        $(this).parents('table').find('p.start, p.end').css('display','none');
+        $(this).parents('table').find('td.' + $(this).attr('class') + ' p.start, p.end').css('display','none');
         $(this).parents('.con').find('.canBox dl.' + $(this).attr('class')).css('display','none');
 
-        $(this).parents('table').find('p.' + $(this).val()).css('display','');
+        $(this).parents('table').find('td.' + $(this).attr('class') + ' p.' + $(this).val()).css('display','');
         $(this).parents('.con').find('.canBox dl.' + $(this).attr('class') + '.' + $(this).val()).css('display','');
     })
 
@@ -258,10 +258,10 @@ function setHistory () {
         }
     })
     $('#Data .history select').change(function(){
-        $(this).parents('table').find('p.start, p.end').css('display','none');
+        $(this).parents('table').find('td.' + $(this).attr('class') + ' p.start, p.end').css('display','none');
         $(this).parents('.con').find('.canBox dl.' + $(this).attr('class')).css('display','none');
 
-        $(this).parents('table').find('p.' + $(this).val()).css('display','');
+        $(this).parents('table').find('td.' + $(this).attr('class') + ' p.' + $(this).val()).css('display','');
         $(this).parents('.con').find('.canBox dl.' + $(this).attr('class') + '.' + $(this).val()).css('display','');
     })
     $('#Data .history .team button').click(function(){

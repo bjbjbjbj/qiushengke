@@ -13,10 +13,10 @@
 
 Route::group(['namespace'=>'Match'], function () {
     Route::any("/", function (){
-        return redirect('/match/immediate.html');
+        return redirect('/match/foot/immediate.html');
     });
     Route::any("/index.html", function (){
-        return redirect('/match/immediate.html');
+        return redirect('/match/foot/immediate.html');
     });
     Route::any("/error", "HomeController@error");
 
@@ -34,7 +34,7 @@ Route::group(['namespace'=>'Match'], function () {
     Route::get("/match/basket/schedule_{dateStr}_{order}.html", "MatchController@schedule_bk"); //下日赛程
 
     //比赛终端
-    Route::get("/match/foot/match_detail_{mid}.html", "MatchDetailController@matchDetail"); //今天
+    Route::get("/match/foot/{first}/{second}/{mid}.html", "MatchDetailController@matchDetail"); //今天
 });
 
 Route::group(['namespace'=>'League'], function () {

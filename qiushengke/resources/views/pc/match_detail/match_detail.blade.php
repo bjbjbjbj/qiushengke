@@ -18,7 +18,7 @@
         @endcomponent
         @component('pc.match_detail.foot_cell.character',['match'=>$match,'analyse'=>$analyse])
         @endcomponent
-        @component('pc.match_detail.foot_cell.data')
+        @component('pc.match_detail.foot_cell.data',['match'=>$match,'analyse'=>$analyse])
         @endcomponent
         <div id="Corner" style="display: none;">
             <div class="odd">

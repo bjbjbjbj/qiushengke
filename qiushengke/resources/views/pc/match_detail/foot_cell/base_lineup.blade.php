@@ -1,4 +1,4 @@
-@if(count($lineup['home']['first']) > 0 || count($lineup['away']['first']) > 0)
+@if((isset($lineup['home']) || isset($lineup['away'])) && (count($lineup['home']['first']) > 0 || count($lineup['away']['first']) > 0))
 <div class="first">
     <div class="part host">
         <p class="name">{{$match['hname']}}

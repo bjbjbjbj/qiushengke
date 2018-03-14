@@ -1,0 +1,133 @@
+<div class="odd" style="display: none">
+    <p class="title">赔率指数</p>
+    <p class="abox"><a href="odd.html">【亚】</a><a href="odd.html">【欧】</a><a href="odd.html">【大】</a></p>
+    <table>
+        <colgroup>
+            <col num="1" width="">
+            <col num="2" width="7.5%">
+            <col num="3" width="7.5%">
+            <col num="4" width="7.5%">
+            <col num="5" width="7.5%">
+            <col num="6" width="7.5%">
+            <col num="7" width="9.5%">
+            <col num="8" width="7.5%">
+            <col num="9" width="7.5%">
+            <col num="10" width="7.5%">
+            <col num="11" width="7.5%">
+            <col num="12" width="7.5%">
+            <col num="13" width="7.5%">
+        </colgroup>
+        <thead>
+        <tr>
+            <th colspan="2"></th>
+            <th colspan="3">欧洲指数</th>
+            <th colspan="4">亚洲指数</th>
+            <th colspan="4">大小球指数</th>
+        </tr>
+        <tr>
+            <th>公司</th>
+            <th></th>
+            <th>主胜</th>
+            <th>平手</th>
+            <th>客胜</th>
+            <th>主队</th>
+            <th>让球</th>
+            <th>客队</th>
+            <th>总水位</th>
+            <th>大球</th>
+            <th>盘口</th>
+            <th>小球</th>
+            <th>总水位</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td rowspan="2">SB</td>
+            <td>初盘</td>
+            <td>2.29</td>
+            <td>3.5</td>
+            <td>3.5</td>
+            <td>1.00</td>
+            <td>让平手/半球</td>
+            <td>0.98</td>
+            <td>1.98</td>
+            <td>1.00</td>
+            <td>2.5/3</td>
+            <td>0.98</td>
+            <td>1.98</td>
+        </tr>
+        <tr>
+            <td>终盘</td>
+            <td>2.29</td>
+            <td>3.5</td>
+            <td>3.5</td>
+            <td>1.00</td>
+            <td>让平手/半球</td>
+            <td>0.98</td>
+            <td>1.98</td>
+            <td>1.00</td>
+            <td>2.5/3</td>
+            <td>0.98</td>
+            <td>1.98</td>
+        </tr>
+        <tr>
+            <td rowspan="2">Bet365</td>
+            <td>初盘</td>
+            <td>2.29</td>
+            <td>3.5</td>
+            <td>3.5</td>
+            <td>1.00</td>
+            <td>让平手/半球</td>
+            <td>0.98</td>
+            <td>1.98</td>
+            <td>1.00</td>
+            <td>2.5/3</td>
+            <td>0.98</td>
+            <td>1.98</td>
+        </tr>
+        <tr>
+            <td>终盘</td>
+            <td>2.29</td>
+            <td>3.5</td>
+            <td>3.5</td>
+            <td>1.00</td>
+            <td>让平手/半球</td>
+            <td>0.98</td>
+            <td>1.98</td>
+            <td>1.00</td>
+            <td>2.5/3</td>
+            <td>0.98</td>
+            <td>1.98</td>
+        </tr>
+        <tr>
+            <td rowspan="2">金宝博</td>
+            <td>初盘</td>
+            <td>2.29</td>
+            <td>3.5</td>
+            <td>3.5</td>
+            <td>1.00</td>
+            <td>让平手/半球</td>
+            <td>0.98</td>
+            <td>1.98</td>
+            <td>1.00</td>
+            <td>2.5/3</td>
+            <td>0.98</td>
+            <td>1.98</td>
+        </tr>
+        <tr>
+            <td>终盘</td>
+            <td>2.29</td>
+            <td>3.5</td>
+            <td>3.5</td>
+            <td>1.00</td>
+            <td>让平手/半球</td>
+            <td>0.98</td>
+            <td>1.98</td>
+            <td>1.00</td>
+            <td>2.5/3</td>
+            <td>0.98</td>
+            <td>1.98</td>
+        </tr>
+        </tbody>
+    </table>
+</div>

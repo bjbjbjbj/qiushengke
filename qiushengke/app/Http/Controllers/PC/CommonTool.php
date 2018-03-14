@@ -48,9 +48,9 @@ class CommonTool
             $first = substr($mid,0,2);
             $second = substr($mid,2,2);
             if ($sport == 2) {
-                $path = '/2/' . $first . '/'. $second . '/' . $mid . '.html';
+                $path = '/match/basket/' . $first . '/'. $second . '/' . $mid . '.html';
             } else {
-                $path = '/1/' . $first . '/'. $second . '/' . $mid . '.html';
+                $path = '/match/foot/' . $first . '/'. $second . '/' . $mid . '.html';
             }
         }
         return $path;
