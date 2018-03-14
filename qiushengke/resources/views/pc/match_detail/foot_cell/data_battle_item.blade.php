@@ -238,8 +238,8 @@ foreach ($keys as $key){
                     <p class="end {{$resulta2 == 3?'green':($resulta2 == 1 ? 'gray' :'blue')}}" style="display: none;">{{$resulta2 == 3?'赢':($resulta2 == 1 ? '走' :'输')}}</p>
                 </td>
                 <td class="goal">
-                    <p class="start {{$resultg1 == 3?'green':($resultg1 == 1 ? 'gray' :'blue')}}">{{$resultg1 == 3?'green':($resultg1 == 1 ? 'gray' :'blue')}}</p>
-                    <p class="end {{$resultg2 == 3?'green':($resultg2 == 1 ? 'gray' :'blue')}}" style="display: none;">{{$resultg2 == 3?'green':($resultg1 == 1 ? 'gray' :'blue')}}</p>
+                    <p class="start {{$resultg1 == 3?'green':($resultg1 == 1 ? 'gray' :'blue')}}">{{$resultg1 == 3?'大':($resultg1 == 1 ? '走' :'小')}}</p>
+                    <p class="end {{$resultg2 == 3?'green':($resultg2 == 1 ? 'gray' :'blue')}}" style="display: none;">{{$resultg2 == 3?'大':($resultg2 == 1 ? '走' :'小')}}</p>
                 </td>
             </tr>
         @endfor

@@ -204,12 +204,12 @@
                 }
             })
         }
+        refreshOdd();
+        refreshMatch();
         if ('{{$match['status']}}' == -1){
 
         }
         else{
-            refreshOdd();
-            refreshMatch();
             window.setInterval('refreshOdd()', 5000);
             window.setInterval('refreshMatch()', 5000);
         }

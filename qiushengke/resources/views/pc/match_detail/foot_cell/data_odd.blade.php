@@ -1,6 +1,6 @@
 <div class="odd" style="display: none">
     <p class="title">赔率指数</p>
-    <p class="abox"><a href="odd.html">【亚】</a><a href="odd.html">【欧】</a><a href="odd.html">【大】</a></p>
+    <p class="abox"><a target="_blank" href="/match/foot/odd.html?mid={{$mid}}&type=1">【亚】</a><a target="_blank" href="/match/foot/odd.html?mid={{$mid}}&type=2">【欧】</a><a target="_blank" href="/match/foot/odd.html?mid={{$mid}}&type=3">【大】</a></p>
     <table>
         <colgroup>
             <col num="1" width="">
