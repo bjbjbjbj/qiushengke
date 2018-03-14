@@ -11,8 +11,25 @@ use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Http\Request;
 
 class MatchDetailController extends BaseController{
-    public function matchDetail(Request $request,$first,$second,$mid)
-    {
+
+    public function oddDetail(Request $request){
+        if (is_null($request->input('mid'))){
+            return abort(404);
+        }
+        $this->html_var['mid'] = $request->input('mid');
+        $this->html_var['type'] = $request->input('type',1);
+        return view('pc.match_detail.odd_detail',$this->html_var);
+    }
+
+    /**
+     * 足球终端
+     * @param Request $request
+     * @param $first
+     * @param $second
+     * @param $mid
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|void
+     */
+    public function matchDetail(Request $request,$first,$second,$mid){
         if (is_null($mid)) {
             return abort(404);
         }
@@ -31,8 +48,6 @@ class MatchDetailController extends BaseController{
 
         //阵容;
         $result['lineup'] = $this->matchDetailData($mid, 'lineup');
-
-//        dump($result);
 
         $this->html_var = array_merge($this->html_var,$result);
 //        dump($this->html_var);

@@ -40,138 +40,37 @@ $sortData = [
 //逻辑没做优惠,先完成功能
 for ($i = 0 ; $i < min(10,count($matches));$i++){
     $match = $matches[$i];
-    //初盘
-    //亚盘
-    $result = \App\Http\Controllers\PC\OddCalculateTool::getMatchAsiaOddResult($match['hscore'],$match['ascore'],$match['asiamiddle1'],$match['hid'] == $tid);
-    $key = 'asia';
-    $middle = '1';
-    if ($result == 3){
-        $sortData[$key][$middle]['win10'] = $sortData[$key][$middle]['win10'] + 1;
-        if ($i < 5){
-            $sortData[$key][$middle]['win5'] = $sortData[$key][$middle]['win5'] + 1;
-        }
-    }
-    elseif ($result == 1){
-        $sortData[$key][$middle]['draw10'] = $sortData[$key][$middle]['draw10'] + 1;
-        if ($i < 5){
-            $sortData[$key][$middle]['draw5'] = $sortData[$key][$middle]['draw5'] + 1;
-        }
-    }
-    else{
-        $sortData[$key][$middle]['lose10'] = $sortData[$key][$middle]['lose10'] + 1;
-        if ($i < 5){
-            $sortData[$key][$middle]['lose5'] = $sortData[$key][$middle]['lose5'] + 1;
-        }
-    }
-    //大小球
-    $result = \App\Http\Controllers\PC\OddCalculateTool::getMatchSizeOddResult($match['hscore'],$match['ascore'],$match['goalmiddle1'],$match['hid'] == $tid);
-    $key = 'goal';
-    $middle = '1';
-    if ($result == 3){
-        $sortData[$key][$middle]['win10'] = $sortData[$key][$middle]['win10'] + 1;
-        if ($i < 5){
-            $sortData[$key][$middle]['win5'] = $sortData[$key][$middle]['win5'] + 1;
-        }
-    }
-    elseif ($result == 1){
-        $sortData[$key][$middle]['draw10'] = $sortData[$key][$middle]['draw10'] + 1;
-        if ($i < 5){
-            $sortData[$key][$middle]['draw5'] = $sortData[$key][$middle]['draw5'] + 1;
-        }
-    }
-    else{
-        $sortData[$key][$middle]['lose10'] = $sortData[$key][$middle]['lose10'] + 1;
-        if ($i < 5){
-            $sortData[$key][$middle]['lose5'] = $sortData[$key][$middle]['lose5'] + 1;
-        }
-    }
-    //胜负
-    $result = \App\Http\Controllers\PC\OddCalculateTool::getMatchResult($match['hscore'],$match['ascore'],$match['hid'] == $tid);
-    $key = 'result';
-    $middle = '1';
-    if ($result == 3){
-        $sortData[$key][$middle]['win10'] = $sortData[$key][$middle]['win10'] + 1;
-        if ($i < 5){
-            $sortData[$key][$middle]['win5'] = $sortData[$key][$middle]['win5'] + 1;
-        }
-    }
-    elseif ($result == 1){
-        $sortData[$key][$middle]['draw10'] = $sortData[$key][$middle]['draw10'] + 1;
-        if ($i < 5){
-            $sortData[$key][$middle]['draw5'] = $sortData[$key][$middle]['draw5'] + 1;
-        }
-    }
-    else{
-        $sortData[$key][$middle]['lose10'] = $sortData[$key][$middle]['lose10'] + 1;
-        if ($i < 5){
-            $sortData[$key][$middle]['lose5'] = $sortData[$key][$middle]['lose5'] + 1;
-        }
-    }
-    //终盘
-    //亚盘
-    $result = \App\Http\Controllers\PC\OddCalculateTool::getMatchAsiaOddResult($match['hscore'],$match['ascore'],$match['asiamiddle2'],$match['hid'] == $tid);
-    $key = 'asia';
-    $middle = '2';
-    if ($result == 3){
-        $sortData[$key][$middle]['win10'] = $sortData[$key][$middle]['win10'] + 1;
-        if ($i < 5){
-            $sortData[$key][$middle]['win5'] = $sortData[$key][$middle]['win5'] + 1;
-        }
-    }
-    elseif ($result == 1){
-        $sortData[$key][$middle]['draw10'] = $sortData[$key][$middle]['draw10'] + 1;
-        if ($i < 5){
-            $sortData[$key][$middle]['draw5'] = $sortData[$key][$middle]['draw5'] + 1;
-        }
-    }
-    else{
-        $sortData[$key][$middle]['lose10'] = $sortData[$key][$middle]['lose10'] + 1;
-        if ($i < 5){
-            $sortData[$key][$middle]['lose5'] = $sortData[$key][$middle]['lose5'] + 1;
-        }
-    }
-    //大小球
-    $result = \App\Http\Controllers\PC\OddCalculateTool::getMatchSizeOddResult($match['hscore'],$match['ascore'],$match['goalmiddle2'],$match['hid'] == $tid);
-    $key = 'goal';
-    $middle = '2';
-    if ($result == 3){
-        $sortData[$key][$middle]['win10'] = $sortData[$key][$middle]['win10'] + 1;
-        if ($i < 5){
-            $sortData[$key][$middle]['win5'] = $sortData[$key][$middle]['win5'] + 1;
-        }
-    }
-    elseif ($result == 1){
-        $sortData[$key][$middle]['draw10'] = $sortData[$key][$middle]['draw10'] + 1;
-        if ($i < 5){
-            $sortData[$key][$middle]['draw5'] = $sortData[$key][$middle]['draw5'] + 1;
-        }
-    }
-    else{
-        $sortData[$key][$middle]['lose10'] = $sortData[$key][$middle]['lose10'] + 1;
-        if ($i < 5){
-            $sortData[$key][$middle]['lose5'] = $sortData[$key][$middle]['lose5'] + 1;
-        }
-    }
-    //胜负
-    $result = \App\Http\Controllers\PC\OddCalculateTool::getMatchResult($match['hscore'],$match['ascore'],$match['hid'] == $tid);
-    $key = 'result';
-    $middle = '2';
-    if ($result == 3){
-        $sortData[$key][$middle]['win10'] = $sortData[$key][$middle]['win10'] + 1;
-        if ($i < 5){
-            $sortData[$key][$middle]['win5'] = $sortData[$key][$middle]['win5'] + 1;
-        }
-    }
-    elseif ($result == 1){
-        $sortData[$key][$middle]['draw10'] = $sortData[$key][$middle]['draw10'] + 1;
-        if ($i < 5){
-            $sortData[$key][$middle]['draw5'] = $sortData[$key][$middle]['draw5'] + 1;
-        }
-    }
-    else{
-        $sortData[$key][$middle]['lose10'] = $sortData[$key][$middle]['lose10'] + 1;
-        if ($i < 5){
-            $sortData[$key][$middle]['lose5'] = $sortData[$key][$middle]['lose5'] + 1;
+    $keys = ['asia','goal','result'];
+    $middles = ['1','2'];
+    foreach ($keys as $key){
+        foreach ($middles as $middle){
+            if ($key == 'asia'){
+                $result = \App\Http\Controllers\PC\OddCalculateTool::getMatchAsiaOddResult($match['hscore'],$match['ascore'],($middle == '1'?$match['asiamiddle1']:$match['asiamiddle2']),$match['hid'] == $tid);
+            }
+            elseif ($key == 'goal'){
+                $result = \App\Http\Controllers\PC\OddCalculateTool::getMatchSizeOddResult($match['hscore'],$match['ascore'],($middle == '1'?$match['goalmiddle1']:$match['goalmiddle2']),$match['hid'] == $tid);
+            }
+            else{
+                $result = \App\Http\Controllers\PC\OddCalculateTool::getMatchResult($match['hscore'],$match['ascore'],$match['hid'] == $tid);
+            }
+            if ($result == 3){
+                $sortData[$key][$middle]['win10'] = $sortData[$key][$middle]['win10'] + 1;
+                if ($i < 5){
+                    $sortData[$key][$middle]['win5'] = $sortData[$key][$middle]['win5'] + 1;
+                }
+            }
+            elseif ($result == 1){
+                $sortData[$key][$middle]['draw10'] = $sortData[$key][$middle]['draw10'] + 1;
+                if ($i < 5){
+                    $sortData[$key][$middle]['draw5'] = $sortData[$key][$middle]['draw5'] + 1;
+                }
+            }
+            else{
+                $sortData[$key][$middle]['lose10'] = $sortData[$key][$middle]['lose10'] + 1;
+                if ($i < 5){
+                    $sortData[$key][$middle]['lose5'] = $sortData[$key][$middle]['lose5'] + 1;
+                }
+            }
         }
     }
 }
@@ -267,8 +166,9 @@ foreach ($keys as $key){
         </tr>
         </thead>
         <tbody>
-        @foreach($matches as $match)
+        @for($i = 0 ; $i < min(10,count($matches)); $i++)
             <?php
+            $match = $matches[$i];
             //赛事背景色
             $bgRgb = \App\Http\Controllers\PC\CommonTool::getLeagueBgRgb($match['lid']);
             $r = $bgRgb['r'];
@@ -342,7 +242,7 @@ foreach ($keys as $key){
                     <p class="end {{$resultg2 == 3?'green':($resultg2 == 1 ? 'gray' :'blue')}}" style="display: none;">{{$resultg2 == 3?'大':($resultg2 == 1 ? '走' :'小')}}</p>
                 </td>
             </tr>
-        @endforeach
+        @endfor
         </tbody>
     </table>
 </div>

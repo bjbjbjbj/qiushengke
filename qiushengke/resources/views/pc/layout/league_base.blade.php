@@ -2,7 +2,7 @@
 @section('navContent')
     <div class="home"><p class="abox"><a href="index.html"><img src="/pc/img/logo_image_n.png"></a></p></div>
     <div class="Column">
-        <a class="on">足球</a>
+        <a class="on" href="/match/foot/immediate.html">足球</a>
         <a href="/match/basket/immediate_t.html">篮球</a>
         <a href="">主播</a>
         <a href="">手机APP</a>

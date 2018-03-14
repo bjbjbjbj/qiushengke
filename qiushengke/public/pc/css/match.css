@@ -866,6 +866,7 @@ body{
 #Character .sameOdd .con .num button{
 	height: 28px; width: 50px;
 	margin-left: 35px;
+	background: #fff;
 	font-size: 14px; color: #adadad;
 }
 #Character .sameOdd .con .num button.on{
@@ -893,7 +894,9 @@ body{
 #Character .sameOdd table td:hover{
 	background: #b6d5c8 !important;
 }
-#Character .sameOdd table tr:hover td,
+#Character .sameOdd table tr:hover td{
+	background: #e0ece7;
+}
 #Character .sameOdd table[choose="1"] td:nth-child(1),
 #Character .sameOdd table[choose="2"] td:nth-child(2),
 #Character .sameOdd table[choose="3"] td:nth-child(3),
@@ -1035,7 +1038,7 @@ body{
 #Data .odd table tr:nth-child(4n + 1) + tr td{
 	background: #f6f6f6;
 }
-#Data .odd table td[rowspan]{
+#Data .odd table td[rowspan]:nth-child(1){
 	padding-left: 10px;
 	text-align: left; color: #c52601;
 }
@@ -1143,6 +1146,7 @@ body{
 #Data .battle .cbox .num button{
 	height: 28px; width: 50px;
 	margin-left: 35px;
+	background: #fff;
 	font-size: 14px; color: #adadad;
 }
 #Data .battle .cbox .num button.on{
@@ -1255,7 +1259,9 @@ body{
 #Data .battle table td:hover{
 	background: #b6d5c8 !important;
 }
-#Data .battle table tr:hover td,
+#Data .battle table tr:hover td{
+	background: #e0ece7;
+}
 #Data .battle table[choose="1"] td:nth-child(1),
 #Data .battle table[choose="2"] td:nth-child(2),
 #Data .battle table[choose="3"] td:nth-child(3),
@@ -1321,6 +1327,7 @@ body{
 #Data .history .team button{
 	min-width: 200px; height: 40px;
 	padding: 0 25px;
+	background: #fff;
 	border-radius: 4px; border: 1px solid #2b9968;
 	font-size: 12px; text-align: center; color: #2b9968;
 }
@@ -1367,6 +1374,7 @@ body{
 #Data .history .cbox .num button{
 	height: 28px; width: 50px;
 	margin-left: 35px;
+	background: #fff;
 	font-size: 14px; color: #adadad;
 }
 #Data .history .cbox .num button.on{
@@ -1498,7 +1506,9 @@ body{
 #Data .history table td:hover{
 	background: #b6d5c8 !important;
 }
-#Data .history table tr:hover td,
+#Data .history table tr:hover td{
+	background: #e0ece7;
+}
 #Data .history table[choose="1"] td:nth-child(1),
 #Data .history table[choose="2"] td:nth-child(2),
 #Data .history table[choose="3"] td:nth-child(3),
@@ -1790,6 +1800,7 @@ body{
 #Corner .battle .cbox .num button{
 	height: 28px; width: 50px;
 	margin-left: 35px;
+	background: #fff;
 	font-size: 14px; color: #adadad;
 }
 #Corner .battle .cbox .num button.on{
@@ -1909,6 +1920,7 @@ body{
 #Corner .history .team button{
 	min-width: 200px; height: 40px;
 	padding: 0 25px;
+	background: #fff;
 	border-radius: 4px; border: 1px solid #2b9968;
 	font-size: 12px; text-align: center; color: #2b9968;
 }
@@ -1956,6 +1968,7 @@ body{
 #Corner .history .cbox .num button{
 	height: 28px; width: 50px;
 	margin-left: 35px;
+	background: #fff;
 	font-size: 14px; color: #adadad;
 }
 #Corner .history .cbox .num button.on{
