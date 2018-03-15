@@ -7,9 +7,13 @@
         <th>第三节</th>
         <th>第四节</th>
         @if(isset($match['h_ot']))
-            @foreach($match['h_ot'] as $key=>$ot)
-                <th>加时{{$key}}</th>
-            @endforeach
+            @if(count($match['h_ot']) == 1)
+                <th>加时</th>
+            @else
+                @foreach($match['h_ot'] as $key=>$ot)
+                    <th>加时{{$key+1}}</th>
+                @endforeach
+            @endif
         @endif
         <th>总分</th>
     </tr>
@@ -24,7 +28,7 @@
             <td>{{isset($match['hscore_4th']) ? $match['hscore_4th'] : "-"}}</td>
             @if(isset($match['h_ot']))
                 @foreach($match['h_ot'] as $key=>$ot)
-                    <td>{{$ot}}</td>
+                    <th>{{$ot}}</th>
                 @endforeach
             @endif
             <td>{{isset($match['hscore']) ? $match['hscore'] : "-"}}</td>
@@ -45,7 +49,7 @@
             <td>{{isset($match['ascore_4th']) ? $match['ascore_4th'] : "-"}}</td>
             @if(isset($match['a_ot']))
                 @foreach($match['a_ot'] as $key=>$ot)
-                    <td>{{$ot}}</td>
+                    <th>{{$ot}}</th>
                 @endforeach
             @endif
             <td>{{isset($match['ascore']) ? $match['ascore'] : "-"}}</td>

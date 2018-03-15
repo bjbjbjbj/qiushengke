@@ -18,7 +18,7 @@ class Controller extends BaseController
             array('id'=>'46','name'=>'中超','type'=>1),
             array('id'=>'31','name'=>'英超','type'=>1),
             array('id'=>'26','name'=>'西甲','type'=>1),
-            array('id'=>'33','name'=>'意甲','type'=>1),
+            array('id'=>'29','name'=>'意甲','type'=>1),
             array('id'=>'11','name'=>'法甲','type'=>1),
             array('id'=>'8','name'=>'德甲','type'=>1),
             array('id'=>'139','name'=>'亚冠','type'=>2),
