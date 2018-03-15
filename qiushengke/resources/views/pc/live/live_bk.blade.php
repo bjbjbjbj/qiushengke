@@ -74,67 +74,8 @@
     <div id="Score">
         <p class="title">比分统计</p>
         <div class="con">
-            <table>
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>第一节</th>
-                    <th>第二节</th>
-                    <th>第三节</th>
-                    <th>第四节</th>
-                    @if(isset($match['h_ot']))
-                        @foreach($match['h_ot'] as $key=>$ot)
-                            <th>加时{{$key}}</th>
-                        @endforeach
-                    @endif
-                    <th>总分</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-                    <td>{{$match['hname']}}</td>
-                    @if($isShowScore)
-                        <td>{{isset($match['hscore_1st']) ? $match['hscore_1st'] : "-"}}</td>
-                        <td>{{isset($match['hscore_2nd']) ? $match['hscore_2nd'] : "-"}}</td>
-                        <td>{{isset($match['hscore_3rd']) ? $match['hscore_3rd'] : "-"}}</td>
-                        <td>{{isset($match['hscore_4th']) ? $match['hscore_4th'] : "-"}}</td>
-                        @if(isset($match['h_ot']))
-                            @foreach($match['h_ot'] as $key=>$ot)
-                                <td>{{$ot}}</td>
-                            @endforeach
-                        @endif
-                        <td>{{isset($match['hscore']) ? $match['hscore'] : "-"}}</td>
-                    @else
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    @endif
-                </tr>
-                <tr>
-                    <td>{{$match['aname']}}</td>
-                    @if($isShowScore)
-                        <td>{{isset($match['ascore_1st']) ? $match['ascore_1st'] : "-"}}</td>
-                        <td>{{isset($match['ascore_2nd']) ? $match['ascore_2nd'] : "-"}}</td>
-                        <td>{{isset($match['ascore_3rd']) ? $match['ascore_3rd'] : "-"}}</td>
-                        <td>{{isset($match['ascore_4th']) ? $match['ascore_4th'] : "-"}}</td>
-                        @if(isset($match['a_ot']))
-                            @foreach($match['a_ot'] as $key=>$ot)
-                                <td>{{$ot}}</td>
-                            @endforeach
-                        @endif
-                        <td>{{isset($match['ascore']) ? $match['ascore'] : "-"}}</td>
-                    @else
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>-</td>
-                    @endif
-                </tr>
-                </tbody>
-            </table>
+            @component('pc.match_detail.basket_cell.match_score_table',['match'=>$match,'isShowScore'=>$isShowScore])
+            @endcomponent
         </div>
     </div>
     <div id="BKPlayer">
@@ -144,190 +85,43 @@
                 <p class="host"><button class="on">{{$match['hname']}}</button></p>
                 <p class="away"><button>{{$match['aname']}}</button></p>
             </div>
-            <table class="host">
-                <colgroup>
-                    <col num="1">
-                    <col num="2" width="5%">
-                    <col num="3" width="5%">
-                    <col num="4" width="7.5%">
-                    <col num="5" width="7.5%">
-                    <col num="6" width="7.5%">
-                    <col num="7" width="5%">
-                    <col num="8" width="5%">
-                    <col num="9" width="5%">
-                    <col num="10" width="5%">
-                    <col num="11" width="5%">
-                    <col num="12" width="5%">
-                    <col num="13" width="5%">
-                    <col num="14" width="5%">
-                    <col num="15" width="5%">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th>球员</th>
-                    <th>位置</th>
-                    <th>得分</th>
-                    <th>投篮</th>
-                    <th>三分</th>
-                    <th>罚球</th>
-                    <th>篮板</th>
-                    <th>攻板</th>
-                    <th>防板</th>
-                    <th>助攻</th>
-                    <th>抢断</th>
-                    <th>盖帽</th>
-                    <th>失误</th>
-                    <th>犯规</th>
-                    <th>时间</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($players['home'] as $player)
-                    @if($player['type'] == 'player')
-                        <tr>
-                            <td>{{$player['name']}}</td>
-                            <td>{{\App\Http\Controllers\PC\Match\MatchDetailController::getPlayerLocationCn($player['location'])}}</td>
-                            <td>{{$player['pts']}}</td>
-                            <td>{{$player['fg']}}</td>
-                            <td>{{$player['3pt']}}</td>
-                            <td>{{$player['ft']}}</td>
-                            <td>{{$player['tot']}}</td>
-                            <td>{{$player['off']}}</td>
-                            <td>{{$player['def']}}</td>
-                            <td>{{$player['ast']}}</td>
-                            <td>{{$player['stl']}}</td>
-                            <td>{{$player['blk']}}</td>
-                            <td>{{$player['to']}}</td>
-                            <td>{{$player['pf']}}</td>
-                            <td>{{$player['min']}}'</td>
-                        </tr>
-                    @elseif($player['type'] == 'total')
-                        <tr class="total">
-                            <td>总计</td>
-                            <td></td>
-                            <td>{{$player['pts']}}</td>
-                            <td>{{$player['fg']}}</td>
-                            <td>{{$player['3pt']}}</td>
-                            <td>{{$player['ft']}}</td>
-                            <td>{{$player['tot']}}</td>
-                            <td>{{$player['off']}}</td>
-                            <td>{{$player['def']}}</td>
-                            <td>{{$player['ast']}}</td>
-                            <td>{{$player['stl']}}</td>
-                            <td>{{$player['blk']}}</td>
-                            <td>{{$player['to']}}</td>
-                            <td>{{$player['pf']}}</td>
-                            <td>{{$player['min']}}'</td>
-                        </tr>
-                    @elseif($player['type'] == 'ratio')
-                        <tr class="total">
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>{{$player['fg_p']}}%</td>
-                            <td>{{$player['3pt_p']}}%</td>
-                            <td>{{$player['ft_p']}}%</td>
-                            <td></td>
-                            <td colspan="3"></td>
-                            <td colspan="3"></td>
-                        </tr>
-                    @endif
-                @endforeach
-                </tbody>
-            </table>
-            <table class="away" style="display: none">
-                <colgroup>
-                    <col num="1">
-                    <col num="2" width="5%">
-                    <col num="3" width="5%">
-                    <col num="4" width="7.5%">
-                    <col num="5" width="7.5%">
-                    <col num="6" width="7.5%">
-                    <col num="7" width="5%">
-                    <col num="8" width="5%">
-                    <col num="9" width="5%">
-                    <col num="10" width="5%">
-                    <col num="11" width="5%">
-                    <col num="12" width="5%">
-                    <col num="13" width="5%">
-                    <col num="14" width="5%">
-                    <col num="15" width="5%">
-                </colgroup>
-                <thead>
-                <tr>
-                    <th>球员</th>
-                    <th>位置</th>
-                    <th>得分</th>
-                    <th>投篮</th>
-                    <th>三分</th>
-                    <th>罚球</th>
-                    <th>篮板</th>
-                    <th>攻板</th>
-                    <th>防板</th>
-                    <th>助攻</th>
-                    <th>抢断</th>
-                    <th>盖帽</th>
-                    <th>失误</th>
-                    <th>犯规</th>
-                    <th>时间</th>
-                </tr>
-                </thead>
-                <tbody>
-                @foreach($players['away'] as $player)
-                    @if($player['type'] == 'player')
-                        <tr>
-                            <td>{{$player['name']}}</td>
-                            <td>{{\App\Http\Controllers\PC\Match\MatchDetailController::getPlayerLocationCn($player['location'])}}</td>
-                            <td>{{$player['pts']}}</td>
-                            <td>{{$player['fg']}}</td>
-                            <td>{{$player['3pt']}}</td>
-                            <td>{{$player['ft']}}</td>
-                            <td>{{$player['tot']}}</td>
-                            <td>{{$player['off']}}</td>
-                            <td>{{$player['def']}}</td>
-                            <td>{{$player['ast']}}</td>
-                            <td>{{$player['stl']}}</td>
-                            <td>{{$player['blk']}}</td>
-                            <td>{{$player['to']}}</td>
-                            <td>{{$player['pf']}}</td>
-                            <td>{{$player['min']}}'</td>
-                        </tr>
-                    @elseif($player['type'] == 'total')
-                        <tr class="total">
-                            <td>总计</td>
-                            <td></td>
-                            <td>{{$player['pts']}}</td>
-                            <td>{{$player['fg']}}</td>
-                            <td>{{$player['3pt']}}</td>
-                            <td>{{$player['ft']}}</td>
-                            <td>{{$player['tot']}}</td>
-                            <td>{{$player['off']}}</td>
-                            <td>{{$player['def']}}</td>
-                            <td>{{$player['ast']}}</td>
-                            <td>{{$player['stl']}}</td>
-                            <td>{{$player['blk']}}</td>
-                            <td>{{$player['to']}}</td>
-                            <td>{{$player['pf']}}</td>
-                            <td>{{$player['min']}}'</td>
-                        </tr>
-                    @elseif($player['type'] == 'ratio')
-                        <tr class="total">
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>{{$player['fg_p']}}%</td>
-                            <td>{{$player['3pt_p']}}%</td>
-                            <td>{{$player['ft_p']}}%</td>
-                            <td></td>
-                            <td colspan="3"></td>
-                            <td colspan="3"></td>
-                        </tr>
-                    @endif
-                @endforeach
-                </tbody>
-            </table>
+            @component('pc.match_detail.basket_cell.match_players_table',['players'=>$players['home'],'key'=>'host'])
+            @endcomponent
+            @component('pc.match_detail.basket_cell.match_players_table',['show'=>0,'players'=>$players['away'],'key'=>'away'])
+            @endcomponent
         </div>
     </div>
+@endsection
+
+@section('live_js')
+    <script type="text/javascript">
+        //刷新比赛
+        function refreshMatch() {
+            var mid = '{{$match['mid']}}';
+            var first = mid.substr(0,2);
+            var second = mid.substr(2,2);
+            var url = 'http://match.liaogou168.com/static/terminal/2/'+ first +'/'+ second +'/'+mid+'/match.json';
+            url = 'http://localhost:8000/static/terminal/1/10/44/10446/match.json';
+            $.ajax({
+                'url': url,
+                'success': function (json) {
+                    //比分
+                    if (json['status'] > 0 || json['status'] == -1) {
+                        $('p.score span.host').html(json['hscore']);
+                        $('p.score span.away').html(json['ascore']);
+                        if(json['sport'] == 1)
+                            $('p.time').html(json['current_time']);
+                        else
+                            $('p.time').html(json['live_time_str']);
+                    }
+                    if (json['status'] == -1){
+                        $('p.time').html('已结束');
+                    }
+                }
+            });
+        }
+        refreshMatch();
+    </script>
 @endsection
 
 @section('navContent')

@@ -34,6 +34,7 @@
         //选第一个
         $("div#Live a:first").trigger("click");
     </script>
+    @yield('live_js')
 @endsection
 
 @section('content')

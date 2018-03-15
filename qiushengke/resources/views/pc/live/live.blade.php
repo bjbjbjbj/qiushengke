@@ -8,15 +8,15 @@
         <dl>
             <dt>VS</dt>
             <dd class="host">
-                <p class="item corner">{{$match['h_corner']}}</p>
-                <p class="item yellow">{{$match['h_yellow']}}</p>
-                <p class="item red">{{$match['h_red']}}</p>
+                <p class="item corner">{{isset($match['h_corner'])?$match['h_corner']:0}}</p>
+                <p class="item yellow">{{isset($match['h_yellow'])?$match['h_yellow']:0}}</p>
+                <p class="item red">{{isset($match['h_red'])?$match['h_red']:0}}</p>
                 <p class="team"><img src="{{$hicon}}">{{$match['hname']}}</p>
             </dd>
             <dd class="away">
-                <p class="item corner">{{$match['a_corner']}}</p>
-                <p class="item yellow">{{$match['a_yellow']}}</p>
-                <p class="item red">{{$match['a_red']}}</p>
+                <p class="item corner">{{isset($match['a_corner'])?$match['a_corner']:0}}</p>
+                <p class="item yellow">{{isset($match['a_yellow'])?$match['a_yellow']:0}}</p>
+                <p class="item red">{{isset($match['a_red'])?$match['a_red']:0}}</p>
                 <p class="team"><img src="{{$aicon}}">{{$match['aname']}}</p>
             </dd>
         </dl>
@@ -259,6 +259,37 @@
             </div>
     </div>
 @endsection
+
+@section('live_js')
+    <script type="text/javascript">
+        //刷新比赛
+        function refreshMatch() {
+            var mid = '{{$match['mid']}}';
+            var first = mid.substr(0,2);
+            var second = mid.substr(2,2);
+            var url = 'http://match.liaogou168.com/static/terminal/1/'+ first +'/'+ second +'/'+mid+'/match.json';
+            url = 'http://localhost:8000/static/terminal/1/10/20/1020697/match.json';
+            $.ajax({
+                'url': url,
+                'success': function (json) {
+                    //比分
+                    if (json['status'] > 0 || json['status'] == -1) {
+                        $('p.score span.host').html(json['hscore']);
+                        $('p.score span.away').html(json['ascore']);
+                        if(json['sport'] == 1)
+                            $('p.time').html(json['current_time']);
+                        else
+                            $('p.time').html(json['live_time_str']);
+                    }
+                    if (json['status'] == -1){
+                        $('p.time').html('已结束');
+                    }
+                }
+            });
+        }
+        refreshMatch();
+    </script>
+    @endsection
 
 @section('navContent')
     <div class="home"><p class="abox"><a href="index.html"><img src="/pc/img/logo_image_n.png"></a></p></div>
