@@ -93,7 +93,7 @@ class MatchDetailController extends BaseController{
      * @param $sport
      * @return array
      */
-    private function matchDetailData($id, $name, $sport = 1){
+    public static function matchDetailData($id, $name, $sport = 1){
         $ch = curl_init();
         $url = env('MATCH_URL')."/static/terminal/$sport/".substr($id,0,2)."/".substr($id,2,2)."/$id/$name.json";
         curl_setopt($ch, CURLOPT_URL, $url);

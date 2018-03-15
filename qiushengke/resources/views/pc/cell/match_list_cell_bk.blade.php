@@ -70,6 +70,8 @@ $otCount = min(count($h_ots), count($a_ots));
 $show = true;
 $league_name = isset($match['league']) ? $match['league'] : '';
 $hasLive = $match['live'];
+
+$liveUrl = \App\Http\Controllers\PC\CommonTool::matchLivePathWithId($match['mid'],2);
 ?>
 <table isMatch="1" class="{{$show?'show':'hide'}}" id="m_table_{{$mid}}" match="{{$mid}}" league="{{$lid}}" nba="{{$isNBA?"nba":""}}" lottery="{{$isLottery?"lottery":""}}" live="{{$hasLive?"live":""}}">
     <thead>
@@ -130,9 +132,9 @@ $hasLive = $match['live'];
             @if($hasLive)
                 <br/>
                 @if($match['status'] > 0)
-                    <a id="live_{{$mid}}" class="live" href="{{$matchUrl}}" target="_blank"><span>直播中</span></a>
+                    <a id="live_{{$mid}}" class="live" href="{{$liveUrl}}" target="_blank"><span>直播中</span></a>
                 @else
-                    <a id="live_{{$mid}}" href="{{$matchUrl}}" target="_blank"><img src="/pc/img/icon_living.png"></a>
+                    <a id="live_{{$mid}}" href="{{$liveUrl}}" target="_blank"><img src="/pc/img/icon_living.png"></a>
                 @endif
             @endif
         </td>

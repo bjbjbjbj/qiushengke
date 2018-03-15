@@ -22,25 +22,33 @@
         </dl>
         <ul>
             <button class="open"></button>
-            @foreach($tech['tech'] as $t)
-                @if((strlen($t['name']) < 10) && ($t['h'] > 0 || $t['a'] > 0))
-                    <li>
-                        <p class="host">
-                            <b>{{$t['h']}}</b>
-                            <span><em></em></span>
-                        </p>
-                        <p class="item">{{$t['name']}}</p>
-                        <p class="away">
-                            <b>{{$t['a']}}</b>
-                            <span><em></em></span>
-                        </p>
-                    </li>
-                @endif
-            @endforeach
-            <!--li的数量必须是3的倍数，不够使用空li-->
+            @foreach($tech['tech'] as $item)
+                <?php
+                $hname = $item['h'];
+                $aname = $item['a'];
+                if (str_contains($hname, "(")) {
+                    $hname = str_replace(')','',explode("(", $hname)[1]);
+                }
+                if (str_contains($aname, "(")) {
+                    $aname = str_replace(')','',explode("(", $aname)[1]);
+                }
+                ?>
+                <li>
+                    {{$item['name']}}
+                    <div class="line host">
+                        <p>{{$hname}}</p>
+                        <span style="width: {{$item['h_p']*100}}%;"></span>
+                    </div>
+                    <div class="line away">
+                        <p>{{$aname}}</p>
+                        <span style="width: {{$item['a_p']*100}}%;"></span>
+                    </div>
+                </li>
+        @endforeach
+        <!--li的数量必须是3的倍数，不够使用空li-->
         </ul>
     </div>
-    @endsection
+@endsection
 @section('live_content')
     <div id="Event">
         <?php

@@ -9,13 +9,41 @@
             setPage();
         }
     </script>
+    <script type="text/javascript">
+        //获取是S还是非S
+        function GetHttp () {
+            if (location.href.indexOf('https://') != -1) {
+                return 'https://';
+            }else{
+                return 'http://';
+            }
+        }
+        //通过播放地址判断使用http头
+        function CheckHttp (Link) {
+            if (Link.indexOf('.flv') != -1 || Link.indexOf('rtmp://') == 0 || Link.indexOf('.m3u8') != -1) { //播放方式为播放器播放
+                return 'https://';
+            }else{
+                return 'http://';
+            }
+        }
+
+        function changeChannel(Link,obj) {
+            document.getElementById('MyFrame').src = Link;
+        }
+
+        //选第一个
+        $("div#Live a:first").trigger("click");
+    </script>
 @endsection
 
 @section('content')
     <?php
     $hicon = strlen($match['hicon']) > 0 ? $match['hicon'] : '/pc/img/icon_teamDefault.png';
     $aicon = strlen($match['aicon']) > 0 ? $match['aicon'] : '/pc/img/icon_teamDefault.png';
-    $matchTime = \App\Http\Controllers\PC\CommonTool::getMatchCurrentTime($match['time'],$match['timehalf'],$match['status']);
+    if ($sport == 1)
+        $matchTime = \App\Http\Controllers\PC\CommonTool::getMatchCurrentTime($match['time'],$match['timehalf'],$match['status']);
+    else
+        $matchTime = \App\Http\Controllers\PC\CommonTool::getBasketCurrentTime($match['time'],$match['live_time_str']);
     ?>
     <div id="Match">
         <div class="mbox">
@@ -53,9 +81,19 @@
                 @if($match['status'] > 0)
                     <tr>
                         <td>半场滚球</td>
-                        <td class="green">{{$roll['half']['3']['up']}}</td>
-                        <td class="green">{{$roll['half']['3']['middle']}}</td>
-                        <td class="green">{{$roll['half']['3']['down']}}</td>
+                        @if(isset($roll['half']['3']))
+                            <td class="green">{{$roll['half']['3']['up']}}</td>
+                            @if($sport == 1)
+                                <td class="green">{{$roll['half']['3']['middle']}}</td>
+                            @else
+                                <td class="green">-</td>
+                            @endif
+                            <td class="green">{{$roll['half']['3']['down']}}</td>
+                        @else
+                            <td class="green">-</td>
+                            <td class="green">-</td>
+                            <td class="green">-</td>
+                        @endif
                         <td class="green">{{$roll['half']['1']['up']}}</td>
                         <td class="green">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['half']['1']['middle'])}}</td>
                         <td class="green">{{$roll['half']['1']['down']}}</td>
@@ -65,9 +103,19 @@
                     </tr>
                     <tr>
                         <td>全场滚球</td>
-                        <td class="green">{{$roll['all']['3']['up']}}</td>
-                        <td class="green">{{$roll['all']['3']['middle']}}</td>
-                        <td class="green">{{$roll['all']['3']['down']}}</td>
+                        @if(isset($roll['half']['3']))
+                            <td class="green">{{$roll['all']['3']['up']}}</td>
+                            @if($sport == 1)
+                                <td class="green">{{$roll['all']['3']['middle']}}</td>
+                            @else
+                                <td class="green">-</td>
+                            @endif
+                            <td class="green">{{$roll['all']['3']['down']}}</td>
+                        @else
+                            <td class="green">-</td>
+                            <td class="green">-</td>
+                            <td class="green">-</td>
+                        @endif
                         <td class="green">{{$roll['all']['1']['up']}}</td>
                         <td class="green">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['1']['middle'])}}</td>
                         <td class="green">{{$roll['all']['1']['down']}}</td>
@@ -79,7 +127,11 @@
                     <tr>
                         <td>初盘</td>
                         <td class="green">{{$roll['all']['3']['up1']}}</td>
-                        <td class="green">{{$roll['all']['3']['middle1']}}</td>
+                        @if($sport == 1)
+                            <td class="green">{{$roll['all']['3']['middle1']}}</td>
+                        @else
+                            <td class="green">-</td>
+                        @endif
                         <td class="green">{{$roll['all']['3']['down1']}}</td>
                         <td class="green">{{$roll['all']['1']['up1']}}</td>
                         <td class="green">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['1']['middle1'])}}</td>
@@ -91,7 +143,11 @@
                     <tr>
                         <td>即盘</td>
                         <td class="green">{{$roll['all']['3']['up2']}}</td>
-                        <td class="green">{{$roll['all']['3']['middle2']}}</td>
+                        @if($sport == 1)
+                            <td class="green">{{$roll['all']['3']['middle2']}}</td>
+                        @else
+                            <td class="green">-</td>
+                        @endif
                         <td class="green">{{$roll['all']['3']['down2']}}</td>
                         <td class="green">{{$roll['all']['1']['up2']}}</td>
                         <td class="green">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['1']['middle2'])}}</td>
@@ -105,18 +161,41 @@
             </table>
         </div>
         <div id="Live">
-            <div id="Anchor" style="display: none;">
-                <p><img src="img/icon_teamDefault.png">王者表弟解说々...</p>
-                <a href="">更多主播 >></a>
-            </div>
             <div class="line">
-                <a style="width: 25%;" class="on">动画直播</a>
-                <a href="javascript:void(0)" style="width: 25%;" img="img/icon_teamDefault.png"><span>王者表弟解说々</span>的直播间</a>
-                <a href="javascript:void(0)" style="width: 25%;">高清直播</a>
-                <a href="javascript:void(0)" class="last">CCTV5</a><!--最后一个不用设置宽度-->
+                @for($i = 0 ; $i < count($lives); $i++)
+                    <?php
+                    $channel = $lives[$i];
+                    ?>
+
+                    <?php
+                    if ($channel['type'] == 3 || $channel['type'] == 1 || $channel['type'] == 2 || $channel['type'] == 7)
+                        $preUrl = str_replace("https://","http://",env('AKQ_URL'));
+                    else if($channel['type'] == 99){
+                        if ($channel['player'] == 11){
+                            $preUrl = str_replace("https://","http://",env('AKQ_URL'));
+                        }
+                        else{
+                            if (stristr($channel['link'],'player.pptv.com')){
+                                $preUrl = str_replace("https://","http://",env('AKQ_URL'));
+                            }
+                            else{
+                                $preUrl = str_replace("http://","https://",env('AKQ_URL'));
+                            }
+                        }
+                    } else {
+                        $preUrl = str_replace("http://","https://",env('AKQ_URL'));
+                    }
+                    $link = $preUrl.'/live/player/player-'.$channel['id'].'-'.$channel['type'].'.html';
+                    ?>
+                    @if($i == count($lives) - 1)
+                        <a onclick="changeChannel('{{$link}}',this)" style="width: 25%;" class="last">{{$channel['name']}}</a>
+                    @else
+                        <a onclick="changeChannel('{{$link}}',this)" style="width: 25%;">{{$channel['name']}}</a>
+                    @endif
+                @endfor
             </div>
             <div id="Player">
-                <!-- <iframe src=""></iframe> -->
+                <iframe id="MyFrame" src=""></iframe>
                 <div class="flash"></div>
             </div>
             @yield('live_data')

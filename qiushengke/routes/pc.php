@@ -42,6 +42,7 @@ Route::group(['namespace'=>'Match'], function () {
 
     //直播终端
     Route::get("/live/foot/{first}/{second}/{mid}.html", "LiveController@liveDetail"); //足球
+    Route::get("/live/basket/{first}/{second}/{mid}.html", "LiveController@liveDetail_bk"); //篮球
 });
 
 Route::group(['namespace'=>'League'], function () {
