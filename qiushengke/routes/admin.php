@@ -27,6 +27,22 @@ Route::group(['middleware' => 'admin_auth'], function () {
     Route::get('/links', 'LinkController@links');//外链列表
     Route::post('/links/save', 'LinkController@saveLink');//保存外链
     Route::get('/links/del', 'LinkController@deleteLink');//删除友链
+});
+
+/**
+ * 主播相关
+ */
+Route::group(['middleware' => 'admin_auth'], function () {
+    Route::get('/anchor/platforms', 'Anchor\LivePlatformController@platforms');//直播间平台列表
+    Route::post('/anchor/platforms/save', 'Anchor\LivePlatformController@savePlatform');//保存直播间平台
+
+    Route::get('/anchor', 'Anchor\AnchorController@anchors');//主播列表
+    Route::post('/anchor/save', 'Anchor\AnchorController@saveAnchor');//保存主播信息
+    Route::get('/anchor/change', 'Anchor\AnchorController@changeStatus');//显示/隐藏主播
+
+    Route::get('/anchor/rooms', 'Anchor\AnchorController@rooms');//直播间列表
+    Route::post('/anchor/rooms/save', 'Anchor\AnchorController@saveRoom');//保存直播间信息
+    Route::get('/anchor/rooms/del', 'Anchor\AnchorController@deleteRoom');//删除直播间
 
 });
 
