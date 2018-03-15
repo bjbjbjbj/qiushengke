@@ -10,9 +10,13 @@
             <th>第三节</th>
             <th>第四节</th>
             @if(isset($match['h_ot']))
-                @foreach($match['h_ot'] as $key=>$ot)
-                    <th>加时{{$key}}</th>
-                @endforeach
+                @if(count($match['h_ot']) == 1)
+                    <th>加时</th>
+                @else
+                    @foreach($match['h_ot'] as $key=>$ot)
+                        <th>加时{{$key+1}}</th>
+                    @endforeach
+                @endif
             @endif
             <th>总分</th>
         </tr>
