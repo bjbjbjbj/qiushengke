@@ -17,7 +17,7 @@
                 <p class="column">
                     <button id="column_first" class="on" onclick="matchFilter('first')">精简</button><button id="column_lottery" onclick="matchFilter('lottery')">竞彩</button><button id="column_live" onclick="matchFilter('live')">直播</button><button id="column_all" onclick="matchFilter('all')">完整</button>
                 </p>
-                <p class="number">共<b>{{$total}}</b>场&nbsp;隐藏<b id="hideMatchCount">-</b>场<span>【显示】</span></p>
+                <p class="number">共<b>{{$total}}</b>场&nbsp;隐藏<b id="hideMatchCount">-</b>场<span >【显示】</span></p>
                 <p class="filter"><button class="league">选择赛事</button><button class="odd">选择盘路</button></p>
             </div>
         </div>
