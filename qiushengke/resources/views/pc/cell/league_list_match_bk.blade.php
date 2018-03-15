@@ -3,7 +3,8 @@ $status = $match['status'];
 $mid = $match['mid'];
 $lid = $match['lid'];
 
-$matchTime = \App\Http\Controllers\PC\CommonTool::getMatchCurrentTime($match['time'],$match['timehalf'],$match['status']);;
+//$matchTime = \App\Http\Controllers\PC\CommonTool::getMatchCurrentTime($match['time'],$match['timehalf'],$match['status']);;
+$matchTime = date('Y-m-d H:i',$match['time']);;
 $sport = 2;
 $matchUrl = \App\Http\Controllers\PC\CommonTool::matchPathWithId($mid,$sport);
 
@@ -44,8 +45,8 @@ if (str_contains($typeCn, "受")) {
 $ouOddArray = \App\Http\Controllers\PC\CommonTool::getMatchOdds($match['goalmiddle2'], \App\Http\Controllers\PC\CommonTool::k_odd_type_ou,\App\Http\Controllers\PC\CommonTool::kSportBasketball);
 $ouOdd = "ou_" . $ouOddArray['sort'];
 
-$hicon = strlen($match['hicon'])>0?'http://nba.win007.com'.$match['hicon'] : (env('CDN_URL') . '/pc/img/icon_teamDefault.png');
-$aicon = strlen($match['aicon'])>0?'http://nba.win007.com'.$match['aicon'] : (env('CDN_URL') . '/pc/img/icon_teamDefault.png');
+$hicon = strlen($match['hicon'])>0?$match['hicon'] : (env('CDN_URL') . '/pc/img/icon_teamDefault.png');
+$aicon = strlen($match['aicon'])>0?$match['aicon'] : (env('CDN_URL') . '/pc/img/icon_teamDefault.png');
 ?>
 <tr>
     <td>{{date('m.d', $match['time'])}}<br/>{{date('H:i', $match['time'])}}</td>

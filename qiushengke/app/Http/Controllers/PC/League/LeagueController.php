@@ -12,16 +12,23 @@ use App\Http\Controllers\Controller as BaseController;
 use Illuminate\Http\Request;
 
 class LeagueController extends BaseController{
-    /********** 足球 ************/
-    public function league(Request $request,$lid){
+
+    private function getLeagueData($lid,$sport=1) {
         $ch = curl_init();
-        $url = 'file:///Users/BJ/Documents/git/qiushengke/qiushengke/public/static/leagues/'.$lid.'.json';
+        $url = env('MATCH_URL')."/static/league/$sport/$lid.json";
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);//5秒超时
         $pc_json = curl_exec ($ch);
         curl_close ($ch);
         $pc_json = json_decode($pc_json,true);
+
+        return $pc_json;
+    }
+
+    /********** 足球 ************/
+    public function league(Request $request,$lid){
+        $pc_json = $this->getLeagueData($lid);
         if (!empty($pc_json)) {
             $result = $pc_json;
             //联赛,杯赛
@@ -40,14 +47,7 @@ class LeagueController extends BaseController{
     }
 
     public function leagueSeason(Request $request,$season,$lid){
-        $ch = curl_init();
-        $url = 'http://localhost:8000/static/leagues/'.$lid.'.json';
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 20);//5秒超时
-        $pc_json = curl_exec ($ch);
-        curl_close ($ch);
-        $pc_json = json_decode($pc_json,true);
+        $pc_json = $this->getLeagueData($lid);
         if (!empty($pc_json)) {
             $result = $pc_json;
             //联赛,杯赛
@@ -67,14 +67,7 @@ class LeagueController extends BaseController{
 
     /************ 篮球 *************/
     public function leagueBK(Request $request,$lid){
-        $ch = curl_init();
-        $url = 'file:///Users/BJ/Documents/git/qiushengke/qiushengke/public/static/leagues/2/'.$lid.'.json';
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 5);//5秒超时
-        $pc_json = curl_exec ($ch);
-        curl_close ($ch);
-        $pc_json = json_decode($pc_json,true);
+        $pc_json = $this->getLeagueData($lid,2);
         if (!empty($pc_json)) {
             $result = $pc_json;
             $result['start'] = date_create()->getTimestamp();
@@ -100,7 +93,7 @@ class LeagueController extends BaseController{
             return null;
         }
         $ch = curl_init();
-        $url = 'file:///Users/BJ/Documents/git/qiushengke/qiushengke/public/static/leagues/2/'.$lid.'.json?date=' . $start;
+        $url = env('MATCH_URL')."/static/league/2/$lid?date=" . $start;
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 5);//5秒超时
