@@ -306,7 +306,7 @@ class MatchController extends BaseController
             $name = $item['name'];
             $count = $item['count'];
             $isFive = isset($item['isFive'])?$item['isFive']:0;
-            $isFirst = isset($item['isFirst'])?$item['isFirst']:0;
+            $isFirst = isset($item['genre'])?(($item['genre'] >> 1 & 1) == 1):0;
             if (!isset($leagues[$py][$lid])) {
                 $filter[$py][$lid] = ["id" => $lid, "name" => $name, "count" => $count, "isFive" => $isFive, "isFirst" => $isFirst];
             }
