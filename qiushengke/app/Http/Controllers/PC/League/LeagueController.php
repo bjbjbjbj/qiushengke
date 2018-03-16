@@ -71,6 +71,7 @@ class LeagueController extends BaseController{
         if (!empty($pc_json)) {
             $result = $pc_json;
             $result['start'] = date_create()->getTimestamp();
+            $result['lid'] = $lid;
             //联赛,杯赛
             if ($pc_json['league']['type'] == 1) {
                 $this->html_var = array_merge($this->html_var,$result);
@@ -87,7 +88,7 @@ class LeagueController extends BaseController{
     }
 
     public function leagueBKWithDate(Request $request,$lid){
-        $start = $request->input('start');
+        $start = $request->input('date');
         if (is_null($start))
         {
             return null;

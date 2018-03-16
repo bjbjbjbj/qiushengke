@@ -3,7 +3,7 @@
     <div class="lbox" id="Cup">
         <ul><!-- on-表示当前选中，now-表示赛事进行中的轮次，last-最后一个li-->
             <?php
-            $width = 100/count($stages);
+            $width = count($stages)>0?100/count($stages):0;
             ?>
             @for($i = 0 ; $i < count($stages) ; $i++)
                 <?php

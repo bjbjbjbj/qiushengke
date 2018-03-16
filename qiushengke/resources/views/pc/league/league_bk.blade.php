@@ -6,7 +6,7 @@
             var params = input.value.split('/');
             timeStr = params[2]+'-'+params[0]+'-'+params[1];
             $.ajax({
-                'url':'http://localhost:8000//league/basket/schedule/2.html?date='+timeStr,
+                'url':'http://localhost:8000//league/basket/schedule/'+'{{$lid}}'+'.html?date='+timeStr,
                 'success':function (html) {
                     $('div#Match tbody').html(html);
                 }
