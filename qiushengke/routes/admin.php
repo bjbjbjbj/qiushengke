@@ -43,6 +43,15 @@ Route::group(['middleware' => 'admin_auth'], function () {
     Route::get('/anchor/rooms', 'Anchor\AnchorController@rooms');//直播间列表
     Route::post('/anchor/rooms/save', 'Anchor\AnchorController@saveRoom');//保存直播间信息
     Route::get('/anchor/rooms/del', 'Anchor\AnchorController@deleteRoom');//删除直播间
+
+    //比赛相关 开始
+    Route::get('/anchor/leagues', 'Anchor\MatchController@leagues');//可预约主播的联赛设置
+    Route::post('/anchor/leagues/change', 'Anchor\MatchController@changeStatus');//设置预约/取消预约
+
+    Route::get('/anchor/matches', 'Anchor\MatchController@matches');//比赛预约页面
+    Route::post('/anchor/matches/book', 'Anchor\MatchController@anchorBook');//主播预约比赛
+    Route::post('/anchor/matches/cancel', 'Anchor\MatchController@cancelBook');//主播取消预约比赛
+    //比赛相关 结束
 });
 
 /**

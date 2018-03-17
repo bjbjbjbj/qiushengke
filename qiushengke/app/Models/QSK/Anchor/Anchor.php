@@ -29,7 +29,28 @@ class Anchor extends Model
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function rooms() {
-        return $this->hasMany(AnchorRoom::class, 'anchor_id', 'id')->where('status', AnchorRoom::kStatusShow);
+        return $this->hasMany(AnchorRoom::class, 'anchor_id', 'id')->where('status','<>', AnchorRoom::kStatusHide);
+    }
+
+
+    public static function bookRooms() {
+        $array = [];
+        $anchors = self::query()->where('status', self::kStatusValid)->get();
+        foreach ($anchors as $anchor) {
+            $rooms = $anchor->rooms;
+            $anchorName = $anchor->name;
+            foreach ($rooms as $room) {
+                $livePlatform = $room->livePlatform;
+
+                $obj['anchorName'] = $anchorName;//主播名称
+                $obj['type'] = $room->type;//直播间类型
+                $obj['typeCn'] = $livePlatform->name;//直播间类型中文
+                $obj['roomName'] = $room->name;
+
+                $array[$room->id] = $obj;//房间类型 - 房间名称 - 主播名称
+            }
+        }
+        return $array;
     }
 
 }
