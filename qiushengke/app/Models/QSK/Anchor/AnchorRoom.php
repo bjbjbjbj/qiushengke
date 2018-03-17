@@ -35,4 +35,25 @@ class AnchorRoom extends Model
         return $this->hasOne(LivePlatform::class, 'id', 'type');
     }
 
+    /**
+     * 状态中文
+     * @return string
+     */
+    public function statusCn() {
+        $status = $this->status;
+        $cn = "";
+        switch ($status) {
+            case self::kStatusWait:
+                $cn = "未开播";
+                break;
+            case self::kStatusPlay:
+                $cn = "播放中";
+                break;
+            case self::kStatusHide:
+                $cn = "隐藏";
+                break;
+        }
+        return $cn;
+    }
+
 }

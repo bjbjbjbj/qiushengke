@@ -43,7 +43,6 @@ Route::group(['middleware' => 'admin_auth'], function () {
     Route::get('/anchor/rooms', 'Anchor\AnchorController@rooms');//直播间列表
     Route::post('/anchor/rooms/save', 'Anchor\AnchorController@saveRoom');//保存直播间信息
     Route::get('/anchor/rooms/del', 'Anchor\AnchorController@deleteRoom');//删除直播间
-
 });
 
 /**

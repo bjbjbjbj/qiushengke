@@ -12,8 +12,10 @@ namespace App\Http\Controllers\Admin\Anchor;
 use App\Http\Controllers\UploadTrait;
 use App\Models\QSK\Anchor\Anchor;
 use App\Models\QSK\Anchor\AnchorRoom;
+use App\Models\QSK\Anchor\LivePlatform;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Log;
 
 class AnchorController extends Controller
 {
@@ -111,21 +113,77 @@ class AnchorController extends Controller
     public function rooms(Request $request) {
         $query = AnchorRoom::query();
         $page = $query->paginate(self::default_page_size);
-        return view('admin.anchor.room.list', ['page'=>$page]);
+
+        $anchors = Anchor::query()->where('status', Anchor::kStatusValid)->get();
+        $types = LivePlatform::query()->where('status', LivePlatform::kStatusShow)->get();
+
+        return view('admin.anchor.room.list', ['page'=>$page, 'anchors'=>$anchors, 'types'=>$types]);
     }
 
     /**
      * 保存直播间信息
      * @param Request $request
-     * @return \Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function saveRoom(Request $request) {
+        $id = $request->input('id');
         $name = $request->input('name');
         $anchor_id = $request->input('anchor_id');
         $type = $request->input('type');
-        $status = $request->input('status');
+        $link = $request->input('link');
+//        $status = $request->input('status');
 
-        return response()->json();
+        $inputs = is_numeric($id) ? [] : $request->all();
+
+        //参数判断 开始
+        if(!is_numeric($anchor_id) ) {
+            return back()->withInput($inputs)->with('error', '请选择主播');
+        }
+        if(!is_numeric($type) ) {
+            return back()->withInput($inputs)->with('error', '请选择平台');
+        }
+        if (empty($name)) {
+            return back()->withInput($inputs)->with('error', '直播间名称不能为空');
+        }
+        if (empty($link)) {
+            return back()->withInput($inputs)->with('error', '直播间链接/源不能为空');
+        }
+
+        $anchor = Anchor::query()->find($anchor_id);
+        if (!isset($anchor)) {
+            return back()->withInput($inputs)->with('error', '主播不存在');
+        }
+
+        $platform = LivePlatform::query()->find($type);
+        if (!isset($platform)) {
+            return back()->withInput($inputs)->with('error', '平台不存在');
+        }
+        //参数判断 结束
+
+        if (is_numeric($id)) {
+            $room = AnchorRoom::query()->find($id);
+        }
+        if (!isset($room)) {
+            $room = new AnchorRoom();
+        }
+
+        try {
+            if ($request->hasFile('cover')) {
+                $file = $request->file('cover');
+                $upload = $this->saveUploadedFile($file, 'cover');
+                $room->cover = $upload->getUrl();
+            }
+            $room->name = $name;
+            $room->anchor_id = $anchor_id;
+            $room->type = $type;
+            $room->link = $link;
+            $room->save();
+        } catch (\Exception $exception) {
+            Log::error($exception);
+            return back()->with('error', '保存失败');
+        }
+
+        return back()->with('success', '保存成功');
     }
 
     /**
