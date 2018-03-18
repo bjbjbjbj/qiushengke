@@ -45,11 +45,11 @@
 @section('content')
     <h1 class="page-header">联赛设置</h1>
     <div style="margin-bottom: 10px;">
-        <form action="/admin/anchor/leagues">
+        <form action="/admin/anchor/{{$sport == 1 ? 'football' : 'basketball'}}/leagues">
             <input style="width:99px;" name="name" value="{{request('name', '')}}" placeholder="联赛名称" class="form-control form-input-css">
             <select style="width:99px;" name="type" class="form-control form-input-css">
                 <option value="">全部</option>
-                <option value="1" @if(request('type', '') == '1') selected @endif >主流</option>
+                @if($sport == 1)<option value="1" @if(request('type', '') == '1') selected @endif >主流</option>@endif
                 <option value="2" @if(request('type', '') == '2') selected @endif >热门</option>
             </select>
             <button type="submit" class="btn btn btn-success">查询</button>
@@ -115,7 +115,7 @@
             $.ajax({
                 "url": "/admin/anchor/leagues/change",
                 "type": "post",
-                "data": {"id": id, "status": status},
+                "data": {"id": id, "status": status, 'sport': "{{$sport or '1'}}"},
                 "dataType": "json",
                 "success": function (json) {
                     if (json) {

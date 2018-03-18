@@ -13,7 +13,7 @@ use App\Models\QSK\Match\League;
 use App\Models\QSK\Match\Match;
 use Illuminate\Console\Command;
 
-class MatchCommands extends Command
+class FootballMatchCommands extends Command
 {
 
     /**
@@ -21,7 +21,7 @@ class MatchCommands extends Command
      *
      * @var string
      */
-    protected $signature = 'matches_in_db:run';
+    protected $signature = 'football_matches_in_db:run';
 
     /**
      * The console command description.
@@ -53,8 +53,8 @@ class MatchCommands extends Command
         }
         //
         $ch = curl_init();
-        //$url = env('MATCH_URL') . "/api/qsk/matches.json?lid=" . $lid;
-        $url = 'http://user.liaogou168.com:9020/api/qsk/matches.json?lid=' . $lid;
+        //$url = env('MATCH_URL') . "/api/qsk/football/matches.json?lid=" . $lid;
+        $url = 'http://user.liaogou168.com:9020/api/qsk/football/matches.json?lid=' . $lid;
         //echo 'url = ' . $url . "\n";
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

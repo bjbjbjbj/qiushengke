@@ -63,8 +63,8 @@
         @endif
     </div>
     <div style="margin-bottom: 10px;">
-        <form action="/admin/anchor/matches">
-            <input type="hidden" name="lid" value="" />
+        <form action="/admin/anchor/{{$sport == 1 ? 'football' : 'basketball'}}/matches">
+            <input type="hidden" name="lid" value="{{request('lid', '')}}" />
             <input style="width:200px;" name="name" value="{{request('name', '')}}" placeholder="球队名称" class="form-control form-input-css">
             <button type="submit" class="btn btn btn-success">查询</button>
         </form>
@@ -86,7 +86,7 @@
                             <p>ID：{{$match->id}}</p>
                             <p>比赛时间：<b>{{date('Y-m-d H:i', strtotime($match['time']))}}</b></p>
                             <p>
-                                <span style="color: red;">{{$match['lname']}}</span>&nbsp;&nbsp;
+                                <span style="color: red;">{{empty($match['lname']) ? $match['win_lname'] : $match['lname']}}</span>&nbsp;&nbsp;
                                 {{$match['hname'] . ' VS ' . $match['aname']}}
                             </p>
                             <p>
