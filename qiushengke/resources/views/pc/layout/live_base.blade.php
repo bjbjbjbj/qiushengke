@@ -33,6 +33,96 @@
 
         //选第一个
         $("div#Live a:first").trigger("click");
+
+
+        //时间格式化
+        function add0(m){return m<10?'0'+m:m }
+        function format(string)
+        {
+            string = string*1000;
+            var time = new Date(string);
+            var y = time.getFullYear();
+            var m = time.getMonth()+1;
+            var d = time.getDate();
+            var h = time.getHours();
+            var mm = time.getMinutes();
+            var s = time.getSeconds();
+            return add0(h)+':'+add0(mm);
+        }
+
+        var user = '';
+
+        //聊天室相关
+        //发送
+        function postChat() {
+            user = $('#charUser')[0].value;
+            var message = $('#charContent')[0].value;
+            var url = '/chat/post';
+            var current = new Date();
+            current = current.getTime()/1000;
+            current = format(current);
+            $.post({
+                        'url': url,
+                        'data':{
+                            "sport":'{{$sport}}',
+                            "mid":'{{$match['mid']}}',
+                            "message":message,
+                            "user":user,
+                        },
+                        'success': function (json) {
+                            var ul = $('div#Chatroom ul');
+                            var li = '<li>'+
+                                    '<p class="time">'+current+'</p>'+
+                                    '<p class="name">'+user+'</p>'+
+                                    '<p class="con">'+message+'</p>'+
+                                    '</li>'
+                            ul.append(li);
+                        }
+                    }
+            );
+        }
+
+        //获取聊天数据(增量
+        function getChat() {
+            var url = '/public/chat/json/{{$sport}}/{{substr($match['mid'],0,2)}}/{{substr($match['mid'],2,2)}}/{{$match['mid']}}_t.json';
+            $.ajax({
+                        'url': url,
+                        'success': function (json) {
+                            if (json){
+                                var ul = $('div#Chatroom ul');
+                                for (var i = 0 ; i < json.length ; i++){
+                                    var current = new Date();
+                                    var data = json[i];
+                                    current = current.getTime()/1000;
+                                    //60秒前不出
+                                    if (data['time'] < current - 10){
+                                        continue;
+                                    }
+                                    if (user && user == data['user']){
+                                        continue;
+                                    }
+                                    var time = format(data['time']);
+                                    var li = '<li>'+
+                                            '<p class="time">'+time+'</p>'+
+                                            '<p class="name">'+data['user']+'</p>'+
+                                            '<p class="con">'+data['content']+'</p>'+
+                                            '</li>'
+                                    ul.append(li);
+                                }
+                            }
+                        }
+                    }
+            );
+        }
+        if ('{{$match['status']}}' == -1){
+
+        }
+        else{
+            getChat();
+            window.setInterval('getChat()', 10000);
+        }
+        getChat();
+        window.setInterval('getChat()', 10000);
     </script>
     @yield('live_js')
 @endsection
@@ -203,40 +293,16 @@
             <div id="Chatroom">
                 <p class="title">聊天室<button>清除</button></p>
                 <ul>
-                    <li>
-                        <p class="time">01:52</p>
-                        <p class="name">路飞的鞋</p>
-                        <p class="con">我猜这场的比分是2：1 上半场小2.5 下半场客队来</p>
-                    </li>
-                    <li>
-                        <p class="time">01:52</p>
-                        <p class="name">红剑足球大神来也</p>
-                        <p class="con">悉尼这么强我申花怎么办</p>
-                    </li>
-                    <li>
-                        <p class="time">01:52</p>
-                        <p class="name">从前从前有个</p>
-                        <p class="con">西尼下半场进三个很轻松啊。慌啥啊。</p>
-                    </li>
-                    <li>
-                        <p class="time">01:52</p>
-                        <p class="name">路飞的鞋</p>
-                        <p class="con">我猜这场的比分是2：1 上半场小2.5 下半场客队来</p>
-                    </li>
-                    <li>
-                        <p class="time">01:52</p>
-                        <p class="name">红剑足球大神来也</p>
-                        <p class="con">悉尼这么强我申花怎么办</p>
-                    </li>
+
                 </ul>
             </div>
             <div id="Chat">
                 <p class="name">
                     <span>昵称：</span>
-                    <input type="text" name="name" placeholder="大侠请留名">
+                    <input id="charUser" type="text" name="name" placeholder="大侠请留名">
                 </p>
-                <textarea placeholder="输入信息"></textarea>
-                <button class="push">发送</button>
+                <textarea id="charContent" placeholder="输入信息"></textarea>
+                <button class="push" onclick="postChat()">发送</button>
             </div>
         </div>
         @yield('live_content')

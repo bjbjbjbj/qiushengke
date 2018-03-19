@@ -45,6 +45,16 @@ Route::group(['namespace'=>'Match'], function () {
     Route::get("/live/basket/{first}/{second}/{mid}.html", "LiveController@liveDetail_bk"); //篮球
 });
 
+//聊天室
+Route::group(['namespace'=>'Chat'], function () {
+    //获取聊天记录
+    Route::get("/chat/foot/{first}/{second}/{mid}.json", "ChatController@getChat");
+    //获取聊天记录
+    Route::get("/chat/basket/{first}/{second}/{mid}.json", "ChatController@getChat");
+    //发聊天
+    Route::any("/chat/post", "ChatController@postChat");
+});
+
 Route::group(['namespace'=>'League'], function () {
     //赛事专题
     Route::get("/league/foot/{season}/{lid}.html", "LeagueController@leagueSeason");//联赛

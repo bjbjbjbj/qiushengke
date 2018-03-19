@@ -287,7 +287,12 @@
                 }
             });
         }
-        refreshMatch();
+        if ('{{$match['status']}}' == -1){
+
+        }
+        else{
+            window.setInterval('refreshMatch()', 5000);
+        }
     </script>
     @endsection
 
