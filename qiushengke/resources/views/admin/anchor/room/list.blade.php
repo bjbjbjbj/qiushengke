@@ -1,4 +1,18 @@
 @extends('admin.layout.nav')
+@section('css')
+    <style>
+        .form-css {
+            height: 33px;
+            border: 1px solid #ccc;
+            color:#555;
+            border-radius:4px;
+            font-size: 14px;
+        }
+        td {
+            text-align: left;
+        }
+    </style>
+@endsection
 @section('content')
     <h1 class="page-header">直播间列表</h1>
     <div class="row placeholders">
@@ -6,13 +20,29 @@
             <table class="table table-striped">
                 <thead>
                 <tr>
-                    <form action="/admin/anchor/save" method="post" enctype="multipart/form-data" onsubmit="return checkAnchor(this);">
+                    <form action="/admin/anchor/rooms/save" method="post" enctype="multipart/form-data" onsubmit="return checkAnchor(this);">
                         <th>{{ csrf_field() }}</th>
                         <th>
-                            <input type="text" name="name" class="form-control" placeholder="主播名" value="{{ session('name','') }}" required>
+                            <input type="text" name="name" class="form-control" placeholder="直播间名称" value="{{ session('name','') }}" required>
                         </th>
-                        <th><textarea name="intro" class="form-control"></textarea></th>
-                        <th><input type="file" name="icon"></th>
+                        <th>
+                            <select name="anchor_id" class="form-css" required>
+                                <option value="">请选择</option>
+                                @foreach($anchors as $anchor)
+                                <option value="{{$anchor->id}}">{{$anchor->name}}</option>
+                                @endforeach
+                            </select>
+                        </th>
+                        <th>
+                            <select name="type" class="form-css" required>
+                                <option value="">请选择</option>
+                                @foreach($types as $type)
+                                <option value="{{$type->id}}">{{$type->name}}</option>
+                                @endforeach
+                            </select>
+                        </th>
+                        <th><input style="width: 150px;" type="file" name="cover"></th>
+                        <th><input name="link" style="width: 88%;" class="form-css" placeholder="链接/源" required></th>
                         <th>
                             <button type="submit" class="btn btn-sm btn-primary">
                                 <span class="glyphicon glyphicon-plus"></span>新建
@@ -22,37 +52,54 @@
                 </tr>
                 <tr>
                     <th width="5%">#</th>
-                    <th width="15%">名称</th>
-                    <th width="25%">简介</th>
-                    <th width="10%">头像</th>
+                    <th width="12%">名称</th>
+                    <th width="12%">主播</th>
+                    <th width="10%">平台</th>
+                    <th width="150px">封面</th>
+                    <th>链接/源</th>
                     <th width="15%">操作</th>
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($page as $anchor)
-                    <form action="/admin/anchor/save" enctype="multipart/form-data" method="post" onsubmit="return checkAnchor(this);">
+                @foreach($page as $room)
+                    <form action="/admin/anchor/rooms/save" enctype="multipart/form-data" method="post" onsubmit="return checkAnchor(this);">
                         {{ csrf_field() }}
-                        <input type="hidden" name="id" value="{{ $anchor->id }}">
+                        <input type="hidden" name="id" value="{{ $room->id }}">
                         <tr>
-                            <td><h5>{{ $anchor->id }}</h5></td>
+                            <td><h5>{{ $room->id }}</h5></td>
                             <td>
-                                <input type="text" name="name" class="form-control" placeholder="名称" value="{{ $anchor->name }}" required>
+                                <input type="text" name="name" class="form-css" value="{{ $room->name }}" required>
                             </td>
-                            <td><textarea name="intro" class="form-control">{{$anchor->intro}}</textarea></td>
+                            <td>
+                                <select name="anchor_id" class="form-css">
+                                    @foreach($anchors as $anchor)
+                                    <option value="{{$anchor->id}}" @if($anchor->id == $room->anchor_id) selected @endif>{{$anchor->name}}</option>
+                                    @endforeach
+                                </select>
+                            </td>
+                            <td>
+                                <select name="type" class="form-css">
+                                    @foreach($types as $type)
+                                        <option value="{{$type->id}}" @if($type->id == $room->type) selected @endif>{{$type->name}}</option>
+                                    @endforeach
+                                </select>
+                            </td>
                             <td style="text-align:left;">
-                                @if(!empty($anchor->icon)) <img src="{{$anchor->icon}}" style="max-width: 100%;max-height: 100px;"> @endif
-                                <input type="file" name="icon">
+                                @if(!empty($room->cover)) <img src="{{$room->cover}}" style="max-width: 100%;max-height: 100px;"> @endif
+                                <input type="file" name="cover" style="width: 150px;" >
                             </td>
+                            <td><input class="form-css" style="width: 88%;"  name="link" value="{{$room->link}}"></td>
                             <td>
                                 <p>
-                                    <button type="submit" class="btn btn-sm btn-info">保存</button>
+                                    <b>状态：{{$room->statusCn()}}</b>
                                 </p>
                                 <p>
+                                    <button type="submit" class="btn btn-xs btn-info">保存</button>
                                     <?php
                                     $msg = $anchor->status == 1 ? "隐藏" : "显示";
                                     $status = $anchor->status == 1 ? -1 : 1;
                                     ?>
-                                    <a class="btn btn-sm btn-danger" href="javascript:if (confirm('是否{{$msg}}主播')) { location.href = '/admin/anchor/change?status={{$status}}&id={{ $anchor->id }}';}">
+                                    <a class="btn btn-xs btn-danger" href="javascript:if (confirm('是否{{$msg}}主播')) { location.href = '/admin/anchor/change?status={{$status}}&id={{ $anchor->id }}';}">
                                         {{$msg}}
                                     </a>
                                 </p>
