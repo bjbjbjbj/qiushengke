@@ -28,7 +28,11 @@
             <div class="rbox" id="Info">
                 <p class="title">赛事介绍</p>
                 <div class="con">
-                    <p class="info"><img src="/pc/img/icon_teamDefault.png">{{$league['name']}}<span>{{$season['name']}}赛季</span></p>
+                    @if(array_key_exists($league['id'], \App\Http\Controllers\PC\League\LeagueController::footLeagueIcons))
+                        <p class="info"><img src="{{\App\Http\Controllers\PC\League\LeagueController::footLeagueIcons[$league['id']]}}">{{$league['name']}}<span>{{$season['name']}}赛季</span></p>
+                    @else
+                        <p class="info"><img src="/pc/img/icon_teamDefault.png">{{$league['name']}}<span>{{$season['name']}}赛季</span></p>
+                    @endif
                     <?php
                         $describeStr = $league['describe'];
                         $describes = explode("<br>", $describeStr);
