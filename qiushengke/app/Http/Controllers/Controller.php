@@ -40,8 +40,8 @@ class Controller extends BaseController
         $basketLeague = [
             array('id'=>'1','name'=>'NBA','type'=>1),
             array('id'=>'4','name'=>'CBA','type'=>1),
-            array('id'=>'2','name'=>'WNBA','type'=>1),
-            array('id'=>'89','name'=>'欧锦赛','type'=>1),
+//            array('id'=>'2','name'=>'WNBA','type'=>1),
+            array('id'=>'89','name'=>'Euro','type'=>1),
         ];
         $links = array();
         foreach ($basketLeague as $link) {
