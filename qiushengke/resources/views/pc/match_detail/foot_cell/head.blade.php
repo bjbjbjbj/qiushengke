@@ -164,16 +164,16 @@ $aicon = strlen($match['aicon']) > 0 ? $match['aicon'] : '/pc/img/icon_teamDefau
     }
     ?>
     <div class="cbox host">
-        <canvas width="114px" height="114px" value="{{$middle+$up}}" color="#2b9968"></canvas>
+        <canvas width="114px" height="114px" value="{{isset($middle)?($middle+$up):0}}" color="#2b9968"></canvas>
         <div class="cover">
-            <p><b>{{$middle + $up}}%</b></p>
+            <p><b>{{isset($middle)?($middle + $up):'-'}}%</b></p>
             <p>不败</p>
         </div>
     </div>
     <div class="cbox away">
-        <canvas width="114px" height="114px" value="{{100 - $middle - $up}}" color="#fabd36"></canvas>
+        <canvas width="114px" height="114px" value="{{isset($middle)?(100 - $middle - $up):0}}" color="#fabd36"></canvas>
         <div class="cover">
-            <p><b>{{100 - $middle - $up}}%</b></p>
+            <p><b>{{isset($middle)?(100 - $middle - $up):'-'}}%</b></p>
             <p>客胜</p>
         </div>
     </div>

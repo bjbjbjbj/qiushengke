@@ -151,6 +151,37 @@
         }
         return text;
     }
+
+    //获取链点参数
+    function GetQueryString(str,href) {
+        var Href;
+        if (href != undefined && href != '') {
+            Href = href;
+        }else{
+            Href = location.href;
+        };
+        var rs = new RegExp("([\?&])(" + str + ")=([^&#]*)(&|$|#)", "gi").exec(Href);
+        if (rs) {
+            return decodeURI(rs[3]);
+        } else {
+            return '';
+        }
+    }
+
+    //比赛终端url
+    function matchPathWithId(mid,sport){
+        var path = '';
+        if (mid > 1000) {
+            var first = mid.substr(0,2);
+            var second = mid.substr(2,2);
+            if (sport == 2) {
+                path = '/match/basket/' + first + '/' + second + '/' + mid + '.html';
+            } else {
+                path = '/match/foot/' + first + '/' + second + '/' + mid + '.html';
+            }
+        }
+        return path;
+    }
 </script>
 <script type="text/javascript" src="/pc/js/jquery.js"></script>
 <!--[if lte IE 8]>

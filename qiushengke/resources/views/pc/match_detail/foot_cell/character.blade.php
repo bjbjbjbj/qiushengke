@@ -1,6 +1,6 @@
 <?php
 $ws = $analyse['ws'];
-$rank = $analyse['rank'];
+$rank = isset($analyse['rank'])?$analyse['rank']:null;
 $sameOdd = $analyse['sameOdd'];
 ?>
 <div id="Character" style="display: none;">
@@ -19,9 +19,9 @@ $sameOdd = $analyse['sameOdd'];
             $scount = max($stylesCount2,$stylesCount);
             $count = max($strengthCount + $weaknessCount,$strengthCount2 + $weaknessCount2);
             ?>
-            @component('pc.match_detail.foot_cell.character_item',['scount'=>$scount,'count'=>$count,'items'=>$ws['home'],'key'=>'host','tname'=>$match['hname'],'rank'=>$rank['leagueRank']['hLeagueRank'],'rankLeague'=>$rank['leagueRank']['hLeagueName']])
+            @component('pc.match_detail.foot_cell.character_item',['scount'=>$scount,'count'=>$count,'items'=>$ws['home'],'key'=>'host','tname'=>$match['hname'],'rank'=>isset($rank)?$rank['leagueRank']['hLeagueRank']:null,'rankLeague'=>isset($rank)?$rank['leagueRank']['hLeagueName']:null])
             @endcomponent
-            @component('pc.match_detail.foot_cell.character_item',['scount'=>$scount,'count'=>$count,'items'=>$ws['away'],'key'=>'away','tname'=>$match['hname'],'rank'=>$rank['leagueRank']['hLeagueRank'],'rankLeague'=>$rank['leagueRank']['hLeagueName']])
+            @component('pc.match_detail.foot_cell.character_item',['scount'=>$scount,'count'=>$count,'items'=>$ws['away'],'key'=>'away','tname'=>$match['hname'],'rank'=>isset($rank)?$rank['leagueRank']['hLeagueRank']:null,'rankLeague'=>isset($rank)?$rank['leagueRank']['hLeagueName']:null])
             @endcomponent
         </div>
     @endif
