@@ -25,13 +25,13 @@ Route::group(['namespace'=>'Match'], function () {
 
     //足球
     Route::get("/match/foot/immediate.html", "MatchController@immediate_f"); //今天
-    Route::get("/match/foot/result_{dateStr}.html", "MatchController@result_f"); //完赛比分
-    Route::get("/match/foot/schedule_{dateStr}.html", "MatchController@schedule_f"); //下日赛程
+    Route::get("/match/foot/{dateStr}/result.html", "MatchController@result_f"); //完赛比分
+    Route::get("/match/foot/{dateStr}/schedule.html", "MatchController@schedule_f"); //下日赛程
 
     //篮球 按联赛排序
     Route::get("/match/basket/immediate_{order}.html", "MatchController@immediate_bk"); //今天
-    Route::get("/match/basket/result_{dateStr}_{order}.html", "MatchController@result_bk"); //完赛比分
-    Route::get("/match/basket/schedule_{dateStr}_{order}.html", "MatchController@schedule_bk"); //下日赛程
+    Route::get("/match/basket/{dateStr}/result_{order}.html", "MatchController@result_bk"); //完赛比分
+    Route::get("/match/basket/{dateStr}/schedule_{order}.html", "MatchController@schedule_bk"); //下日赛程
 
     //比赛终端
     Route::get("/match/foot/{first}/{second}/{mid}.html", "MatchDetailController@matchDetail"); //足球
@@ -52,7 +52,7 @@ Route::group(['namespace'=>'Chat'], function () {
     //获取聊天记录
     Route::get("/chat/basket/{first}/{second}/{mid}.json", "ChatController@getChat");
     //发聊天
-    Route::any("/chat/post", "ChatController@postChat");
+    Route::post("/chat/post", "ChatController@postChat");
 });
 
 Route::group(['namespace'=>'League'], function () {

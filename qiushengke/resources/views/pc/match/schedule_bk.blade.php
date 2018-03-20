@@ -4,7 +4,7 @@
         <div id="Calendar">
             <ul>
                 @foreach($calendar as $item)
-                    <a class="li {{$item['on'] ? 'on':''}}" href="{{'/match/basket/schedule_'.$item['date'].'_t.html'}}">
+                    <a class="li {{$item['on'] ? 'on':''}}" href="{{'/match/basket/'.$item['date'].'/schedule_t.html'}}">
                         <p class="date">{{$item['dateStr']}}</p>
                         <p class="week">{{$item['w']}}</p>
                     </a>
@@ -33,7 +33,7 @@
     <div class="abox">
         <ul>
             <a class="li" href="/match/basket/immediate_t.html">即时比分</a>
-            <a class="li" href="/match/basket/result_{{$lastDate}}_t.html">完场赛果</a>
+            <a class="li" href="/match/basket/{{$lastDate}}/result_t.html">完场赛果</a>
             <a class="li on">未来赛程</a>
         </ul>
     </div>

@@ -54,18 +54,19 @@ class ChatController extends BaseController{
         else{
             $datas = json_decode($datas, true);
         }
-        dump($datas);
-
         $datas[] = array('user'=>$user,'time'=>date_create()->getTimestamp(),'content'=>$message);
         $allDatas[] = array('user'=>$user,'time'=>date_create()->getTimestamp(),'content'=>$message);
-
-        dump($datas);
         Redis::setEx($key, 60, json_encode($datas));
         Redis::setEx($allKey, 24 * 60 * 60, json_encode($allDatas));
-
-        //大数据
-        Storage::disk("public")->put("/chat/json/$sport/".substr($mid,0,2).'/'.substr($mid,2,2).'/'.$mid.".json", json_encode($allDatas));
-        //增量
-        Storage::disk("public")->put("/chat/json/$sport/".substr($mid,0,2).'/'.substr($mid,2,2).'/'.$mid."_t.json", json_encode($datas));
+        try {
+            //大数据
+            Storage::disk("public")->put("/chat/json/$sport/" . substr($mid, 0, 2) . '/' . substr($mid, 2, 2) . '/' . $mid . ".json", json_encode($allDatas));
+            //增量
+            Storage::disk("public")->put("/chat/json/$sport/" . substr($mid, 0, 2) . '/' . substr($mid, 2, 2) . '/' . $mid . "_t.json", json_encode($datas));
+        }
+        catch (\Exception $e){
+            return array('code'=>-1,'message'=>'保存失败');
+        }
+        return array('code'=>0,'message'=>'success');
     }
 }
