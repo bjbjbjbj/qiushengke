@@ -15,26 +15,44 @@
                 <th>大球率</th>
             </tr>
             <tr>
-                <td>{{$match['hname']}}</td>
-                <?php
-                $item = $cornerAnalyse['home']['20'];
-                ?>
-                <td>{{round($item['get'],0)}}</td>
-                <td>{{round($item['lose'],0)}}</td>
-                <td>{{round($item['leave'],0)}}</td>
-                <td>{{$item['lose'] + $item['get']}}</td>
-                <td>{{round($item['big'],0)}}%</td>
+                @if(isset($cornerAnalyse['home']['20']))
+                    <td>{{$match['hname']}}</td>
+                    <?php
+                    $item = $cornerAnalyse['home']['20'];
+                    ?>
+                    <td>{{round($item['get'],0)}}</td>
+                    <td>{{round($item['lose'],0)}}</td>
+                    <td>{{round($item['leave'],0)}}</td>
+                    <td>{{$item['lose'] + $item['get']}}</td>
+                    <td>{{round($item['big'],0)}}%</td>
+                @else
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                @endif
             </tr>
             <tr>
-                <td>{{$match['aname']}}</td>
-                <?php
-                $item = $cornerAnalyse['away']['20'];
-                ?>
-                <td>{{round($item['get'],0)}}</td>
-                <td>{{round($item['lose'],0)}}</td>
-                <td>{{round($item['leave'],0)}}</td>
-                <td>{{$item['lose'] + $item['get']}}</td>
-                <td>{{round($item['big'],0)}}%</td>
+                @if(isset($cornerAnalyse['away']['20']))
+                    <td>{{$match['aname']}}</td>
+                    <?php
+                    $item = $cornerAnalyse['away']['20'];
+                    ?>
+                    <td>{{round($item['get'],0)}}</td>
+                    <td>{{round($item['lose'],0)}}</td>
+                    <td>{{round($item['leave'],0)}}</td>
+                    <td>{{$item['lose'] + $item['get']}}</td>
+                    <td>{{round($item['big'],0)}}%</td>
+                @else
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                @endif
             </tr>
         </table>
         <table num="5" style="display: none;">

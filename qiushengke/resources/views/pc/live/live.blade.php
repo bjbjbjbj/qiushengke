@@ -267,8 +267,7 @@
             var mid = '{{$match['mid']}}';
             var first = mid.substr(0,2);
             var second = mid.substr(2,2);
-            var url = 'http://match.liaogou168.com/static/terminal/1/'+ first +'/'+ second +'/'+mid+'/match.json';
-            url = 'http://localhost:8000/static/terminal/1/10/20/1020697/match.json';
+            var url = '/static/terminal/1/'+ first +'/'+ second +'/'+mid+'/match.json';
             $.ajax({
                 'url': url,
                 'success': function (json) {

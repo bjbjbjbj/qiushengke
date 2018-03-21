@@ -12,6 +12,9 @@
 */
 
 Route::group(['namespace'=>'Match'], function () {
+    //测试用,免得跨域
+    Route::get("/test", "MatchController@test"); //今天
+
     Route::any("/", function (){
         return redirect('/match/foot/immediate.html');
     });
@@ -19,9 +22,6 @@ Route::group(['namespace'=>'Match'], function () {
         return redirect('/match/foot/immediate.html');
     });
     Route::any("/error", "HomeController@error");
-
-    Route::any('/static/score.json',"MatchController@test");
-    Route::any('/static/roll.json',"MatchController@test2");
 
     //足球
     Route::get("/match/foot/immediate.html", "MatchController@immediate_f"); //今天
@@ -35,7 +35,7 @@ Route::group(['namespace'=>'Match'], function () {
 
     //比赛终端
     Route::get("/match/foot/{first}/{second}/{mid}.html", "MatchDetailController@matchDetail"); //足球
-    Route::get("/match/basket/{first}/{second}/{mid}.html", "MatchDetailController@basketDetail"); //今天
+    Route::get("/match/basket/{first}/{second}/{mid}.html", "MatchDetailController@basketDetail"); //篮球
 
     //赔率终端
     Route::get("/match/foot/odd.html", "MatchDetailController@oddDetail"); //足球

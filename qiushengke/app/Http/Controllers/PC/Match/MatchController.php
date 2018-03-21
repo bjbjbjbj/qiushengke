@@ -8,11 +8,18 @@
 namespace App\Http\Controllers\PC\Match;
 
 use App\Http\Controllers\Controller as BaseController;
+use App\Http\Controllers\PC\FileTool;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class MatchController extends BaseController
 {
+    public function test(Request $request){
+        $url = $request->input('url');
+        $json = FileTool::curlData($url,5);
+        return $json;
+    }
+
     /**
      * 静态化
      * @param Request $request
@@ -104,21 +111,7 @@ class MatchController extends BaseController
         $nextDate = date('Ymd',strtotime('1 day'));
         $lastDate = date('Ymd', strtotime('-1 day'));
 
-        if ($order == 't'){
-            $order = 'all';
-        }
-        else{
-            $order = 'league';
-        }
-
-        $ch = curl_init();
-        $url = 'http://match.liaogou168.com/static/schedule/'.$startDate.'/'.$sport.'/'.$order.'.json';
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 20);//5秒超时
-        $pc_json = curl_exec ($ch);
-        curl_close ($ch);
-        $pc_json = json_decode($pc_json,true);
+        $pc_json = FileTool::matchListDataJson($startDate,$sport);
         if (!empty($pc_json)) {
             $result['total'] = count($pc_json['matches']);
             $sortData = $this->sortMatch($pc_json,$sport);
@@ -177,14 +170,7 @@ class MatchController extends BaseController
             $order = 'league';
         }
 
-        $ch = curl_init();
-        $url = 'http://match.liaogou168.com/static/schedule/'.$startDate.'/'.$sport.'/'.$order.'.json';
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 5);//5秒超时
-        $pc_json = curl_exec ($ch);
-        curl_close ($ch);
-        $pc_json = json_decode($pc_json,true);
+        $pc_json = FileTool::matchListDataJson($startDate,$sport);
         if (!empty($pc_json)) {
             $result['total'] = count($pc_json['matches']);
             $sortData = $this->sortMatch($pc_json,$sport);
@@ -241,14 +227,7 @@ class MatchController extends BaseController
             $order = 'league';
         }
 
-        $ch = curl_init();
-        $url = 'http://match.liaogou168.com/static/schedule/'.$startDate.'/'.$sport.'/'.$order.'.json';
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 5);//5秒超时
-        $pc_json = curl_exec ($ch);
-        curl_close ($ch);
-        $pc_json = json_decode($pc_json,true);
+        $pc_json = FileTool::matchListDataJson($startDate,$sport);
         if (!empty($pc_json)) {
             $result['total'] = count($pc_json['matches']);
             $sortData = $this->sortMatch($pc_json,$sport);
@@ -263,28 +242,6 @@ class MatchController extends BaseController
             else
                 return view('pc.match.schedule_bk',$this->html_var);
         }
-    }
-
-    public function test(Request $request){
-        $ch = curl_init();
-        $url = 'http://match.liaogou168.com/static/change/2/score.json';
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 5);//5秒超时
-        $pc_json = curl_exec ($ch);
-        curl_close ($ch);
-        return $pc_json;
-    }
-
-    public function test2(Request $request){
-        $ch = curl_init();
-        $url = 'http://match.liaogou168.com/static/change/2/roll.json';
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 5);//5秒超时
-        $pc_json = curl_exec ($ch);
-        curl_close ($ch);
-        return $pc_json;
     }
 
     private function sortMatch($pc_json,$sport){

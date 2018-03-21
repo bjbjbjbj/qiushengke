@@ -487,8 +487,10 @@
             ID = ID + '';
             var first = ID.substr(0,2);
             var second = ID.substr(2,2);
+            var url = "/static/terminal/1/"+first+"/"+second+"/"+ID+"/tech.json";
+            url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
             $.ajax({
-                "url": '{{env('MATCH_URL')}}' + "/static/terminal/1/"+first+"/"+second+"/"+ID+"/tech.json",
+                "url": url,
 //                "url":"/static/terminal/1/"+first+"/"+second+"/"+ID+"/tech.json",
                 "dataType": "json",
                 "success": function (json) {
@@ -497,49 +499,51 @@
                     var event = document.getElementById(ID+'_eboxCon');
                     if (typeof(event) != 'undefined') {
                         var content = '';
-                        var events = json['event']['events'];
-                        for (var i = 0 ; i < events.length ; i++){
-                            var item = events[i];
-                            var icon = '';
-                            switch (item.kind){
-                                case 1:
-                                case 7:
-                                    icon = '/pc/img/icon_goal_n.png';
-                                    break;
-                                case 2:
-                                    icon = '/pc/img/icon_redcard_n.png';
-                                    break;
-                                case 3:
-                                    icon = '/pc/img/icon_yellowcard_n.png';
-                                    break;
-                                case 8:
-                                    icon = '/pc/img/icon_goal_n.png';
-                                    break;
-                                case 11:
-                                    icon = '/pc/img/icon_xchange_n.png';
-                                    break;
+                        if (json['event']) {
+                            var events = json['event']['events'];
+                            for (var i = 0; i < events.length; i++) {
+                                var item = events[i];
+                                var icon = '';
+                                switch (parseInt(item.kind)) {
+                                    case 1:
+                                    case 7:
+                                        icon = '/pc/img/icon_goal_n.png';
+                                        break;
+                                    case 2:
+                                        icon = '/pc/img/icon_redcard_n.png';
+                                        break;
+                                    case 3:
+                                        icon = '/pc/img/icon_yellowcard_n.png';
+                                        break;
+                                    case 8:
+                                        icon = '/pc/img/icon_goal_n.png';
+                                        break;
+                                    case 11:
+                                        icon = '/pc/img/icon_xchange_n.png';
+                                        break;
+                                }
+                                if (item.kind == 11) {
+                                    content = content +
+                                            '<dd class="' + (item['is_home'] == 1 ? 'host' : 'away') + '">' +
+                                            '<p class="time">' + item['happen_time'] + '\'</p>' +
+                                            '<p class="img"><img src="' + icon + '"></p>' +
+                                            '<p class="name exchange">' + item['player_name_j'] + '</br>' + item['player_name_j2'] + '</p>' +
+                                            '</dd>';
+                                }
+                                else {
+                                    content = content +
+                                            '<dd class="' + (item['is_home'] == 1 ? 'host' : 'away') + '">' +
+                                            '<p class="time">' + item['happen_time'] + '\'</p>' +
+                                            '<p class="img"><img src="' + icon + '"></p>' +
+                                            '<p class="name">' + item['player_name_j'] + '</p>' +
+                                            '</dd>';
+                                }
                             }
-                            if(item.kind == 11){
-                                content = content +
-                                        '<dd class="'+ (item['is_home'] == 1 ? 'host' : 'away') +'">'+
-                                        '<p class="time">'+item['happen_time']+'\'</p>'+
-                                        '<p class="img"><img src="' + icon + '"></p>'+
-                                        '<p class="name exchange">'+item['player_name_j'] + '</br>' + item['player_name_j2']+'</p>'+
-                                        '</dd>';
-                            }
-                            else{
-                                content = content +
-                                        '<dd class="'+ (item['is_home'] == 1 ? 'host' : 'away') +'">'+
-                                        '<p class="time">'+item['happen_time']+'\'</p>'+
-                                        '<p class="img"><img src="' + icon + '"></p>'+
-                                        '<p class="name">'+item['player_name_j']+'</p>'+
-                                        '</dd>';
-                            }
+                            var html = '<dl class="ebox"><dt><p>事件</p></dt>' +
+                                    content +
+                                    '</dl>';
+                            event.innerHTML = html;
                         }
-                        var html = '<dl class="ebox"><dt><p>事件</p></dt>' +
-                                content +
-                                '</dl>';
-                        event.innerHTML = html;
                     }
                     //统计
                     var event = document.getElementById(ID+'_tboxCon');
@@ -629,8 +633,10 @@
 
         //赔率刷新
         function refreshRoll() {
+            var url = "/static/change/1/roll.json?" + (new Date().getTime());
+            url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
             $.ajax({
-                "url": "/static/change/1/roll.json?" + (new Date().getTime()),
+                "url": url,
                 "dataType": "json",
                 "success": function (json) {
                     for (var ID in json) {
@@ -679,8 +685,10 @@
         function refresh() {
             if (htmlPathType !='immediate')
                 return;
+            var url = "/static/change/1/score.json?" + (new Date().getTime());
+            url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
             $.ajax({
-                "url": "/static/change/1/score.json?" + (new Date().getTime()),
+                "url": url,
                 "dataType": "json",
                 "success": function (json) {
                     var ups = $('span.up');
@@ -743,7 +751,7 @@
                                 }
                             }
                             var icon = isHost ? $('#'+ID+'_h_icon')[0].src : $('#'+ID+'_a_icon')[0].src;
-                            if (currentScore != lastScore && (dataItem.hscore + dataItem.ascore) > 0) {
+                            if (lastScore.indexOf(currentScore) == -1 && (dataItem.hscore + dataItem.ascore) > 0) {
                                 Goal(dataItem.hname, dataItem.aname, dataItem.hscore, dataItem.ascore, icon,dataItem.time.replace('\'',''), isHost?'host':'away');
                             }
                             scoreItem.html(currentScore);
@@ -752,7 +760,7 @@
                             chScoreItem.html(dataItem.h_corner + ' - ' + dataItem.a_corner);
                         }
                         if (halfScoreItem) {
-                            halfScoreItem.html(dataItem.hscorehalf + ' - ' + dataItem.ascorehalf);
+                            halfScoreItem.html('半 ' + dataItem.hscorehalf + ' - ' + dataItem.ascorehalf);
                         }
                         if (liveItem && liveItem.length > 0){
                             if(liveItem[0].src == "{{env('CDN_URL')}}/pc/img/icon_living.png") {
@@ -769,7 +777,7 @@
                             tbody.appendChild(matchTr);
                             var liveItem = $('#live_' + ID);
                             if (liveItem && liveItem.length > 0){
-                                liveItem[0].src = "{{env('CDN_URL')}}/img/icon_lived.png";
+                                liveItem[0].src = "{{env('CDN_URL')}}/pc/img/icon_lived.png";
                             }
                             _updateSection();
                         }
@@ -793,9 +801,11 @@
             ID = ID + '';
             var first = ID.substr(0,2);
             var second = ID.substr(2,2);
+            var url = "/static/terminal/1/"+first+"/"+second+"/"+ID+"/roll.json";
+            url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
             $.ajax({
 {{--                "url": '{{env('MATCH_URL')}}' + "/static/terminal/1/"+first+"/"+second+"/"+ID+"/tech.json",--}}
-                "url":"/static/terminal/1/10/70/1070722/roll.json",
+                "url":url,
                 "dataType": "json",
                 "success": function (json) {
                     window.clearInterval(ct2);

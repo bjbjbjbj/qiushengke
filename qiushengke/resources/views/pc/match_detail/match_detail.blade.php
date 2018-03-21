@@ -12,12 +12,15 @@
 @endsection
 @section('content')
     <div id="Con">
-        @component('pc.match_detail.foot_cell.head',['match'=>$match,'analyse'=>$analyse,'rank'=>$analyse['rank']])
+        <?php
+        $rank = isset($analyse['rank']) ? $analyse['rank'] : null;
+        ?>
+        @component('pc.match_detail.foot_cell.head',['match'=>$match,'analyse'=>$analyse,'rank'=>$rank])
         @endcomponent
-        @component('pc.match_detail.foot_cell.base',['match'=>$match,'rank'=>$analyse['rank'],'tech'=>$tech,'lineup'=>$lineup])
+        @component('pc.match_detail.foot_cell.base',['match'=>$match,'rank'=>$rank,'tech'=>$tech,'lineup'=>$lineup])
         @endcomponent
-        @component('pc.match_detail.foot_cell.character',['match'=>$match,'analyse'=>$analyse])
-        @endcomponent
+                @component('pc.match_detail.foot_cell.character',['match'=>$match,'analyse'=>$analyse])
+                @endcomponent
         @component('pc.match_detail.foot_cell.data',['match'=>$match,'analyse'=>$analyse])
         @endcomponent
         @component('pc.match_detail.foot_cell.corner',['match'=>$match,'analyse'=>$analyse])

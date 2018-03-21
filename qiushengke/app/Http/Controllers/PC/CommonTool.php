@@ -8,6 +8,8 @@
 
 namespace App\Http\Controllers\PC;
 
+use Illuminate\Support\Facades\Storage;
+
 class CommonTool
 {
     //odd的

@@ -8,16 +8,75 @@
 namespace App\Http\Controllers\PC\Match;
 
 use App\Http\Controllers\Controller as BaseController;
+use App\Http\Controllers\PC\FileTool;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class MatchDetailController extends BaseController{
-
-    public function oddDetail(Request $request){
-        if (is_null($request->input('mid'))){
-            return abort(404);
+    /**
+     * 通过请求自己的链接静态化pc终端，主要是解决 文件权限问题。
+     * @param $mid
+     * @param $sport
+     */
+    public static function curlToHtml($mid,$sport = 1) {
+        $ch = curl_init();
+        if (1 == $sport)
+            $url = asset('/static/football/detail/' . $mid);
+        else if(2 == $sport){
+            $url = asset('/static/basketball/detail/' . $mid);
         }
-        $this->html_var['mid'] = $request->input('mid');
-        $this->html_var['type'] = $request->input('type',1);
+        echo $url;
+        if (is_null($url))
+            return;
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 25);
+        curl_exec ($ch);
+        curl_close ($ch);
+    }
+
+    /**
+     * 静态化
+     * @param Request $request
+     */
+    public function staticOddDetail(Request $request){
+        $html = $this->oddDetail($request);
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/match/foot/odd.html", $html);
+    }
+
+    /**
+     * 静态化
+     * @param Request $request
+     * @param $mid int
+     */
+    public function staticMatchDetail(Request $request,$mid){
+        $first = substr($mid,0,2);
+        $second = substr($mid,2,2);
+        $html = $this->matchDetail($request,$first,$second,$mid);
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/match/foot/".$first."/".$second."/".$mid.".html", $html);
+    }
+
+    /**
+     * 静态化
+     * @param Request $request
+     * @param $mid int
+     */
+    public function staticMatchDetailBK(Request $request,$mid){
+        $first = substr($mid,0,2);
+        $second = substr($mid,2,2);
+        $html = $this->basketDetail($request,$first,$second,$mid);
+        if (isset($html))
+            Storage::disk("public")->put("/match/basket/".$first."/".$second."/".$mid.".html", $html);
+    }
+
+    /**
+     * 赔率终端
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|void
+     */
+    public function oddDetail(Request $request){
         return view('pc.match_detail.odd_detail',$this->html_var);
     }
 
@@ -50,7 +109,6 @@ class MatchDetailController extends BaseController{
         $result['lineup'] = $this->matchDetailData($mid, 'lineup');
 
         $this->html_var = array_merge($this->html_var,$result);
-//        dump($this->html_var);
         return view('pc.match_detail.match_detail',$this->html_var);
     }
 
@@ -82,7 +140,6 @@ class MatchDetailController extends BaseController{
         $result['odds'] = $odds;
 
         $this->html_var = array_merge($this->html_var,$result);
-//        dump($this->html_var);
         return view('pc.match_detail.match_detail_bk',$this->html_var);
     }
 
@@ -94,14 +151,7 @@ class MatchDetailController extends BaseController{
      * @return array
      */
     public static function matchDetailData($id, $name, $sport = 1){
-        $ch = curl_init();
-        $url = env('MATCH_URL')."/static/terminal/$sport/".substr($id,0,2)."/".substr($id,2,2)."/$id/$name.json";
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 20);//5秒超时
-        $json = curl_exec ($ch);
-        curl_close ($ch);
-        $json = json_decode($json, true);
+        $json = FileTool::matchDetailJson(substr($id,0,2),substr($id,2,2),$id,$sport,$name);
         return $json;
     }
 
