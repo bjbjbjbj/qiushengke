@@ -2,6 +2,8 @@
 
 namespace App\Console;
 
+use App\Console\League\BasketballCommands;
+use App\Console\League\FootballCommands;
 use App\Console\Match\Basketball\BasketballDetailCommands;
 use App\Console\Match\Basketball\BasketballDetailIngCommands;
 use App\Console\Match\BasketballMatchCommands;
@@ -29,9 +31,12 @@ class Kernel extends ConsoleKernel
         HourCommands::class,//一小时一次
         FootballDetailCommands::class,//足球比赛终端
         FootballDetailIngCommands::class,//足球比赛终端
-        //篮球
+        //篮球终端
         BasketballDetailCommands::class,
         BasketballDetailIngCommands::class,
+        //专题
+        FootballCommands::class,
+        BasketballCommands::class,
     ];
 
     /**
@@ -55,6 +60,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('bb_ing_detail_cache:run')->everyFiveMinutes();//正在比赛的篮球赛事终端每分五种静态化一次。
         $schedule->command('bb_detail_cache:run')->everyTenMinutes();//每10分钟执行一次 每次缓存15个页面(赛程赛果各15)
 
+        //专题静态化
+        $schedule->command('league_foot:run')->hourly(10);
+        $schedule->command('league_basket:run')->hourly(40);
 
         $schedule->command('football_matches_in_db:run')->everyTenMinutes();
         $schedule->command('basketball_matches_in_db:run')->everyTenMinutes();

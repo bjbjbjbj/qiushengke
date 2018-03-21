@@ -4,7 +4,7 @@
         <div id="Calendar">
             <ul>
                 @foreach($calendar as $item)
-                    <a class="li {{$item['on'] ? 'on':''}}" href="{{'/match/foot/'.$item['date'].'/result.html'}}">
+                    <a class="li {{$item['on'] ? 'on':''}}" href="{{'/match/foot/schedule/'.$item['date'].'/result.html'}}">
                         <p class="date">{{$item['dateStr']}}</p>
                         <p class="week">{{$item['w']}}</p>
                     </a>
@@ -90,8 +90,8 @@
     <div class="abox">
         <ul>
             <a class="li" href="/match/foot/immediate.html">即时比分</a>
-            <a class="li on" href="/match/foot/{{$lastDate}}/result.html">完场赛果</a>
-            <a class="li" href="/match/foot/{{$nextDate}}/schedule.html">未来赛程</a>
+            <a class="li on" href="/match/foot/schedule/{{$lastDate}}/result.html">完场赛果</a>
+            <a class="li" href="/match/foot/schedule/{{$nextDate}}/schedule.html">未来赛程</a>
         </ul>
     </div>
 @endsection
@@ -107,7 +107,7 @@
         }
         function clickDate(date) {
             var value = date.value.replace(/\//g,"");
-            var url = '{{env('APP_URL')}}' + '/match/foot/'+value+'/result.html';
+            var url = '{{env('APP_URL')}}' + '/match/foot/schedule/'+value+'/result.html';
             window.location.href = url;
         }
     </script>

@@ -27,13 +27,13 @@ class MatchController extends BaseController
     public function staticOneMin(Request $request){
         //即时
         $html = $this->immediate_f($request);
-        Storage::disk("public")->put("/match/foot/immediate.html", $html);
+        Storage::disk("public")->put("/match/foot/schedule/immediate.html", $html);
 
         //篮球
         $html = $this->immediate_bk($request,'t');
-        Storage::disk("public")->put("/match/basket/immediate_t.html", $html);
+        Storage::disk("public")->put("/match/basket/schedule/immediate_t.html", $html);
         $html = $this->immediate_bk($request,'l');
-        Storage::disk("public")->put("/match/basket/immediate_l.html", $html);
+        Storage::disk("public")->put("/match/basket/schedule/immediate_l.html", $html);
     }
 
     /**
@@ -44,28 +44,28 @@ class MatchController extends BaseController
         //赛程
         $tomorrow = date('Ymd', strtotime('+1 days'));
         $html = $this->schedule_f($request,$tomorrow);
-        Storage::disk("public")->put("/match/foot/".$tomorrow."/schedule.html", $html);
+        Storage::disk("public")->put("/match/foot/schedule/".$tomorrow."/schedule.html", $html);
         //赛果
         $yesterday = date('Ymd', strtotime('-1 days'));
         $html = $this->result_f($request,$yesterday);
-        Storage::disk("public")->put("/match/foot/".$yesterday."/result.html", $html);
+        Storage::disk("public")->put("/match/foot/schedule/".$yesterday."/result.html", $html);
 
         //篮球
         //赛程
         $tomorrow = date('Ymd', strtotime('+1 days'));
         $html = $this->schedule_bk($request,$tomorrow,'t');
-        Storage::disk("public")->put("/match/basket/".$tomorrow."/schedule_t.html", $html);
+        Storage::disk("public")->put("/match/basket/schedule/".$tomorrow."/schedule_t.html", $html);
         $tomorrow = date('Ymd', strtotime('+1 days'));
         $html = $this->schedule_bk($request,$tomorrow,'t');
-        Storage::disk("public")->put("/match/basket/".$yesterday."/schedule_l.html", $html);
+        Storage::disk("public")->put("/match/basket/schedule/".$yesterday."/schedule_l.html", $html);
 
         //赛果
         $tomorrow = date('Ymd', strtotime('-1 days'));
         $html = $this->result_bk($request,$tomorrow,'t');
-        Storage::disk("public")->put("/match/basket/".$tomorrow."/result_t.html", $html);
+        Storage::disk("public")->put("/match/basket/schedule/".$tomorrow."/result_t.html", $html);
         $yesterday = date('Ymd', strtotime('-1 days'));
         $html = $this->result_bk($request,$yesterday,'l');
-        Storage::disk("public")->put("/match/basket/".$yesterday."/result_l.html", $html);
+        Storage::disk("public")->put("/match/basket/schedule/".$yesterday."/result_l.html", $html);
     }
 
     //篮球

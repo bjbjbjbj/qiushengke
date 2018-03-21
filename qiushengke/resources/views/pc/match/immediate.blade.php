@@ -128,8 +128,8 @@
     <div class="abox">
         <ul>
             <a class="li on">即时比分</a>
-            <a class="li" href="/match/foot/{{$lastDate}}/result.html">完场赛果</a>
-            <a class="li" href="/match/foot/{{$nextDate}}/schedule.html">未来赛程</a>
+            <a class="li" href="/match/foot/schedule/{{$lastDate}}/result.html">完场赛果</a>
+            <a class="li" href="/match/foot/schedule/{{$nextDate}}/schedule.html">未来赛程</a>
         </ul>
     </div>
 @endsection
