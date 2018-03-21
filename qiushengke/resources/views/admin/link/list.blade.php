@@ -1,6 +1,6 @@
 @extends('admin.layout.nav')
 @section('content')
-    <h1 class="page-header">友情链接</h1>
+    <h1 class="page-header">录像类型</h1>
     <div class="row placeholders">
         <div class="table-responsive">
             <table class="table table-striped">

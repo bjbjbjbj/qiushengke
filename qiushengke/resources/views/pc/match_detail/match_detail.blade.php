@@ -12,12 +12,15 @@
 @endsection
 @section('content')
     <div id="Con">
-        @component('pc.match_detail.foot_cell.head',['match'=>$match,'analyse'=>$analyse,'rank'=>$analyse['rank']])
+        <?php
+        $rank = isset($analyse['rank']) ? $analyse['rank'] : null;
+        ?>
+        @component('pc.match_detail.foot_cell.head',['match'=>$match,'analyse'=>$analyse,'rank'=>$rank])
         @endcomponent
-        @component('pc.match_detail.foot_cell.base',['match'=>$match,'rank'=>$analyse['rank'],'tech'=>$tech,'lineup'=>$lineup])
+        @component('pc.match_detail.foot_cell.base',['match'=>$match,'rank'=>$rank,'tech'=>$tech,'lineup'=>$lineup])
         @endcomponent
-        @component('pc.match_detail.foot_cell.character',['match'=>$match,'analyse'=>$analyse])
-        @endcomponent
+                @component('pc.match_detail.foot_cell.character',['match'=>$match,'analyse'=>$analyse])
+                @endcomponent
         @component('pc.match_detail.foot_cell.data',['match'=>$match,'analyse'=>$analyse])
         @endcomponent
         @component('pc.match_detail.foot_cell.corner',['match'=>$match,'analyse'=>$analyse])
@@ -47,8 +50,8 @@
             var mid = '{{$match['mid']}}';
             var first = mid.substr(0,2);
             var second = mid.substr(2,2);
-            var url = 'http://match.liaogou168.com/static/terminal/1/'+ first +'/'+ second +'/'+mid+'/match.json';
-            url = 'http://localhost:8000/static/terminal/1/10/20/1020697/match.json';
+            var url = '/static/terminal/1/'+ first +'/'+ second +'/'+mid+'/match.json';
+            url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 'url': url,
                 'success': function (json) {
@@ -91,8 +94,8 @@
             var mid = '{{$match['mid']}}';
             var first = mid.substr(0,2);
             var second = mid.substr(2,2);
-            var url = 'http://match.liaogou168.com/static/terminal/1/'+ first +'/'+ second +'/'+mid+'/odd.json';
-            url = 'http://localhost:8000/static/terminal/1/10/20/1020697/odd.json';
+            var url = '/static/terminal/1/'+ first +'/'+ second +'/'+mid+'/odd.json';
+            url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 'url':url,
                 'success':function (json) {

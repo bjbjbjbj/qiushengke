@@ -1,8 +1,5 @@
 @extends('pc.layout.base')
 @section('content')
-    <?php
-    $matchUrl = \App\Http\Controllers\PC\CommonTool::matchPathWithId($mid);
-    ?>
     <div id="Con">
         <div id="Info" class="football">
             <p class="info">-<br/>比赛时间：-</p>
@@ -16,12 +13,8 @@
             </div>
         </div>
         <div id="Odd">
-            <a target="_blank" href="{{$matchUrl}}" class="match">【析】</a>
-            <table id="Asia"
-                   @if($type != 1)
-                   style="display: none;"
-                    @endif
-            >
+            <a target="_blank" class="match">【析】</a>
+            <table id="Asia" style="display: none;">
                 <colgroup>
                     <col num="1" width="15%">
                     <col num="2">
@@ -49,11 +42,7 @@
                 <tbody>
                 </tbody>
             </table>
-            <table id="Europe"
-                   @if($type != 2)
-                   style="display: none;"
-                    @endif
-            >
+            <table id="Europe" style="display: none;">
                 <colgroup>
                     <col num="1" width="18%">
                     <col num="2">
@@ -81,11 +70,7 @@
                 <tbody>
                 </tbody>
             </table>
-            <table id="Goal"
-                   @if($type != 3)
-                   style="display: none;"
-                    @endif
-            >
+            <table id="Goal" style="display: none;">
                 <colgroup>
                     <col num="1" width="17%">
                     <col num="2">
@@ -118,21 +103,9 @@
     <div id="Play">
         <div class="abox">
             <ul>
-                <li
-                        @if($type == 1)
-                        class="on"
-                        @endif
-                        target="Asia">亚盘让分</li>
-                <li
-                        @if($type == 2)
-                        class="on"
-                        @endif
-                        target="Europe">欧盘</li>
-                <li
-                        @if($type == 3)
-                        class="on"
-                        @endif
-                        target="Goal">大小球</li>
+                <li target="Asia">亚盘让分</li>
+                <li target="Europe">欧盘</li>
+                <li target="Goal">大小球</li>
             </ul>
         </div>
     </div>
@@ -157,6 +130,34 @@
         }
     </script>
     <script type="text/javascript">
+        var mid = GetQueryString('mid',window.location.href);
+        var type = GetQueryString('type',window.location.href);
+        if (type == ''){
+            type = 1;
+        }
+
+        //初始化ui
+        var lis = $('div#Play li');
+        for (var i = 0 ; i < 3 ; i++){
+            var li = lis[i];
+            if ((i + 1) == type) {
+                li.className = 'on';
+            }
+        }
+        if (type == 1){
+            $('table#Asia')[0].style.display = '';
+        }
+        if (type == 2){
+            $('table#Europe')[0].style.display = '';
+        }
+        if (type == 3){
+            $('table#Goal')[0].style.display = '';
+        }
+
+        var url = matchPathWithId(mid,1);
+
+        $('div#Odd a')[0].href = url;
+
         //时间格式化
         function add0(m){return m<10?'0'+m:m }
         function format(string)
@@ -174,11 +175,13 @@
         }
         //刷新比赛
         function refreshMatch() {
-            var mid = '{{$mid}}';
+            if (mid < 1000){
+                return;
+            }
             var first = mid.substr(0,2);
             var second = mid.substr(2,2);
-            var url = 'http://match.liaogou168.com/static/terminal/1/'+ first +'/'+ second +'/'+mid+'/match.json';
-            url = 'http://localhost:8000/static/terminal/1/10/20/1020697/match.json';
+            var url = '/static/terminal/1/'+ first +'/'+ second +'/'+mid+'/match.json';
+            url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 'url': url,
                 'success': function (json) {
@@ -217,11 +220,10 @@
         }
         //刷新赔率
         function refreshOdd() {
-            var mid = '{{$mid}}';
             var first = mid.substr(0,2);
             var second = mid.substr(2,2);
-            var url = 'http://match.liaogou168.com/static/terminal/1/'+ first +'/'+ second +'/'+mid+'/odd.json';
-            url = 'http://localhost:8000/static/terminal/1/10/20/1020697/odd.json';
+            var url = '/static/terminal/1/'+ first +'/'+ second +'/'+mid+'/odd.json';
+            url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 'url':url,
                 'success':function (json) {
@@ -304,8 +306,10 @@
                                 tr = '<tr>'+
                                         '<td>'+item['name']+'</td>';
                                 if(data['middle1']){
+                                    var pankou = panKouText(data['middle1'],false);
+                                    pankou = pankou.replace('让','');
                                     tr = tr + '<td>'+data['up1']+'</td>'+
-                                            '<td>'+panKouText(data['middle1'],false)+'</td>'+
+                                            '<td>'+pankou+'</td>'+
                                             '<td>'+data['down1']+'</td>';
                                 }
                                 else{
@@ -315,8 +319,10 @@
                                             '<td>-</td>';
                                 }
                                 if(data['middle2']){
+                                    var pankou = panKouText(data['middle2'],false);
+                                    pankou = pankou.replace('让','');
                                     tr = tr + '<td>'+data['up2']+'</td>'+
-                                            '<td>'+panKouText(data['middle2'],false)+'</td>'+
+                                            '<td>'+pankou+'</td>'+
                                             '<td>'+data['down2']+'</td>';
                                 }
                                 else{

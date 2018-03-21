@@ -9,15 +9,21 @@
     @component('pc.match_detail.foot_cell.data_league',['match'=>$match,'analyse'=>$analyse])
     @endcomponent
     {{--交锋--}}
-    @component('pc.match_detail.foot_cell.data_battle',['match'=>$match,'historyBattle'=>$analyse['historyBattle']['historyBattle']])
-    @endcomponent
-    {{--近期战绩--}}
-    @component('pc.match_detail.foot_cell.data_history',['match'=>$match,'analyse'=>$analyse,'recentBattle'=>$analyse['recentBattle']])
-    @endcomponent
+    @if(isset($analyse['historyBattle']))
+        @component('pc.match_detail.foot_cell.data_battle',['match'=>$match,'historyBattle'=>$analyse['historyBattle']['historyBattle']])
+        @endcomponent
+    @endif
+    @if(isset($analyse['recentBattle']))
+        {{--近期战绩--}}
+        @component('pc.match_detail.foot_cell.data_history',['match'=>$match,'analyse'=>$analyse,'recentBattle'=>$analyse['recentBattle']])
+        @endcomponent
+    @endif
     {{--赛事盘路--}}
     @component('pc.match_detail.foot_cell.data_trend',['match'=>$match,'analyse'=>$analyse])
     @endcomponent
-    {{--未来赛程--}}
-    @component('pc.match_detail.foot_cell.data_schedule',['currmatch'=>$match,'analyse'=>$analyse])
-    @endcomponent
+    @if(isset($analyse['schedule']))
+        {{--未来赛程--}}
+        @component('pc.match_detail.foot_cell.data_schedule',['currmatch'=>$match,'analyse'=>$analyse])
+        @endcomponent
+    @endif
 </div>

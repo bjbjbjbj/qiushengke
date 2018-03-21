@@ -4,13 +4,13 @@
         <div id="Calendar">
             <ul>
                 @foreach($calendar as $item)
-                    <a class="li {{$item['on'] ? 'on':''}}" href="{{'/match/basket/schedule_'.$item['date'].'_t.html'}}">
+                    <a class="li {{$item['on'] ? 'on':''}}" href="{{'/match/basket/'.$item['date'].'/schedule_t.html'}}">
                         <p class="date">{{$item['dateStr']}}</p>
                         <p class="week">{{$item['w']}}</p>
                     </a>
                 @endforeach
             </ul>
-            <input type="text" name="date" placeholder="请选择日期">
+            <input type="text" name="date" placeholder="{{$currDate}}" onchange="clickDate(this)">
         </div>
         <div id="Control">
             <div class="inbox">
@@ -33,7 +33,7 @@
     <div class="abox">
         <ul>
             <a class="li" href="/match/basket/immediate_t.html">即时比分</a>
-            <a class="li" href="/match/basket/result_{{$lastDate}}_t.html">完场赛果</a>
+            <a class="li" href="/match/basket/{{$lastDate}}/result_t.html">完场赛果</a>
             <a class="li on">未来赛程</a>
         </ul>
     </div>
@@ -47,6 +47,11 @@
     <script type="text/javascript">
         window.onload = function () {
             setPage();
+        }
+        function clickDate(date) {
+            var value = date.value.replace(/\//g,"");
+            var url = '{{env('APP_URL')}}' + '/match/basket/'+value+'/schedule_t.html';
+            window.location.href = url;
         }
     </script>
 @endsection

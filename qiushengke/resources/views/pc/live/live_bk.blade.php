@@ -100,8 +100,8 @@
             var mid = '{{$match['mid']}}';
             var first = mid.substr(0,2);
             var second = mid.substr(2,2);
-            var url = 'http://match.liaogou168.com/static/terminal/2/'+ first +'/'+ second +'/'+mid+'/match.json';
-            url = 'http://localhost:8000/static/terminal/1/10/44/10446/match.json';
+            var url = '/static/terminal/2/'+ first +'/'+ second +'/'+mid+'/match.json';
+            url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 'url': url,
                 'success': function (json) {
@@ -120,7 +120,12 @@
                 }
             });
         }
-        refreshMatch();
+        if ('{{$match['status']}}' == -1){
+
+        }
+        else{
+            window.setInterval('refreshMatch()', 5000);
+        }
     </script>
 @endsection
 

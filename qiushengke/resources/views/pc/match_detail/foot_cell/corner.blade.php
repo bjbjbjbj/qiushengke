@@ -24,8 +24,12 @@
     </div>
     @component('pc.match_detail.foot_cell.corner_data',['match'=>$match,'analyse'=>$analyse])
     @endcomponent
-    @component('pc.match_detail.foot_cell.corner_battle',['match'=>$match,'analyse'=>$analyse])
-    @endcomponent
-    @component('pc.match_detail.foot_cell.corner_history',['match'=>$match,'analyse'=>$analyse])
-    @endcomponent
+    @if(isset($analyse['cornerHistoryBattle']))
+        @component('pc.match_detail.foot_cell.corner_battle',['match'=>$match,'analyse'=>$analyse])
+        @endcomponent
+    @endif
+    @if(isset($analyse['cornerRecentBattle']))
+        @component('pc.match_detail.foot_cell.corner_history',['match'=>$match,'analyse'=>$analyse])
+        @endcomponent
+    @endif
 </div>

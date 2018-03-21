@@ -210,10 +210,10 @@ body{
 	content: '';
 }
 #Odd table td.up:after{
-	background: url(../img/handicap_icon_up_n.png) no-repeat center; background-size: 14px;
+	background: url(../img/handicap_icon_up_n@2x.png) no-repeat center; background: url(../img/handicap_icon_up_n.png) no-repeat center\0/; background-size: 12px;
 }
 #Odd table td.down:after{
-	background: url(../img/handicap_icon_down_n.png) no-repeat center; background-size: 14px;
+	background: url(../img/handicap_icon_down_n@2x.png) no-repeat center; background: url(../img/handicap_icon_down_n.png) no-repeat center\0/; background-size: 12px;
 }
 
 /*直播*/

@@ -41,6 +41,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->adminWebRoutes();
         //
         $this->mapPCRoutes();
+        $this->mapStaticRoutes();
     }
 
     protected function mapPCRoutes()
@@ -84,5 +85,12 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
+    }
+
+    protected function mapStaticRoutes()
+    {
+        Route::prefix('static')
+            ->namespace($this->namespace)
+            ->group(base_path('routes/static.php'));
     }
 }

@@ -233,10 +233,10 @@ $liveUrl = \App\Http\Controllers\PC\CommonTool::matchLivePathWithId($match['mid'
         </a>
     </td>
     <td>
-        <a href="">析</a>
-        <a href="">亚</a>
-        <a href="">欧</a>
-        <a href="">大</a>
+        <a target="_blank" href="{{$matchUrl}}">析</a>
+        <a target="_blank" href="/match/foot/odd.html?mid={{$mid}}&type=1">亚</a>
+        <a target="_blank" href="/match/foot/odd.html?mid={{$mid}}&type=2">欧</a>
+        <a target="_blank" href="/match/foot/odd.html?mid={{$mid}}&type=3">大</a>
     </td>
     {{--<td><button class="top" value="{{$isTop}}"></button></td>--}}
 </tr>

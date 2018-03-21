@@ -44,49 +44,17 @@
                 <button class="open">查看详情</button>
             </div>
             <div class="rbox" id="Video">
-                <p class="title">精彩视频</p>
-                <ul>
-                    <a class="li" href="">
-                        <p class="img"><img src="/pc/img/img_demo.png"></p>
-                        <p class="text"><span>奥巴梅扬进球助攻完美首秀</span></p>
-                    </a>
-                    <a class="li" href="">
-                        <p class="img"><img src="/pc/img/img_demo.png"></p>
-                        <p class="text"><span>奥巴梅扬进球助攻完美首秀</span></p>
-                    </a>
-                    <a class="li" href="">
-                        <p class="img"><img src="/pc/img/img_demo.png"></p>
-                        <p class="text"><span>奥巴梅扬进球助攻完美首秀</span></p>
-                    </a>
-                    <a class="li" href="">
-                        <p class="img"><img src="/pc/img/img_demo.png"></p>
-                        <p class="text"><span>奥巴梅扬进球助攻完美首秀</span></p>
-                    </a>
-                    <a class="li" href="">
-                        <p class="img"><img src="/pc/img/img_demo.png"></p>
-                        <p class="text"><span>奥巴梅扬进球助攻完美首秀</span></p>
-                    </a>
-                    <a class="li" href="">
-                        <p class="img"><img src="/pc/img/img_demo.png"></p>
-                        <p class="text"><span>奥巴梅扬进球助攻完美首秀</span></p>
-                    </a>
-                    <a class="li" href="">
-                        <p class="img"><img src="/pc/img/img_demo.png"></p>
-                        <p class="text"><span>奥巴梅扬进球助攻完美首秀</span></p>
-                    </a>
-                    <a class="li" href="">
-                        <p class="img"><img src="/pc/img/img_demo.png"></p>
-                        <p class="text"><span>奥巴梅扬进球助攻完美首秀</span></p>
-                    </a>
-                    <a class="li" href="">
-                        <p class="img"><img src="/pc/img/img_demo.png"></p>
-                        <p class="text"><span>奥巴梅扬进球助攻完美首秀</span></p>
-                    </a>
-                    <a class="li" href="">
-                        <p class="img"><img src="/pc/img/img_demo.png"></p>
-                        <p class="text"><span>奥巴梅扬进球助攻完美首秀</span></p>
-                    </a>
-                </ul>
+                @if(isset($videos) && count($videos) > 0)
+                    <p class="title">精彩视频</p>
+                    <ul>
+                        @foreach($videos as $video)
+                            <a class="li" target="_blank" href="{{$video['content']}}">
+                                <p class="img"><img src="{{$video['cover']}}"></p>
+                                <p class="text"><span>{{$video['title']}}</span></p>
+                            </a>
+                        @endforeach
+                    </ul>
+                @endif
             </div>
         </div>
         @yield('league_content')

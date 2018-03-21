@@ -155,7 +155,7 @@
 #Control div.sound:before{
 	width: 30px; height: 30px;
 	border-radius: 4px 0 0 4px;
-	background: url(../img/entrance_sound_n.png) no-repeat center #006c3c; background-size: 30px;
+	background: url(../img/entrance_sound_n@2x.png) no-repeat center #006c3c; background: url(../img/entrance_sound_n.png) no-repeat center #006c3c\0/; background-size: 30px;
 	position: absolute; top: 5px; left: 0;
 	content: '';
 }
@@ -470,7 +470,7 @@ a.team span.name{
 #Con td p.asia span.up:before, #Con td p.goal span.up:before{
 	width: 14px; height: 14px;
 	margin-top: -7px;
-	background: url(../img/bas_icon_up_n.png) no-repeat center; background-size: 14px;
+	background: url(../img/bas_icon_up_n@2x.png) no-repeat center; background: url(../img/bas_icon_up_n.png) no-repeat center\0/; background-size: 14px;
 	position: absolute; top: 50%; right: -7px;
 	content: '';
 }
@@ -480,7 +480,7 @@ a.team span.name{
 #Con td p.asia span.down:before, #Con td p.goal span.down:before{
 	width: 14px; height: 14px;
 	margin-top: -7px;
-	background: url(../img/bas_icon_down_n.png) no-repeat center; background-size: 14px;
+	background: url(../img/bas_icon_down_n@2x.png) no-repeat center; background: url(../img/bas_icon_down_n.png) no-repeat center\0/; background-size: 14px;
 	position: absolute; top: 50%; right: -7px;
 	content: '';
 }
@@ -527,7 +527,7 @@ a.team span.name{
 #Con table div.even:before{
 	width: 16px; height: 8px;
 	margin-left: -8px;
-	background: url(../img/icon_triangle_up_n.png) no-repeat center; background-size: 16px;
+	background: url(../img/icon_triangle_up_n@2x.png) no-repeat center; background: url(../img/icon_triangle_up_n.png) no-repeat center\0/; background-size: 16px;
 	position: absolute; top: -8px; left: 50%;
 	content: '';
 }
@@ -535,7 +535,7 @@ a.team span.name{
 	top: auto; bottom: 44px;
 }
 #Con table div.even.top:before{
-	background: url(../img/icon_triangle_down_n.png) no-repeat center; background-size: 16px;
+	background: url(../img/icon_triangle_down_n@2x.png) no-repeat center; background: url(../img/icon_triangle_down_n.png) no-repeat center\0/; background-size: 16px;
 	top: auto; bottom: -8px;
 }
 #Con table div.even p.team{
@@ -829,6 +829,15 @@ a.team span.name{
 	padding: 15px 62px 15px 34px;
 	background: #fff;
 	position: absolute; bottom: 0; left: 0; right: 0;
+}
+.filterBox .inner .bottomBar p{
+	margin-right: 20px;
+	font-size: 12px; line-height: 30px; text-align: right;
+	float: right;
+}
+.filterBox .inner .bottomBar p span{
+	padding: 0 4px;
+	color: #c52601;
 }
 .filterBox .inner .bottomBar button.all{
 	height: 30px; width: 58px;
