@@ -59,6 +59,23 @@ Route::group(['middleware' => 'admin_auth'], function () {
 });
 
 /**
+ * 热门录像操作
+ */
+Route::group(['middleware' => 'admin_auth'], function () {
+    Route::get('/videos/types', 'Video\VideoController@types');//录像类型列表
+    Route::post('/videos/types/save', 'Video\VideoController@saveType');//保存录像类型
+
+
+    Route::get('/videos', 'Video\VideoController@videos');//录像列表
+    Route::get('/videos/edit', 'Video\VideoController@videoEdit');//录像编辑
+    Route::post('/videos/save', 'Video\VideoController@saveVideo');//保存录像
+});
+
+Route::group(['middleware' => 'admin_auth'], function () {
+    Route::post("/upload/cover", "UploadController@uploadCover");//上传封面
+});
+
+/**
  * 用户、权限操作
  */
 Route::group(['middleware' => 'admin_auth'], function () {
