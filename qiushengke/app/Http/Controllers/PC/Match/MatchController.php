@@ -14,6 +14,12 @@ use Illuminate\Support\Facades\Storage;
 
 class MatchController extends BaseController
 {
+    public function test(Request $request){
+        $url = $request->input('url');
+        $json = FileTool::curlData($url,5);
+        return $json;
+    }
+
     /**
      * 静态化
      * @param Request $request

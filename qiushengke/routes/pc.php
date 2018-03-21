@@ -12,6 +12,9 @@
 */
 
 Route::group(['namespace'=>'Match'], function () {
+    //测试用,免得跨域
+    Route::get("/test", "MatchController@test"); //今天
+
     Route::any("/", function (){
         return redirect('/match/foot/immediate.html');
     });
