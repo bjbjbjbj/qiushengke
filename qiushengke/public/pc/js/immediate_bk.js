@@ -41,6 +41,7 @@ function setDateInput() {
 }
 
 function setFilter() {
+    CheckChooseBtn();
     //按钮设置
     $('#Control button.league').click(function(){
         $('#LeagueFilter').css('display','block');
@@ -52,12 +53,14 @@ function setFilter() {
         var Par = $(this).parents('.filterBox')[0];
         $(Par).find('ul button').val(1);
         $(Par).find('button.comfirm').removeAttr('disabled');
+        CheckChooseBtn();
     })
     $('.filterBox button.opposite').click(function(){
         var Par = $(this).parents('.filterBox')[0];
         $(Par).find('ul button').each(function(){
             ClickBtn(this)
         })
+        CheckChooseBtn();
     })
     $('.filterBox ul button').click(function(){
         ClickBtn(this)
@@ -66,11 +69,17 @@ function setFilter() {
     function ClickBtn(obj) {
         if (obj.value == 1 || obj.value == '1') {
             obj.value = 0;
+            $(obj).parents('.filterBox').find('.bottomBar p span').html(parseInt($(obj).parents('.filterBox').find('.bottomBar p span').html()) - 1)
         }else{
             obj.value = 1;
+            $(obj).parents('.filterBox').find('.bottomBar p span').html(parseInt($(obj).parents('.filterBox').find('.bottomBar p span').html()) + 1)
         }
 
         CheckAllBtn(obj);
+    }
+
+    function CheckChooseBtn() {
+        $('#LeagueFilter .bottomBar p span').html($('#LeagueFilter .inner ul button[value="1"]').length);
     }
 
     function CheckAllBtn(obj) {

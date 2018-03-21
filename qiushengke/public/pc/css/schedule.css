@@ -674,6 +674,15 @@
 	background: #fff;
 	position: absolute; bottom: 0; left: 0; right: 0;
 }
+.filterBox .inner .bottomBar p{
+	margin-right: 20px;
+	font-size: 12px; line-height: 30px; text-align: right;
+	float: right;
+}
+.filterBox .inner .bottomBar p span{
+	padding: 0 4px;
+	color: #c52601;
+}
 .filterBox .inner .bottomBar button.all{
 	height: 30px; width: 58px;
 	margin-right: 10px;

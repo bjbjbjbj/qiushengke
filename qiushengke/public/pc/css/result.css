@@ -432,7 +432,7 @@ a.team span.name{
 #Con table div.even:before{
 	width: 16px; height: 8px;
 	margin-left: -8px;
-	background: url(../img/icon_triangle_up_n.png) no-repeat center; background-size: 16px;
+	background: url(../img/icon_triangle_up_n@2x.png) no-repeat center; background: url(../img/icon_triangle_up_n.png) no-repeat center\0/; background-size: 16px;
 	position: absolute; top: -8px; left: 50%;
 	content: '';
 }
@@ -440,7 +440,7 @@ a.team span.name{
 	top: auto; bottom: 44px;
 }
 #Con table div.even.top:before{
-	background: url(../img/icon_triangle_down_n.png) no-repeat center; background-size: 16px;
+	background: url(../img/icon_triangle_down_n@2x.png) no-repeat center; background: url(../img/icon_triangle_down_n.png) no-repeat center\0/; background-size: 16px;
 	top: auto; bottom: -8px;
 }
 #Con table div.even p.team{
@@ -687,6 +687,15 @@ a.team span.name{
 	padding: 15px 62px 15px 34px;
 	background: #fff;
 	position: absolute; bottom: 0; left: 0; right: 0;
+}
+.filterBox .inner .bottomBar p{
+	margin-right: 20px;
+	font-size: 12px; line-height: 30px; text-align: right;
+	float: right;
+}
+.filterBox .inner .bottomBar p span{
+	padding: 0 4px;
+	color: #c52601;
 }
 .filterBox .inner .bottomBar button.all{
 	height: 30px; width: 58px;

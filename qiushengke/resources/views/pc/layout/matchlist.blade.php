@@ -20,7 +20,7 @@
 
         }
     </style>
-    @endsection
+@endsection
 @section('js')
     @yield('js_match_list')
     <script type="text/javascript">
@@ -73,6 +73,8 @@
             }
             //选择保留删除
             _resetFilterUser('match',filter);
+
+            setBG();
         }
 
         //设置cookies
@@ -140,6 +142,7 @@
 
             //还原列表类型 进行中 稍后等显示方式
             _updateSection();
+            setBG();
         }
 
         //更新比赛类型按钮
@@ -214,6 +217,7 @@
                     }
                 }
             }
+            setBG();
         }
 
         //根据选中赛事 赔率大小 保留筛选还原
@@ -432,6 +436,8 @@
             _updateSection();
             //精简的按钮不能选中
             _updateMatchFilterBtn('league');
+
+            setBG();
         }
 
         //是否显示比赛
@@ -752,7 +758,9 @@
                             }
                             var icon = isHost ? $('#'+ID+'_h_icon')[0].src : $('#'+ID+'_a_icon')[0].src;
                             if (lastScore.indexOf(currentScore) == -1 && (dataItem.hscore + dataItem.ascore) > 0) {
-                                Goal(dataItem.hname, dataItem.aname, dataItem.hscore, dataItem.ascore, icon,dataItem.time.replace('\'',''), isHost?'host':'away');
+                                var tmpTR = $('tr#m_tr_' + ID)[0];
+                                if (tmpTR.className.indexOf('show') != -1)
+                                    Goal(dataItem.hname, dataItem.aname, dataItem.hscore, dataItem.ascore, icon,dataItem.time.replace('\'',''), isHost?'host':'away');
                             }
                             scoreItem.html(currentScore);
                         }
@@ -804,7 +812,7 @@
             var url = "/static/terminal/1/"+first+"/"+second+"/"+ID+"/roll.json";
             url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
             $.ajax({
-{{--                "url": '{{env('MATCH_URL')}}' + "/static/terminal/1/"+first+"/"+second+"/"+ID+"/tech.json",--}}
+                {{--                "url": '{{env('MATCH_URL')}}' + "/static/terminal/1/"+first+"/"+second+"/"+ID+"/tech.json",--}}
                 "url":url,
                 "dataType": "json",
                 "success": function (json) {
@@ -845,8 +853,32 @@
             var p = tbody.find('p.' + key + 'down' + key2)[0];
             p.innerHTML = data['down'+key3];
         }
+
+        jQuery(function(){
+            $.datepicker.setDefaults( $.datepicker.regional[ "zh-TW" ] );
+
+            $.datepicker.regional['zh-TW'] = {
+                closeText: '关闭',
+                prevText: '&#x3C;上月',
+                nextText: '下月&#x3E;',
+                currentText: '今天',
+                monthNames: ['一月','二月','三月','四月','五月','六月',
+                    '七月','八月','九月','十月','十一月','十二月'],
+                monthNamesShort: ['一月','二月','三月','四月','五月','六月',
+                    '七月','八月','九月','十月','十一月','十二月'],
+                dayNames: ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'],
+                dayNamesShort: ['周日','周一','周二','周三','周四','周五','周六'],
+                dayNamesMin: ['日','一','二','三','四','五','六'],
+                weekHeader: '周',
+                dateFormat: 'yy/mm/dd',
+                firstDay: 1,
+                isRTL: false,
+                showMonthAfterYear: true,
+                yearSuffix: '年'};
+            $.datepicker.setDefaults($.datepicker.regional['zh-TW']);
+        });
     </script>
-    @endsection
+@endsection
 @section('content')
     <div id="Con">
         @yield('match_list_content')
@@ -866,7 +898,7 @@
                     <li>
                         @foreach($leagues as $league)
                             <?php $leagueClass = ($league["isFive"] ? "five " : "").($league["isFirst"] ? "first" : "") ?>
-                                <button mid="{{$league['id']}}" league="{{$leagueClass}}" class="item">{{$league["name"]}}({{$league["count"]}})</button>
+                            <button mid="{{$league['id']}}" league="{{$leagueClass}}" class="item">{{$league["name"]}}({{$league["count"]}})</button>
                         @endforeach
                         <b class="letter">{{$key}}</b>
                     </li>
@@ -882,34 +914,39 @@
                 <button class="all">全选</button>
                 <button class="opposite">反选</button>
                 <button class="comfirm" onclick="confirmFilter('league', false)">确认</button><!--选项为空时有disabled效果--><!--套界面时添加这里的事件-->
+                <p>已选择<span>0</span>项赛事</p>
             </div>
         </div>
     </div>
     <div id="OddFilter" class="filterBox" style="display: none;">
         <div class="inner">
             <div class="item" type="asia">
-                @if(count($odd['asiaOdds']['up']) > 0 || count($odd['asiaOdds']['middle'])> 0 || count($odd['asiaOdds']['down']) > 0)
-                    <ul class="asia">
-                        @if(count($odd['asiaOdds']['middle']) > 0)
-                            @foreach($odd['asiaOdds']['middle'] as $item)
-                                <li><button mid="{{'asiaMiddle_'.$item['sort']}}">{{$item['typeCn']}}({{$item['count']}})</button></li>
-                            @endforeach
-                            <p class="clear"></p>
-                        @endif
-                        @if(count($odd['asiaOdds']['up']) > 0)
-                            @foreach($odd['asiaOdds']['up'] as $item)
-                                <li><button mid="{{'asiaUp_'.$item['sort']}}">{{$item['typeCn']}}({{$item['count']}})</button></li>
-                            @endforeach
-                            <p class="clear"></p>
-                        @endif
-                        @if(count($odd['asiaOdds']['down']) > 0)
-                            @foreach($odd['asiaOdds']['down'] as $item)
-                                <li><button mid="{{'asiaDown_'.$item['sort']}}">{{$item['typeCn']}}({{$item['count']}})</button></li>
-                            @endforeach
-                            <p class="clear"></p>
-                        @endif
-                    </ul>
-                @endif
+                @if(
+                (isset($odd['asiaOdds']['up']) && count($odd['asiaOdds']['up']) > 0) ||
+                (isset($odd['asiaOdds']['middle']) && count($odd['asiaOdds']['middle']) > 0) ||
+                (isset($odd['asiaOdds']['down']) && count($odd['asiaOdds']['down']) > 0)
+                )
+                        <ul class="asia">
+                            @if(isset($odd['asiaOdds']['middle']) && count($odd['asiaOdds']['middle']) > 0)
+                                @foreach($odd['asiaOdds']['middle'] as $item)
+                                    <li><button mid="{{'asiaMiddle_'.$item['sort']}}">{{$item['typeCn']}}({{$item['count']}})</button></li>
+                                @endforeach
+                                <p class="clear"></p>
+                            @endif
+                            @if(isset($odd['asiaOdds']['up']) && count($odd['asiaOdds']['up']) > 0)
+                                @foreach($odd['asiaOdds']['up'] as $item)
+                                    <li><button mid="{{'asiaUp_'.$item['sort']}}">{{$item['typeCn']}}({{$item['count']}})</button></li>
+                                @endforeach
+                                <p class="clear"></p>
+                            @endif
+                            @if(isset($odd['asiaOdds']['down']) &&count($odd['asiaOdds']['down']) > 0)
+                                @foreach($odd['asiaOdds']['down'] as $item)
+                                    <li><button mid="{{'asiaDown_'.$item['sort']}}">{{$item['typeCn']}}({{$item['count']}})</button></li>
+                                @endforeach
+                                <p class="clear"></p>
+                            @endif
+                        </ul>
+                    @endif
                 @if(count($odd['ouOdds']) > 0)
                     <ul class="goal">
                         @if(isset($odd['ouOdds']['-1']))
@@ -937,6 +974,7 @@
                 <button class="all">全选</button>
                 <button class="opposite">反选</button>
                 <button class="comfirm" onclick="confirmFilter('odd', false)">确认</button><!--选项为空时有disabled效果-->
+                <p>已选择<span>0</span>个盘口</p>
             </div>
         </div>
     </div>

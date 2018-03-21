@@ -9,9 +9,24 @@
 namespace App\Http\Controllers\PC\League;
 
 use App\Http\Controllers\Controller as BaseController;
+use App\Models\QSK\Video\HotVideo;
+use App\Models\QSK\Video\HotVideoType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class LeagueController extends BaseController{
+
+    const footLeagues = [
+        ['id'=>46,'type'=>'1'],
+        ['id'=>31,'type'=>'1'],
+        ['id'=>26,'type'=>'1'],
+        ['id'=>29,'type'=>'1'],
+        ['id'=>11,'type'=>'1'],
+        ['id'=>8,'type'=>'1'],
+        ['id'=>139,'type'=>'2'],
+        ['id'=>73,'type'=>'2'],
+        ['id'=>57,'type'=>'2'],
+    ];
 
     const footLeagueIcons = [
         46=>'https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=0b42678f1b3853438ccf8027ab28d743/0e2442a7d933c895ef2b0c98da1373f0830200ff.jpg',
@@ -40,15 +55,56 @@ class LeagueController extends BaseController{
         $pc_json = curl_exec ($ch);
         curl_close ($ch);
         $pc_json = json_decode($pc_json,true);
-
         return $pc_json;
     }
 
+    /************* 静态化 ***************/
+    /**
+     * 静态化
+     * @param Request $request
+     */
+    public function staticFoot(Request $request){
+        //足球
+        foreach (LeagueController::footLeagues as $item){
+            $html = $this->league($request,$item['id']);
+            echo $item['id'] . ' ';
+            if ($html && strlen($html) > 0){
+                if ($item['type'] == 2)
+                    Storage::disk("public")->put("/cup_league/foot/".$item['id'].".html", $html);
+                else
+                    Storage::disk("public")->put("/league/foot/".$item['id'].".html", $html);
+            }
+        }
+    }
+
+    public function staticBasket(Request $request){
+        //足球
+        foreach (LeagueController::basketLeagueIcons as $key=>$value){
+            $html = $this->leagueBK($request,$key);
+            if ($html && strlen($html) > 0) {
+                echo $key . ' ';
+                Storage::disk("public")->put("/league/basket/" . $key . ".html", $html);
+            }
+        }
+    }
+
     /********** 足球 ************/
+    /**
+     * 赛事专题
+     * @param Request $request
+     * @param $lid
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View|void
+     */
     public function league(Request $request,$lid){
         $pc_json = $this->getLeagueData($lid);
         if (!empty($pc_json)) {
             $result = $pc_json;
+            //赛事视频
+            $videoType = HotVideoType::where('lid',$lid)->first();
+            if ($videoType){
+                $videos = HotVideo::where('type_id',$videoType->id)->get();
+                $result['videos'] = $videos;
+            }
             //联赛,杯赛
             if ($pc_json['league']['type'] == 1) {
                 $this->html_var = array_merge($this->html_var,$result);

@@ -10,7 +10,7 @@
                     </a>
                 @endforeach
             </ul>
-            <input type="text" name="date" placeholder="请选择日期">
+            <input type="text" name="date" placeholder="{{$currDate}}" onchange="clickDate(this)">
         </div>
         <div id="Control">
             <div class="inbox">
@@ -47,6 +47,11 @@
     <script type="text/javascript">
         window.onload = function () {
             setPage();
+        }
+        function clickDate(date) {
+            var value = date.value.replace(/\//g,"");
+            var url = '{{env('APP_URL')}}' + '/match/basket/'+value+'/result_t.html';
+            window.location.href = url;
         }
     </script>
 @endsection
