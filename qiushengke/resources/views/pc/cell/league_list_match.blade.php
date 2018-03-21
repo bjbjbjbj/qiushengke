@@ -91,10 +91,10 @@ $ouOdd = "ou_" . $ouOddArray['sort'];
 ?>
 <tr>
     <td>{{date('m.d', $match['time'])}}<br/>{{date('H:i', $match['time'])}}</td>
-    <td><a href="" class="team">{{$match['hname']}}</a></td>
-    <td><a href=""><img src="{{strlen($match['hicon'])>0?$match['hicon'] : (env('CDN_URL') . '/pc/img/icon_teamDefault.png')}}"></a></td>
+    <td><a target="_blank" href="{{$matchUrl}}" class="team">{{$match['hname']}}</a></td>
+    <td><a target="_blank" href="{{$matchUrl}}"><img src="{{strlen($match['hicon'])>0?$match['hicon'] : (env('CDN_URL') . '/pc/img/icon_teamDefault.png')}}"></a></td>
     <td>
-        <a href="">
+        <a target="_blank" href="{{$matchUrl}}">
             <p class="fullScore">
                 @if($status == 0)
                     VS
@@ -109,8 +109,8 @@ $ouOdd = "ou_" . $ouOddArray['sort'];
             @endif
         </a>
     </td>
-    <td><a href=""><img src="{{strlen($match['aicon'])>0?$match['aicon'] : (env('CDN_URL') . '/pc/img/icon_teamDefault.png')}}"></a></td>
-    <td><a href="" class="team">{{$match['aname']}}</a></td>
+    <td><a target="_blank" href="{{$matchUrl}}"><img src="{{strlen($match['aicon'])>0?$match['aicon'] : (env('CDN_URL') . '/pc/img/icon_teamDefault.png')}}"></a></td>
+    <td><a target="_blank" href="{{$matchUrl}}" class="team">{{$match['aname']}}</a></td>
     <td>
         <p class="asia">
             <span>{{$asiaUp}}</span><span class="odd">{{$asiaMiddle}}</span><span>{{$asiaDown}}</span>
@@ -120,9 +120,9 @@ $ouOdd = "ou_" . $ouOddArray['sort'];
         </p>
     </td>
     <td>
-        <a href="">析</a>
-        <a href="">亚</a>
-        <a href="">欧</a>
-        <a href="">大</a>
+        <a target="_blank" href="{{$matchUrl}}">析</a>
+        <a target="_blank" href="/match/foot/odd.html?mid={{$mid}}&type=1">亚</a>
+        <a target="_blank" href="/match/foot/odd.html?mid={{$mid}}&type=2">欧</a>
+        <a target="_blank" href="/match/foot/odd.html?mid={{$mid}}&type=3">大</a>
     </td>
 </tr>

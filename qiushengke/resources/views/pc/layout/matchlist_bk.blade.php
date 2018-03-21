@@ -561,9 +561,10 @@
 
         //赔率刷新
         function refreshRoll() {
+            var url = "/static/change/2/roll.json?" + (new Date().getTime());
+            url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
             $.ajax({
-//                "url": "/static/change/2/roll.json?" + (new Date().getTime()),
-                "url":"/static/roll.json",
+                "url": url,
                 "dataType": "json",
                 "success": function (json) {
                     for (var ID in json) {
@@ -691,9 +692,10 @@
         function refresh() {
             if (htmlPathType !='bk_immediate')
                 return;
+            var url = "/static/change/2/score.json?" + (new Date().getTime());
+            url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
             $.ajax({
-//                "url": "/static/change/2/score.json?" + (new Date().getTime()),
-                "url":"/static/score.json",
+                "url": url,
                 "dataType": "json",
                 "success": function (json) {
                     var ups = $('span.up');
