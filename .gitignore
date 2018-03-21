@@ -5,3 +5,9 @@ qiushengke/vendor
 qiushengke/composer.lock
 qiushengke/public/icon
 qiushengke/public/cover
+
+qsk-match/.idea/*
+qsk-match/vendor
+qsk-match/composer.lock
+qsk-match/public/icon
+qsk-match/public/cover
