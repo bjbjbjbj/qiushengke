@@ -29,7 +29,7 @@
                             </td>
                             <td>
                                 <p>
-                                    <b>专题联赛：</b>{{isset($leagues[$video->subject_lid]) ? $leagues[$video->subject_lid] : ''}}
+                                    <b>专题联赛：</b>{{isset($leagues[$video->s_lid]) ? $leagues[$video->s_lid] : ''}}
                                     &nbsp;&nbsp;&nbsp;<b>播放方式：</b>{{$players[$video->player]}}
                                 </p>
                                 <p><b>源链接：</b>{{$video->content}}</p>

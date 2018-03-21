@@ -76,7 +76,7 @@ class VideoController extends Controller
         $id = $request->input('id');
         $title = $request->input('title');//标题
 //        $type_id = $request->input('type_id');//类型
-        $subject_lid = $request->input('subject_lid');//专题联赛
+        $s_lid = $request->input('s_lid');//专题联赛
         $content = $request->input('content');//源链接
         $player = $request->input('player');//播放方式
         $status = $request->input('status');//显示/隐藏
@@ -93,7 +93,7 @@ class VideoController extends Controller
 //        if (!is_numeric($type_id)) {
 //            return response()->json(['code'=>401, 'msg'=>'类型不能为空']);
 //        }
-        if (!is_numeric($subject_lid)) {
+        if (!is_numeric($s_lid)) {
             return response()->json(['code'=>401, 'msg'=>'专题联赛填写错误']);
         }
         if (empty($content)) {
@@ -112,7 +112,7 @@ class VideoController extends Controller
 //        if (!isset($type) || $type->status != HotVideoType::kStatusShow) {
 //            return response()->json(['code'=>401, 'msg'=>'类型不存在']);
 //        }
-        $sj = SubjectLeague::query()->find($subject_lid);
+        $sj = SubjectLeague::query()->find($s_lid);
         if (!isset($sj) || $sj->status != SubjectLeague::kStatusShow) {
             return response()->json(['code'=>401, 'msg'=>'专题联赛不存在']);
         }
@@ -128,7 +128,7 @@ class VideoController extends Controller
         try {
             $video->title = $title;
 //            $video->type_id = $type_id;
-            $video->subject_lid = $subject_lid;
+            $video->s_lid = $s_lid;
             $video->content = $content;
             $video->player = $player;
             $video->status = $status;

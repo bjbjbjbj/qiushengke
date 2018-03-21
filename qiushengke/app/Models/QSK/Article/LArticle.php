@@ -16,6 +16,8 @@ class LArticle extends Model
 
     const kStatusDraft = 2, kStatusPublish = 1;//1：发布，2：草稿。
 
+    public function getArticles($lid, $sport, $size = 10) {
 
+    }
 
 }

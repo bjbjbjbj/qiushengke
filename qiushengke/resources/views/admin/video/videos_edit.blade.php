@@ -21,10 +21,10 @@
 
                 <div class="input-group form-group">
                     <span class="input-group-addon">专题联赛</span>
-                    <select name="subject_lid" class="form-control" required>
+                    <select name="s_lid" class="form-control" required>
                         <option value="">请选择联赛</option>
                         @foreach($leagues as $league)
-                        <option value="{{$league->id}}" @if(isset($video) && $video->subject_lid == $league->id) selected @endif>{{$league->getName()}}</option>
+                        <option value="{{$league->id}}" @if(isset($video) && $video->s_lid == $league->id) selected @endif>{{$league->getName()}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -104,7 +104,7 @@
             //判断参数
             var title = thisForm.title.value;
             // var type_id = thisForm.type_id.value;
-            var subject_lid = thisForm.subject_lid.value;
+            var s_lid = thisForm.s_lid.value;
             var content = thisForm.content.value;
 
             title = $.trim(title);
@@ -122,7 +122,7 @@
             //     alert("请选择分类");
             //     return false;
             // }
-            if (subject_lid == "") {
+            if (s_lid == "") {
                 alert("请选择专题联赛");
                 return false;
             }

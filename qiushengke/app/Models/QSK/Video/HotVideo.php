@@ -52,7 +52,7 @@ class HotVideo extends Model
      */
     public function getVideo($lid, $sport, $size = 10) {
         $query = self::query();
-        $query->join('subject_leagues', 'subject_leagues.id', 'hot_videos.subject_lid');
+        $query->join('subject_leagues', 'subject_leagues.id', 'hot_videos.s_lid');
         $query->where('subject_leagues.sport', $sport);
         $query->where('subject_leagues.lid', $lid);
         $query->where('subject_leagues.status', SubjectLeague::kStatusShow);

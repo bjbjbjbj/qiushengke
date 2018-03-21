@@ -83,6 +83,7 @@
                             <td>
                                 <p>
                                     <button type="submit" class="btn btn-sm btn-info"><span class="glyphicon glyphicon-ok"></span>保存</button>
+                                    <a href="javascript:delArticle('{{$article->id}}');" class="btn btn-sm btn-danger">删除</a>
                                 </p>
                             </td>
                         </tr>
@@ -98,6 +99,33 @@
     <script type="text/javascript">
         function submit() {
             console.info('submit...');
+        }
+        $.ajaxSetup({
+            headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'}
+        });
+        function delArticle(id) {
+            if (!confirm('是否确认删除该文章')) {
+                return;
+            }
+            $.ajax({
+                "url": "/admin/articles/del",
+                "type": "post",
+                "data": {"id": id},
+                "dataType": "json",
+                "success": function (json) {
+                    if (json) {
+                        alert(json.msg);
+                        if (json.code == 200) {
+                            location.reload();
+                        }
+                    } else {
+                        alert("删除失败");
+                    }
+                },
+                "error": function () {
+                    alert("删除失败");
+                }
+            });
         }
 
         /**

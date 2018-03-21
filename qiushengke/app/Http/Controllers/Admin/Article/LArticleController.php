@@ -94,4 +94,20 @@ class LArticleController extends Controller
         return back()->with('success', '保存成功');
     }
 
+    /**
+     * 删除文章
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function deleteArticle(Request $request) {
+        $id = $request->input('id');
+        if (is_numeric($id)) {
+            $article = LArticle::query()->find($id);
+            if (isset($article)) {
+                $article->delete();
+            }
+        }
+        return response()->json(['code'=>200, 'msg'=>'删除成功']);
+    }
+
 }

@@ -71,6 +71,7 @@ Route::group(['middleware' => 'admin_auth'], function () {
 
     Route::get('/articles', 'Article\LArticleController@articles');//专题资讯
     Route::post('/articles/save', 'Article\LArticleController@saveArticle');//保存资讯
+    Route::post('/articles/del', 'Article\LArticleController@deleteArticle');
 });
 
 Route::group(['middleware' => 'admin_auth'], function () {
