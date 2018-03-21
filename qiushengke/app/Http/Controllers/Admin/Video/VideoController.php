@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\Admin\Video;
 
 
+use App\Models\QSK\Subject\SubjectLeague;
 use App\Models\QSK\Video\HotVideo;
 use App\Models\QSK\Video\HotVideoType;
 use Illuminate\Http\Request;
@@ -30,12 +31,19 @@ class VideoController extends Controller
 
         $result['page'] = $page;
 
-        $type_array = [];
-        $types = HotVideoType::getAllTypes();
-        foreach ($types as $type) {
-            $type_array[$type->id] = $type->name;
+//        $type_array = [];
+//        $types = HotVideoType::getAllTypes();
+//        foreach ($types as $type) {
+//            $type_array[$type->id] = $type->name;
+//        }
+//
+//        $result['types'] = $type_array;
+        $league_array = [];
+        $leagues = SubjectLeague::getAllLeagues();
+        foreach ($leagues as $league) {
+            $league_array[$league->id] = $league->getName();
         }
-        $result['types'] = $type_array;
+        $result['leagues'] = $league_array;
         $result['players'] = HotVideo::kPlayerArray;
 
         return view('admin.video.videos', $result);
@@ -53,7 +61,8 @@ class VideoController extends Controller
             $video = HotVideo::query()->find($id);
             $result['video'] = $video;
         }
-        $result['types'] = HotVideoType::getAllTypes();
+        //$result['types'] = HotVideoType::getAllTypes();
+        $result['leagues'] = SubjectLeague::getAllLeagues();
         $result['players'] = HotVideo::kPlayerArray;
         return view('admin.video.videos_edit', $result);
     }
@@ -66,7 +75,8 @@ class VideoController extends Controller
     public function saveVideo(Request $request) {
         $id = $request->input('id');
         $title = $request->input('title');//标题
-        $type_id = $request->input('type_id');//类型
+//        $type_id = $request->input('type_id');//类型
+        $subject_lid = $request->input('subject_lid');//专题联赛
         $content = $request->input('content');//源链接
         $player = $request->input('player');//播放方式
         $status = $request->input('status');//显示/隐藏
@@ -80,8 +90,11 @@ class VideoController extends Controller
         if (mb_strlen($title) > 30) {
             return response()->json(['code'=>401, 'msg'=>'标题不能超过30字']);
         }
-        if (!is_numeric($type_id)) {
-            return response()->json(['code'=>401, 'msg'=>'类型不能为空']);
+//        if (!is_numeric($type_id)) {
+//            return response()->json(['code'=>401, 'msg'=>'类型不能为空']);
+//        }
+        if (!is_numeric($subject_lid)) {
+            return response()->json(['code'=>401, 'msg'=>'专题联赛填写错误']);
         }
         if (empty($content)) {
             return response()->json(['code'=>401, 'msg'=>'源链接不能为空']);
@@ -95,9 +108,13 @@ class VideoController extends Controller
         if (!empty($od) && !is_numeric($od)) {
             return response()->json(['code'=>401, 'msg'=>'排序错误']);
         }
-        $type = HotVideoType::query()->find($type_id);
-        if (!isset($type) || $type->status != HotVideoType::kStatusShow) {
-            return response()->json(['code'=>401, 'msg'=>'类型不存在']);
+//        $type = HotVideoType::query()->find($type_id);
+//        if (!isset($type) || $type->status != HotVideoType::kStatusShow) {
+//            return response()->json(['code'=>401, 'msg'=>'类型不存在']);
+//        }
+        $sj = SubjectLeague::query()->find($subject_lid);
+        if (!isset($sj) || $sj->status != SubjectLeague::kStatusShow) {
+            return response()->json(['code'=>401, 'msg'=>'专题联赛不存在']);
         }
         //判断参数 结束
 
@@ -110,7 +127,8 @@ class VideoController extends Controller
 
         try {
             $video->title = $title;
-            $video->type_id = $type_id;
+//            $video->type_id = $type_id;
+            $video->subject_lid = $subject_lid;
             $video->content = $content;
             $video->player = $player;
             $video->status = $status;
