@@ -119,6 +119,7 @@ class MatchController extends BaseController
             $result['sport'] = $sport;
             $result['nextDate'] = $nextDate;
             $result['lastDate'] = $lastDate;
+            $result['currDate'] = date('Y-m-d');
             $this->html_var = array_merge($this->html_var,$result);
             if ($sport == 1)
                 return view('pc.match.immediate',$this->html_var);
@@ -179,6 +180,7 @@ class MatchController extends BaseController
             $result['nextDate'] = $nextDate;
             $result['lastDate'] = $lastDate;
             $result['calendar'] = $calendar;
+            $result['currDate'] = date('Y-m-d',strtotime($dateStr));
             $this->html_var = array_merge($this->html_var,$result);
             if($sport == 1)
                 return view('pc.match.result',$this->html_var);
@@ -236,6 +238,7 @@ class MatchController extends BaseController
             $result['nextDate'] = $nextDate;
             $result['lastDate'] = $lastDate;
             $result['calendar'] = $calendar;
+            $result['currDate'] = date('Y-m-d',strtotime($dateStr));
             $this->html_var = array_merge($this->html_var,$result);
             if ($sport == 1)
                 return view('pc.match.schedule',$this->html_var);

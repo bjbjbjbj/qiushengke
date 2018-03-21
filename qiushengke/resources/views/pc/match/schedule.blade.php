@@ -10,14 +10,14 @@
                     </a>
                 @endforeach
             </ul>
-            <input type="text" name="date" placeholder="请选择日期">
+            <input type="text" name="date" placeholder="{{$currDate}}" onchange="clickDate(this)">
         </div>
         <div id="Control">
             <div class="inbox">
                 <p class="column">
                     <button id="column_first" class="on" onclick="matchFilter('first')">精简</button><button id="column_lottery" onclick="matchFilter('lottery')">竞彩</button><button id="column_live" onclick="matchFilter('live')">直播</button><button id="column_all" onclick="matchFilter('all')">完整</button>
                 </p>
-                <p class="number">共<b>{{$total}}</b>场&nbsp;隐藏<b id="hideMatchCount">-</b>场<span >【显示】</span></p>
+                <p class="number">共<b>{{$total}}</b>场&nbsp;隐藏<b id="hideMatchCount">-</b>场<span  onclick="matchFilter('all')">【显示】</span></p>
                 <p class="filter"><button class="league">选择赛事</button><button class="odd">选择盘路</button></p>
             </div>
         </div>
@@ -100,6 +100,11 @@
     <script type="text/javascript">
         window.onload = function () {
             setPage();
+        }
+        function clickDate(date) {
+            var value = date.value.replace(/\//g,"");
+            var url = '{{env('APP_URL')}}' + '/match/foot/'+value+'/schedule.html';
+            window.location.href = url;
         }
     </script>
 @endsection

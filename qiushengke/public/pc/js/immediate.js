@@ -65,6 +65,8 @@ function setDateInput() {
 }
 
 function setFilter() {
+    CheckChooseBtn();
+
     //按钮设置
     $('#Control button.league').click(function(){
         $('#LeagueFilter').css('display','block');
@@ -84,6 +86,7 @@ function setFilter() {
             $(Par).find('ul.' + $(Par).find('.item').attr('type') + ' button').val(1);
         }
         $(Par).find('button.comfirm').removeAttr('disabled');
+        CheckChooseBtn();
     })
     $('.filterBox button.opposite').click(function(){
         var Par = $(this).parents('.filterBox')[0];
@@ -96,6 +99,7 @@ function setFilter() {
                 ClickBtn(this)
             })
         }
+        CheckChooseBtn()
     })
     $('.filterBox ul button').click(function(){
         ClickBtn(this)
@@ -104,11 +108,18 @@ function setFilter() {
     function ClickBtn(obj) {
         if (obj.value == 1 || obj.value == '1') {
             obj.value = 0;
+            $(obj).parents('.filterBox').find('.bottomBar p span').html(parseInt($(obj).parents('.filterBox').find('.bottomBar p span').html()) - 1)
         }else{
             obj.value = 1;
+            $(obj).parents('.filterBox').find('.bottomBar p span').html(parseInt($(obj).parents('.filterBox').find('.bottomBar p span').html()) + 1)
         }
 
         CheckAllBtn(obj);
+    }
+
+    function CheckChooseBtn() {
+        $('#LeagueFilter .bottomBar p span').html($('#LeagueFilter .inner ul button[value="1"]').length);
+        $('#OddFilter .bottomBar p span').html($('#OddFilter .inner ul.' + $('#OddFilter .item').attr('type') + ' button[value="1"]').length);
     }
 
     function CheckAllBtn(obj) {
@@ -144,6 +155,7 @@ function setFilter() {
             }
 
             CheckAllBtn(this)
+            CheckChooseBtn();
         }
     })
 }
@@ -263,7 +275,18 @@ function CheckGoal() {
 }
 
 
-
+//重置底色
+function setBG () {
+    $('#Table tbody').each(function(){
+        if (this.id == 'Top') {
+            $(this).find('tr.show:even td').css('background','#f5f5f5');
+            $(this).find('tr.show:odd td').css('background','#fff');
+        }else{
+            $(this).find('tr.show:even td').css('background','#fff');
+            $(this).find('tr.show:odd td').css('background','#f5f5f5');
+        }
+    })
+}
 
 
 
