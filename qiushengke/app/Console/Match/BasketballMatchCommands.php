@@ -21,7 +21,7 @@ class BasketballMatchCommands extends Command
      *
      * @var string
      */
-    protected $signature = 'basketball_matches_in_db:run';
+    protected $signature = 'bb_matches_in_db:run';
 
     /**
      * The console command description.

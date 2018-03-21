@@ -16,10 +16,18 @@ class MatchDetailController extends BaseController{
     /**
      * 通过请求自己的链接静态化pc终端，主要是解决 文件权限问题。
      * @param $mid
+     * @param $sport
      */
-    public static function curlToHtml($mid) {
+    public static function curlToHtml($mid,$sport = 1) {
         $ch = curl_init();
-        $url = asset('/static/football/detail/' . $mid);
+        if (1 == $sport)
+            $url = asset('/static/football/detail/' . $mid);
+        else if(2 == $sport){
+            $url = asset('/static/basketball/detail/' . $mid);
+        }
+        echo $url;
+        if (is_null($url))
+            return;
         curl_setopt($ch, CURLOPT_URL, $url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_TIMEOUT, 25);
@@ -33,7 +41,8 @@ class MatchDetailController extends BaseController{
      */
     public function staticOddDetail(Request $request){
         $html = $this->oddDetail($request);
-        Storage::disk("public")->put("/match/foot/odd.html", $html);
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/match/foot/odd.html", $html);
     }
 
     /**
@@ -45,7 +54,7 @@ class MatchDetailController extends BaseController{
         $first = substr($mid,0,2);
         $second = substr($mid,2,2);
         $html = $this->matchDetail($request,$first,$second,$mid);
-        if (isset($html))
+        if (isset($html) && strlen($html) > 0)
             Storage::disk("public")->put("/match/foot/".$first."/".$second."/".$mid.".html", $html);
     }
 
