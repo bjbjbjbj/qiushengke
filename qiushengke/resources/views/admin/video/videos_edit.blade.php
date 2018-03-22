@@ -20,11 +20,11 @@
                 </div>
 
                 <div class="input-group form-group">
-                    <span class="input-group-addon">类型</span>
-                    <select name="type_id" class="form-control" required>
-                        <option value="">请选择类型</option>
-                        @foreach($types as $type)
-                        <option value="{{$type->id}}" @if(isset($video) && $video->type_id == $type->id) selected @endif>{{$type->name}}</option>
+                    <span class="input-group-addon">专题联赛</span>
+                    <select name="s_lid" class="form-control" required>
+                        <option value="">请选择联赛</option>
+                        @foreach($leagues as $league)
+                        <option value="{{$league->id}}" @if(isset($video) && $video->s_lid == $league->id) selected @endif>{{$league->getName()}}</option>
                         @endforeach
                     </select>
                 </div>
@@ -103,7 +103,8 @@
         function saveVideo(thisForm) {
             //判断参数
             var title = thisForm.title.value;
-            var type_id = thisForm.type_id.value;
+            // var type_id = thisForm.type_id.value;
+            var s_lid = thisForm.s_lid.value;
             var content = thisForm.content.value;
 
             title = $.trim(title);
@@ -117,8 +118,12 @@
                 alert("标题不能大于30字");
                 return false;
             }
-            if (type_id == "") {
-                alert("请选择分类");
+            // if (type_id == "") {
+            //     alert("请选择分类");
+            //     return false;
+            // }
+            if (s_lid == "") {
+                alert("请选择专题联赛");
                 return false;
             }
             if (content.length == 0) {

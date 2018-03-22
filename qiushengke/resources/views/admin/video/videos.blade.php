@@ -28,8 +28,10 @@
                                 @endif
                             </td>
                             <td>
-                                <p><b>录像类型：</b>{{isset($types[$video->type_id]) ? $types[$video->type_id] : ''}}</p>
-                                <p><b>播放方式：</b>{{$players[$video->player]}}</p>
+                                <p>
+                                    <b>专题联赛：</b>{{isset($leagues[$video->s_lid]) ? $leagues[$video->s_lid] : ''}}
+                                    &nbsp;&nbsp;&nbsp;<b>播放方式：</b>{{$players[$video->player]}}
+                                </p>
                                 <p><b>源链接：</b>{{$video->content}}</p>
                                 <p><b>是否显示：</b>{{$video->statusCn()}}</p>
                                 <p><b>排序：</b>{{$video->od}}</p>

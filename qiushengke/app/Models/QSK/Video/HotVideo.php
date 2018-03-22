@@ -9,6 +9,7 @@
 namespace App\Models\QSK\Video;
 
 
+use App\Models\QSK\Subject\SubjectLeague;
 use Illuminate\Database\Eloquent\Model;
 
 class HotVideo extends Model
@@ -42,6 +43,21 @@ class HotVideo extends Model
         return $cn;
     }
 
-
+    /**
+     * 根据lid 或 竞技类型获取 录像
+     * @param $lid
+     * @param $sport
+     * @param int $size
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Support\Collection|static[]
+     */
+    public function getVideo($lid, $sport, $size = 10) {
+        $query = self::query();
+        $query->join('subject_leagues', 'subject_leagues.id', 'hot_videos.s_lid');
+        $query->where('subject_leagues.sport', $sport);
+        $query->where('subject_leagues.lid', $lid);
+        $query->where('subject_leagues.status', SubjectLeague::kStatusShow);
+        $query->selectRaw('hot_videos.*');
+        return $query->take($size)->get();
+    }
 
 }
