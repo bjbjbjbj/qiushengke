@@ -652,9 +652,12 @@ class SpiderController extends Controller
     private function spiderFillOddMatch()
     {
         $matches = Match::where("status", "=", -1)
+            ->leftJoin('leagues', 'leagues.id', '=', 'matches.lid')
+            ->select('matches.*')
+            ->where("leagues.hot", "=", 1)
             ->where("is_odd", "=", 0)
             ->orderBy('time', 'desc')
-            ->take(20)
+            ->take(15)
             ->get();
         foreach ($matches as $match) {
             echo $match->hname . ' VS ' . $match->aname . '<br>';
