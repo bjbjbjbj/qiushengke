@@ -144,15 +144,6 @@ class MatchTipController extends Controller
                 $conclusion .= "该阵容场均进" . $a_avg_goal . "球失" . $a_avg_fumble . "球。";
             }
             echo "h_main_count = $h_main_count; a_main_count = $a_main_count".'; text ='. $conclusion . '<br/>';
-            $data = FileTool::getFileFromLiveAnalyse(date('Ymd', strtotime($time)), $lineup->id);
-            if (empty($data)) {
-                echo 'data is empty!! <br>';
-                FileTool::putFileToLiveAnalyse($lineup->id, ["lineup"=>$conclusion], date('Ymd', strtotime($time)));
-            } else {
-                $json = json_decode($data);
-                $json->lineup = $conclusion;
-                FileTool::putFileToLiveAnalyse($lineup->id, $json, date('Ymd', strtotime($time)));
-            }
             //新版即时提点
             $event_analyse = StatisticFileTool::getFileFromTerminal(MatchLive::kSportFootball, $lineup->id, 'event_analyse');
             if (empty($event_analyse)) {
@@ -171,17 +162,6 @@ class MatchTipController extends Controller
      */
     protected function createHalfFullCourtTip($base_match) {
         $tips = $this->createHalfFullCourtTipByTid($base_match);
-
-        $date = date('Ymd', strtotime($base_match->time));
-        $data = FileTool::getFileFromLiveAnalyse($date, $base_match->id);
-        //3.生成文件 开始
-        if (isset($data)) {
-            $json_data = json_decode($data);
-            $json_data->half_full_data = $tips;
-        } else {
-            $json_data = [ "half_full_data"=>$tips];
-        }
-        FileTool::putFileToLiveAnalyse($base_match->id, $json_data, date('Ymd', strtotime($base_match->time)));
 
         //新版提点数据
         $event_analyse = StatisticFileTool::getFileFromTerminal(MatchLive::kSportFootball, $base_match->id, 'event_analyse');
@@ -655,15 +635,6 @@ class MatchTipController extends Controller
             $refereeArray['wdl'] = $WDLForecast;
         }
         if (count($refereeArray) > 0) {
-            $date = date('Ymd', strtotime($match->time));
-            $data = FileTool::getFileFromLiveAnalyse($date, $mid);
-            if (empty($data)) {
-                FileTool::putFileToLiveAnalyse($mid, ["referee" => $refereeArray], $date);
-            } else {
-                $json = json_decode($data);
-                $json->referee = $refereeArray;
-                FileTool::putFileToLiveAnalyse($mid, $json, $date);
-            }
 
             //新版即时提点部分
             $event_analyse = StatisticFileTool::getFileFromTerminal(MatchLive::kSportFootball, $mid, 'event_analyse');

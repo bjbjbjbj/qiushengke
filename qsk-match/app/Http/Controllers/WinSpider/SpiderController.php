@@ -1111,7 +1111,6 @@ class SpiderController extends Controller
         $content = $this->spiderTextFromUrlByWin007($url, true);
 
         $datas = explode(";\r\n", $content);
-//        dump($datas);
         $tempLgIds = array();
         $tempLgTime = array();
         $dataArray = array();
@@ -1196,8 +1195,8 @@ class SpiderController extends Controller
                             //技术统计静态化
                             if (array_has(self::win_event_types, $type)) {
                                 $staticItem = ['name' => self::win_event_types[$type], 'h'=>$h_count, 'a'=>$a_count,
-                                'h_p'=>MatchDataChangeTool::dataPercent($h_count, $a_count),
-                                    'a_p'=>MatchDataChangeTool::dataPercent($a_count, $h_count)];
+                                'h_p'=>MatchDataChangeTool::dataPercent(intval($h_count), intval($a_count)),
+                                    'a_p'=>MatchDataChangeTool::dataPercent(intval($a_count), intval($h_count))];
 
                                 $staticArray[$mid]['tech'][] = $staticItem;
                             }
@@ -1209,16 +1208,10 @@ class SpiderController extends Controller
                 }
             }
         }
-//        dump($dataArray);
-        foreach ($dataArray as $mid=>$array) {
-            if (isset($tempLgIds[$mid])) {
-                $lg_mid = $tempLgIds[$mid];
-                FileTool::putFileToLiveEvent($lg_mid, $array,$tempLgTime[$mid]);
-            }
-        }
 
         foreach ($staticArray as $mid=>$techData) {
             if (isset($tempLgIds[$mid]) && $tempLgIds[$mid] > 0) {
+                echo "lg_mid = ".$tempLgIds[$mid]."<br>";
                 StatisticFileTool::putFileToTerminal($techData, MatchLive::kSportFootball, $tempLgIds[$mid], 'tech');
             }
         }

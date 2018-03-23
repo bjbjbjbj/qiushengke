@@ -429,48 +429,6 @@ trait SpiderBasketSchedule
         dump(time()-$lastTime);
     }
 
-    /**
-     * 即时更新比赛数据
-     */
-    private function matchLiveChangeToFile()
-    {
-        $url = "http://txt.win007.com/phone/lqscore/lqlivechange.txt";
-        $str = $this->spiderTextFromUrl($url);
-        $tempArray = array();
-        if ($str) {
-            $ss = explode("!", $str);
-            if (count($str) > 0) {
-                foreach ($ss as $s) {
-                    if (count(explode("^", $s)) >= 19) {
-                        list(
-                            $id, $status, $timeStr, $hscore, $ascore,
-                            $event, $hscore1st, $ascore1st, $hscore2nd, $ascore2nd,
-                            $hscore3rd, $ascore3rd, $hscore4th, $ascore4th, $h_ot,
-                            $a_ot, $asiaOdd, $enEvent, $ouOdd
-                            ) = explode("^", $s);
-                        $lg_m = \App\Models\LiaoGouModels\BasketMatch::getMatchWith($id, "win_id");
-                        if (isset($lg_m)) {
-                            $items = array();
-                            $items['status'] = $status;
-                            $items['time'] = $timeStr;
-                            $items['hscore'] = $hscore;
-                            $items['ascore'] = $ascore;
-
-                            $items['hscores'] = [$hscore1st, $hscore2nd, $hscore3rd, $hscore4th];
-                            $items['ascores'] = [$ascore1st, $ascore2nd, $ascore3rd, $ascore4th];
-
-                            $items['h_ots'] = (isset($h_ot)&&strlen($h_ot)>0) ? explode(',', $h_ot) : [];
-                            $items['a_ots'] = (isset($a_ot)&&strlen($a_ot)>0) ? explode(',', $a_ot) : [];
-
-                            $tempArray[$lg_m->id] = $items;
-                        }
-                    }
-                }
-            }
-        }
-        FileTool::putFileToLiveScore($tempArray, FileTool::kBasketball);
-    }
-
     private function getScore($score)
     {
         if (isset($score) && strlen($score) > 0) {

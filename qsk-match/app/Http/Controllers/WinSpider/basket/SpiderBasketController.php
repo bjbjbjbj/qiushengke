@@ -74,17 +74,6 @@ class SpiderBasketController extends Controller
     }
 
     /**
-     * 比赛直播，比分刷新（添加到文件），每分钟执行一次
-     */
-    private function spiderMatchLiveChangeToFile()
-    {
-        foreach (range(0, 50) as $key) {
-            $this->matchLiveChangeToFile();
-            sleep(1);
-        }
-    }
-
-    /**
      * 未爬取的比赛错误数据
      */
     private function spiderMatchError() {
@@ -152,7 +141,7 @@ class SpiderBasketController extends Controller
 //        $this->handicapChange(2);
 //        $this->handicapChange(3);
 
-        $this->liveHandicapLiveChange();
+//        $this->liveHandicapLiveChange();
     }
 
     /**
