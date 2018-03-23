@@ -62,16 +62,23 @@ Route::group(['middleware' => 'admin_auth'], function () {
  * 专题相关
  */
 Route::group(['middleware' => 'admin_auth'], function () {
+    Route::get('/subject/leagues', 'Subject\SubjectLeagueController@sLeagues');//专题列表
+    Route::get('/subject/leagues/edit', 'Subject\SubjectLeagueController@edit');//专题 修改/新增 页面
+    Route::post('/subject/leagues/save', 'Subject\SubjectLeagueController@saveLeague');//保存/修改 专题赛事
+    Route::post('/subject/leagues/change', 'Subject\SubjectLeagueController@changeSL');//改变 专题赛事 状态
+    Route::post('/subject/leagues/find-league', 'Subject\SubjectLeagueController@findLeague');//根据名称获取赛事
+
     Route::get('/videos/types', 'Video\VideoController@types');//录像类型列表
     Route::post('/videos/types/save', 'Video\VideoController@saveType');//保存录像类型
 
     Route::get('/videos', 'Video\VideoController@videos');//录像列表
     Route::get('/videos/edit', 'Video\VideoController@videoEdit');//录像编辑
     Route::post('/videos/save', 'Video\VideoController@saveVideo');//保存录像
+    Route::get('/videos/del', 'Video\VideoController@delVideo');//删除录像
 
     Route::get('/articles', 'Article\LArticleController@articles');//专题资讯
     Route::post('/articles/save', 'Article\LArticleController@saveArticle');//保存资讯
-    Route::post('/articles/del', 'Article\LArticleController@deleteArticle');
+    Route::post('/articles/del', 'Article\LArticleController@deleteArticle');//删除资讯
 });
 
 Route::group(['middleware' => 'admin_auth'], function () {

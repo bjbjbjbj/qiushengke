@@ -68,3 +68,7 @@ Route::group(['namespace'=>'League'], function () {
     //篮球动态请求
     Route::get("/league/basket/schedule/{lid}.html", "LeagueController@leagueBKWithDate");//赛程by时间
 });
+
+Route::group(['namespace'=>'Anchor'], function () {
+    Route::get("/anchor/index.html", "AnchorController@anchorIndex");//首页
+});
