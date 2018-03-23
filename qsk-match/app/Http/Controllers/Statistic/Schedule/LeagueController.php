@@ -26,22 +26,22 @@ use Illuminate\Http\Request;
 class LeagueController{
 
     const footLeague = [
-        array('id'=>'46','name'=>'中超','type'=>1),
-        array('id'=>'31','name'=>'英超','type'=>1),
-        array('id'=>'26','name'=>'西甲','type'=>1),
-        array('id'=>'29','name'=>'意甲','type'=>1),
-        array('id'=>'11','name'=>'法甲','type'=>1),
-        array('id'=>'8','name'=>'德甲','type'=>1),
-        array('id'=>'139','name'=>'亚冠','type'=>2),
-        array('id'=>'73','name'=>'欧冠','type'=>2),
-        array('id'=>'57','name'=>'世界杯','type'=>2)
+        array('id'=>'360','win_id'=>60,'name'=>'中超','type'=>1),
+        array('id'=>'1','win_id'=>36,'name'=>'英超','type'=>1),
+        array('id'=>'42','win_id'=>31,'name'=>'西甲','type'=>1),
+        array('id'=>'30','win_id'=>34,'name'=>'意甲','type'=>1),
+        array('id'=>'64','win_id'=>11,'name'=>'法甲','type'=>1),
+        array('id'=>'51','win_id'=>8,'name'=>'德甲','type'=>1),
+        array('id'=>'642','win_id'=>192,'name'=>'亚冠','type'=>2),
+        array('id'=>'602','win_id'=>103,'name'=>'欧冠','type'=>2),
+        array('id'=>'564','win_id'=>75,'name'=>'世界杯','type'=>2)
     ];
 
     const basketLeague = [
-        array('id'=>'1','name'=>'NBA','type'=>1),
-        array('id'=>'4','name'=>'CBA','type'=>1),
-        array('id'=>'2','name'=>'WNBA','type'=>1),
-        array('id'=>'89','name'=>'欧锦赛','type'=>1),
+        array('id'=>'1','win_id'=>1,'name'=>'NBA','type'=>1),
+        array('id'=>'4','win_id'=>5,'name'=>'CBA','type'=>1),
+        array('id'=>'2','win_id'=>2,'name'=>'WNBA','type'=>1),
+        array('id'=>'89','win_id'=>7,'name'=>'Euro','type'=>1),
     ];
 
     public function onMatchLeagueScheduleStatic($sport, $lid) {

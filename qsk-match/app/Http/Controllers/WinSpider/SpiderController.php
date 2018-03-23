@@ -98,7 +98,6 @@ class SpiderController extends Controller
      */
     private function spiderCurrentLeagueSchedule()
     {
-        set_time_limit(0);
         $lids = $this->getRecentLids('league_schedule', -1, 25, 24);
         foreach ($lids as $lid) {
             $league = League::find($lid);
@@ -943,6 +942,11 @@ class SpiderController extends Controller
         $lid = $request->input('lid');
         $season = $request->input('season');
         $this->leagueRefreshById($lid, $season);
+    }
+
+    private function spiderTeamDetail(Request $request) {
+        $lid = $request->input('tid');
+        $this->spiderTeamDetailByHtml($lid, true);
     }
 
     /******************* end 足彩 *****************/

@@ -93,7 +93,7 @@ trait SpiderTools
      */
     public function spiderTextFromUrlByPost($url, $data)
     {
-//        echo "=========spider url========<br>$url<br>";
+        echo "=========spider url========<br>$url<br>";
 
         $html = "";
         try {
@@ -117,7 +117,7 @@ trait SpiderTools
      * 专门用来爬取球探网页数据
      */
     public function spiderTextFromUrlByWin007($url, $shouldUtf8 = false, $referee = 'http://live.titan007.com/') {
-//        echo "url = ".$url."</br>";
+        echo "url = ".$url."</br>";
 
         $content = '';
         try {
@@ -132,7 +132,7 @@ trait SpiderTools
             curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.98 Safari/537.36");
 //        curl_setopt($ch, CURLOPT_USERAGENT, "WSMobile/1.5.1 (iPad; iOS 10.2; Scale/2.00)");
             //这个必须加上去，否则请求会404的
-//            curl_setopt($ch, CURLOPT_REFERER, $referee);
+            curl_setopt($ch, CURLOPT_REFERER, $referee);
             curl_setopt($ch, CURLOPT_COOKIESESSION, true);
             curl_setopt($ch, CURLOPT_HEADER, true);
             $response = curl_exec($ch);
