@@ -634,7 +634,7 @@ trait SpiderLeague
                 $this->leagueAwayRanking($season->lid, $season->name);
             }
         } elseif ($league->type == 2) {
-            $this->cupSchedule($lid, $season);
+            $this->cupSchedule($lid, $season->name);
         }
         echo "<br>";
     }

@@ -276,10 +276,10 @@ trait SpiderOdds
                                 return;
                             }
                         }
-                        $name = str_replace('澳门', '澳彩', $name);
-                        $name = str_replace('SB', 'ＳＢ', $name);
-                        $name = str_replace('Crown', 'ＳＢ', $name);
-                        $name = str_replace('12BET', '12bet/大发', $name);
+//                        $name = str_replace('澳门', '澳彩', $name);
+                        $name = str_replace('SB', 'Crown', $name);
+                        $name = str_replace('ＳＢ', 'Crown', $name);
+                        $name = str_replace('12BET', '12bet', $name);
                         $name = str_replace('利记sbobet', '利记', $name);
                         $name = str_replace('bet 365', 'Bet365', $name);
                         if ($up1 != '' && $up2 != '' && $middle1 != '' && $middle2 != '' && $down1 != '' && $down2 != '') {
