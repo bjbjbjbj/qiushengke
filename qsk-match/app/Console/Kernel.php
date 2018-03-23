@@ -86,43 +86,14 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        //足球爬虫相关
         $schedule->command('without_tid_match:run')->hourly();
-        $schedule->command('spider_ballbar:run')->hourlyAt(5);
-        $schedule->command('spider_ttzb:run')->hourlyAt(10);
-        $schedule->command('spider_wcj:run')->everyTenMinutes();
-//        $schedule->command('spider_sport365:run')->everyFiveMinutes();
         $schedule->command('spider_win_ten:run')->everyTenMinutes();
-        $schedule->command('match_tip:run')->hourly();
+//        $schedule->command('match_tip:run')->hourly();
         $schedule->command('match_lineup:run')->everyTenMinutes();
         $schedule->command('referee_calculate:run')->cron('* */2 * * * *');
-        $schedule->command('day:run')->dailyAt('1:00');
-        $schedule->command('day:run')->dailyAt('13:00');
 
-        $schedule->command('spider_input_lz:run')->twiceDaily(6, 18);//每五分钟抓取龙珠直播的五大联赛足球赛事
-        $schedule->command('spider_input_qqsport:run')->everyFiveMinutes();//腾讯体育,五分钟一次
-
-        //新版比赛静态数据相关的定时任务
-        $schedule->command('static_basket_immediate:run')->everyMinute();
-        $schedule->command('static_foot_immediate:run')->everyMinute();
-        $schedule->command('static_basket_schedule:run')->everyFiveMinutes();
-        $schedule->command('static_foot_schedule:run')->everyFiveMinutes();
-        $schedule->command('static_basket_next_terminal:run')->everyFiveMinutes();
-        $schedule->command('static_foot_next_terminal:run')->everyFiveMinutes();
-        $schedule->command('static_foot_cur_terminal:run')->everyFiveMinutes();
-        $schedule->command('static_basket_roll_change:run')->everyMinute();
-        $schedule->command('static_foot_roll_change:run')->everyMinute();
-        $schedule->command('static_basket_roll_list_change:run')->everyFiveMinutes();
-        $schedule->command('static_foot_roll_list_change:run')->everyFiveMinutes();
-        $schedule->command('static_basket_odd_days:run')->hourly();
-        $schedule->command('static_foot_odd_days:run')->hourly();
-        $schedule->command('static_basket_tech:run')->everyMinute();
-        $schedule->command('static_score_change_del:run')->everyMinute();
-        $schedule->command('static_basket_league:run')->twiceDaily(15, 23);
-        $schedule->command('static_foot_league:run')->twiceDaily(7, 14);
-
-        //篮球相关
+        //篮球爬虫相关
         $schedule->call(function (){
             $controller = new SpiderBasketController();
             $controller->spiderTeam();
@@ -142,44 +113,33 @@ class Kernel extends ConsoleKernel
             $controller->fillLiaogouMatchToday();
         })->everyFiveMinutes();
 
-//        //比赛列表相关
-//        $schedule->call(function (){
-//            $controller = new MatchesController();
-//            $controller->onAllMatchStatistic(MatchLive::kSportFootball);
-//        })->everyMinute();
-//        $schedule->call(function (){
-//            $controller = new MatchesController();
-//            $controller->onAllMatchStatistic(MatchLive::kSportBasketball);
-//        })->everyMinute();
-//
-//        //足球终端
-//        $schedule->call(function (){
-//            $controller = new DetailController();
-//            $controller->footballGoing();
-//        })->everyMinute();
-//        $schedule->call(function (){
-//            $controller = new DetailController();
-//            $controller->footballUnstart();
-//        })->everyTenMinutes();
-//        $schedule->call(function (){
-//            $controller = new DetailController();
-//            $controller->footballDone();
-//        })->everyTenMinutes();
-//
-//
-//        //篮球终端
-//        $schedule->call(function (){
-//            $controller = new DetailController();
-//            $controller->basketballGoing();
-//        })->everyMinute();
-//        $schedule->call(function (){
-//            $controller = new DetailController();
-//            $controller->basketballUnstart();
-//        })->everyTenMinutes();
-//        $schedule->call(function (){
-//            $controller = new DetailController();
-//            $controller->basketballDone();
-//        })->everyTenMinutes();
+        //直播数据相关
+//        $schedule->command('spider_sport365:run')->everyFiveMinutes();
+//        $schedule->command('spider_wcj:run')->everyTenMinutes();
+//        $schedule->command('spider_ttzb:run')->hourlyAt(10);
+//        $schedule->command('spider_ballbar:run')->hourlyAt(5);
+//        $schedule->command('day:run')->twiceDaily(1, 13);
+//        $schedule->command('spider_input_lz:run')->twiceDaily(6, 18);//每五分钟抓取龙珠直播的五大联赛足球赛事
+//        $schedule->command('spider_input_qqsport:run')->everyFiveMinutes();//腾讯体育,五分钟一次
+
+        //新版比赛静态数据相关的定时任务
+        $schedule->command('static_basket_immediate:run')->everyMinute();
+        $schedule->command('static_foot_immediate:run')->everyMinute();
+        $schedule->command('static_basket_schedule:run')->everyFiveMinutes();
+        $schedule->command('static_foot_schedule:run')->everyFiveMinutes();
+//        $schedule->command('static_basket_next_terminal:run')->everyFiveMinutes();
+//        $schedule->command('static_foot_next_terminal:run')->everyFiveMinutes();
+//        $schedule->command('static_foot_cur_terminal:run')->everyFiveMinutes();
+        $schedule->command('static_basket_roll_change:run')->everyMinute();
+        $schedule->command('static_foot_roll_change:run')->everyMinute();
+        $schedule->command('static_basket_roll_list_change:run')->everyFiveMinutes();
+        $schedule->command('static_foot_roll_list_change:run')->everyFiveMinutes();
+        $schedule->command('static_basket_odd_days:run')->hourly();
+        $schedule->command('static_foot_odd_days:run')->hourly();
+        $schedule->command('static_basket_tech:run')->everyMinute();
+        $schedule->command('static_score_change_del:run')->everyMinute();
+        $schedule->command('static_basket_league:run')->twiceDaily(15, 23);
+        $schedule->command('static_foot_league:run')->twiceDaily(7, 14);
     }
 
     /**

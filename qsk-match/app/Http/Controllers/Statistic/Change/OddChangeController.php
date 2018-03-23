@@ -23,13 +23,13 @@ class OddChangeController extends Controller
     use SpiderTools;
 
     const win_cid_convert_array = [
-        1=>['id'=>1, 'name'=>'澳彩', 'rank'=>3],
-        3=>['id'=>2, 'name'=>'ＳＢ', 'rank'=>2],
-        4=>['id'=>3, 'name'=>'立博', 'rank'=>7],
-        8=>['id'=>5, 'name'=>'Bet365', 'rank'=>1],
-        9=>['id'=>6, 'name'=>'威廉希尔', 'rank'=>10],
-        12=>['id'=>7, 'name'=>'易胜博', 'rank'=>5],
-        14=>['id'=>8, 'name'=>'韦德', 'rank'=>4],
+        1=>['id'=>5, 'name'=>'澳门', 'rank'=>3],
+        3=>['id'=>6, 'name'=>'Crown', 'rank'=>2],
+        4=>['id'=>17, 'name'=>'立博', 'rank'=>7],
+        8=>['id'=>7, 'name'=>'Bet365', 'rank'=>1],
+        9=>['id'=>3, 'name'=>'威廉希尔', 'rank'=>10],
+        12=>['id'=>8, 'name'=>'易胜博', 'rank'=>5],
+        14=>['id'=>9, 'name'=>'韦德', 'rank'=>4],
         23=>['id'=>12, 'name'=>'金宝博', 'rank'=>6]
     ];
 

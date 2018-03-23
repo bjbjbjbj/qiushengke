@@ -21,7 +21,6 @@ use App\Models\WinModels\MatchData;
 use App\Models\WinModels\MatchLineup;
 use App\Models\WinModels\OddDetail;
 use App\Models\WinModels\Season;
-use EasyWeChat\Core\Exception;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\DB;
@@ -99,6 +98,7 @@ class SpiderController extends Controller
      */
     private function spiderCurrentLeagueSchedule()
     {
+        set_time_limit(0);
         $lids = $this->getRecentLids('league_schedule', -1, 25, 24);
         foreach ($lids as $lid) {
             $league = League::find($lid);
