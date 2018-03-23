@@ -39,14 +39,37 @@ class SubjectLeague extends Model
      * @return string
      */
     public function getName() {
+        $sportCn = $this->sportCn();
+        $sportCn = $sportCn == '' ? '' : $sportCn . '：';
+        return $sportCn . $this->name;
+    }
+
+    /**
+     * 类型中文
+     * @return string
+     */
+    public function sportCn() {
         $sport = $this->sport;
         $sportCn = '';
         if ($sport == self::kSportFootball) {
-            $sportCn = '足球：';
+            $sportCn = '足球';
         } else if ($sport == self::kSportBasketball) {
-            $sportCn = '篮球：';
+            $sportCn = '篮球';
         }
-        return $sportCn . $this->name;
+        return $sportCn;
+    }
+
+    /**
+     *
+     * @return mixed
+     */
+    public function contentHtml() {
+        $content = $this->content;
+        if (!empty($content)) {
+            $content = str_replace(' ', '&nbsp;', $content);
+            $content = str_replace("\n", '<br/>', $content);
+        }
+        return $content;
     }
 
 }

@@ -38,6 +38,7 @@
                             </td>
                             <td>
                                 <a class="btn btn-primary btn-sm" href="/admin/videos/edit?id={{$video->id}}" target="_blank">修改</a>
+                                <a class="btn btn-danger btn-sm" href="javascript:delVideo('{{$video->id}}');">删除</a>
                             </td>
                         </tr>
                     </form>
@@ -52,9 +53,17 @@
         function submit() {
             console.info('submit...');
         }
+
         $.ajaxSetup({
             headers: {'X-CSRF-TOKEN': '{{ csrf_token() }}'}
         });
+
+        function delVideo(id) {
+            if (!confirm("是否确认删除？")) {
+                return;
+            }
+            location.href = "/admin/videos/del?id=" + id;
+        }
 
         /**
          * 保存外链
