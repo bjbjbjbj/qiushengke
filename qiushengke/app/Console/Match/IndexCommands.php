@@ -10,6 +10,7 @@ namespace App\Console\Match;
 
 
 use App\Http\Controllers\PC\Match\MatchController;
+use App\Models\QSK\Match\Match;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 
@@ -45,7 +46,6 @@ class IndexCommands extends Command
      */
     public function handle()
     {
-        $home = new MatchController();
-        $home->staticOneMin(new Request());
+        MatchController::curlToHtml();
     }
 }

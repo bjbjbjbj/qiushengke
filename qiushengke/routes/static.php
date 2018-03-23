@@ -12,4 +12,6 @@
 Route::group(['namespace'=>'PC\Match'], function () {
     Route::get('/football/detail/{id}',"MatchDetailController@staticMatchDetail");//静态化PC足球终端
     Route::get('/basketball/detail/{id}',"MatchDetailController@staticMatchDetailBK");//静态化PC篮球终端
+
+    Route::get('/football/one',"MatchController@staticOneMin");//静态化PC足球终端
 });

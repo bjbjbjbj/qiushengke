@@ -21,6 +21,22 @@ class MatchController extends BaseController
     }
 
     /**
+     * 通过请求自己的链接静态化pc终端，主要是解决 文件权限问题。
+     */
+    public static function curlToHtml() {
+        $ch = curl_init();
+        $url = asset('/static/football/one');
+        echo $url;
+        if (is_null($url))
+            return;
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 25);
+        curl_exec ($ch);
+        curl_close ($ch);
+    }
+
+    /**
      * 静态化
      * @param Request $request
      */
@@ -112,6 +128,7 @@ class MatchController extends BaseController
         $lastDate = date('Ymd', strtotime('-1 day'));
 
         $pc_json = FileTool::matchListDataJson($startDate,$sport);
+        dump($pc_json);
         if (!empty($pc_json)) {
             $result['total'] = count($pc_json['matches']);
             $sortData = $this->sortMatch($pc_json,$sport);

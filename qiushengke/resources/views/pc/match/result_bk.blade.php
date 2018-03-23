@@ -32,7 +32,7 @@
 @section('match_list_date')
     <div class="abox">
         <ul>
-            <a class="li" href="/match/basket/immediate_t.html">即时比分</a>
+            <a class="li" href="/match/basket/schedule/immediate_t.html">即时比分</a>
             <a class="li on">完场赛果</a>
             <a class="li" href="/match/basket/{{$nextDate}}/schedule_t.html">未来赛程</a>
         </ul>
