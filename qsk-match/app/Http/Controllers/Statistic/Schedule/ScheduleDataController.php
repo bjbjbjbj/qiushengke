@@ -381,24 +381,20 @@ class ScheduleDataController
             ['type'=>'nba', 'name'=>'NBA', 'data'=>$nbaLeagues],
         ];
 
-        if ($isToday) {
-            $leagueMatches = $allMatches;
-            usort($leagueMatches, function ($a, $b){
-                if ($a['hot'] == $b['hot']) {
-                    if ($a['lid'] == $b['lid']) {
-                        return ($a['time'] > $b['time']) ? 1 : -1;
-                    } else {
-                        return ($a['lid'] > $b['lid']) ? 1 : -1;
-                    }
+        $leagueMatches = $allMatches;
+        usort($leagueMatches, function ($a, $b){
+            if ($a['hot'] == $b['hot']) {
+                if ($a['lid'] == $b['lid']) {
+                    return ($a['time'] > $b['time']) ? 1 : -1;
                 } else {
-                    return ($a['hot'] < $b['hot']) ? 1 : -1;
+                    return ($a['lid'] > $b['lid']) ? 1 : -1;
                 }
-            });
+            } else {
+                return ($a['hot'] < $b['hot']) ? 1 : -1;
+            }
+        });
+        StatisticFileTool::putFileToSchedule(['filter'=>$filterData, 'matches'=>$allMatches, 'l_matches'=>$leagueMatches], MatchLive::kSportBasketball, 'all', $date);
 
-            StatisticFileTool::putFileToSchedule(['filter'=>$filterData, 'matches'=>$allMatches, 'l_matches'=>$leagueMatches], MatchLive::kSportBasketball, 'all', $date);
-        } else {
-            StatisticFileTool::putFileToSchedule(['filter'=>$filterData, 'matches'=>$allMatches], MatchLive::kSportBasketball, 'all', $date);
-        }
         StatisticFileTool::putFileToSchedule(['filter'=>$filterData, 'matches'=>$lotteryMatches], MatchLive::kSportBasketball, 'lottery', $date);
         StatisticFileTool::putFileToSchedule(['filter'=>$filterData, 'matches'=>$firstMatches], MatchLive::kSportBasketball, 'first', $date);
         StatisticFileTool::putFileToSchedule(['filter'=>$filterData, 'matches'=>$nbaMatches], MatchLive::kSportBasketball, 'nba', $date);
