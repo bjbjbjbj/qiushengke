@@ -15,6 +15,7 @@ use App\Models\WinModels\Stage;
 use App\Models\WinModels\State;
 use App\Models\WinModels\Zone;
 use App\Models\WinModels\Banker;
+use Illuminate\Http\Request;
 
 trait SpiderOnce
 {
@@ -151,9 +152,14 @@ trait SpiderOnce
     /**
      * 抓取全部杯赛赛程数据
      */
-    private function cupAll()
+    private function cupAll(Request $request)
     {
-        $leagues = League::where(["type" => 2])->orderBy('spider_at', 'asc')->take(1)->get();
+        $lid = $request->input('lid', -1);
+        if ($lid > 0) {
+            $leagues = League::where(["type" => 2, 'id'=>$lid])->take(1)->get();
+        } else {
+            $leagues = League::where(["type" => 2])->orderBy('spider_at', 'asc')->take(1)->get();
+        }
         foreach ($leagues as $league) {
             echo $league->id . ":";
             $seasons = Season::where(["lid" => $league->id])->orderBy('year', 'desc')->get();
@@ -173,9 +179,14 @@ trait SpiderOnce
     /**
      * 初始化联赛赛程
      */
-    private function leagueInit()
+    private function leagueInit(Request $request)
     {
-        $leagues = League::where(["type" => 1])->orderBy('spider_at', 'asc')->take(10)->get();
+        $lid = $request->input('lid', -1);
+        if ($lid > 0) {
+            $leagues = League::where(["type" => 1, 'id'=>$lid])->take(1)->get();
+        } else {
+            $leagues = League::where(["type" => 1])->orderBy('spider_at', 'asc')->take(10)->get();
+        }
         foreach ($leagues as $league) {
             echo $league->id . ":";
             $seasons = Season::where(["lid" => $league->id])->orderBy('year', 'desc')->get();

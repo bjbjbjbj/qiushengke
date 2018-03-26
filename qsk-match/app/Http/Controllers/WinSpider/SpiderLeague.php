@@ -6,6 +6,7 @@
  * Time: 下午3:53
  */
 namespace App\Http\Controllers\WinSpider;
+use App\Models\WinModels\Team;
 use App\Models\WinModels\League;
 use App\Models\WinModels\LeagueSub;
 use App\Models\WinModels\Match;
@@ -368,6 +369,7 @@ trait SpiderLeague
                             $s->lsid = $subid;
                             $s->tid = $tid;
                         }
+                        $this->spiderTeamDetailByHtml($tid);
                         $s->score = $score;
                         $s->goal = $goal;
                         $s->fumble = $fumble;
@@ -585,6 +587,8 @@ trait SpiderLeague
      */
     private function leagueRefreshById($lid, $seasonString = null){
         $league = League::where(["id" => $lid])->first();
+        if (!isset($league)) return;
+
         echo $league->id . ":";
         if (isset($seasonString)){
             $season = Season::where(["lid" => $league->id,"name"=>$seasonString])->first();
@@ -630,7 +634,7 @@ trait SpiderLeague
                 $this->leagueAwayRanking($season->lid, $season->name);
             }
         } elseif ($league->type == 2) {
-//            $this->cupSchedule($lid, $season);
+            $this->cupSchedule($lid, $season->name);
         }
         echo "<br>";
     }
@@ -722,6 +726,43 @@ trait SpiderLeague
             }
         } catch (\Exception $e) {
 
+        }
+    }
+
+    private function spiderTeamDetailByHtml($tid, $isReset = false) {
+        $team = Team::query()->find($tid);
+        if (isset($team) && !$isReset) {
+            return;
+        }
+        $url = "http://zq.win007.com/jsData/teamInfo/teamDetail/tdl$tid.js?version=".date('YmdH');
+        $data = $this->spiderTextFromUrlByWin007($url,true);
+        if (isset($data) && strlen($data) > 0) {
+            $strs = explode(";\n",$data);
+            if (count($strs) > 0) {
+                $teamDetail = str_replace("var teamDetail = [", "", $strs[0]);
+                $teamDetail = str_replace("]", "", $teamDetail);
+                if (count(explode("','", $teamDetail)) >= 14) {
+                    list($name, $name_big, $name_en, $icon, $city,
+                        $city_big, $city_en, $gym, $gym_big, $gym_en,
+                        $gid, $establish, $official_web, $describe) = explode("','", $teamDetail);
+
+                    if (!isset($team)) {
+                        $team = new Team();
+                        $team->name = str_replace("$tid,'", '', $name);
+                    }
+                    $team->name_big = $name_big;
+                    if (strlen($icon) > 0) {
+                        $team->icon = "http://zq.win007.com/image/team/".$icon;
+                    }
+                    $team->city = $city;
+                    $team->establish = $establish;
+                    $team->gym = $gym;
+                    $team->describe = $describe;
+                    $team->save();
+
+                    \App\Models\LiaoGouModels\Team::saveWithWinData($team,$tid,$team->name);
+                }
+            }
         }
     }
 }

@@ -143,6 +143,21 @@ class VideoController extends Controller
         return response()->json(['code'=>200, 'msg'=>'保存成功']);
     }
 
+    /**
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function delVideo(Request $request) {
+        $id = $request->input('id');
+        if (is_numeric($id)) {
+            $video = HotVideo::query()->find($id);
+            if (isset($video)) {
+                $video->delete();
+            }
+        }
+        return back()->with('success', '删除成功');
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     /**
