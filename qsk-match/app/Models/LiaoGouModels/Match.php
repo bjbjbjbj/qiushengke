@@ -168,6 +168,7 @@ class Match extends Model
                         $q->on('teams.id','=','liaogou_aliases.lg_id');
                     })
                         ->where('liaogou_aliases.win_id','=',$m->hid)
+                        ->where('liaogou_aliases.sport',1)
                         ->where('liaogou_aliases.type',1)
                         ->where('liaogou_aliases.from',1)
                         ->select('teams.id as tid','liaogou_aliases.*')
@@ -179,6 +180,7 @@ class Match extends Model
                         $q->on('teams.id','=','liaogou_aliases.lg_id');
                     })
                         ->where('liaogou_aliases.target_name','=',$hname)
+                        ->where('liaogou_aliases.sport',1)
                         ->where('liaogou_aliases.type',1)
                         ->where('liaogou_aliases.from',1)
                         ->select('teams.id as tid','liaogou_aliases.*')
@@ -214,6 +216,7 @@ class Match extends Model
                         $q->on('teams.id','=','liaogou_aliases.lg_id');
                     })
                         ->where('liaogou_aliases.win_id','=',$m->aid)
+                        ->where('liaogou_aliases.sport',1)
                         ->where('liaogou_aliases.type',1)
                         ->where('liaogou_aliases.from',1)
                         ->select('teams.id as tid','liaogou_aliases.*')
@@ -225,6 +228,7 @@ class Match extends Model
                         $q->on('teams.id','=','liaogou_aliases.lg_id');
                     })
                         ->where('liaogou_aliases.target_name','=',$m->aname)
+                        ->where('liaogou_aliases.sport',1)
                         ->where('liaogou_aliases.type',1)
                         ->where('liaogou_aliases.from',1)
                         ->select('teams.id as tid','liaogou_aliases.*')
@@ -278,6 +282,7 @@ class Match extends Model
                 $q->on('teams.id','=','liaogou_aliases.lg_id');
             })
                 ->where('liaogou_aliases.win_id','=',$m->hid)
+                ->where('liaogou_aliases.sport',1)
                 ->where('liaogou_aliases.type',1)
                 ->where('liaogou_aliases.from',1)
                 ->select('teams.id as tid','liaogou_aliases.*')
@@ -289,6 +294,7 @@ class Match extends Model
                 $q->on('teams.id','=','liaogou_aliases.lg_id');
             })
                 ->where('liaogou_aliases.target_name','=',$hname)
+                ->where('liaogou_aliases.sport',1)
                 ->where('liaogou_aliases.type',1)
                 ->where('liaogou_aliases.from',1)
                 ->select('teams.id as tid','liaogou_aliases.*')
@@ -321,6 +327,7 @@ class Match extends Model
                 $q->on('teams.id','=','liaogou_aliases.lg_id');
             })
                 ->where('liaogou_aliases.win_id','=',$m->aid)
+                ->where('liaogou_aliases.sport',1)
                 ->where('liaogou_aliases.type',1)
                 ->where('liaogou_aliases.from',1)
                 ->select('teams.id as tid','liaogou_aliases.*')
@@ -332,6 +339,7 @@ class Match extends Model
                 $q->on('teams.id','=','liaogou_aliases.lg_id');
             })
                 ->where('liaogou_aliases.target_name','=',$m->aname)
+                ->where('liaogou_aliases.sport',1)
                 ->where('liaogou_aliases.type',1)
                 ->where('liaogou_aliases.from',1)
                 ->select('teams.id as tid','liaogou_aliases.*')
