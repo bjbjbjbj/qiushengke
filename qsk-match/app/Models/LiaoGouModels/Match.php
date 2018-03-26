@@ -198,6 +198,7 @@ class Match extends Model
                         $alia = new LiaogouAlias();
                         $alia->type = 1;
                         $alia->from = 1;
+                        $alia->sport = LiaogouAlias::kSportTypeFootball;
                         $alia->win_id = $team->win_id;
                         $alia->target_name = $hname;
                         $alia->lg_name = $hname;
@@ -246,6 +247,7 @@ class Match extends Model
                         $alia = new LiaogouAlias();
                         $alia->type = 1;
                         $alia->from = 1;
+                        $alia->sport = LiaogouAlias::kSportTypeFootball;
                         $alia->win_id = $team->win_id;
                         $alia->target_name = $m->aname;
                         $alia->lg_name = $m->aname;
@@ -311,6 +313,7 @@ class Match extends Model
                 $alia = new LiaogouAlias();
                 $alia->type = 1;
                 $alia->from = 1;
+                $alia->sport = LiaogouAlias::kSportTypeFootball;
                 $alia->win_id = $team->win_id;
                 $alia->target_name = $hname;
                 $alia->lg_name = $hname;
@@ -356,6 +359,7 @@ class Match extends Model
                 $alia = new LiaogouAlias();
                 $alia->type = 1;
                 $alia->from = 1;
+                $alia->sport = LiaogouAlias::kSportTypeFootball;
                 $alia->win_id = $team->win_id;
                 $alia->target_name = $m->aname;
                 $alia->lg_name = $m->aname;
