@@ -17,27 +17,27 @@ use Illuminate\Support\Facades\Storage;
 class LeagueController extends BaseController{
 
     const footLeagues = [
-        ['id'=>46,'type'=>'1'],
-        ['id'=>31,'type'=>'1'],
-        ['id'=>26,'type'=>'1'],
-        ['id'=>29,'type'=>'1'],
-        ['id'=>11,'type'=>'1'],
-        ['id'=>8,'type'=>'1'],
-        ['id'=>139,'type'=>'2'],
-        ['id'=>73,'type'=>'2'],
-        ['id'=>57,'type'=>'2'],
+        ['id'=>360,'type'=>'1'],
+        ['id'=>1,'type'=>'1'],
+        ['id'=>42,'type'=>'1'],
+        ['id'=>30,'type'=>'1'],
+        ['id'=>64,'type'=>'1'],
+        ['id'=>51,'type'=>'1'],
+        ['id'=>642,'type'=>'2'],
+        ['id'=>602,'type'=>'2'],
+        ['id'=>564,'type'=>'2'],
     ];
 
     const footLeagueIcons = [
-        46=>'https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=0b42678f1b3853438ccf8027ab28d743/0e2442a7d933c895ef2b0c98da1373f0830200ff.jpg',
-        31=>'https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=8b5f7ac998ef76c6d0d2fc2da52d9ac7/2f738bd4b31c8701cf091a0e2f7f9e2f0608ff9f.jpg',
-        26=>'https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=3b57e13d5a0fd9f9a017526f1d16b317/d31b0ef41bd5ad6e0d6baaab8acb39dbb7fd3ce5.jpg',
-        29=>'https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=dd31376f9bef76c6d0d2fc2da52d9ac7/2f738bd4b31c8701996757a82c7f9e2f0608ffaf.jpg',
-        11=>'https://gss0.bdstatic.com/-4o3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=227ac2f0a2773912c4268267c022e125/cf1b9d16fdfaaf5127a705f2875494eef01f7a33.jpg',
-        8=>'https://gss2.bdstatic.com/9fo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=257e40a291504fc2a25fb703dde6802c/b151f8198618367ad0e4b37724738bd4b31ce52f.jpg',
-        139=>'https://gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=7cc73b66104c510faec4e51c58624210/7c1ed21b0ef41bd556ed0d5a5bda81cb38db3de6.jpg',
-        73=>'https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=9a8c6d0c59df8db1bc2e7b623118ba69/7af40ad162d9f2d391c0487baeec8a136227cc55.jpg',
-        57=>'https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=85d6561f3cd12f2ece05a96677f9b25f/a8773912b31bb051062384e03c7adab44bede0f7.jpg'
+        360=>'https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=0b42678f1b3853438ccf8027ab28d743/0e2442a7d933c895ef2b0c98da1373f0830200ff.jpg',
+        1=>'https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=8b5f7ac998ef76c6d0d2fc2da52d9ac7/2f738bd4b31c8701cf091a0e2f7f9e2f0608ff9f.jpg',
+        42=>'https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=3b57e13d5a0fd9f9a017526f1d16b317/d31b0ef41bd5ad6e0d6baaab8acb39dbb7fd3ce5.jpg',
+        30=>'https://gss0.bdstatic.com/94o3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=dd31376f9bef76c6d0d2fc2da52d9ac7/2f738bd4b31c8701996757a82c7f9e2f0608ffaf.jpg',
+        64=>'https://gss0.bdstatic.com/-4o3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=227ac2f0a2773912c4268267c022e125/cf1b9d16fdfaaf5127a705f2875494eef01f7a33.jpg',
+        51=>'https://gss2.bdstatic.com/9fo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=257e40a291504fc2a25fb703dde6802c/b151f8198618367ad0e4b37724738bd4b31ce52f.jpg',
+        642=>'https://gss3.bdstatic.com/-Po3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=7cc73b66104c510faec4e51c58624210/7c1ed21b0ef41bd556ed0d5a5bda81cb38db3de6.jpg',
+        602=>'https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=9a8c6d0c59df8db1bc2e7b623118ba69/7af40ad162d9f2d391c0487baeec8a136227cc55.jpg',
+        564=>'https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=85d6561f3cd12f2ece05a96677f9b25f/a8773912b31bb051062384e03c7adab44bede0f7.jpg'
     ];
     const basketLeagueIcons = [
         1=>'https://gss2.bdstatic.com/9fo3dSag_xI4khGkpoWK1HF6hhy/baike/crop%3D0%2C0%2C600%2C396%3Bc0%3Dbaike80%2C5%2C5%2C80%2C26/sign=1d7f38adc0fcc3cea08f9373af75fab8/962bd40735fae6cd21e61fee07b30f2443a70fea.jpg',
