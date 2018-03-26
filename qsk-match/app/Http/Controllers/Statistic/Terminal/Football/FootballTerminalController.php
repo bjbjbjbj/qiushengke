@@ -128,7 +128,7 @@ class FootballTerminalController extends Controller
         }
         if (in_array(2, $typeArray)) {
             //球队风格、场面预测 team_style
-            $analyse['ws'] = $this->teamStyleData($match, $this->getJsonItemByName($analyse, 'ws'), $reset);
+//            $analyse['ws'] = $this->teamStyleData($match, $this->getJsonItemByName($analyse, 'ws'), $reset);
             //裁判
             $analyse['referee'] = $this->matchDetailReferee($match, $this->getJsonItemByName($analyse, 'referee'), $reset);
         }
