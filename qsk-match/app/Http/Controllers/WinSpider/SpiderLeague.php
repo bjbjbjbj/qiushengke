@@ -748,6 +748,7 @@ trait SpiderLeague
 
                     if (!isset($team)) {
                         $team = new Team();
+                        $team->id = $tid;
                         $team->name = str_replace("$tid,'", '', $name);
                     }
                     $team->name_big = $name_big;

@@ -204,10 +204,16 @@ trait SpiderOnce
     /**
      * 联赛赛程与积分
      */
-    private function leagueAll()
+    private function leagueAll(Request $request)
     {
-//        $leagues = \App\Models\League::where(["type" => 1])->orderBy('spider_at', 'asc')->take(1)->get();
-        $leagues = League::where(["type" => 1, 'sub' => 1,'id'=>619])->orderBy('spider_at', 'asc')->take(1)->get();
+        set_time_limit(0);
+        $lid = $request->input('lid', -1);
+        if ($lid > 0) {
+            $leagues = League::where(["type" => 1, 'id'=>$lid])->take(1)->get();
+        } else {
+            $leagues = League::where(["type" => 1])->orderBy('spider_at', 'asc')->take(10)->get();
+        }
+//        $leagues = League::where(["type" => 1, 'sub' => 1,'id'=>619])->orderBy('spider_at', 'asc')->take(1)->get();
         foreach ($leagues as $league) {
             echo $league->id . ":";
             $seasons = Season::where(["lid" => $league->id])->orderBy('year', 'desc')->get();

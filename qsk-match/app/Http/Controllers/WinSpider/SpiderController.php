@@ -942,6 +942,7 @@ class SpiderController extends Controller
 
     private function spiderLeagueRefresh(Request $request)
     {
+        set_time_limit(0);
         $lid = $request->input('lid');
         $season = $request->input('season');
         $this->leagueRefreshById($lid, $season);
