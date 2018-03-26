@@ -21,3 +21,8 @@ Route::group(['namespace'=>'PC\Match'], function () {
 
     Route::get('/live/{sport}/{mid}',"LiveController@staticLiveDetail");//静态化直播终端
 });
+
+//专题
+Route::group(['namespace'=>'PC\League'], function () {
+    Route::get('/league/{sport}/{id}',"LeagueController@staticLeague");
+});

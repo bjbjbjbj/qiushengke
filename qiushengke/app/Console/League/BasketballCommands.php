@@ -51,7 +51,9 @@ class BasketballCommands extends Command
      */
     public function handle()
     {
-        $controller = new LeagueController();
-        $controller->staticBasket(new Request());
+        //篮球
+        foreach (LeagueController::basketLeagueIcons as $key=>$value){
+            LeagueController::flushLiveDetailHtml($key,2);
+        }
     }
 }

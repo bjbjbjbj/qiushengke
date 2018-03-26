@@ -64,8 +64,10 @@ class Kernel extends ConsoleKernel
         $schedule->command('bb_detail_cache:run')->everyTenMinutes();//每10分钟执行一次 每次缓存15个页面(赛程赛果各15)
 
         //专题静态化
-        $schedule->command('league_foot:run')->hourly(10);
-        $schedule->command('league_basket:run')->hourly(40);
+        $schedule->command('league_foot:run')->dailyAt('7:10');
+        $schedule->command('league_foot:run')->dailyAt('14:10');
+        $schedule->command('league_basket:run')->dailyAt('15:10');
+        $schedule->command('league_basket:run')->dailyAt('11:10');
 
         //直播终端静态化
         $schedule->command('live_detail_cache:run')->everyTenMinutes();
