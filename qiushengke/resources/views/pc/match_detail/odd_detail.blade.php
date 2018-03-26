@@ -153,7 +153,7 @@
             $('table#Goal')[0].style.display = '';
         }
 
-        var url = matchPathWithId(mid,1);
+        var url = matchPathWithId(mid,sport);
 
         $('div#Odd a')[0].href = url;
 

@@ -46,7 +46,6 @@ class HourCommands extends Command
      */
     public function handle()
     {
-        $home = new MatchDetailController();
-        $home->staticOddDetail(new Request());
+        MatchDetailController::staticHour();
     }
 }

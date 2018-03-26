@@ -27,13 +27,29 @@ class MatchController extends BaseController
         $ch = curl_init();
         $url = asset('/static/football/one');
         echo $url;
-        if (is_null($url))
-            return;
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 25);
-        curl_exec ($ch);
-        curl_close ($ch);
+        if (!is_null($url)) {
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 25);
+            curl_exec($ch);
+            curl_close($ch);
+        }
+    }
+
+    /**
+     * 通过请求自己的链接静态化pc终端，主要是解决 文件权限问题。
+     */
+    public static function curlToHtml5() {
+        $ch = curl_init();
+        $url = asset('/static/football/five');
+        echo $url;
+        if (!is_null($url)) {
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 25);
+            curl_exec($ch);
+            curl_close($ch);
+        }
     }
 
     /**
