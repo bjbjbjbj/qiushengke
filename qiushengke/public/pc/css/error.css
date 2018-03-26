@@ -1,0 +1,44 @@
+body{background: #3f5468;}
+
+#Content{
+	padding: 100px 0 0;
+	background: #3f5468;
+}
+#Content .inner{
+	width: 100%; height: 100%;
+}
+#Content[type='404'] .inner{
+	background: url(../img/bg_404.jpg) no-repeat center #3f5468;
+}
+#Content[type='500'] .inner{
+	background: url(../img/bg_500.jpg) no-repeat center #3f5468;
+}
+#Content .inner p{
+	padding-top: 500px;
+	font-size: 28px; line-height: 30px; text-align: center; color: #a7c1d0; letter-spacing: 2px;
+}
+
+@media screen and (max-width: 1400px){
+	html{
+		height: 100%;
+		/*overflow: hidden;*/
+	}
+	body{
+		height: 100%;
+	}
+	#Navigation{
+		position: fixed; top: 0; left: 0; right: 0;
+	}
+	#Content .inner p{
+		padding-top: 578px;
+	}
+}
+
+
+
+
+
+
+
+
+

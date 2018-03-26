@@ -142,6 +142,14 @@ class MatchController extends BaseController
         } else{
             $sport = 1;
         }
+
+        if ($order == 't'){
+            $order = 'all';
+        }
+        else{
+            $order = 'league';
+        }
+
         $startDate = date('Ymd');
         $nextDate = date('Ymd',strtotime('1 day'));
         $lastDate = date('Ymd', strtotime('-1 day'));
@@ -149,7 +157,7 @@ class MatchController extends BaseController
         $pc_json = FileTool::matchListDataJson($startDate,$sport);
         if (!empty($pc_json)) {
             $result['total'] = count($pc_json['matches']);
-            $sortData = $this->sortMatch($pc_json,$sport);
+            $sortData = $this->sortMatch($pc_json,$sport,$order);
             $result = array_merge($result,$sortData);
             $result['sport'] = $sport;
             $result['nextDate'] = $nextDate;
@@ -162,7 +170,7 @@ class MatchController extends BaseController
                 return view('pc.match.immediate_bk',$this->html_var);
         }
         else {
-            return abort(404);
+            return abort(500);
         }
     }
 
@@ -209,7 +217,7 @@ class MatchController extends BaseController
         $pc_json = FileTool::matchListDataJson($startDate,$sport);
         if (!empty($pc_json)) {
             $result['total'] = count($pc_json['matches']);
-            $sortData = $this->sortMatch($pc_json,$sport);
+            $sortData = $this->sortMatch($pc_json,$sport,$order);
             $result = array_merge($result,$sortData);
             $result['sport'] = $sport;
             $result['nextDate'] = $nextDate;
@@ -244,6 +252,13 @@ class MatchController extends BaseController
         $lastDate = date('Ymd', strtotime('-1 day'));
         $today = date('Ymd');
 
+        if ($order == 't'){
+            $order = 'all';
+        }
+        else{
+            $order = 'league';
+        }
+
         //日期
         $calendar = array();
         for ($i = 0 ; $i < 7 ; $i++){
@@ -267,7 +282,7 @@ class MatchController extends BaseController
         $pc_json = FileTool::matchListDataJson($startDate,$sport);
         if (!empty($pc_json)) {
             $result['total'] = count($pc_json['matches']);
-            $sortData = $this->sortMatch($pc_json,$sport);
+            $sortData = $this->sortMatch($pc_json,$sport,$order);
             $result = array_merge($result,$sortData);
             $result['sport'] = $sport;
             $result['nextDate'] = $nextDate;
@@ -282,21 +297,28 @@ class MatchController extends BaseController
         }
     }
 
-    private function sortMatch($pc_json,$sport){
+    private function sortMatch($pc_json,$sport,$order){
         if ($sport == 1)
         {
             return self::_sortMatch($pc_json);
         }
         else{
-            return self::_sortMatchBK($pc_json);
+            return self::_sortMatchBK($pc_json,$order);
         }
     }
 
-    private function _sortMatchBK($pc_json){
+    private function _sortMatchBK($pc_json,$order){
         //比赛列表用
         $matches = array();
-        foreach ($pc_json['matches'] as $match){
-            $matches[] = $match;
+        if ($order == 'league'){
+            foreach ($pc_json['l_matches'] as $match){
+                $matches[] = $match;
+            }
+        }
+        else{
+            foreach ($pc_json['matches'] as $match){
+                $matches[] = $match;
+            }
         }
         $result['matches'] = $matches;
         //赛事
@@ -358,5 +380,20 @@ class MatchController extends BaseController
         $result['filter'] = $filter;
         $result['odd'] = $pc_json['odd'];
         return $result;
+    }
+
+    /**
+     * 错误页面
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function error(Request $request){
+        return view('pc.500',array('error'=>500));
+    }
+
+    public function staticError(Request $request){
+        $html = $this->error($request);
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("500.html", $html);
     }
 }

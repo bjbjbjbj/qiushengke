@@ -11,9 +11,13 @@
 |
 */
 
+
 Route::group(['namespace'=>'Match'], function () {
     //测试用,免得跨域
     Route::get("/test", "MatchController@test"); //今天
+
+    //错误页面
+    Route::any("/500.html", "MatchController@error");
 
     Route::any("/", function (){
         return redirect('/match/foot/schedule/immediate.html');
@@ -21,7 +25,6 @@ Route::group(['namespace'=>'Match'], function () {
     Route::any("/index.html", function (){
         return redirect('/match/foot/schedule/immediate.html');
     });
-    Route::any("/error", "HomeController@error");
 
     //足球
     Route::get("/match/foot/schedule/immediate.html", "MatchController@immediate_f"); //今天

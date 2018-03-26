@@ -37,15 +37,24 @@ class MatchDetailController extends BaseController{
 
     public static function staticHour(){
         $url = asset('/static/football/hour');
-        echo $url;
-        if (is_null($url))
-            return;
-        $ch = curl_init();
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 25);
-        curl_exec ($ch);
-        curl_close ($ch);
+        if (!is_null($url)) {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 25);
+            curl_exec($ch);
+            curl_close($ch);
+        }
+
+        $url = asset('/static/error');
+        if (!is_null($url)) {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 25);
+            curl_exec($ch);
+            curl_close($ch);
+        }
     }
 
     /**
