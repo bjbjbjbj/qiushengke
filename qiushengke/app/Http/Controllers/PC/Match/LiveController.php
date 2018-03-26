@@ -9,27 +9,61 @@
 namespace App\Http\Controllers\PC\Match;
 
 use App\Http\Controllers\Controller as BaseController;
+use App\Http\Controllers\PC\CommonTool;
+use App\Http\Controllers\PC\FileTool;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class LiveController extends BaseController{
+    /**
+     * 静态化
+     * @param Request $request
+     * @param $sport
+     * @param $mid
+     */
+    public function staticLiveDetail(Request $request,$sport,$mid){
+        $first = substr($mid,0,2);
+        $second = substr($mid,2,2);
+        if ($sport == 1){
+            $html = $this->liveDetail($request,$first,$second,$mid);
+            if (isset($html) && strlen($html) > 0) {
+                $path = CommonTool::matchLivePathWithId($mid,$sport);
+                Storage::disk("public")->put($path, $html);
+            }
+        }
+        else{
+            $html = $this->liveDetail_bk($request,$first,$second,$mid);
+            if (isset($html) && strlen($html) > 0) {
+                $path = CommonTool::matchLivePathWithId($mid,$sport);
+                Storage::disk("public")->put($path, $html);
+            }
+        }
+    }
+
+    /**
+     * 足球直播终端
+     * @param Request $request
+     * @param $first
+     * @param $second
+     * @param $mid
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function liveDetail(Request $request,$first,$second,$mid){
         $this->html_var['match'] = MatchDetailController::matchDetailData($mid,'match');
         $this->html_var['tech'] = MatchDetailController::matchDetailData($mid,'tech');
         $this->html_var['roll'] = MatchDetailController::matchDetailData($mid,'roll');
-
-        $ch = curl_init();
-        $url = 'http://liaogou168.com/aik/lives/detailJson/'.$mid;
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 20);//5秒超时
-        $json = curl_exec ($ch);
-        curl_close ($ch);
-        $json = json_decode($json, true);
-        $this->html_var['lives'] = array();//$json['live']['channels'];
         $this->html_var['sport'] = 1;
         return view('pc.live.live',$this->html_var);
     }
 
+    /**
+     * 篮球直播终端
+     * @param Request $request
+     * @param $first
+     * @param $second
+     * @param $mid
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function liveDetail_bk(Request $request,$first,$second,$mid){
         $this->html_var['match'] = MatchDetailController::matchDetailData($mid,'match',2);
         if (is_null($this->html_var['match']))
@@ -39,16 +73,6 @@ class LiveController extends BaseController{
         $this->html_var['tech'] = MatchDetailController::matchDetailData($mid,'tech',2);
         $this->html_var['roll'] = MatchDetailController::matchDetailData($mid,'roll',2);
         $this->html_var['players'] = MatchDetailController::matchDetailData($mid,'player',2);
-
-        $ch = curl_init();
-        $url = 'http://liaogou168.com/aik/lives/basketDetailJson/'.$mid;
-        curl_setopt($ch, CURLOPT_URL, $url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_TIMEOUT, 20);//5秒超时
-        $json = curl_exec ($ch);
-        curl_close ($ch);
-        $json = json_decode($json, true);
-        $this->html_var['lives'] = $json['live']['channels'];
         $this->html_var['sport'] = 2;
         return view('pc.live.live_bk',$this->html_var);
     }

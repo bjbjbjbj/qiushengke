@@ -333,7 +333,6 @@
                         matchTime = (Math.floor((diff) % 86400 / 60)) > 45 ? 45 : Math.floor((diff) % 86400 / 60);
                     } else if (status == 3) {
                         var diff = (now - timehalf) > 0 ? (now - timehalf) : 0;
-                        diff = diff/1000;
                         matchTime = (Math.floor((diff) % 86400 / 60)) > 45 ? 90 : (Math.floor((diff) % 86400 / 60) + 45);
                     }
 

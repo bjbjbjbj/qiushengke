@@ -79,28 +79,34 @@ class MatchController extends BaseController
         //赛程
         $tomorrow = date('Ymd', strtotime('+1 days'));
         $html = $this->schedule_f($request,$tomorrow);
-        Storage::disk("public")->put("/match/foot/schedule/".$tomorrow."/schedule.html", $html);
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/match/foot/schedule/".$tomorrow."/schedule.html", $html);
         //赛果
         $yesterday = date('Ymd', strtotime('-1 days'));
         $html = $this->result_f($request,$yesterday);
-        Storage::disk("public")->put("/match/foot/schedule/".$yesterday."/result.html", $html);
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/match/foot/schedule/".$yesterday."/result.html", $html);
 
         //篮球
         //赛程
         $tomorrow = date('Ymd', strtotime('+1 days'));
         $html = $this->schedule_bk($request,$tomorrow,'t');
-        Storage::disk("public")->put("/match/basket/schedule/".$tomorrow."/schedule_t.html", $html);
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/match/basket/schedule/".$tomorrow."/schedule_t.html", $html);
         $tomorrow = date('Ymd', strtotime('+1 days'));
         $html = $this->schedule_bk($request,$tomorrow,'t');
-        Storage::disk("public")->put("/match/basket/schedule/".$yesterday."/schedule_l.html", $html);
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/match/basket/schedule/".$yesterday."/schedule_l.html", $html);
 
         //赛果
         $tomorrow = date('Ymd', strtotime('-1 days'));
         $html = $this->result_bk($request,$tomorrow,'t');
-        Storage::disk("public")->put("/match/basket/schedule/".$tomorrow."/result_t.html", $html);
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/match/basket/schedule/".$tomorrow."/result_t.html", $html);
         $yesterday = date('Ymd', strtotime('-1 days'));
         $html = $this->result_bk($request,$yesterday,'l');
-        Storage::disk("public")->put("/match/basket/schedule/".$yesterday."/result_l.html", $html);
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/match/basket/schedule/".$yesterday."/result_l.html", $html);
     }
 
     //篮球

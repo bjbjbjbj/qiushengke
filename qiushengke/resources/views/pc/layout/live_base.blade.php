@@ -368,6 +368,7 @@
             </table>
         </div>
         <div id="Live">
+            @if(isset($lives))
             <div class="line">
                 @for($i = 0 ; $i < count($lives); $i++)
                     <?php
@@ -401,6 +402,7 @@
                     @endif
                 @endfor
             </div>
+            @endif
             <div id="Player">
                 <iframe id="MyFrame" src=""></iframe>
                 <div class="flash"></div>

@@ -16,9 +16,9 @@
                             <p class="item bk on">{{$ot}}</p>
                         @endforeach
                     @endif
-                        <p class="item bk @if(!isset($match['h_ot'])) on @endif">{{isset($match['hscore_4th']) ? $match['hscore_4th'] : "-"}}</p>
-                        <p class="item bk @if(!isset($match['hscore_4th'])) on @endif">{{isset($match['hscore_3rd']) ? $match['hscore_3rd'] : "-"}}</p>
-                        <p class="item bk @if(!isset($match['hscore_3rd'])) on @endif">{{isset($match['hscore_2nd']) ? $match['hscore_2nd'] : "-"}}</p>
+                    <p class="item bk @if(!isset($match['h_ot'])) on @endif">{{isset($match['hscore_4th']) ? $match['hscore_4th'] : "-"}}</p>
+                    <p class="item bk @if(!isset($match['hscore_4th'])) on @endif">{{isset($match['hscore_3rd']) ? $match['hscore_3rd'] : "-"}}</p>
+                    <p class="item bk @if(!isset($match['hscore_3rd'])) on @endif">{{isset($match['hscore_2nd']) ? $match['hscore_2nd'] : "-"}}</p>
                     <p class="item bk @if(!isset($match['hscore_2nd'])) on @endif">{{isset($match['hscore_1st']) ? $match['hscore_1st'] : "-"}}</p>
                 @else
                     <p class="item bk">-</p>
@@ -85,10 +85,14 @@
                 <p class="host"><button class="on">{{$match['hname']}}</button></p>
                 <p class="away"><button>{{$match['aname']}}</button></p>
             </div>
-            @component('pc.match_detail.basket_cell.match_players_table',['players'=>$players['home'],'key'=>'host'])
-            @endcomponent
-            @component('pc.match_detail.basket_cell.match_players_table',['show'=>0,'players'=>$players['away'],'key'=>'away'])
-            @endcomponent
+            @if(isset($players['home']))
+                @component('pc.match_detail.basket_cell.match_players_table',['players'=>$players['home'],'key'=>'host'])
+                @endcomponent
+            @endif
+            @if(isset($players['away']))
+                @component('pc.match_detail.basket_cell.match_players_table',['show'=>0,'players'=>$players['away'],'key'=>'away'])
+                @endcomponent
+            @endif
         </div>
     </div>
 @endsection
