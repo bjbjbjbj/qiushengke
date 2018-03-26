@@ -46,7 +46,11 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         if ($exception instanceof NotFoundHttpException) {
-            return redirect('/');
+            if (!stristr($request->url(),'.json'))
+                return redirect('/');
+            else{
+
+            }
         }
         else{
             if (!env('APP_DEBUG'))

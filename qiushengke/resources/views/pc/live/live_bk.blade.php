@@ -109,10 +109,7 @@
                     if (json['status'] > 0 || json['status'] == -1) {
                         $('p.score span.host').html(json['hscore']);
                         $('p.score span.away').html(json['ascore']);
-                        if(json['sport'] == 1)
-                            $('p.time').html(json['current_time']);
-                        else
-                            $('p.time').html(json['live_time_str']);
+                        $('p.time').html(json['live_time_str']);
                     }
                     if (json['status'] == -1){
                         $('p.time').html('已结束');

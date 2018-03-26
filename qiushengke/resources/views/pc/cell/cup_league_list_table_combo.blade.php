@@ -23,8 +23,8 @@
             <tr class="total">
                 <th colspan="8">
                     <p>
-                        <a href="team.html" class="host"><b>{{$combo['hscore']}}</b>{{$combo['hname']}}</a>
-                        <a href="team.html" class="away"><b>{{$combo['ascore']}}</b>{{$combo['aname']}}</a>
+                        <a href="team.html" class="host"><b>{{isset($combo['hscore']) ? $combo['hscore'] : 0}}</b>{{$combo['hname']}}</a>
+                        <a href="team.html" class="away"><b>{{isset($combo['ascore']) ? $combo['ascore'] : 0}}</b>{{$combo['aname']}}</a>
                     </p>
                 </th>
             </tr>

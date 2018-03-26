@@ -282,8 +282,7 @@ class CommonTool
      */
     public static function getMatchCurrentTime($time, $timehalf, $status)
     {
-        $time = strtotime(isset($timehalf)? $timehalf : $time);
-        $timehalf = strtotime($timehalf);
+        $time = $timehalf > 0 ? $timehalf : $time;
         $now = strtotime(date('Y-m-d H:i:s'));
         if ($status < 0 || $status == 2 || $status == 4) {
             $matchTime = self::getStatusTextCn($status);

@@ -1,5 +1,5 @@
 <?php
-$ws = $analyse['ws'];
+$ws = isset($analyse['ws'])?$analyse['ws']:null;
 $rank = isset($analyse['rank'])?$analyse['rank']:null;
 $sameOdd = $analyse['sameOdd'];
 ?>

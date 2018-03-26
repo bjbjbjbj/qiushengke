@@ -57,6 +57,8 @@
         function postChat() {
             user = $('#charUser')[0].value;
             var message = $('#charContent')[0].value;
+            if(message.length == 0)
+                alert('请输入内容');
             var url = '/chat/post';
             var current = new Date();
             current = current.getTime()/1000;
@@ -70,17 +72,20 @@
                             "user":user,
                         },
                         'success': function (json) {
-                            var ul = $('div#Chatroom ul');
-                            var li = '<li>'+
-                                    '<p class="time">'+current+'</p>'+
-                                    '<p class="name">'+user+'</p>'+
-                                    '<p class="con">'+message+'</p>'+
-                                    '</li>'
-                            ul.append(li);
+//                            var ul = $('div#Chatroom ul');
+//                            var li = '<li>'+
+//                                    '<p class="time">'+current+'</p>'+
+//                                    '<p class="name">'+user+'</p>'+
+//                                    '<p class="con">'+message+'</p>'+
+//                                    '</li>'
+//                            ul.append(li);
+                            addChat(user,message,current);
                         }
                     }
             );
         }
+
+        var current_time = 0;
 
         //获取聊天数据(增量
         function getChat() {
@@ -89,25 +94,32 @@
                         'url': url,
                         'success': function (json) {
                             if (json){
+                                if (json.length > 0 && current_time >= json[json.length - 1]['time']){
+                                    return;
+                                }
                                 var ul = $('div#Chatroom ul');
                                 for (var i = 0 ; i < json.length ; i++){
                                     var current = new Date();
                                     var data = json[i];
                                     current = current.getTime()/1000;
-                                    //60秒前不出
+                                    //10秒前不出
                                     if (data['time'] < current - 10){
+//                                        console.log(data['user']+' ' + data['content']+' ' + time);
                                         continue;
                                     }
                                     if (user && user == data['user']){
+//                                        console.log('bj ' + data['user']+' ' + data['content']+' ' + time);
                                         continue;
                                     }
                                     var time = format(data['time']);
-                                    var li = '<li>'+
-                                            '<p class="time">'+time+'</p>'+
-                                            '<p class="name">'+data['user']+'</p>'+
-                                            '<p class="con">'+data['content']+'</p>'+
-                                            '</li>'
-                                    ul.append(li);
+//                                    var li = '<li>'+
+//                                            '<p class="time">'+time+'</p>'+
+//                                            '<p class="name">'+data['user']+'</p>'+
+//                                            '<p class="con">'+data['content']+'</p>'+
+//                                            '</li>'
+//                                    ul.append(li);
+                                    addChat(data['user'],data['content'],time);
+                                    current_time = data['time'];
                                 }
                             }
                         }
@@ -115,14 +127,14 @@
             );
         }
         if ('{{$match['status']}}' == -1){
-
+            getChat();
         }
         else{
             getChat();
-            window.setInterval('getChat()', 10000);
+            window.setInterval('getChat()', 1000);
         }
-        getChat();
-        window.setInterval('getChat()', 10000);
+//        getChat();
+//        window.setInterval('getChat()', 10000);
     </script>
     @yield('live_js')
 @endsection

@@ -824,29 +824,33 @@
 
         function _updateOddBody(key,ID,json) {
             var tbody = $('#'+ID + '_odd_'+key);
-            _updateOdd(tbody,'a','1',json[key]['1'],'1');
-            _updateOdd(tbody,'o','1',json[key]['3'],'1');
-            _updateOdd(tbody,'g','1',json[key]['2'],'1');
-            _updateOdd(tbody,'a','2',json[key]['1'],json[key]['1']['middle'] == null?'2':'');
-            _updateOdd(tbody,'o','2',json[key]['3'],json[key]['2']['middle'] == null?'2':'');
-            _updateOdd(tbody,'g','2',json[key]['2'],json[key]['3']['middle'] == null?'2':'');
+            if (json[key]) {
+                _updateOdd(tbody, 'a', '1', json[key]['1'], '1');
+                _updateOdd(tbody, 'o', '1', json[key]['3'], '1');
+                _updateOdd(tbody, 'g', '1', json[key]['2'], '1');
+                _updateOdd(tbody, 'a', '2', json[key]['1'], json[key]['1']['middle'] == null ? '2' : '');
+                _updateOdd(tbody, 'o', '2', json[key]['3'], json[key]['2']['middle'] == null ? '2' : '');
+                _updateOdd(tbody, 'g', '2', json[key]['2'], json[key]['3']['middle'] == null ? '2' : '');
+            }
         }
 
         //更新赔率小框 tbody全场半场 key类型a亚盘o欧赔g大小球 key21初盘2即时 data数据 key3数据拿那个
         function _updateOdd (tbody,key,key2,data,key3) {
-            var p = tbody.find('p.' + key + 'up' + key2)[0];
-            p.innerHTML = data['up'+key3];
-            var p = tbody.find('p.' + key + 'mid' + key2)[0];
             var middle = data['middle'+key3];
-            if ('a' == key){
-                middle = getHandicapCn(middle, '',1,1,true);
+            if (middle) {
+                var p = tbody.find('p.' + key + 'up' + key2)[0];
+                p.innerHTML = data['up'+key3];
+                var p = tbody.find('p.' + key + 'mid' + key2)[0];
+                if ('a' == key) {
+                    middle = getHandicapCn(middle, '', 1, 1, true);
+                }
+                else if ('g' == key) {
+                    middle = getHandicapCn(middle, '', 2, 1, true);
+                }
+                p.innerHTML = middle;
+                var p = tbody.find('p.' + key + 'down' + key2)[0];
+                p.innerHTML = data['down' + key3];
             }
-            else if('g' == key){
-                middle = getHandicapCn(middle, '',2,1,true);
-            }
-            p.innerHTML = middle;
-            var p = tbody.find('p.' + key + 'down' + key2)[0];
-            p.innerHTML = data['down'+key3];
         }
 
         jQuery(function(){

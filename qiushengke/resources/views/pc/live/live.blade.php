@@ -35,15 +35,15 @@
                     }
                     ?>
                     <li>
-                        {{$item['name']}}
-                        <div class="line host">
-                            <p>{{$hname}}</p>
-                            <span style="width: {{$item['h_p']*100}}%;"></span>
-                        </div>
-                        <div class="line away">
-                            <p>{{$aname}}</p>
-                            <span style="width: {{(1 - $item['a_p'])*100}}%;"></span>
-                        </div>
+                        <p class="host">
+                            <b>{{$hname}}</b>
+                            <span><em style="width: {{$item['h_p']*100}}%;"></em></span>
+                        </p>
+                        <p class="item">{{$item['name']}}</p>
+                        <p class="away">
+                            <b>{{$aname}}</b>
+                            <span><em style="width: {{1 - $item['h_p']*100}}%;"></em></span>
+                        </p>
                     </li>
                 @endforeach
             <!--li的数量必须是3的倍数，不够使用空li-->
@@ -105,7 +105,7 @@
                 @if($status == -1)
                     <dt id="event_time" style="width: 100%"><p>{{$matchTime}}'</p></dt>
                 @else
-                    <dt id="event_time" style="width: {{($lastTime > 90 ?(100/120):(100/90))*($matchTime - 1) + $width/2}}%"><p>{{$matchTime}}'</p></dt>
+                    <dt id="event_time" style="width: {{($width)*($matchTime - 1) + $width/2}}%"><p>{{$matchTime}}'</p></dt>
                 @endif
                 <dd id="event_15"
                         @if($matchTime > 15)
@@ -309,23 +309,20 @@
             $.ajax({
                 'url': url,
                 'success': function (json) {
+                    var status = parseInt(json['status']);
                     //比分
-                    if (json['status'] > 0 || json['status'] == -1) {
+                    if (status > 0 || status == -1) {
                         $('p.score span.host').html(json['hscore']);
                         $('p.score span.away').html(json['ascore']);
-                        if(json['sport'] == 1)
-                            $('div.mbox p.time').html(json['current_time']);
-                        else
-                            $('div.mbox p.time').html(json['live_time_str']);
+                        $('div.mbox p.time').html(json['current_time']);
                     }
-                    if (json['status'] == -1){
+                    if (status == -1){
                         $('div.mbox p.time').html('已结束');
                     }
                     //刷新比赛时间,之后时间轴用到
-                    var status = json['status'];
-                    var time = json['timehalf']? json['timehalf'] : json['time'];
+                    var time = json['timehalf'] > 0 ? json['timehalf'] : json['time'];
                     var timehalf = json['timehalf'];
-                    var now = Date.parse(new Date());
+                    var now = Date.parse(new Date())/1000;
                     if (status == 4){
                         matchTime = 90;
                     }
@@ -333,16 +330,16 @@
                         matchTime = 45;
                     }else if (status == 1) {
                         var diff = (now - time) > 0 ? (now - time) : 0;
-                        matchTime = (floor((diff) % 86400 / 60)) > 45 ? 45 : floor((diff) % 86400 / 60);
+                        matchTime = (Math.floor((diff) % 86400 / 60)) > 45 ? 45 : Math.floor((diff) % 86400 / 60);
                     } else if (status == 3) {
                         var diff = (now - timehalf) > 0 ? (now - timehalf) : 0;
-                        matchTime = (floor((diff) % 86400 / 60)) > 45 ? 90 : (floor((diff) % 86400 / 60) + 45);
+                        diff = diff/1000;
+                        matchTime = (Math.floor((diff) % 86400 / 60)) > 45 ? 90 : (Math.floor((diff) % 86400 / 60) + 45);
                     }
 
                     if (status == -1){
                         matchTime = 90;
                     }
-                    console.log(matchTime);
                 }
             });
         }
@@ -367,10 +364,10 @@
                     //刷新基础ui,例如时间轴,比赛时间
                     $('p#event_total_time').html((matchTime > 90 || lastTime > 90) ? '120\'':'90\'');
                     if (lastTime > 90 || matchTime > 90){
-                        var width = Math.round(100/120,2);
+                        var width = (100/120).toFixed(2);
                     }
                     else{
-                        var width = Math.round(100/90,2);
+                        var width = (100/90).toFixed(2);
                     }
                     if(status == -1) {
                         $('dt#event_time').html('<p>' + matchTime + '\'</p>');
@@ -378,8 +375,9 @@
                     }
                     else{
                         $('dt#event_time').html('<p>' + matchTime + '\'</p>');
-                        $('dt#event_time')[0].style.width = (parseInt(lastTime > 90 ?(100/120):(100/90))*(matchTime - 1) + parseInt(width/2)) + "%";
+                        $('dt#event_time')[0].style.width = (width*(matchTime - 1) + width/2) + "%";
                     }
+
                     if (lastTime > 15 || matchTime > 15){
                         $('#event_15')[0].className = 'after';
                     }
@@ -446,7 +444,7 @@
 
                     return;
 
-                    //统计
+                    //统计,暂时没做
                     var event = document.getElementById(ID+'_tboxCon');
                     if (typeof(event) != 'undefined') {
                         var events = json['tech'];

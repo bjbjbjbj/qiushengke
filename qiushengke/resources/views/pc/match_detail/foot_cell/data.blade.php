@@ -9,7 +9,7 @@
     @component('pc.match_detail.foot_cell.data_league',['match'=>$match,'analyse'=>$analyse])
     @endcomponent
     {{--交锋--}}
-    @if(isset($analyse['historyBattle']))
+    @if(isset($analyse['historyBattle'])&&isset($analyse['historyBattle']['historyBattle']))
         @component('pc.match_detail.foot_cell.data_battle',['match'=>$match,'historyBattle'=>$analyse['historyBattle']['historyBattle']])
         @endcomponent
     @endif
