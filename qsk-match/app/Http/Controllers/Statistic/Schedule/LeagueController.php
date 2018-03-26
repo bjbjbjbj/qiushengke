@@ -256,6 +256,7 @@ class LeagueController{
                     ->where('stage',$stage)
                     ->orderby('score','desc')
                     ->get();
+
                 $result[$key]['scores'] = $scores;
             }
 

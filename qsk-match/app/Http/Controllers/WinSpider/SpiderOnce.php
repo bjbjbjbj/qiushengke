@@ -10,6 +10,7 @@ namespace App\Http\Controllers\WinSpider;
 
 use App\Models\WinModels\League;
 use App\Models\WinModels\LeagueSub;
+use App\Models\WinModels\Score;
 use App\Models\WinModels\Season;
 use App\Models\WinModels\Stage;
 use App\Models\WinModels\State;
@@ -238,6 +239,35 @@ trait SpiderOnce
             $league->spider_at = date("Y-m-d H:i:s");
             $league->save();
             echo "<br>";
+        }
+    }
+
+    private function delUselessScore(Request $request) {
+        $lid = $request->input("lid", -1);
+        if ($lid > 0) {
+            //赛季
+            $season = \App\Models\LiaoGouModels\Season::query()
+                ->select("name", "year", "total_round", "curr_round", "start")
+                ->where('lid',$lid)
+                ->orderby('year','desc')
+                ->first();
+            if (is_null($season)){
+                return null;
+            }
+            $stages = \App\Models\LiaoGouModels\Stage::where(["lid" => $lid, "season" => $season->name])->get();
+            foreach ($stages as $stage) {
+                $scores = \App\Models\LiaoGouModels\Score::where(['lid' => $lid, 'season' => $season->name, 'stage' => $stage->id])->get();
+                $tid_array = array();
+                foreach ($scores as $score) {
+                    $tid = $score->tid;
+                    if (in_array($tid, $tid_array)) {
+                        $score->delete();
+                        echo "score_id = $score->id ,lg_score delete success!";
+                    } else {
+                        $tid_array[] = $tid;
+                    }
+                }
+            }
         }
     }
 }

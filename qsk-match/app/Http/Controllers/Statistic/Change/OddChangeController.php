@@ -96,17 +96,14 @@ class OddChangeController extends Controller
     //获取比赛列表SB盘口变化的数据
     public function rollChangeStatic($sport, $isDebug = true) {
         $lastTime = time();
-        foreach (range(0, 20) as $key) {
-            switch ($sport) {
-                case MatchLive::kSportBasketball:
-                    $this->basketRollChange($isDebug);
-                    break;
-                case MatchLive::kSportFootball:
-                default:
-                    $this->footballRollChange($isDebug);
-                    break;
-            }
-            sleep(1);
+        switch ($sport) {
+            case MatchLive::kSportBasketball:
+                $this->basketRollChange($isDebug);
+                break;
+            case MatchLive::kSportFootball:
+            default:
+                $this->footballRollChange($isDebug);
+                break;
         }
         dump(time()-$lastTime);
     }
@@ -439,8 +436,9 @@ class OddChangeController extends Controller
                     list($mid, $aisaid, $asiamiddle, $asiaup, $asiadown,
                         $ouid, $ouup, $oumiddle, $oudown, $goalid,
                         $goalmiddle, $goalup, $goaldown, $other) = explode(",", $itemStr);
-                    $lg_mid = Match::getMatchIdWith($mid, "win_id");
-                    if ($lg_mid > 0) {
+                    $lg_match = Match::getMatchWith($mid, "win_id");
+                    if (isset($lg_match) && $lg_match->status > 0) {
+                        $lg_mid = $lg_match->id;
                         if (array_key_exists($lg_mid, $rollData)) {
                             $itemData = $rollData[$lg_mid];
                         } else {
@@ -804,8 +802,9 @@ class OddChangeController extends Controller
                     list($mid, $asiamiddle, $asiaup, $asiadown, $goalmiddle,
                         $goalup, $goaldown, $asiamiddlehalf, $asiauphalf, $asiadownhalf,
                         $goalmiddlehalf, $goaluphalf, $goalupdonw) = explode(",", $itemStr);
-                    $lg_mid = BasketMatch::getMatchIdWith($mid, "win_id");
-                    if ($lg_mid > 0) {
+                    $lg_match = BasketMatch::getMatchWith($mid, "win_id");
+                    if (isset($lg_match) && $lg_match->status > 0) {
+                        $lg_mid = $lg_match->id;
                         if (array_key_exists($lg_mid, $rollData)) {
                             $itemData = $rollData[$lg_mid];
                         } else {
