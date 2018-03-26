@@ -18,12 +18,12 @@ class Score extends Model
         $tid = Team::getTeamIdWithType($ws->tid,'win_id');
         $sid = Stage::getStageIdWithType($ws->stage,'win_id');
         if ($lid > 0 && $tid > 0) {
-            $s = Score::where(['lid' => $lid, 'season' => $ws->season, 'stage' => $ws->stage, 'tid' => $tid])->first();
+            $s = Score::where(['lid' => $lid, 'season' => $ws->season, 'stage' => $sid, 'tid' => $tid])->first();
             if (!isset($s)) {
                 $s = new Score();
                 $s->lid = $lid;
                 $s->season = $ws->season;
-                $s->stage = $ws->stage;
+                $s->stage = $sid;
                 $s->tid = $tid;
                 $s->win_tid = $ws->tid;
                 $s->win_stage = $ws->stage;
@@ -34,7 +34,6 @@ class Score extends Model
                 if ($key != 'id' && $key != 'lid' && $key != 'tid' && $key != 'stage')
                     $s[$key] = $value;
             }
-            $s->stage = $sid;
             $s->win_stage = $ws->stage;
             $s->save();
         }

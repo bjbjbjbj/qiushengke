@@ -40,7 +40,6 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-    use MatchStaticTool;
     /**
      * The Artisan commands provided by your application.
      *
