@@ -171,9 +171,9 @@ $liveUrl = \App\Http\Controllers\PC\CommonTool::matchLivePathWithId($match['mid'
         </td>
         <td rowspan="2">
             <a href="/match/basket/{{substr($mid, 0, 2)}}/{{substr($mid, 2, 2)}}/{{$mid}}.html">析</a>
-            <a href="">亚</a>
-            <a href="">欧</a>
-            <a href="">大</a>
+            <a href="/match/foot/odd.html?sport=2&mid={{$mid}}&type=1">亚</a>
+            <a href="/match/foot/odd.html?sport=2&mid={{$mid}}&type=2">欧</a>
+            <a href="/match/foot/odd.html?sport=2&mid={{$mid}}&type=3">大</a>
         </td>
     </tr>
     <tr>
