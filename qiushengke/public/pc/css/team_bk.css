@@ -58,19 +58,28 @@ body{
 }
 
 #Info .player{
-	padding-top: 40px;
-	border-top: 2px solid #2b9968;
+	padding-top: 40px; padding-right: 10px;
+	/*border-top: 2px solid #2b9968;*/
+	/*background: #fff;*/
+	position: absolute; top: 0; bottom: 0; right: 26%; left: 470px;
+	overflow: hidden;
+}
+#Info .player:before{
 	background: #fff;
-	position: absolute; top: 0; bottom: 0; right: 280px; left: 470px;
+	position: absolute; top: 0; left: 0; right: 10px; bottom: 0;
+	content: '';
 }
 #Info .player p.title{
+	padding-left: 20px;
+	border-top: 2px solid #2b9968;
 	font-size: 14px; line-height: 40px; color: #2b9968;
-	position: absolute; top: 0; left: 20px;
+	position: absolute; top: 0; left: 0; right: 10px;
 }
 #Info .player .tabBox{
 	height: 24px; 
 	padding: 12px 0 10px;
 	font-size: 0px; text-align: center;
+	position: relative; 
 }
 #Info .player .tabBox button{
 	width: 36px; height: 24px;
@@ -81,34 +90,37 @@ body{
 	background: #e8f1ed;
 }
 #Info .player .tabBox button + button{
-	margin-left: 10px;
+	margin-left: 2%;
 }
 #Info .player table{
 	width: 100%;
-	position: absolute; bottom: 0; left: 0; right: 0;
+	position: absolute; bottom: 0; right: 10px;
 }
 #Info .player table td{
 	height: 32px;
-	font-size: 12px; line-height: 16px; text-align: center;
+	font-size: 12px; line-height: 14px; text-align: center;
 }
 #Info .player table tr:nth-child(odd) td{
 	background: #f6f6f6;
 }
+#Info .player table td:first-child{
+	padding-left: 13px;
+}
 #Info .player table td:first-child + td{
-	padding-left: 6px;
+	padding-left: 9px;
 	text-align: left;
 }
 #Info .player table td span{
-	width: 20px; height: 20px;
+	width: 16px; height: 16px;
 	border-radius: 2px;
 	background: #2b9968;
-	line-height: 20px; color: #fff;
+	line-height: 16px; color: #fff;
 	display: inline-block;
 }
 
 /*近期赛程*/
 #Info .match{
-	width: 270px;
+	width: 26%;
 	padding-top: 40px;
 	border-top: 2px solid #2b9968;
 	background: #fff;

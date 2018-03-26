@@ -45,7 +45,6 @@ class IndexFiveCommands extends Command
      */
     public function handle()
     {
-        $home = new MatchController();
-        $home->staticFiveMin(new Request());
+        MatchController::curlToHtml5();
     }
 }

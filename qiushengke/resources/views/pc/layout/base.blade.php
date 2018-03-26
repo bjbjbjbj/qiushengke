@@ -67,7 +67,7 @@
                 //篮球
                 return BasketpanKouText(handicap, !isHome);
             } else if (type == 2) {//大小球
-                return ((handicap * 100 % 100 == 0) ? handicap.toFixed(0) : handicap.toFixed(2));
+                return ((handicap * 100 % 100 == 0) ? handicap.toFixed(0) : handicap.toFixed(1));
             } else if (type == 3) {//竞彩
                 if (handicap > 0) {
                     return "+" + handicap;

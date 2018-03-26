@@ -380,7 +380,7 @@
 #Con td p.flash{
 	background: #2b9968;
 }
-#Con td p.live img{
+#Con td a.live img{
 	width: 20px; height: 20px;
 }
 

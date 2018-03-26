@@ -119,4 +119,5 @@ $sameOdd = $analyse['sameOdd'];
             @endforeach
         </div>
     @endif
+        <div class="noList"></div>
 </div>

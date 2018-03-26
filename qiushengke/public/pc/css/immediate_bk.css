@@ -247,11 +247,11 @@
 	position: relative; z-index: 2;
 }
 #Con table thead th.league{
-	width: 130px;
+	max-width: 130px; width: 12%;
 	text-align: left;
 }
 #Con table thead th.team{
-	width: 150px;
+	width: 150px; width: 16%;
 	padding-left: 10px;
 	text-align: left;
 }
@@ -265,13 +265,13 @@
 	width: 40px;
 }
 #Con table thead th.difference{
-	width: 50px;
+	max-width: 50px; width: 4.8%;
 }
 #Con table thead th.total{
-	width: 70px;
+	max-width: 70px; width: 6.8%;
 }
 #Con table thead th.europe{
-	width: 50px;
+	max-width: 50px; width: 4.8%;
 }
 #Con table thead th.asia{
 	width: 90px;
@@ -280,7 +280,7 @@
 	width: 110px;
 }
 #Con table thead th.data{
-	width: 100px;
+	max-width: 100px; width: 9%;
 }
 #Con table thead th.league p{
 	height: 30px;

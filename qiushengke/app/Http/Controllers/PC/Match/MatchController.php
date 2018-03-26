@@ -21,19 +21,54 @@ class MatchController extends BaseController
     }
 
     /**
+     * 通过请求自己的链接静态化pc终端，主要是解决 文件权限问题。
+     */
+    public static function curlToHtml() {
+        $ch = curl_init();
+        $url = asset('/static/football/one');
+        echo $url;
+        if (!is_null($url)) {
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 25);
+            curl_exec($ch);
+            curl_close($ch);
+        }
+    }
+
+    /**
+     * 通过请求自己的链接静态化pc终端，主要是解决 文件权限问题。
+     */
+    public static function curlToHtml5() {
+        $ch = curl_init();
+        $url = asset('/static/football/five');
+        echo $url;
+        if (!is_null($url)) {
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 25);
+            curl_exec($ch);
+            curl_close($ch);
+        }
+    }
+
+    /**
      * 静态化
      * @param Request $request
      */
     public function staticOneMin(Request $request){
         //即时
         $html = $this->immediate_f($request);
-        Storage::disk("public")->put("/match/foot/schedule/immediate.html", $html);
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/match/foot/schedule/immediate.html", $html);
 
         //篮球
         $html = $this->immediate_bk($request,'t');
-        Storage::disk("public")->put("/match/basket/schedule/immediate_t.html", $html);
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/match/basket/schedule/immediate_t.html", $html);
         $html = $this->immediate_bk($request,'l');
-        Storage::disk("public")->put("/match/basket/schedule/immediate_l.html", $html);
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/match/basket/schedule/immediate_l.html", $html);
     }
 
     /**

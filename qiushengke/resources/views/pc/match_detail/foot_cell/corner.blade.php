@@ -32,4 +32,5 @@
         @component('pc.match_detail.foot_cell.corner_history',['match'=>$match,'analyse'=>$analyse])
         @endcomponent
     @endif
+    <div class="noList"></div>
 </div>

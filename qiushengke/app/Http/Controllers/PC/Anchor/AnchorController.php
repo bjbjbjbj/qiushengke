@@ -33,7 +33,6 @@ class AnchorController extends BaseController{
         foreach ($football as $match){
             $fids[] = $match['mid'];
         }
-        $fids[] = 1020706;
         //根据比赛拿直播
         $fLives = AnchorRoomMatches::whereIn('mid',$fids)
             ->where('sport',1)
@@ -97,7 +96,6 @@ class AnchorController extends BaseController{
         foreach ($basketball as $match){
             $bids[] = $match['mid'];
         }
-        $bids[] = 10474;
         //根据比赛拿直播
         $bLives = AnchorRoomMatches::whereIn('mid',$bids)
             ->where('sport',2)

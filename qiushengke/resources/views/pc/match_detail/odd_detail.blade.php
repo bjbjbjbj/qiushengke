@@ -112,13 +112,8 @@
 @endsection
 
 @section('navContent')
-    <div class="home"><p class="abox"><a href="index.html"><img src="/pc/img/logo_image_n.png"></a></p></div>
-    <div class="Column">
-        <a class="on" href="/match/foot/immediate.html">足球</a>
-        <a href="/match/basket/immediate_t.html">篮球</a>
-        <a href="">主播</a>
-        <a href="">手机APP</a>
-    </div>
+    @component('pc.layout.nav_content',['type'=>0])
+    @endcomponent
     @component('pc.cell.top_leagues',['links'=>$footLeagues])
     @endcomponent
 @endsection
@@ -132,8 +127,12 @@
     <script type="text/javascript">
         var mid = GetQueryString('mid',window.location.href);
         var type = GetQueryString('type',window.location.href);
+        var sport = GetQueryString('sport',window.location.href);
         if (type == ''){
             type = 1;
+        }
+        if (sport == ''){
+            sport = 1;
         }
 
         //初始化ui
@@ -154,7 +153,7 @@
             $('table#Goal')[0].style.display = '';
         }
 
-        var url = matchPathWithId(mid,1);
+        var url = matchPathWithId(mid,sport);
 
         $('div#Odd a')[0].href = url;
 
@@ -180,7 +179,7 @@
             }
             var first = mid.substr(0,2);
             var second = mid.substr(2,2);
-            var url = '/static/terminal/1/'+ first +'/'+ second +'/'+mid+'/match.json';
+            var url = '/static/terminal/'+sport+'/'+ first +'/'+ second +'/'+mid+'/match.json';
             url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 'url': url,
@@ -214,6 +213,11 @@
                             window.setInterval('refreshOdd()', 5000);
                             window.setInterval('refreshMatch()', 5000);
                         }
+                        var status = json['status'];
+                        if (status >= 0){
+                            window.setInterval('refreshOdd()', 5000);
+                            window.setInterval('refreshMatch()', 5000);
+                        }
                     }
                 }
             });
@@ -222,7 +226,7 @@
         function refreshOdd() {
             var first = mid.substr(0,2);
             var second = mid.substr(2,2);
-            var url = '/static/terminal/1/'+ first +'/'+ second +'/'+mid+'/odd.json';
+            var url = '/static/terminal/'+sport+'/'+ first +'/'+ second +'/'+mid+'/odd.json';
             url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 'url':url,
@@ -245,7 +249,7 @@
                                         '<td>'+item['name']+'</td>';
                                 if(data['middle1']){
                                     tr = tr + '<td>'+data['up1']+'</td>'+
-                                            '<td>'+panKouText(data['middle1'],false)+'</td>'+
+                                            '<td>'+getHandicapCn(data['middle1'],'',1,sport,true)+'</td>'+
                                             '<td>'+data['down1']+'</td>';
                                 }
                                 else{
@@ -256,7 +260,7 @@
                                 }
                                 if(data['middle2']){
                                     tr = tr + '<td>'+data['up2']+'</td>'+
-                                            '<td>'+panKouText(data['middle2'],false)+'</td>'+
+                                            '<td>'+getHandicapCn(data['middle2'],'',1,sport,true)+'</td>'+
                                             '<td>'+data['down2']+'</td>';
                                 }
                                 else{
@@ -306,7 +310,7 @@
                                 tr = '<tr>'+
                                         '<td>'+item['name']+'</td>';
                                 if(data['middle1']){
-                                    var pankou = panKouText(data['middle1'],false);
+                                    var pankou = getHandicapCn(data['middle1'],'',2,sport,true);
                                     pankou = pankou.replace('让','');
                                     tr = tr + '<td>'+data['up1']+'</td>'+
                                             '<td>'+pankou+'</td>'+
@@ -319,7 +323,7 @@
                                             '<td>-</td>';
                                 }
                                 if(data['middle2']){
-                                    var pankou = panKouText(data['middle2'],false);
+                                    var pankou = getHandicapCn(data['middle2'],'',2,sport,true);
                                     pankou = pankou.replace('让','');
                                     tr = tr + '<td>'+data['up2']+'</td>'+
                                             '<td>'+pankou+'</td>'+

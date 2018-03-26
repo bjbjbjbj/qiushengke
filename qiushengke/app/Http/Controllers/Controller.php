@@ -15,15 +15,15 @@ class Controller extends BaseController
     function __construct()
     {
         $footLeague = [
-            array('id'=>'46','name'=>'中超','type'=>1),
-            array('id'=>'31','name'=>'英超','type'=>1),
-            array('id'=>'26','name'=>'西甲','type'=>1),
-            array('id'=>'29','name'=>'意甲','type'=>1),
-            array('id'=>'11','name'=>'法甲','type'=>1),
-            array('id'=>'8','name'=>'德甲','type'=>1),
-            array('id'=>'139','name'=>'亚冠','type'=>2),
-            array('id'=>'73','name'=>'欧冠','type'=>2),
-            array('id'=>'57','name'=>'世界杯','type'=>2)
+            array('id'=>'360','name'=>'中超','type'=>1),
+            array('id'=>'1','name'=>'英超','type'=>1),
+            array('id'=>'42','name'=>'西甲','type'=>1),
+            array('id'=>'30','name'=>'意甲','type'=>1),
+            array('id'=>'64','name'=>'法甲','type'=>1),
+            array('id'=>'51','name'=>'德甲','type'=>1),
+            array('id'=>'642','name'=>'亚冠','type'=>2),
+            array('id'=>'602','name'=>'欧冠','type'=>2),
+            array('id'=>'564','name'=>'世界杯','type'=>2)
         ];
         $links = array();
         foreach ($footLeague as $link) {
