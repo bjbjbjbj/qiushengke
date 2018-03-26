@@ -54,7 +54,7 @@
 @section('live_content')
     <div id="Event">
         <?php
-        $events = $tech['event'];
+        $events = isset($tech['event'])?$tech['event']:null;
         ?>
         <?php
         //获取足球比赛的即时时间
@@ -76,7 +76,7 @@
             $matchTime = (floor(($diff) % 86400 / 60)) > 45 ? 90 : (floor(($diff) % 86400 / 60) + 45);
         }
 
-        $lastTime = $events['last_event_time'];
+        $lastTime = isset($events) ? $events['last_event_time'] : 0;
         if ($lastTime > 90 || $matchTime > 90){
             $width = round(100/120,2);
         }

@@ -25,7 +25,7 @@ class LiveController extends BaseController{
         $json = curl_exec ($ch);
         curl_close ($ch);
         $json = json_decode($json, true);
-        $this->html_var['lives'] = $json['live']['channels'];
+        $this->html_var['lives'] = array();//$json['live']['channels'];
         $this->html_var['sport'] = 1;
         return view('pc.live.live',$this->html_var);
     }

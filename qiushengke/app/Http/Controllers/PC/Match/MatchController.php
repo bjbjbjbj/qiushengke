@@ -43,13 +43,16 @@ class MatchController extends BaseController
     public function staticOneMin(Request $request){
         //即时
         $html = $this->immediate_f($request);
-        Storage::disk("public")->put("/match/foot/schedule/immediate.html", $html);
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/match/foot/schedule/immediate.html", $html);
 
         //篮球
         $html = $this->immediate_bk($request,'t');
-        Storage::disk("public")->put("/match/basket/schedule/immediate_t.html", $html);
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/match/basket/schedule/immediate_t.html", $html);
         $html = $this->immediate_bk($request,'l');
-        Storage::disk("public")->put("/match/basket/schedule/immediate_l.html", $html);
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/match/basket/schedule/immediate_l.html", $html);
     }
 
     /**
@@ -128,7 +131,6 @@ class MatchController extends BaseController
         $lastDate = date('Ymd', strtotime('-1 day'));
 
         $pc_json = FileTool::matchListDataJson($startDate,$sport);
-        dump($pc_json);
         if (!empty($pc_json)) {
             $result['total'] = count($pc_json['matches']);
             $sortData = $this->sortMatch($pc_json,$sport);

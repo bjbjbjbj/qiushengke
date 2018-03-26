@@ -1405,12 +1405,12 @@ body{
 }
 #Data .history .con .svgBox{
 	height: 120px;
-	padding: 5px 0 30px 50px;
+	padding: 5px 0 30px 3%;
 	text-align: center;
 }
 #Data .history .con .svgBox dl{
 	width: 232px; height: 118px;
-	margin-left: 70px; padding: 0 10px;
+	margin-left: 6%; padding: 0 10px;
 	border-top: 1px dashed #dbdbdb; border-bottom: 1px dashed #dbdbdb;
 	font-size: 0; text-align: left;
 	display: inline-block;
