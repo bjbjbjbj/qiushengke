@@ -1028,18 +1028,7 @@ trait SpiderMatchTeam{
                 }
             }
 
-            $date = date('Ymd');
             $lg_mid = $lg_match->id;
-
-            //比赛事件
-            $event = FileTool::getFileFromLiveAnalyse($date, $lg_mid);
-            if (!isset($event)) {
-                $event = ['timeLine'=>$array];
-            } else {
-                $event = json_decode($event);
-                $event->timeLine = $array;
-            }
-            FileTool::putFileToLiveAnalyse($lg_mid, $event);
 
             //提点数据
             $event_analyse = StatisticFileTool::getFileFromTerminal(MatchLive::kSportFootball, $lg_mid, 'event_analyse');

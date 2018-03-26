@@ -17,7 +17,7 @@ class StatisticFileTool
         try {
             Storage::disk($disk)->put($filePatch, json_encode($data));
         } catch (\Exception $exception) {
-//            dump($exception->getMessage());
+            dump($exception->getMessage());
         }
     }
 
@@ -26,7 +26,7 @@ class StatisticFileTool
         try {
             $data = json_decode(Storage::disk($disk)->get($filePath), true);
         } catch (\Exception $exception) {
-
+//            dump($exception->getMessage());
         }
         return $data;
     }

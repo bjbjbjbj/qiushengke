@@ -7,17 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 class BasketOddsAfter extends Model
 {
     protected $connection = 'liaogou_match';
-    const k_odd_type_asian = 1;//亚盘
-    const k_odd_type_ou = 2;//大小
-    const k_odd_type_europe = 3;//欧赔
-    const k_odd_type_corner = 4;//角球
-    const default_banker_id = 5;//默认公司id 取bet365(角球计算、历史同赔)
-    const default_calculate_cid = 2;//默认计算用的博彩公司id 取sb
-
-    const default_top_bankers = [1, 2, 3, 5, 7, 8, 12];
-    const default_top_rank_bankerStr = "2,5,1,3,7,8,12";
-
-    const default_article_bankers = [2,5,8];
     //
 //    public $timestamps = false;
 
@@ -41,7 +30,7 @@ class BasketOddsAfter extends Model
         if (isset($match)) {
             $mid = $match->id;
             //如果比赛结束了，或者比赛时间超过了未来的5天，则不再更新盘口信息
-            if (!$match->isCanAddToAfter() || !in_array($cid, self::default_article_bankers)) {
+            if (!$match->isCanAddToAfter() || !in_array($cid, BasketOdd::default_article_bankers)) {
                 echo 'mid = '.$mid.', match status = ' . $match->status . '</br>';
                 return;
             }
@@ -73,7 +62,7 @@ class BasketOddsAfter extends Model
             $mid = $match->id;
             $cid = $lg_odd->cid;
             //如果比赛结束了，或者比赛时间超过了未来的5天，则不再更新盘口信息
-            if (!$match->isCanAddToAfter() || !in_array($cid, self::default_article_bankers)) {
+            if (!$match->isCanAddToAfter() || !in_array($cid, BasketOdd::default_article_bankers)) {
                 echo 'mid = '.$mid.', match status = ' . $match->status . '</br>';
                 return;
             }
