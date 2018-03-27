@@ -84,6 +84,7 @@ class League extends Model
      * 五大联赛id
      */
     public static function getFiveLids() {
-        return [31,26,29,8,11];
+//        return [31,26,29,8,11];
+        return [42,1,30,64,61];
     }
 }

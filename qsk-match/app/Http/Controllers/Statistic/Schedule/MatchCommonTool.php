@@ -219,7 +219,7 @@ trait MatchCommonTool
     }
 
     private function onCommonOrderBy($query) {
-        $query->orderByRaw('if(status=50,2.5,status) desc')
+        $query->orderByRaw('if(m.status=50,2.5,m.status) desc')
             ->orderBy('m.time', 'asc')
             ->orderBy('l.type', 'asc')
             ->orderBy('l.id', 'asc');

@@ -651,19 +651,24 @@ class SpiderController extends Controller
      */
     private function spiderFillOddMatch()
     {
-        $matches = Match::where("status", "=", -1)
-            ->leftJoin('leagues', 'leagues.id', '=', 'matches.lid')
+        $matches = \App\Models\LiaoGouModels\Match::query()
             ->select('matches.*')
-            ->where("leagues.hot", "=", 1)
-            ->where("is_odd", "=", 0)
-            ->orderBy('time', 'desc')
+            ->join('leagues', function ($join){
+                $join->on('matches.lid', '=', 'leagues.id')
+                    ->where(function ($q){
+                        $q->where("leagues.hot", "=", 1)
+                        ->orWhere('leagues.main', '=', 1);
+                    });
+            })->where("matches.is_odd", "=", 0)
+            ->where("matches.status", "=", -1)
+            ->orderBy('matches.time', 'desc')
             ->take(15)
             ->get();
         foreach ($matches as $match) {
             echo $match->hname . ' VS ' . $match->aname . '<br>';
-            $this->oddsWithMatchAndType($match->id, 1);
-            $this->oddsWithMatchAndType($match->id, 2);
-            $this->oddsWithMatchAndType($match->id, 3);
+            $this->oddsWithMatchAndType($match->win_id, 1);
+            $this->oddsWithMatchAndType($match->win_id, 2);
+            $this->oddsWithMatchAndType($match->win_id, 3);
             $match->is_odd = 1;
             $match->save();
         }

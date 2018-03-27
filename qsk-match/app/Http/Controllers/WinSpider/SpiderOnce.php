@@ -17,6 +17,7 @@ use App\Models\WinModels\State;
 use App\Models\WinModels\Zone;
 use App\Models\WinModels\Banker;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 trait SpiderOnce
 {
@@ -167,8 +168,12 @@ trait SpiderOnce
             foreach ($seasons as $season) {
                 echo $season->name . "<br>";
                 $stages = Stage::where(["lid" => $league->id, "season" => $season->name])->get();
-                foreach ($stages as $stage) {
-                    $this->cupSchedule($season->lid, $season->name, $stage->id);
+                if (count($stages) > 0) {
+                    foreach ($stages as $stage) {
+                        $this->cupSchedule($season->lid, $season->name, $stage->id);
+                    }
+                } else {
+                    $this->cupSchedule($season->lid, $season->name);
                 }
             }
             $league->spider_at = date("Y-m-d H:i:s");
@@ -275,5 +280,38 @@ trait SpiderOnce
                 }
             }
         }
+    }
+
+    private function onLeagueHistorySpider(Request $request) {
+        $key = "league_schedule_history";
+        $lg_leagues = Redis::get($key);
+        if (isset($lg_leagues)) {
+            $lg_leagues = json_decode($lg_leagues, true);
+        } else {
+            $lg_leagues = \App\Models\LiaoGouModels\League::query()
+                ->select('win_id', 'type')
+                ->where(function ($q) {
+                    $q->where('main', 1)
+                        ->orWhere('hot', 1);
+                })->get()->toArray();
+        }
+        if (count($lg_leagues) <= 0) {
+            echo "league history spider complete!! <br>";
+            return;
+        }
+        dump(count($lg_leagues));
+        $lg_league = $lg_leagues[0];
+        $win_lid = $lg_league['win_id'];
+        $type = $lg_league['type'];
+        $request->merge(['lid'=>$win_lid]);
+        foreach (range(0, 1) as $index) {
+            if ($type == 1) {
+                $this->leagueAll($request);
+            } else if ($type == 2) {
+                $this->cupAll($request);
+            }
+        }
+        $lg_leagues = array_slice($lg_leagues, 1);
+        Redis::set($key, json_encode($lg_leagues));
     }
 }
