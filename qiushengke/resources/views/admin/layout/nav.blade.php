@@ -67,7 +67,7 @@
         }
 
         var path = window.location.pathname;
-        var curA = $("ul.nav-sidebar li a[href^='" + path + "']:first");
+        var curA = $("ul.nav-sidebar li a[href='" + path + "']:first");
         curA.parent().addClass("active");
     });
 </script>

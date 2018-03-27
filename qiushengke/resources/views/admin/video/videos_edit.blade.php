@@ -60,7 +60,7 @@
                     <input type="number" name="od" class="form-control" value="{{isset($video) ? $video->od : ''}}">
                 </div>
 
-                <img @if(!isset($video) || !empty($video->cover)) style="display: none" @endif
+                <img @if(!isset($video) || empty($video->cover)) style="display: none" @endif
                         class="img-thumbnail" id="coverImage"
                         src="{{ isset($video) && !empty($video->cover) ? $video->cover : '' }}">
 
