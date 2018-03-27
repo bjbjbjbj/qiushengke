@@ -87,10 +87,10 @@
                         <td><h5>{{ $league->id }}</h5></td>
                         <td>{{ $league->name }}</td>
                         <td>
-                            @if($league->status == 1)
-                            <a class="btn btn-sm btn-info" onclick="changeStatus('{{$league->id}}', 2, this);">设置预约</a>
-                            @elseif($league->status == 2)
-                            <a class="btn btn-sm btn-danger" onclick="changeStatus('{{$league->id}}', 1, this);">取消预约</a>
+                            @if($league->status == 2)
+                                <a class="btn btn-sm btn-danger" onclick="changeStatus('{{$league->id}}', 1, this);">取消预约</a>
+                            @else
+                                <a class="btn btn-sm btn-info" onclick="changeStatus('{{$league->id}}', 2, this);">设置预约</a>
                             @endif
                         </td>
                     </tr>

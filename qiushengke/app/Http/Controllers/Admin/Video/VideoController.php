@@ -169,7 +169,7 @@ class VideoController extends Controller
         $query = HotVideoType::query();
         $query->selectRaw('*, ifNull(od, 999) as n_od');
         $query->orderBy('status')->orderBy('n_od');
-        $page = $query->paginate(2);
+        $page = $query->paginate(20);
         $result['page'] = $page;
         return view('admin.video.types', $result);
     }
