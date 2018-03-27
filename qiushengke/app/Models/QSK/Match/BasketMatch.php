@@ -13,5 +13,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class BasketMatch extends Model
 {
-    protected $connection = 'qsk';
+    protected $connection = 'qsk_match';
 }

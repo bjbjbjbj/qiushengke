@@ -4,7 +4,7 @@
         <div id="Calendar">
             <ul>
                 @foreach($calendar as $item)
-                    <a class="li {{$item['on'] ? 'on':''}}" href="{{'/match/foot/schedule/'.$item['date'].'schedule.html'}}">
+                    <a class="li {{$item['on'] ? 'on':''}}" href="{{'/match/foot/schedule/'.$item['date'].'/schedule.html'}}">
                         <p class="date">{{$item['dateStr']}}</p>
                         <p class="week">{{$item['w']}}</p>
                     </a>

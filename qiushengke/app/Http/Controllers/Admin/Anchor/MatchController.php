@@ -109,6 +109,7 @@ class MatchController extends Controller
             $query->where('hot', League::kHot);
         }
         $page = $query->paginate(self::default_page_size);
+        $page->appends($request->all());
         return $page;
     }
 
@@ -167,6 +168,7 @@ class MatchController extends Controller
 
         $start_date = date('Y-m-d H:i:s', strtotime('-3 hours'));
         $end_date = date('Y-m-d H:i:s', strtotime('+3 days'));
+
         if ($sport == self::kSportFootball) {
             $query = Match::query();
         } else {
@@ -181,6 +183,9 @@ class MatchController extends Controller
         }
         if (is_numeric($lid)) {
             $query->where('lid', $lid);
+        } else {
+            $book_ids = $sport == self::kSportFootball ? League::getBookLids() : BasketLeague::getBookLids();
+            $query->whereIn('lid', $book_ids);
         }
         $query->whereBetween('time', [$start_date, $end_date]);
         $page = $query->paginate($size);

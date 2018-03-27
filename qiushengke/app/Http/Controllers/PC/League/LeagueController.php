@@ -9,6 +9,8 @@
 namespace App\Http\Controllers\PC\League;
 
 use App\Http\Controllers\Controller as BaseController;
+use App\Models\QSK\Article\LArticle;
+use App\Models\QSK\Subject\SubjectLeague;
 use App\Models\QSK\Video\HotVideo;
 use App\Models\QSK\Video\HotVideoType;
 use Illuminate\Http\Request;
@@ -66,25 +68,110 @@ class LeagueController extends BaseController{
     public function staticFoot(Request $request){
         //足球
         foreach (LeagueController::footLeagues as $item){
-            $html = $this->league($request,$item['id']);
-            echo $item['id'] . ' ';
-            if ($html && strlen($html) > 0){
-                if ($item['type'] == 2)
-                    Storage::disk("public")->put("/cup_league/foot/".$item['id'].".html", $html);
-                else
-                    Storage::disk("public")->put("/league/foot/".$item['id'].".html", $html);
-            }
+            $this->staticLeague($request,1,$item['id']);
         }
     }
 
     public function staticBasket(Request $request){
-        //足球
+        //篮球
         foreach (LeagueController::basketLeagueIcons as $key=>$value){
-            $html = $this->leagueBK($request,$key);
-            if ($html && strlen($html) > 0) {
-                echo $key . ' ';
-                Storage::disk("public")->put("/league/basket/" . $key . ".html", $html);
+            $this->staticLeague($request,2,$key);
+        }
+    }
+
+    public function staticLeague(Request $request,$sport,$id){
+        if ($sport == 1){
+            $pc_json = $this->getLeagueData($id);
+            $html = $this->league($request,$id);
+            if ($html && strlen($html) > 0){
+                if ($pc_json['league']['type'] == 2)
+                    Storage::disk("public")->put("/cup_league/foot/".$id.".html", $html);
+                else
+                    Storage::disk("public")->put("/league/foot/".$id.".html", $html);
             }
+        }
+        else{
+            $html = $this->leagueBK($request,$id);
+            if ($html && strlen($html) > 0) {
+                Storage::disk("public")->put("/league/basket/" . $id . ".html", $html);
+            }
+        }
+    }
+
+    /**
+     * 静态化
+     * @param $mid
+     * @param int $sport
+     */
+    public static function flushLiveDetailHtml($mid, $sport = 1){
+        $ch = curl_init();
+        $url = asset('/static/league/' . $sport.'/'.$mid);
+        echo $url . '<br>';
+        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 8);//8秒超时
+        curl_exec ($ch);
+        curl_close ($ch);
+    }
+
+    /**
+     * 静态化专题,足球篮球
+     */
+    public static function flushSubLeagueJson(){
+        $ch = curl_init();
+        $url = asset('/static/league/json');
+        echo $url . '<br>';
+        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 8);//8秒超时
+        curl_exec ($ch);
+        curl_close ($ch);
+    }
+
+    public static function staticSubLeagueJson(Request $request){
+        //足球
+        $query = SubjectLeague::query();
+        $query->where('sport', SubjectLeague::kSportFootball);
+        $query->where('status', SubjectLeague::kStatusShow);
+        $query->selectRaw('*, ifNull(subject_leagues.od, 999) as n_od');
+        $query->orderBy('status')->orderBy('n_od');
+        $leagues = $query->get();
+        $result = array();
+        foreach ($leagues as $league){
+            if ($league['type'] == 1) {
+                $url = '/league/foot/' . $league['lid'] . '.html';
+            }
+            elseif ($league['type'] == 2) {
+                $url = '/cup_league/foot/' . $league['lid'] . '.html';
+            }
+            $result[] = array(
+                'url'=>(isset($url)?$url:''),
+                'id'=>$league->lid,
+                'name'=>$league['name'],
+                'type'=>$league['type']);
+        }
+        if (count($result) > 0){
+            $result = json_encode($result);
+            Storage::disk("public")->put("/league/foot/sub.json",$result);
+        }
+        //篮球
+        $query = SubjectLeague::query();
+        $query->where('sport', SubjectLeague::kSportBasketball);
+        $query->where('status', SubjectLeague::kStatusShow);
+        $query->selectRaw('*, ifNull(subject_leagues.od, 999) as n_od');
+        $query->orderBy('status')->orderBy('n_od');
+        $leagues = $query->get();
+        $result = array();
+        foreach ($leagues as $league){
+            $url = '/league/basket/' . $league['lid'] . '.html';
+            $result[] = array(
+                'url'=>(isset($url)?$url:''),
+                'id'=>$league->lid,
+                'name'=>$league['name']);
+        }
+        if (count($result) > 0){
+            $result = json_encode($result);
+            Storage::disk("public")->put("/league/basket/sub.json",$result);
         }
     }
 
@@ -99,12 +186,17 @@ class LeagueController extends BaseController{
         $pc_json = $this->getLeagueData($lid);
         if (!empty($pc_json)) {
             $result = $pc_json;
-            //赛事视频
-            $videoType = HotVideoType::where('lid',$lid)->first();
-            if ($videoType){
-                $videos = HotVideo::where('type_id',$videoType->id)->get();
+            //专题
+            $sl = SubjectLeague::where('lid',$lid)->first();
+            if ($sl){
+                //赛事视频
+                $videos = HotVideo::where('s_lid',$sl->id)->get();
                 $result['videos'] = $videos;
+                //文章
+                $articles = LArticle::where('s_lid',$sl->id)->get();
+                $result['articles'] = $articles;
             }
+
             //联赛,杯赛
             if ($pc_json['league']['type'] == 1) {
                 $this->html_var = array_merge($this->html_var,$result);

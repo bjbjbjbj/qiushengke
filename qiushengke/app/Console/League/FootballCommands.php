@@ -51,7 +51,8 @@ class FootballCommands extends Command
      */
     public function handle()
     {
-        $controller = new LeagueController();
-        $controller->staticFoot(new Request());
+        foreach (LeagueController::footLeagues as $item){
+            LeagueController::flushLiveDetailHtml($item['id'],1);
+        }
     }
 }

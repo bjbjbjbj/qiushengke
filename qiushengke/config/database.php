@@ -39,6 +39,20 @@ return [
             'prefix' => '',
         ],
 
+        'qsk_match' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_MATCH', '127.0.0.1'),
+            'port' => env('DB_PORT_MATCH', '3306'),
+            'database' => env('DB_DATABASE_MATCH', 'liaogou_matches'),
+            'username' => env('DB_USERNAME_MATCH', 'root'),
+            'password' => env('DB_PASSWORD_MATCH', ''),
+            'charset'   => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+
         'qsk' => [
             'driver' => 'mysql',
             'host' => env('DB_QSK_HOST', '127.0.0.1'),

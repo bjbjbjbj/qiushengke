@@ -14,7 +14,7 @@ use Illuminate\Database\Eloquent\Model;
 class BasketLeague extends Model
 {
 
-    protected $connection = 'qsk';
+    protected $connection = 'qsk_match';
 
     const kStatusBook = 2, kStatusHide = 1;//1：可预约赛事不显示该联赛的比赛，2：可预约赛事显示该联赛的比赛。
     const kMain = 1;//主流联赛

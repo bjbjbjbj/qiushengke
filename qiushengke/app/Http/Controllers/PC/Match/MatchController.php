@@ -176,7 +176,7 @@ class MatchController extends BaseController
                 return view('pc.match.immediate_bk',$this->html_var);
         }
         else {
-            return abort(500);
+//            return abort(500);
         }
     }
 
