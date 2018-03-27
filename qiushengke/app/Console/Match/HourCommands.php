@@ -47,8 +47,9 @@ class HourCommands extends Command
      */
     public function handle()
     {
+        //赔率终端,暂时只有这个
         MatchDetailController::staticHour();
-
+        //专题
         LeagueController::flushSubLeagueJson();
     }
 }

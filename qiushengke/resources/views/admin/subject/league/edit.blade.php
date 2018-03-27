@@ -290,7 +290,7 @@
                             comboObj.css({"left":left + 40,"top":index + 175,"display":"block"});
                             var str = "";
                             var leagues = json.leagues;
-                            for(var i = 1; i < leagues.length; i++) {
+                            for(var i = 0; i < leagues.length; i++) {
                                 var league = leagues[i];
                                 str += '<div value="'+ league.id +'" type="' + league.type + '" onclick="selectCombo(this);" class="combo-select-div">'+ league.name +'</div>';
                             }

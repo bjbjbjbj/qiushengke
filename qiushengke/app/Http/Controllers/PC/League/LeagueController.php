@@ -139,14 +139,14 @@ class LeagueController extends BaseController{
         $result = array();
         foreach ($leagues as $league){
             if ($league['type'] == 1) {
-                $url = '/league/foot/' . $league['id'] . '.html';
+                $url = '/league/foot/' . $league['lid'] . '.html';
             }
             elseif ($league['type'] == 2) {
-                $url = '/cup_league/foot/' . $league['id'] . '.html';
+                $url = '/cup_league/foot/' . $league['lid'] . '.html';
             }
             $result[] = array(
                 'url'=>(isset($url)?$url:''),
-                'id'=>$league->id,
+                'id'=>$league->lid,
                 'name'=>$league['name'],
                 'type'=>$league['type']);
         }
@@ -163,10 +163,10 @@ class LeagueController extends BaseController{
         $leagues = $query->get();
         $result = array();
         foreach ($leagues as $league){
-            $url = '/league/basket/' . $league['id'] . '.html';
+            $url = '/league/basket/' . $league['lid'] . '.html';
             $result[] = array(
                 'url'=>(isset($url)?$url:''),
-                'id'=>$league->id,
+                'id'=>$league->lid,
                 'name'=>$league['name']);
         }
         if (count($result) > 0){
