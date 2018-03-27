@@ -24,5 +24,6 @@ Route::group(['namespace'=>'PC\Match'], function () {
 
 //专题
 Route::group(['namespace'=>'PC\League'], function () {
-    Route::get('/league/{sport}/{id}',"LeagueController@staticLeague");
+    Route::get('/league/json',"LeagueController@staticSubLeagueJson");//专题列表json
+    Route::get('/league/{sport}/{id}',"LeagueController@staticLeague");//专题终端
 });

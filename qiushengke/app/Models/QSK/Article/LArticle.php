@@ -14,8 +14,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class LArticle extends Model
 {
-
     const kStatusDraft = 2, kStatusPublish = 1;//1：发布，2：草稿。
+
+    protected $connection = 'qsk';
 
     public function getArticles($lid, $sport, $size = 10) {
         $query = self::query();

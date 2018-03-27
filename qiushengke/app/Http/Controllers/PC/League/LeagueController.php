@@ -9,6 +9,7 @@
 namespace App\Http\Controllers\PC\League;
 
 use App\Http\Controllers\Controller as BaseController;
+use App\Models\QSK\Article\LArticle;
 use App\Models\QSK\Subject\SubjectLeague;
 use App\Models\QSK\Video\HotVideo;
 use App\Models\QSK\Video\HotVideoType;
@@ -67,14 +68,14 @@ class LeagueController extends BaseController{
     public function staticFoot(Request $request){
         //足球
         foreach (LeagueController::footLeagues as $item){
-            $this->staticLeague($request,$item['id']);
+            $this->staticLeague($request,1,$item['id']);
         }
     }
 
     public function staticBasket(Request $request){
         //篮球
         foreach (LeagueController::basketLeagueIcons as $key=>$value){
-            $this->staticLeague($request,$key);
+            $this->staticLeague($request,2,$key);
         }
     }
 
@@ -113,6 +114,67 @@ class LeagueController extends BaseController{
         curl_close ($ch);
     }
 
+    /**
+     * 静态化专题,足球篮球
+     */
+    public static function flushSubLeagueJson(){
+        $ch = curl_init();
+        $url = asset('/static/league/json');
+        echo $url . '<br>';
+        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 8);//8秒超时
+        curl_exec ($ch);
+        curl_close ($ch);
+    }
+
+    public static function staticSubLeagueJson(Request $request){
+        //足球
+        $query = SubjectLeague::query();
+        $query->where('sport', SubjectLeague::kSportFootball);
+        $query->where('status', SubjectLeague::kStatusShow);
+        $query->selectRaw('*, ifNull(subject_leagues.od, 999) as n_od');
+        $query->orderBy('status')->orderBy('n_od');
+        $leagues = $query->get();
+        $result = array();
+        foreach ($leagues as $league){
+            if ($league['type'] == 1) {
+                $url = '/league/foot/' . $league['id'] . '.html';
+            }
+            elseif ($league['type'] == 2) {
+                $url = '/cup_league/foot/' . $league['id'] . '.html';
+            }
+            $result[] = array(
+                'url'=>(isset($url)?$url:''),
+                'id'=>$league->id,
+                'name'=>$league['name'],
+                'type'=>$league['type']);
+        }
+        if (count($result) > 0){
+            $result = json_encode($result);
+            Storage::disk("public")->put("/league/foot/sub.json",$result);
+        }
+        //篮球
+        $query = SubjectLeague::query();
+        $query->where('sport', SubjectLeague::kSportBasketball);
+        $query->where('status', SubjectLeague::kStatusShow);
+        $query->selectRaw('*, ifNull(subject_leagues.od, 999) as n_od');
+        $query->orderBy('status')->orderBy('n_od');
+        $leagues = $query->get();
+        $result = array();
+        foreach ($leagues as $league){
+            $url = '/league/basket/' . $league['id'] . '.html';
+            $result[] = array(
+                'url'=>(isset($url)?$url:''),
+                'id'=>$league->id,
+                'name'=>$league['name']);
+        }
+        if (count($result) > 0){
+            $result = json_encode($result);
+            Storage::disk("public")->put("/league/basket/sub.json",$result);
+        }
+    }
+
     /********** 足球 ************/
     /**
      * 赛事专题
@@ -124,12 +186,17 @@ class LeagueController extends BaseController{
         $pc_json = $this->getLeagueData($lid);
         if (!empty($pc_json)) {
             $result = $pc_json;
-            //赛事视频
+            //专题
             $sl = SubjectLeague::where('lid',$lid)->first();
             if ($sl){
+                //赛事视频
                 $videos = HotVideo::where('s_lid',$sl->id)->get();
                 $result['videos'] = $videos;
+                //文章
+                $articles = LArticle::where('s_lid',$sl->id)->get();
+                $result['articles'] = $articles;
             }
+
             //联赛,杯赛
             if ($pc_json['league']['type'] == 1) {
                 $this->html_var = array_merge($this->html_var,$result);

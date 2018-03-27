@@ -76,4 +76,20 @@
             </table>
         </div>
     </div>
+    @if(isset($articles) && count($articles) > 0)
+        <div class="lbox" id="News">
+            <div class="title">
+                <p>赛事资讯</p>
+            </div>
+            <div class="con">
+                <ul>
+                    @foreach($articles as $article)
+                        <a target="_blank" class="li" href="{{$article['link']}}">
+                            <p><img alt="{{$article['title']}}" src="{{$article['cover']}}">{{$article['title']}}</p>
+                        </a>
+                    @endforeach
+                </ul>
+            </div>
+        </div>
+    @endif
 @endsection

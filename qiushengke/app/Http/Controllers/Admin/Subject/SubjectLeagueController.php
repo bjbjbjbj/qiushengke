@@ -125,6 +125,12 @@ class SubjectLeagueController extends Controller
             $sl->od = $od;
             $sl->content = $content;
             $sl->icon = $icon;
+            //保存到league表
+            if ($league){
+                $league->describe = $content;
+                $league->icon = $icon;
+                $league->save();
+            }
             $sl->save();
         } catch (\Exception $exception) {
             Log::error($exception);
@@ -151,7 +157,7 @@ class SubjectLeagueController extends Controller
             $query = BasketLeague::query();
         }
         $query->where('name', 'like', '%' . $name . '%');
-        $leagues = $query->take(20)->get();
+        $leagues = $query->get();
         $json = [];
         foreach ($leagues as $league) {
             $obj['id'] = $league->id;

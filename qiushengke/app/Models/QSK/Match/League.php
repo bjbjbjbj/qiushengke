@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class League extends Model
 {
-    protected $connection = 'qsk';
+    protected $connection = 'qsk_match';
     public $timestamps = false;
 
     protected $hidden = ['create_at', "spider_at"];

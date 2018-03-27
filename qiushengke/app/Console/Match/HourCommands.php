@@ -9,6 +9,7 @@
 namespace App\Console\Match;
 
 
+use App\Http\Controllers\PC\League\LeagueController;
 use App\Http\Controllers\PC\Match\MatchController;
 use App\Http\Controllers\PC\Match\MatchDetailController;
 use Illuminate\Console\Command;
@@ -47,5 +48,7 @@ class HourCommands extends Command
     public function handle()
     {
         MatchDetailController::staticHour();
+
+        LeagueController::flushSubLeagueJson();
     }
 }
