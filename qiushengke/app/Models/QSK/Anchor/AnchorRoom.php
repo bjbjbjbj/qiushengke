@@ -62,7 +62,7 @@ class AnchorRoom extends Model
      * @return string
      */
     public function getResource($isMobile = 0) {
-        $type = $this->type;//此直播间的平台ID 1：龙珠，2：章鱼，3：斗鱼，4：火猫，5:熊猫
+        $type = $this->type;//此直播间的平台ID 1：龙珠，2：章鱼，3：斗鱼，4：火猫，5:熊猫，6:iframe
         $content = $this->link;//房间ID/源链接等内容
         $url = "";
         switch ($type) {
@@ -71,6 +71,9 @@ class AnchorRoom extends Model
                 break;
             case 2:
                 $url = $this->getZYResource($content);
+                break;
+            case 6:
+                $url = $content;
                 break;
         }
         return $url;
@@ -159,5 +162,4 @@ class AnchorRoom extends Model
         $src = str_replace("'", '', $src);
         return $src;
     }
-
 }

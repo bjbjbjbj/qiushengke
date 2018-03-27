@@ -269,21 +269,23 @@ function countdown() {
 function PlayVideoShare (cid){
     var url;
     if (window.isMobile) {
-        url = GetHttp() + host + '/match/live/url/channel/mobile/' + cid + '.json';
+        url = GetHttp() + host + '/json/live/channel/mobile/' + cid + '.json';
     } else {
-        url = GetHttp() + host + '/match/live/url/channel/' + cid + '.json';
+        url = GetHttp() + host + '/json/live/channel/' + cid + '.json';
     }
     url = url + '?time=' + (new Date()).getTime();
-    LoadIframe('https://www.aikq.cc/live/player/player-18528-3.html');
-    return
 	$.ajax({
 		url: url,
 		type:'GET',
 		dataType:'json',
 		success:function(data){
 			if (data.code == 0){
-				//CloseLoading();
-				var match = data.match;
+				var type = data.type;
+                if (type == 6){
+                    var Link = getLink(data);
+                    LoadIframe(Link);
+                }
+                return;
 				var show_live = match.show_live;
                 if (window.isMobile && data.platform && data.platform == 2 && (show_live || match.status == 0)) {//如果是PC端的线路，未开始比赛或者在直播中，则提示
                     $('#MyFrame').html('<p class="noframe">该比赛暂无手机信号，请使用<b>电脑浏览器</b> 打开<img class="code" src="/img/pc/code.jpg">加微信 <b>fs188fs</b><br/>与球迷赛事交流，乐享高清精彩赛事！</p>')
@@ -293,10 +295,9 @@ function PlayVideoShare (cid){
                     if (match.status && match.status == 0) {
                         countdownHtml(match.hour_html, match.minute_html, match.second_html);
                     }
-					return;
-				}else if(show_live){
-						var Link = getLink(data);
-                        LoadIframe(Link);
+                    return;
+                }else if(show_live){
+
                 }
             }else{
                 document.getElementById('MyFrame').innerHTML = '<p class="loading">暂无直播信号</p>';
@@ -334,12 +335,7 @@ function LoadClappr(Link) { //clappr
 
 //获取播放链接
 function getLink (data) {
-	if (data.type == 2 && data.js) {
-        eval(data.js);
-        return play_url;
-	}else{
-		return data.playurl;
-	}
+    return data.url;
 }
 
 //按链接选择播放方式
