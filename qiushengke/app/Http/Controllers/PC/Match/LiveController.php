@@ -53,6 +53,7 @@ class LiveController extends BaseController{
         $this->html_var['tech'] = MatchDetailController::matchDetailData($mid,'tech');
         $this->html_var['roll'] = MatchDetailController::matchDetailData($mid,'roll');
         $this->html_var['sport'] = 1;
+        $this->html_var['lives'] = array(['name'=>'bj','id'=>18528]);
         return view('pc.live.live',$this->html_var);
     }
 
@@ -74,6 +75,16 @@ class LiveController extends BaseController{
         $this->html_var['roll'] = MatchDetailController::matchDetailData($mid,'roll',2);
         $this->html_var['players'] = MatchDetailController::matchDetailData($mid,'player',2);
         $this->html_var['sport'] = 2;
+        $this->html_var['lives'] = array();
         return view('pc.live.live_bk',$this->html_var);
+    }
+
+    /**
+     * 播放器
+     * @param Request $request
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function player(Request $request){
+        return view('pc.live.player',$this->html_var);
     }
 }

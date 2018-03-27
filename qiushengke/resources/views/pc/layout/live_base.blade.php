@@ -376,24 +376,8 @@
                     ?>
 
                     <?php
-                    if ($channel['type'] == 3 || $channel['type'] == 1 || $channel['type'] == 2 || $channel['type'] == 7)
-                        $preUrl = str_replace("https://","http://",env('AKQ_URL'));
-                    else if($channel['type'] == 99){
-                        if ($channel['player'] == 11){
-                            $preUrl = str_replace("https://","http://",env('AKQ_URL'));
-                        }
-                        else{
-                            if (stristr($channel['link'],'player.pptv.com')){
-                                $preUrl = str_replace("https://","http://",env('AKQ_URL'));
-                            }
-                            else{
-                                $preUrl = str_replace("http://","https://",env('AKQ_URL'));
-                            }
-                        }
-                    } else {
-                        $preUrl = str_replace("http://","https://",env('AKQ_URL'));
-                    }
-                    $link = $preUrl.'/live/player/player-'.$channel['id'].'-'.$channel['type'].'.html';
+                    $preUrl = str_replace("http://","http://",env('APP_URL'));
+                    $link = $preUrl.'/live/player/player-'.$channel['id'].'.html';
                     ?>
                     @if($i == count($lives) - 1)
                         <a onclick="changeChannel('{{$link}}',this)" style="width: 25%;" class="last">{{$channel['name']}}</a>
