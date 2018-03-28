@@ -607,19 +607,24 @@ class SpiderController extends Controller
      * 填充没有球队ID的比赛
      * 10分钟一次
      */
-    private function spiderFillTeamMatch()
+    private function spiderFillTeamMatch(Request $request)
     {
+        $count = $request->input('count', 10);
         $matches = Match::where("status", "=", -1)
             ->where(function ($q) {
                 $q->whereNull("hid")
                     ->orwhereNull("aid");
             })
             ->orderBy('time', 'desc')
-            ->take(10)
+            ->take($count)
             ->get();
         foreach ($matches as $match) {
             echo $match->hname . ' VS ' . $match->aname . '<br>';
             $this->matchDetail($match->id, true, true);
+        }
+        if ($request->input('auto', 0) == 1) {
+            echo "<script language=JavaScript>window.location.reload();</script>";
+            exit;
         }
     }
 
@@ -649,7 +654,7 @@ class SpiderController extends Controller
     /**
      * 填充赔率
      */
-    private function spiderFillOddMatch()
+    private function spiderFillOddMatch(Request $request)
     {
         $matches = \App\Models\LiaoGouModels\Match::query()
             ->select('matches.*')
@@ -662,7 +667,7 @@ class SpiderController extends Controller
             })->where("matches.is_odd", "=", 0)
             ->where("matches.status", "=", -1)
             ->orderBy('matches.time', 'desc')
-            ->take(15)
+            ->take(50)
             ->get();
         foreach ($matches as $match) {
             echo $match->hname . ' VS ' . $match->aname . '<br>';
@@ -671,6 +676,11 @@ class SpiderController extends Controller
             $this->oddsWithMatchAndType($match->win_id, 3);
             $match->is_odd = 1;
             $match->save();
+        }
+
+        if ($request->input('auto', 0) == 1) {
+            echo "<script language=JavaScript>window.location.reload();</script>";
+            exit;
         }
     }
 

@@ -114,9 +114,7 @@ class ScheduleDataController
             }
 
             $match->live = isset($liveCounts[$mid]) ? $liveCounts[$mid] : 0;
-            $match->live2 = isset($liveCounts[$mid]) ? $liveCounts[$mid] : 0;
             $match->pc_live = isset($pcLiveCounts[$mid]) ? $pcLiveCounts[$mid] : 0;
-            $match->pc_live2 = isset($pcLiveCounts[$mid]) ? $pcLiveCounts[$mid] : 0;
 
             StatisticFileTool::putFileToTerminal($match, MatchLive::kSportFootball, $match->mid, 'match');
 
@@ -321,9 +319,7 @@ class ScheduleDataController
             $match->a_ot = self::convertOtScore($match->a_ot);
 
             $match->live = isset($liveCounts[$mid]) ? $liveCounts[$mid] : 0;
-            $match->live2 = isset($liveCounts[$mid]) ? $liveCounts[$mid] : 0;
             $match->pc_live = isset($pcLiveCounts[$mid]) ? $pcLiveCounts[$mid] : 0;
-            $match->pc_live2 = isset($pcLiveCounts[$mid]) ? $pcLiveCounts[$mid] : 0;
 
             StatisticFileTool::putFileToTerminal($match, MatchLive::kSportBasketball, $match->mid, 'match');
 

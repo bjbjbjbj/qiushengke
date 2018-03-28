@@ -68,10 +68,8 @@ trait FootballMatchBaseTool
             $match->statusStr = $match->getStatusText();
 
             $liveCountArray = MatchLiveTool::getMatchLiveCountById($id, MatchLive::kSportFootball);
-            $data['live'] = $liveCountArray['live'];
-            $data['live2'] = $liveCountArray['live'];
-            $data['pc_live'] = $liveCountArray['pc_live'];
-            $data['pc_live2'] = $liveCountArray['pc_live'];
+            $match->live = $liveCountArray['live'];
+            $match->pc_live = $liveCountArray['pc_live'];
 
             if (!$isRest) {
                 StatisticFileTool::putFileToTerminal($match, MatchLive::kSportFootball, $id, 'match');

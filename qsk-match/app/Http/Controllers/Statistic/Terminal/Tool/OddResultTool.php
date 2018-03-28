@@ -47,12 +47,12 @@ class OddResultTool
         $query = MatchQueryTool::onMatchOddLeftJoin($query, $cid, $sport, [1,2]);
 
         $matches = $query->where('lid',$currentMatch->lid)
-            ->where('status',-1)
+            ->where('m.status',-1)
 //            ->where('season',$currentMatch->season)
             ->where(function ($q) use($tid){
-                $q->where('hid',$tid)
-                    ->orwhere('aid',$tid);
-            })->orderby('time','desc')
+                $q->where('m.hid',$tid)
+                    ->orwhere('m.aid',$tid);
+            })->orderby('m.time','desc')
             ->take(30)->get();
         //如果比赛场次为空则返回空
         if(count($matches) <=0) {

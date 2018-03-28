@@ -490,7 +490,7 @@ class Match extends Model
             $key != 'lid' && $key != 'hid' && $key != 'aid' &&
             $key != 'inflexion' && $key != 'stage' &&
             $key != 'has_sync' &&
-            $key != 'hname' && $key != 'aname')
+            $key != 'hname' && $key != 'aname' && $key != 'is_odd')
         {
             return true;
         }

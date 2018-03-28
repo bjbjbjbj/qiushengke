@@ -82,13 +82,14 @@ trait SpiderBasketMatch
     /**
      * 填充liaogoumatch篮球没有比赛id数据
      */
-    public function fillLiaogouMatch(){
+    public function fillLiaogouMatch(Request $request){
+        $count = $request->input('count', 10);
         $matches = \App\Models\LiaoGouModels\BasketMatch::where(function ($q){
             $q->whereNull('hid')
                 ->orwhereNull('aid');
         })
             ->orderby('time','asc')
-            ->take(10)
+            ->take($count)
             ->get();
         foreach ($matches as $match){
             echo 'win_id '.$match->win_id.'</br>';
@@ -97,12 +98,18 @@ trait SpiderBasketMatch
                 \App\Models\LiaoGouModels\BasketMatch::saveWithWinData($tmp);
             }
         }
+
+        if ($request->input('auto', 0) == 1) {
+            echo "<script language=JavaScript>window.location.reload();</script>";
+            exit;
+        }
     }
 
     /**
      * 填充winmatch比赛没有hid的数据
      */
-    public function spiderMatch(){
+    public function spiderMatch(Request $request){
+        $count = $request->input('count', 10);
         $matches = BasketMatch::where(function ($q){
             $q->whereNull('hid')
                 ->orwhereNull('aid');
@@ -112,7 +119,7 @@ trait SpiderBasketMatch
 //                    ->orwhereNull('ascore_1st');
 //            })
             ->orderby('time','asc')
-            ->take(10)
+            ->take($count)
             ->get();
         foreach ($matches as $match){
             echo 'win_id '.$match->id.'</br>';
@@ -126,6 +133,10 @@ trait SpiderBasketMatch
             //只爬取亚盘和大小球的盘口数据
             $this->oddsWithMatchAndType($mid, 1);
             $this->oddsWithMatchAndType($mid, 2);
+        }
+        if ($request->input('auto', 0) == 1) {
+            echo "<script language=JavaScript>window.location.reload();</script>";
+            exit;
         }
     }
 

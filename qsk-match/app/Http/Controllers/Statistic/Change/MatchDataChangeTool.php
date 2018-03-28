@@ -164,11 +164,11 @@ trait MatchDataChangeTool
                 $join->on('basket_leagues.id', 'basket_matches_afters.lid')
                     ->where('hot', 1);
             })
-            ->where("time", ">=", date('Y-m-d H:i:s', strtotime('-4 hours')))
-            ->where("time", "<", date('Y-m-d H:i:s'))
-            ->where('status', '>=', -1)
-            ->orderByRaw('if(status=50,2.5,status) desc')
-            ->orderBy('time', 'asc')
+            ->where("basket_matches_afters.time", ">=", date('Y-m-d H:i:s', strtotime('-4 hours')))
+            ->where("basket_matches_afters.time", "<", date('Y-m-d H:i:s'))
+            ->where('basket_matches_afters.status', '>=', -1)
+            ->orderByRaw('if(basket_matches_afters.status=50,2.5,basket_matches_afters.status) desc')
+            ->orderBy('basket_matches_afters.time', 'asc')
             ->get();
         echo 'spiderBasketTechData ' . count($matches) . '</br>';
         foreach ($matches as $match) {

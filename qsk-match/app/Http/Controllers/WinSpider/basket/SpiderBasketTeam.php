@@ -24,15 +24,20 @@ trait SpiderBasketTeam
     /**
      * 填充球队数据,球探爬下来只有id,需要填充
      */
-    public function spiderTeam(){
+    public function spiderTeam(Request $request){
+        $count = $request->input('count', 10);
         $teams = BasketTeam::where(function ($q){
             $q->whereNull('name_china');
         })
             ->orderby('created_at','asc')
-            ->take(10)
+            ->take($count)
             ->get();
         foreach ($teams as $team){
             self::spiderTeamWithId($team->id);
+        }
+        if ($count > 0 && $request->input('auto') == 1) {
+            echo "<script language=JavaScript> location.replace(location.href);</script>";
+            exit;
         }
     }
 

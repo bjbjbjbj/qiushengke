@@ -164,6 +164,37 @@ class SpiderBasketController extends Controller
     }
 
     /**
+     * 填充赔率
+     */
+    private function spiderFillOddMatch(Request $request)
+    {
+        $matches = \App\Models\LiaoGouModels\BasketMatch::query()
+            ->select('basket_matches.*')
+            ->join('basket_leagues', function ($join){
+                $join->on('basket_matches.lid', '=', 'basket_leagues.id')
+                    ->where("basket_leagues.hot", "=", 1);
+            })->where(function ($q){
+                $q->where("basket_matches.is_odd", "=", 0)
+                    ->orWhereNull("basket_matches.is_odd");
+            })->where("basket_matches.status", "=", -1)
+            ->orderBy('basket_matches.time', 'desc')
+            ->take(50)
+            ->get();
+        foreach ($matches as $match) {
+            echo $match->hname . ' VS ' . $match->aname . '<br>';
+            $request->merge(['mid'=>$match->win_id]);
+            $this->spiderOddsByMid($request);
+            $match->is_odd = 1;
+            $match->save();
+        }
+
+        if ($request->input('auto', 0) == 1) {
+            echo "<script language=JavaScript>window.location.reload();</script>";
+            exit;
+        }
+    }
+
+    /**
      * 专门用来删除冗余比赛表的多余数据的接口（包括matches_afters, odds_afters, baskets_afters）
      */
     private function deleteUselessAllAfters(Request $request) {
