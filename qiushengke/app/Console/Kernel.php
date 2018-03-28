@@ -5,6 +5,8 @@ namespace App\Console;
 use App\Console\League\BasketballCommands;
 use App\Console\League\FootballCommands;
 use App\Console\Live\LiveCommands;
+use App\Console\Live\LiveDetailJsonCommands;
+use App\Console\Live\PlayerJsonCommands;
 use App\Console\Match\Basketball\BasketballDetailCommands;
 use App\Console\Match\Basketball\BasketballDetailIngCommands;
 use App\Console\Match\BasketballMatchCommands;
@@ -40,6 +42,9 @@ class Kernel extends ConsoleKernel
         BasketballCommands::class,
         //直播终端
         LiveCommands::class,
+        //json
+        LiveDetailJsonCommands::class,
+        PlayerJsonCommands::class,
     ];
 
     /**
@@ -71,6 +76,8 @@ class Kernel extends ConsoleKernel
 
         //直播终端静态化
         $schedule->command('live_detail_cache:run')->everyTenMinutes();
+        $schedule->command('live_detail_json_cache:run')->everyFiveMinutes();
+        $schedule->command('player_json_cache:run')->everyFiveMinutes();
 
         $schedule->command('football_matches_in_db:run')->everyTenMinutes();
         $schedule->command('basketball_matches_in_db:run')->everyTenMinutes();

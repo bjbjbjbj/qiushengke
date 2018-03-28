@@ -20,6 +20,8 @@ Route::group(['namespace'=>'PC\Match'], function () {
     Route::get('/football/error',"MatchController@staticError");//静态化一小时一次,手动执行用
 
     Route::get('/live/{sport}/{mid}',"LiveController@staticLiveDetail");//静态化直播终端
+    Route::get('/live/detail/{sport}/{mid}',"LiveController@staticLiveDetailJson");//静态化直播终端json(这个比赛有什么channel
+    Route::get('/live/channel/detail/{cid}',"LiveController@staticChannelJson");//直播器终端json(这个channel是什么内容
 });
 
 //专题

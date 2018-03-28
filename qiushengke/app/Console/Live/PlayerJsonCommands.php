@@ -14,25 +14,26 @@ use App\Http\Controllers\PC\FileTool;
 use App\Http\Controllers\PC\Match\LiveController;
 use App\Http\Controllers\PC\Match\MatchController;
 use App\Http\Controllers\PC\Match\MatchDetailController;
+use App\Models\QSK\Anchor\AnchorRoomMatches;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class LiveCommands extends Command
+class PlayerJsonCommands extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'live_detail_cache:run';
+    protected $signature = 'player_json_cache:run';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = '静态化直播终端,10分钟一次,一次拿-1到+3小时的30场比赛';
+    protected $description = '静态化直播终端每个直播房间json,5分钟一次';
 
     /**
      * Create a new command instance.
@@ -52,6 +53,7 @@ class LiveCommands extends Command
     {
         //足球
         $this->cache(1);
+        //篮球
         $this->cache(2);
     }
 
@@ -64,10 +66,9 @@ class LiveCommands extends Command
         else{
             //直播终端
             $matches = $pc_json['matches'];
-            $count = 0;
+            $mids = array();
+            //先整理时间符合的mid
             foreach ($matches as $match){
-                if ($count >= 30)
-                    break;
                 $mid = $match['mid'];
                 $time = isset($match['time']) ? $match['time'] : 0;
                 $now = time();
@@ -75,27 +76,27 @@ class LiveCommands extends Command
                     continue;
                 }
                 $start_time = $time;//比赛时间
-                $flg_1 = $start_time >= $now && $now + 5 * 60 * 60 >= $start_time;//开赛前1小时
+                $flg_1 = $start_time >= $now && $now + 10 * 60 * 60 >= $start_time;//开赛前5小时
                 $flg_2 = $start_time <= $now && $start_time + 3 * 60 * 60  >= $now;//开赛后3小时
-                $path = CommonTool::matchLivePathWithId($mid,$sport);
-                $hasHtml = Storage::disk("public")->exists($path);
-                //生成了就不自动加进去了
-                if (!$hasHtml && ($flg_1 || $flg_2)) {
-                    try {
-                        echo '生成 ' . $sport . ' ' . $mid.'<br>';
-                        LiveCommands::flushLiveDetailHtml($mid, $sport);
-                    } catch (\Exception $exception) {
-                        dump($exception);
-                    }
-                    $count++;
+                if ($flg_1 || $flg_2) {
+                    $mids[] = $mid;
                 }
             }
         }
+        //获取这些比赛id中有直播房间的比赛
+        $ams = AnchorRoomMatches::whereIn('mid',$mids)
+            ->select('room_id')
+            ->get();
+        $mids = $ams;
+        //生成这些直播id对应的直播间的json,直播player生成的时候用
+        foreach ($mids as $mid){
+            self::flushLiveDetailHtml($mid['room_id']);
+        }
     }
 
-    public static function flushLiveDetailHtml($mid, $sport){
+    public static function flushLiveDetailHtml($rid){
         $ch = curl_init();
-        $url = asset('/static/live/' . $sport.'/'.$mid);
+        $url = asset('/static/live/channel/detail/' . $rid);
         echo $url . '<br>';
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

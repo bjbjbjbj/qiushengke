@@ -104,20 +104,12 @@
                                     current = current.getTime()/1000;
                                     //10秒前不出
                                     if (data['time'] < current - 10){
-//                                        console.log(data['user']+' ' + data['content']+' ' + time);
                                         continue;
                                     }
                                     if (user && user == data['user']){
-//                                        console.log('bj ' + data['user']+' ' + data['content']+' ' + time);
                                         continue;
                                     }
                                     var time = format(data['time']);
-//                                    var li = '<li>'+
-//                                            '<p class="time">'+time+'</p>'+
-//                                            '<p class="name">'+data['user']+'</p>'+
-//                                            '<p class="con">'+data['content']+'</p>'+
-//                                            '</li>'
-//                                    ul.append(li);
                                     addChat(data['user'],data['content'],time);
                                     current_time = data['time'];
                                 }
@@ -133,8 +125,10 @@
             getChat();
             window.setInterval('getChat()', 1000);
         }
-//        getChat();
-//        window.setInterval('getChat()', 10000);
+        //        getChat();
+        //        window.setInterval('getChat()', 10000);
+
+        $("div.line a:first")[0].className = 'on';
     </script>
     @yield('live_js')
 @endsection
@@ -232,41 +226,41 @@
                         </tr>
                     @endif
                     @if(isset($roll['all']))
-                    <tr>
-                        <td>全场滚球</td>
-                        @if(isset($roll['all']['3']) && isset($roll['all']['3']['up']))
-                            <td class="green">{{$roll['all']['3']['up']}}</td>
-                            @if($sport == 1)
-                                <td class="green">{{$roll['all']['3']['middle']}}</td>
+                        <tr>
+                            <td>全场滚球</td>
+                            @if(isset($roll['all']['3']) && isset($roll['all']['3']['up']))
+                                <td class="green">{{$roll['all']['3']['up']}}</td>
+                                @if($sport == 1)
+                                    <td class="green">{{$roll['all']['3']['middle']}}</td>
+                                @else
+                                    <td class="green">-</td>
+                                @endif
+                                <td class="green">{{$roll['all']['3']['down']}}</td>
                             @else
                                 <td class="green">-</td>
+                                <td class="green">-</td>
+                                <td class="green">-</td>
                             @endif
-                            <td class="green">{{$roll['all']['3']['down']}}</td>
-                        @else
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                        @endif
-                        @if(isset($roll['all']['1']) && isset($roll['all']['1']['up']))
-                            <td class="green">{{$roll['all']['1']['up']}}</td>
-                            <td class="green">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['1']['middle'])}}</td>
-                            <td class="green">{{$roll['all']['1']['down']}}</td>
-                        @else
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                        @endif
-                        @if(isset($roll['all']['2']) && isset($roll['all']['2']['up']))
-                            <td class="green">{{$roll['all']['2']['up']}}</td>
-                            <td class="green">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['2']['middle'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou)}}</td>
-                            <td class="green">{{$roll['all']['2']['down']}}</td>
-                        @else
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                        @endif
-                    </tr>
-                        @endif
+                            @if(isset($roll['all']['1']) && isset($roll['all']['1']['up']))
+                                <td class="green">{{$roll['all']['1']['up']}}</td>
+                                <td class="green">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['1']['middle'])}}</td>
+                                <td class="green">{{$roll['all']['1']['down']}}</td>
+                            @else
+                                <td class="green">-</td>
+                                <td class="green">-</td>
+                                <td class="green">-</td>
+                            @endif
+                            @if(isset($roll['all']['2']) && isset($roll['all']['2']['up']))
+                                <td class="green">{{$roll['all']['2']['up']}}</td>
+                                <td class="green">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['2']['middle'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou)}}</td>
+                                <td class="green">{{$roll['all']['2']['down']}}</td>
+                            @else
+                                <td class="green">-</td>
+                                <td class="green">-</td>
+                                <td class="green">-</td>
+                            @endif
+                        </tr>
+                    @endif
                 @else
                     @if(isset($roll['all']))
                         <tr>
@@ -369,23 +363,22 @@
         </div>
         <div id="Live">
             @if(isset($lives))
-            <div class="line">
-                @for($i = 0 ; $i < count($lives); $i++)
-                    <?php
-                    $channel = $lives[$i];
-                    ?>
-
-                    <?php
-                    $preUrl = str_replace("http://","http://",env('APP_URL'));
-                    $link = $preUrl.'/live/player/player-'.$channel['id'].'.html';
-                    ?>
-                    @if($i == count($lives) - 1)
-                        <a onclick="changeChannel('{{$link}}',this)" style="width: 25%;" class="last">{{$channel['name']}}</a>
-                    @else
-                        <a onclick="changeChannel('{{$link}}',this)" style="width: 25%;">{{$channel['name']}}</a>
-                    @endif
-                @endfor
-            </div>
+                <div class="line">
+                    @for($i = 0 ; $i < count($lives); $i++)
+                        <?php
+                        $channel = $lives[$i];
+                        ?>
+                        <?php
+                        $preUrl = str_replace("http://","http://",env('APP_URL'));
+                        $link = $preUrl.'/live/player/player-'.$channel['id'].'.html';
+                        ?>
+                        @if($i == count($lives) - 1)
+                            <a onclick="changeChannel('{{$link}}',this)" style="width: 25%;">{{$channel['name']}}</a>
+                        @else
+                            <a onclick="changeChannel('{{$link}}',this)" style="width: 25%;">{{$channel['name']}}</a>
+                        @endif
+                    @endfor
+                </div>
             @endif
             <div id="Player">
                 <iframe id="MyFrame" src=""></iframe>
