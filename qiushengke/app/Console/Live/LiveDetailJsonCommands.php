@@ -60,13 +60,13 @@ class LiveDetailJsonCommands extends Command
     private function cache($sport){
         $startDate = date('Ymd');
         $pc_json = FileTool::matchListDataJson($startDate,$sport);
+        $mids = array();
         if (is_null($pc_json) || !isset($pc_json['matches'])) {
             echo '获取数据失败';
         }
         else{
             //直播终端
             $matches = $pc_json['matches'];
-            $mids = array();
             //先整理时间符合的mid
             foreach ($matches as $match){
                 $mid = $match['mid'];

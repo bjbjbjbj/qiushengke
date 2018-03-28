@@ -57,6 +57,6 @@ class Controller extends BaseController
 
         //cdn
         $this->html_var['cdn'] = env('CDN_URL');
-        $this->html_var['host'] = env('APP_URL');
+        $this->html_var['host'] = env('HOST');
     }
 }

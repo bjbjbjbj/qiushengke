@@ -28,6 +28,9 @@
         }
 
         function changeChannel(Link,obj) {
+            if($('div.line a.on').length > 0)
+                $('div.line a.on')[0].className = '';
+            obj.className = 'on';
             document.getElementById('MyFrame').src = Link;
         }
 
@@ -102,6 +105,7 @@
                                     var current = new Date();
                                     var data = json[i];
                                     current = current.getTime()/1000;
+                                    current_time = data['time'];
                                     //10秒前不出
                                     if (data['time'] < current - 10){
                                         continue;
@@ -111,7 +115,6 @@
                                     }
                                     var time = format(data['time']);
                                     addChat(data['user'],data['content'],time);
-                                    current_time = data['time'];
                                 }
                             }
                         }
