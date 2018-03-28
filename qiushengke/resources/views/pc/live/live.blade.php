@@ -319,6 +319,14 @@
                     if (status == -1){
                         $('div.mbox p.time').html('已结束');
                     }
+
+                    //比赛结束不定时刷新
+                    if (status >= 0){
+                        window.setTimeout('refreshMatch()', 5000);
+                        window.setTimeout('refreshMatchTech()',5000);
+                        window.setTimeout('refreshOddByMid()',5000);
+                    }
+
                     //刷新比赛时间,之后时间轴用到
                     var time = json['timehalf'] > 0 ? json['timehalf'] : json['time'];
                     var timehalf = json['timehalf'];
@@ -343,15 +351,10 @@
             });
         }
 
-        //比赛结束不定时刷新
-        if ('{{$match['status']}}' >= 0){
-            window.setInterval('refreshMatch()', 5000);
-        }
-
         refreshMatch();
 
-        function refreshMatchTech(ID){
-            ID = ID + '';
+        function refreshMatchTech(){
+            ID = '{{$match['mid']}}' + '';
             var first = ID.substr(0,2);
             var second = ID.substr(2,2);
             var url = "/static/terminal/1/"+first+"/"+second+"/"+ID+"/tech.json";
@@ -527,7 +530,7 @@
             return html;
         }
 
-        refreshMatchTech({{$match['mid']}});
+        refreshMatchTech();
     </script>
 @endsection
 

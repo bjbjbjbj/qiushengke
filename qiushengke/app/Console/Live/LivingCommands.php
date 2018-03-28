@@ -14,26 +14,25 @@ use App\Http\Controllers\PC\FileTool;
 use App\Http\Controllers\PC\Match\LiveController;
 use App\Http\Controllers\PC\Match\MatchController;
 use App\Http\Controllers\PC\Match\MatchDetailController;
-use App\Models\QSK\Anchor\AnchorRoomMatches;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
-class LiveDetailJsonCommands extends Command
+class LivingCommands extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'live_detail_json_cache:run';
+    protected $signature = 'living_detail_cache:run';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = '静态化直播终端直播房间json,5分钟一次';
+    protected $description = '静态化正在进行直播终端,5分钟一次,一次拿-1到+3小时的30场比赛';
 
     /**
      * Create a new command instance.
@@ -53,22 +52,22 @@ class LiveDetailJsonCommands extends Command
     {
         //足球
         $this->cache(1);
-        //篮球
         $this->cache(2);
     }
 
     private function cache($sport){
         $startDate = date('Ymd');
         $pc_json = FileTool::matchListDataJson($startDate,$sport);
-        $mids = array();
         if (is_null($pc_json) || !isset($pc_json['matches'])) {
             echo '获取数据失败';
         }
         else{
             //直播终端
             $matches = $pc_json['matches'];
-            //先整理时间符合的mid
+            $count = 0;
             foreach ($matches as $match){
+                if ($count >= 30)
+                    break;
                 $mid = $match['mid'];
                 $time = isset($match['time']) ? $match['time'] : 0;
                 $now = time();
@@ -76,28 +75,25 @@ class LiveDetailJsonCommands extends Command
                     continue;
                 }
                 $start_time = $time;//比赛时间
-                $flg_1 = $start_time >= $now && $now + 5 * 60 * 60 >= $start_time;//开赛前5小时
+                $flg_1 = $start_time >= $now && $now + 5 * 60 * 60 >= $start_time;//开赛前1小时
                 $flg_2 = $start_time <= $now && $start_time + 3 * 60 * 60  >= $now;//开赛后3小时
+                //生成了就不自动加进去了
                 if ($flg_1 || $flg_2) {
-                    $mids[] = $mid;
+                    try {
+                        echo '生成 ' . $sport . ' ' . $mid.'<br>';
+                        LiveCommands::flushLiveDetailHtml($mid, $sport);
+                    } catch (\Exception $exception) {
+                        dump($exception);
+                    }
+                    $count++;
                 }
             }
-        }
-        //获取这些比赛id中有直播房间的比赛
-        $ams = AnchorRoomMatches::whereIn('mid',$mids)
-            ->select('mid')
-            ->groupBy('mid')
-            ->get();
-        $mids = $ams;
-        //生成这些比赛id对应的有什么直播间的json,直播终端生成的时候用
-        foreach ($mids as $mid){
-            self::flushLiveDetailHtml($mid['mid'],$sport);
         }
     }
 
     public static function flushLiveDetailHtml($mid, $sport){
         $ch = curl_init();
-        $url = asset('/api/static/live/detail/' . $sport.'/'.$mid);
+        $url = asset('/api/static/live/' . $sport.'/'.$mid);
         echo $url . '<br>';
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

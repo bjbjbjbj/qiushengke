@@ -37,6 +37,8 @@
     <script type="text/javascript">
         window.onload = function () {
             setPage();
+            refreshOdd();
+            refreshMatch();
         }
     </script>
     <script type="text/javascript">
@@ -53,6 +55,10 @@
                     //比分
                     if (json['status'] > 0 || json['status'] == -1) {
                         $('div#Info p.score').html(json['hscore'] + ' - ' + json['ascore']);
+                    }
+                    if (json['status'] > 0){
+                        window.setTimeout('refreshOdd()', 5000);
+                        window.setTimeout('refreshMatch()', 5000);
                     }
                     //赔率
                     var ps = $('div#Info div.odd p');
@@ -201,15 +207,6 @@
                     }
                 }
             })
-        }
-        refreshOdd();
-        refreshMatch();
-        if ('{{$match['status']}}' == -1){
-
-        }
-        else{
-            window.setInterval('refreshOdd()', 5000);
-            window.setInterval('refreshMatch()', 5000);
         }
     </script>
 @endsection

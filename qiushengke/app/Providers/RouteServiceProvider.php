@@ -89,7 +89,7 @@ class RouteServiceProvider extends ServiceProvider
 
     protected function mapStaticRoutes()
     {
-        Route::prefix('static')
+        Route::prefix('api/static')
             ->namespace($this->namespace)
             ->group(base_path('routes/static.php'));
     }

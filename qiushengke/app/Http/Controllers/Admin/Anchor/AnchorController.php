@@ -183,6 +183,8 @@ class AnchorController extends Controller
             return back()->with('error', '保存失败');
         }
 
+        $this->updateJson($room->id);
+
         return back()->with('success', '保存成功');
     }
 
@@ -207,5 +209,42 @@ class AnchorController extends Controller
         return response()->json();
     }
 
+    /**
+     * 刷新静态文件
+     * @param $rid
+     * @param $sport
+     * @param $mid
+     */
+    public static function updateJson($rid = null,$sport = null,$mid = null){
+        //直播间json
+        if (isset($rid)) {
+            $ch = curl_init();
+            $url = asset('/api/static/live/channel/detail/' . $rid);
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 5);//8秒超时
+            curl_exec($ch);
+            curl_close($ch);
+        }
 
+        if (isset($mid)) {
+            //比赛json
+            $ch = curl_init();
+            $url = asset('/api/static/live/detail/' . $sport . '/' . $mid);
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 5);//8秒超时
+            curl_exec($ch);
+            curl_close($ch);
+
+            //比赛页面
+            $ch = curl_init();
+            $url = asset('/api/static/live/' . $sport . '/' . $mid);
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 5);//8秒超时
+            curl_exec($ch);
+            curl_close($ch);
+        }
+    }
 }

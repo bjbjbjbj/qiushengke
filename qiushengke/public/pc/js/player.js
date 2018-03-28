@@ -1,4 +1,4 @@
-var CKHead = '/js/public/pc/ckplayer/';
+var CKHead = '/pc/js/ckplayer/';
 var maxTimeOut = 0;
 
 //获取链点参数
@@ -48,10 +48,6 @@ function LoadCK (Link){ //m3u8
         lv:1,
         c:0,
         p:1,
-        l: ad_l,
-        d: ad_d,
-        z: ad_z,
-        t: maxTimeOut > 0 ? 0 : ad_time,
         loaded:'loadHandler'
     }
     if (flashvars.t == 0) {
@@ -76,10 +72,6 @@ function LoadFlv (Link){ //flv
         lv:1,
         c:0,
         p:1,
-        l: ad_l,
-        d: ad_d,
-        z: ad_z,
-        t:maxTimeOut > 0 ? 0 : ad_time,
         loaded:'loadHandler'
     }
     if (flashvars.t == 0) {
@@ -97,10 +89,6 @@ function LoadRtmp (Link){ //rtmp
         lv:1,
         c:0,
         p:1,
-        l: ad_l,
-        d: ad_d,
-        z: ad_z,
-        t:maxTimeOut > 0 ? 0 : ad_time,
         loaded:'loadHandler'
     }
     if (flashvars.t == 0) {
@@ -284,6 +272,18 @@ function PlayVideoShare (cid){
                 if (type == 6){
                     var Link = getLink(data);
                     LoadIframe(Link);
+                }
+                else if(type == 2){
+                    var Link = getLink(data);
+                    LoadCK(Link);
+                }
+                else if(type == 1){
+                    //龙珠
+                    var Link = getLink(data);
+                    if (isMobileWithJS())
+                        LoadCK(Link);
+                    else
+                        LoadFlv(Link);
                 }
                 return;
 				var show_live = match.show_live;

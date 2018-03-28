@@ -219,7 +219,7 @@ body{
 /*直播*/
 #Live{
 	margin-bottom: 30px; padding-right: 320px;
-	position: relative;
+	position: relative; z-index: 1;
 	overflow: hidden;
 }
 #Live div.line{
