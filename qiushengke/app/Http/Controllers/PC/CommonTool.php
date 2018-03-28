@@ -79,6 +79,26 @@ class CommonTool
     }
 
     /**
+     * 根据比赛id返回wap path
+     * @param $mid
+     * @param int $sport
+     * @return string
+     */
+    public static function matchWapPathWithId($mid,$sport=CommonTool::kSportFootball){
+        $path = '';
+        if ($mid > 1000) {
+            $first = substr($mid,0,2);
+            $second = substr($mid,2,2);
+            if ($sport == 2) {
+                $path = '/wap/match/basket/' . $first . '/'. $second . '/' . $mid . '.html';
+            } else {
+                $path = '/wap/match/foot/' . $first . '/'. $second . '/' . $mid . '.html';
+            }
+        }
+        return $path;
+    }
+
+    /**
      * 前端盘口显示
      * @param $handicap
      * @param string $default
@@ -293,6 +313,27 @@ class CommonTool
             $diff = ($now - $timehalf) > 0 ? ($now - $timehalf) : 0;
             $matchTime = (floor(($diff) % 86400 / 60)) > 45 ? ('90+' . '<span>' . '\''.'</span>') : ((floor(($diff) % 86400 / 60) + 45) . '<span>' . '\''.'</span>');
         } else {
+            $matchTime = '';
+        }
+        return $matchTime;
+    }
+
+    public static function getMatchWapCurrentTime($time, $timehalf, $status)
+    {
+        $time = $timehalf > 0 ? $timehalf : $time;
+        $now = strtotime(date('Y-m-d H:i:s'));
+        if ($status < 0 || $status == 2 || $status == 4) {
+            $matchTime = self::getStatusTextCn($status);
+        }elseif ($status == 1) {
+            $diff = ($now - $time) > 0 ? ($now - $time) : 0;
+            $matchTime = (floor(($diff) % 86400 / 60)) > 45 ? ('45+') : ((floor(($diff) % 86400 / 60)));
+        } elseif ($status == 3) {
+            $diff = ($now - $timehalf) > 0 ? ($now - $timehalf) : 0;
+            $matchTime = (floor(($diff) % 86400 / 60)) > 45 ? ('90+') : ((floor(($diff) % 86400 / 60) + 45));
+        } else if ($status == 0){
+            $matchTime = date('H:i',$time);
+        }
+        else{
             $matchTime = '';
         }
         return $matchTime;

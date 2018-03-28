@@ -42,6 +42,8 @@ class RouteServiceProvider extends ServiceProvider
         //
         $this->mapPCRoutes();
         $this->mapStaticRoutes();
+
+        $this->mapWapRoutes();
     }
 
     protected function mapPCRoutes()
@@ -92,5 +94,12 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('api/static')
             ->namespace($this->namespace)
             ->group(base_path('routes/static.php'));
+    }
+
+    protected function mapWapRoutes()
+    {
+        Route::prefix('wap')
+            ->namespace($this->namespace.'\Phone')
+            ->group(base_path('routes/phone.php'));
     }
 }

@@ -1,0 +1,221 @@
+﻿body{
+	padding: 160px 0 0;
+}
+
+#Navigation .banner{
+	background: #fff;
+	color: #4f4f4f;
+}
+
+#List{
+	padding-bottom: 98px;
+}
+#Group + #List{
+	margin-top: 20px; padding-bottom: 0;
+}
+
+#Round{
+	height: 98px;
+	background: #fff;
+	box-shadow: 0 0 3px 0 rgba(0, 0, 0, 0.2);
+	position: fixed; bottom: -10px; left: 0; right: 0;
+	overflow-y: hidden; overflow-x: auto; -webkit-overflow-scrolling: touch;
+	display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;
+}
+#Round input{
+	width: 0; height: 0;
+	visibility: hidden; opacity: 0;
+	position: absolute; top: 0; left: 0;
+}
+#Round label{
+	min-width: 150px; height: 98px;
+	font-size: 28px; line-height: 98px; text-align: center; color: #34b45d;
+	position: relative;
+	-webkit-box-flex: 1; -moz-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1;
+}
+#Round input:checked + label{
+	background: #34b45d;
+	color: #fff;
+}
+#Round input:checked + label:before{
+	width: 10px; height: 10px;
+	margin-left: -5px;
+	background: #fff;
+	position: absolute; top: -5px; left: 50%;
+	transform: rotate(45deg); -ms-transform: rotate(45deg); -webkit-transform: rotate(45deg); -o-transform: rotate(45deg); -moz-transform: rotate(45deg);
+	content: '';
+}
+
+/*积分榜*/
+#Rank{
+	
+}
+#Rank table{
+	width: 100%;
+}
+#Rank table.head{
+	position: fixed; top: 160px; left: 0; right: 0;
+}
+#Rank table th{
+	height: 60px;
+	background: #f4f4f4;
+	font-size: 24px; line-height: 36px; text-align: center; color: #c1c1c1;
+}
+#Rank table th:nth-child(1), #Rank table td:nth-child(1){
+	width: 10%; max-width: 64px;
+	padding-left: 24px;
+	text-align: left; color: #4f4f4f;
+}
+#Rank table th:nth-child(2), #Rank table td:nth-child(2){
+	
+}
+#Rank table th:nth-child(3), #Rank table td:nth-child(3){
+	width: 14%; max-width: 80px;
+}
+#Rank table th:nth-child(4), #Rank table td:nth-child(4){
+	width: 8%; max-width: 60px;
+}
+#Rank table th:nth-child(5), #Rank table td:nth-child(5){
+	width: 8%; max-width: 60px;
+}
+#Rank table th:nth-child(6), #Rank table td:nth-child(6){
+	width: 24%; max-width: 190px;
+}
+#Rank table th:nth-child(7), #Rank table td:nth-child(7){
+	width: 8%; max-width: 60px;
+}
+#Rank table th:nth-child(8), #Rank table td:nth-child(8){
+	width: 12%; max-width: 104px;
+	padding-right: 24px;
+}
+#Rank table td{
+	height: 88px;
+	background: #fff;
+	font-size: 28px; line-height: 32px; text-align: center;
+}
+#Rank table td:nth-child(2){
+	text-align: left;
+}
+#Rank table td:nth-child(8){
+	padding-right: 24px;
+}
+#Rank table tr:nth-child(1) td:nth-child(1), #Rank table tr:nth-child(1) td:nth-child(2),
+#Rank table tr:nth-child(2) td:nth-child(1), #Rank table tr:nth-child(2) td:nth-child(2),
+#Rank table tr:nth-child(3) td:nth-child(1), #Rank table tr:nth-child(3) td:nth-child(2),
+#Rank table tr:nth-child(4) td:nth-child(1), #Rank table tr:nth-child(4) td:nth-child(2),
+#Rank table tr:nth-child(5) td:nth-child(1), #Rank table tr:nth-child(5) td:nth-child(2),
+#Rank table tr:nth-child(6) td:nth-child(1), #Rank table tr:nth-child(6) td:nth-child(2),
+#Rank table tr:nth-child(7) td:nth-child(1), #Rank table tr:nth-child(7) td:nth-child(2),
+#Rank table tr:nth-child(8) td:nth-child(1), #Rank table tr:nth-child(8) td:nth-child(2){
+	color: #34b45d;
+}
+#Rank table tr + tr td{
+	border-top: 1px solid #e6e4e4;
+}
+
+/*淘汰赛*/
+#Playoffs{
+	background: #fff;
+	position: fixed; top: 160px; left: 0; right: 0; bottom: 0;
+	overflow-x: hidden; overflow-y: auto; -webkit-overflow-scrolling: touch;
+}
+#Playoffs .line{
+	display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;
+}
+#Playoffs .line.finals{
+	width: 50%;
+	margin: 0 auto;
+}
+#Playoffs .line:first-child{
+	padding-top: 100px;
+}
+#Playoffs .line:last-child{
+	padding-bottom: 100px;
+}
+#Playoffs .line .part{
+	font-size: 0; text-align: center;
+	position: relative;
+	-webkit-box-flex: 1; -moz-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1;
+}
+#Playoffs .line .part p.team{
+	width: 50%;
+	font-size: 20px; line-height: 24px; text-align: center;
+	display: inline-block;
+}
+#Playoffs .line .part p.team img{
+	width: 50px; height: 50px;
+	margin: 0 auto 8px;
+	display: block;
+}
+#Playoffs .line.green .part p.team, #Playoffs .line.finals .part p.team{
+	color: #34b45d;
+}
+#Playoffs .line.orange .part p.team, #Playoffs .line.finals .part p.team ~ p.team{
+	color: #e55c00;
+}
+#Playoffs .line .part p.score{
+	font-size: 20px; line-height: 22px; color: #4f4f4f;
+	position: absolute; left: 0; right: 0;
+	display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;
+	-webkit-box-align: center; -webkit-align-items: center; -moz-align-items: center; -ms-align-items: center; -o-align-items: center; align-items: center;
+	-webkit-justify-content: space-around; -moz-justify-content: space-around; -ms-justify-content: space-around; -o-justify-content: space-around; justify-content: space-around;
+}
+#Playoffs .line.green .part p.score{
+	top: 0; bottom: 36px;
+}
+#Playoffs .line.orange .part p.score{
+	top: 36px; bottom: 0;
+}
+#Playoffs .line.finals .part p.score{
+	top: 0; bottom: 0;
+}
+#Playoffs .line .part p.advanced{
+	width: 50%; min-height: 12px;
+	margin: 10px auto; padding: 2px 0;
+	border: 1px solid;
+	font-size: 20px; line-height: 22px; color: #4f4f4f;
+	display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;
+	-webkit-box-align: center; -webkit-align-items: center; -moz-align-items: center; -ms-align-items: center; -o-align-items: center; align-items: center;
+	-webkit-justify-content: space-around; -moz-justify-content: space-around; -ms-justify-content: space-around; -o-justify-content: space-around; justify-content: space-around;
+}
+#Playoffs .line.green .part p.advanced{
+	border-color: #34b45d;  border-top: none; border-radius: 0 0 4px 4px;
+}
+#Playoffs .line.orange .part p.advanced{
+	border-color: #e55c00;  border-bottom: none; border-radius: 4px 4px 0 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

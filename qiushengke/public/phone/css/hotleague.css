@@ -1,0 +1,39 @@
+﻿body{
+	padding: 88px 0 99px;
+}
+
+#List{
+	padding-top: 60px;
+	display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;
+	-webkit-flex-wrap: wrap; -moz-flex-wrap: wrap; -ms-flex-wrap: wrap; flex-wrap: wrap;
+}
+#List a{
+	height: 130px; width: 28%;
+	margin: 0 0 30px 4%; padding-bottom: 80px;
+	display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;
+	-webkit-box-align: center; -webkit-align-items: center; -moz-align-items: center; -ms-align-items: center; -o-align-items: center; align-items: center;
+}
+#List a img{
+	max-width: 110px; max-height: 110px;
+	margin: 0 auto;
+	display: block;
+}
+#List a p{
+	height: 80px;
+	font-size: 30px; line-height: 80px; text-align: center;
+	position: absolute; bottom: 0; left: 0; right: 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
