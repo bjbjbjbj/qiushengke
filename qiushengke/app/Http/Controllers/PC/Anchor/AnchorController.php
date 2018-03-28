@@ -19,6 +19,13 @@ use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Storage;
 
 class AnchorController extends BaseController{
+    public function staticIndex(Request $request){
+        $html = $this->anchorIndex($request);
+        if ($html && strlen($html) > 0){
+            Storage::disk('public')->put('/anchor/index.html',$html);
+        }
+    }
+
     public function anchorIndex(Request $request){
         $result = array();
         //推荐

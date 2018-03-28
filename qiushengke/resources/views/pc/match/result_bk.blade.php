@@ -4,7 +4,7 @@
         <div id="Calendar">
             <ul>
                 @foreach($calendar as $item)
-                    <a class="li {{$item['on'] ? 'on':''}}" href="{{'/match/basket/'.$item['date'].'/result_t.html'}}">
+                    <a class="li {{$item['on'] ? 'on':''}}" href="{{'/match/basket/schedule/'.$item['date'].'/result_t.html'}}">
                         <p class="date">{{$item['dateStr']}}</p>
                         <p class="week">{{$item['w']}}</p>
                     </a>
@@ -34,7 +34,7 @@
         <ul>
             <a class="li" href="/match/basket/schedule/immediate_t.html">即时比分</a>
             <a class="li on">完场赛果</a>
-            <a class="li" href="/match/basket/{{$nextDate}}/schedule_t.html">未来赛程</a>
+            <a class="li" href="/match/basket/schedule/{{$nextDate}}/schedule_t.html">未来赛程</a>
         </ul>
     </div>
 @endsection
@@ -50,7 +50,7 @@
         }
         function clickDate(date) {
             var value = date.value.replace(/\//g,"");
-            var url = '{{env('APP_URL')}}' + '/match/basket/'+value+'/result_t.html';
+            var url = '{{env('APP_URL')}}' + '/match/basket/schedule/'+value+'/result_t.html';
             window.location.href = url;
         }
     </script>

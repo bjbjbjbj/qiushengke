@@ -85,7 +85,7 @@
                         <a class="li" target="_blank" href="{{$living['link']}}">
                             <div class="img"><img src="{{isset($living['cover']) ? $living['cover'] : '/pc/img/img_demo.png'}}"></div>
                             <img alt="{{$anchor['name']}}" src="{{isset($anchor['icon'])?$anchor['icon']:'/pc/img/icon_teamDefault.png'}}" class="face">
-                            <p>{{$living['icon']}}</p>
+                            <p>{{$anchor['name']}}</p>
                         </a>
                     @endforeach
                 </ul>

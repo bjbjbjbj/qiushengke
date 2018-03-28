@@ -196,7 +196,7 @@
 #Match .tabLine button{
 	height: 30px; width: 16.6%;
 	background: #2b9968;
-	font-size: 14px; text-align: center; color: #fff;
+	font-size: 14px; line-height: 30px; text-align: center; color: #fff; vertical-align: top;
 }
 #Match .tabLine button.on{
 	background: #fff;
