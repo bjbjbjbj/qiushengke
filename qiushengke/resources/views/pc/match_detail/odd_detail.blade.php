@@ -118,7 +118,7 @@
     @endcomponent
 @endsection
 @section('js')
-    <script type="text/javascript" src="/pc/js/odd.js"></script>
+    <script type="text/javascript" src="{{$cdn}}/pc/js/odd.js"></script>
     <script type="text/javascript">
         window.onload = function () {
             setPage();
@@ -351,5 +351,5 @@
 @endsection
 
 @section('css')
-    <link rel="stylesheet" type="text/css" href="/pc/css/odd.css">
+    <link rel="stylesheet" type="text/css" href="{{$cdn}}/pc/css/odd.css">
 @endsection

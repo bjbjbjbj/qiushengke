@@ -8,9 +8,9 @@
     <meta http-equiv="X-UA-Compatible" content="edge" />
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
     <meta name="baidu-site-verification" content="nEdUlBWvbw">
-    <link rel="Shortcut Icon" data-ng-href="/pc/img/ico.ico" href="/pc/img/ico.ico">
-    <link rel="stylesheet" type="text/css" href="/pc/css/style.css">
-    <link rel="stylesheet" type="text/css" href="/pc/css/jquery-ui.css">
+    <link rel="Shortcut Icon" data-ng-href="{{$cdn}}/pc/img/ico.ico" href="{{$cdn}}/pc/img/ico.ico">
+    <link rel="stylesheet" type="text/css" href="{{$cdn}}/pc/css/style.css">
+    <link rel="stylesheet" type="text/css" href="{{$cdn}}/pc/css/jquery-ui.css">
     @yield('css')
 </head>
 <body>
@@ -183,10 +183,10 @@
         return path;
     }
 </script>
-<script type="text/javascript" src="/pc/js/jquery.js"></script>
+<script type="text/javascript" src="{{$cdn}}/pc/js/jquery.js"></script>
 <!--[if lte IE 8]>
-<script type="text/javascript" src="/pc/js/jquery_191.js"></script>
+<script type="text/javascript" src="{{$cdn}}/pc/js/jquery_191.js"></script>
 <![endif]-->
-<script type="text/javascript" src="/pc/js/jquery-ui.js"></script>
+<script type="text/javascript" src="{{$cdn}}/pc/js/jquery-ui.js"></script>
 @yield('js')
 </html>

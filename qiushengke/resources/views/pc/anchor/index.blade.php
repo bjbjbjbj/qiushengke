@@ -113,11 +113,11 @@
 @endsection
 
 @section('css')
-    <link rel="stylesheet" type="text/css" href="/pc/css/anchor.css">
+    <link rel="stylesheet" type="text/css" href="{{$cdn}}/pc/css/anchor.css">
 @endsection
 
 @section('js')
-    <script type="text/javascript" src="/pc/js/anchor.js"></script>
+    <script type="text/javascript" src="{{$cdn}}/pc/js/anchor.js"></script>
     <script type="text/javascript">
         window.onload = function () {
              setPage();
