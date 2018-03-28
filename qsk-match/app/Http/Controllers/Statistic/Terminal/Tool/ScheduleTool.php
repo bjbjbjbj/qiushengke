@@ -39,18 +39,18 @@ class ScheduleTool
 
         $matches = $query->where(function ($q) use($match,$tid,$name){
             $q->where(function ($j) use($match,$tid){
-                $j->where('hid',$tid)
-                    ->orwhere('aid',$tid);
+                $j->where('m.hid',$tid)
+                    ->orwhere('m.aid',$tid);
             })
                 ->orwhere(function ($j) use($match,$name){
-                    $j->where('hname',$name)
-                        ->orwhere('aname',$name);
+                    $j->where('m.hname',$name)
+                        ->orwhere('m.aname',$name);
                 });
         })
-            ->where('time','>',$match->time)
+            ->where('m.time','>',$match->time)
             ->where('m.id','!=',$match->id)
-            ->where('status',0)
-            ->orderby('time','asc')
+            ->where('m.status',0)
+            ->orderby('m.time','asc')
             ->take(3)
             ->get();
         foreach ($matches as $match){

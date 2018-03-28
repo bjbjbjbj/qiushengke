@@ -70,17 +70,17 @@ class HistoryBattleTool
         $query = MatchQueryTool::onMatchOddLeftJoin($query, Odd::default_calculate_cid, $sport);
 
         $matches = $query->where(function ($q) use ($match) {
-            $q->where('status', -1)
-                ->where('hid', $match->hid)
-                ->where('aid', $match->aid)
-                ->where('time', '<', $match->time);
+            $q->where('m.status', -1)
+                ->where('m.hid', $match->hid)
+                ->where('m.aid', $match->aid)
+                ->where('m.time', '<', $match->time);
         })
             ->orwhere(function ($q) use ($match) {
-                $q->where('status', -1)
-                    ->where('hid', $match->aid)
-                    ->where('aid', $match->hid)
-                    ->where('time', '<', $match->time);
-            })->orderby('time', 'desc')
+                $q->where('m.status', -1)
+                    ->where('m.hid', $match->aid)
+                    ->where('m.aid', $match->hid)
+                    ->where('m.time', '<', $match->time);
+            })->orderby('m.time', 'desc')
             ->get();
         return $matches;
     }

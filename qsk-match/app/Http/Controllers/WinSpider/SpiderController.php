@@ -609,13 +609,14 @@ class SpiderController extends Controller
      */
     private function spiderFillTeamMatch(Request $request)
     {
+        $count = $request->input('count', 10);
         $matches = Match::where("status", "=", -1)
             ->where(function ($q) {
                 $q->whereNull("hid")
                     ->orwhereNull("aid");
             })
             ->orderBy('time', 'desc')
-            ->take(50)
+            ->take($count)
             ->get();
         foreach ($matches as $match) {
             echo $match->hname . ' VS ' . $match->aname . '<br>';

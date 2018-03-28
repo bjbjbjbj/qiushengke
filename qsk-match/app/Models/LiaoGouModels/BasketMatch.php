@@ -286,7 +286,7 @@ class BasketMatch extends Model
     {
         if ($key != 'id' && $key != 'win_id' && $key != 'lid' && $key != 'lname'
             && $key != 'created_at' && $key != 'updated_at' && $key != 'stage'
-            && $key != 'hid' && $key != 'aid') {
+            && $key != 'hid' && $key != 'aid' && $key != 'is_odd') {
             return true;
         }
         return false;

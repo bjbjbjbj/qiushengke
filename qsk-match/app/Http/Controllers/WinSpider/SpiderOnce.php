@@ -314,4 +314,44 @@ trait SpiderOnce
         $lg_leagues = array_slice($lg_leagues, 1);
         Redis::set($key, json_encode($lg_leagues));
     }
+
+    private function onLeagueTestSpider() {
+        $url = "http://121.10.245.38/phone/FBDataBase/LeaguePoints.aspx?sclassid=381&season=2014&lang=1";
+
+        echo "url = ".$url."</br>";
+
+        $content = '';
+        try {
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            if (substr($url, 0, 5) == 'https') {
+                curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // 跳过证书检查
+            }
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_ENCODING, 'gzip');
+            curl_setopt($ch, CURLINFO_CONTENT_TYPE, 'application/utf-8');
+//            curl_setopt($ch, CURLOPT_USERAGENT, "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.98 Safari/537.36");
+//        curl_setopt($ch, CURLOPT_USERAGENT, "WSMobile/1.5.1 (iPad; iOS 10.2; Scale/2.00)");
+            //这个必须加上去，否则请求会404的
+//            curl_setopt($ch, CURLOPT_REFERER, $referee);
+            curl_setopt($ch, CURLOPT_COOKIESESSION, true);
+            curl_setopt($ch, CURLOPT_HEADER, true);
+            $response = curl_exec($ch);
+            if ($error = curl_error($ch)) {
+                die($error);
+            }
+            curl_close($ch);
+
+            list($head, $content) = explode("\r\n\r\n", $response, 2);
+            dump($head);
+
+            //加上这行，可以解决中文乱码问题
+//            $content = mb_convert_encoding($content, 'utf-8', 'x-protobuf,utf-8,GBK,UTF-8,ASCII');
+        } catch (\Exception $e) {
+
+        }
+        dump($content);
+        $content = json_decode($content, true);
+        dump($content);
+    }
 }

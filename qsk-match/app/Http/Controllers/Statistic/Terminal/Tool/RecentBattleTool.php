@@ -39,14 +39,14 @@ class RecentBattleTool{
                 'corner.up1 as up2','corner.middle1 as middle2','corner.down1 as down2')
             ->where('m.status', -1)
             ->where(function ($q) use ($outMatch) {
-                $q->where('hid', $outMatch->hid)
-                    ->orwhere('hid', $outMatch->aid)
-                    ->orwhere('aid', $outMatch->hid)
-                    ->orwhere('aid', $outMatch->aid);
+                $q->where('m.hid', $outMatch->hid)
+                    ->orwhere('m.hid', $outMatch->aid)
+                    ->orwhere('m.aid', $outMatch->hid)
+                    ->orwhere('m.aid', $outMatch->aid);
             })
-            ->where('time', '<', $outMatch->time)
+            ->where('m.time', '<', $outMatch->time)
 //            ->where('time', '>=', $lastTime)
-            ->orderBy('time', 'desc')->take($count*10)->get();
+            ->orderBy('m.time', 'desc')->take($count*10)->get();
         //主队
         $homeMatches = self::initMatches();
         //客队
