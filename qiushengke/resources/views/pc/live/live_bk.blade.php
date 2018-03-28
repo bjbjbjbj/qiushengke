@@ -113,10 +113,10 @@
                     if (json['status'] > 0 || json['status'] == -1) {
                         $('p.score span.host').html(json['hscore']);
                         $('p.score span.away').html(json['ascore']);
-                        $('p.time').html(json['live_time_str']);
+                        $('div.mbox p.time').html(json['live_time_str']);
                     }
                     if (json['status'] == -1){
-                        $('p.time').html('已结束');
+                        $('div.mbox p.time').html('已结束');
                     }
                 }
             });

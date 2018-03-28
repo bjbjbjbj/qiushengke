@@ -17,19 +17,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class LeagueController extends BaseController{
-
-    const footLeagues = [
-        ['id'=>360,'type'=>'1'],
-        ['id'=>1,'type'=>'1'],
-        ['id'=>42,'type'=>'1'],
-        ['id'=>30,'type'=>'1'],
-        ['id'=>64,'type'=>'1'],
-        ['id'=>51,'type'=>'1'],
-        ['id'=>642,'type'=>'2'],
-        ['id'=>602,'type'=>'2'],
-        ['id'=>564,'type'=>'2'],
-    ];
-
     const footLeagueIcons = [
         360=>'https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=0b42678f1b3853438ccf8027ab28d743/0e2442a7d933c895ef2b0c98da1373f0830200ff.jpg',
         1=>'https://gss2.bdstatic.com/-fo3dSag_xI4khGkpoWK1HF6hhy/baike/w%3D268%3Bg%3D0/sign=8b5f7ac998ef76c6d0d2fc2da52d9ac7/2f738bd4b31c8701cf091a0e2f7f9e2f0608ff9f.jpg',
@@ -66,16 +53,28 @@ class LeagueController extends BaseController{
      * @param Request $request
      */
     public function staticFoot(Request $request){
-        //足球
-        foreach (LeagueController::footLeagues as $item){
-            $this->staticLeague($request,1,$item['id']);
+        if (Storage::disk("public")->exists('/league/foot/sub.json')) {
+            $json_str = Storage::disk("public")->get('/league/foot/sub.json');
+            $json = json_decode($json_str, true);
+            if ($json && strlen($json_str) > 0) {
+                $footLeague = $json;
+                foreach ($footLeague as $item){
+                    LeagueController::flushLiveDetailHtml($item['id'],1);
+                }
+            }
         }
     }
 
     public function staticBasket(Request $request){
-        //篮球
-        foreach (LeagueController::basketLeagueIcons as $key=>$value){
-            $this->staticLeague($request,2,$key);
+        if (Storage::disk("public")->exists('/league/basket/sub.json')) {
+            $json_str = Storage::disk("public")->get('/league/basket/sub.json');
+            $json = json_decode($json_str, true);
+            if ($json && strlen($json_str) > 0) {
+                $basketLeague = $json;
+                foreach ($basketLeague as $item){
+                    LeagueController::flushLiveDetailHtml($item['id'],2);
+                }
+            }
         }
     }
 
