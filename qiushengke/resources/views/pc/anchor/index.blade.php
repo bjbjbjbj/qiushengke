@@ -23,9 +23,9 @@
                             <p class="time"><span>{{$match['lname']}}{{$match['round'] > 0 ? '第'.$match['round'].'轮':''}}</span>{{date('m.d H:i',$match['time'])}}</p>
                             <div class="team">
                                 @if($match['status'] > 0)
-                                    <a href="video.html">直播中</a>
+                                    <a href="{{$liveUrl}}">直播中</a>
                                 @else
-                                    <a href="video.html">未开始</a>
+                                    <a href="{{$liveUrl}}">未开始</a>
                                 @endif
                                 <?php
                                 $hicon = strlen($match['h_icon']) > 0 ? $match['h_icon'] :'/pc/img/icon_teamDefault.png';
@@ -43,7 +43,7 @@
                     @endforeach
                 </ul>
                 @foreach($leagues as $key=>$item)
-                    <ul id="{{'l_'.$item['id']}}">
+                    <ul id="{{'l_'.$item['id']}}" style="display: none">
                         @foreach($item['matches'] as $match)
                             <?php
                             $liveUrl = \App\Http\Controllers\PC\CommonTool::matchLivePathWithId($match['mid'],$match['sport']);
@@ -65,7 +65,7 @@
                                 </div>
                                 <p class="anchor">
                                     @foreach($match['anchors'] as $anchor)
-                                        <a href="video.html">{{$anchor['name']}}</a>
+                                        <a href="{{$liveUrl}}">{{$anchor['name']}}</a>
                                     @endforeach
                                 </p>
                             </li>

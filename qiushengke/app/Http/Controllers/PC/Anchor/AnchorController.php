@@ -32,7 +32,7 @@ class AnchorController extends BaseController{
         $anchors = Anchor::where('status', 1)->get();
         $result['anchors'] = $anchors;
         //正在直播
-        $livings = AnchorRoom::where('status', 1)->get();
+        $livings = AnchorRoom::where('status', 2)->get();
         $result['livings'] = $livings;
 
         $FResult = $this->_matches(1);
@@ -81,6 +81,9 @@ class AnchorController extends BaseController{
         //先拿全部比赛
         $startDate = date('Ymd');
         $football = FileTool::matchListDataJson($startDate,$sport)['matches'];
+        if (is_null($football)){
+            return array();
+        }
         $fids = array();
         foreach ($football as $match){
             $fids[] = $match['mid'];
@@ -156,7 +159,7 @@ class AnchorController extends BaseController{
                 $item['hname'] = $fLive['hname'];
                 $item['a_icon'] = $fLive['a_icon'];
                 $item['aname'] = $fLive['aname'];
-                $item['lname'] = $fLive['lname'];
+                $item['lname'] = isset($fLive['lname'])?$fLive['lname']:$fLive['win_lname'];
                 $item['lid'] = $fLive['lid'];
                 $item['time'] = $fLive['time'];
                 $item['status'] = $fLive['status'];
