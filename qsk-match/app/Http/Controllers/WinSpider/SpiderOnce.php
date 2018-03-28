@@ -283,7 +283,7 @@ trait SpiderOnce
     }
 
     private function onLeagueHistorySpider(Request $request) {
-        $key = "league_schedule_history";
+        $key = "league_schedule_history2";
         $lg_leagues = Redis::get($key);
         if (isset($lg_leagues)) {
             $lg_leagues = json_decode($lg_leagues, true);
@@ -304,13 +304,13 @@ trait SpiderOnce
         $win_lid = $lg_league['win_id'];
         $type = $lg_league['type'];
         $request->merge(['lid'=>$win_lid]);
-        foreach (range(0, 1) as $index) {
+//        foreach (range(0, 1) as $index) {
             if ($type == 1) {
                 $this->leagueAll($request);
             } else if ($type == 2) {
                 $this->cupAll($request);
             }
-        }
+//        }
         $lg_leagues = array_slice($lg_leagues, 1);
         Redis::set($key, json_encode($lg_leagues));
     }

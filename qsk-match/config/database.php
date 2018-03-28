@@ -191,6 +191,20 @@ return [
             'strict' => true,
             'engine' => null,
         ],
+
+        'qsk_live' => [
+            'driver' => 'mysql',
+            'host' => env('DB_HOST_LIVE', '127.0.0.1'),
+            'port' => env('DB_PORT_LIVE', '3306'),
+            'database' => env('DB_DATABASE_LIVE', 'qsk'),
+            'username' => env('DB_USERNAME_LIVE', 'root'),
+            'password' => env('DB_PASSWORD_LIVE', ''),
+            'charset'   => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
     ],
 
     /*

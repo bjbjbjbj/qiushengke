@@ -12,6 +12,7 @@ use App\Models\WinModels\BasketSeason;
 use App\Models\WinModels\BasketStage;
 use App\Models\WinModels\BasketState;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redis;
 
 trait SpiderBasketLeague
 {
@@ -430,4 +431,37 @@ trait SpiderBasketLeague
     }
 
     /********* ***********/
+
+    private function onBasketLeagueHistorySpider(Request $request) {
+        set_time_limit(0);
+        $key = "basket_league_schedule_history";
+        $lg_leagues = Redis::get($key);
+        if (isset($lg_leagues)) {
+            $lg_leagues = json_decode($lg_leagues, true);
+        } else {
+            $lg_leagues = \App\Models\LiaoGouModels\BasketLeague::query()
+                ->select('win_id', 'type')
+                ->where('hot', 1)->get()->toArray();
+        }
+        if (count($lg_leagues) <= 0) {
+            echo "league history spider complete!! <br>";
+            return;
+        }
+        dump(count($lg_leagues));
+        $lg_league = $lg_leagues[0];
+        $win_lid = $lg_league['win_id'];
+        $type = $lg_league['type'];
+        $request->merge(['lid'=>$win_lid]);
+        $seasons = BasketSeason::query()->where('lid', $win_lid)->orderBy('year', 'desc')->get();
+        foreach ($seasons as $season) {
+            $request->merge(['season'=>$season->name]);
+            if ($type == 1) {
+                $this->spiderFullLeagueSchedule($request);
+            } else if ($type == 2) {
+                $this->spiderCupFullSchedule($request);
+            }
+        }
+        $lg_leagues = array_slice($lg_leagues, 1);
+        Redis::set($key, json_encode($lg_leagues));
+    }
 }

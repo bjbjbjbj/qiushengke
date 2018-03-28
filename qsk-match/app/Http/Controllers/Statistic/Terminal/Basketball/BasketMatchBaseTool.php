@@ -66,10 +66,8 @@ trait BasketMatchBaseTool
             $match->a_ot = (isset($match->a_ot) && strlen($match->a_ot) > 0) ? explode(',', $match->a_ot) : null;
 
             $liveCountArray = MatchLiveTool::getMatchLiveCountById($id, MatchLive::kSportBasketball);
-            $data['live'] = $liveCountArray['live'];
-            $data['live2'] = $liveCountArray['live'];
-            $data['pc_live'] = $liveCountArray['pc_live'];
-            $data['pc_live2'] = $liveCountArray['pc_live'];
+            $match->live = $liveCountArray['live'];
+            $match->pc_live = $liveCountArray['pc_live'];
 
             if (!$isReset) {
                 StatisticFileTool::putFileToTerminal($match, MatchLive::kSportBasketball, $id, 'match');

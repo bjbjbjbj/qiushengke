@@ -82,13 +82,14 @@ trait SpiderBasketMatch
     /**
      * 填充liaogoumatch篮球没有比赛id数据
      */
-    public function fillLiaogouMatch(){
+    public function fillLiaogouMatch(Request $request){
+        $count = $request->input('count', 50);
         $matches = \App\Models\LiaoGouModels\BasketMatch::where(function ($q){
             $q->whereNull('hid')
                 ->orwhereNull('aid');
         })
             ->orderby('time','asc')
-            ->take(10)
+            ->take($count)
             ->get();
         foreach ($matches as $match){
             echo 'win_id '.$match->win_id.'</br>';
@@ -96,6 +97,11 @@ trait SpiderBasketMatch
             if (isset($tmp)){
                 \App\Models\LiaoGouModels\BasketMatch::saveWithWinData($tmp);
             }
+        }
+
+        if ($request->input('auto', 0) == 1) {
+            echo "<script language=JavaScript>window.location.reload();</script>";
+            exit;
         }
     }
 
