@@ -131,7 +131,69 @@
         //        getChat();
         //        window.setInterval('getChat()', 10000);
 
-        $("div.line a:first")[0].className = 'on';
+        if ($("div.line a:first").length > 0) {
+            $("div.line a:first")[0].className = 'on';
+        }
+
+        //赔率更新
+        function refreshOddByMid(){
+            ID = '{{$match['mid']}}';
+            ID = ID + '';
+            var first = ID.substr(0,2);
+            var second = ID.substr(2,2);
+            var url = "/static/terminal/"+"{{$sport}}"+"/"+first+"/"+second+"/"+ID+"/roll.json";
+            url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
+            $.ajax({
+                "url":url,
+                "dataType": "json",
+                "success": function (json) {
+                    //全场/半场
+                    _updateOddBody('all',json);
+                    _updateOddBody('half',json);
+                },
+                "error": function () {
+                }
+            });
+        }
+
+        function _updateOddBody(key,json) {
+            var tbody = $('.' + 'odd_'+key);
+            if (json[key]) {
+                _updateOdd(tbody, 'a', '1', json[key]['1'], '1');
+                _updateOdd(tbody, 'o', '1', json[key]['3'], '1');
+                _updateOdd(tbody, 'g', '1', json[key]['2'], '1');
+                _updateOdd(tbody, 'a', '2', json[key]['1'], json[key]['1']['middle'] == null ? '2' : '');
+                _updateOdd(tbody, 'o', '2', json[key]['3'], json[key]['2']['middle'] == null ? '2' : '');
+                _updateOdd(tbody, 'g', '2', json[key]['2'], json[key]['3']['middle'] == null ? '2' : '');
+            }
+        }
+
+        //更新赔率小框 tbody全场半场 key类型a亚盘o欧赔g大小球 key21初盘2即时 data数据 key3数据拿那个
+        function _updateOdd (tbody,key,key2,data,key3) {
+            var middle = data['middle'+key3];
+            if (middle) {
+                var p = tbody.find('td.' + key + 'up' + key2)[0];
+                if (p) {
+                    p.innerHTML = data['up' + key3];
+                }
+                var p = tbody.find('td.' + key + 'mid' + key2)[0];
+                if ('a' == key) {
+                    middle = getHandicapCn(middle, '', 1, 1, true);
+                }
+                else if ('g' == key) {
+                    middle = getHandicapCn(middle, '', 2, 1, true);
+                }
+                if (p) {
+                    p.innerHTML = middle;
+                }
+                var p = tbody.find('td.' + key + 'down' + key2)[0];
+                if (p) {
+                    p.innerHTML = data['down' + key3];
+                }
+            }
+        }
+
+        refreshOddByMid();
     </script>
     @yield('live_js')
 @endsection
@@ -180,184 +242,184 @@
                 <tbody>
                 @if($match['status'] > 0)
                     @if(isset($roll['half']))
-                        <tr>
+                        <tr class="odd_half">
                             <td>半场滚球</td>
                             @if(isset($roll['half']['3']) && isset($roll['half']['3']['up']))
-                                <td class="green">{{$roll['half']['3']['up']}}</td>
+                                <td class="green oup2">{{$roll['half']['3']['up']}}</td>
                                 @if($sport == 1)
-                                    <td class="green">{{$roll['half']['3']['middle']}}</td>
+                                    <td class="green omid2">{{$roll['half']['3']['middle']}}</td>
                                 @else
-                                    <td class="green">-</td>
+                                    <td class="green omid2">-</td>
                                 @endif
-                                <td class="green">{{$roll['half']['3']['down']}}</td>
+                                <td class="green odown2">{{$roll['half']['3']['down']}}</td>
                             @else
-                                <td class="green">-</td>
-                                <td class="green">-</td>
-                                <td class="green">-</td>
+                                <td class="green oup2">-</td>
+                                <td class="green omid2">-</td>
+                                <td class="green odown2">-</td>
                             @endif
                             @if(isset($roll['half']['1']) && isset($roll['half']['1']['up']))
-                                <td class="green">{{$roll['half']['1']['up']}}</td>
-                                <td class="green">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['half']['1']['middle'])}}</td>
-                                <td class="green">{{$roll['half']['1']['down']}}</td>
+                                <td class="green aup2">{{$roll['half']['1']['up']}}</td>
+                                <td class="green amid2">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['half']['1']['middle'])}}</td>
+                                <td class="green adown2">{{$roll['half']['1']['down']}}</td>
                             @else
-                                <td class="green">-</td>
-                                <td class="green">-</td>
-                                <td class="green">-</td>
+                                <td class="green aup2">-</td>
+                                <td class="green amid2">-</td>
+                                <td class="green adown2">-</td>
                             @endif
                             @if(isset($roll['half']['2']) && isset($roll['half']['2']['up']))
-                                <td class="green">{{$roll['half']['2']['up']}}</td>
-                                <td class="green">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['half']['2']['middle'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou)}}</td>
-                                <td class="green">{{$roll['half']['2']['down']}}</td>
+                                <td class="green gup2">{{$roll['half']['2']['up']}}</td>
+                                <td class="green gmid2">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['half']['2']['middle'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou)}}</td>
+                                <td class="green gdown2">{{$roll['half']['2']['down']}}</td>
                             @else
-                                <td class="green">-</td>
-                                <td class="green">-</td>
-                                <td class="green">-</td>
+                                <td class="green gup2">-</td>
+                                <td class="green gmid2">-</td>
+                                <td class="green gdown2">-</td>
                             @endif
                         </tr>
                     @else
-                        <tr>
+                        <tr class="odd_half">
                             <td>半场滚球</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
+                            <td class="green oup2">-</td>
+                            <td class="green omid2">-</td>
+                            <td class="green odown2">-</td>
+                            <td class="green aup2">-</td>
+                            <td class="green amid2">-</td>
+                            <td class="green adown2">-</td>
+                            <td class="green gup2">-</td>
+                            <td class="green gmid2">-</td>
+                            <td class="green gdown2">-</td>
                         </tr>
                     @endif
                     @if(isset($roll['all']))
-                        <tr>
+                        <tr class="odd_all">
                             <td>全场滚球</td>
                             @if(isset($roll['all']['3']) && isset($roll['all']['3']['up']))
-                                <td class="green">{{$roll['all']['3']['up']}}</td>
+                                <td class="green oup2">{{$roll['all']['3']['up']}}</td>
                                 @if($sport == 1)
-                                    <td class="green">{{$roll['all']['3']['middle']}}</td>
+                                    <td class="green omid2">{{$roll['all']['3']['middle']}}</td>
                                 @else
-                                    <td class="green">-</td>
+                                    <td class="green odown2">-</td>
                                 @endif
                                 <td class="green">{{$roll['all']['3']['down']}}</td>
                             @else
-                                <td class="green">-</td>
-                                <td class="green">-</td>
-                                <td class="green">-</td>
+                                <td class="green oup2">-</td>
+                                <td class="green omid2">-</td>
+                                <td class="green odown2">-</td>
                             @endif
                             @if(isset($roll['all']['1']) && isset($roll['all']['1']['up']))
-                                <td class="green">{{$roll['all']['1']['up']}}</td>
-                                <td class="green">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['1']['middle'])}}</td>
-                                <td class="green">{{$roll['all']['1']['down']}}</td>
+                                <td class="green aup2">{{$roll['all']['1']['up']}}</td>
+                                <td class="green amid2">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['1']['middle'])}}</td>
+                                <td class="green adown2">{{$roll['all']['1']['down']}}</td>
                             @else
-                                <td class="green">-</td>
-                                <td class="green">-</td>
-                                <td class="green">-</td>
+                                <td class="green aup2">-</td>
+                                <td class="green amid2">-</td>
+                                <td class="green adown2">-</td>
                             @endif
                             @if(isset($roll['all']['2']) && isset($roll['all']['2']['up']))
-                                <td class="green">{{$roll['all']['2']['up']}}</td>
-                                <td class="green">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['2']['middle'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou)}}</td>
-                                <td class="green">{{$roll['all']['2']['down']}}</td>
+                                <td class="green gup2">{{$roll['all']['2']['up']}}</td>
+                                <td class="green gmid2">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['2']['middle'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou)}}</td>
+                                <td class="green gdown2">{{$roll['all']['2']['down']}}</td>
                             @else
-                                <td class="green">-</td>
-                                <td class="green">-</td>
-                                <td class="green">-</td>
+                                <td class="green gup2">-</td>
+                                <td class="green gmid2">-</td>
+                                <td class="green gdown2">-</td>
                             @endif
                         </tr>
                     @endif
                 @else
                     @if(isset($roll['all']))
-                        <tr>
+                        <tr class="odd_all">
                             <td>初盘</td>
                             @if(isset($roll['all']['3']) && isset($roll['all']['3']['up1']))
-                                <td class="green">{{$roll['all']['3']['up1']}}</td>
+                                <td class="green oup1">{{$roll['all']['3']['up1']}}</td>
                                 @if($sport == 1)
-                                    <td class="green">{{$roll['all']['3']['middle1']}}</td>
+                                    <td class="green omid1">{{$roll['all']['3']['middle1']}}</td>
                                 @else
-                                    <td class="green">-</td>
+                                    <td class="green omid1">-</td>
                                 @endif
-                                <td class="green">{{$roll['all']['3']['down1']}}</td>
+                                <td class="green odown1">{{$roll['all']['3']['down1']}}</td>
                             @else
-                                <td class="green">-</td>
-                                <td class="green">-</td>
-                                <td class="green">-</td>
+                                <td class="green oup1">-</td>
+                                <td class="green omid1">-</td>
+                                <td class="green odown1">-</td>
                             @endif
                             @if(isset($roll['all']['1']) && isset($roll['all']['1']['up1']))
-                                <td class="green">{{$roll['all']['1']['up1']}}</td>
-                                <td class="green">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['1']['middle1'])}}</td>
-                                <td class="green">{{$roll['all']['1']['down1']}}</td>
+                                <td class="green aup1">{{$roll['all']['1']['up1']}}</td>
+                                <td class="green amid1">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['1']['middle1'])}}</td>
+                                <td class="green adown1">{{$roll['all']['1']['down1']}}</td>
                             @else
-                                <td class="green">-</td>
-                                <td class="green">-</td>
-                                <td class="green">-</td>
+                                <td class="green aup1">-</td>
+                                <td class="green amid1">-</td>
+                                <td class="green adown1">-</td>
                             @endif
                             @if(isset($roll['all']['2']) && isset($roll['all']['2']['up1']))
-                                <td class="green">{{$roll['all']['2']['up1']}}</td>
-                                <td class="green">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['2']['middle1'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou)}}</td>
-                                <td class="green">{{$roll['all']['2']['down1']}}</td>
+                                <td class="green gup1">{{$roll['all']['2']['up1']}}</td>
+                                <td class="green gmid1">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['2']['middle1'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou)}}</td>
+                                <td class="green gdown1">{{$roll['all']['2']['down1']}}</td>
                             @else
-                                <td class="green">-</td>
-                                <td class="green">-</td>
-                                <td class="green">-</td>
+                                <td class="green gup1">-</td>
+                                <td class="green gmid1">-</td>
+                                <td class="green gdown1">-</td>
                             @endif
                         </tr>
-                        <tr>
+                        <tr class="odd_all">
                             <td>即盘</td>
                             @if(isset($roll['all']['3']) && isset($roll['all']['3']['up1']))
-                                <td class="green">{{$roll['all']['3']['up2']}}</td>
+                                <td class="green oup2">{{$roll['all']['3']['up2']}}</td>
                                 @if($sport == 1)
-                                    <td class="green">{{$roll['all']['3']['middle2']}}</td>
+                                    <td class="green omid2">{{$roll['all']['3']['middle2']}}</td>
                                 @else
-                                    <td class="green">-</td>
+                                    <td class="green omid2">-</td>
                                 @endif
-                                <td class="green">{{$roll['all']['3']['down2']}}</td>
+                                <td class="green odown2">{{$roll['all']['3']['down2']}}</td>
                             @else
-                                <td class="green">-</td>
-                                <td class="green">-</td>
-                                <td class="green">-</td>
+                                <td class="green oup2">-</td>
+                                <td class="green omid2">-</td>
+                                <td class="green odown2">-</td>
                             @endif
                             @if(isset($roll['all']['1']) && isset($roll['all']['1']['up1']))
-                                <td class="green">{{$roll['all']['1']['up2']}}</td>
-                                <td class="green">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['1']['middle2'])}}</td>
-                                <td class="green">{{$roll['all']['1']['down2']}}</td>
+                                <td class="green aup2">{{$roll['all']['1']['up2']}}</td>
+                                <td class="green amid2">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['1']['middle2'])}}</td>
+                                <td class="green adown2">{{$roll['all']['1']['down2']}}</td>
                             @else
-                                <td class="green">-</td>
-                                <td class="green">-</td>
-                                <td class="green">-</td>
+                                <td class="green aup2">-</td>
+                                <td class="green amid1">-</td>
+                                <td class="green adown2">-</td>
                             @endif
                             @if(isset($roll['all']['2']) && isset($roll['all']['2']['up1']))
-                                <td class="green">{{$roll['all']['2']['up2']}}</td>
-                                <td class="green">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['2']['middle2'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou)}}</td>
-                                <td class="green">{{$roll['all']['2']['down2']}}</td>
+                                <td class="green gup2">{{$roll['all']['2']['up2']}}</td>
+                                <td class="green gmid2">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['2']['middle2'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou)}}</td>
+                                <td class="green gdown2">{{$roll['all']['2']['down2']}}</td>
                             @else
-                                <td class="green">-</td>
-                                <td class="green">-</td>
-                                <td class="green">-</td>
+                                <td class="green gup2">-</td>
+                                <td class="green gmid2">-</td>
+                                <td class="green gdown2">-</td>
                             @endif
                         </tr>
                     @else
-                        <tr>
+                        <tr class="odd_all">
                             <td>初盘</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
+                            <td class="green oup1">-</td>
+                            <td class="green omid1">-</td>
+                            <td class="green odown1">-</td>
+                            <td class="green aup1">-</td>
+                            <td class="green amid1">-</td>
+                            <td class="green adown1">-</td>
+                            <td class="green gup1">-</td>
+                            <td class="green gmid1">-</td>
+                            <td class="green gdown1">-</td>
                         </tr>
-                        <tr>
+                        <tr class="odd_all">
                             <td>即盘</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
-                            <td class="green">-</td>
+                            <td class="green oup2">-</td>
+                            <td class="green omid2">-</td>
+                            <td class="green odown2">-</td>
+                            <td class="green aup2">-</td>
+                            <td class="green amid1">-</td>
+                            <td class="green adown2">-</td>
+                            <td class="green gup2">-</td>
+                            <td class="green gmid2">-</td>
+                            <td class="green gdown2">-</td>
                         </tr>
                     @endif
                 @endif

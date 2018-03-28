@@ -1489,6 +1489,175 @@
     <script type="text/javascript">
         window.onload = function () {
             setPage();
+            refreshOdd();
+            refreshMatch();
+        }
+    </script>
+    <script type="text/javascript">
+        //刷新比赛
+        function refreshMatch() {
+            var mid = '{{$match['mid']}}';
+            var first = mid.substr(0,2);
+            var second = mid.substr(2,2);
+            var url = '/static/terminal/2/'+ first +'/'+ second +'/'+mid+'/match.json';
+            url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
+            $.ajax({
+                'url': url,
+                'success': function (json) {
+                    //比分
+                    if (json['status'] > 0 || json['status'] == -1) {
+                        $('div#Info p.score').html(json['hscore'] + ' - ' + json['ascore']);
+                    }
+                    if (json['status'] > 0){
+                        window.setTimeout('refreshOdd()', 5000);
+                        window.setTimeout('refreshMatch()', 5000);
+                    }
+
+                    var match = json;
+
+                    $('.data_h_1').html(match['hscore_1st']?match['hscore_1st']:'-');
+                    $('.data_h_2').html(match['hscore_2nd']?match['hscore_2nd']:'-');
+                    $('.data_h_3').html(match['hscore_3rd']?match['hscore_3rd']:'-');
+                    $('.data_h_4').html(match['hscore_4th']?match['hscore_4th']:'-');
+                    $('.data_h_s').html(match['hscore']?match['hscore']:'-');
+
+                    $('.data_a_1').html(match['ascore_1st']?match['ascore_1st']:'-');
+                    $('.data_a_2').html(match['ascore_2nd']?match['ascore_2nd']:'-');
+                    $('.data_a_3').html(match['ascore_3rd']?match['ascore_3rd']:'-');
+                    $('.data_a_4').html(match['ascore_4th']?match['ascore_4th']:'-');
+                    $('.data_a_s').html(match['ascore']?match['ascore']:'-');
+
+                    //赔率
+                    var ps = $('div#Info div.odd p');
+                    if (json['asiamiddle2']){
+                        $(ps[0]).html('亚：'+json['asiaup2']+'&nbsp;&nbsp;'+json['asiamiddle2']+'&nbsp;&nbsp;'+json['asiadown2']);
+                    }
+                    if (json['oumiddle2']){
+                        $(ps[1]).html('欧：'+json['ouup2']+'&nbsp;&nbsp;'+json['oumiddle2']+'&nbsp;&nbsp;'+json['oudown2']);
+                    }
+                    if (json['goalmiddle2']){
+                        $(ps[2]).html('大：'+json['goalup2']+'&nbsp;&nbsp;'+json['goalmiddle2']+'&nbsp;&nbsp;'+json['goaldown2']);
+                    }
+                }
+            });
+        }
+        //刷新赔率
+        function refreshOdd() {
+            var mid = '{{$match['mid']}}';
+            var first = mid.substr(0,2);
+            var second = mid.substr(2,2);
+            var url = '/static/terminal/2/'+ first +'/'+ second +'/'+mid+'/odd.json';
+            url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
+            $.ajax({
+                'url':url,
+                'success':function (json) {
+                    var keys = Object.keys(json);
+                    if (keys.length > 0){
+                        $('div#Data div.odd')[0].style.display = '';
+                        var tbody = $('div#Data div.odd table tbody');
+                        tbody.html('')
+                        for (var i = 0 ; i < keys.length ; i++){
+                            var item = json[keys[i]];
+                            if(2 != item['id'] && 5 != item['id'] && 12 != item['id']){
+                                continue;
+                            }
+                            var tr = '<tr>'+
+                                    '<td rowspan="2">'+item['name']+'</td>'+
+                                    '<td>初盘</td>';
+                            if (item['ou']){
+                                tr = tr +
+                                        '<td>'+item['ou']['up1']+'</td>'+
+                                        '<td>'+item['ou']['middle1']+'</td>'+
+                                        '<td>'+item['ou']['down1']+'</td>';
+                            }
+                            else{
+                                tr = tr +
+                                        '<td>-</td>'+
+                                        '<td>-</td>'+
+                                        '<td>-</td>';
+                            }
+                            if (item['asia']){
+                                tr = tr +
+                                        '<td>'+item['asia']['up1']+'</td>'+
+                                        '<td>'+panKouText(item['asia']['middle1'],false)+'</td>'+
+                                        '<td>'+item['asia']['down1']+'</td>'+
+                                        '<td>'+(parseFloat(item['asia']['up1'])+parseFloat(item['asia']['down1'])).toFixed(2)+'</td>';
+                            }
+                            else{
+                                tr = tr +
+                                        '<td>-</td>'+
+                                        '<td>-</td>'+
+                                        '<td>-</td>'+
+                                        '<td>-</td>';
+                            }
+                            if (item['goal']){
+                                tr = tr +
+                                        '<td>'+item['goal']['up1']+'</td>'+
+                                        '<td>'+panKouText(item['goal']['middle1'],false)+'</td>'+
+                                        '<td>'+item['goal']['down1']+'</td>'+
+                                        '<td>'+(parseFloat(item['goal']['up1'])+parseFloat(item['goal']['down1'])).toFixed(2)+'</td>';
+                            }
+                            else{
+                                tr = tr +
+                                        '<td>-</td>'+
+                                        '<td>-</td>'+
+                                        '<td>-</td>'+
+                                        '<td>-</td>';
+                            }
+
+                            tr = tr+'</tr>';
+                            //初盘
+                            tbody.append(tr);
+
+                            tr = '<tr>'+
+                                    '<td>终盘</td>';
+                            if (item['ou']){
+                                tr = tr +
+                                        '<td>'+item['ou']['up2']+'</td>'+
+                                        '<td>'+item['ou']['middle2']+'</td>'+
+                                        '<td>'+item['ou']['down2']+'</td>';
+                            }
+                            else{
+                                tr = tr +
+                                        '<td>-</td>'+
+                                        '<td>-</td>'+
+                                        '<td>-</td>';
+                            }
+                            if (item['asia']){
+                                tr = tr +
+                                        '<td>'+item['asia']['up2']+'</td>'+
+                                        '<td>'+panKouText(item['asia']['middle2'],false)+'</td>'+
+                                        '<td>'+item['asia']['down2']+'</td>'+
+                                        '<td>'+(parseFloat(item['asia']['down2'])+parseFloat(item['asia']['up2'])).toFixed(2)+'</td>';
+                            }
+                            else{
+                                tr = tr +
+                                        '<td>-</td>'+
+                                        '<td>-</td>'+
+                                        '<td>-</td>'+
+                                        '<td>-</td>';
+                            }
+                            if (item['goal']){
+                                tr = tr +
+                                        '<td>'+item['goal']['up2']+'</td>'+
+                                        '<td>'+panKouText(item['goal']['middle2'],false)+'</td>'+
+                                        '<td>'+item['goal']['down2']+'</td>'+
+                                        '<td>'+(parseFloat(item['goal']['down2'])+parseFloat(item['goal']['up2'])).toFixed(2)+'</td>';
+                            }
+                            else{
+                                tr = tr +
+                                        '<td>-</td>'+
+                                        '<td>-</td>'+
+                                        '<td>-</td>'+
+                                        '<td>-</td>';
+                            }
+                            tr = tr+'</tr>';
+                            //终盘
+                            tbody.append(tr);
+                        }
+                    }
+                }
+            })
         }
     </script>
 @endsection

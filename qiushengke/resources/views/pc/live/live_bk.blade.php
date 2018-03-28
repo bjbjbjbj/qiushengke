@@ -16,34 +16,34 @@
                             <p class="item bk on">{{$ot}}</p>
                         @endforeach
                     @endif
-                    <p class="item bk @if(!isset($match['h_ot'])) on @endif">{{isset($match['hscore_4th']) ? $match['hscore_4th'] : "-"}}</p>
-                    <p class="item bk @if(!isset($match['hscore_4th'])) on @endif">{{isset($match['hscore_3rd']) ? $match['hscore_3rd'] : "-"}}</p>
-                    <p class="item bk @if(!isset($match['hscore_3rd'])) on @endif">{{isset($match['hscore_2nd']) ? $match['hscore_2nd'] : "-"}}</p>
-                    <p class="item bk @if(!isset($match['hscore_2nd'])) on @endif">{{isset($match['hscore_1st']) ? $match['hscore_1st'] : "-"}}</p>
+                    <p class="data_h_4 item bk @if(!isset($match['h_ot'])) on @endif">{{isset($match['hscore_4th']) ? $match['hscore_4th'] : "-"}}</p>
+                    <p class="data_h_3 item bk @if(!isset($match['hscore_4th'])) on @endif">{{isset($match['hscore_3rd']) ? $match['hscore_3rd'] : "-"}}</p>
+                    <p class="data_h_2 item bk @if(!isset($match['hscore_3rd'])) on @endif">{{isset($match['hscore_2nd']) ? $match['hscore_2nd'] : "-"}}</p>
+                    <p class="data_h_1 item bk @if(!isset($match['hscore_2nd'])) on @endif">{{isset($match['hscore_1st']) ? $match['hscore_1st'] : "-"}}</p>
                 @else
-                    <p class="item bk">-</p>
-                    <p class="item bk">-</p>
-                    <p class="item bk">-</p>
-                    <p class="item bk">-</p>
+                    <p class="data_h_4 item bk">-</p>
+                    <p class="data_h_3 item bk">-</p>
+                    <p class="data_h_2 item bk">-</p>
+                    <p class="data_h_1 item bk">-</p>
                 @endif
                 <p class="team"><img src="{{$hicon}}">{{$match['hname']}}</p>
             </dd>
             <dd class="away">
                 @if($isShowScore)
-                    <p class="item bk @if(!isset($match['hscore_2nd'])) on @endif">{{isset($match['ascore_1st']) ? $match['ascore_1st'] : "-"}}</p>
-                    <p class="item bk @if(!isset($match['hscore_3rd'])) on @endif">{{isset($match['ascore_2nd']) ? $match['ascore_2nd'] : "-"}}</p>
-                    <p class="item bk @if(!isset($match['hscore_4th'])) on @endif">{{isset($match['ascore_3rd']) ? $match['ascore_3rd'] : "-"}}</p>
-                    <p class="item bk @if(!isset($match['h_ot'])) on @endif">{{isset($match['ascore_4th']) ? $match['ascore_4th'] : "-"}}</p>
+                    <p class="data_a_1 item bk @if(!isset($match['hscore_2nd'])) on @endif">{{isset($match['ascore_1st']) ? $match['ascore_1st'] : "-"}}</p>
+                    <p class="data_a_2 item bk @if(!isset($match['hscore_3rd'])) on @endif">{{isset($match['ascore_2nd']) ? $match['ascore_2nd'] : "-"}}</p>
+                    <p class="data_a_3 item bk @if(!isset($match['hscore_4th'])) on @endif">{{isset($match['ascore_3rd']) ? $match['ascore_3rd'] : "-"}}</p>
+                    <p class="data_a_4 item bk @if(!isset($match['h_ot'])) on @endif">{{isset($match['ascore_4th']) ? $match['ascore_4th'] : "-"}}</p>
                     @if(isset($match['a_ot']))
                         @foreach($match['a_ot'] as $key=>$ot)
                             <p class="item bk on">{{$ot}}</p>
                         @endforeach
                     @endif
                 @else
-                    <p class="item bk">-</p>
-                    <p class="item bk">-</p>
-                    <p class="item bk">-</p>
-                    <p class="item bk">-</p>
+                    <p class="data_a_1 item bk">-</p>
+                    <p class="data_a_2 item bk">-</p>
+                    <p class="data_a_3 item bk">-</p>
+                    <p class="data_a_4 item bk">-</p>
                 @endif
                 <p class="team"><img src="{{$aicon}}">{{$match['aname']}}</p>
             </dd>
@@ -114,19 +114,31 @@
                         $('p.score span.host').html(json['hscore']);
                         $('p.score span.away').html(json['ascore']);
                         $('div.mbox p.time').html(json['live_time_str']);
+
+                        var match = json;
+
+                        $('.data_h_1').html(match['hscore_1st']?match['hscore_1st']:'-');
+                        $('.data_h_2').html(match['hscore_2nd']?match['hscore_2nd']:'-');
+                        $('.data_h_3').html(match['hscore_3rd']?match['hscore_3rd']:'-');
+                        $('.data_h_4').html(match['hscore_4th']?match['hscore_4th']:'-');
+                        $('.data_h_s').html(match['hscore']?match['hscore']:'-');
+
+                        $('.data_a_1').html(match['ascore_1st']?match['ascore_1st']:'-');
+                        $('.data_a_2').html(match['ascore_2nd']?match['ascore_2nd']:'-');
+                        $('.data_a_3').html(match['ascore_3rd']?match['ascore_3rd']:'-');
+                        $('.data_a_4').html(match['ascore_4th']?match['ascore_4th']:'-');
+                        $('.data_a_s').html(match['ascore']?match['ascore']:'-');
                     }
                     if (json['status'] == -1){
                         $('div.mbox p.time').html('已结束');
                     }
+                    if (json['status'] > 0){
+                        window.setTimeout('refreshMatch()', 5000);
+                    }
                 }
             });
         }
-        if ('{{$match['status']}}' == -1){
-
-        }
-        else{
-            window.setInterval('refreshMatch()', 5000);
-        }
+        refreshMatch();
     </script>
 @endsection
 

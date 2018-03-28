@@ -241,6 +241,8 @@ class MatchController extends Controller
         $anm->sport = $sport;
         $anm->save();
 
+        AnchorController::updateJson($room_id,$sport,$match_id);
+
         return response()->json(['code'=>200, 'msg'=>'预约成功']);
     }
 
@@ -256,6 +258,7 @@ class MatchController extends Controller
         }
         $arm = AnchorRoomMatches::query()->find($id);
         if (isset($arm)) {
+            AnchorController::updateJson(null,$arm->sport,$arm->mid);
             $arm->delete();
         }
         return response()->json(['code'=>200, 'msg'=>'取消预约成功']);

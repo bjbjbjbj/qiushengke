@@ -277,6 +277,14 @@ function PlayVideoShare (cid){
                     var Link = getLink(data);
                     LoadCK(Link);
                 }
+                else if(type == 1){
+                    //龙珠
+                    var Link = getLink(data);
+                    if (isMobileWithJS())
+                        LoadCK(Link);
+                    else
+                        LoadFlv(Link);
+                }
                 return;
 				var show_live = match.show_live;
                 if (window.isMobile && data.platform && data.platform == 2 && (show_live || match.status == 0)) {//如果是PC端的线路，未开始比赛或者在直播中，则提示
