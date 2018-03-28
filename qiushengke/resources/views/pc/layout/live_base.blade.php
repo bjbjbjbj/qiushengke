@@ -325,6 +325,19 @@
                                 <td class="green gdown2">-</td>
                             @endif
                         </tr>
+                    @else
+                        <tr class="odd_all">
+                            <td>全场滚球</td>
+                            <td class="green oup2">-</td>
+                            <td class="green omid2">-</td>
+                            <td class="green odown2">-</td>
+                            <td class="green aup2">-</td>
+                            <td class="green amid2">-</td>
+                            <td class="green adown2">-</td>
+                            <td class="green gup2">-</td>
+                            <td class="green gmid2">-</td>
+                            <td class="green gdown2">-</td>
+                        </tr>
                     @endif
                 @else
                     @if(isset($roll['all']))
@@ -390,6 +403,83 @@
                                 <td class="green gup2">{{$roll['all']['2']['up2']}}</td>
                                 <td class="green gmid2">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['2']['middle2'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou)}}</td>
                                 <td class="green gdown2">{{$roll['all']['2']['down2']}}</td>
+                            @else
+                                <td class="green gup2">-</td>
+                                <td class="green gmid2">-</td>
+                                <td class="green gdown2">-</td>
+                            @endif
+                        </tr>
+                    @elseif(isset($match) &&
+                    (
+                    isset($match['asiamiddle1']) ||
+                    isset($match['asiamiddle2']) ||
+                    isset($match['ouup1']) ||
+                    isset($match['ouup2']) ||
+                    isset($match['goalmiddle1']) ||
+                    isset($match['goalmiddle2']))
+                    )
+                        <tr class="odd_all">
+                            <td>初盘</td>
+                            @if(isset($match['ouup1']))
+                                <td class="green oup1">{{$match['ouup1']}}</td>
+                                @if($sport == 1)
+                                    <td class="green omid1">{{$match['oumiddle1']}}</td>
+                                @else
+                                    <td class="green omid1">-</td>
+                                @endif
+                                <td class="green odown1">{{$match['oudown1']}}</td>
+                            @else
+                                <td class="green oup1">-</td>
+                                <td class="green omid1">-</td>
+                                <td class="green odown1">-</td>
+                            @endif
+                            @if(isset($match['asiaup1']))
+                                <td class="green aup1">{{$match['asiaup1']}}</td>
+                                <td class="green amid1">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($match['asiamiddle1'])}}</td>
+                                <td class="green adown1">{{$match['asiadown1']}}</td>
+                            @else
+                                <td class="green aup1">-</td>
+                                <td class="green amid1">-</td>
+                                <td class="green adown1">-</td>
+                            @endif
+                            @if(isset($match['goalup1']))
+                                <td class="green gup1">{{$match['goalup1']}}</td>
+                                <td class="green gmid1">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($match['goalmiddle1'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou)}}</td>
+                                <td class="green gdown1">{{$match['goaldown1']}}</td>
+                            @else
+                                <td class="green gup1">-</td>
+                                <td class="green gmid1">-</td>
+                                <td class="green gdown1">-</td>
+                            @endif
+                        </tr>
+                        <tr class="odd_all">
+                            <td>即盘</td>
+                            @if(isset($match['ouup2']))
+                                <td class="green oup2">{{$match['ouup2']}}</td>
+                                @if($sport == 1)
+                                    <td class="green omid2">{{$match['oumiddle2']}}</td>
+                                @else
+                                    <td class="green omid2">-</td>
+                                @endif
+                                <td class="green odown2">{{$match['oudown2']}}</td>
+                            @else
+                                <td class="green oup2">-</td>
+                                <td class="green omid2">-</td>
+                                <td class="green odown2">-</td>
+                            @endif
+                            @if(isset($match['asiaup2']))
+                                <td class="green aup2">{{$match['asiaup2']}}</td>
+                                <td class="green amid2">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($match['asiamiddle2'])}}</td>
+                                <td class="green adown2">{{$match['asiadown2']}}</td>
+                            @else
+                                <td class="green aup2">-</td>
+                                <td class="green amid2">-</td>
+                                <td class="green adown2">-</td>
+                            @endif
+                            @if(isset($match['goalup2']))
+                                <td class="green gup2">{{$match['goalup2']}}</td>
+                                <td class="green gmid2">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($match['goalmiddle2'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou)}}</td>
+                                <td class="green gdown2">{{$match['goaldown2']}}</td>
                             @else
                                 <td class="green gup2">-</td>
                                 <td class="green gmid2">-</td>
