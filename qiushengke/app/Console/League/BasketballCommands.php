@@ -52,7 +52,7 @@ class BasketballCommands extends Command
     public function handle()
     {
         $ch = curl_init();
-        $url = asset('/static/league/basket');
+        $url = asset('/api/static/league/basket');
         echo $url . '<br>';
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

@@ -52,7 +52,7 @@ class FootballCommands extends Command
     public function handle()
     {
         $ch = curl_init();
-        $url = asset('/static/league/foot');
+        $url = asset('/api/static/league/foot');
         echo $url . '<br>';
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

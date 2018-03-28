@@ -25,7 +25,7 @@ class MatchController extends BaseController
      */
     public static function curlToHtml() {
         $ch = curl_init();
-        $url = asset('/static/football/one');
+        $url = asset('/api/static/football/one');
         echo $url;
         if (!is_null($url)) {
             curl_setopt($ch, CURLOPT_URL, $url);
@@ -41,7 +41,7 @@ class MatchController extends BaseController
      */
     public static function curlToHtml5() {
         $ch = curl_init();
-        $url = asset('/static/football/five');
+        $url = asset('/api/static/football/five');
         echo $url;
         if (!is_null($url)) {
             curl_setopt($ch, CURLOPT_URL, $url);

@@ -97,7 +97,7 @@ class LiveDetailJsonCommands extends Command
 
     public static function flushLiveDetailHtml($mid, $sport){
         $ch = curl_init();
-        $url = asset('/static/live/detail/' . $sport.'/'.$mid);
+        $url = asset('/api/static/live/detail/' . $sport.'/'.$mid);
         echo $url . '<br>';
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

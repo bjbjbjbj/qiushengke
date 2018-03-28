@@ -96,7 +96,7 @@ class PlayerJsonCommands extends Command
 
     public static function flushLiveDetailHtml($rid){
         $ch = curl_init();
-        $url = asset('/static/live/channel/detail/' . $rid);
+        $url = asset('/api/static/live/channel/detail/' . $rid);
         echo $url . '<br>';
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

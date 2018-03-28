@@ -104,7 +104,7 @@ class LeagueController extends BaseController{
      */
     public static function flushLiveDetailHtml($mid, $sport = 1){
         $ch = curl_init();
-        $url = asset('/static/league/' . $sport.'/'.$mid);
+        $url = asset('/api/static/league/' . $sport.'/'.$mid);
         echo $url . '<br>';
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -118,7 +118,7 @@ class LeagueController extends BaseController{
      */
     public static function flushSubLeagueJson(){
         $ch = curl_init();
-        $url = asset('/static/league/json');
+        $url = asset('/api/static/league/json');
         echo $url . '<br>';
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

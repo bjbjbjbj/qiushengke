@@ -21,9 +21,9 @@ class MatchDetailController extends BaseController{
     public static function curlToHtml($mid,$sport = 1) {
         $ch = curl_init();
         if (1 == $sport)
-            $url = asset('/static/football/detail/' . $mid);
+            $url = asset('/api/static/football/detail/' . $mid);
         else if(2 == $sport){
-            $url = asset('/static/basketball/detail/' . $mid);
+            $url = asset('/api/static/basketball/detail/' . $mid);
         }
         echo $url;
         if (is_null($url))
@@ -36,7 +36,7 @@ class MatchDetailController extends BaseController{
     }
 
     public static function staticHour(){
-        $url = asset('/static/football/hour');
+        $url = asset('/api/static/football/hour');
         if (!is_null($url)) {
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
@@ -46,7 +46,7 @@ class MatchDetailController extends BaseController{
             curl_close($ch);
         }
 
-        $url = asset('/static/error');
+        $url = asset('/api/static/error');
         if (!is_null($url)) {
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $url);
