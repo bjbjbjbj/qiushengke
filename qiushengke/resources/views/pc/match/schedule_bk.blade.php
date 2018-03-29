@@ -4,7 +4,7 @@
         <div id="Calendar">
             <ul>
                 @foreach($calendar as $item)
-                    <a class="li {{$item['on'] ? 'on':''}}" href="{{'/match/basket/'.$item['date'].'/schedule_t.html'}}">
+                    <a class="li {{$item['on'] ? 'on':''}}" href="{{'/match/basket/schedule/'.$item['date'].'/schedule_t.html'}}">
                         <p class="date">{{$item['dateStr']}}</p>
                         <p class="week">{{$item['w']}}</p>
                     </a>
@@ -33,24 +33,24 @@
     <div class="abox">
         <ul>
             <a class="li" href="/match/basket/schedule/immediate_t.html">即时比分</a>
-            <a class="li" href="/match/basket/{{$lastDate}}/result_t.html">完场赛果</a>
+            <a class="li" href="/match/basket/schedule/{{$lastDate}}/result_t.html">完场赛果</a>
             <a class="li on">未来赛程</a>
         </ul>
     </div>
 @endsection
 
 @section('css_match_list')
-    <link rel="stylesheet" type="text/css" href="/pc/css/immediate_bk.css">
+    <link rel="stylesheet" type="text/css" href="{{$cdn}}/pc/css/immediate_bk.css">
 @endsection
 @section('js_match_list')
-    <script type="text/javascript" src="/pc/js/immediate.js"></script>
+    <script type="text/javascript" src="{{$cdn}}/pc/js/immediate.js"></script>
     <script type="text/javascript">
         window.onload = function () {
             setPage();
         }
         function clickDate(date) {
             var value = date.value.replace(/\//g,"");
-            var url = '{{env('APP_URL')}}' + '/match/basket/'+value+'/schedule_t.html';
+            var url = '{{env('APP_URL')}}' + '/match/basket/schedule/'+value+'/schedule_t.html';
             window.location.href = url;
         }
     </script>

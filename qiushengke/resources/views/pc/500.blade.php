@@ -9,5 +9,5 @@
     </div>
 @endsection
 @section('css')
-    <link rel="stylesheet" type="text/css" href="/pc/css/error.css">
+    <link rel="stylesheet" type="text/css" href="{{$cdn}}/pc/css/error.css">
 @endsection

@@ -23,9 +23,9 @@
                             <p class="time"><span>{{$match['lname']}}{{$match['round'] > 0 ? '第'.$match['round'].'轮':''}}</span>{{date('m.d H:i',$match['time'])}}</p>
                             <div class="team">
                                 @if($match['status'] > 0)
-                                    <a href="video.html">直播中</a>
+                                    <a href="{{$liveUrl}}">直播中</a>
                                 @else
-                                    <a href="video.html">未开始</a>
+                                    <a href="{{$liveUrl}}">未开始</a>
                                 @endif
                                 <?php
                                 $hicon = strlen($match['h_icon']) > 0 ? $match['h_icon'] :'/pc/img/icon_teamDefault.png';
@@ -43,7 +43,7 @@
                     @endforeach
                 </ul>
                 @foreach($leagues as $key=>$item)
-                    <ul id="{{'l_'.$item['id']}}">
+                    <ul id="{{'l_'.$item['id']}}" style="display: none">
                         @foreach($item['matches'] as $match)
                             <?php
                             $liveUrl = \App\Http\Controllers\PC\CommonTool::matchLivePathWithId($match['mid'],$match['sport']);
@@ -65,7 +65,7 @@
                                 </div>
                                 <p class="anchor">
                                     @foreach($match['anchors'] as $anchor)
-                                        <a href="video.html">{{$anchor['name']}}</a>
+                                        <a href="{{$liveUrl}}">{{$anchor['name']}}</a>
                                     @endforeach
                                 </p>
                             </li>
@@ -85,7 +85,7 @@
                         <a class="li" target="_blank" href="{{$living['link']}}">
                             <div class="img"><img src="{{isset($living['cover']) ? $living['cover'] : '/pc/img/img_demo.png'}}"></div>
                             <img alt="{{$anchor['name']}}" src="{{isset($anchor['icon'])?$anchor['icon']:'/pc/img/icon_teamDefault.png'}}" class="face">
-                            <p>{{$living['icon']}}</p>
+                            <p>{{$anchor['name']}}</p>
                         </a>
                     @endforeach
                 </ul>
@@ -113,11 +113,11 @@
 @endsection
 
 @section('css')
-    <link rel="stylesheet" type="text/css" href="/pc/css/anchor.css">
+    <link rel="stylesheet" type="text/css" href="{{$cdn}}/pc/css/anchor.css">
 @endsection
 
 @section('js')
-    <script type="text/javascript" src="/pc/js/anchor.js"></script>
+    <script type="text/javascript" src="{{$cdn}}/pc/js/anchor.js"></script>
     <script type="text/javascript">
         window.onload = function () {
              setPage();

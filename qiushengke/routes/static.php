@@ -32,3 +32,8 @@ Route::group(['namespace'=>'PC\League'], function () {
     Route::get('/league/foot',"LeagueController@staticFoot");//专题终端足球
     Route::get('/league/basket',"LeagueController@staticBasket");//专题终端篮球
 });
+
+//主播
+Route::group(['namespace'=>'PC\Anchor'], function () {
+    Route::get('/anchor/index',"AnchorController@staticIndex");//首页
+});

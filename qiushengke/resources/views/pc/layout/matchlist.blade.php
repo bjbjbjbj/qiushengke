@@ -297,14 +297,18 @@
             for (var j = 0; j < matches.length; j++) {
                 ///先算保留
                 var trAttr = type + "_" + matches[j].getAttribute(type) + ',';
-                if (showIds.length > 0 && showIds.indexOf(trAttr) != -1) {
-                    matchItemShow(matches[j], true);
-                }else{
-                    matchItemShow(matches[j], false);
+                if (showIds.length > 0) {
+                    if (showIds.length > 0 && showIds.indexOf(trAttr) != -1) {
+                        matchItemShow(matches[j], true);
+                    } else {
+                        matchItemShow(matches[j], false);
+                    }
                 }
                 //再算删除
-                if (hideIds.length > 0 && hideIds.indexOf(trAttr) != -1) {
-                    matchItemShow(matches[j], false);
+                if (hideIds.length > 0) {
+                    if (hideIds.length > 0 && hideIds.indexOf(trAttr) != -1) {
+                        matchItemShow(matches[j], false);
+                    }
                 }
             }
         }
@@ -411,14 +415,18 @@
                 if ('match' == type){
                     ///先算保留
                     trAttr = type + "_" + matches[j].getAttribute(type) + ',';
-                    if (showIds.length > 0 && showIds.indexOf(trAttr) != -1) {
-                        matchItemShow(matches[j], true);
-                    }else{
-                        matchItemShow(matches[j], false);
+                    if (showIds.length > 0) {
+                        if (showIds.length > 0 && showIds.indexOf(trAttr) != -1) {
+                            matchItemShow(matches[j], true);
+                        } else {
+                            matchItemShow(matches[j], false);
+                        }
                     }
                     //再算删除
-                    if (hideIds.length > 0 && hideIds.indexOf(trAttr) != -1) {
-                        matchItemShow(matches[j], false);
+                    if(hideIds.length > 0) {
+                        if (hideIds.length > 0 && hideIds.indexOf(trAttr) != -1) {
+                            matchItemShow(matches[j], false);
+                        }
                     }
                 }
                 else{
@@ -777,7 +785,9 @@
                         if (dataItem.time == '已结束') {
                             var tbody = $('tbody#End')[0];
                             var matchTr = document.getElementById('m_tr_' + ID);
-                            tbody.appendChild(matchTr);
+                            if(matchTr) {
+                                tbody.appendChild(matchTr);
+                            }
                             var liveItem = $('#live_' + ID);
                             if (liveItem && liveItem.length > 0){
                                 liveItem[0].src = "{{env('CDN_URL')}}/pc/img/icon_lived.png";

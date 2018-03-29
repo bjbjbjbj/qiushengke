@@ -23,17 +23,17 @@
     <div class="abox">
         <ul>
             <a class="li on">即时比分</a>
-            <a class="li" href="/match/basket/{{$lastDate}}/result_t.html">完场赛果</a>
-            <a class="li" href="/match/basket/{{$nextDate}}/schedule_t.html">未来赛程</a>
+            <a class="li" href="/match/basket/schedule/{{$lastDate}}/result_t.html">完场赛果</a>
+            <a class="li" href="/match/basket/schedule/{{$nextDate}}/schedule_t.html">未来赛程</a>
         </ul>
     </div>
 @endsection
 
 @section('css_match_list')
-    <link rel="stylesheet" type="text/css" href="/pc/css/immediate_bk.css">
+    <link rel="stylesheet" type="text/css" href="{{$cdn}}/pc/css/immediate_bk.css">
 @endsection
 @section('js_match_list')
-    <script type="text/javascript" src="/pc/js/immediate.js"></script>
+    <script type="text/javascript" src="{{$cdn}}/pc/js/immediate.js"></script>
     <script type="text/javascript">
         window.onload = function () {
             setPage();

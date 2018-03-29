@@ -93,10 +93,10 @@
 @endsection
 
 @section('css_match_list')
-    <link rel="stylesheet" type="text/css" href="/pc/css/schedule.css">
+    <link rel="stylesheet" type="text/css" href="{{$cdn}}/pc/css/schedule.css">
 @endsection
 @section('js_match_list')
-    <script type="text/javascript" src="/pc/js/immediate.js"></script>
+    <script type="text/javascript" src="{{$cdn}}/pc/js/immediate.js"></script>
     <script type="text/javascript">
         window.onload = function () {
             setPage();

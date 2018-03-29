@@ -6,7 +6,7 @@
     @endcomponent
 @endsection
 @section('js')
-    <script type="text/javascript" src="/pc/js/league.js"></script>
+    <script type="text/javascript" src="{{$cdn}}/pc/js/league.js"></script>
     <script type="text/javascript">
         window.onload = function () {
             setPage();
@@ -15,7 +15,7 @@
     @yield('league_js')
 @endsection
 @section('css')
-    <link rel="stylesheet" type="text/css" href="/pc/css/league.css">
+    <link rel="stylesheet" type="text/css" href="{{$cdn}}/pc/css/league.css">
 @endsection
 @section('content')
     <div id="Con">

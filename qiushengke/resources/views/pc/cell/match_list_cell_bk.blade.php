@@ -130,11 +130,10 @@ $liveUrl = \App\Http\Controllers\PC\CommonTool::matchLivePathWithId($match['mid'
         <td rowspan="2">
             <p class="time">{{date('n月j日 H:i', $match['time'])}}</p>
             @if($hasLive)
-                <br/>
                 @if($match['status'] > 0)
                     <a id="live_{{$mid}}" class="live" href="{{$liveUrl}}" target="_blank"><span>直播中</span></a>
                 @else
-                    <a id="live_{{$mid}}" href="{{$liveUrl}}" target="_blank"><img src="/pc/img/icon_living.png"></a>
+                    <a id="live_{{$mid}}" class="live" href="{{$liveUrl}}" target="_blank"><img src="/pc/img/icon_living.png"></a>
                 @endif
             @endif
         </td>

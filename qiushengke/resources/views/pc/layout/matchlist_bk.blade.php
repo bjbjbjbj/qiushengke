@@ -331,14 +331,18 @@
             for (var j = 0; j < matches.length; j++) {
                 ///先算保留
                 var trAttr = type + "_" + matches[j].getAttribute(type) + ',';
-                if (showIds.length > 0 && showIds.indexOf(trAttr) != -1) {
-                    matchItemShow(matches[j], true);
-                }else{
-                    matchItemShow(matches[j], false);
+                if (showIds.length > 0) {
+                    if (showIds.length > 0 && showIds.indexOf(trAttr) != -1) {
+                        matchItemShow(matches[j], true);
+                    } else {
+                        matchItemShow(matches[j], false);
+                    }
                 }
                 //再算删除
-                if (hideIds.length > 0 && hideIds.indexOf(trAttr) != -1) {
-                    matchItemShow(matches[j], false);
+                if(hideIds.length > 0) {
+                    if (hideIds.length > 0 && hideIds.indexOf(trAttr) != -1) {
+                        matchItemShow(matches[j], false);
+                    }
                 }
             }
         }
@@ -445,14 +449,18 @@
                 if ('match' == type){
                     ///先算保留
                     trAttr = type + "_" + matches[j].getAttribute(type) + ',';
-                    if (showIds.length > 0 && showIds.indexOf(trAttr) != -1) {
-                        matchItemShow(matches[j], true);
-                    }else{
-                        matchItemShow(matches[j], false);
+                    if(showIds.length > 0) {
+                        if (showIds.length > 0 && showIds.indexOf(trAttr) != -1) {
+                            matchItemShow(matches[j], true);
+                        } else {
+                            matchItemShow(matches[j], false);
+                        }
                     }
                     //再算删除
-                    if (hideIds.length > 0 && hideIds.indexOf(trAttr) != -1) {
-                        matchItemShow(matches[j], false);
+                    if (hideIds.length > 0) {
+                        if (hideIds.length > 0 && hideIds.indexOf(trAttr) != -1) {
+                            matchItemShow(matches[j], false);
+                        }
                     }
                 }
                 else{

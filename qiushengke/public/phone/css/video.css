@@ -1,0 +1,312 @@
+﻿body{
+	padding: 588px 0 0;
+}
+
+#Iframe{
+	width: 100%; height: 420px;
+	background: url(../img/live_bg_video_n.jpg) no-repeat center #000; background-size: cover;
+	position: fixed; top: 88px; z-index: 10;
+}
+
+#Navigation .banner select{
+	height: 54px; max-width: 180px;
+	padding: 0 34px 0 24px;
+	border-radius: 4px;
+	background: url(../img/live_icon_down_n.png) no-repeat right 10px center #fff; background-size: 24px;
+	font-size: 22px; line-height: 54px; text-align: left; color: #34b45d;
+	position: absolute; top: 17px; right: 24px;
+	overflow: hidden;
+}
+
+div.tab{
+	height: 80px;
+	padding: 0 20%;
+	box-shadow: 0 0 5px 0 rgba(0, 73, 23, 0.3);
+	position: fixed; top: 508px; left: 0; right: 0; z-index: 10;
+}
+div.tab label{
+	font-size: 28px; line-height: 80px;
+}
+
+#Info{
+	background: #fff;
+}
+#Info .info{
+	height: 240px;
+	padding: 30px 80px 0;
+	display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;
+	-webkit-box-align: flex-start; -webkit-align-items: flex-start; -moz-align-items: flex-start; -ms-align-items: flex-start; -o-align-items: flex-start; align-items: flex-start;
+}
+#Info .info .score{
+	width: 230px;
+	padding-top: 20px;
+	font-size: 60px; line-height: 60px; text-align: center; font-weight: bold;
+}
+#Info .info .score button{
+	height: 68px; width: 150px;
+	margin: 20px auto 0;
+	background: none;
+	font-size: 24px; text-align: center; color: #9e9e9e; font-weight: normal;
+	display: block;
+}
+#Info .info .team{
+	-webkit-box-flex: 1; -moz-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1;
+}
+#Info .info .team .imgbox{
+	width: 64px; height: 64px;
+	padding: 18px 18px 34px; margin: 0 auto;
+}
+#Info .info .team .imgbox img{
+	max-width: 100%; max-height: 100%;
+}
+#Info .info .team p{
+	margin: 0 -10px;
+	font-size: 28px; line-height: 40px; text-align: center;
+}
+#Info ul{
+	padding: 0 5% 88px;
+}
+#Info ul li{
+	height: 24px;
+	margin-bottom: 30px;
+	display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;
+	-webkit-box-align: center; -webkit-align-items: center; -moz-align-items: center; -ms-align-items: center; -o-align-items: center; align-items: center;
+	-webkit-justify-content: center; -moz-justify-content: center; -ms-justify-content: center; -o-justify-content: center; justify-content: center;
+}
+#Info ul li p.item{
+	width: 160px; height: 24px;
+	font-size: 24px; line-height: 24px; text-align: center; color: #9e9e9e;
+	overflow: hidden;
+}
+#Info ul li p.line{
+	width: 20%; min-width: 110px; height: 8px;
+	border-radius: 4px;
+	background: #ebeff9;
+	overflow: hidden;
+}
+#Info ul li p.line span{
+	height: 8px;
+	border-radius: 4px;
+	background: #34b45d;
+	float: right;
+}
+#Info ul li p.line ~ p.line span{
+	background: #e55c00;
+	float: left;
+}
+#Info ul li p.val{
+	font-size: 24px; line-height: 24px; text-align: center;
+	-webkit-box-flex: 1; -moz-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1;
+}
+
+/*事件*/
+#Event{
+	padding: 40px 0 150px;
+	background: #fff;
+}
+#Event .info{
+	height: 100px;
+	padding-bottom: 22px;
+	display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;
+}
+#Event .info p.team{
+	height: 100px; width: 100%;
+	position: relative;
+}
+#Event .info p.team img{
+	width: 64px; height: 64px;
+	margin: 18px auto 0;
+	display: block;
+}
+#Event .info p.team:before{
+	font-size: 24px; line-height: 34px; text-align: center; color: #999;
+	position: absolute; top: 120px; left: 0; right: 0;
+	content: '（主）';
+}
+#Event .info p.team + p.team:before{
+	content: '（客）';
+}
+#Event dl{
+	margin-top: 64px;
+	position: relative;
+}
+#Event dl:before{
+	width: 2px;
+	margin-left: -1px;
+	background: #d8d8d8;
+	position: absolute; top: 0; bottom: 0; left: 50%;
+	content: '';
+}
+#Event dl dt{
+	height: 24px;
+	font-size: 24px; line-height: 24px; text-align: center;
+	position: absolute; left: 0; right: 0;
+}
+#Event dl dt.end{
+	color: #bdbdbd;
+}
+#Event dl dt:first-child{
+	padding-bottom: 72px;
+	background: url(../img/icon_video_end.png) no-repeat center bottom 24px; background-size: 30px;
+	top: -92px;
+}
+#Event dl dt:first-child:before{
+	width: 18px; height: 18px;
+	margin-left: -9px;
+	border-radius: 50%;
+	background: #d8d8d8;
+	position: absolute; top: 81px; left: 50%;
+	content: '';
+}
+#Event dl dt:last-child{
+	padding-top: 72px;
+	background: url(../img/icon_video_begin.png) no-repeat center 24px; background-size: 30px;
+	bottom: -92px;
+}
+#Event dl dt:last-child:before{
+	width: 18px; height: 18px;
+	margin-left: -9px;
+	border-radius: 50%;
+	background: #d8d8d8;
+	position: absolute; bottom: 81px; left: 50%;
+	content: '';
+}
+#Event dl dd{
+	min-height: 60px;
+	padding-bottom: 40px;
+	display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;
+	-webkit-box-align: center; -webkit-align-items: center; -moz-align-items: center; -ms-align-items: center; -o-align-items: center; align-items: center;
+	position: relative;
+}
+#Event dl dt + dd{
+	padding-top: 40px;
+}
+#Event dl dd.host{
+	padding-right: 50%;
+}
+#Event dl dd.away{
+	padding-left: 50%;
+}
+#Event dl dd p.minute{
+	width: 60px; height: 60px;
+	border-radius: 50%;
+	background: #ededed;
+	font-size: 24px; line-height: 60px; text-align: center; color: #666;
+	position: absolute; top: 0; z-index: 1;
+}
+#Event dl dt + dd p.minute{
+	top: 40px;
+}
+#Event dl dd p.minute span{
+	position: absolute;
+}
+#Event dl dd.host p.minute{
+	margin-right: -30px;
+	right: 50%;
+}
+#Event dl dd.away p.minute{
+	margin-left: -30px;
+	left: 50%;
+}
+#Event dl dd ul{
+	margin: -10px 0;
+	-webkit-box-flex: 1; -moz-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1;
+}
+#Event dl dd.host ul{
+	padding-left: 10px;
+	text-align: right;
+}
+#Event dl dd.aways ul{
+	padding-right: 10px;
+	text-align: left;
+}
+#Event dl dd ul li{
+	font-size: 28px; line-height: 40px;
+	position: relative;
+}
+#Event dl dd.host ul li{
+	padding-right: 94px;
+}
+#Event dl dd.away ul li{
+	padding-left: 94px;
+}
+#Event dl dd ul li img{
+	width: 30px; height: 30px;
+	position: absolute; top: 5px;
+}
+#Event dl dd.host ul li img{
+	right: 47px;
+}
+#Event dl dd.away ul li img{
+	left: 47px;
+}
+
+/*球员统计*/
+#Player{
+	background: #fff;
+}
+#Player h2{
+	padding: 40px 0 40px 25px;
+	font-size: 28px; line-height: 28px; text-align: left; font-weight: bold;
+}
+#Player h2 ~ h2{
+	padding-top: 80px;
+}
+#Player .list{
+	position: relative;
+	display: -webkit-box; display: -moz-box; display: -ms-flexbox; display: -webkit-flex; display: flex;
+}
+#Player .list dl{
+	width: 280px;
+}
+#Player .list dl dt{
+	height: 56px;
+	font-size: 24px; line-height: 56px; text-align: center; color: #7e7e7e;
+	position: relative;
+}
+#Player .list dl dd{
+	height: 80px;
+	padding-left: 24px;
+	font-size: 24px; line-height: 80px;
+	position: relative;
+	overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+#Player .list .item{
+	overflow-y: hidden; overflow-x: auto; -webkit-overflow-scrolling: touch;
+	-webkit-box-flex: 1; -moz-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1;
+}
+#Player .list table{
+	min-width: 100%;
+}
+#Player .list table th{
+	height: 56px; min-width: 100px;
+	font-size: 24px; line-height: 32px; text-align: center; color: #7e7e7e;
+	position: relative;
+}
+#Player .list table td{
+	height: 80px;
+	font-size: 24px; line-height: 80px; text-align: center;
+	position: relative;
+}
+#Player .list dl dd:after, #Player .list dl dt:after, #Player .list table th:after, #Player .list table td:after{
+	height: 1px;
+	background: #e0e3ea;
+	position: absolute; bottom: 0; left: 0; right: 0;
+	content: '';
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

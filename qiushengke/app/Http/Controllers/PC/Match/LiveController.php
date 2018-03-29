@@ -55,6 +55,16 @@ class LiveController extends BaseController{
         if ($json && strlen($json) > 0){
             Storage::disk('public')->put('/json/live/'.($sport == 1 ? 'foot':'basket').'/'.$mid.'.json',$json);
         }
+
+        //聊天室json,默认生成吧,免得404
+        $first = substr($mid,0,2);
+        $second = substr($mid,2,2);
+        $path = '/chat/json/'.($sport == 1 ? '1':'2').'/'.$first.'/'.$second.'/'.$mid.'_t.json';
+        if (!Storage::disk('public')->exists($path)){
+            $json = array();
+            $json = json_encode($json);
+            Storage::disk('public')->put($path,$json);
+        }
     }
 
     /**
