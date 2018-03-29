@@ -18,3 +18,11 @@ Route::group(['namespace'=>'Match'], function () {
     Route::get("/match/foot/schedule/{dateStr}/result.html", "MatchController@result_f"); //完赛比分
     Route::get("/match/foot/schedule/{dateStr}/schedule.html", "MatchController@schedule_f"); //下日赛程
 });
+
+
+Route::group(['namespace'=>'Detail'], function () {
+    //足球终端
+    Route::get("/match/foot/{sub1}/{sub2}/{mid}.html", "FootballController@detail"); //今天
+
+
+});

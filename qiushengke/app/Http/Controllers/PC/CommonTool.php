@@ -182,6 +182,22 @@ class CommonTool
         return '';
     }
 
+    /**
+     * wap 赔率颜色，绿色上升，蓝色下降
+     * @param $up1
+     * @param $up2
+     * @return string
+     */
+    public static function colorOfWapUpDown($up1, $up2) {
+        if ($up2 > $up1){
+            return 'green';
+        }
+        elseif ($up2 < $up1){
+            return 'blue';
+        }
+        return '';
+    }
+
     public static function object_to_array($obj) {
         $object =  json_decode( json_encode( $obj),true);
         return  $object;
@@ -270,6 +286,44 @@ class CommonTool
             return $prefix . $text;
         }
         return $text;
+    }
+
+    /**
+     * 盘口转字符串显示
+     * @param $middle
+     * @param $withMinus
+     * @return int
+     */
+    public static function getOddMiddleString($middle, $withMinus = true){
+        //是否小数
+        $isMinus = $middle < 0;
+        //取绝对值
+        $middle = abs($middle);
+        //分离小数
+        $decimal = (100*$middle)%100;
+        $first = '';
+        $second = '';
+        switch ($decimal){
+            //没有半球盘
+            case 0:
+            case 50:
+                $first = $middle;
+                break;
+            case 25:
+                $first = floor($middle);
+                $second = $first.'.5';
+                break;
+            case 75:
+                $second = ceil($middle);
+                $first = $second - 0.5;
+                break;
+        }
+        if (strlen($second) > 0){
+            return ($isMinus&&$withMinus?'-':'').$first.'/'.$second;
+        }
+        else{
+            return ($isMinus&&$withMinus?'-':'').$middle;
+        }
     }
 
     /**

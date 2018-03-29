@@ -14,7 +14,6 @@
 </head>
 <body>
 @yield('content')
-@com
 </body>
 <script type="text/javascript">
     window.onload = function () {
