@@ -33,7 +33,7 @@ $asiaDown = "-";
 if (isset($match['asiamiddle2'])) {
     $asiaUp = \App\Http\Controllers\PC\CommonTool::float2Decimal($match['asiaup2']);
     $asiaDown = \App\Http\Controllers\PC\CommonTool::float2Decimal($match['asiadown2']);
-    $asiaMiddle = \App\Http\Controllers\PC\CommonTool::getHandicapCn($match['asiamiddle2'], "-", \App\Http\Controllers\PC\CommonTool::k_odd_type_asian);
+    $asiaMiddle = \App\Http\Controllers\PC\CommonTool::panKouTextWap($match['asiamiddle2'], "-", \App\Http\Controllers\PC\CommonTool::k_odd_type_asian);
 }
 
 //大小球
@@ -115,11 +115,11 @@ $liveUrl = \App\Http\Controllers\PC\CommonTool::matchLivePathWithId($match['mid'
 $hicon = isset($match['hicon'])?$match['hicon']:'/phone/img/icon_teamDefault.png';
 $aicon = isset($match['aicon'])?$match['aicon']:'/phone/img/icon_teamDefault.png';
 ?>
-<a href="match.html" class="default">
+<a href="match.html" isMatch="1" class="default {{$show?'show':'hide'}}" id="m_tr_{{$mid}}" match="{{$mid}}" league="{{$lid}}" asiaOdd="{{$asiaOdd}}" ouOdd="{{$ouOdd}}" first="{{$isFirst?"first":""}}" lottery="{{$isLottery?"lottery":""}}" live="{{$hasLive?"live":""}}">
     <div class="odd">
-        <p>欧：1.88&nbsp;&nbsp;3.88&nbsp;&nbsp;5.67</p>
-        <p>亚：0.88&nbsp;&nbsp;1.5/2&nbsp;&nbsp;1.02</p>
-        <p>大：0.88&nbsp;&nbsp;2.5/3&nbsp;&nbsp;1.02</p>
+        <p>欧：{{$ouUp}} {{$ouMiddle}} {{$ouDown}}</p>
+        <p>亚：{{$asiaUp}} {{$asiaMiddle}} {{$asiaDown}}</p>
+        <p>大：{{$goalUp}} {{$goalMiddle}} {{$goalDown}}</p>
     </div>
     <div class="match">
         <div class="time">
@@ -142,44 +142,23 @@ $aicon = isset($match['aicon'])?$match['aicon']:'/phone/img/icon_teamDefault.png
             <div class="halfScore"><p>{{$match['hscorehalf']}}</p><p>{{$match['ascorehalf']}}</p></div>
         @endif
         <div class="card">
-            <p>
-                <span
-                        @if($match['h_red'] > 0)
-                        class="redCard"
-                        @else
-                        class="redCard hide"
-                        @endif
-                        id="{{$mid}}_h_red">{{$match['h_red']}}</span>
-                <span
-                        @if($match['h_yellow'] > 0)
-                        class="yellowCard"
-                        @else
-                        class="yellowCard hide"
-                        @endif
-                        id="{{$mid}}_h_yellow">{{$match['h_yellow']}}</span>
-            </p>
-            <p>
-                <span
-                        @if($match['a_red'] > 0)
-                        class="redCard"
-                        @else
-                        class="redCard hide"
-                        @endif
-                        id="{{$mid}}_a_red">{{$match['a_red']}}</span>
-                <span
-                        @if($match['a_yellow'] > 0)
-                        class="yellowCard"
-                        @else
-                        class="yellowCard hide"
-                        @endif
-                        id="{{$mid}}_a_yellow">{{$match['a_yellow']}}</span>
-            </p>
+            @if($status == 0)
+            @else
+                <p>
+                    <span class="red" id="{{$mid}}_h_red">{{$match['h_red']}}</span>
+                    <span class="yellow" id="{{$mid}}_h_yellow">{{$match['h_yellow']}}</span>
+                </p>
+                <p>
+                    <span class="red" id="{{$mid}}_a_red">{{$match['a_red']}}</span>
+                    <span class="yellow" id="{{$mid}}_a_yellow">{{$match['a_yellow']}}</span>
+                </p>
+            @endif
         </div>
         @if($status == 0)
             @if($hasLive)
                 <div class="live"><img src="img/soccer_icon_living_n.png"></div>
             @else
-                
+
             @endif
         @elseif($status == -1)
             @if($hasLive)

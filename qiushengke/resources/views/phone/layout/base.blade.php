@@ -8,13 +8,20 @@
     @yield('css')
     <link rel="Shortcut Icon" data-ng-href="{{$cdn}}/phone/img/ico.ico" href="{{$cdn}}/phone/img/ico.ico">
     <link href="img/icon_face.png" sizes="100x100" rel="apple-touch-icon-precomposed">
+    <style>
+        .hide {
+            display: none;
+        }
+        .show {
+            display: block;
+        }
+    </style>
     <script type="text/javascript" src="{{$cdn}}/phone/js/jquery.js"></script>
     <script type="text/javascript" src="{{$cdn}}/phone/js/public.js"></script>
     <title>球胜客</title>
 </head>
 <body>
 @yield('content')
-@com
 </body>
 <script type="text/javascript">
     window.onload = function () {

@@ -565,7 +565,7 @@
         //赔率刷新
         function refreshRoll() {
             var url = "/static/change/2/roll.json?" + (new Date().getTime());
-            url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
+            url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 "url": url,
                 "dataType": "json",
@@ -696,7 +696,7 @@
             if (htmlPathType !='bk_immediate')
                 return;
             var url = "/static/change/2/score.json?" + (new Date().getTime());
-            url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
+            url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 "url": url,
                 "dataType": "json",

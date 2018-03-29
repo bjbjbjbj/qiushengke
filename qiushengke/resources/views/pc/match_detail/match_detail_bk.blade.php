@@ -1500,7 +1500,7 @@
             var first = mid.substr(0,2);
             var second = mid.substr(2,2);
             var url = '/static/terminal/2/'+ first +'/'+ second +'/'+mid+'/match.json';
-            url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
+            url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 'url': url,
                 'success': function (json) {
@@ -1547,7 +1547,7 @@
             var first = mid.substr(0,2);
             var second = mid.substr(2,2);
             var url = '/static/terminal/2/'+ first +'/'+ second +'/'+mid+'/odd.json';
-            url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
+            url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 'url':url,
                 'success':function (json) {

@@ -142,7 +142,7 @@
             var first = ID.substr(0,2);
             var second = ID.substr(2,2);
             var url = "/static/terminal/"+"{{$sport}}"+"/"+first+"/"+second+"/"+ID+"/roll.json";
-            url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
+            url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 "url":url,
                 "dataType": "json",

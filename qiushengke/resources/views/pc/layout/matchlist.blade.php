@@ -497,7 +497,7 @@
             var first = ID.substr(0,2);
             var second = ID.substr(2,2);
             var url = "/static/terminal/1/"+first+"/"+second+"/"+ID+"/tech.json";
-            url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
+            url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 "url": url,
 //                "url":"/static/terminal/1/"+first+"/"+second+"/"+ID+"/tech.json",
@@ -643,7 +643,7 @@
         //赔率刷新
         function refreshRoll() {
             var url = "/static/change/1/roll.json?" + (new Date().getTime());
-            url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
+            url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 "url": url,
                 "dataType": "json",
@@ -695,7 +695,7 @@
             if (htmlPathType !='immediate')
                 return;
             var url = "/static/change/1/score.json?" + (new Date().getTime());
-            url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
+            url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 "url": url,
                 "dataType": "json",
@@ -815,7 +815,7 @@
             var first = ID.substr(0,2);
             var second = ID.substr(2,2);
             var url = "/static/terminal/1/"+first+"/"+second+"/"+ID+"/roll.json";
-            url = '/test?url=' + '{{env('MATCH_URL')}}' + url;
+            url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 {{--                "url": '{{env('MATCH_URL')}}' + "/static/terminal/1/"+first+"/"+second+"/"+ID+"/tech.json",--}}
                 "url":url,
