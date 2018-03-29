@@ -610,7 +610,7 @@ class SpiderController extends Controller
     private function spiderFillTeamMatch(Request $request)
     {
         $count = $request->input('count', 10);
-        $matches = Match::where("status", "=", -1)
+        $matches = \App\Models\LiaoGouModels\Match::where("status", "=", -1)
             ->where(function ($q) {
                 $q->whereNull("hid")
                     ->orwhereNull("aid");
@@ -620,7 +620,7 @@ class SpiderController extends Controller
             ->get();
         foreach ($matches as $match) {
             echo $match->hname . ' VS ' . $match->aname . '<br>';
-            $this->matchDetail($match->id, true, true);
+            $this->matchDetail($match->win_id, true, true);
         }
         if ($request->input('auto', 0) == 1) {
             echo "<script language=JavaScript>window.location.reload();</script>";

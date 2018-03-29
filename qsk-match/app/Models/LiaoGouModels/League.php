@@ -85,6 +85,6 @@ class League extends Model
      */
     public static function getFiveLids() {
 //        return [31,26,29,8,11];
-        return [42,1,30,64,61];
+        return [42,1,30,64,51];
     }
 }

@@ -72,7 +72,7 @@ trait SpiderReferee
 
         $matches = DB::connection('liaogou_match')->select("select m.* from 
         (select matches.* from matches
-        left join liaogou_match.leagues as l on l.win_id = matches.lid
+        left join qsk_match.leagues as l on l.win_id = matches.lid
         where time < '$endTime' and l.$leagueQuery = 1 $startTimeQueryStr order by time desc $limitQueryStr) as m
         left join match_datas as md on m.id = md.id where (md.referee_id = 0 or md.referee_id is null)");
 
@@ -722,9 +722,9 @@ trait SpiderReferee
     private function convertErrorRefereeId() {
         $matchDatas = DB::connection('liaogou_match')->select("
         select md.id, m.time from 
-        (select * from liaogou_match.match_datas where referee_id > 0) as md
-        left join liaogou_match.referees as ref on md.referee_id = ref.id
-        left join liaogou_match.matches as m on m.id = md.id
+        (select * from qsk_match.match_datas where referee_id > 0) as md
+        left join qsk_match.referees as ref on md.referee_id = ref.id
+        left join qsk_match.matches as m on m.id = md.id
         where ref.name is null order by m.time desc limit 100;
         ");
 

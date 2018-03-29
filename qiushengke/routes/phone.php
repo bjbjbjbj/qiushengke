@@ -23,3 +23,11 @@ Route::group(['namespace'=>'Match'], function () {
     Route::get("/match/basket/schedule/{dateStr}/result_{order}.html", "MatchController@result_bk"); //完赛比分
     Route::get("/match/basket/schedule/{dateStr}/schedule_{order}.html", "MatchController@schedule_bk"); //下日赛程
 });
+
+
+Route::group(['namespace'=>'Detail'], function () {
+    //足球终端
+    Route::get("/match/foot/{sub1}/{sub2}/{mid}.html", "FootballController@detail"); //今天
+
+
+});
