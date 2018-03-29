@@ -27,7 +27,7 @@ Route::group(['namespace'=>'Match'], function () {
 
 Route::group(['namespace'=>'Detail'], function () {
     //足球终端
-    Route::get("/match/foot/{sub1}/{sub2}/{mid}.html", "FootballController@detail"); //今天
-
+    Route::get("/match/foot/{sub1}/{sub2}/{mid}.html", "FootballController@detail");
+    Route::get("/match/foot_cell/{sub1}/{sub2}/{mid}.html", "FootballController@dataOdd");
 
 });

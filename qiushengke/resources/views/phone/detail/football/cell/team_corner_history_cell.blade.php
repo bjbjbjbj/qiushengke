@@ -1,3 +1,4 @@
+@if(isset($history['historyBattle']['nhnl']) && count($history['historyBattle']['nhnl']) > 0)
 <div class="battle matchTable default" ha="0" le="0">
     <div class="title">
         交锋往绩<button class="close"></button>
@@ -27,3 +28,4 @@
     ])
     @endcomponent
 </div>
+@endif

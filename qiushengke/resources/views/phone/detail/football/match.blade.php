@@ -19,7 +19,7 @@
     </div>
     @component("phone.detail.football.cell.match_cell", ['cdn'=>$cdn, 'lineup'=>$lineup, 'tech'=>$tech, 'match'=>$match ]) {{-- Match 模块 --}}
     @endcomponent
-    @component("phone.detail.football.cell.data_cell", ['cdn'=>$cdn, 'match'=>$match, 'analyse'=>$analyse ]) {{-- Data 模块 TODO --}}
+    @component("phone.detail.football.cell.data_cell", ['cdn'=>$cdn, 'match'=>$match, 'analyse'=>$analyse ]) {{-- Data 模块 --}}
     @endcomponent
     @component("phone.detail.football.cell.team_cell", ['cdn'=>$cdn, 'match'=>$match, 'analyse'=>$analyse] ) {{-- Team 模块 --}}
     @endcomponent
@@ -37,6 +37,26 @@
     // }
     $(function () {
         setCanvas();
+        $.get('/wap/match/foot_cell/{{$first}}/{{$second}}/{{$mid}}.html', function (html) {
+            if (html && html != "") {
+                $("#Data div.odd").html(html);
+
+                var BtnClose = $('#Data div.odd button.close');
+                BtnClose.click(function(){
+                    if ($(this).parents('.default').attr('close')) {
+                        $(this).parents('.default').removeAttr('close');
+                    }else{
+                        $(this).parents('.default').attr('close','close');
+                    }
+                });
+
+                var Sel = $('#Data div.odd select');
+                Sel.change(function(){
+                    $(this).parents('.default').children('table').css('display','none');
+                    $('#' + $(this).children('option:selected').val()).css('display','');
+                })
+            }
+        });
     });
     window.onscroll = function () {
         setHead();

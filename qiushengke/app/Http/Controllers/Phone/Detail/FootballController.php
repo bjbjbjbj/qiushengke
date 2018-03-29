@@ -38,8 +38,33 @@ class FootballController extends BaseController
         $result['tech'] = MatchDetailController::matchDetailData($mid, 'tech');
         //阵容;
         $result['lineup'] = MatchDetailController::matchDetailData($mid, 'lineup');
+        $result['first'] = substr($mid, 0, 2);
+        $result['second'] = substr($mid, 2, 4);
+        $result['mid'] = $mid;
         $this->html_var = array_merge($this->html_var,$result);
         return view('phone.detail.football.match', $this->html_var);
+    }
+
+    /**
+     * 获取足球终端 Data 模块的赔率
+     * @param Request $request
+     * @param $sub1
+     * @param $sub2
+     * @param $mid
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function dataOdd(Request $request, $sub1, $sub2, $mid) {
+        $result['odds'] = MatchDetailController::matchDetailData($mid, 'odd');
+        if (!isset($result['odds'])) {
+            return;
+        }
+//        dump($result['odds']);
+        $this->html_var = array_merge($this->html_var,$result);
+        return view('phone.detail.football.cell.data_odd_cell', $this->html_var);
+    }
+
+    public function typeOdd(Request $request, $sub1, $sub2, $mid) {
+
     }
 
 }

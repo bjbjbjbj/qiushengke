@@ -14,22 +14,22 @@
         </thead>
         <tbody>
         <tr>
-            <td class="green">{{$host['rank']}}</td>
+            <td class="green">{{empty($host['rank']) ? '-' : $host['rank']}}</td>
             <td>{{$match['hname']}}</td>
-            <td>{{$host['count']}}</td>
-            <td>{{$host['win']}}/{{$host['draw']}}/{{$host['lose']}}</td>
-            <td>{{$host['goal']}}/{{$host['fumble']}}</td>
+            <td>{{empty($host['count']) ? '-' : $host['count']}}</td>
+            <td>{{!empty($host['win']) ? $host['win'] : '-'}}/{{empty($host['draw']) ? '-' : $host['draw']}}/{{empty($host['lose']) ? '-' : $host['lose']}}</td>
+            <td>{{empty($host['goal']) ? '-' : $host['goal']}}/{{empty($host['fumble']) ? '-' : $host['fumble']}}</td>
             <td>{{$host['goal'] - $host['fumble']}}</td>
-            <td>{{$host['score']}}</td>
+            <td>{{empty($host['score']) ? '-' : $host['score']}}</td>
         </tr>
         <tr>
-            <td class="green">{{$away['rank']}}</td>
+            <td class="green">{{empty($away['rank']) ? '-' : $away['rank']}}</td>
             <td>{{$match['aname']}}</td>
-            <td>{{$away['count']}}</td>
-            <td>{{$away['win']}}/{{$away['draw']}}/{{$away['lose']}}</td>
-            <td>{{$away['goal']}}/{{$away['fumble']}}</td>
+            <td>{{empty($away['count']) ? '-' : $away['count']}}</td>
+            <td>{{empty($away['win']) ? '-' : $away['win']}}/{{empty($away['draw']) ? '-' : $away['draw']}}/{{empty($away['lose']) ? '-' : $away['lose']}}</td>
+            <td>{{empty($away['goal']) ? '-' : $away['goal']}}/{{empty($away['fumble']) ? '-' : $away['fumble']}}</td>
             <td>{{$away['goal'] - $away['fumble']}}</td>
-            <td>{{$away['score']}}</td>
+            <td>{{empty($away['score']) ? '-' : $away['score']}}</td>
         </tr>
         </tbody>
     </table>
