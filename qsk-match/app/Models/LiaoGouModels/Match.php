@@ -4,7 +4,6 @@ namespace App\Models\LiaoGouModels;
 
 use App\Http\Controllers\Tool\MatchControllerTool;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Match extends Model
 {
@@ -193,7 +192,11 @@ class Match extends Model
                 }
                 else{
                     //尝试看看有没有team对应球探的
-                    $team = Team::where('name',$hname)->first();
+                    if ($m->hid > 0) {
+                        $team = Team::query()->where('win_id', $m->hid)->first();
+                    } else {
+                        $team = Team::where('name', $hname)->first();
+                    }
                     if (isset($team)){
                         $alia = new LiaogouAlias();
                         $alia->type = 1;
@@ -228,7 +231,7 @@ class Match extends Model
                     join('teams',function ($q){
                         $q->on('teams.id','=','liaogou_aliases.lg_id');
                     })
-                        ->where('liaogou_aliases.target_name','=',$m->aname)
+                        ->where('liaogou_aliases.lg_name','=',$m->aname)
                         ->where('liaogou_aliases.sport',1)
                         ->where('liaogou_aliases.type',1)
                         ->where('liaogou_aliases.from',1)
@@ -242,7 +245,11 @@ class Match extends Model
                 }
                 else{
                     //尝试看看有没有team对应球探的
-                    $team = Team::where('name',$m->aname)->first();
+                    if ($m->aid > 0) {
+                        $team = Team::query()->where('win_id', $m->aid)->first();
+                    } else {
+                        $team = Team::where('name', $m->aname)->first();
+                    }
                     if (isset($team)){
                         $alia = new LiaogouAlias();
                         $alia->type = 1;

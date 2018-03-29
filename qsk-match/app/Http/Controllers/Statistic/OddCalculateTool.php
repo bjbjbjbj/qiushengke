@@ -289,8 +289,8 @@ class OddCalculateTool extends Controller
         //框架有bug,不能搜float
         $query = DB::select('select matches.*, odds.id as odd_id,
         odds.up1 as up1, odds.middle1 as middle1, odds.down1 as down1,
-        odds.up2 as up2, odds.middle2 as middle2, odds.down2 as down2 from liaogou_match.matches as matches '.
-            'join liaogou_match.odds as odds on (matches.id = odds.mid and odds.cid = '.Odd::default_banker_id.' and odds.type = '. $type .
+        odds.up2 as up2, odds.middle2 as middle2, odds.down2 as down2 from qsk_match.matches as matches '.
+            'join qsk_match.odds as odds on (matches.id = odds.mid and odds.cid = '.Odd::default_banker_id.' and odds.type = '. $type .
             ' and odds.up1 = '. $up .' and odds.middle1='.$middle.' and odds.down1 = '.$down.' and matches.status = -1'.
             ' and matches.time < \''.$time.'\' and matches.time >  \''.$startTime.'\') order by matches.time desc, matches.id desc limit '.$size);
          return $query;
@@ -312,9 +312,9 @@ class OddCalculateTool extends Controller
         matches.hscore,matches.ascore,matches.hscorehalf,matches.ascorehalf,
         matches.hname,matches.aname, leagues.name as lname,
         odds.up1 as up1, odds.middle1 as middle1, odds.down1 as down1,
-        odds.up2 as up2, odds.middle2 as middle2, odds.down2 as down2 from liaogou_match.matches as matches '.
-            'left join liaogou_match.leagues as leagues on leagues.id = matches.lid '.
-            'join liaogou_match.odds as odds on (matches.id = odds.mid and odds.cid = '.Odd::default_banker_id.' and odds.type = '. $type .
+        odds.up2 as up2, odds.middle2 as middle2, odds.down2 as down2 from qsk_match.matches as matches '.
+            'left join qsk_match.leagues as leagues on leagues.id = matches.lid '.
+            'join qsk_match.odds as odds on (matches.id = odds.mid and odds.cid = '.Odd::default_banker_id.' and odds.type = '. $type .
             ' and odds.up1 = '. $up .' and odds.middle1='.$middle.' and odds.down1 = '.$down.' and matches.status = -1'.
             ' and matches.time < \''.$time.'\' and matches.time >  \''.$startTime.'\') order by matches.time desc, matches.id desc limit '.$size);
         return $query;

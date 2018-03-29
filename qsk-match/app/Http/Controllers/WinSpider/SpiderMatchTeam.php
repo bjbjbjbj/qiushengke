@@ -32,7 +32,7 @@ trait SpiderMatchTeam{
      * @param $id
      * @param bool $team 是否需要爬球队
      * @param bool $data 是否需要爬比赛详情
-     * @return \App\Models\Match|null 返回id对应球探库match数据
+     * @return Match $m 返回id对应球探库match数据
      */
     private function matchDetail($id, $team = false, $data = false, $refreshData = false)
     {
@@ -126,17 +126,17 @@ trait SpiderMatchTeam{
                 $lgm = \App\Models\LiaoGouModels\Match::saveWithWinData($m);
 
                 //如果liaogou没有tid,但是球探有,这个对球队信息要做一次保存操作
-                if (isset($lgm)
-                    && (is_null($lgm->hid) || is_null($lgm->aid))
-                    && (isset($m->hid) && isset($m->aid))
-                ) {
-                    if (is_null($lgm->hid))
-                        $this->teamDetail($m->hid, $id, $hname, true);
-                    if (is_null($lgm->aid))
-                        $this->teamDetail($m->aid, $id, $aname, true);
-
-                    $lgm = \App\Models\LiaoGouModels\Match::saveWithWinData($m);
-                }
+//                if (isset($lgm)
+//                    && (is_null($lgm->hid) || is_null($lgm->aid))
+//                    && (isset($m->hid) && isset($m->aid))
+//                ) {
+//                    if (is_null($lgm->hid))
+//                        $this->teamDetail($m->hid, $id, $hname, true);
+//                    if (is_null($lgm->aid))
+//                        $this->teamDetail($m->aid, $id, $aname, true);
+//
+//                    $lgm = \App\Models\LiaoGouModels\Match::saveWithWinData($m);
+//                }
 
                 //盘王(这里的算法没有实际效果，弃用了)
 //                if (isset($lgm)) {
@@ -159,7 +159,11 @@ trait SpiderMatchTeam{
 //            $lgm = \App\Models\LiaoGouModels\Match::getMatchWith($id,'win_id');
 //            $lgm->delete();
         }
-        return null;
+
+        $win_match = Match::query()->find($id);
+        \App\Models\LiaoGouModels\Match::saveWithWinData($win_match);
+
+        return $win_match;
     }
 
     /**
@@ -644,7 +648,7 @@ trait SpiderMatchTeam{
         }
 
         $matches = DB::connection('liaogou_match')->select("select matches.win_id, matches.time from matches
-        left join liaogou_match.leagues as l on l.win_id = matches.lid
+        left join qsk_match.leagues as l on l.win_id = matches.lid
         where time < '$endTime' and l.odd = 1 and status = -1 $startTimeQueryStr order by time desc $limitQueryStr;");
 
         foreach ($matches as $match) {

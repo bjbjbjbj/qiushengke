@@ -77,7 +77,7 @@ trait SpiderSportBetting
             ->whereNull('prediction_result')
             ->where('time', '>', $startDate)
             ->orderBy("time", "asc")
-            ->leftJoin('liaogou_match.matches as match', function ($join) {
+            ->leftJoin('qsk_match.matches as match', function ($join) {
                 $join->on('match.id', '=', 'match_europe_predictions.id');
             })
             ->take(10)

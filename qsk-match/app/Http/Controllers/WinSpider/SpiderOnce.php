@@ -16,6 +16,7 @@ use App\Models\WinModels\Stage;
 use App\Models\WinModels\State;
 use App\Models\WinModels\Zone;
 use App\Models\WinModels\Banker;
+use Google\Protobuf\Internal\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 
@@ -351,7 +352,10 @@ trait SpiderOnce
 
         }
         dump($content);
-        $content = json_decode($content, true);
-        dump($content);
+
+        $test = new Message();
+        $test->mergeFromString($content);
+
+        dump($test);
     }
 }
