@@ -288,6 +288,55 @@ class CommonTool
         return $text;
     }
 
+    public static function panKouTextWap ($middle, $isAway = false, $isGoal = false) {
+        if ($isGoal || $middle == 0){
+            $prefix = "";
+        } else{
+            if ($isAway){
+                $prefix = $middle < 0 ? "" : "-";
+            }else{
+                $prefix = $middle < 0 ? "-" : "";
+            }
+        }
+        $text = $middle;
+        $middle = abs($middle);
+        switch ($middle) {
+            case 7: $text = "7"; break;
+            case 6.75: $text = "6.5/7"; break;
+            case 6.5: $text = "6.5"; break;
+            case 6.25: $text = "6/6.5"; break;
+            case 6: $text = "6"; break;
+            case 5.75: $text = "5.5/6"; break;
+            case 5.5: $text = "5.5"; break;
+            case 5.25: $text = "5/5.5"; break;
+            case 5: $text = "5"; break;
+            case 4.75: $text = "4.5/5"; break;
+            case 4.5: $text = "4.5"; break;
+            case 4.25: $text = "4/4.5"; break;
+            case 4: $text = "4"; break;
+            case 3.75: $text = "3.5/4"; break;
+            case 3.5: $text = "3.5"; break;
+            case 3.25: $text = "3/3.5"; break;
+            case 3: $text = "3"; break;
+            case 2.75: $text = "2.5/3"; break;
+            case 2.5: $text = "2.5"; break;
+            case 2.25: $text = "2/2.5"; break;
+            case 2: $text = "2"; break;
+            case 1.75: $text = "1.5/2"; break;
+            case 1.5: $text = "1.5"; break;
+            case 1.25: $text = "1/1.5"; break;
+            case 1: $text = "1"; break;
+            case 0.75: $text = "0.5/1"; break;
+            case 0.5: $text = "0.5"; break;
+            case 0.25: $text = "0/0.5"; break;
+            case 0: $text = "0"; break;
+        }
+        if (!is_numeric($text)) {
+            return $prefix . $text;
+        }
+        return $text;
+    }
+
     /**
      * 盘口转字符串显示
      * @param $middle

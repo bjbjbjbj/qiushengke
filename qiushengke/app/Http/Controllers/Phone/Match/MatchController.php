@@ -231,19 +231,36 @@ class MatchController extends BaseController{
             }
         }
         $result['matches'] = $matches;
-        //赛事
+        //赛事,pc wap不一样
         $filter = array();
+        //全部
         $o_leagues = $pc_json['filter'][0]['data'];
         foreach ($o_leagues as $item){
-            $py = $item['py'];
+            $py = 'All';
             $lid = $item['id'];
             $name = $item['name'];
             $count = $item['count'];
-            $isNBA = isset($item['isFive'])?$item['isFive']:0;
-            if (!isset($leagues[$py][$lid])) {
-                $filter[$py][$lid] = ["id" => $lid, "name" => $name, "count" => $count, "isNBA" => $isNBA];
-            }
+            $filter[$py][] = ["id" => $lid, "name" => $name, "count" => $count];
         }
+        //NBA
+        $o_leagues = $pc_json['filter'][3]['data'];
+        foreach ($o_leagues as $item){
+            $py = 'NBA';
+            $lid = $item['id'];
+            $name = $item['name'];
+            $count = $item['count'];
+            $filter[$py][] = ["id" => $lid, "name" => $name, "count" => $count];
+        }
+        //自定义
+        $o_leagues = $pc_json['filter'][0]['data'];
+        foreach ($o_leagues as $item){
+            $py = 'Self';
+            $lid = $item['id'];
+            $name = $item['name'];
+            $count = $item['count'];
+            $filter[$py][] = ["id" => $lid, "name" => $name, "count" => $count];
+        }
+
         $result['filter'] = $filter;
         return $result;
     }
