@@ -529,6 +529,11 @@ class CommonTool
         return '';
     }
 
+    public static function getBasketScoreWap($score) {
+        if (isset($score)) return $score;
+        return '-';
+    }
+
     //获取篮球比赛 单个球队的半场分数
     public static function getBasketHalfScoreTxt($match, $isHome = true) {
         $status = $match['status'];
