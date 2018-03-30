@@ -367,7 +367,7 @@
     <div class="filterBox" id="LeagueFilter" style="display: none;">
         <div class="default">
             <div class="tab">
-                <input type="radio" name="leagueFilter" id="LeagueAll" value="ALL" checked><label for="LeagueAll">全部赛事</label>
+                <input type="radio" name="leagueFilter" id="LeagueAll" value="All" checked><label for="LeagueAll">全部赛事</label>
                 <input type="radio" name="leagueFilter" id="LeagueNBA" value="NBA"><label for="LeagueNBA">NBA</label>
                 <input type="radio" name="leagueFilter" id="LeagueSelf" value="Self"><label for="LeagueSelf">自定义</label>
             </div>

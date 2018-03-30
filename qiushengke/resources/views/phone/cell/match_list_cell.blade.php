@@ -156,7 +156,7 @@ $aicon = isset($match['aicon'])?$match['aicon']:'/phone/img/icon_teamDefault.png
         </div>
         @if($status == 0)
             @if($hasLive)
-                <div class="live"><img src="img/soccer_icon_living_n.png"></div>
+                <div class="live"><img src="{{$cdn}}/phone/img/soccer_icon_living_n.png"></div>
             @else
 
             @endif
