@@ -33,7 +33,7 @@
     // }
     $(function () {
         setCanvas();
-        $.get('/wap/match/basket_cell/{{$first}}/{{$second}}/{{$mid}}.html', function (html) {
+        $.get('/wap/match/basket/odd_cell/{{$first}}/{{$second}}/{{$mid}}.html', function (html) {
             if (html && html != "") {
                 $("#Data div.odd").html(html);
 

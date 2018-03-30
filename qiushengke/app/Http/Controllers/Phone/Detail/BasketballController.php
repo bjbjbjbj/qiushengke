@@ -60,7 +60,7 @@ class BasketballController extends BaseController
         if (!isset($result['odds'])) {
             return;
         }
-        dump($result['odds']);
+//        dump($result['odds']);
         $this->html_var = array_merge($this->html_var,$result);
         return view('phone.detail.football.cell.data_odd_cell', $this->html_var);
     }
