@@ -44,8 +44,10 @@
             @endforeach
         </ul>
     </div>
+    @if(isset($players))
     <div id="Player" style="display: none;">
         <h2>{{$match['hname']}}</h2>
+        @if(isset($players['home']))
         <div class="list">
             <dl>
                 <dt>球员</dt>
@@ -97,7 +99,11 @@
             </div>
 
         </div>
+            @else
+            <div class="noList"></div>
+        @endif
         <h2>{{$match['aname']}}</h2>
+        @if(isset($players['away']))
         <div class="list">
             <dl>
                 <dt>球员</dt>
@@ -149,5 +155,9 @@
             </div>
 
         </div>
+        @else
+            <div class="noList"></div>
+            @endif
     </div>
+    @endif
 @endsection
