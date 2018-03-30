@@ -36,9 +36,10 @@
     // }
     $(function () {
         setCanvas();
-        $.get('/wap/match/foot_cell/{{$first}}/{{$second}}/{{$mid}}.html', function (html) {
-            if (html && html != "") {
-                $("#Data div.odd").html(html);
+        $.get('/wap/match/foot/detail/odd_cell/{{$first}}/{{$second}}/{{$mid}}.html', function (json) {
+            var dataOddHtml = json.odd_html;
+            if (dataOddHtml && dataOddHtml != "") {
+                $("#Data div.odd").html(dataOddHtml);
 
                 var BtnClose = $('#Data div.odd button.close');
                 BtnClose.click(function(){
@@ -53,6 +54,16 @@
                 Sel.change(function(){
                     $(this).parents('.default').children('table').css('display','none');
                     $('#' + $(this).children('option:selected').val()).css('display','');
+                })
+            }
+            var oddIndexHtml = json.index_html;
+            if (oddIndexHtml && oddIndexHtml != "") {
+                $("#Odd").html(oddIndexHtml);
+
+                var BottomTab = $('#Odd div.bottom input');
+                BottomTab.change(function(){
+                    $(this).parents('.content').children('.childNode').css('display','none');
+                    $('#' + this.value).css('display','');
                 })
             }
         });

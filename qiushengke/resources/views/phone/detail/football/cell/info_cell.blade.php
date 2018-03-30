@@ -1,16 +1,17 @@
+<?php $liveUrl = \App\Http\Controllers\PC\CommonTool::matchWapPathWithId($match['mid']); ?>
 <div id="Navigation">
     <div class="banner">
         <!-- <a href="index.html" class="home"></a> -->
-        @if($match['live'])
-            <a class="team" href="video.html" style="opacity: 0;"><!--有直播就用a标签，如果没有就用div-->
+        @if($match['status'] > 0 && $match['live'])
+            <a class="team" href="{{$liveUrl}}" style="opacity: 0;"><!--有直播就用a标签，如果没有就用div-->
                 <p class="host">{{$match['hname']}}</p>
-                <p class="score">@if($match['status'] == 0) VS @else {{$match['hscore'].'-'.$match['ascore']}} @endif<span>[直播]</span></p><!--有直播就用加span-->
+                <p class="score">@if($match['status'] == 0 || $match['status'] < -1) VS @else {{$match['hscore'].'-'.$match['ascore']}} @endif<span>[直播]</span></p><!--有直播就用加span-->
                 <p class="away">{{$match['aname']}}</p>
             </a>
         @else
             <div class="team" style="opacity: 0;"><!--有直播就用a标签，如果没有就用div-->
                 <p class="host">{{$match['hname']}}</p>
-                <p class="score">@if($match['status'] == 0) VS @else {{$match['hscore'].'-'.$match['ascore']}} @endif</p>
+                <p class="score">@if($match['status'] == 0 || $match['status'] < -1) VS @else {{$match['hscore'].'-'.$match['ascore']}} @endif</p>
                 <p class="away">{{$match['aname']}}</p>
             </div>
         @endif
@@ -31,7 +32,7 @@
                 <span class="away">{{$match['ascore']}}</span>
             @endif
         </p>
-        @if($match['live'])<a href="video.html" class="live">正在直播</a>@endif
+        @if($match['status'] > 0 && $match['live'])<a href="{{$liveUrl}}" class="live">正在直播</a>@endif
     </div>
     <div class="team">
         <p class="img"><img src="{{$match['aicon']}}" onerror="this.src='{{$cdn}}/pc/img/icon_teamDefault.png'"></p>

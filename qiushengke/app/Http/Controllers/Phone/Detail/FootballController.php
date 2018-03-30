@@ -58,13 +58,10 @@ class FootballController extends BaseController
         if (!isset($result['odds'])) {
             return;
         }
-//        dump($result['odds']);
         $this->html_var = array_merge($this->html_var,$result);
-        return view('phone.detail.football.cell.data_odd_cell', $this->html_var);
+
+        $html['odd_html'] =  response(view('phone.detail.football.cell.data_odd_cell', $this->html_var))->getContent();
+        $html['index_html'] = response(view('phone.detail.football.cell.odd_index_cell', $this->html_var))->getContent();
+        return response()->json($html);
     }
-
-    public function typeOdd(Request $request, $sub1, $sub2, $mid) {
-
-    }
-
 }

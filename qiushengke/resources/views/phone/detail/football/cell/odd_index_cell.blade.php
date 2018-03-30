@@ -45,7 +45,7 @@
             </tbody>
         </table>
     </div>
-    <div id="Europe" class="asia default childNode" style="display: none;">
+    <div id="Europe" class="europe default childNode" style="display: none;">
         <table>
             <thead>
             <tr>
@@ -95,7 +95,7 @@
             </tbody>
         </table>
     </div>
-    <div id="Goal" class="asia default childNode" style="display: none;">
+    <div id="Goal" class="goal default childNode" style="display: none;">
         <table>
             <thead>
             <tr>
@@ -148,7 +148,7 @@
             <input type="radio" name="Odd" id="Odd_Europe" value="Europe">
             <label for="Odd_Europe">欧赔</label>
             <input type="radio" name="Odd" id="Odd_Goal" value="Goal">
-            <label for="Odd_Goal">大小球</label>
+            <label for="Odd_Goal">大小{{isset($isBasket) ? "分":"球"}}</label>
             {{--<input type="radio" name="Odd" id="Odd_Kaili" value="Kaili">--}}
             {{--<label for="Odd_Kaili">凯利</label>--}}
         </div>

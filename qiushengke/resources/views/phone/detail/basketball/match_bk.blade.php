@@ -56,6 +56,12 @@
             var oddIndexHtml = json.index_html;
             if (oddIndexHtml && oddIndexHtml != "") {
                 $("#Odd").html(oddIndexHtml);
+
+                var BottomTab = $('#Odd div.bottom input');
+                BottomTab.change(function(){
+                    $(this).parents('.content').children('.childNode').css('display','none');
+                    $('#' + this.value).css('display','');
+                })
             }
         });
     });

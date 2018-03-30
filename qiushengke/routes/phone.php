@@ -14,7 +14,7 @@
 
 Route::group(['namespace'=>'Match'], function () {
     //足球
-    Route::get("/match/foot/schedule/immediate.html", "MatchController@immediate_f"); //今天
+    Route::get("match/foot/schedule/immediate.html/", "MatchController@immediate_f"); //今天
     Route::get("/match/foot/schedule/{dateStr}/result.html", "MatchController@result_f"); //完赛比分
     Route::get("/match/foot/schedule/{dateStr}/schedule.html", "MatchController@schedule_f"); //下日赛程
 
