@@ -56,8 +56,39 @@
         }
         updateHideCount();
         updateMatch();
+
+        function _updateTimeLeagueFilterBtn(type) {
+            var options = $('div.filter p.select select');
+            if (options.length > 0) {
+                if (1 == type) {
+                    $('div.filter p.select span').html('时间排序');
+                    options[0].value = 1;
+                }
+                else {
+                    $('div.filter p.select span').html('赛事排序');
+                    options[0].value = 2;
+                }
+            }
+        }
+
+
         //初始化比赛列表,哪些显示,哪些不显示
         function updateMatch() {
+            //按时间 按赛事
+            var type = 'time';
+            var str = window.location.pathname;
+            var index = str .lastIndexOf("\/");
+            str  = str .substring(index + 1, str .length);
+            str = str.replace('.html','');
+            str = str.split('_');
+            str = str[str.length - 1];
+            if (str == 'l'){
+                type = 2;
+            }
+            else{
+                type = 1;
+            }
+            _updateTimeLeagueFilterBtn(type);
             //选择赛事
             var filter = getCookie(htmlPathType + '_' + 'filter_league');
             if (filter != null){

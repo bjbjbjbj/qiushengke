@@ -102,7 +102,7 @@ else
             <p><img src="{{\App\Http\Controllers\PC\CommonTool::getIconBK($match['hicon'])}}">{{$match['hname']}}</p>
             <p><img src="{{\App\Http\Controllers\PC\CommonTool::getIconBK($match['aicon'])}}">{{$match['aname']}}</p>
         </div>
-        @if($status > 0)
+        @if($status == -1)
             <div
                     @if($status == 1)
                     class="part"
