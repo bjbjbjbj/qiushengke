@@ -29,11 +29,12 @@
 @endsection
 @section("js")
 <script type="text/javascript" src="/phone/js/match.js"></script>
+<script type="text/javascript" src="/phone/js/match_football_data.js"></script>
 <script type="text/javascript">
-    // window.onload = function () {
-    //     // setPage() //base中已经存在
-    //     setCanvas();
-    // }
+     window.onload = function () {
+         // setPage() //base中已经存在
+         setDataUpdate('{{$mid}}')
+     }
     $(function () {
         setCanvas();
         $.get('/wap/match/foot/detail/odd_cell/{{$first}}/{{$second}}/{{$mid}}.html', function (json) {
