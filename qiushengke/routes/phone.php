@@ -33,4 +33,9 @@ Route::group(['namespace'=>'Detail'], function () {
     //足球终端
     Route::get("/match/foot/{sub1}/{sub2}/{mid}.html", "FootballController@detail");
     Route::get("/match/foot_cell/{sub1}/{sub2}/{mid}.html", "FootballController@dataOdd");
+
+    //篮球终端
+    Route::get("/match/basket/{sub1}/{sub2}/{mid}.html", "BasketballController@detail");
+    Route::get("/match/basket/ood_cell/{sub1}/{sub2}/{mid}.html", "BasketballController@dataOdd");
+
 });

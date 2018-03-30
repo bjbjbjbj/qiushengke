@@ -40,10 +40,10 @@
     @if(isset($odd['ou']) && count($odd['ou']) > 0)
         <tr>
             <td>欧赔</td>
-            <td><p>{{$odd['ou']['up1']}}</p><p>{{$odd['ou']['middle1']}}</p><p>{{$odd['ou']['down1']}}</p></td>
+            <td><p>{{$odd['ou']['up1']}}</p>@if(isset($odd['ou']['middle1']))<p>{{$odd['ou']['middle1']}}</p>@endif<p>{{$odd['ou']['down1']}}</p></td>
             <td>
                 <p>{{$odd['ou']['up2']}}</p>
-                <p>{{$odd['ou']['middle2']}}</p>
+                @if(isset($odd['ou']['middle1']))<p>{{$odd['ou']['middle2']}}</p>@endif
                 <p class="blue">{{$odd['ou']['down2']}}</p>
             </td>
         </tr>
