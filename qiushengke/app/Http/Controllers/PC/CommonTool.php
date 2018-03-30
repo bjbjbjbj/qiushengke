@@ -84,9 +84,9 @@ class CommonTool
             $first = substr($mid,0,2);
             $second = substr($mid,2,2);
             if ($sport == 2) {
-                $path = '/match/basket/' . $first . '/'. $second . '/' . $mid . '.html';
+                $path = '/match/basket/detail/' . $first . '/'. $second . '/' . $mid . '.html';
             } else {
-                $path = '/match/foot/' . $first . '/'. $second . '/' . $mid . '.html';
+                $path = '/match/foot/detail/' . $first . '/'. $second . '/' . $mid . '.html';
             }
         }
         return $path;
@@ -99,16 +99,7 @@ class CommonTool
      * @return string
      */
     public static function matchWapPathWithId($mid,$sport=CommonTool::kSportFootball){
-        $path = '';
-        if ($mid > 1000) {
-            $first = substr($mid,0,2);
-            $second = substr($mid,2,2);
-            if ($sport == 2) {
-                $path = '/wap/match/basket/' . $first . '/'. $second . '/' . $mid . '.html';
-            } else {
-                $path = '/wap/match/foot/' . $first . '/'. $second . '/' . $mid . '.html';
-            }
-        }
+        $path = '/wap'. CommonTool::matchPathWithId($mid,$sport);
         return $path;
     }
 

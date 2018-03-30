@@ -37,8 +37,8 @@ Route::group(['namespace'=>'Match'], function () {
     Route::get("/match/basket/schedule/{dateStr}/schedule_{order}.html", "MatchController@schedule_bk"); //下日赛程
 
     //比赛终端
-    Route::get("/match/foot/{first}/{second}/{mid}.html", "MatchDetailController@matchDetail"); //足球
-    Route::get("/match/basket/{first}/{second}/{mid}.html", "MatchDetailController@basketDetail"); //篮球
+    Route::get("/match/foot/detail/{first}/{second}/{mid}.html", "MatchDetailController@matchDetail"); //足球
+    Route::get("/match/basket/detail/{first}/{second}/{mid}.html", "MatchDetailController@basketDetail"); //篮球
 
     //赔率终端
     Route::get("/match/foot/odd.html", "MatchDetailController@oddDetail"); //足球

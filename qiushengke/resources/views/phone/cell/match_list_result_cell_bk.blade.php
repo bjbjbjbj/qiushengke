@@ -64,7 +64,7 @@ $whole_total = \App\Http\Controllers\PC\CommonTool::getBasketScoreTxt($match, fa
 
 //加时
 $h_ots = is_array($match['h_ot']) ? $match['h_ot'] : array();
-$a_ots = is_array($match['a_ot']) ? $match['h_ot'] : array();
+$a_ots = is_array($match['a_ot']) ? $match['a_ot'] : array();
 $otCount = min(count($h_ots), count($a_ots));
 
 //默认是否显示
@@ -153,8 +153,10 @@ else
                 $h_ot = array_sum($h_ots);
                 $a_ot = array_sum($a_ots);
                 ?>
-                <p class="ot" id="h_ot_{{$mid}}"><p>{{$h_ot}}</p></p>
-                <p class="ot" id="a_ot_{{$mid}}"><p>{{$a_ot}}</p></p>
+                <div class="part ot">
+                    <p id="h_ot_{{$mid}}">{{$h_ot}}</p>
+                    <p id="a_ot_{{$mid}}">{{$a_ot}}</p>
+                </div>
             @endif
             <div class="total">
                 <p>{{\App\Http\Controllers\PC\CommonTool::getBasketScoreWap($match['hscore'])}}</p>
