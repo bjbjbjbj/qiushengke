@@ -20,7 +20,7 @@
         @endforeach
     </div>
 @endsection
-@section('js')
+@section('match_list_js')
     <script type="text/javascript" src="{{$cdn}}/phone/js/immediate.js"></script>
     <script type="text/javascript">
         $('#Navigation .filter input[type=date]').val('{{$currDate}}');

@@ -1,6 +1,14 @@
 @extends('pc.layout.base')
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{$cdn}}/pc/css/video.css">
+    <style>
+        .hide{
+            display: none;
+        }
+        .show{
+            display: block;
+        }
+    </style>
 @endsection
 @section('js')
     <script type="text/javascript" src="{{$cdn}}/pc/js/video.js"></script>
@@ -8,6 +16,17 @@
         window.onload = function () {
             setPage();
         }
+        function clickHideScore(button) {
+            if (button.innerHTML == '(隐藏比分)'){
+                $('div.mbox p.score')[0].className = 'score hide';
+                button.innerHTML = '(显示比分)'
+            }
+            else{
+                $('div.mbox p.score')[0].className = 'score';
+                button.innerHTML = '(隐藏比分)'
+            }
+        }
+
     </script>
     <script type="text/javascript">
         //获取是S还是非S
@@ -60,8 +79,14 @@
         function postChat() {
             user = $('#charUser')[0].value;
             var message = $('#charContent')[0].value;
-            if(message.length == 0)
+            if(message.length == 0) {
                 alert('请输入内容');
+                return;
+            }
+            if(user.length == 0) {
+                alert('请输入昵称');
+                return;
+            }
             var url = '/chat/post';
             var current = new Date();
             current = current.getTime()/1000;
@@ -82,6 +107,7 @@
 //                                    '<p class="con">'+message+'</p>'+
 //                                    '</li>'
 //                            ul.append(li);
+                            $('#charContent').html('');
                             addChat(user,message,current);
                         }
                     }
@@ -217,7 +243,7 @@
                 <dt>
                 <p class="time">{!! $matchTime !!}</p>
                 <p class="score"><span class="host">{{$match['hscore']}}</span><span class="away">{{$match['ascore']}}</span></p><!--隐藏时增加hid-->
-                <button>(隐藏比分)</button>
+                <button onclick="clickHideScore(this)">(隐藏比分)</button>
                 </dt>
                 <dd class="away">
                     <img src="{{$aicon}}">

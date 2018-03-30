@@ -212,6 +212,9 @@
                     }
                 }
             }
+
+            $('span#leagueChooseCount').html($("#LeagueFilter").find('.item[value=1]').length);
+
             setBG();
         }
 
@@ -923,7 +926,7 @@
                 <button class="all">全选</button>
                 <button class="opposite">反选</button>
                 <button class="comfirm" onclick="confirmFilter('league', false)">确认</button><!--选项为空时有disabled效果--><!--套界面时添加这里的事件-->
-                <p>已选择<span>0</span>项赛事</p>
+                <p>已选择<span id="leagueChooseCount">0</span>项赛事</p>
             </div>
         </div>
     </div>

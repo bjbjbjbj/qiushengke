@@ -72,9 +72,9 @@ $show = true;
 $league_name = isset($match['league']) ? $match['league'] : '';
 $hasLive = $match['live'];
 
-$liveUrl = \App\Http\Controllers\PC\CommonTool::matchLivePathWithId($match['mid'],2);
+$liveUrl = \App\Http\Controllers\PC\CommonTool::matchWapLivePathWithId($match['mid'],2);
 ?>
-<a isMatch="1" class="default {{$show?'show':'hide'}}" id="m_table_{{$mid}}" match="{{$mid}}" league="{{$lid}}" nba="{{$isNBA?"nba":""}}" lottery="{{$isLottery?"lottery":""}}" live="{{$hasLive?"live":""}}">
+<a href="{{$liveUrl}}" isMatch="1" class="default {{$show?'show':'hide'}}" id="m_table_{{$mid}}" match="{{$mid}}" league="{{$lid}}" nba="{{$isNBA?"nba":""}}" lottery="{{$isLottery?"lottery":""}}" live="{{$hasLive?"live":""}}">
     <div class="odd">
         <p>欧：{{$europeUp}} {{$europeDown}}</p>
         <p>亚：{{$asiaUp}} {{$asiaMiddle}} {{$asiaDown}}</p>

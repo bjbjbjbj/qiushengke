@@ -858,9 +858,9 @@
          */
         function panKouText (middle, isAway) {
             if (isAway){
-                var prefix = middle < 0 ? "让" : "受让";
+                var prefix = middle < 0 ? "让" : "受";
             }else{
-                var prefix = middle < 0 ? "受让" : "让";
+                var prefix = middle < 0 ? "受" : "让";
             }
 
             if (middle == 0)

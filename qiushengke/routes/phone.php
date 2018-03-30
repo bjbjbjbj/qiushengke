@@ -22,6 +22,10 @@ Route::group(['namespace'=>'Match'], function () {
     Route::get("/match/basket/schedule/immediate_{order}.html", "MatchController@immediate_bk"); //今天
     Route::get("/match/basket/schedule/{dateStr}/result_{order}.html", "MatchController@result_bk"); //完赛比分
     Route::get("/match/basket/schedule/{dateStr}/schedule_{order}.html", "MatchController@schedule_bk"); //下日赛程
+
+    //直播终端
+    Route::get("/live/foot/{first}/{second}/{mid}.html", "LiveController@liveDetail"); //足球
+    Route::get("/live/basket/{first}/{second}/{mid}.html", "LiveController@liveDetail_bk"); //篮球
 });
 
 
@@ -29,5 +33,4 @@ Route::group(['namespace'=>'Detail'], function () {
     //足球终端
     Route::get("/match/foot/{sub1}/{sub2}/{mid}.html", "FootballController@detail");
     Route::get("/match/foot_cell/{sub1}/{sub2}/{mid}.html", "FootballController@dataOdd");
-
 });

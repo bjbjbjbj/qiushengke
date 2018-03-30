@@ -110,12 +110,12 @@ $show = true;
 
 $hasLive = $match['pc_live'];
 
-$liveUrl = \App\Http\Controllers\PC\CommonTool::matchLivePathWithId($match['mid']);
+$liveUrl = \App\Http\Controllers\PC\CommonTool::matchWapLivePathWithId($match['mid']);
 
 $hicon = isset($match['hicon'])?$match['hicon']:'/phone/img/icon_teamDefault.png';
 $aicon = isset($match['aicon'])?$match['aicon']:'/phone/img/icon_teamDefault.png';
 ?>
-<a href="match.html" isMatch="1" class="default {{$show?'show':'hide'}}" id="m_tr_{{$mid}}" match="{{$mid}}" league="{{$lid}}" asiaOdd="{{$asiaOdd}}" ouOdd="{{$ouOdd}}" first="{{$isFirst?"first":""}}" lottery="{{$isLottery?"lottery":""}}" live="{{$hasLive?"live":""}}">
+<a href="{{$liveUrl}}" isMatch="1" class="default {{$show?'show':'hide'}}" id="m_tr_{{$mid}}" match="{{$mid}}" league="{{$lid}}" asiaOdd="{{$asiaOdd}}" ouOdd="{{$ouOdd}}" first="{{$isFirst?"first":""}}" lottery="{{$isLottery?"lottery":""}}" live="{{$hasLive?"live":""}}">
     <div class="odd">
         <p>欧：{{$ouUp}} {{$ouMiddle}} {{$ouDown}}</p>
         <p>亚：{{$asiaUp}} {{$asiaMiddle}} {{$asiaDown}}</p>
@@ -161,11 +161,7 @@ $aicon = isset($match['aicon'])?$match['aicon']:'/phone/img/icon_teamDefault.png
 
             @endif
         @elseif($status == -1)
-            @if($hasLive)
-
-            @else
-
-            @endif
+            <div class="live"></div>
         @else
             @if($hasLive)
                 <div class="live video"><p href="{{$liveUrl}}">直播中</p></div>
