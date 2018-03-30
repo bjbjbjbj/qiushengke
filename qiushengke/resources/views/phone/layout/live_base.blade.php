@@ -5,6 +5,11 @@
 @section('js')
     <script type="text/javascript" src="{{$cdn}}/phone/js/video.js"></script>
     <script type="text/javascript">
+        window.onload = function () {
+            setPage();
+            setDataUpdate('{{$sport}}','{{$match['mid']}}');
+        }
+
         function changeChannel() {
             var obj = $('select#channelSelect')[0];
             var Link = obj.value;
@@ -23,7 +28,6 @@
                 button.innerHTML = '隐藏比分'
             }
         }
-
     </script>
     @yield('live_js')
 @endsection
