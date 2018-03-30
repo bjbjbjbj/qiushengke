@@ -80,7 +80,7 @@ class MatchController extends BaseController{
                 return view('phone.match.immediate_bk',$this->html_var);
         }
         else {
-//            return abort(500);
+            return redirect('/500.html');
         }
     }
 
@@ -204,6 +204,9 @@ class MatchController extends BaseController{
                 return view('phone.match.schedule',$this->html_var);
             else
                 return view('phone.match.schedule_bk',$this->html_var);
+        }
+        else{
+            return redirect('/500.html');
         }
     }
 

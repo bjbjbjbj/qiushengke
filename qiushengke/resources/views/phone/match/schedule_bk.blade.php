@@ -15,7 +15,7 @@
     </div>
     <div id="List">
         @foreach($matches as $match)
-            @component('phone.cell.match_list_schedule_cell_bk',['match'=>$match,'sport'=>$sport])
+            @component('phone.cell.match_list_schedule_cell_bk',['match'=>$match,'sport'=>$sport,'cdn'=>$cdn])
             @endcomponent
         @endforeach
     </div>
@@ -27,7 +27,7 @@
         function clickDate(date) {
             var value = date.value.replace(/\//g,"");
             value = date.value.replace(/-/g,"");
-            var url = '{{env('APP_URL')}}' + '/wap/match/basket/schedule/'+value+'/schedule.html';
+            var url = '{{env('APP_URL')}}' + '/wap/match/basket/schedule/'+value+'/schedule_t.html';
             window.location.href = url;
         }
     </script>

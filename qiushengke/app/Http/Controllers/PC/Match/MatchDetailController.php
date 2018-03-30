@@ -77,7 +77,7 @@ class MatchDetailController extends BaseController{
         $second = substr($mid,2,2);
         $html = $this->matchDetail($request,$first,$second,$mid);
         if (isset($html) && strlen($html) > 0)
-            Storage::disk("public")->put("/match/foot/".$first."/".$second."/".$mid.".html", $html);
+            Storage::disk("public")->put("/match/foot/detail/".$first."/".$second."/".$mid.".html", $html);
     }
 
     /**
@@ -90,7 +90,7 @@ class MatchDetailController extends BaseController{
         $second = substr($mid,2,2);
         $html = $this->basketDetail($request,$first,$second,$mid);
         if (isset($html))
-            Storage::disk("public")->put("/match/basket/".$first."/".$second."/".$mid.".html", $html);
+            Storage::disk("public")->put("/match/basket/detail/".$first."/".$second."/".$mid.".html", $html);
     }
 
     /**

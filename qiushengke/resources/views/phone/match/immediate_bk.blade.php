@@ -21,7 +21,7 @@
     </div>
     <div id="List">
         @foreach($matches as $match)
-            @component('phone.cell.match_list_cell_bk',['match'=>$match,'sport'=>$sport])
+            @component('phone.cell.match_list_cell_bk',['match'=>$match,'sport'=>$sport,'cdn'=>$cdn])
             @endcomponent
         @endforeach
     </div>
