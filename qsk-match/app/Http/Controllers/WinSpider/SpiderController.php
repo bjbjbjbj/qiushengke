@@ -656,6 +656,7 @@ class SpiderController extends Controller
      */
     private function spiderFillOddMatch(Request $request)
     {
+        $count = $request->input('count', 50);
         $matches = \App\Models\LiaoGouModels\Match::query()
             ->select('matches.*')
             ->join('leagues', function ($join){
@@ -664,10 +665,13 @@ class SpiderController extends Controller
                         $q->where("leagues.hot", "=", 1)
                         ->orWhere('leagues.main', '=', 1);
                     });
-            })->where("matches.is_odd", "=", 0)
+            })->where(function ($q){
+                $q->whereNull('is_odd')
+                    ->orWhere('is_odd', 0);
+            })
             ->where("matches.status", "=", -1)
             ->orderBy('matches.time', 'desc')
-            ->take(50)
+            ->take($count)
             ->get();
         foreach ($matches as $match) {
             echo $match->hname . ' VS ' . $match->aname . '<br>';
