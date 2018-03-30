@@ -659,7 +659,7 @@ div#Event .score table th{
 	width: 80px;
 }
 div#Event .score table th:nth-child(1){
-	width: 25%;
+	max-width: 25%; min-width: 20%;
 	padding-left: 60px;
 	text-align: left;
 }

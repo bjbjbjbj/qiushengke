@@ -128,7 +128,7 @@
 	padding-top: 28px;
 }
 #List .match .team{
-	height: 100%; max-width: 40%;
+	height: 100%; min-width: 40%;
 	-webkit-box-flex: 1; -moz-box-flex: 1; -webkit-flex: 1; -ms-flex: 1; flex: 1;
 }
 #List .match .team p{

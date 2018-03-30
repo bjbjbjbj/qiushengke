@@ -183,6 +183,7 @@
             url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 'url': url,
+                dataType: "jsonp",
                 'success': function (json) {
                     if (json) {
                         //比赛信息
@@ -230,6 +231,7 @@
             url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 'url':url,
+                dataType: "jsonp",
                 'success':function (json) {
                     var keys = Object.keys(json);
                     if (keys.length > 0){

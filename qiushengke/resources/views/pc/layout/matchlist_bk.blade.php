@@ -568,7 +568,7 @@
             url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 "url": url,
-                "dataType": "json",
+                dataType: "jsonp",
                 "success": function (json) {
                     for (var ID in json) {
                         var dataItem = json[ID];
@@ -699,7 +699,7 @@
             url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 "url": url,
-                "dataType": "json",
+                dataType: "jsonp",
                 "success": function (json) {
                     var ups = $('span.up');
                     for (var i = 0 ; i < ups.length; i++){

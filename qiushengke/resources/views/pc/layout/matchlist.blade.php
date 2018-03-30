@@ -503,8 +503,7 @@
             url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 "url": url,
-//                "url":"/static/terminal/1/"+first+"/"+second+"/"+ID+"/tech.json",
-                "dataType": "json",
+                dataType: "jsonp",
                 "success": function (json) {
                     window.clearInterval(ct);
                     //事件
@@ -649,7 +648,7 @@
             url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 "url": url,
-                "dataType": "json",
+                dataType: "jsonp",
                 "success": function (json) {
                     for (var ID in json) {
                         var dataItem = json[ID];
@@ -701,7 +700,7 @@
             url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 "url": url,
-                "dataType": "json",
+                dataType: "jsonp",
                 "success": function (json) {
                     var ups = $('span.up');
                     for (var i = 0 ; i < ups.length; i++){
@@ -820,9 +819,8 @@
             var url = "/static/terminal/1/"+first+"/"+second+"/"+ID+"/roll.json";
             url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
-                {{--                "url": '{{env('MATCH_URL')}}' + "/static/terminal/1/"+first+"/"+second+"/"+ID+"/tech.json",--}}
                 "url":url,
-                "dataType": "json",
+                dataType: "jsonp",
                 "success": function (json) {
                     window.clearInterval(ct2);
                     //全场/半场

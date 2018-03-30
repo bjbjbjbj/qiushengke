@@ -171,7 +171,7 @@
             url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 "url":url,
-                "dataType": "json",
+                dataType: "jsonp",
                 "success": function (json) {
                     //全场/半场
                     _updateOddBody('all',json);
