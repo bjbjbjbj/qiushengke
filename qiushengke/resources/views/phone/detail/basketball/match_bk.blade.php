@@ -27,10 +27,9 @@
 <script type="text/javascript" src="/phone/js/match.js"></script>
 <script type="text/javascript" src="/phone/js/match_basketball_data.js"></script>
 <script type="text/javascript">
-    // window.onload = function () {
-    //     // setPage() //base中已经存在
-    //     setCanvas();
-    // }
+     window.onload = function () {
+         setDataUpdate('{{$mid}}'); //ID
+     }
     $(function () {
         setCanvas();
         $.get('/wap/match/basket/detail/odd_cell/{{$first}}/{{$second}}/{{$mid}}.html', function (json) {

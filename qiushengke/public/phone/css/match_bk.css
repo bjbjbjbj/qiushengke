@@ -717,6 +717,7 @@ div#Data .odd .title select{
 	padding-right: 36px;
 	border: none;
 	background: url(../img/live_icon_down_n.png) no-repeat right 10px center #fff; background-size: 24px;
+	line-height: 148px;
 }
 div#Data .odd table th:nth-child(1){
 	width: 150px;
