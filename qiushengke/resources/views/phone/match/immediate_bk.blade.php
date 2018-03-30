@@ -9,6 +9,13 @@
         </div>
         <div class="filter">
             <p class="in league">重要赛事</p>
+            <p class="in select">
+                <span>时间排序</span>
+                <select onchange="clickSort(this)">
+                    <option value="1">时间排序</option>
+                    <option value="2">赛事排序</option>
+                </select>
+            </p>
             <p class="num">共<span>{{$total}}</span>场&nbsp;&nbsp;隐藏<span id="hideMatchCount">-</span>场</p>
         </div>
     </div>
@@ -22,6 +29,16 @@
 @section('match_list_js')
     <script type="text/javascript" src="{{$cdn}}/phone/js/immediate.js"></script>
     <script type="text/javascript">
+        function clickSort(select) {
+            var url = window.location.href;
+            if (select.value == 1){
+                url = url.replace('_l.html','_t.html');
+            }
+            else if(select.value == 2){
+                url = url.replace('_t.html','_l.html');
+            }
+            window.location.href = url;
+        }
     </script>
 @endsection
 @section('css')
