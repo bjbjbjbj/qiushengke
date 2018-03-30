@@ -13,9 +13,6 @@
 
 
 Route::group(['namespace'=>'Match'], function () {
-    Route::any("/wap", function (){
-        return redirect('/wap/match/foot/schedule/immediate.html');
-    });
     //足球
     Route::get("/match/foot/schedule/immediate.html", "MatchController@immediate_f"); //今天
     Route::get("/match/foot/schedule/{dateStr}/result.html", "MatchController@result_f"); //完赛比分
@@ -27,18 +24,18 @@ Route::group(['namespace'=>'Match'], function () {
     Route::get("/match/basket/schedule/{dateStr}/schedule_{order}.html", "MatchController@schedule_bk"); //下日赛程
 
     //直播终端
-    Route::get("/live/foot/{first}/{second}/{mid}.html", "LiveController@liveDetail"); //足球
-    Route::get("/live/basket/{first}/{second}/{mid}.html", "LiveController@liveDetail_bk"); //篮球
+    Route::get("/live/foot/detail/{first}/{second}/{mid}.html", "LiveController@liveDetail"); //足球
+    Route::get("/live/basket/detail/{first}/{second}/{mid}.html", "LiveController@liveDetail_bk"); //篮球
 });
 
 
 Route::group(['namespace'=>'Detail'], function () {
     //足球终端
     Route::get("/match/foot/detail/{sub1}/{sub2}/{mid}.html", "FootballController@detail");
-    Route::get("/match/foot_cell/{sub1}/{sub2}/{mid}.html", "FootballController@dataOdd");
+    Route::get("/match/foot/detail/odd_cell/{sub1}/{sub2}/{mid}.html", "FootballController@dataOdd");
 
     //篮球终端
     Route::get("/match/basket/detail/{sub1}/{sub2}/{mid}.html", "BasketballController@detail");
-    Route::get("/match/basket/ood_cell/{sub1}/{sub2}/{mid}.html", "BasketballController@dataOdd");
+    Route::get("/match/basket/detail/odd_cell/{sub1}/{sub2}/{mid}.html", "BasketballController@dataOdd");
 
 });
