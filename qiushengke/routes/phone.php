@@ -31,11 +31,11 @@ Route::group(['namespace'=>'Match'], function () {
 
 Route::group(['namespace'=>'Detail'], function () {
     //足球终端
-    Route::get("/match/foot/{sub1}/{sub2}/{mid}.html", "FootballController@detail");
-    Route::get("/match/foot_cell/{sub1}/{sub2}/{mid}.html", "FootballController@dataOdd");
+    Route::get("/match/foot/detail/{sub1}/{sub2}/{mid}.html", "FootballController@detail");
+    Route::get("/match/foot/detail/odd_cell/{sub1}/{sub2}/{mid}.html", "FootballController@dataOdd");
 
     //篮球终端
-    Route::get("/match/basket/{sub1}/{sub2}/{mid}.html", "BasketballController@detail");
-    Route::get("/match/basket/ood_cell/{sub1}/{sub2}/{mid}.html", "BasketballController@dataOdd");
+    Route::get("/match/basket/detail/{sub1}/{sub2}/{mid}.html", "BasketballController@detail");
+    Route::get("/match/basket/detail/odd_cell/{sub1}/{sub2}/{mid}.html", "BasketballController@dataOdd");
 
 });
