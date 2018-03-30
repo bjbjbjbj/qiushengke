@@ -20,8 +20,6 @@ function setFilter () {
         $('#Navigation .filter .select span').html($(this).find('option:selected').text());
     })
 
-    $('#Navigation .filter input[type=date]').val(getTime())
-
     $('.filterBox .tab input').change(function(){ //切换栏目
         if (this.checked) {
             $(this).parents('.filterBox').find('ul').css('display','none');

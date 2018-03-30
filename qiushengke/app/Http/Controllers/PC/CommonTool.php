@@ -182,6 +182,22 @@ class CommonTool
         return '';
     }
 
+    /**
+     * wap 赔率颜色，绿色上升，蓝色下降
+     * @param $up1
+     * @param $up2
+     * @return string
+     */
+    public static function colorOfWapUpDown($up1, $up2) {
+        if ($up2 > $up1){
+            return 'green';
+        }
+        elseif ($up2 < $up1){
+            return 'blue';
+        }
+        return '';
+    }
+
     public static function object_to_array($obj) {
         $object =  json_decode( json_encode( $obj),true);
         return  $object;
@@ -270,6 +286,93 @@ class CommonTool
             return $prefix . $text;
         }
         return $text;
+    }
+
+    public static function panKouTextWap ($middle, $isAway = false, $isGoal = false) {
+        if ($isGoal || $middle == 0){
+            $prefix = "";
+        } else{
+            if ($isAway){
+                $prefix = $middle < 0 ? "" : "-";
+            }else{
+                $prefix = $middle < 0 ? "-" : "";
+            }
+        }
+        $text = $middle;
+        $middle = abs($middle);
+        switch ($middle) {
+            case 7: $text = "7"; break;
+            case 6.75: $text = "6.5/7"; break;
+            case 6.5: $text = "6.5"; break;
+            case 6.25: $text = "6/6.5"; break;
+            case 6: $text = "6"; break;
+            case 5.75: $text = "5.5/6"; break;
+            case 5.5: $text = "5.5"; break;
+            case 5.25: $text = "5/5.5"; break;
+            case 5: $text = "5"; break;
+            case 4.75: $text = "4.5/5"; break;
+            case 4.5: $text = "4.5"; break;
+            case 4.25: $text = "4/4.5"; break;
+            case 4: $text = "4"; break;
+            case 3.75: $text = "3.5/4"; break;
+            case 3.5: $text = "3.5"; break;
+            case 3.25: $text = "3/3.5"; break;
+            case 3: $text = "3"; break;
+            case 2.75: $text = "2.5/3"; break;
+            case 2.5: $text = "2.5"; break;
+            case 2.25: $text = "2/2.5"; break;
+            case 2: $text = "2"; break;
+            case 1.75: $text = "1.5/2"; break;
+            case 1.5: $text = "1.5"; break;
+            case 1.25: $text = "1/1.5"; break;
+            case 1: $text = "1"; break;
+            case 0.75: $text = "0.5/1"; break;
+            case 0.5: $text = "0.5"; break;
+            case 0.25: $text = "0/0.5"; break;
+            case 0: $text = "0"; break;
+        }
+        if (!is_numeric($text)) {
+            return $prefix . $text;
+        }
+        return $text;
+    }
+
+    /**
+     * 盘口转字符串显示
+     * @param $middle
+     * @param $withMinus
+     * @return int
+     */
+    public static function getOddMiddleString($middle, $withMinus = true){
+        //是否小数
+        $isMinus = $middle < 0;
+        //取绝对值
+        $middle = abs($middle);
+        //分离小数
+        $decimal = (100*$middle)%100;
+        $first = '';
+        $second = '';
+        switch ($decimal){
+            //没有半球盘
+            case 0:
+            case 50:
+                $first = $middle;
+                break;
+            case 25:
+                $first = floor($middle);
+                $second = $first.'.5';
+                break;
+            case 75:
+                $second = ceil($middle);
+                $first = $second - 0.5;
+                break;
+        }
+        if (strlen($second) > 0){
+            return ($isMinus&&$withMinus?'-':'').$first.'/'.$second;
+        }
+        else{
+            return ($isMinus&&$withMinus?'-':'').$middle;
+        }
     }
 
     /**
@@ -473,6 +576,11 @@ class CommonTool
     public static function getBasketScore($score) {
         if (isset($score)) return $score;
         return '';
+    }
+
+    public static function getBasketScoreWap($score) {
+        if (isset($score)) return $score;
+        return '-';
     }
 
     //获取篮球比赛 单个球队的半场分数

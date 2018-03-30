@@ -72,14 +72,15 @@ class FileTool{
     public static function matchDetailJson($first,$second,$mid,$sport,$name){
         try {
             $patch = FileTool::matchDetailStoragePatch($first,$second,$mid,$sport,$name);
-            $patch = '/public' . $patch;
-            $json = Storage::get($patch);
+//            $patch = '/public' . $patch;
+            $patch = public_path($patch);
+            $json = file_get_contents($patch);//Storage::get($patch);
             if (is_null($json)){
                 $json = self::curlData(env('MATCH_URL')."/static/terminal/$sport/".$first."/".$second."/".$mid."/$name.json",10);
                 return $json;
             }
             else{
-                return $json;
+                return json_decode($json, true);
             }
         } catch (\Exception $exception) {
             $json = self::curlData(env('MATCH_URL')."/static/terminal/$sport/".$first."/".$second."/".$mid."/$name.json",10);
