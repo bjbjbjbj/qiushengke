@@ -288,7 +288,8 @@ trait SpiderOnce
         $lg_leagues = Redis::get($key);
         if (isset($lg_leagues)) {
             $lg_leagues = json_decode($lg_leagues, true);
-        } else {
+        }
+        if (!is_array($lg_leagues) || count($lg_leagues) <= 0) {
             $lg_leagues = \App\Models\LiaoGouModels\League::query()
                 ->select('win_id', 'type')
                 ->where(function ($q) {
@@ -296,24 +297,22 @@ trait SpiderOnce
                         ->orWhere('hot', 1);
                 })->get()->toArray();
         }
-        if (count($lg_leagues) <= 0) {
-            echo "league history spider complete!! <br>";
-            return;
-        }
-        dump(count($lg_leagues));
+        echo 'league count = '.count($lg_leagues).'<br>';
         $lg_league = $lg_leagues[0];
         $win_lid = $lg_league['win_id'];
         $type = $lg_league['type'];
         $request->merge(['lid'=>$win_lid]);
-//        foreach (range(0, 1) as $index) {
-            if ($type == 1) {
-                $this->leagueAll($request);
-            } else if ($type == 2) {
-                $this->cupAll($request);
-            }
-//        }
+        if ($type == 1) {
+            $this->leagueAll($request);
+        } else if ($type == 2) {
+            $this->cupAll($request);
+        }
         $lg_leagues = array_slice($lg_leagues, 1);
         Redis::set($key, json_encode($lg_leagues));
+        if ($request->input('auto', 0) == 1) {
+            echo "<script language=JavaScript>window.location.reload();</script>";
+            exit;
+        }
     }
 
     private function onLeagueTestSpider() {

@@ -183,7 +183,7 @@ trait SpiderLeague
         }
         $url = "http://ios.win007.com/phone/SaiCheng2.aspx?sclassid=$lid&season=$season" . ($round == NULL ? "" : "&round=$round") . ($subid == NULL ? "" : "&subid=$subid");
         $str = $this->spiderTextFromUrl($url);
-        if ($str) {
+        if ($str && strlen($str) > 0) {
             $ss = explode("$$", $str);
 
             //轮次处理
@@ -241,7 +241,7 @@ trait SpiderLeague
 //            echo $ss[0] . "<br>";
 
             //赛程
-            if ($ss[1] != "") {
+            if (isset($ss[1]) && $ss[1] != "") {
                 $schedules = explode("!", $ss[1]);
                 foreach ($schedules as $schedule) {
                     if(count(explode("^", $schedule)) >= 13) {
