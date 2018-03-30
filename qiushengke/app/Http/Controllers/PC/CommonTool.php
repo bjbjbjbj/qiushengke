@@ -58,6 +58,20 @@ class CommonTool
         return $path;
     }
 
+    public static function matchWapLivePathWithId($mid,$sport=CommonTool::kSportFootball){
+        $path = '';
+        if ($mid > 1000) {
+            $first = substr($mid,0,2);
+            $second = substr($mid,2,2);
+            if ($sport == 2) {
+                $path = '/wap/live/basket/' . $first . '/'. $second . '/' . $mid . '.html';
+            } else {
+                $path = '/wap/live/foot/' . $first . '/'. $second . '/' . $mid . '.html';
+            }
+        }
+        return $path;
+    }
+
     /**
      * 根据比赛id返回path
      * @param $mid
@@ -70,9 +84,9 @@ class CommonTool
             $first = substr($mid,0,2);
             $second = substr($mid,2,2);
             if ($sport == 2) {
-                $path = '/match/basket/' . $first . '/'. $second . '/' . $mid . '.html';
+                $path = '/match/basket/detail/' . $first . '/'. $second . '/' . $mid . '.html';
             } else {
-                $path = '/match/foot/' . $first . '/'. $second . '/' . $mid . '.html';
+                $path = '/match/foot/detail/' . $first . '/'. $second . '/' . $mid . '.html';
             }
         }
         return $path;
@@ -85,16 +99,7 @@ class CommonTool
      * @return string
      */
     public static function matchWapPathWithId($mid,$sport=CommonTool::kSportFootball){
-        $path = '';
-        if ($mid > 1000) {
-            $first = substr($mid,0,2);
-            $second = substr($mid,2,2);
-            if ($sport == 2) {
-                $path = '/wap/match/basket/' . $first . '/'. $second . '/' . $mid . '.html';
-            } else {
-                $path = '/wap/match/foot/' . $first . '/'. $second . '/' . $mid . '.html';
-            }
-        }
+        $path = '/wap'. CommonTool::matchPathWithId($mid,$sport);
         return $path;
     }
 
@@ -244,9 +249,9 @@ class CommonTool
             $prefix = "";
         } else{
             if ($isAway){
-                $prefix = $middle < 0 ? "让" : "受让";
+                $prefix = $middle < 0 ? "让" : "受";
             }else{
-                $prefix = $middle < 0 ? "受让" : "让";
+                $prefix = $middle < 0 ? "受" : "让";
             }
         }
         $text = $middle;

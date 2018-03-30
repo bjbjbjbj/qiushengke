@@ -16,19 +16,19 @@
     @endif
     @if(isset($analyse['recentBattle']))
         @component("phone.detail.football.cell.data_history_cell", [
-            'match'=>$match, 'home'=>$analyse['recentBattle']['home'],
-            'away'=>$analyse['recentBattle']['away'],
+            'match'=>$match, 'home'=>isset($analyse['recentBattle']['home'])?$analyse['recentBattle']['home']:null,
+            'away'=>isset($analyse['recentBattle']['away'])?$analyse['recentBattle']['away']:null,
         ]) @endcomponent
     @endif
     @if(isset($analyse['oddResult']))
         @component('phone.detail.football.cell.data_track_cell', [
-            'match'=>$match, 'home'=>$analyse['oddResult']['home'],
-            'away'=>$analyse['oddResult']['away'],
+            'match'=>$match, 'home'=>isset($analyse['oddResult']['home'])?$analyse['oddResult']['home']:null,
+            'away'=>isset($analyse['oddResult']['away'])?$analyse['oddResult']['away']:null,
         ]) @endcomponent
     @endif
     @if(isset($analyse['schedule']))
         @component('phone.detail.football.cell.data_future_cell', [
-            'match'=>$match, 'future'=>$analyse['schedule']
+            'match'=>$match, 'future'=>isset($analyse['schedule'])?$analyse['schedule']:null
         ]) @endcomponent
     @endif
 </div>

@@ -568,7 +568,7 @@
             url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 "url": url,
-                "dataType": "json",
+                dataType: "jsonp",
                 "success": function (json) {
                     for (var ID in json) {
                         var dataItem = json[ID];
@@ -699,7 +699,7 @@
             url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 "url": url,
-                "dataType": "json",
+                dataType: "jsonp",
                 "success": function (json) {
                     var ups = $('span.up');
                     for (var i = 0 ; i < ups.length; i++){
@@ -858,9 +858,9 @@
          */
         function panKouText (middle, isAway) {
             if (isAway){
-                var prefix = middle < 0 ? "让" : "受让";
+                var prefix = middle < 0 ? "让" : "受";
             }else{
-                var prefix = middle < 0 ? "受让" : "让";
+                var prefix = middle < 0 ? "受" : "让";
             }
 
             if (middle == 0)

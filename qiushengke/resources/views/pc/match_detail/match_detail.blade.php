@@ -51,6 +51,7 @@
             url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 'url': url,
+                dataType: "jsonp",
                 'success': function (json) {
                     //比分
                     if (json['status'] > 0 || json['status'] == -1) {
@@ -99,6 +100,7 @@
             url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 'url':url,
+                dataType: "jsonp",
                 'success':function (json) {
                     var keys = Object.keys(json);
                     if (keys.length > 0){

@@ -394,7 +394,8 @@ class MatchController extends BaseController
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function error(Request $request){
-        return view('pc.500',array('error'=>500));
+        $this->html_var['error'] = 500;
+        return view('pc.500',$this->html_var);
     }
 
     public function staticError(Request $request){

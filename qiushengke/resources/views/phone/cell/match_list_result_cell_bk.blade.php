@@ -7,7 +7,7 @@ $lid = $match['lid'];
 $isHalfFormat = $match['system'] == 1;
 $matchTime = \App\Http\Controllers\PC\CommonTool::getBasketCurrentTime($status, $match['live_time_str'], $isHalfFormat);
 $matchTime = explode(' ',$matchTime)[0];
-$matchUrl = \App\Http\Controllers\PC\CommonTool::matchPathWithId($mid,2);
+$matchUrl = \App\Http\Controllers\PC\CommonTool::matchWapPathWithId($mid,2);
 
 //亚赔
 $asiaUp = "-";
@@ -64,7 +64,7 @@ $whole_total = \App\Http\Controllers\PC\CommonTool::getBasketScoreTxt($match, fa
 
 //加时
 $h_ots = is_array($match['h_ot']) ? $match['h_ot'] : array();
-$a_ots = is_array($match['a_ot']) ? $match['h_ot'] : array();
+$a_ots = is_array($match['a_ot']) ? $match['a_ot'] : array();
 $otCount = min(count($h_ots), count($a_ots));
 
 //默认是否显示
@@ -72,7 +72,8 @@ $show = true;
 $league_name = isset($match['league']) ? $match['league'] : '';
 $hasLive = $match['live'];
 
-$liveUrl = \App\Http\Controllers\PC\CommonTool::matchLivePathWithId($match['mid'],2);
+$liveUrl = \App\Http\Controllers\PC\CommonTool::matchWapLivePathWithId($match['mid'],2);
+$url = \App\Http\Controllers\PC\CommonTool::matchWapPathWithId($match['mid'],2);
 
 if (isset($match['asiamiddle2'])){
     $ra = \App\Http\Controllers\PC\OddCalculateTool::getMatchAsiaOddResult($match['hscore'],$match['ascore'],$match['asiamiddle2'],true);
@@ -92,7 +93,7 @@ else
     $rg = '-';
 ?>
 
-<a isMatch="1" class="default {{$show?'show':'hide'}}" id="m_table_{{$mid}}" match="{{$mid}}" league="{{$lid}}" nba="{{$isNBA?"nba":""}}" lottery="{{$isLottery?"lottery":""}}" live="{{$hasLive?"live":""}}">
+<a href="{{$matchUrl}}" isMatch="1" class="default {{$show?'show':'hide'}}" id="m_table_{{$mid}}" match="{{$mid}}" league="{{$lid}}" nba="{{$isNBA?"nba":""}}" lottery="{{$isLottery?"lottery":""}}" live="{{$hasLive?"live":""}}">
     <div class="match">
         <div class="time">
             <p class="result">{{$ra}}&nbsp;{{$ro}}&nbsp;{{$rg}}</p>
@@ -102,7 +103,7 @@ else
             <p><img src="{{\App\Http\Controllers\PC\CommonTool::getIconBK($match['hicon'])}}">{{$match['hname']}}</p>
             <p><img src="{{\App\Http\Controllers\PC\CommonTool::getIconBK($match['aicon'])}}">{{$match['aname']}}</p>
         </div>
-        @if($status > 0)
+        @if($status == -1)
             <div
                     @if($status == 1)
                     class="part"
@@ -152,8 +153,10 @@ else
                 $h_ot = array_sum($h_ots);
                 $a_ot = array_sum($a_ots);
                 ?>
-                <p class="ot" id="h_ot_{{$mid}}"><p>{{$h_ot}}</p></p>
-                <p class="ot" id="a_ot_{{$mid}}"><p>{{$a_ot}}</p></p>
+                <div class="part ot">
+                    <p id="h_ot_{{$mid}}">{{$h_ot}}</p>
+                    <p id="a_ot_{{$mid}}">{{$a_ot}}</p>
+                </div>
             @endif
             <div class="total">
                 <p>{{\App\Http\Controllers\PC\CommonTool::getBasketScoreWap($match['hscore'])}}</p>

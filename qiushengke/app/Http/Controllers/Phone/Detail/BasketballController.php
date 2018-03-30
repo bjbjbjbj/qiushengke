@@ -13,11 +13,11 @@ use App\Http\Controllers\Controller as BaseController;
 use App\Http\Controllers\PC\Match\MatchDetailController;
 use Illuminate\Http\Request;
 
-class FootballController extends BaseController
+class BasketballController extends BaseController
 {
 
     /**
-     * 足球终端
+     * 篮球终端
      * @param Request $request
      * @param $sub1
      * @param $sub2
@@ -25,24 +25,26 @@ class FootballController extends BaseController
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function detail(Request $request, $sub1, $sub2, $mid){
-        $match = MatchDetailController::matchDetailData($mid, 'match');
+        $match = MatchDetailController::matchDetailData($mid, 'match', 2);
         if (empty($match)) {
             abort(404);
         }
         $result = array();
         $result['match'] = $match;
-//dump($result['match']);
         //基本数据
-        $result['analyse'] = MatchDetailController::matchDetailData($mid, 'analyse');
+        $result['analyse'] = MatchDetailController::matchDetailData($mid, 'analyse', 2);
         //统计
-        $result['tech'] = MatchDetailController::matchDetailData($mid, 'tech');
+        $result['tech'] = MatchDetailController::matchDetailData($mid, 'tech', 2);
         //阵容;
-        $result['lineup'] = MatchDetailController::matchDetailData($mid, 'lineup');
+        $result['players'] = MatchDetailController::matchDetailData($mid, 'player', 2);
+        //盘口
+        $result['odds'] = MatchDetailController::matchDetailData($mid, 'odd', 2);
         $result['first'] = substr($mid, 0, 2);
-        $result['second'] = substr($mid, 2, 4);
+        $result['second'] = substr($mid, 2, 2);
         $result['mid'] = $mid;
         $this->html_var = array_merge($this->html_var,$result);
-        return view('phone.detail.football.match', $this->html_var);
+
+        return view('phone.detail.basketball.match_bk', $this->html_var);
     }
 
     /**
@@ -54,10 +56,11 @@ class FootballController extends BaseController
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function dataOdd(Request $request, $sub1, $sub2, $mid) {
-        $result['odds'] = MatchDetailController::matchDetailData($mid, 'odd');
+        $result['odds'] = MatchDetailController::matchDetailData($mid, 'odd', 2);
         if (!isset($result['odds'])) {
             return;
         }
+        $result['isBasket'] = true;
         $this->html_var = array_merge($this->html_var,$result);
 
         $html['odd_html'] =  response(view('phone.detail.football.cell.data_odd_cell', $this->html_var))->getContent();

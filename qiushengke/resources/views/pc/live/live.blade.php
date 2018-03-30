@@ -308,6 +308,7 @@
             url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 'url': url,
+                dataType: "jsonp",
                 'success': function (json) {
                     var status = parseInt(json['status']);
                     //比分
@@ -361,7 +362,7 @@
             url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 "url": url,
-                "dataType": "json",
+                dataType: "jsonp",
                 "success": function (json) {
                     //刷新基础ui,例如时间轴,比赛时间
                     $('p#event_total_time').html((matchTime > 90 || lastTime > 90) ? '120\'':'90\'');

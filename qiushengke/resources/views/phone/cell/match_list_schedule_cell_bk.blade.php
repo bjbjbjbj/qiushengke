@@ -7,7 +7,7 @@ $lid = $match['lid'];
 $isHalfFormat = $match['system'] == 1;
 $matchTime = \App\Http\Controllers\PC\CommonTool::getBasketCurrentTime($status, $match['live_time_str'], $isHalfFormat);
 $matchTime = explode(' ',$matchTime)[0];
-$matchUrl = \App\Http\Controllers\PC\CommonTool::matchPathWithId($mid,2);
+$matchUrl = \App\Http\Controllers\PC\CommonTool::matchWapPathWithId($mid,2);
 
 //亚赔
 $asiaUp = "-";
@@ -72,7 +72,7 @@ $show = true;
 $league_name = isset($match['league']) ? $match['league'] : '';
 $hasLive = $match['live'];
 
-$liveUrl = \App\Http\Controllers\PC\CommonTool::matchLivePathWithId($match['mid'],2);
+$liveUrl = \App\Http\Controllers\PC\CommonTool::matchWapLivePathWithId($match['mid'],2);
 
 if (isset($match['asiamiddle2'])){
     $ra = \App\Http\Controllers\PC\OddCalculateTool::getMatchAsiaOddResult($match['hscore'],$match['ascore'],$match['asiamiddle2'],true);
@@ -92,7 +92,7 @@ else
     $rg = '-';
 ?>
 
-<a isMatch="1" class="default {{$show?'show':'hide'}}" id="m_table_{{$mid}}" match="{{$mid}}" league="{{$lid}}" nba="{{$isNBA?"nba":""}}" lottery="{{$isLottery?"lottery":""}}" live="{{$hasLive?"live":""}}">
+<a href="{{$matchUrl}}" isMatch="1" class="default {{$show?'show':'hide'}}" id="m_table_{{$mid}}" match="{{$mid}}" league="{{$lid}}" nba="{{$isNBA?"nba":""}}" lottery="{{$isLottery?"lottery":""}}" live="{{$hasLive?"live":""}}">
     <div class="match">
         <div class="time">
             <p class="league">{{$league_name}}</p>

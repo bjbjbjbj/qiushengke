@@ -1,4 +1,4 @@
-<?php $liveUrl = \App\Http\Controllers\PC\CommonTool::matchWapLivePathWithId($match['mid']); ?>
+<?php $liveUrl = \App\Http\Controllers\PC\CommonTool::matchWapPathWithId($match['mid'],2); ?>
 <div id="Navigation">
     <div class="banner">
         <!-- <a href="index.html" class="home"></a> -->
@@ -15,19 +15,19 @@
                 <p class="away">{{$match['aname']}}</p>
             </div>
         @endif
-        {{$match['league']}}{{!empty($match['round']) ? '&nbsp;&nbsp;第' . $match['round'] . '轮' : ''}}
+        {{$match['league']}}
     </div>
 </div>
 <div id="Info">
     <div class="team">
         <p class="img"><img src="{{$match['hicon']}}" onerror="this.src='{{$cdn}}/pc/img/icon_teamDefault.png'"></p>
         <p class="name">{{$match['hname']}}</p>
-        @if(!empty($match['hrank']))<p class="rank">排名：{{$match['hrank']}}</p>@endif
+        <!--@if(!empty($match['hrank']))<p class="rank">排名：{{$match['hrank']}}</p>@endif -->
     </div>
     <div class="info">
-        <p class="minute">{{$match['current_time']}}</p>
+        <p class="minute">{{$match['live_time_str']}}</p>
         <p class="score">
-            @if($match["status"] != 0)
+            @if($match["status"] > 0 || $match["status"] == -1)
                 <span class="host">{{$match['hscore']}}</span>
                 <span class="away">{{$match['ascore']}}</span>
             @endif
@@ -37,6 +37,6 @@
     <div class="team">
         <p class="img"><img src="{{$match['aicon']}}" onerror="this.src='{{$cdn}}/pc/img/icon_teamDefault.png'"></p>
         <p class="name">{{$match['aname']}}</p>
-        @if(!empty($match['arank']))<p class="rank">排名：{{$match['arank']}}</p>@endif
+        <!--@if(!empty($match['arank']))<p class="rank">排名：{{$match['arank']}}</p>@endif -->
     </div>
 </div>

@@ -212,6 +212,9 @@
                     }
                 }
             }
+
+            $('span#leagueChooseCount').html($("#LeagueFilter").find('.item[value=1]').length);
+
             setBG();
         }
 
@@ -500,8 +503,7 @@
             url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 "url": url,
-//                "url":"/static/terminal/1/"+first+"/"+second+"/"+ID+"/tech.json",
-                "dataType": "json",
+                dataType: "jsonp",
                 "success": function (json) {
                     window.clearInterval(ct);
                     //事件
@@ -646,7 +648,7 @@
             url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 "url": url,
-                "dataType": "json",
+                dataType: "jsonp",
                 "success": function (json) {
                     for (var ID in json) {
                         var dataItem = json[ID];
@@ -698,7 +700,7 @@
             url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
                 "url": url,
-                "dataType": "json",
+                dataType: "jsonp",
                 "success": function (json) {
                     var ups = $('span.up');
                     for (var i = 0 ; i < ups.length; i++){
@@ -817,9 +819,8 @@
             var url = "/static/terminal/1/"+first+"/"+second+"/"+ID+"/roll.json";
             url = '{{env('MATCH_URL')}}' + url;
             $.ajax({
-                {{--                "url": '{{env('MATCH_URL')}}' + "/static/terminal/1/"+first+"/"+second+"/"+ID+"/tech.json",--}}
                 "url":url,
-                "dataType": "json",
+                dataType: "jsonp",
                 "success": function (json) {
                     window.clearInterval(ct2);
                     //全场/半场
@@ -923,7 +924,7 @@
                 <button class="all">全选</button>
                 <button class="opposite">反选</button>
                 <button class="comfirm" onclick="confirmFilter('league', false)">确认</button><!--选项为空时有disabled效果--><!--套界面时添加这里的事件-->
-                <p>已选择<span>0</span>项赛事</p>
+                <p>已选择<span id="leagueChooseCount">0</span>项赛事</p>
             </div>
         </div>
     </div>

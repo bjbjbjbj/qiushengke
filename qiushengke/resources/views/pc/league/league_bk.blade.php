@@ -18,7 +18,7 @@
     <div class="lbox" id="Match">
         <div class="title">
             <p>赛程赛果</p>
-            <div class="inbox"><input type="text" name="date" placeholder="请选择日期" value="{{date('m/d/Y', $start)}}" onchange="changeDate(this)"><button></button></div>
+            <div class="inbox"><input type="text" name="date" placeholder="请选择日期" onchange="changeDate(this)"><button></button></div>
         </div>
         <div class="con">
             <table class="match">

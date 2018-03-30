@@ -15,19 +15,19 @@
     </div>
     <div id="List">
         @foreach($matches as $match)
-            @component('phone.cell.match_list_result_cell_bk',['match'=>$match,'sport'=>$sport])
+            @component('phone.cell.match_list_result_cell_bk',['match'=>$match,'sport'=>$sport,'cdn'=>$cdn])
             @endcomponent
         @endforeach
     </div>
 @endsection
-@section('js')
+@section('match_list_js')
     <script type="text/javascript" src="{{$cdn}}/phone/js/immediate.js"></script>
     <script type="text/javascript">
         $('#Navigation .filter input[type=date]').val('{{$currDate}}');
         function clickDate(date) {
             var value = date.value.replace(/\//g,"");
             value = date.value.replace(/-/g,"");
-            var url = '{{env('APP_URL')}}' + '/wap/match/basket/schedule/'+value+'/result.html';
+            var url = '{{env('APP_URL')}}' + '/wap/match/basket/schedule/'+value+'/result_t.html';
             window.location.href = url;
         }
     </script>
