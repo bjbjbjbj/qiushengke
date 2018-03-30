@@ -5,6 +5,11 @@
 @section('js')
     <script type="text/javascript" src="{{$cdn}}/phone/js/video.js"></script>
     <script type="text/javascript">
+        window.onload = function () {
+            setPage();
+            setDataUpdate('{{$sport}}','{{$match['mid']}}');
+        }
+
         function changeChannel() {
             var obj = $('select#channelSelect')[0];
             var Link = obj.value;
@@ -12,6 +17,17 @@
         }
 
         changeChannel();
+
+        function clickHideScore(button) {
+            if (button.innerHTML == '隐藏比分'){
+                $('div#Info div.score p')[0].className = 'hide';
+                button.innerHTML = '显示比分'
+            }
+            else{
+                $('div#Info div.score p')[0].className = '';
+                button.innerHTML = '隐藏比分'
+            }
+        }
     </script>
     @yield('live_js')
 @endsection
@@ -40,9 +56,5 @@
         </div>
     </div>
     <iframe src="" id="Iframe"></iframe>
-    <div class="tab">
-        <input type="radio" name="tab" id="Tab_Info" value="Info" checked><label for="Tab_Info">比赛信息</label>
-        <input type="radio" name="tab" id="Tab_Event" value="Event"><label for="Tab_Event">比赛事件</label><!--足球-->
-        <input type="radio" name="tab" id="Tab_Player" value="Player"><label for="Tab_Player">球员统计</label><!--篮球-->
-    </div>
+    @yield('live_tab')
 @endsection
