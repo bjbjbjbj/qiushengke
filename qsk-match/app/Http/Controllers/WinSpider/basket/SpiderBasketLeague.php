@@ -156,9 +156,9 @@ trait SpiderBasketLeague
                 echo $hname . 'vs'.$aname.'</br>';
                 \App\Models\LiaoGouModels\BasketMatch::saveWithWinData($tmp);
             }
+            return array('kind'=>isset($currentKind)?$currentKind:0,'array'=>$months);
         }
-
-        return array('kind'=>isset($currentKind)?$currentKind:0,'array'=>$months);
+        return;
     }
 
     /**

@@ -131,7 +131,7 @@ class Match extends Model
         else{
             $hname = $m['hname'];
         }
-        $hname = str_replace('﻿','',$hname);
+        $hname = trim($hname);
 
         $idString = "win_id";
         $match = Match::where($idString,$m->id)
@@ -197,6 +197,12 @@ class Match extends Model
                     } else {
                         $team = Team::where('name', $hname)->first();
                     }
+                    if (is_null($team)) {
+                        $temps = Team::where('name', 'like', "%$hname%")->get();
+                        if (count($temps) == 1) {
+                            $team = $temps[0];
+                        }
+                    }
                     if (isset($team)){
                         $alia = new LiaogouAlias();
                         $alia->type = 1;
@@ -250,6 +256,12 @@ class Match extends Model
                     } else {
                         $team = Team::where('name', $m->aname)->first();
                     }
+                    if (is_null($team)) {
+                        $temps = Team::where('name', 'like', "%$m->aname%")->get();
+                        if (count($temps) == 1) {
+                            $team = $temps[0];
+                        }
+                    }
                     if (isset($team)){
                         $alia = new LiaogouAlias();
                         $alia->type = 1;
@@ -273,7 +285,7 @@ class Match extends Model
             else{
                 $hname = $m['hname'];
             }
-            $hname = str_replace('﻿','',$hname);
+            $hname = trim($hname);
             $match->win_hname = $hname;
             $match->win_lname = $league->name;
             $match->win_aname = $m['aname'];
@@ -319,6 +331,12 @@ class Match extends Model
                 $team = Team::query()->where('win_id', $m->hid)->first();
             } else {
                 $team = Team::where('name',$hname)->first();
+            }
+            if (is_null($team)) {
+                $temps = Team::where('name', 'like', "%$hname%")->get();
+                if (count($temps) == 1) {
+                    $team = $temps[0];
+                }
             }
             if (isset($team)){
                 $alia = new LiaogouAlias();
@@ -369,6 +387,12 @@ class Match extends Model
                 $team = Team::query()->where('win_id', $m->aid)->first();
             } else {
                 $team = Team::where('name',$m->aname)->first();
+            }
+            if (is_null($team)) {
+                $temps = Team::where('name', 'like', "%$m->aname%")->get();
+                if (count($temps) == 1) {
+                    $team = $temps[0];
+                }
             }
             if (isset($team)){
                 $alia = new LiaogouAlias();
@@ -424,7 +448,7 @@ class Match extends Model
             else{
                 $hname = $m['hname'];
             }
-            $hname = str_replace('﻿','',$hname);
+            $hname = trim($hname);
             $match->win_hname = $hname;
             $match->win_lname = $league->name;
             $match->win_aname = $m['aname'];
