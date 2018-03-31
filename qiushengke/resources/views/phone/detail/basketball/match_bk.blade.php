@@ -36,32 +36,12 @@
             var dataOddHtml = json.odd_html;
             if (dataOddHtml && dataOddHtml != "") {
                 $("#Data div.odd").html(dataOddHtml);
-
-                var BtnClose = $('#Data div.odd button.close');
-                BtnClose.click(function(){
-                    if ($(this).parents('.default').attr('close')) {
-                        $(this).parents('.default').removeAttr('close');
-                    }else{
-                        $(this).parents('.default').attr('close','close');
-                    }
-                });
-
-                var Sel = $('#Data div.odd select');
-                Sel.change(function(){
-                    $(this).parents('.default').children('table').css('display','none');
-                    $('#' + $(this).children('option:selected').val()).css('display','');
-                })
             }
             var oddIndexHtml = json.index_html;
             if (oddIndexHtml && oddIndexHtml != "") {
                 $("#Odd").html(oddIndexHtml);
-
-                var BottomTab = $('#Odd div.bottom input');
-                BottomTab.change(function(){
-                    $(this).parents('.content').children('.childNode').css('display','none');
-                    $('#' + this.value).css('display','');
-                })
             }
+            setPage();
         });
     });
     window.onscroll = function () {
