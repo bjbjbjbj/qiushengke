@@ -356,9 +356,9 @@ trait SpiderBasketLeague
                 $tmp->save();
                 \App\Models\LiaoGouModels\BasketMatch::saveWithWinData($tmp);
             }
+            return array('kind'=>isset($currentKind)?$currentKind:0,'array'=>$months);
         }
-
-        return array('kind'=>isset($currentKind)?$currentKind:0,'array'=>$months);
+        return;
     }
     /******************* ***********************/
     /***  通用 ****/
