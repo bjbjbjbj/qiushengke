@@ -497,13 +497,13 @@ a.team span.name{
 	content: '';
 }
 #Con td p.asia span.odd, #Con td p.goal span.odd{
-	width: 80px;
+	width: 100px;
 	margin: 0 3px;
 	font-size: 12px;
 	display: inline-block;
 }
 #Con td p.asia span.odd:before, #Con td p.goal span.odd:before{
-	right: -2px;
+	right: -4px;
 }
 
 /*置顶*/
@@ -1127,6 +1127,9 @@ a.team span.name{
 	}
 	#Con > .ConInner > table > colgroup > col:nth-child(4){
 		width: 60px !important;
+	}
+	#Con > .ConInner > table > colgroup > col:nth-child(12){
+		width: 226px !important;
 	}
 }
 

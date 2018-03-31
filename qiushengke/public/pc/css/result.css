@@ -569,6 +569,7 @@ a.team span.name{
 /*盘口*/
 #Con table p.odd{
 	color: #adadad;
+	position: relative;
 }
 #Con table p.odd span{
 	width: 18px; height: 18px;

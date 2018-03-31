@@ -86,8 +86,8 @@ $aicon = strlen($match['aicon']) > 0 ? $match['aicon'] : '/pc/img/icon_teamDefau
         }
 
 
-        $homePer = ($winh + $drawa + $wina) > 0 ? round(100*($winh/($winh+$drawa+$wina)),0) : 0;
-        $awayPer = ($winh + $drawa + $wina) > 0 ? round(100*($wina/($winh+$drawa+$wina)),0) : 0;
+        $homePer = ($winh + $wina) > 0 ? round(100*($winh/($winh+$wina)),0) : 0;
+        $awayPer = ($winh + $wina) > 0 ? 100 - $homePer : 0;
 
         ?>
         <p class="wdl host"><span>{{$winh}}</span>胜<span>{{$drawh}}</span>平<span>{{$loseh}}</span>负</p>
