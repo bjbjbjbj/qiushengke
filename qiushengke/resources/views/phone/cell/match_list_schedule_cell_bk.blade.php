@@ -99,8 +99,8 @@ else
             <p>{{date('H:i', $match['time'])}}</p>
         </div>
         <div class="team">
-            <p><img src="{{\App\Http\Controllers\PC\CommonTool::getIconBK($match['hicon'])}}">{{$match['hname']}}</p>
-            <p><img src="{{\App\Http\Controllers\PC\CommonTool::getIconBK($match['aicon'])}}">{{$match['aname']}}</p>
+            <p><img src="{{\App\Http\Controllers\PC\CommonTool::getIconBK($match['hicon'])}}" onerror="this.src='{{$cdn}}/phone/img/icon_teamDefault.png'">{{$match['hname']}}</p>
+            <p><img src="{{\App\Http\Controllers\PC\CommonTool::getIconBK($match['aicon'])}}" onerror="this.src='{{$cdn}}/phone/img/icon_teamDefault.png'">{{$match['aname']}}</p>
         </div>
         @if($status == 0)
             @if($hasLive)

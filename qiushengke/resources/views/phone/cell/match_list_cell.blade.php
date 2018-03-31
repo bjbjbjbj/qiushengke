@@ -112,8 +112,8 @@ $hasLive = $match['pc_live'];
 
 $liveUrl = \App\Http\Controllers\PC\CommonTool::matchWapLivePathWithId($match['mid']);
 
-$hicon = isset($match['hicon']) && strlen($match['hicon']) > 0 ?$match['hicon']:'/phone/img/icon_teamDefault.png';
-$aicon = isset($match['aicon']) && strlen($match['hicon']) > 0?$match['aicon']:'/phone/img/icon_teamDefault.png';
+$hicon = isset($match['hicon']) && strlen($match['hicon']) > 0 ? $match['hicon'] : '/phone/img/icon_teamDefault.png';
+$aicon = isset($match['aicon']) && strlen($match['aicon']) > 0 ? $match['aicon'] : '/phone/img/icon_teamDefault.png';
 ?>
 <a href="{{$matchUrl}}" isMatch="1" class="default {{$show?'show':'hide'}}" id="m_tr_{{$mid}}" match="{{$mid}}" league="{{$lid}}" asiaOdd="{{$asiaOdd}}" ouOdd="{{$ouOdd}}" first="{{$isFirst?"first":""}}" lottery="{{$isLottery?"lottery":""}}" live="{{$hasLive?"live":""}}">
     <div class="odd">
@@ -131,8 +131,8 @@ $aicon = isset($match['aicon']) && strlen($match['hicon']) > 0?$match['aicon']:'
             @endif
         </div>
         <div class="team">
-            <p><img src="{{$hicon}}">{{$match['hname']}}</p>
-            <p><img src="{{$aicon}}">{{$match['aname']}}</p>
+            <p><img src="{{$hicon}}" onerror="this.src='{{$cdn}}/phone/img/icon_teamDefault.png'">{{$match['hname']}}</p>
+            <p><img src="{{$aicon}}" onerror="this.src='{{$cdn}}/phone/img/icon_teamDefault.png'">{{$match['aname']}}</p>
         </div>
         @if($status == 0)
             <div class="fullScore"><p>-</p><p>-</p></div>

@@ -31,7 +31,7 @@
             htmlPathType = str;
         }
 
-        $('#hideMatchCount').html($('table#Table tr.hide').length);
+        $('#hideMatchCount').html($('table#Table tr[isMatch=1].hide').length);
 
         updateMatch();
 
@@ -128,7 +128,7 @@
                     }
                 }
             }
-            $('#hideMatchCount').html($('table#Table tr.hide').length);
+            $('#hideMatchCount').html($('table#Table tr[isMatch=1].hide').length);
 //            $('#totalMatchCount').html(totalMatchCount);
 
             //还原列表类型 进行中 稍后等显示方式

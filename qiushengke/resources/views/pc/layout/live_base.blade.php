@@ -193,14 +193,20 @@
                 _updateOdd(tbody, 'a', '1', json[key]['1'], '1');
                 _updateOdd(tbody, 'o', '1', json[key]['3'], '1');
                 _updateOdd(tbody, 'g', '1', json[key]['2'], '1');
-                _updateOdd(tbody, 'a', '2', json[key]['1'], json[key]['1']['middle'] == null ? '2' : '');
-                _updateOdd(tbody, 'o', '2', json[key]['3'], json[key]['2']['middle'] == null ? '2' : '');
-                _updateOdd(tbody, 'g', '2', json[key]['2'], json[key]['3']['middle'] == null ? '2' : '');
+                if(json[key]['1'])
+                    _updateOdd(tbody, 'a', '2', json[key]['1'], json[key]['1']['middle'] == null ? '2' : '');
+                if(json[key]['2'])
+                    _updateOdd(tbody, 'o', '2', json[key]['3'], json[key]['2']['middle'] == null ? '2' : '');
+                if(json[key]['3'])
+                    _updateOdd(tbody, 'g', '2', json[key]['2'], json[key]['3']['middle'] == null ? '2' : '');
             }
         }
 
         //更新赔率小框 tbody全场半场 key类型a亚盘o欧赔g大小球 key21初盘2即时 data数据 key3数据拿那个
         function _updateOdd (tbody,key,key2,data,key3) {
+            if (data == null || data == undefined){
+                return;
+            }
             var middle = data['middle'+key3];
             if (middle) {
                 var p = tbody.find('td.' + key + 'up' + key2)[0];
