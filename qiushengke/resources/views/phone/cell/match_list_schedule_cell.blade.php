@@ -122,8 +122,8 @@ $aicon = isset($match['aicon'])?$match['aicon']:'/phone/img/icon_teamDefault.png
             <p>{{$matchTime}}</p>
         </div>
         <div class="team">
-            <p><img src="{{$hicon}}">{{$match['hname']}}</p>
-            <p><img src="{{$aicon}}">{{$match['aname']}}</p>
+            <p><img src="{{$hicon}}" onerror="this.src='{{$cdn}}/phone/img/icon_teamDefault.png'">{{$match['hname']}}</p>
+            <p><img src="{{$aicon}}" onerror="this.src='{{$cdn}}/phone/img/icon_teamDefault.png'">{{$match['aname']}}</p>
         </div>
         @if($status == 0)
             @if($hasLive)

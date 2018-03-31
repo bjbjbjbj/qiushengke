@@ -65,6 +65,12 @@ class LiveController extends BaseController{
             $json = json_encode($json);
             Storage::disk('public')->put($path,$json);
         }
+        $path = '/chat/json/'.($sport == 1 ? '1':'2').'/'.$first.'/'.$second.'/'.$mid.'.json';
+        if (!Storage::disk('public')->exists($path)){
+            $json = array();
+            $json = json_encode($json);
+            Storage::disk('public')->put($path,$json);
+        }
     }
 
     /**

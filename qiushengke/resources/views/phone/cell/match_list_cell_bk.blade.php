@@ -97,8 +97,8 @@ $liveUrl = \App\Http\Controllers\PC\CommonTool::matchWapLivePathWithId($match['m
             @endif
         </div>
         <div class="team">
-            <p><img src="{{\App\Http\Controllers\PC\CommonTool::getIconBK($match['hicon'])}}">{{$match['hname']}}</p>
-            <p><img src="{{\App\Http\Controllers\PC\CommonTool::getIconBK($match['aicon'])}}">{{$match['aname']}}</p>
+            <p><img src="{{\App\Http\Controllers\PC\CommonTool::getIconBK($match['hicon'])}}" onerror="this.src='{{$cdn}}/phone/img/icon_teamDefault.png'">{{$match['hname']}}</p>
+            <p><img src="{{\App\Http\Controllers\PC\CommonTool::getIconBK($match['aicon'])}}" onerror="this.src='{{$cdn}}/phone/img/icon_teamDefault.png'">{{$match['aname']}}</p>
         </div>
 
         @if($status > 0)
