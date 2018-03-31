@@ -162,9 +162,10 @@ class MatchController extends BaseController
 
         $pc_json = FileTool::matchListDataJson($startDate,$sport);
         if (!empty($pc_json)) {
-            $result['total'] = count($pc_json['matches']);
+            $result = array();
             $sortData = $this->sortMatch($pc_json,$sport,$order);
             $result = array_merge($result,$sortData);
+            $result['total'] = count($sortData['matches']);
             $result['sport'] = $sport;
             $result['nextDate'] = $nextDate;
             $result['lastDate'] = $lastDate;
@@ -359,7 +360,7 @@ class MatchController extends BaseController
             elseif ($match['status'] == 0){
                 $after[] = $match;
             }
-            elseif ($match['status'] == -1){
+            elseif ($match['status'] <= -1){
                 $end[] = $match;
             }
             //缺顶置
