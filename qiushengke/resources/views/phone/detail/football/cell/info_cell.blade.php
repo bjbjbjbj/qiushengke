@@ -1,4 +1,4 @@
-<?php $liveUrl = \App\Http\Controllers\PC\CommonTool::matchWapPathWithId($match['mid']); ?>
+<?php $liveUrl = \App\Http\Controllers\PC\CommonTool::matchWapLivePathWithId($match['mid']); ?>
 <div id="Navigation">
     <div class="banner">
         <!-- <a href="index.html" class="home"></a> -->

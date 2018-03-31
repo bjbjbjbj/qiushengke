@@ -119,6 +119,9 @@
         //获取聊天数据(增量
         function getChat() {
             var url = '/chat/json/{{$sport}}/{{substr($match['mid'],0,2)}}/{{substr($match['mid'],2,2)}}/{{$match['mid']}}_t.json';
+            if ($('div#Chatroom ul li').length == 0){
+                url = '/chat/json/{{$sport}}/{{substr($match['mid'],0,2)}}/{{substr($match['mid'],2,2)}}/{{$match['mid']}}.json';
+            }
             $.ajax({
                         'url': url,
                         'success': function (json) {
@@ -132,11 +135,13 @@
                                     var data = json[i];
                                     current = current.getTime()/1000;
                                     current_time = data['time'];
-                                    //10秒前不出
-                                    if (data['time'] < current - 10){
-                                        continue;
+                                    if($('div#Chatroom ul li').length > 0) {
+                                        //10秒前不出
+                                        if (data['time'] < current - 10) {
+                                            continue;
+                                        }
                                     }
-                                    if (user && user == data['user']){
+                                    if (user && user == data['user']) {
                                         continue;
                                     }
                                     var time = format(data['time']);
