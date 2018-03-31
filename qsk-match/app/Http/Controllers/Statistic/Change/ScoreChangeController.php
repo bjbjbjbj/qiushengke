@@ -55,6 +55,8 @@ class ScoreChangeController extends Controller
                     $timehalf = $match['timehalf'];
                     $scoreItem['timestamphalf'] = $timehalf;
                     $scoreItem['time'] = Match::getMatchCurrentTimeByTimestamp($time, $timehalf, $status, true);
+                } else {
+                    $scoreItem['system'] = $match['system'];
                 }
                 $tempArray[$key] = $scoreItem;
             }
