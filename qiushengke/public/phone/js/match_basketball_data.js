@@ -10,7 +10,7 @@ function getMatchData (ID) {
     $.ajax({
         url: RootUrl + '2/' + ID.slice(0,2) + '/' + ID.slice(2,4) + '/' + ID + '/match.json',
         type: 'GET',
-        dataType: 'json',
+        dataType: 'jsonp',
         success: function (data) {
         	if (parseInt(data.status) != 0) {
         		/*
