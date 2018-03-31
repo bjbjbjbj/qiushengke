@@ -52,10 +52,18 @@ class BasketTerminalController
         }
         $schedule = StatisticFileTool::getFileFromSchedule($date, MatchLive::kSportBasketball, 'all');
 
-        $isToday = date('Ymd') == date('Ymd', strtotime($date));
-
         $matches = isset($schedule['matches']) ? $schedule['matches'] : [];
         if (count($matches) <= 0) return;
+
+        $matches = collect($matches)->sort(function ($a,$b){
+            if (isset($a['betting_num']) || isset($b['betting_num'])) {
+                return isset($a['betting_num']) ? 0 : 1;
+            } else if (isset($a['asiamiddle1']) || isset($b['asiamiddle1'])) {
+                return isset($a['asiamiddle1']) ? 0 : 1;
+            } else {
+                return $a['time'] > $b['time'] ? 0 : 1;
+            }
+        })->all();
 
         $key = "football_analyse_".$date."_static";
         $savedMids = json_decode(Redis::get($key));
@@ -69,6 +77,9 @@ class BasketTerminalController
         $livingCount = 0;
         foreach ($matches as $match) {
             if ($count >= $saveCount) break;
+
+            $time = $match['time'];
+            $isToday = time() - $time <= 5*60;
 
             $mid = $match['mid'];
             if (!in_array($mid, $savedMids)) {

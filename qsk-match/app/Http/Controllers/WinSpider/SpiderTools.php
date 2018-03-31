@@ -137,7 +137,8 @@ trait SpiderTools
             curl_setopt($ch, CURLOPT_HEADER, true);
             $response = curl_exec($ch);
             if ($error = curl_error($ch)) {
-                die($error);
+                curl_close($ch);
+                return $content;
             }
             curl_close($ch);
 
