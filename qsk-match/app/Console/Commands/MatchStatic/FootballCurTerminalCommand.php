@@ -49,7 +49,7 @@ class FootballCurTerminalCommand extends Command
     public function handle()
     {
         $controller = new MatchTerminalController();
-        $controller->onStatic('date', MatchLive::kSportFootball, date('Ymd'), 10);
+        $controller->onStatic(null, 'date', MatchLive::kSportFootball, date('Ymd'), 10);
     }
 
 }

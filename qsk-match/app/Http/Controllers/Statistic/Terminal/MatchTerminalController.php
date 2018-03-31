@@ -5,6 +5,7 @@ use App\Http\Controllers\Statistic\Terminal\Football\FootballTerminalController;
 use App\Models\LiaoGouModels\BasketMatch;
 use App\Models\LiaoGouModels\Match;
 use App\Models\LiaoGouModels\MatchLive;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
 
 
@@ -38,7 +39,7 @@ class MatchTerminalController
         return ($a == $index1) && ($index2 == $b);
     }
 
-    public function onStatic($type, $sport, $key, $saveCount = 6) {
+    public function onStatic(Request $request, $type, $sport, $key, $saveCount = 6) {
         $isBasket = $sport == MatchLive::kSportBasketball;
         if ($isBasket) {
             $controller = new BasketTerminalController();
@@ -48,7 +49,12 @@ class MatchTerminalController
         if ($type == 'match') {
             $controller->analyseDataStatic($key, [1,2], true);
         } else if ($type == 'date') {
-            $controller->onMatchAnalyseDataStatic($key, $saveCount);
+            $isReset = false;
+            if (isset($request)) {
+                $isReset = $request->input('reset', false);
+                $saveCount = $request->input('count', $saveCount);
+            }
+            $controller->onMatchAnalyseDataStatic($key, $saveCount, $isReset);
         } else if ($type == 'tech') {
             if ($isBasket) {
                 $match = BasketMatch::query()->find($key);

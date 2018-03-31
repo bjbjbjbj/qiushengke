@@ -46,7 +46,7 @@ class FootballTerminalController extends Controller
         return $data;
     }
 
-    public function onMatchAnalyseDataStatic($date = null, $saveCount = 6) {
+    public function onMatchAnalyseDataStatic($date = null, $saveCount = 6, $isResetRedis = false) {
 //        set_time_limit(0);
 //        dump(date('Y-m-d H:i:s'));
         if (is_null($date)) {
@@ -69,7 +69,12 @@ class FootballTerminalController extends Controller
             }
         })->all();
 
+        $curMatchCount = count($matches);
+
         $key = "football_analyse_".$date."_static";
+        if ($isResetRedis) {
+            Redis::del($key);
+        }
         $savedMids = json_decode(Redis::get($key));
         if (is_null($savedMids)) {
             $savedMids = [];
@@ -98,8 +103,13 @@ class FootballTerminalController extends Controller
         }
         $totalSaveCount = count($savedMids);
         $curSaveCount = $totalSaveCount - $lastSaveCount - $livingCount;
-        if ($curSaveCount < $saveCount) {
-            $length = $totalSaveCount - $saveCount;
+        echo "total_save_count = $totalSaveCount; cur_save_count = $curSaveCount <br>";
+        if ($totalSaveCount > $curMatchCount || $curSaveCount < $saveCount) {
+            if ($totalSaveCount > $curMatchCount) {
+                $length = $totalSaveCount - $curMatchCount - $saveCount;
+            } else {
+                $length = $totalSaveCount - $saveCount;
+            }
             if ($length > 0) {
                 $savedMids = array_slice($savedMids, $saveCount, $length);
             } else {

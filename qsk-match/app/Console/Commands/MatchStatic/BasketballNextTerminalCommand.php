@@ -49,7 +49,7 @@ class BasketballNextTerminalCommand extends Command
     public function handle()
     {
         $controller = new MatchTerminalController();
-        $controller->onStatic('date', MatchLive::kSportBasketball, date('Ymd', strtotime('+1 day')), 10);
+        $controller->onStatic(null,'date', MatchLive::kSportBasketball, date('Ymd', strtotime('+1 day')), 10);
     }
 
 }
