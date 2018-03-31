@@ -99,7 +99,7 @@ function getEventData (ID,Status) {
 	$.ajax({
         url: RootUrl + '2/' + ID.slice(0,2) + '/' + ID.slice(2,4) + '/' + ID + '/tech.json',
         type: 'GET',
-        dataType: 'json',
+        dataType: 'jsonp',
         success: function (data) {
         	if (data) { //数据
 	      		$('#Event .technology li').html($('#Event .technology li dl.team'));

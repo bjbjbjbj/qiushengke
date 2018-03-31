@@ -24,6 +24,7 @@
 @yield('content')
 </body>
 <script type="text/javascript">
+    var CDN = '{{$cdn}}' + '/phone';
     window.onload = function () {
         setPage();
     }

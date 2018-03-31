@@ -31,7 +31,8 @@ function setDataUpdate (Type,ID) {
 function FootballData (ID) {
 	$.ajax({
         url: RootUrl + '1/' + ID.slice(0,2) + '/' + ID.slice(2,4) + '/' + ID + '/match.json',
-		dataType: "jsonp",
+        type: 'GET',
+        dataType: 'jsonp',
         success: function (data) {
         	if (parseInt(data.status) != 0) {
         		/*
@@ -60,6 +61,7 @@ function FootballData (ID) {
 function getFootballEventData (ID,Status) {
 	$.ajax({
         url: RootUrl + '1/' + ID.slice(0,2) + '/' + ID.slice(2,4) + '/' + ID + '/tech.json',
+        type: 'GET',
         dataType: 'jsonp',
         success: function (data) {
         	if (data.tech) { //数据
@@ -76,16 +78,16 @@ function getFootballEventData (ID,Status) {
 				$.each(data.event.events, function(index, value) {
 					var Inner = '';
 					if (parseInt(value.kind) == 1 || parseInt(value.kind) == 7) { //1-进球，7-点球
-						Inner = '<li><img src="img/icon_video_goal.png">' + value.player_name_j + (parseInt(value.kind) == 7 ? '（点球）' : '') + '</li>';
+						Inner = '<li><img src="' + CDN + '/img/icon_video_goal.png">' + value.player_name_j + (parseInt(value.kind) == 7 ? '（点球）' : '') + '</li>';
 					}else if (parseInt(value.kind) == 8) { //8-乌龙
-						Inner = '<li><img src="img/icon_video_own.png">' + value.player_name_j + '（乌龙）</li>';
+						Inner = '<li><img src="' + CDN + '/img/icon_video_own.png">' + value.player_name_j + '（乌龙）</li>';
 					}else if (parseInt(value.kind) == 2 || parseInt(value.kind) == 9) { //2-红牌, 9-两黄一红
-						Inner = '<li><img src="img/icon_video_red.png">' + value.player_name_j + (parseInt(value.kind) == 9 ? '（两黄一红）' : '') + '</li>';
+						Inner = '<li><img src="' + CDN + '/img/icon_video_red.png">' + value.player_name_j + (parseInt(value.kind) == 9 ? '（两黄一红）' : '') + '</li>';
 					}else if (parseInt(value.kind) == 3) { //3-黄牌
-						Inner = '<li><img src="img/icon_video_yellow.png">' + value.player_name_j + '</li>';
+						Inner = '<li><img src="' + CDN + '/img/icon_video_yellow.png">' + value.player_name_j + '</li>';
 					}else if (parseInt(value.kind) == 11) { //11-换人
-						Inner = '<li><img src="img/icon_video_up.png">' + value.player_name_j + '换上</li>' + 
-								'<li><img src="img/icon_video_down.png">' + value.player_name_j2 + '换下</li>';
+						Inner = '<li><img src="' + CDN + '/img/icon_video_up.png">' + value.player_name_j + '换上</li>' + 
+								'<li><img src="' + CDN + '/img/icon_video_down.png">' + value.player_name_j2 + '换下</li>';
 					}
 					$('#Event dt.end').after('<dd class="' + (parseInt(value.is_home) == 1 ? 'host' : 'away') + '"><p class="minute">' + value.happen_time + '<span>' + 
 													"'</span></p><ul>" + Inner + '</ul></dd>');
