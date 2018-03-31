@@ -412,16 +412,20 @@ class CommonTool
     {
         $time = $timehalf > 0 ? $timehalf : $time;
         $now = strtotime(date('Y-m-d H:i:s'));
-        if ($status < 0 || $status == 2 || $status == 4) {
+        if ($status < 0) {
             $matchTime = self::getStatusTextCn($status);
-        }elseif ($status == 1) {
+        }
+        elseif ($status == 2 || $status == 4){
+            $matchTime = '<p class="time">'.self::getStatusTextCn($status).'</p>';
+        }
+        elseif ($status == 1) {
             $diff = ($now - $time) > 0 ? ($now - $time) : 0;
-            $matchTime = (floor(($diff) % 86400 / 60)) > 45 ? ('45+' . '<span>' . '\''.'</span>') : ((floor(($diff) % 86400 / 60)) . '<span>' . '\''.'</span>');
+            $matchTime = (floor(($diff) % 86400 / 60)) > 45 ? ('<p class="time">45+' . '<span>\'</span></p>') : ('<p class="time">' .(floor(($diff) % 86400 / 60)) .'<span>\'</span></p>');
         } elseif ($status == 3) {
             $diff = ($now - $timehalf) > 0 ? ($now - $timehalf) : 0;
-            $matchTime = (floor(($diff) % 86400 / 60)) > 45 ? ('90+' . '<span>' . '\''.'</span>') : ((floor(($diff) % 86400 / 60) + 45) . '<span>' . '\''.'</span>');
+            $matchTime = (floor(($diff) % 86400 / 60)) > 45 ? ('<p class="time">' .'90+' .'<span>\'</span></p>') : ('<p class="time">' .(floor(($diff) % 86400 / 60) + 45) .'<span>\'</span></p>');
         } else {
-            $matchTime = '';
+            $matchTime = '未';
         }
         return $matchTime;
     }
@@ -665,7 +669,10 @@ class CommonTool
             if (str_contains($icon, '.gif') && str_contains($icon, 'team/images/2005')) {
                 return env('CDN_URL') . '/pc/img/icon_teamDefault.png';
             }
-            return $icon;
+            if (str_contains($icon, 'http'))
+                return $icon;
+            else
+                return 'http://nba.win007.com'.$icon;
         } else {
             return env('CDN_URL') . '/pc/img/icon_teamDefault.png';
         }

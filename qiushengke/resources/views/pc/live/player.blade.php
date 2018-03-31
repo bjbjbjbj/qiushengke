@@ -8,6 +8,11 @@
     <meta name="Description" content="爱看球是一个专业为球迷提供免费的NBA,CBA,英超,西甲,德甲,意甲,法甲,中超,欧冠,世界杯等各大体育赛事直播、解说平台，无广告，无插件，高清，直播线路多">
     <link rel="stylesheet" type="text/css" href="{{$cdn}}/pc/css/style.css?rd=2018">
     <link rel="stylesheet" type="text/css" href="{{$cdn}}/pc/css/player.css?rd=20180306">
+    <style type="text/css">
+        body{
+            background: url({{$cdn}}/pc/img/image_video_bg.jpg) no-repeat center; background-size: cover;
+        }
+    </style>
     <meta http-equiv="X-UA-Compatible" content="edge" />
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
     <meta name="baidu-site-verification" content="nEdUlBWvbw">

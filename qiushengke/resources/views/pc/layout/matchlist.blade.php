@@ -66,6 +66,7 @@
             _resetFilterUser('match',filter);
 
             setBG();
+            $('#hideMatchCount').html($('table#Table tr[isMatch=1].hide').length);
         }
 
         //设置cookies

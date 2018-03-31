@@ -25,8 +25,8 @@
             @if(isset($tech['tech']))
                 @foreach($tech['tech'] as $item)
                     <?php
-                    $hname = $item['h'];
-                    $aname = $item['a'];
+                    $hname = str_replace('%','',$item['h']);
+                    $aname = str_replace('%','',$item['a']);
                     if (str_contains($hname, "(")) {
                         $hname = str_replace(')','',explode("(", $hname)[1]);
                     }
@@ -324,7 +324,7 @@
                     //比赛结束不定时刷新
                     if (status >= 0){
                         window.setTimeout('refreshMatch()', 5000);
-                        window.setTimeout('refreshMatchTech()',5000);
+//                        window.setTimeout('refreshMatchTech()',5000);
                         window.setTimeout('refreshOddByMid()',5000);
                     }
 
@@ -445,31 +445,47 @@
                     var html = _createEventHtml('away',away_events,width);
                     $('div#away_event').html(html);
 
-                    return;
-
-                    //统计,暂时没做
-                    var event = document.getElementById(ID+'_tboxCon');
-                    if (typeof(event) != 'undefined') {
-                        var events = json['tech'];
-                        var content = '';
-                        for (var i = 0 ; i < events.length ; i++) {
-                            var item = events[i];
-                            if (!(item.h_p == 0 && item.a_p == 0)){
-                                content = content +
-                                        '<dd class="total">' +
-                                        '<p class="num host">' + item.h + '</p>' +
-                                        '<p class="percent"><span class="host" width="' + item.h_p * 100 + '%"></span></p>' +
-                                        '<p class="item">' + item.name + '</p>' +
-                                        '<p class="percent"><span class="away" width="' + item.a_p * 100 + '%"></span></p>' +
-                                        '<p class="num away">' + item.a + '</p>' +
-                                        '</dd>';
-                            }
-                        }
-                        var html = '<dl class="tbox"> <dt><p>统计</p></dt>' +
-                                content +
-                                '</dl>';
-                        event.innerHTML = html;
+                    var eventUl = $('div#Live div.data ul');
+                    var lis = $('div#Live div.data ul li');
+                    if (lis.length == 0){
+                        $('div#Live div.data button.open')[0].className = 'open hide';
                     }
+                    else {
+                        $('div#Live div.data button.open')[0].className = 'open';
+                    }
+                    var events = json['tech'];
+                    if (events.length == 0)
+                        return;
+
+                    //清空
+                    lis.remove();
+
+                    var content = '';
+                    for (var i = 0 ; i < events.length ; i++) {
+                        var item = events[i];
+                        if (!(item.h_p == 0 && item.a_p == 0)){
+                            content = content +
+                                    '<li>'+
+                                    '<p class="host">'+
+                                    '<b>'+(item.h+'').replace('%','')+'</b>'+
+                                    '<span><em style="width: ' + item.h_p * 100 + '%;"></em></span>'+
+                                    '</p>'+
+                                    '<p class="item">' + item.name + '</p>'+
+                                    '<p class="away">'+
+                                    '<b>' + (item.a+'').replace('%','') + '</b>'+
+                                    '<span><em style="width: ' + item.a_p * 100 + '%;"></em></span>'+
+                                    '</p>'+
+                                    '</li>';
+                        }
+                    }
+                    eventUl.append(content);
+
+                    var Length = 3 - $('#Live .data ul li').length % 3 == 3 ? 0 : 3 - $('#Live .data ul li').length % 3;
+                    for (var i = 0; i < Length; i++) {
+                        $('#Live .data ul').append('<li></li>');
+                    }
+
+                    $('div#Live div.data button.open')[0].className = 'open';
                 },
                 "error": function () {
 

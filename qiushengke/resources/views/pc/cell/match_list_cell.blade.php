@@ -111,6 +111,7 @@ $show = true;
 $hasLive = $match['pc_live'];
 
 $liveUrl = \App\Http\Controllers\PC\CommonTool::matchLivePathWithId($match['mid']);
+$show = false;
 ?>
 <tr isMatch="1" class="{{$show?'show':'hide'}}" id="m_tr_{{$mid}}" match="{{$mid}}" league="{{$lid}}" asiaOdd="{{$asiaOdd}}" ouOdd="{{$ouOdd}}" first="{{$isFirst?"first":""}}" lottery="{{$isLottery?"lottery":""}}" live="{{$hasLive?"live":""}}">
     <td><button name="match" class="choose" value="0" mid="{{$mid}}" name="match" id="match_{{$mid}}" onclick="clickMatchBtn(this)"></button></td>
@@ -209,7 +210,8 @@ $liveUrl = \App\Http\Controllers\PC\CommonTool::matchLivePathWithId($match['mid'
             @if($hasLive)
                 <a class="live video" href="{{$liveUrl}}" target="_blank">直播中</a>
             @else
-                <a class="live flash" href="{{$liveUrl}}" target="_blank">动画</a>
+                {{--<a class="live flash" href="{{$liveUrl}}" target="_blank">动画</a>--}}
+                <a class="live" style="color: lightgray">暂无直播</a>
             @endif
         @endif
     </td>
