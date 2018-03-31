@@ -31,18 +31,13 @@
         }
         
         var htmlPathType = 'bk_immediate';
-        if (window.location.pathname.indexOf('result') != -1){
-            var str = window.location.pathname;
-            var index = str .lastIndexOf("\/");
-            str  = str .substring(index + 1, str .length);
-            str = str.replace('.html','');
+        var str = window.location.pathname;
+        var index = str .lastIndexOf("\/");
+        str  = str .substring(index + 1, str .length);
+        if (str.indexOf('result') != -1){
             htmlPathType = str;
         }
-        if (window.location.pathname.indexOf('schedule') != -1){
-            var str = window.location.pathname;
-            var index = str .lastIndexOf("\/");
-            str  = str .substring(index + 1, str .length);
-            str = str.replace('.html','');
+        if (str.indexOf('schedule') != -1){
             htmlPathType = str;
         }
 
@@ -589,7 +584,6 @@
                                     changeSpanOdd(span, value, true, false);
                                     var value = asia['middle'];
                                     var span = table.find('td.asia span')[0];
-                                    console.log(span);
                                     changeSpanOdd(span, value, true, true);
                                     var value = asia['down'];
                                     var span = table.find('td.asia p')[1];
@@ -644,14 +638,19 @@
                 score4.html(score[3]);
             }
 
+            var score1 = score[0]?parseInt(score[0]):0;
+            var score2 = score[1]?parseInt(score[1]):0;
+            var score3 = score[2]?parseInt(score[2]):0;
+            var score4 = score[3]?parseInt(score[3]):0;
+
             //半全场
             var half = $('#'+key+'_score_half_' + ID);
             if (half && half.length > 0){
-                half.html((parseInt(score[0]) + parseInt(score[1])) + ' / ' + (parseInt(score[2]) + parseInt(score[3])));
+                half.html((score1+score2) + ' / ' + (score3+score4));
             }
             var full = $('#'+key+'_score_full_' + ID);
             if (full && full.length > 0){
-                full.html((parseInt(score[0]) + parseInt(score[1])) + (parseInt(score[2]) + parseInt(score[3])));
+                full.html(score1 + score2 + score3 + score4);
             }
 
             //ot
@@ -691,6 +690,83 @@
             }
         }
 
+        function getBasketCurrentTime(status, liveStr, isHalfFormat) {
+            var timeStr = '';
+            switch (status) {
+                case -1:
+                    timeStr = '已结束';
+                    break;
+                case 0:
+                    timeStr = '';
+                    break;
+                case 1:
+                    timeStr = (isHalfFormat ? '上半场 ' : '第一节 ') + liveStr;
+                    break;
+                case 2:
+                    timeStr = '第二节 ' + liveStr;
+                    break;
+                case 3:
+                    timeStr = (isHalfFormat ? '下半场 ' : '第三节 ') + liveStr;
+                    break;
+                case 4:
+                    timeStr = '第四节 ' + liveStr;
+                    break;
+                case 5:
+                    timeStr = '加时1 ' + liveStr;
+                    break;
+                case 6:
+                    timeStr = '加时2 ' + liveStr;
+                    break;
+                case 7:
+                    timeStr = '加时3 ' + liveStr;
+                    break;
+                case 8:
+                    timeStr = '加时4 ' + liveStr;
+                    break;
+                case 50:
+                default:
+                    timeStr = getStatusTextCnBK(status);
+                    break;
+            }
+            return timeStr;
+        }
+
+        function getStatusTextCnBK(status) {
+            switch (status) {
+                case 0:
+                    return "未开始";
+                case 1:
+                    return "第一节";
+                case 2:
+                    return "第二节";
+                case 3:
+                    return "第三节";
+                case 4:
+                    return "第四节";
+                case 5:
+                    return "加时1";
+                case 6:
+                    return "加时2";
+                case 7:
+                    return "加时3";
+                case 50:
+                    return "中场";
+                case -1:
+                    return "已结束";
+                case -5:
+                    return "推迟";
+                case -2:
+                    return "待定";
+                case -12:
+                    return "腰斩";
+                case -10:
+                    return "退赛";
+                case -99:
+                    return "异常";
+            }
+            return '';
+        }
+
         //比分刷新
         function refresh() {
             if (htmlPathType !='bk_immediate')
@@ -726,31 +802,35 @@
                             }
                         }
                         if (timeItem) {
-                            timeItem.html(dataItem.time);
+                            var system = dataItem.system ? parseInt(dataItem.system) : 0;
+                            timeItem.html(getBasketCurrentTime(parseInt(dataItem['status']),dataItem.time,system == 1));
                         }
                         _refreshBasketScore(dataItem,'h',ID);
                         _refreshBasketScore(dataItem,'a',ID);
                         if (liveItem && liveItem.length > 0){
                             //有直播
                             if(liveItem.find('img').length > 0 && dataItem.status > 0) {
-                                liveItem[0].html('<span>直播中</span>');
+                                liveItem.html('<span>直播中</span>');
                             }
                             //已结束
                             if (liveItem.find('img').length > 0 && dataItem.status == -1){
-                                liveItem[0].html('<img src="/pc/img/icon_living.png">');
+                                liveItem.html('<img src="/pc/img/icon_living.png">');
                             }
                         }
-
                         //分差
                         var hscore = dataItem['hscores'];
                         var ascore = dataItem['ascores'];
+                        var hscore0 = hscore[0]?parseInt(hscore[0]):0;
+                        var hscore1 = hscore[1]?parseInt(hscore[1]):0;
+                        var ascore0 = ascore[0]?parseInt(ascore[0]):0;
+                        var ascore1 = ascore[1]?parseInt(ascore[1]):0;
                         var hd = $('#score_half_diff_' + ID);
                         if (hd && hd.length > 0) {
-                            hd.html('半：' + (parseInt(hscore[0]) + parseInt(hscore[1]) - parseInt(ascore[0]) - parseInt(ascore[1])));
+                            hd.html('半：' + (hscore0 + hscore1) - ascore0 - ascore1);
                         }
                         var ht = $('#score_half_total_' + ID);
                         if (ht && ht.length > 0) {
-                            ht.html('半：' + (parseInt(hscore[0]) + parseInt(hscore[1]) + parseInt(ascore[0]) + parseInt(ascore[1])));
+                            ht.html('半：' + (hscore0 + hscore1 + ascore0 + ascore1));
                         }
                         var wd = $('#score_whole_diff_' + ID);
                         if (wd && wd.length > 0) {

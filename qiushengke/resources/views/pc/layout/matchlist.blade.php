@@ -20,18 +20,14 @@
     @yield('js_match_list')
     <script type="text/javascript">
         var htmlPathType = 'immediate';
-        if (window.location.pathname.indexOf('result') != -1){
-            var str = window.location.pathname;
-            var index = str .lastIndexOf("\/");
-            str  = str .substring(index + 1, str .length);
-            str = str.replace('.html','');
+        var str = window.location.pathname;
+        var index = str .lastIndexOf("\/");
+        str  = str .substring(index + 1, str .length);
+        str = str.replace('.html','');
+        if (str.indexOf('result') != -1){
             htmlPathType = str;
         }
-        if (window.location.pathname.indexOf('schedule') != -1){
-            var str = window.location.pathname;
-            var index = str .lastIndexOf("\/");
-            str  = str .substring(index + 1, str .length);
-            str = str.replace('.html','');
+        if (str.indexOf('schedule') != -1){
             htmlPathType = str;
         }
 
