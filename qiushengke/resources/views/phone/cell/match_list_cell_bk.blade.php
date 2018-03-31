@@ -90,6 +90,11 @@ $liveUrl = \App\Http\Controllers\PC\CommonTool::matchWapLivePathWithId($match['m
             @else
                 <p class="live" id="time_{{$mid}}">{{$matchTime}}</p>
             @endif
+            @if($status != 0 && $status != -1)
+                @if($hasLive)
+                    <p><span href="{{$liveUrl}}">直播中</span></p>
+                @endif
+            @endif
         </div>
         <div class="team">
             <p><img src="{{\App\Http\Controllers\PC\CommonTool::getIconBK($match['hicon'])}}">{{$match['hname']}}</p>

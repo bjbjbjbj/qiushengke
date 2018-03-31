@@ -1,6 +1,11 @@
 <div class="team {{$class}}">
-    <p class="number">本场比赛有<b>6</b>名主力首发</p>
-    <p class="percent">81.82%<span style="width: 130.91px"></span></p><!--span的值为160*百分比-->
+    @if(isset($lineup['h_lineup_per']))
+        <p class="number">本场比赛有<b>{{number_format($lineup['h_lineup_per']*0.01*11,0)}}</b>名主力首发</p>
+        <?php
+        $width = 160*round($lineup['h_lineup_per'],2);
+        ?>
+        <p class="percent">{{round($lineup['h_lineup_per'],2)}}%<span style="width: '{{$width}}'px"></span></p><!--span的值为160*百分比-->
+    @endif
     <ul>
         @if(isset($lineup['first']))
             @foreach($lineup['first'] as $first)
