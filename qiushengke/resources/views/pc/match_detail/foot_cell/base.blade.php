@@ -5,5 +5,4 @@
     @endcomponent
     @component('pc.match_detail.foot_cell.base_event',['match'=>$match,'events'=>$tech])
     @endcomponent
-    <div class="noList"></div>
 </div>

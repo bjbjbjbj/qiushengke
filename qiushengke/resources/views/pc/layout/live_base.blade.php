@@ -15,6 +15,13 @@
     <script type="text/javascript">
         window.onload = function () {
             setPage();
+            var lis = $('div#Live div.data ul li');
+            if (lis.length == 0){
+                $('div#Live div.data button.open')[0].className = 'open hide';
+            }
+            else {
+                $('div#Live div.data button.open')[0].className = 'open';
+            }
         }
         function clickHideScore(button) {
             if (button.innerHTML == '(隐藏比分)'){
@@ -100,14 +107,7 @@
                             "user":user,
                         },
                         'success': function (json) {
-//                            var ul = $('div#Chatroom ul');
-//                            var li = '<li>'+
-//                                    '<p class="time">'+current+'</p>'+
-//                                    '<p class="name">'+user+'</p>'+
-//                                    '<p class="con">'+message+'</p>'+
-//                                    '</li>'
-//                            ul.append(li);
-                            $('#charContent').html('');
+                            $('#charContent')[0].value = ''
                             addChat(user,message,current);
                         }
                     }
@@ -159,8 +159,6 @@
             getChat();
             window.setInterval('getChat()', 1000);
         }
-        //        getChat();
-        //        window.setInterval('getChat()', 10000);
 
         if ($("div.line a:first").length > 0) {
             $("div.line a:first")[0].className = 'on';

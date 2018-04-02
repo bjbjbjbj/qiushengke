@@ -8,6 +8,7 @@
 namespace App\Http\Controllers\PC\Anchor;
 
 use App\Http\Controllers\Controller as BaseController;
+use App\Http\Controllers\PC\CommonTool;
 use App\Http\Controllers\PC\FileTool;
 use App\Models\QSK\Anchor\Anchor;
 use App\Models\QSK\Anchor\AnchorRoom;
@@ -77,6 +78,7 @@ class AnchorController extends BaseController{
 
     private function _matches($sport){
         $matchStr = $sport == 1 ? 'matches' : 'basket_matches';
+        $teamStr = $sport == 1 ? 'teams' : 'basket_teams';
         //比赛
         //先拿全部比赛
         $startDate = date('Ymd');
@@ -99,7 +101,15 @@ class AnchorController extends BaseController{
 
         //把正在比赛的筛出来
         $matches = $query
+            ->leftjoin($teamStr.' as hteam',function ($q)use($matchStr){
+                $q->on($matchStr.'.hid','hteam.id');
+            })
+            ->leftjoin($teamStr.' as ateam',function ($q)use($matchStr){
+                $q->on($matchStr.'.aid','ateam.id');
+            })
             ->addSelect($matchStr.'.*')
+            ->addSelect('hteam.icon as h_icon')
+            ->addSelect('ateam.icon as a_icon')
             ->selectRaw('unix_timestamp('.$matchStr.'.time) as time')
             ->orderby($matchStr.'.time','asc')
             ->orderby($matchStr.'.id','desc')
@@ -155,9 +165,9 @@ class AnchorController extends BaseController{
                 $item['sport'] = $sport;
                 $item['lid'] = $fLive['lid'];
                 $item['round'] = $fLive['round'];
-                $item['h_icon'] = $fLive['h_icon'];
+                $item['h_icon'] = $sport == 1 ?$fLive['h_icon'] : CommonTool::getIconBK($fLive['h_icon']);
                 $item['hname'] = $fLive['hname'];
-                $item['a_icon'] = $fLive['a_icon'];
+                $item['a_icon'] = $sport == 1 ?$fLive['a_icon'] : CommonTool::getIconBK($fLive['a_icon']);
                 $item['aname'] = $fLive['aname'];
                 $item['lname'] = isset($fLive['lname'])?$fLive['lname']:$fLive['win_lname'];
                 $item['lid'] = $fLive['lid'];

@@ -7,9 +7,9 @@ if (isset($tech) && isset($tech['tech'])){
             $hasTech = true;
 }
 ?>
-@if($hasTech)
-    <div class="total">
-        <p class="title">技术统计</p>
+<div class="total">
+    <p class="title">技术统计</p>
+    @if($hasTech)
         <ul>
             @foreach($tech as $t)
                 @if($t['h'] > 0 || $t['a'] > 0)
@@ -27,5 +27,6 @@ if (isset($tech) && isset($tech['tech'])){
                 @endif
             @endforeach
         </ul>
-    </div>
-@endif
+    @endif
+    <div class="noList"></div>
+</div>

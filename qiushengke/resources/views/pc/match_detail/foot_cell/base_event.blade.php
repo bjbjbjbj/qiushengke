@@ -1,5 +1,6 @@
-@if(isset($events['event']))
-    <div class="event">
+<div class="event">
+    <p class="title">比赛事件</p>
+    @if(isset($events['event']))
         <?php
         $events = $events['event'];
         ?>
@@ -42,7 +43,6 @@
         $hicon = strlen($match['hicon']) > 0 ? $match['hicon'] : '/pc/img/icon_teamDefault.png';
         $aicon = strlen($match['aicon']) > 0 ? $match['aicon'] : '/pc/img/icon_teamDefault.png';
         ?>
-        <p class="title">比赛事件</p>
         <div class="con">
             <p class="start">0'</p>
             <p class="end">{{($lastTime > 90 || $matchTime > 90)?'120':'90'}}'</p>
@@ -206,5 +206,6 @@
                 @endforeach
             </dl>
         </div>
-    </div>
-@endif
+    @endif
+    <div class="noList"></div>
+</div>
