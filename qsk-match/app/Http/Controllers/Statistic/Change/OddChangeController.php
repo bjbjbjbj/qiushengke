@@ -348,6 +348,8 @@ class OddChangeController extends Controller
 
         $sDatas = explode(";", $content);
 //        echo "共有 ".count($sDatas)." 场比赛</br>";
+
+        $rollData = StatisticFileTool::getFileFromChange(MatchLive::kSportFootball, 'roll');
         $gunQiuArray = array();
         foreach ($sDatas as $data) {
             if (str_contains($data, "=")) {
@@ -363,6 +365,10 @@ class OddChangeController extends Controller
                     list($up1, $middle1, $down1, $up2, $middle2, $down2, $up, $middle, $down) = explode(",", $oddList[0], 9);
                     if (!isset($up) || strlen($up) <= 0) {
                         continue;
+                    }
+
+                    if (array_key_exists($lg_mid, $rollData)) {
+                        $array = $rollData[$lg_mid];
                     }
 //                    echo $mid.'<br>';
                     //全场
@@ -432,27 +438,41 @@ class OddChangeController extends Controller
             $rollData = StatisticFileTool::getFileFromChange(MatchLive::kSportFootball, 'roll');
             if (!is_array($rollData)) $rollData = array();
             foreach ($matches as $itemStr) {
-                if (count(explode(",", $itemStr)) >= 13) {
+                if (count(explode(",", $itemStr)) >= 17) {
                     list($mid, $aisaid, $asiamiddle, $asiaup, $asiadown,
                         $ouid, $ouup, $oumiddle, $oudown, $goalid,
-                        $goalmiddle, $goalup, $goaldown, $other) = explode(",", $itemStr);
+                        $goalmiddle, $goalup, $goaldown, $rollType, $isForbid,
+                        $b, $c) = explode(",", $itemStr);
                     $lg_match = Match::getMatchWith($mid, "win_id");
-                    if (isset($lg_match) && $lg_match->status > 0) {
+                    if (isset($lg_match)) {
                         $lg_mid = $lg_match->id;
                         if (array_key_exists($lg_mid, $rollData)) {
                             $itemData = $rollData[$lg_mid];
                         } else {
                             $itemData = array();
                         }
-                        $itemData['all'][1]['up'] = $asiaup;
-                        $itemData['all'][1]['middle'] = $asiamiddle;
-                        $itemData['all'][1]['down'] = $asiadown;
-                        $itemData['all'][2]['up'] = $goalup;
-                        $itemData['all'][2]['middle'] = $goalmiddle;
-                        $itemData['all'][2]['down'] = $goaldown;
-                        $itemData['all'][3]['up'] = $ouup;
-                        $itemData['all'][3]['middle'] = $oumiddle;
-                        $itemData['all'][3]['down'] = $oudown;
+                        $itemData['forbid'] = $isForbid;
+                        if ($rollType == 2) { //0无滚球盘，1有滚球盘，2正在滚球
+                            $itemData['all'][1]['up'] = $asiaup;
+                            $itemData['all'][1]['middle'] = $asiamiddle;
+                            $itemData['all'][1]['down'] = $asiadown;
+                            $itemData['all'][2]['up'] = $goalup;
+                            $itemData['all'][2]['middle'] = $goalmiddle;
+                            $itemData['all'][2]['down'] = $goaldown;
+                            $itemData['all'][3]['up'] = $ouup;
+                            $itemData['all'][3]['middle'] = $oumiddle;
+                            $itemData['all'][3]['down'] = $oudown;
+                        } else {
+                            $itemData['all'][1]['up2'] = $asiaup;
+                            $itemData['all'][1]['middle2'] = $asiamiddle;
+                            $itemData['all'][1]['down2'] = $asiadown;
+                            $itemData['all'][2]['up2'] = $goalup;
+                            $itemData['all'][2]['middle2'] = $goalmiddle;
+                            $itemData['all'][2]['down2'] = $goaldown;
+                            $itemData['all'][3]['up2'] = $ouup;
+                            $itemData['all'][3]['middle2'] = $oumiddle;
+                            $itemData['all'][3]['down2'] = $oudown;
+                        }
 
                         $rollData[$lg_mid] = $itemData;
 
