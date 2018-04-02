@@ -84,7 +84,7 @@ class BasketTerminalController
             if ($count >= $saveCount) break;
 
             $time = $match['time'];
-            $isToday = time() - $time <= 5*60;
+            $isToday = $time - time() <= 6*60;
 
             $mid = $match['mid'];
             if (!in_array($mid, $savedMids)) {
