@@ -198,7 +198,7 @@ $show = false;
             @if($hasLive)
                 <a class="live" href="{{$liveUrl}}" target="_blank"><img id="live_{{$match['mid']}}" src="{{env('CDN_URL')}}/pc/img/icon_living.png"></a>
             @else
-                <a class="live" style="color: lightgray">暂无直播</a>
+                <span class="" style="color: lightgray">暂无直播</span>
                 {{--<a class="live" href="{{$liveUrl}}" target="_blank"><img id="live_{{$match['mid']}}" src="{{env('CDN_URL')}}/pc/img/icon_action_light.png"></a>--}}
             @endif
         @elseif($status == -1)
@@ -212,7 +212,7 @@ $show = false;
                 <a class="live video" href="{{$liveUrl}}" target="_blank">直播中</a>
             @else
                 {{--<a class="live flash" href="{{$liveUrl}}" target="_blank">动画</a>--}}
-                <a class="live" style="color: lightgray">暂无直播</a>
+                <span class="" style="color: lightgray">暂无直播</span>
             @endif
         @endif
     </td>

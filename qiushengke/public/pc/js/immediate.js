@@ -254,8 +254,8 @@ function CheckGoal() {
                    '<p class="team away">' + (Target.Type=='away'?Target.Time + "'":'') + '<span>' + Target.Away + '</span></p></li>');
 
         $('#GoalUl ul').append(Li);
-        //对应TD加底色
 
+        //对应TD加底色
         var TD;
         if (Target.Type == 'host') {
             TD = $('tr[match=' + Target.ID + '] td.host, tr[match=' + Target.ID + '] td.host + td');
@@ -264,13 +264,20 @@ function CheckGoal() {
         }
         TD.addClass('goal');
 
+        //播音频
+        var CanPlay = false;
+        if (document.getElementById('GoalAudio').canPlayType('audio/mp3') != '' || document.getElementById('GoalAudio').canPlayType('audio/wav') != '') {
+            CanPlay = true;
+        }
+        if ($('#Control .sound button').html() != '静音' && CanPlay) {
+            PlayAudio();
+        }
 
         setTimeout(function(){
             $(Li).addClass('show');
         },20)
         setTimeout(function(){
             $(Li).addClass('close');
-            TD.removeClass('goal');
         },7000)
         setTimeout(function(){
             $(Li).addClass('height');
@@ -281,11 +288,17 @@ function CheckGoal() {
                 $('#GoalUl').remove();
             }
         },7800)
+        setTimeout(function(){
+            TD.removeClass('goal');
+        },21000)
 
         GoalArr.splice(0, 1);
     }
 }
 
+function PlayAudio () {
+    document.getElementById("GoalAudio").play();
+}
 
 //重置底色
 function setBG () {

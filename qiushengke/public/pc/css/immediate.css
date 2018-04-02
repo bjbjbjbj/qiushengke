@@ -99,7 +99,7 @@
 }
 #Control p.column{
 	height: 30px;
-	padding: 5px 0 5px 3%;
+	padding: 5px 0 5px 2.5%;
 	overflow: hidden;
 }
 #Control p.column button{
@@ -148,7 +148,7 @@
 }
 #Control div.sound{
 	height: 30px;
-	padding: 5px 0; margin-left: 2.5%;
+	padding: 5px 0; margin-left: 1.5%;
 	display: inline-block;
 	position: relative;
 }
@@ -189,7 +189,7 @@
 }
 #Control p.filter{
 	height: 30px;
-	padding: 5px 3% 5px 0;
+	padding: 5px 2.5% 5px 0;
 	float: right;
 }
 #Control p.filter button{
@@ -442,12 +442,15 @@ a.team span.name{
 }
 #Con td.goal:after{
 	display: block !important;
+	-moz-animation: goalball 2s cubic-bezier(0.5,0.1,0.25,1) infinite;
+	-webkit-animation: goalball 2s cubic-bezier(0.5,0.1,0.25,1) infinite;
+	-o-animation: goalball 2s cubic-bezier(0.5,0.1,0.25,1) infinite;
+	animation: goalball 2s cubic-bezier(0.5,0.1,0.25,1) infinite;
 }
-#Con table tbody tr td.goal a:hover{
-	color: #fff;
-}
-#Con table tbody tr:hover td.goal:after{
-	background: #95ccb3;
+@keyframes goalball{
+	0%   {opacity: 100;}
+	50%  {opacity: 0;}
+	100% {opacity: 100;}
 }
 
 
@@ -516,7 +519,7 @@ a.team span.name{
 	content: '';
 }
 #Con td p.asia span.odd, #Con td p.goal span.odd{
-	width: 100px;
+	width: 80px;
 	margin: 0 3px;
 	font-size: 12px;
 	display: inline-block;
@@ -540,10 +543,10 @@ a.team span.name{
 /*事件弹层*/
 #Con table div.even{
 	width: 310px; height: 0;
-	margin-left: -200px; padding: 0 45px;
+	margin-left: 30px; padding: 0 45px;
 	border-radius: 8px;
 	background: rgb(24, 80, 55)\0/; background: rgba(24, 80, 55, 0.94);
-	position: absolute; top: 44px; left: 50%; z-index: 101;
+	position: absolute; top: 0; left: 50%; z-index: 101;
 	transform: translateY(10px); -ms-transform: translateY(10px); -webkit-transform: translateY(10px); -o-transform: translateY(10px); -moz-transform: translateY(10px);
 	visibility: hidden;
 	overflow: hidden;
@@ -560,10 +563,10 @@ a.team span.name{
 	margin-left: -8px;
 	background: url(../img/icon_triangle_up_n@2x.png) no-repeat center; background: url(../img/icon_triangle_up_n.png) no-repeat center\0/; background-size: 16px;
 	position: absolute; top: -8px; left: 50%;
-	content: '';
+	/*content: '';*/
 }
 #Con table div.even.top{
-	top: auto; bottom: 44px;
+	top: auto; bottom: 0;
 }
 #Con table div.even.top:before{
 	background: url(../img/icon_triangle_down_n@2x.png) no-repeat center; background: url(../img/icon_triangle_down_n.png) no-repeat center\0/; background-size: 16px;
@@ -702,7 +705,7 @@ a.team span.name{
 	border-radius: 8px;
 	background: #fff;
 	box-shadow: 0px 0px 10px 0px rgba(0, 64, 36, 0.4);
-	position: absolute; top: 44px; left: 50%; z-index: 1;
+	position: absolute; bottom: 45px; left: 50%; z-index: 1;
 	transform: translateY(10px); -ms-transform: translateY(10px); -webkit-transform: translateY(10px); -o-transform: translateY(10px); -moz-transform: translateY(10px);
 	overflow: hidden;
 	visibility: hidden;
@@ -1151,7 +1154,7 @@ a.team span.name{
 		width: 70px !important;
 	}
 	#Con > .ConInner > table > colgroup > col:nth-child(12){
-		width: 226px !important;
+		width: 206px !important;
 	}
 }
 

@@ -161,6 +161,9 @@ class CommonTool
      * @return float 返回的保留两位有效数字后的结果
      */
     public static function float2Decimal($float, $notKeepZero = false){
+        if (is_null($float)){
+            return '-';
+        }
         if (isset($float)) {
             if ($notKeepZero) {
                 return round($float, 2);
