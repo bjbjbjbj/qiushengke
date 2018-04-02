@@ -26,10 +26,12 @@ function setPage() {
 
 function setMatch() {
     $('#Match ul li').click(function(){
-        $('#Match table').css('display','none');
-        $('#Match table[num="' + $(this).html() + '"]').css('display','');
-        $('#Match ul li').removeClass('on');
-        $(this).addClass('on');
+        if ($(this).html() != '-') {
+            $('#Match table').css('display','none');
+            $('#Match table[num="' + $(this).html() + '"]').css('display','');
+            $('#Match ul li').removeClass('on');
+            $(this).addClass('on');
+        }
     })
 }
 

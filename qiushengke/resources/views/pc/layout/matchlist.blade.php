@@ -564,9 +564,9 @@
                                 content = content +
                                         '<dd class="total">' +
                                         '<p class="num host">' + item.h + '</p>' +
-                                        '<p class="percent"><span class="host" width="' + item.h_p * 100 + '%"></span></p>' +
+                                        '<p class="percent"><span class="host" style="width: ' + item.h_p * 100 + '%" width="' + item.h_p * 100 + '%"></span></p>' +
                                         '<p class="item">' + item.name + '</p>' +
-                                        '<p class="percent"><span class="away" width="' + item.a_p * 100 + '%"></span></p>' +
+                                        '<p class="percent"><span class="away" style="width: ' + item.a_p * 100 + '%" width="' + item.a_p * 100 + '%"></span></p>' +
                                         '<p class="num away">' + item.a + '</p>' +
                                         '</dd>';
                             }
@@ -741,9 +741,24 @@
                             ayItem.className = 'yellowCard';
                         }
 
+                        //未开始跳进行中
                         if (timeItem) {
-                            if(dataItem.status > 0)
-                                timeItem.html('<p class=\'time\'>' + dataItem.time + '</p>');
+                            if(dataItem.status > 0){
+                                var tbody = $('tbody#Live')[0];
+                                var matchTr = document.getElementById('m_tr_' + ID);
+                                if(matchTr) {
+                                    tbody.appendChild(matchTr);
+                                }
+                                _updateSection();
+                            }
+                        }
+
+                        if (timeItem) {
+                            if(dataItem.status > 0) {
+                                var timeStr = dataItem.time;
+                                timeStr = timeStr.replace("'","");
+                                timeItem.html('<p class=\'time\'>' + timeStr + '<span>\'</span></p>');
+                            }
                             else
                                 timeItem.html(dataItem.time);
                         }
@@ -761,8 +776,14 @@
                             var icon = isHost ? $('#'+ID+'_h_icon')[0].src : $('#'+ID+'_a_icon')[0].src;
                             if (lastScore.indexOf(currentScore) == -1 && (dataItem.hscore + dataItem.ascore) > 0) {
                                 var tmpTR = $('tr#m_tr_' + ID)[0];
-                                if (tmpTR.className.indexOf('show') != -1)
-                                    Goal(dataItem.hname, dataItem.aname, dataItem.hscore, dataItem.ascore, icon,dataItem.time.replace('\'',''), isHost?'host':'away');
+                                if (tmpTR.className.indexOf('show') != -1) {
+                                    var timeStr = dataItem.time;
+                                    timeStr = timeStr.replace("'","");
+                                    if ('已结束' == timeStr){
+                                        timeStr = '90';
+                                    }
+                                    Goal(dataItem.hname, dataItem.aname, dataItem.hscore, dataItem.ascore, icon, timeStr, isHost ? 'host' : 'away');
+                                }
                             }
                             scoreItem.html(currentScore);
                         }
@@ -781,6 +802,7 @@
                             }
                         }
 
+                        //进行中跳已结束
                         if (dataItem.time == '已结束') {
                             var tbody = $('tbody#End')[0];
                             var matchTr = document.getElementById('m_tr_' + ID);

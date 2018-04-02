@@ -12,6 +12,10 @@
         else
             $lis = $lis . '<li>'.($i + 1).'</li>';
     }
+
+    for ($i = 0 ; $i < 16 - $season['total_round']%16 ; $i++){
+        $lis = $lis . '<li>-</li>';
+    }
     ?>
     <div class="lbox" id="Match"><!--联赛-->
         <div class="title">
