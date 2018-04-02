@@ -75,6 +75,8 @@ class FootballDetailCommands extends Command
             }
             $excArray[] = $id;
             MatchDetailController::curlToHtml($id);
+            //wap
+            \App\Http\Controllers\Phone\Detail\FootballController::curlToHtml($id);
             $excIndex++;
             sleep(1);
         }
@@ -101,6 +103,8 @@ class FootballDetailCommands extends Command
             }
             $excArray[] = $id;
             MatchDetailController::curlToHtml($id);
+            //wap
+            \App\Http\Controllers\Phone\Detail\FootballController::curlToHtml($id);
             $excIndex++;
             sleep(1);
         }

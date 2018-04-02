@@ -61,6 +61,7 @@ class FootballDetailIngCommands extends Command
             if ($status > 0 && $index < 30) {//每次只做30个正在进行得比赛终端，其他随缘。
                 $id = $match['mid'];
                 MatchDetailController::curlToHtml($id);
+                \App\Http\Controllers\Phone\Detail\FootballController::curlToHtml($id);
                 $index++;
             }
         }

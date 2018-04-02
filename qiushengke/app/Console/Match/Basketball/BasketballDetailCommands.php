@@ -12,6 +12,7 @@ use App\Http\Controllers\CacheInterface\FootballInterface;
 use App\Http\Controllers\PC\FileTool;
 use App\Http\Controllers\PC\Index\FootballController;
 use App\Http\Controllers\PC\Match\MatchDetailController;
+use App\Http\Controllers\Phone\Detail\BasketballController;
 use App\Http\Controllers\StaticHtml\FootballDetailController;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
@@ -75,6 +76,7 @@ class BasketballDetailCommands extends Command
             }
             $excArray[] = $id;
             MatchDetailController::curlToHtml($id,2);
+            BasketballController::curlToHtml($id);
             $excIndex++;
             sleep(1);
         }
@@ -101,6 +103,7 @@ class BasketballDetailCommands extends Command
             }
             $excArray[] = $id;
             MatchDetailController::curlToHtml($id,2);
+            BasketballController::curlToHtml($id);
             $excIndex++;
             sleep(1);
         }

@@ -12,9 +12,39 @@ namespace App\Http\Controllers\Phone\Detail;
 use App\Http\Controllers\Controller as BaseController;
 use App\Http\Controllers\PC\Match\MatchDetailController;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class FootballController extends BaseController
 {
+    /**
+     * 通过请求自己的链接静态化pc终端，主要是解决 文件权限问题。
+     * @param $mid
+     */
+    public static function curlToHtml($mid) {
+        $ch = curl_init();
+        $url = asset('/api/static/wap/football/detail/' . $mid);
+        echo $url;
+        if (is_null($url))
+            return;
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 25);
+        curl_exec ($ch);
+        curl_close ($ch);
+    }
+
+    /**
+     * 静态化
+     * @param Request $request
+     * @param $mid int
+     */
+    public function staticMatchDetail(Request $request,$mid){
+        $first = substr($mid,0,2);
+        $second = substr($mid,2,2);
+        $html = $this->matchDetail($request,$first,$second,$mid);
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/wap/match/foot/detail/".$first."/".$second."/".$mid.".html", $html);
+    }
 
     /**
      * 足球终端

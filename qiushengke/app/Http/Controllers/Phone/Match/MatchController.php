@@ -13,6 +13,95 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class MatchController extends BaseController{
+    /**
+     * 通过请求自己的链接静态化pc终端，主要是解决 文件权限问题。
+     */
+    public static function curlToHtml() {
+        $ch = curl_init();
+        $url = asset('/api/static/wap/football/one');
+        echo $url;
+        if (!is_null($url)) {
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 25);
+            curl_exec($ch);
+            curl_close($ch);
+        }
+    }
+
+    /**
+     * 通过请求自己的链接静态化pc终端，主要是解决 文件权限问题。
+     */
+    public static function curlToHtml5() {
+        $ch = curl_init();
+        $url = asset('/api/static/wap/football/five');
+        echo $url;
+        if (!is_null($url)) {
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 25);
+            curl_exec($ch);
+            curl_close($ch);
+        }
+    }
+
+    /**
+     * 静态化
+     * @param Request $request
+     */
+    public function staticOneMin(Request $request){
+        //即时
+        $html = $this->immediate_f($request);
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/wap/match/foot/schedule/immediate.html", $html);
+
+        //篮球
+        $html = $this->immediate_bk($request,'t');
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/wap/match/basket/schedule/immediate_t.html", $html);
+        $html = $this->immediate_bk($request,'l');
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/wap/match/basket/schedule/immediate_l.html", $html);
+    }
+
+    /**
+     * 静态化
+     * @param Request $request
+     */
+    public function staticFiveMin(Request $request){
+        //赛程
+        $tomorrow = date('Ymd', strtotime('+1 days'));
+        $html = $this->schedule_f($request,$tomorrow);
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/wap/match/foot/schedule/".$tomorrow."/schedule.html", $html);
+        //赛果
+        $yesterday = date('Ymd', strtotime('-1 days'));
+        $html = $this->result_f($request,$yesterday);
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/wap/match/foot/schedule/".$yesterday."/result.html", $html);
+
+        //篮球
+        //赛程
+        $tomorrow = date('Ymd', strtotime('+1 days'));
+        $html = $this->schedule_bk($request,$tomorrow,'t');
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/wap/match/basket/schedule/".$tomorrow."/schedule_t.html", $html);
+        $tomorrow = date('Ymd', strtotime('+1 days'));
+        $html = $this->schedule_bk($request,$tomorrow,'t');
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/wap/match/basket/schedule/".$yesterday."/schedule_l.html", $html);
+
+        //赛果
+        $tomorrow = date('Ymd', strtotime('-1 days'));
+        $html = $this->result_bk($request,$tomorrow,'t');
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/wap/match/basket/schedule/".$tomorrow."/result_t.html", $html);
+        $yesterday = date('Ymd', strtotime('-1 days'));
+        $html = $this->result_bk($request,$yesterday,'l');
+        if (isset($html) && strlen($html) > 0)
+            Storage::disk("public")->put("/wap/match/basket/schedule/".$yesterday."/result_l.html", $html);
+    }
+
     //篮球
     public function immediate_bk(Request $request,$order){
         return $this->immediate($request,'basket',$order);

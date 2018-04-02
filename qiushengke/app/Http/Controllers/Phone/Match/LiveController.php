@@ -8,6 +8,7 @@
 namespace App\Http\Controllers\Phone\Match;
 
 use App\Http\Controllers\Controller as BaseController;
+use App\Http\Controllers\PC\CommonTool;
 use App\Http\Controllers\PC\FileTool;
 use App\Http\Controllers\PC\Match\MatchDetailController;
 use App\Models\QSK\Anchor\AnchorRoomMatches;
@@ -15,6 +16,31 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class LiveController extends BaseController{
+    /**
+     * 静态化
+     * @param Request $request
+     * @param $sport
+     * @param $mid
+     */
+    public function staticLiveDetail(Request $request,$sport,$mid){
+        $first = substr($mid,0,2);
+        $second = substr($mid,2,2);
+        if ($sport == 1){
+            $html = $this->liveDetail($request,$first,$second,$mid);
+            if (isset($html) && strlen($html) > 0) {
+                $path = CommonTool::matchWapLivePathWithId($mid,$sport);
+                Storage::disk("public")->put($path, $html);
+            }
+        }
+        else{
+            $html = $this->liveDetail_bk($request,$first,$second,$mid);
+            if (isset($html) && strlen($html) > 0) {
+                $path = CommonTool::matchWapLivePathWithId($mid,$sport);
+                Storage::disk("public")->put($path, $html);
+            }
+        }
+    }
+
     /**
      * 足球直播终端
      * @param Request $request

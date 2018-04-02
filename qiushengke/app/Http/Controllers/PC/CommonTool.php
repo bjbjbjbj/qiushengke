@@ -59,16 +59,7 @@ class CommonTool
     }
 
     public static function matchWapLivePathWithId($mid,$sport=CommonTool::kSportFootball){
-        $path = '';
-        if ($mid > 1000) {
-            $first = substr($mid,0,2);
-            $second = substr($mid,2,2);
-            if ($sport == 2) {
-                $path = '/wap/live/basket/' . $first . '/'. $second . '/' . $mid . '.html';
-            } else {
-                $path = '/wap/live/foot/' . $first . '/'. $second . '/' . $mid . '.html';
-            }
-        }
+        $path = '/wap'. CommonTool::matchLivePathWithId($mid,$sport);
         return $path;
     }
 
