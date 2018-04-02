@@ -105,6 +105,9 @@ class CommonTool
      */
     public static function getHandicapCn($handicap, $default = "", $type = CommonTool::k_odd_type_asian, $sport = CommonTool::kSportFootball, $isHome = true)
     {
+        if (is_null($handicap)){
+            return '-';
+        }
         if ($sport == CommonTool::kSportFootball) {
             if ($type == CommonTool::k_odd_type_asian) {
                 return CommonTool::panKouText($handicap, !$isHome);
@@ -236,6 +239,9 @@ class CommonTool
      * @return string
      */
     public static function panKouText ($middle, $isAway = false, $isGoal = false) {
+        if (is_null($middle)){
+            return '-';
+        }
         if ($isGoal || $middle == 0){
             $prefix = "";
         } else{

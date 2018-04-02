@@ -41,7 +41,11 @@
             <td>{{substr($match['time'],0, 10)}}</td>
             <td>{{$match['league']}}</td>
             <td @if($match['hid'] == $hid) class="host red" @endif>{{$match['hname']}}</td>
-            <td>{{$match['hscore']}} - {{$match['ascore']}}<p class="goal">{{$goal_result}}{{\App\Http\Controllers\PC\CommonTool::getOddMiddleString($match['goalmiddle1'])}}</p></td>
+            <td>{{$match['hscore']}} - {{$match['ascore']}}
+                @if(isset($match['goalmiddle1']))
+                    <p class="goal">{{$goal_result}}{{\App\Http\Controllers\PC\CommonTool::getOddMiddleString($match['goalmiddle1'])}}</p>
+                @endif
+            </td>
             <td @if($match['aid'] == $hid) class="host red" @endif>{{$match['aname']}}</td>
             @if($match['asiamiddle1'] == null)
                 <td>{{''}}{!! $asia_result !!}</td>
