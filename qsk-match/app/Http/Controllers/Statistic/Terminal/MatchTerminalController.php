@@ -55,6 +55,10 @@ class MatchTerminalController
                 $saveCount = $request->input('count', $saveCount);
             }
             $controller->onMatchAnalyseDataStatic($key, $saveCount, $isReset);
+            if (isset($request) && $request->input('auto', 0) == 1) {
+                echo "<script language='javascript'>window.location.reload();</script>";
+                exit;
+            }
         } else if ($type == 'tech') {
             if ($isBasket) {
                 $match = BasketMatch::query()->find($key);
