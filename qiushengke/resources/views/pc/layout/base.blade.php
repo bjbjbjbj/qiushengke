@@ -175,9 +175,9 @@
             var first = mid.substr(0,2);
             var second = mid.substr(2,2);
             if (sport == 2) {
-                path = '/match/basket/' + first + '/' + second + '/' + mid + '.html';
+                path = '/match/basket/detail/' + first + '/' + second + '/' + mid + '.html';
             } else {
-                path = '/match/foot/' + first + '/' + second + '/' + mid + '.html';
+                path = '/match/foot/detail/' + first + '/' + second + '/' + mid + '.html';
             }
         }
         return path;

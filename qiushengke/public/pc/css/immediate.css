@@ -1077,7 +1077,7 @@ a.team span.name{
 }
 #GoalUl li p{
 	height: 70px;
-	font-size: 16px; line-height: 70px;
+	font-size: 16px; line-height: 70px; vertical-align: top;
 	overflow: hidden;
 	display: inline-block;
 }
@@ -1127,6 +1127,9 @@ a.team span.name{
 	}
 	#Con > .ConInner > table > colgroup > col:nth-child(4){
 		width: 60px !important;
+	}
+	#Con > .ConInner > table > colgroup > col:nth-child(11){
+		width: 70px !important;
 	}
 	#Con > .ConInner > table > colgroup > col:nth-child(12){
 		width: 226px !important;
