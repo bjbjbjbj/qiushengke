@@ -964,7 +964,36 @@ class SpiderController extends Controller
         set_time_limit(0);
         $lid = $request->input('lid');
         $season = $request->input('season');
-        $this->leagueRefreshById($lid, $season);
+        $isForData = $request->input('data', false);
+        $this->leagueRefreshById($lid, $season, $isForData);
+    }
+
+    private function spiderLeagueMatchLineup(Request $request) {
+        set_time_limit(0);
+        $key = "league_match_lineup";
+        $saveLid = Redis::get($key);
+        if (!isset($saveLid)) {
+            $saveLid = 0;
+        }
+        $count = $request->input('count', 1);
+        $leagues = \App\Models\AnalyseModels\League::query()
+            ->where(function ($q){
+                $q->where('hot', 1)
+                    ->orWhere('main', 1);
+            })->where('id', '>', $saveLid)
+            ->orderBy('id', 'asc')
+            ->take($count)->get();
+
+        foreach ($leagues as $league) {
+            $this->leagueRefreshById($league->id, NULL, true);
+        }
+        if (isset($league)) {
+            Redis::set($key, $league->id);
+        }
+        if ($request->input('auto', 0) == 1) {
+            echo "<script language=JavaScript>window.location.reload();</script>";
+            exit;
+        }
     }
 
     private function spiderTeamDetail(Request $request) {

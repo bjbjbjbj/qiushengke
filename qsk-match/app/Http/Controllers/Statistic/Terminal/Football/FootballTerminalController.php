@@ -88,7 +88,7 @@ class FootballTerminalController extends Controller
             if ($count >= $saveCount) break;
 
             $time = $match['time'];
-            $isToday = time() - $time <= 4*60;
+            $isToday = $time - time() <= 6*60;
 
             $mid = $match['mid'];
             if (!in_array($mid, $savedMids)) {
