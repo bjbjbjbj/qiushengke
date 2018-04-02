@@ -70,6 +70,7 @@ class FootballTerminalController extends Controller
         })->all();
 
         $curMatchCount = count($matches);
+        echo "cur_match_count = $curMatchCount <br>";
 
         $key = "football_analyse_".$date."_static";
         if ($isResetRedis) {
