@@ -649,6 +649,11 @@
                 "success": function (json) {
                     for (var ID in json) {
                         var dataItem = json[ID];
+                        //是否封盘
+                        var forbid = false;
+                        if (dataItem.forbid && dataItem.forbid == 1){
+                            forbid = true;
+                        }
                         var asia = dataItem['all']['1'];
                         var goal = dataItem['all']['2'];
                         var asiaP = $('tr#m_tr_' + ID + ' p.asia')[0];
@@ -679,6 +684,43 @@
                                 var value = goal['down'];
                                 var span = $(goalP).find('span')[2];
                                 changeSpanOdd(span, value,false,false);
+                            }
+                        }
+
+                        if (forbid){
+                            if (asia) {
+                                var span = $(asiaP).find('span')[0];
+                                if (span) {
+                                    span.setAttribute('class', '');
+                                    $(span).html('');
+                                }
+                                var span = $(asiaP).find('span')[1];
+                                if (span) {
+                                    span.setAttribute('class', 'middle');
+                                    $(span).html('封');
+                                }
+                                var span = $(asiaP).find('span')[2];
+                                if (span) {
+                                    span.setAttribute('class', '');
+                                    $(span).html('');
+                                }
+                            }
+                            if (goal) {
+                                var span = $(goalP).find('span')[0];
+                                if (span) {
+                                    span.setAttribute('class', '');
+                                    $(span).html('');
+                                }
+                                var span = $(goalP).find('span')[1];
+                                if (span) {
+                                    span.setAttribute('class', 'middle');
+                                    $(span).html('封');
+                                }
+                                var span = $(goalP).find('span')[2];
+                                if (span) {
+                                    span.setAttribute('class', '');
+                                    $(span).html('');
+                                }
                             }
                         }
                     }
