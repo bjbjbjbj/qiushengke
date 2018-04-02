@@ -24,7 +24,7 @@ trait SpiderLeague
      * @param $season 赛季
      * @param $stage 阶段
      */
-    private function cupSchedule($lid, $season = NULL, $stage = NULL)
+    private function cupSchedule($lid, $season = NULL, $stage = NULL, $isForDate = false)
     {
         if ($season == NULL) {
             $se = Season::where(["lid" => $lid])->orderBy('year', 'desc')->get()->first();
@@ -158,6 +158,10 @@ trait SpiderLeague
 //                        echo "$schedule<br>";
 //                        dump($m);
                         \App\Models\LiaoGouModels\Match::saveWithWinData($m);
+
+                        if ($isForDate) {
+                            $this->matchData($id, true);
+                        }
                     }
                 }
             }
@@ -170,7 +174,7 @@ trait SpiderLeague
      * @param $season 赛季
      * @param null $round
      */
-    private function leagueSchedule($lid, $season = NULL, $round = NULL, $subid = NULL)
+    private function leagueSchedule($lid, $season = NULL, $round = NULL, $subid = NULL, $isForData = false)
     {
         if ($season == NULL) {
             $se = Season::where(["lid" => $lid])->orderBy('year', 'desc')->get()->first();
@@ -279,7 +283,13 @@ trait SpiderLeague
                         $m->arank = $arank == "" ? "0" : mb_convert_kana($arank, 'n');
                         $m->neutral = 0;
                         $m->save();
+
                         \App\Models\LiaoGouModels\Match::saveWithWinData($m);
+
+                        //顺带重爬阵容等数据
+                        if ($isForData) {
+                            $this->matchData($id, true);
+                        }
 //                echo "$schedule<br>";
                     }
                 }
@@ -585,7 +595,7 @@ trait SpiderLeague
      * @param $lid
      * @param null $seasonString
      */
-    private function leagueRefreshById($lid, $seasonString = null){
+    private function leagueRefreshById($lid, $seasonString = null, $isForData = false){
         $league = League::where(["id" => $lid])->first();
         if (!isset($league)) return;
 
@@ -612,10 +622,10 @@ trait SpiderLeague
                 foreach ($subs as $sub) {
                     if ($sub->total_round > 0) {
                         foreach (range(1, $sub->total_round) as $round) {
-                            $this->leagueSchedule($season->lid, $season->name, $round, $sub->subid);
+                            $this->leagueSchedule($season->lid, $season->name, $round, $sub->subid, $isForData);
                         }
                     } else {
-                        $this->leagueSchedule($season->lid, $season->name, NULL, $sub->subid);
+                        $this->leagueSchedule($season->lid, $season->name, NULL, $sub->subid, $isForData);
                     }
                     $this->leagueAllRanking($season->lid, $season->name, $sub->subid);
                     $this->leagueHomeRanking($season->lid, $season->name, $sub->subid);
@@ -624,17 +634,17 @@ trait SpiderLeague
             } else {
                 if ($season->total_round > 0) {
                     foreach (range(1, $season->total_round) as $round) {
-                        $this->leagueSchedule($season->lid, $season->name, $round);
+                        $this->leagueSchedule($season->lid, $season->name, $round, NULL, $isForData);
                     }
                 } else {
-                    $this->leagueSchedule($season->lid, $season->name);
+                    $this->leagueSchedule($season->lid, $season->name, NULL, NULL, $isForData);
                 }
                 $this->leagueAllRanking($season->lid, $season->name);
                 $this->leagueHomeRanking($season->lid, $season->name);
                 $this->leagueAwayRanking($season->lid, $season->name);
             }
         } elseif ($league->type == 2) {
-            $this->cupSchedule($lid, $season->name);
+            $this->cupSchedule($lid, $season->name, NULL, $isForData);
         }
         echo "<br>";
     }
