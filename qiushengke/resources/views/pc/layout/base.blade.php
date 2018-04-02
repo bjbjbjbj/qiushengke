@@ -117,33 +117,33 @@
         middle = Math.abs(middle);
         switch (middle) {
             case 7: text = "七球"; break;
-            case 6.75: text = "六半/七球"; break;
+            case 6.75: text = "六球半/七"; break;
             case 6.5: text = "六球半"; break;
-            case 6.25: text = "六球/六半"; break;
+            case 6.25: text = "六/六球半"; break;
             case 6: text = "六球"; break;
-            case 5.75: text = "五半/六球"; break;
+            case 5.75: text = "五球半/六"; break;
             case 5.5: text = "五球半"; break;
-            case 5.25: text = "五球/五半"; break;
+            case 5.25: text = "五/五球半"; break;
             case 5: text = "五球"; break;
-            case 4.75: text = "四半/五球"; break;
+            case 4.75: text = "四球半/五"; break;
             case 4.5: text = "四球半"; break;
-            case 4.25: text = "四球/四半"; break;
+            case 4.25: text = "四/四球半"; break;
             case 4: text = "四球"; break;
-            case 3.75: text = "三半/四球"; break;
+            case 3.75: text = "三球半/四"; break;
             case 3.5: text = "三球半"; break;
-            case 3.25: text = "三球/三半"; break;
+            case 3.25: text = "三/三球半"; break;
             case 3: text = "三球"; break;
-            case 2.75: text = "两半/三球"; break;
+            case 2.75: text = "两球半/三"; break;
             case 2.5: text = "两球半"; break;
-            case 2.25: text = "两球/两半"; break;
+            case 2.25: text = "两/两球半"; break;
             case 2: text = "两球"; break;
-            case 1.75: text = "球半/两球"; break;
+            case 1.75: text = "球半/两"; break;
             case 1.5: text = "球半"; break;
-            case 1.25: text = "一球/球半"; break;
+            case 1.25: text = "一/球半"; break;
             case 1: text = "一球"; break;
             case 0.75: text = "半/一"; break;
             case 0.5: text = "半球"; break;
-            case 0.25: text = "平手/半球"; break;
+            case 0.25: text = "平/半"; break;
             case 0: text = "平手"; break;
         }
         if (text.length > 0) {

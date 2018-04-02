@@ -20,10 +20,10 @@
         </div>
         <table id="Table">
             <colgroup>
-                <col num="1" width="40px">
-                <col num="2" width="90px">
-                <col num="3" width="50px">
-                <col num="4" width="60px">
+                <col num="1" width="3.5%">
+                <col num="2" width="7.5%">
+                <col num="3" width="4.5%">
+                <col num="4" width="5%">
                 <col num="5">
                 <col num="6" width="35px">
                 <col num="7" width="60px">
@@ -31,7 +31,7 @@
                 <col num="9">
                 <col num="10" width="60px">
                 <col num="11" width="60px">
-                <col num="12" width="186px">
+                <col num="12" width="206px">
                 <col num="13" width="80px">
                 {{--<col num="14" width="40px">--}}
             </colgroup>
@@ -94,14 +94,18 @@
         <div id="Simulation">
             <table>
                 <colgroup>
-                    <col num="1" width="40px">
-                    <col num="2" width="90px">
-                    <col num="3" width="50px">
-                    <col num="4" width="60px">
+                    <col num="1" width="3.5%">
+                    <col num="2" width="7.5%">
+                    <col num="3" width="4.5%">
+                    <col num="4" width="5%">
                     <col num="5">
+                    <col num="6" width="35px">
+                    <col num="7" width="60px">
+                    <col num="8" width="35px">
+                    <col num="9">
                     <col num="10" width="60px">
                     <col num="11" width="60px">
-                    <col num="12" width="186px">
+                    <col num="12" width="206px">
                     <col num="13" width="80px">
                     {{--<col num="14" width="40px">--}}
                 </colgroup>
