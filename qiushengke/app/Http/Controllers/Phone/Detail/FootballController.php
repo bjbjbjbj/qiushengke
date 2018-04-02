@@ -41,7 +41,7 @@ class FootballController extends BaseController
     public function staticMatchDetail(Request $request,$mid){
         $first = substr($mid,0,2);
         $second = substr($mid,2,2);
-        $html = $this->matchDetail($request,$first,$second,$mid);
+        $html = $this->detail($request,$first,$second,$mid);
         if (isset($html) && strlen($html) > 0)
             Storage::disk("public")->put("/wap/match/foot/detail/".$first."/".$second."/".$mid.".html", $html);
     }
