@@ -2,15 +2,15 @@
 <div class="canvasBox" ha="{{$ha}}" le="{{$le}}">
     <div class="canvasArea">
         <div class="circle"><canvas width="140px" height="140px" value="0.4" color="#34b45d"></canvas></div>
-        <p>主胜<b class="red">{{$result['win']}}</b></p>
+        <p>主胜<b class="green">{{$result['win']}}</b></p>
     </div>
     <div class="canvasArea">
         <div class="circle"><canvas width="140px" height="140px" value="0.2" color="#9e9e9e"></canvas></div>
-        <p>平局<b class="green">{{$result['draw']}}</b></p>
+        <p>平局<b class="gray">{{$result['draw']}}</b></p>
     </div>
     <div class="canvasArea">
         <div class="circle"><canvas width="140px" height="140px" value="0.4" color="#1974bd"></canvas></div>
-        <p>主负<b class="gray">{{$result['lose']}}</b></p>
+        <p>主负<b class="blue">{{$result['lose']}}</b></p>
     </div>
     <p class="summary">共{{$total}}场，胜率：<b>{{$result['winPercent']}}%</b>，赢盘率：<b>{{$result['oddPercent']}}%</b></p>
 </div>
@@ -49,7 +49,11 @@
             <td>{{substr($match['time'],0, 10)}}</td>
             <td>{{$match['league']}}</td>
             <td @if($match['hid'] == $hid) class="host red" @endif>{{$match['hname']}}</td>
-            <td>{{$match['hscore']}} - {{$match['ascore']}}<p class="goal">{{$goal_result}}{{\App\Http\Controllers\PC\CommonTool::getOddMiddleString($match['goalmiddle1'])}}</p></td>
+            <td>{{$match['hscore']}} - {{$match['ascore']}}
+                @if(isset($match['goalmiddle1']))
+                    <p class="goal">{{$goal_result}}{{\App\Http\Controllers\PC\CommonTool::getOddMiddleString($match['goalmiddle1'])}}</p>
+                @endif
+            </td>
             <td @if($match['aid'] == $hid) class="host red" @endif>{{$match['aname']}}</td>
             @if($match['asiamiddle1'] == null)
                 <td>{{''}}{!! $asia_result !!}</td>

@@ -178,12 +178,28 @@ for ($i = 0 ; $i < min(10,count($matches));$i++){
                 ?>
                 <td class="{{$resulto == 3?'green':($resulto == 1 ? 'gray' :'blue')}}">{{$resulto == 3?'胜':($resulto == 1 ? '平' :'负')}}</td>
                 <td class="asia">
-                    <p class="start {{$resulta1 == 3?'green':($resulta1 == 1 ? 'gray' :'blue')}}">{{$resulta1 == 3?'赢':($resulta1 == 1 ? '走' :'输')}}</p>
-                    <p class="end {{$resulta2 == 3?'green':($resulta2 == 1 ? 'gray' :'blue')}}" style="display: none;">{{$resulta2 == 3?'赢':($resulta2 == 1 ? '走' :'输')}}</p>
+                    @if(isset($match['asiamiddle1']))
+                        <p class="start {{$resulta1 == 3?'green':($resulta1 == 1 ? 'gray' :'blue')}}">{{$resulta1 == 3?'赢':($resulta1 == 1 ? '走' :'输')}}</p>
+                    @else
+                        <p class="start"></p>
+                    @endif
+                    @if(isset($match['asiamiddle2']))
+                        <p class="end {{$resulta2 == 3?'green':($resulta2 == 1 ? 'gray' :'blue')}}" style="display: none;">{{$resulta2 == 3?'赢':($resulta2 == 1 ? '走' :'输')}}</p>
+                    @else
+                        <p class="endstart"></p>
+                    @endif
                 </td>
                 <td class="goal">
-                    <p class="start {{$resultg1 == 3?'green':($resultg1 == 1 ? 'gray' :'blue')}}">{{$resultg1 == 3?'大':($resultg1 == 1 ? '走' :'小')}}</p>
-                    <p class="end {{$resultg2 == 3?'green':($resultg2 == 1 ? 'gray' :'blue')}}" style="display: none;">{{$resultg2 == 3?'大':($resultg2 == 1 ? '走' :'小')}}</p>
+                    @if(isset($match['goalmiddle1']))
+                        <p class="start {{$resultg1 == 3?'green':($resultg1 == 1 ? 'gray' :'blue')}}">{{$resultg1 == 3?'大':($resultg1 == 1 ? '走' :'小')}}</p>
+                    @else
+                        <p class="start"></p>
+                    @endif
+                    @if(isset($match['goalmiddle2']))
+                        <p class="end {{$resultg2 == 3?'green':($resultg2 == 1 ? 'gray' :'blue')}}" style="display: none;">{{$resultg2 == 3?'大':($resultg2 == 1 ? '走' :'小')}}</p>
+                    @else
+                        <p class="end"></p>
+                    @endif
                 </td>
             </tr>
         @endfor

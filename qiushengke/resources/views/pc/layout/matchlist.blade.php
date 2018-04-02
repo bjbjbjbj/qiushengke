@@ -782,7 +782,7 @@
                                     if ('已结束' == timeStr){
                                         timeStr = '90';
                                     }
-                                    Goal(dataItem.hname, dataItem.aname, dataItem.hscore, dataItem.ascore, icon, timeStr, isHost ? 'host' : 'away');
+                                    Goal(dataItem.hname, dataItem.aname, dataItem.hscore, dataItem.ascore, icon, timeStr, isHost ? 'host' : 'away',ID);
                                 }
                             }
                             scoreItem.html(currentScore);

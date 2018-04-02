@@ -388,9 +388,11 @@ a.team:hover{
 }
 #Con td.host a.team{
 	padding-left: 30px;
+	position: relative; z-index: 1;
 }
 #Con td.away a.team{
 	padding-right: 30px;
+	position: relative; z-index: 1;
 }
 a.team span.yellowCard, a.team span.redCard{
 	width: 10px; height: 14px;
@@ -432,10 +434,27 @@ a.team span.name{
 #Con td.away a.team span:first-child + span.name{ 
 	margin-right: -12px;
 }
+#Con td.host:after, #Con td.host + td:after, #Con td.host + td + td + td:after, #Con td.away:after{
+	background: #d5ebe1;
+	position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+	display: none;
+	content: '';
+}
+#Con td.goal:after{
+	display: block !important;
+}
+#Con table tbody tr td.goal a:hover{
+	color: #fff;
+}
+#Con table tbody tr:hover td.goal:after{
+	background: #95ccb3;
+}
+
 
 /*队徽*/
 #Con td img.icon{
 	max-width: 28px;
+	position: relative; z-index: 1;
 }
 
 /*比分*/

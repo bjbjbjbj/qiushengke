@@ -40,7 +40,7 @@ class BasketballController extends BaseController
     public function staticMatchDetailBK(Request $request,$mid){
         $first = substr($mid,0,2);
         $second = substr($mid,2,2);
-        $html = $this->basketDetail($request,$first,$second,$mid);
+        $html = $this->detail($request,$first,$second,$mid);
         if (isset($html))
             Storage::disk("public")->put("/wap/match/basket/detail/".$first."/".$second."/".$mid.".html", $html);
     }

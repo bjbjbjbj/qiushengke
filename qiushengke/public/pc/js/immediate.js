@@ -205,8 +205,9 @@ function getMousePos(obj,event) {
 //进球弹层
 var GoalArr = [], GoalAdd = false;
 
-function Goal(Host,Away,Hscore,Ascore,Icon,Time,Type) {
+function Goal(Host,Away,Hscore,Ascore,Icon,Time,Type,ID) {
     var Target = {
+        'ID': ID,
         'Host': Host,
         'Away': Away,
         'Hscore': Hscore,
@@ -253,14 +254,23 @@ function CheckGoal() {
                    '<p class="team away">' + (Target.Type=='away'?Target.Time + "'":'') + '<span>' + Target.Away + '</span></p></li>');
 
         $('#GoalUl ul').append(Li);
+        //对应TD加底色
 
-        GoalArr.splice(0, 1);
+        var TD;
+        if (Target.Type == 'host') {
+            TD = $('tr[match=' + Target.ID + '] td.host, tr[match=' + Target.ID + '] td.host + td');
+        }else{
+            TD = $('tr[match=' + Target.ID + '] td.away, tr[match=' + Target.ID + '] td.host + td + td + td');
+        }
+        TD.addClass('goal');
+
 
         setTimeout(function(){
             $(Li).addClass('show');
         },20)
         setTimeout(function(){
             $(Li).addClass('close');
+            TD.removeClass('goal');
         },7000)
         setTimeout(function(){
             $(Li).addClass('height');
@@ -271,6 +281,8 @@ function CheckGoal() {
                 $('#GoalUl').remove();
             }
         },7800)
+
+        GoalArr.splice(0, 1);
     }
 }
 

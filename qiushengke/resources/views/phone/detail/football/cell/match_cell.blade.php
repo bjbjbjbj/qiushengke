@@ -8,6 +8,10 @@
         @component('phone.detail.football.cell.match_lineup_cell', ['class'=>'away', 'lineup'=>$lineup['away'] ]) @endcomponent
         @endif
     </div>
+        @else
+        <div id="First" class="childNode" style="display: ;">
+        <div class="nolist"></div>
+        </div>
     @endif
     <div id="Event" class="childNode" style="display: none;">
         @if(isset($tech))
