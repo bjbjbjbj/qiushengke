@@ -48,6 +48,8 @@ class IndexFiveCommands extends Command
     {
         MatchController::curlToHtml5();
 
+        \App\Http\Controllers\Phone\Match\MatchController::curlToHtml5();
+
         //主播
         $ch = curl_init();
         $url = asset('/api/static/anchor/index');

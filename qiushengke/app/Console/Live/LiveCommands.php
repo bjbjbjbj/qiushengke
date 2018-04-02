@@ -52,10 +52,13 @@ class LiveCommands extends Command
     {
         //足球
         $this->cache(1);
+        $this->cache(1,true);
+        //篮球
         $this->cache(2);
+        $this->cache(2,true);
     }
 
-    private function cache($sport){
+    private function cache($sport,$isWap = false){
         $startDate = date('Ymd');
         $pc_json = FileTool::matchListDataJson($startDate,$sport);
         if (is_null($pc_json) || !isset($pc_json['matches'])) {
@@ -77,13 +80,16 @@ class LiveCommands extends Command
                 $start_time = $time;//比赛时间
                 $flg_1 = $start_time >= $now && $now + 5 * 60 * 60 >= $start_time;//开赛前1小时
                 $flg_2 = $start_time <= $now && $start_time + 3 * 60 * 60  >= $now;//开赛后3小时
-                $path = CommonTool::matchLivePathWithId($mid,$sport);
+                if ($isWap)
+                    $path = CommonTool::matchWapLivePathWithId($mid,$sport);
+                else
+                    $path = CommonTool::matchLivePathWithId($mid,$sport);
                 $hasHtml = Storage::disk("public")->exists($path);
                 //生成了就不自动加进去了
                 if (!$hasHtml && ($flg_1 || $flg_2)) {
                     try {
                         echo '生成 ' . $sport . ' ' . $mid.'<br>';
-                        LiveCommands::flushLiveDetailHtml($mid, $sport);
+                        LiveCommands::flushLiveDetailHtml($mid, $sport,$isWap);
                     } catch (\Exception $exception) {
                         dump($exception);
                     }
@@ -93,9 +99,12 @@ class LiveCommands extends Command
         }
     }
 
-    public static function flushLiveDetailHtml($mid, $sport){
+    public static function flushLiveDetailHtml($mid, $sport,$isWap){
         $ch = curl_init();
-        $url = asset('/api/static/live/' . $sport.'/'.$mid);
+        if ($isWap)
+            $url = asset('/api/static/wap/live/' . $sport.'/'.$mid);
+        else
+            $url = asset('/api/static/live/' . $sport.'/'.$mid);
         echo $url . '<br>';
         curl_setopt($ch, CURLOPT_URL,$url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

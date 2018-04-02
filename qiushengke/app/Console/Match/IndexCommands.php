@@ -47,5 +47,6 @@ class IndexCommands extends Command
     public function handle()
     {
         MatchController::curlToHtml();
+        \App\Http\Controllers\Phone\Match\MatchController::curlToHtml();
     }
 }
