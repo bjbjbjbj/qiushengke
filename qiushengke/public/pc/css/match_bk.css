@@ -45,7 +45,7 @@ body{
 #Play .abox ul li.on:hover{
 	color: #fff;
 }
-#Play .abox ul li.on:before, #Play .abox ul a.on + li:before{
+#Play .abox ul li.on:before, #Play .abox ul li.on + li:before, #Play .abox ul li.on + a.li:before{
 	display: none;
 }
 
@@ -647,6 +647,9 @@ body{
 #Data .battle table tr:nth-child(odd) td{
 	background: #f6f6f6;
 }
+#Data .battle table td.red{
+	color: #c52601;
+}
 #Data .battle table td.green{
 	color: #2b9968;
 }
@@ -840,6 +843,9 @@ body{
 #Data .history table tr:nth-child(odd) td{
 	background: #f6f6f6;
 }
+#Data .history table td.red{
+	color: #c52601;
+}
 #Data .history table td.green{
 	color: #2b9968;
 }
@@ -977,6 +983,9 @@ body{
 	padding: 0 2px;
 	display: inline-block;
 }
+#Odd .asia .part table .red{
+	color: #c52601;
+}
 #Odd .asia .part table .green{
 	color: #2b9968;
 }
@@ -1082,6 +1091,9 @@ body{
 #Odd .goal .part table p{
 	padding: 0 2px;
 	display: inline-block;
+}
+#Odd .goal .part table .red{
+	color: #c52601;
 }
 #Odd .goal .part table .green{
 	color: #2b9968;

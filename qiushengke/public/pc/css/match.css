@@ -45,7 +45,7 @@ body{
 #Play .abox ul li.on:hover{
 	color: #fff;
 }
-#Play .abox ul li.on:before, #Play .abox ul a.on + li:before{
+#Play .abox ul li.on:before, #Play .abox ul li.on + li:before, #Play .abox ul li.on + a.li:before{
 	display: none;
 }
 
@@ -1111,28 +1111,28 @@ body{
 	content: '';
 }
 #Data .battle .con .canBox dl dd.win{
-	color: #2b9968;
+	color: #c52601;
 }
 #Data .battle .con .canBox dl dd.draw{
-	color: #adadad;
-}
-#Data .battle .con .canBox dl dd.lose{
 	color: #1661c7;
 }
+#Data .battle .con .canBox dl dd.lose{
+	color: #2b9968;
+}
 #Data .battle .con .canBox dl.goal dd.lose{
-	color: #fabd36;
+	color: #2b9968;
 }
 #Data .battle .con .canBox dl dd.win:before{
-	background: #2b9968;
+	background: #c52601;
 }
 #Data .battle .con .canBox dl dd.draw:before{
-	background: #adadad;
-}
-#Data .battle .con .canBox dl dd.lose:before{
 	background: #1661c7;
 }
+#Data .battle .con .canBox dl dd.lose:before{
+	background: #2b9968;
+}
 #Data .battle .con .canBox dl.goal dd.lose:before{
-	background: #fabd36;
+	background: #2b9968;
 }
 #Data .battle .con .canBox dl dt{
 	width: 90px; height: 90px;
@@ -1220,6 +1220,9 @@ body{
 }
 #Data .battle table td.blue, #Data .battle table td p.blue{
 	color: #1661c7;
+}
+#Data .battle table td.red, #Data .battle table td p.red{
+	color: #c52601;
 }
 #Data .battle table td p.yellow{
 	color: #fabd36;
@@ -1458,6 +1461,9 @@ body{
 }
 #Data .history table td p.half{
 	color: #adadad;
+}
+#Data .history table td.red, #Data .history table td p.red{
+	color: #c52601;
 }
 #Data .history table td.green, #Data .history table td p.green{
 	color: #2b9968;
@@ -1748,6 +1754,9 @@ body{
 #Odd .sameOdd table[choose="12"] td:nth-child(12){
 	background: #e0ece7;
 }
+#Odd .sameOdd table td.red{
+	color: #c52601;
+}
 #Odd .sameOdd table td.green{
 	color: #2b9968;
 }
@@ -1811,6 +1820,9 @@ body{
 #Odd .tableIn table[choose='14'] td:nth-child(14),
 #Odd .tableIn table[choose='15'] td:nth-child(15){
 	background: #e0ece7;
+}
+#Odd .tableIn table tr td span.red{
+	color: #c52601;
 }
 #Odd .tableIn table tr td span.green{
 	color: #2b9968;
@@ -1997,13 +2009,13 @@ body{
 	display: inline-block;
 }
 #Corner .battle .con dl dd p.win{
-	background: #2b9968;
+	background: #c73e3e;
 }
 #Corner .battle .con dl dd p.draw{
-	background: #dbdbdb;
+	background: #3e78c7;
 }
 #Corner .battle .con dl dd p.lose{
-	background: #fabd36;
+	background: #9ace4a;
 }
 #Corner .battle table{
 	width: 100%;
@@ -2034,11 +2046,17 @@ body{
 #Corner .battle table td span.half{
 	color: #adadad;
 }
+#Corner .battle table td.red{
+	color: #c52601;
+}
 #Corner .battle table td.green{
 	color: #2b9968;
 }
 #Corner .battle table td.gray{
 	color: #adadad;
+}
+#Corner .battle table td.blue{
+	color: #1661c7;
 }
 #Corner .battle table td.yellow{
 	color: #fabd36;
@@ -2165,13 +2183,13 @@ body{
 	display: inline-block;
 }
 #Corner .history .con dl dd p.win{
-	background: #2b9968;
+	background: #c73e3e;
 }
 #Corner .history .con dl dd p.draw{
-	background: #dbdbdb;
+	background: #3e78c7;
 }
 #Corner .history .con dl dd p.lose{
-	background: #fabd36;
+	background: #9ace4a;
 }
 #Corner .history table{
 	width: 100%;
@@ -2202,16 +2220,21 @@ body{
 #Corner .history table td span.half{
 	color: #adadad;
 }
+#Corner .history table td.red{
+	color: #c52601;
+}
 #Corner .history table td.green{
 	color: #2b9968;
 }
 #Corner .history table td.gray{
 	color: #adadad;
 }
+#Corner .history table td.blue{
+	color: #1661c7;
+}
 #Corner .history table td.yellow{
 	color: #fabd36;
 }
-
 
 
 

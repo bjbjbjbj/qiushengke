@@ -10,7 +10,7 @@ function setPage() {
     setCorHistory();
     setTab();
 
-    if (window.location.hash == '#Odd') {
+    if (window.location.hash == '#odd') {
         $('#Play li[target="Odd"]').trigger('click');
     }
 
@@ -133,7 +133,7 @@ function setBattle () {
             ctx.beginPath();
             ctx.arc(45, 45, 50, - 0.5 * Math.PI, (2 * (Win / All) - 0.5) * Math.PI, false);
             ctx.lineTo(45, 45);
-            ctx.fillStyle = "#2b9968";
+            ctx.fillStyle = "#c73e3e";
             ctx.fill();
             ctx.strokeStyle = "white";
             ctx.closePath();
@@ -145,7 +145,7 @@ function setBattle () {
             ctx.beginPath();
             ctx.arc(45, 45, 50, Math.PI / 180 * (Win / All) * 360 - 0.5 * Math.PI, (2 * ((Win + Draw) / All) - 0.5) * Math.PI, false);
             ctx.lineTo(45, 45);
-            ctx.fillStyle = "#dbdbdb";
+            ctx.fillStyle = "#3e78c7";
             ctx.fill();
             // ctx.strokeStyle = "white";
             ctx.closePath();
@@ -157,7 +157,7 @@ function setBattle () {
             ctx.beginPath();
             ctx.arc(45, 45, 50, Math.PI / 180 * ((Win + Draw) / All) * 360 - 0.5 * Math.PI, 1.5 * Math.PI, false);
             ctx.lineTo(45, 45);
-            ctx.fillStyle = $(obj).parents('dl').hasClass('goal') ? "#fabd36" : "#1661c7";
+            ctx.fillStyle = "#9ace4a";
             ctx.fill();
             // ctx.strokeStyle = "white";
             ctx.closePath();
@@ -423,7 +423,6 @@ function setTab() {
     $('#Play li').click(function(){
         if (!$(this).hasClass('on')) {
             if ((document.documentElement.scrollTop || document.body.scrollTop) > 180) {
-                alert((document.documentElement.scrollTop || document.body.scrollTop))
                 $("html,body").animate({scrollTop:180}, 0);
             }
 

@@ -10,7 +10,7 @@ function setPage() {
     setTotalDifference();
     setTab();
 
-    if (window.location.hash == '#Odd') {
+    if (window.location.hash == '#odd') {
         $('#Play li[target="Odd"]').trigger('click');
     }
 

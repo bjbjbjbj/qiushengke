@@ -502,22 +502,22 @@ a.team span.name{
 	display: inline-block;
 }
 #Con td p.asia span.up, #Con td p.goal span.up{
-	color: #2b9968;
+	color: #c52601;
 }
 #Con td p.asia span.up:before, #Con td p.goal span.up:before{
 	width: 14px; height: 14px;
 	margin-top: -7px;
-	background: url(../img/bas_icon_up_n@2x.png) no-repeat center; background: url(../img/bas_icon_up_n.png) no-repeat center\0/; background-size: 14px;
+	background: url(../img/bas_icon_up_n@2x.png) no-repeat center; background: url(../img/bas_icon_up_n.png) no-repeat center\0/; background-size: 12px;
 	position: absolute; top: 50%; right: -7px;
 	content: '';
 }
 #Con td p.asia span.down, #Con td p.goal span.down{
-	color: #1661c7;
+	color: #9ace4a;
 }
 #Con td p.asia span.down:before, #Con td p.goal span.down:before{
 	width: 14px; height: 14px;
 	margin-top: -7px;
-	background: url(../img/bas_icon_down_n@2x.png) no-repeat center; background: url(../img/bas_icon_down_n.png) no-repeat center\0/; background-size: 14px;
+	background: url(../img/bas_icon_down_n@2x.png) no-repeat center; background: url(../img/bas_icon_down_n.png) no-repeat center\0/; background-size: 12px;
 	position: absolute; top: 50%; right: -7px;
 	content: '';
 }
@@ -528,7 +528,8 @@ a.team span.name{
 	display: inline-block;
 }
 #Con td p.asia span.odd:before, #Con td p.goal span.odd:before{
-	right: -4px;
+	/*right: -4px;*/
+	display: none;
 }
 
 /*置顶*/

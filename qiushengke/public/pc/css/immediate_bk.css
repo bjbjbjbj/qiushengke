@@ -400,24 +400,24 @@
 	position: absolute; top: 0; left: 0;
 }
 #Con table tbody td.asia p.up, #Con table tbody td.goal p.up{
-	color: #2b9968;
+	color: #c52601;
 	position: relative;
 }
 #Con table tbody td.asia p.up:before, table tbody td.goal p.up:before{
 	width: 14px; height: 14px;
 	margin-top: -7px;
-	background: url(../img/bas_icon_up_n@2x.png) no-repeat center; background: url(../img/bas_icon_up_n.png) no-repeat center\0/; background-size: 14px;
+	background: url(../img/bas_icon_up_n@2x.png) no-repeat center; background: url(../img/bas_icon_up_n.png) no-repeat center\0/; background-size: 12px;
 	position: absolute; top: 50%; left: 28px;
 	content: '';
 }
 #Con table tbody td.asia p.down, #Con table tbody td.goal p.down{
-	color: #1661c7;
+	color: #9ace4a;
 	position: relative;
 }
 #Con table tbody td.asia p.down:before, table tbody td.goal p.down:before{
 	width: 14px; height: 14px;
 	margin-top: -7px;
-	background: url(../img/bas_icon_down_n@2x.png) no-repeat center; background: url(../img/bas_icon_down_n.png) no-repeat center\0/; background-size: 14px;
+	background: url(../img/bas_icon_down_n@2x.png) no-repeat center; background: url(../img/bas_icon_down_n.png) no-repeat center\0/; background-size: 12px;
 	position: absolute; top: 50%; left: 28px;
 	content: '';
 }
