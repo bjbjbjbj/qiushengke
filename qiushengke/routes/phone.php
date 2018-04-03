@@ -39,3 +39,9 @@ Route::group(['namespace'=>'Detail'], function () {
     Route::get("/match/basket/detail/odd_cell/{sub1}/{sub2}/{mid}.html", "BasketballController@dataOdd");
 
 });
+
+Route::group(['namespace'=>'Anchor'], function () {
+    Route::get("/anchor/index.html", "AnchorController@anchorIndex");//首页
+
+//    Route::get("/anchor/room/live/{id}", "AnchorRoomController@liveUrl");//主播房间信号
+});

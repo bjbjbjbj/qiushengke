@@ -27,6 +27,10 @@ class AnchorRoom extends Model
         return $this->hasOne(Anchor::class, 'id', 'anchor_id');
     }
 
+    public function roomMatches() {
+        return $this->hasMany(AnchorRoomMatches::class, 'room_id', 'id');
+    }
+
     /**
      * 获取直播平台
      * @return \Illuminate\Database\Eloquent\Relations\HasOne
