@@ -1619,7 +1619,6 @@
                             <th rowspan="2">公司</th>
                             <th colspan="3">初盘</th>
                             <th colspan="3">终盘</th>
-                            <th colspan="3">即盘</th>
                         </tr>
                         <tr>
                             <th class="yellow">主队</th>
@@ -1628,120 +1627,9 @@
                             <th class="green">主队</th>
                             <th class="green">盘口</th>
                             <th class="green">客队</th>
-                            <th class="yellow">主队</th>
-                            <th class="yellow">盘口</th>
-                            <th class="yellow">客队</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>SB</td>
-                            <td>0.99</td>
-                            <td>-5.5</td>
-                            <td>0.81</td>
-                            <td>0.99</td>
-                            <td>-5.5</td>
-                            <td>0.81</td>
-                            <td>0.99</td>
-                            <td>-5.5</td>
-                            <td>0.81</td>
-                        </tr>
-                        <tr>
-                            <td>Bet365</td>
-                            <td>0.99</td>
-                            <td>-5.5</td>
-                            <td>0.81</td>
-                            <td>0.99</td>
-                            <td>-5.5</td>
-                            <td>0.81</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>manbetX</td>
-                            <td>0.99</td>
-                            <td>-5.5</td>
-                            <td>0.81</td>
-                            <td>0.99</td>
-                            <td>-5.5</td>
-                            <td>0.81</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>立博</td>
-                            <td>0.99</td>
-                            <td>-5.5</td>
-                            <td>0.81</td>
-                            <td>0.99</td>
-                            <td>-5.5</td>
-                            <td>0.81</td>
-                            <td>0.99</td>
-                            <td>-5.5</td>
-                            <td>0.81</td>
-                        </tr>
-                        <tr>
-                            <td>韦德</td>
-                            <td>0.99</td>
-                            <td>-5.5</td>
-                            <td>0.81</td>
-                            <td>0.99</td>
-                            <td>-5.5</td>
-                            <td>0.81</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>易胜博</td>
-                            <td>0.99</td>
-                            <td>-5.5</td>
-                            <td>0.81</td>
-                            <td>0.99</td>
-                            <td>-5.5</td>
-                            <td>0.81</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>明升</td>
-                            <td>0.99</td>
-                            <td>-5.5</td>
-                            <td>0.81</td>
-                            <td>0.99</td>
-                            <td>-5.5</td>
-                            <td>0.81</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>澳彩</td>
-                            <td>0.99</td>
-                            <td>-5.5</td>
-                            <td>0.81</td>
-                            <td>0.99</td>
-                            <td>-5.5</td>
-                            <td>0.81</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>SB</td>
-                            <td>0.99</td>
-                            <td>-5.5</td>
-                            <td>0.81</td>
-                            <td>0.99</td>
-                            <td>-5.5</td>
-                            <td>0.81</td>
-                            <td>0.99</td>
-                            <td>-5.5</td>
-                            <td>0.81</td>
-                        </tr>
                         </tbody>
                     </table>
                 </div>
@@ -1757,100 +1645,15 @@
                             <th rowspan="2">公司</th>
                             <th colspan="2">初盘</th>
                             <th colspan="2">终盘</th>
-                            <th colspan="2">即盘</th>
                         </tr>
                         <tr>
                             <th class="yellow">主胜</th>
                             <th class="yellow">客胜</th>
                             <th class="green">主胜</th>
                             <th class="green">客胜</th>
-                            <th class="yellow">主胜</th>
-                            <th class="yellow">客胜</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td>SB</td>
-                            <td>2.60</td>
-                            <td>1.45</td>
-                            <td>2.60</td>
-                            <td>1.45</td>
-                            <td>2.60</td>
-                            <td>1.45</td>
-                        </tr>
-                        <tr>
-                            <td>Bet365</td>
-                            <td>2.60</td>
-                            <td>1.45</td>
-                            <td>2.60</td>
-                            <td>1.45</td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>manbetX</td>
-                            <td>2.60</td>
-                            <td>1.45</td>
-                            <td>2.60</td>
-                            <td>1.45</td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>立博</td>
-                            <td>2.60</td>
-                            <td>1.45</td>
-                            <td>2.60</td>
-                            <td>1.45</td>
-                            <td>2.60</td>
-                            <td>1.45</td>
-                        </tr>
-                        <tr>
-                            <td>韦德</td>
-                            <td>2.60</td>
-                            <td>1.45</td>
-                            <td>2.60</td>
-                            <td>1.45</td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>易胜博</td>
-                            <td>2.60</td>
-                            <td>1.45</td>
-                            <td>2.60</td>
-                            <td>1.45</td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>明升</td>
-                            <td>2.60</td>
-                            <td>1.45</td>
-                            <td>2.60</td>
-                            <td>1.45</td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>澳彩</td>
-                            <td>2.60</td>
-                            <td>1.45</td>
-                            <td>2.60</td>
-                            <td>1.45</td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>SB</td>
-                            <td>2.60</td>
-                            <td>1.45</td>
-                            <td>2.60</td>
-                            <td>1.45</td>
-                            <td>2.60</td>
-                            <td>1.45</td>
-                        </tr>
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>
@@ -1865,7 +1668,6 @@
                             <th rowspan="2">公司</th>
                             <th colspan="3">初盘</th>
                             <th colspan="3">终盘</th>
-                            <th colspan="3">即盘</th>
                         </tr>
                         <tr>
                             <th class="yellow">大分</th>
@@ -1874,121 +1676,9 @@
                             <th class="green">大分</th>
                             <th class="green">盘口</th>
                             <th class="green">小分</th>
-                            <th class="yellow">大分</th>
-                            <th class="yellow">盘口</th>
-                            <th class="yellow">小分</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td>SB</td>
-                            <td>0.83</td>
-                            <td>217.5</td>
-                            <td>0.83</td>
-                            <td>0.83</td>
-                            <td>217.5</td>
-                            <td>0.83</td>
-                            <td>0.83</td>
-                            <td>217.5</td>
-                            <td>0.83</td>
-                        </tr>
-                        <tr>
-                            <td>Bet365</td>
-                            <td>0.83</td>
-                            <td>217.5</td>
-                            <td>0.83</td>
-                            <td>0.83</td>
-                            <td>217.5</td>
-                            <td>0.83</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>manbetX</td>
-                            <td>0.83</td>
-                            <td>217.5</td>
-                            <td>0.83</td>
-                            <td>0.83</td>
-                            <td>217.5</td>
-                            <td>0.83</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>立博</td>
-                            <td>0.83</td>
-                            <td>217.5</td>
-                            <td>0.83</td>
-                            <td>0.83</td>
-                            <td>217.5</td>
-                            <td>0.83</td>
-                            <td>0.83</td>
-                            <td>217.5</td>
-                            <td>0.83</td>
-                        </tr>
-                        <tr>
-                            <td>韦德</td>
-                            <td>0.83</td>
-                            <td>217.5</td>
-                            <td>0.83</td>
-                            <td>0.83</td>
-                            <td>217.5</td>
-                            <td>0.83</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>易胜博</td>
-                            <td>0.83</td>
-                            <td>217.5</td>
-                            <td>0.83</td>
-                            <td>0.83</td>
-                            <td>217.5</td>
-                            <td>0.83</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>明升</td>
-                            <td>0.83</td>
-                            <td>217.5</td>
-                            <td>0.83</td>
-                            <td>0.83</td>
-                            <td>217.5</td>
-                            <td>0.83</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>澳彩</td>
-                            <td>0.83</td>
-                            <td>217.5</td>
-                            <td>0.83</td>
-                            <td>0.83</td>
-                            <td>217.5</td>
-                            <td>0.83</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                        </tr>
-                        <tr>
-                            <td>SB</td>
-                            <td>0.83</td>
-                            <td>217.5</td>
-                            <td>0.83</td>
-                            <td>0.83</td>
-                            <td>217.5</td>
-                            <td>0.83</td>
-                            <td>0.83</td>
-                            <td>217.5</td>
-                            <td>0.83</td>
-                        </tr>
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>
@@ -2101,25 +1791,21 @@
                             if (item['ou']){
                                 tr = tr +
                                     '<td>'+item['ou']['up1']+'</td>'+
-                                    '<td>'+item['ou']['middle1']+'</td>'+
                                     '<td>'+item['ou']['down1']+'</td>';
                             }
                             else{
                                 tr = tr +
-                                    '<td>-</td>'+
                                     '<td>-</td>'+
                                     '<td>-</td>';
                             }
                             if (item['asia']){
                                 tr = tr +
                                     '<td>'+item['asia']['up1']+'</td>'+
-                                    '<td>'+panKouText(item['asia']['middle1'],false)+'</td>'+
-                                    '<td>'+item['asia']['down1']+'</td>'+
-                                    '<td>'+(parseFloat(item['asia']['up1'])+parseFloat(item['asia']['down1'])).toFixed(2)+'</td>';
+                                    '<td>'+BasketpanKouText(item['asia']['middle1'],false,false)+'</td>'+
+                                    '<td>'+item['asia']['down1']+'</td>';
                             }
                             else{
                                 tr = tr +
-                                    '<td>-</td>'+
                                     '<td>-</td>'+
                                     '<td>-</td>'+
                                     '<td>-</td>';
@@ -2127,13 +1813,11 @@
                             if (item['goal']){
                                 tr = tr +
                                     '<td>'+item['goal']['up1']+'</td>'+
-                                    '<td>'+panKouText(item['goal']['middle1'],false)+'</td>'+
-                                    '<td>'+item['goal']['down1']+'</td>'+
-                                    '<td>'+(parseFloat(item['goal']['up1'])+parseFloat(item['goal']['down1'])).toFixed(2)+'</td>';
+                                    '<td>'+BasketpanKouText(item['goal']['middle1'],false,true)+'</td>'+
+                                    '<td>'+item['goal']['down1']+'</td>';
                             }
                             else{
                                 tr = tr +
-                                    '<td>-</td>'+
                                     '<td>-</td>'+
                                     '<td>-</td>'+
                                     '<td>-</td>';
@@ -2148,25 +1832,21 @@
                             if (item['ou']){
                                 tr = tr +
                                     '<td>'+item['ou']['up2']+'</td>'+
-                                    '<td>'+item['ou']['middle2']+'</td>'+
                                     '<td>'+item['ou']['down2']+'</td>';
                             }
                             else{
                                 tr = tr +
-                                    '<td>-</td>'+
                                     '<td>-</td>'+
                                     '<td>-</td>';
                             }
                             if (item['asia']){
                                 tr = tr +
                                     '<td>'+item['asia']['up2']+'</td>'+
-                                    '<td>'+panKouText(item['asia']['middle2'],false)+'</td>'+
-                                    '<td>'+item['asia']['down2']+'</td>'+
-                                    '<td>'+(parseFloat(item['asia']['down2'])+parseFloat(item['asia']['up2'])).toFixed(2)+'</td>';
+                                    '<td>'+BasketpanKouText(item['asia']['middle2'],false)+'</td>'+
+                                    '<td>'+item['asia']['down2']+'</td>';
                             }
                             else{
                                 tr = tr +
-                                    '<td>-</td>'+
                                     '<td>-</td>'+
                                     '<td>-</td>'+
                                     '<td>-</td>';
@@ -2174,13 +1854,11 @@
                             if (item['goal']){
                                 tr = tr +
                                     '<td>'+item['goal']['up2']+'</td>'+
-                                    '<td>'+panKouText(item['goal']['middle2'],false)+'</td>'+
-                                    '<td>'+item['goal']['down2']+'</td>'+
-                                    '<td>'+(parseFloat(item['goal']['down2'])+parseFloat(item['goal']['up2'])).toFixed(2)+'</td>';
+                                    '<td>'+BasketpanKouText(item['goal']['middle2'],false,true)+'</td>'+
+                                    '<td>'+item['goal']['down2']+'</td>';
                             }
                             else{
                                 tr = tr +
-                                    '<td>-</td>'+
                                     '<td>-</td>'+
                                     '<td>-</td>'+
                                     '<td>-</td>';
@@ -2192,7 +1870,7 @@
                     }
 
                     //指数的刷新
-                    var sport = 1;
+                    var sport = 2;
                     var keys = Object.keys(json);
                     if (keys.length > 0){
                         var tbodya = $('div#AsiaOdd div.tableIn tbody');
@@ -2242,23 +1920,19 @@
                                     '<td>'+item['name']+'</td>';
                                 if(data['middle1']){
                                     tr = tr + '<td>'+data['up1']+'</td>'+
-                                        '<td>'+data['middle1']+'</td>'+
                                         '<td>'+data['down1']+'</td>';
                                 }
                                 else{
                                     tr = tr +
                                         '<td>-</td>'+
-                                        '<td>-</td>'+
                                         '<td>-</td>';
                                 }
                                 if(data['middle2']){
                                     tr = tr + '<td>'+data['up2']+'</td>'+
-                                        '<td>'+data['middle2']+'</td>'+
                                         '<td>'+data['down2']+'</td>';
                                 }
                                 else{
                                     tr = tr +
-                                        '<td>-</td>'+
                                         '<td>-</td>'+
                                         '<td>-</td>';
                                 }
@@ -2275,7 +1949,7 @@
                                     var pankou = getHandicapCn(data['middle1'],'',2,sport,true) + '';
                                     pankou = pankou.replace('让','');
                                     tr = tr + '<td>'+data['up1']+'</td>'+
-                                        '<td>'+pankou+'</td>'+
+                                        '<td>'+pankou+'分</td>'+
                                         '<td>'+data['down1']+'</td>';
                                 }
                                 else{
@@ -2288,7 +1962,7 @@
                                     var pankou = getHandicapCn(data['middle2'],'',2,sport,true) + '';
                                     pankou = pankou.replace('让','');
                                     tr = tr + '<td>'+data['up2']+'</td>'+
-                                        '<td>'+pankou+'</td>'+
+                                        '<td>'+pankou+'分</td>'+
                                         '<td>'+data['down2']+'</td>';
                                 }
                                 else{
