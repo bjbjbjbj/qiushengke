@@ -85,6 +85,7 @@ class LiveDetailJsonCommands extends Command
                 }
             }
         }
+
         //获取这些比赛id中有直播房间的比赛
         $resultMid = array();
         $ams = AnchorRoomMatches::whereIn('mid',$mids)
@@ -103,12 +104,12 @@ class LiveDetailJsonCommands extends Command
                 $q->on('match_live_channels.live_id','match_lives.id');
             })
             ->where('sport',$sport)
-            ->select('match_live_channels.id as room_id')
+            ->select('match_lives.match_id as match_id')
             ->get();
         //拼到mids
         foreach ($ams as $mid){
-            if (!in_array($mid['room_id'],$resultMid)) {
-                $resultMid[] = $mid['room_id'];
+            if (!in_array($mid['match_id'],$resultMid)) {
+                $resultMid[] = $mid['match_id'];
             }
         }
 
