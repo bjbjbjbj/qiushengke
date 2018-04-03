@@ -57,8 +57,11 @@ class MatchLiveTool
                 return [$item->id => $count];
             })->all();
 
-        $liveCounts = array_merge($counts, $liveCounts);
-
+        foreach ($counts as $mid=>$count) {
+            if (!array_key_exists($mid, $liveCounts)) {
+                $liveCounts[$mid] = $count;
+            }
+        }
         return $liveCounts;
     }
 
