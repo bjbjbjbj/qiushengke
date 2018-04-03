@@ -1,10 +1,10 @@
-<div id="Data" style="display: none;">
+<div id="Data">
     {{--攻防能力--}}
     @component('pc.match_detail.foot_cell.data_attribute',['match'=>$match,'analyse'=>$analyse])
     @endcomponent
     {{--盘口,另外数据刷新--}}
-    @component('pc.match_detail.foot_cell.data_odd',['mid'=>$match['mid']])
-    @endcomponent
+    {{--@component('pc.match_detail.foot_cell.data_odd',['mid'=>$match['mid']])--}}
+    {{--@endcomponent--}}
     {{--联赛排名--}}
     @component('pc.match_detail.foot_cell.data_league',['match'=>$match,'analyse'=>$analyse])
     @endcomponent

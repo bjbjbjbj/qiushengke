@@ -33,11 +33,10 @@
                 <col num="11" width="60px">
                 <col num="12" width="206px">
                 <col num="13" width="80px">
-                {{--<col num="14" width="40px">--}}
             </colgroup>
             <thead>
             <tr>
-                <th><button class="choose" value="0" onclick="clickAll(this)"></button></th>
+                <th><button class="choose" value="0"></button></th>
                 <th>赛事</th>
                 <th>时间</th>
                 <th>状态</th>
@@ -46,7 +45,7 @@
                 <th>直播</th>
                 <th>指数</th>
                 <th>分析</th>
-                {{--<th>顶</th>--}}
+
             </tr>
             </thead>
 {{--            @if(isset($topMatches) && count($topMatches))--}}
@@ -101,7 +100,7 @@
                     <col num="5">
                     <col num="10" width="60px">
                     <col num="11" width="60px">
-                    <col num="12" width="186px">
+                    <col num="12" width="206px">
                     <col num="13" width="80px">
 
                 </colgroup>
