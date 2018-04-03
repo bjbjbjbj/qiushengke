@@ -2,26 +2,163 @@
 @section('navContent')
     @component('pc.layout.nav_content',['type'=>1])
     @endcomponent
-    @component('pc.cell.top_leagues',['links'=>$basketLeagues])
-    @endcomponent
 @endsection
 @section('content')
+    @component('pc.match_detail.basket_cell.base_info', ['match'=>$match])
+    @endcomponent
     <div id="Con">
-        @component('pc.match_detail.basket_cell.base_info', ['match'=>$match])
-        @endcomponent
-        <div id="Match" style="display: ;">
+        @if(isset($showMatch))
+        <div id="Match" style="display: none;">
             {{--@component('pc.match_detail.basket_cell.match_first',['match'=>$match])--}}
             {{--@endcomponent--}}
             @component('pc.match_detail.basket_cell.match_score', ['match'=>$match])
             @endcomponent
-            @component('pc.match_detail.basket_cell.match_tech', ['tech'=>$tech])
-            @endcomponent
+            @if(isset($hasTotal))
+                <div class="total">
+                    <p class="title">技术统计</p>
+                    <ul>
+                        <li>
+                            得分
+                            <div class="line host">
+                                <p>108</p>
+                                <span style="width: 66%;"></span>
+                            </div>
+                            <div class="line away">
+                                <p>125</p>
+                                <span style="width: 34%;"></span>
+                            </div>
+                        </li>
+                        <li>
+                            篮板
+                            <div class="line host">
+                                <p>33</p>
+                                <span style="width: 66%;"></span>
+                            </div>
+                            <div class="line away">
+                                <p>46</p>
+                                <span style="width: 34%;"></span>
+                            </div>
+                        </li>
+                        <li>
+                            助攻
+                            <div class="line host">
+                                <p>20</p>
+                                <span style="width: 66%;"></span>
+                            </div>
+                            <div class="line away">
+                                <p>21</p>
+                                <span style="width: 34%;"></span>
+                            </div>
+                        </li>
+                        <li>
+                            抢断
+                            <div class="line host">
+                                <p>5</p>
+                                <span style="width: 66%;"></span>
+                            </div>
+                            <div class="line away">
+                                <p>4</p>
+                                <span style="width: 34%;"></span>
+                            </div>
+                        </li>
+                        <li>
+                            盖帽
+                            <div class="line host">
+                                <p>3</p>
+                                <span style="width: 66%;"></span>
+                            </div>
+                            <div class="line away">
+                                <p>2</p>
+                                <span style="width: 34%;"></span>
+                            </div>
+                        </li>
+                        <li>
+                            失误
+                            <div class="line host">
+                                <p>10</p>
+                                <span style="width: 66%;"></span>
+                            </div>
+                            <div class="line away">
+                                <p>11</p>
+                                <span style="width: 34%;"></span>
+                            </div>
+                        </li>
+                        <li>
+                            罚球
+                            <div class="line host">
+                                <p>20</p>
+                                <span style="width: 66%;"></span>
+                            </div>
+                            <div class="line away">
+                                <p>21</p>
+                                <span style="width: 34%;"></span>
+                            </div>
+                        </li>
+                        <li>
+                            三分
+                            <div class="line host">
+                                <p>12</p>
+                                <span style="width: 66%;"></span>
+                            </div>
+                            <div class="line away">
+                                <p>11</p>
+                                <span style="width: 34%;"></span>
+                            </div>
+                        </li>
+                        <li>
+                            犯规
+                            <div class="line host">
+                                <p>20</p>
+                                <span style="width: 66%;"></span>
+                            </div>
+                            <div class="line away">
+                                <p>17</p>
+                                <span style="width: 34%;"></span>
+                            </div>
+                        </li>
+                        <li>
+                            投篮命中率
+                            <div class="line host">
+                                <p>48%</p>
+                                <span style="width: 66%;"></span>
+                            </div>
+                            <div class="line away">
+                                <p>49%</p>
+                                <span style="width: 34%;"></span>
+                            </div>
+                        </li>
+                        <li>
+                            罚球命中率
+                            <div class="line host">
+                                <p>83%</p>
+                                <span style="width: 66%;"></span>
+                            </div>
+                            <div class="line away">
+                                <p>77%</p>
+                                <span style="width: 34%;"></span>
+                            </div>
+                        </li>
+                        <li>
+                            三分命中率
+                            <div class="line host">
+                                <p>42%</p>
+                                <span style="width: 66%;"></span>
+                            </div>
+                            <div class="line away">
+                                <p>41%</p>
+                                <span style="width: 34%;"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            @endif
             @component('pc.match_detail.basket_cell.match_players', ['match'=>$match,'players'=>$players])
             @endcomponent
         </div>
-        <div id="Data" style="display: none;">
-            @component('pc.match_detail.basket_cell.data_odd', ['odds'=>$odds])
-            @endcomponent
+        @endif
+        <div id="Data" style="display: ;">
+            {{--@component('pc.match_detail.basket_cell.match_tech', ['tech'=>$tech])--}}
+            {{--@endcomponent--}}
             @component('pc.match_detail.basket_cell.data_rank', ['match'=>$match,'analyse'=>$analyse])
             @endcomponent
             {{--@component('pc.match_detail.basket_cell.data_attack', ['match'=>$match])--}}
@@ -31,8 +168,17 @@
             @component('pc.match_detail.basket_cell.data_history', ['match'=>$match,'analyse'=>$analyse])
             @endcomponent
         </div>
-        @if(isset($hasTotal))
-            <div id="Total" style="display: none;">
+        <div id="Odd" style="display: none;">
+            <div class="tabLine">
+                <button class="on" value="AllOdd">三合一</button>
+                <button value="AsiaOdd">亚盘</button>
+                <button value="EuropeOdd">欧盘</button>
+                <button value="GoalOdd">大小球</button>
+            </div>
+            <div id="AllOdd">
+                @component('pc.match_detail.basket_cell.data_odd', ['odds'=>$odds])
+                @endcomponent
+                @if(isset($isHasOddResult))
                 <div class="asia">
                     <p class="title">让分盘路比较</p>
                     <div class="part host">
@@ -1460,17 +1606,403 @@
                         </table>
                     </div>
                 </div>
+                @endif
             </div>
-        @endif
+            <div id="AsiaOdd" style="display: none;">
+                <div class="tableIn">
+                    <table>
+                        <colgroup>
+                            <col num="1" width="19%">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th rowspan="2">公司</th>
+                            <th colspan="3">初盘</th>
+                            <th colspan="3">终盘</th>
+                            <th colspan="3">即盘</th>
+                        </tr>
+                        <tr>
+                            <th class="yellow">主队</th>
+                            <th class="yellow">盘口</th>
+                            <th class="yellow">客队</th>
+                            <th class="green">主队</th>
+                            <th class="green">盘口</th>
+                            <th class="green">客队</th>
+                            <th class="yellow">主队</th>
+                            <th class="yellow">盘口</th>
+                            <th class="yellow">客队</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>SB</td>
+                            <td>0.99</td>
+                            <td>-5.5</td>
+                            <td>0.81</td>
+                            <td>0.99</td>
+                            <td>-5.5</td>
+                            <td>0.81</td>
+                            <td>0.99</td>
+                            <td>-5.5</td>
+                            <td>0.81</td>
+                        </tr>
+                        <tr>
+                            <td>Bet365</td>
+                            <td>0.99</td>
+                            <td>-5.5</td>
+                            <td>0.81</td>
+                            <td>0.99</td>
+                            <td>-5.5</td>
+                            <td>0.81</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>manbetX</td>
+                            <td>0.99</td>
+                            <td>-5.5</td>
+                            <td>0.81</td>
+                            <td>0.99</td>
+                            <td>-5.5</td>
+                            <td>0.81</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>立博</td>
+                            <td>0.99</td>
+                            <td>-5.5</td>
+                            <td>0.81</td>
+                            <td>0.99</td>
+                            <td>-5.5</td>
+                            <td>0.81</td>
+                            <td>0.99</td>
+                            <td>-5.5</td>
+                            <td>0.81</td>
+                        </tr>
+                        <tr>
+                            <td>韦德</td>
+                            <td>0.99</td>
+                            <td>-5.5</td>
+                            <td>0.81</td>
+                            <td>0.99</td>
+                            <td>-5.5</td>
+                            <td>0.81</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>易胜博</td>
+                            <td>0.99</td>
+                            <td>-5.5</td>
+                            <td>0.81</td>
+                            <td>0.99</td>
+                            <td>-5.5</td>
+                            <td>0.81</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>明升</td>
+                            <td>0.99</td>
+                            <td>-5.5</td>
+                            <td>0.81</td>
+                            <td>0.99</td>
+                            <td>-5.5</td>
+                            <td>0.81</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>澳彩</td>
+                            <td>0.99</td>
+                            <td>-5.5</td>
+                            <td>0.81</td>
+                            <td>0.99</td>
+                            <td>-5.5</td>
+                            <td>0.81</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>SB</td>
+                            <td>0.99</td>
+                            <td>-5.5</td>
+                            <td>0.81</td>
+                            <td>0.99</td>
+                            <td>-5.5</td>
+                            <td>0.81</td>
+                            <td>0.99</td>
+                            <td>-5.5</td>
+                            <td>0.81</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="EuropeOdd" style="display: none;">
+                <div class="tableIn">
+                    <table>
+                        <colgroup>
+                            <col num="1" width="19%">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th rowspan="2">公司</th>
+                            <th colspan="2">初盘</th>
+                            <th colspan="2">终盘</th>
+                            <th colspan="2">即盘</th>
+                        </tr>
+                        <tr>
+                            <th class="yellow">主胜</th>
+                            <th class="yellow">客胜</th>
+                            <th class="green">主胜</th>
+                            <th class="green">客胜</th>
+                            <th class="yellow">主胜</th>
+                            <th class="yellow">客胜</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>SB</td>
+                            <td>2.60</td>
+                            <td>1.45</td>
+                            <td>2.60</td>
+                            <td>1.45</td>
+                            <td>2.60</td>
+                            <td>1.45</td>
+                        </tr>
+                        <tr>
+                            <td>Bet365</td>
+                            <td>2.60</td>
+                            <td>1.45</td>
+                            <td>2.60</td>
+                            <td>1.45</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>manbetX</td>
+                            <td>2.60</td>
+                            <td>1.45</td>
+                            <td>2.60</td>
+                            <td>1.45</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>立博</td>
+                            <td>2.60</td>
+                            <td>1.45</td>
+                            <td>2.60</td>
+                            <td>1.45</td>
+                            <td>2.60</td>
+                            <td>1.45</td>
+                        </tr>
+                        <tr>
+                            <td>韦德</td>
+                            <td>2.60</td>
+                            <td>1.45</td>
+                            <td>2.60</td>
+                            <td>1.45</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>易胜博</td>
+                            <td>2.60</td>
+                            <td>1.45</td>
+                            <td>2.60</td>
+                            <td>1.45</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>明升</td>
+                            <td>2.60</td>
+                            <td>1.45</td>
+                            <td>2.60</td>
+                            <td>1.45</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>澳彩</td>
+                            <td>2.60</td>
+                            <td>1.45</td>
+                            <td>2.60</td>
+                            <td>1.45</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>SB</td>
+                            <td>2.60</td>
+                            <td>1.45</td>
+                            <td>2.60</td>
+                            <td>1.45</td>
+                            <td>2.60</td>
+                            <td>1.45</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="GoalOdd" style="display: none;">
+                <div class="tableIn">
+                    <table>
+                        <colgroup>
+                            <col num="1" width="19%">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th rowspan="2">公司</th>
+                            <th colspan="3">初盘</th>
+                            <th colspan="3">终盘</th>
+                            <th colspan="3">即盘</th>
+                        </tr>
+                        <tr>
+                            <th class="yellow">大分</th>
+                            <th class="yellow">盘口</th>
+                            <th class="yellow">小分</th>
+                            <th class="green">大分</th>
+                            <th class="green">盘口</th>
+                            <th class="green">小分</th>
+                            <th class="yellow">大分</th>
+                            <th class="yellow">盘口</th>
+                            <th class="yellow">小分</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>SB</td>
+                            <td>0.83</td>
+                            <td>217.5</td>
+                            <td>0.83</td>
+                            <td>0.83</td>
+                            <td>217.5</td>
+                            <td>0.83</td>
+                            <td>0.83</td>
+                            <td>217.5</td>
+                            <td>0.83</td>
+                        </tr>
+                        <tr>
+                            <td>Bet365</td>
+                            <td>0.83</td>
+                            <td>217.5</td>
+                            <td>0.83</td>
+                            <td>0.83</td>
+                            <td>217.5</td>
+                            <td>0.83</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>manbetX</td>
+                            <td>0.83</td>
+                            <td>217.5</td>
+                            <td>0.83</td>
+                            <td>0.83</td>
+                            <td>217.5</td>
+                            <td>0.83</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>立博</td>
+                            <td>0.83</td>
+                            <td>217.5</td>
+                            <td>0.83</td>
+                            <td>0.83</td>
+                            <td>217.5</td>
+                            <td>0.83</td>
+                            <td>0.83</td>
+                            <td>217.5</td>
+                            <td>0.83</td>
+                        </tr>
+                        <tr>
+                            <td>韦德</td>
+                            <td>0.83</td>
+                            <td>217.5</td>
+                            <td>0.83</td>
+                            <td>0.83</td>
+                            <td>217.5</td>
+                            <td>0.83</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>易胜博</td>
+                            <td>0.83</td>
+                            <td>217.5</td>
+                            <td>0.83</td>
+                            <td>0.83</td>
+                            <td>217.5</td>
+                            <td>0.83</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>明升</td>
+                            <td>0.83</td>
+                            <td>217.5</td>
+                            <td>0.83</td>
+                            <td>0.83</td>
+                            <td>217.5</td>
+                            <td>0.83</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>澳彩</td>
+                            <td>0.83</td>
+                            <td>217.5</td>
+                            <td>0.83</td>
+                            <td>0.83</td>
+                            <td>217.5</td>
+                            <td>0.83</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                        </tr>
+                        <tr>
+                            <td>SB</td>
+                            <td>0.83</td>
+                            <td>217.5</td>
+                            <td>0.83</td>
+                            <td>0.83</td>
+                            <td>217.5</td>
+                            <td>0.83</td>
+                            <td>0.83</td>
+                            <td>217.5</td>
+                            <td>0.83</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {{--@component('pc.match_detail.basket_cell.data_odd', ['odds'=>$odds])--}}
+        {{--@endcomponent--}}
     </div>
     <div id="Play">
         <div class="abox">
             <ul>
-                <li class="on" target="Match">比赛赛况</li>
-                <li target="Data">数据分析</li>
-                @if(isset($hasTotal))
-                    <li target="Total">统计比较</li>
-                @endif
+                <li class="on" target="Data">数据分析</li>
+                <li target="Odd">综合指数</li>
+                <?php $liveUrl = \App\Http\Controllers\PC\CommonTool::matchLivePathWithId($match['mid'], 2); ?>
+                <a href="{{$liveUrl}}" class="li">比赛直播</a>
             </ul>
         </div>
     </div>

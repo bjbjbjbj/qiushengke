@@ -1,14 +1,11 @@
 ﻿
 body{
-	padding-top: 110px;
-}
-#Con{
-	min-height: 700px;
+	padding-top: 180px;
 }
 
 /*浮动区域*/
 #Play{
-	position: absolute; top: 350px; left: 0; right: 0;
+	position: fixed; top: 180px; left: 0; right: 0;
 }
 #Play.fixed{
 	position: fixed; top: 20px;
@@ -25,16 +22,17 @@ body{
 	box-shadow: 0px 4px 5px 0px rgba(0, 64, 36, 0.4);
 	overflow: hidden;
 }
-#Play .abox ul li{
+#Play .abox ul li, #Play .abox a.li{
 	height: 50px;
 	font-size: 15px; line-height: 50px; text-align: center;
 	position: relative;
+	display: block;
 	cursor: pointer;
 }
-#Play .abox ul li:hover{
+#Play .abox ul li:hover, #Play .abox ul a.li:hover{
 	color: #2b9968;
 }
-#Play .abox ul li + li:before{
+#Play .abox ul li + li:before, #Play .abox ul a.li + li:before, #Play .abox ul li + a.li:before, #Play .abox ul a.li + a.li:before{
 	height: 1px;
 	background: #e0e0e0;
 	position: absolute; top: 0; left: 15px; right: 15px;
@@ -54,85 +52,155 @@ body{
 
 /*信息区域*/
 #Info{
-	height: 80px;
-	padding: 66px 0 96px;
-	border-radius: 50px 50px 0 0;
-	position: relative;
-}
-#Info.football{
-	background: url(../img/bg_football.jpg) no-repeat center top; background-size: cover;
-}
-#Info.basketball{
-	background: url(../img/bg_basketball.jpg) no-repeat center top; background-size: cover;
-}
-#Info p.info{
-	font-size: 12px; line-height: 18px; text-align: center; color: #fff;
-	position: absolute; top: 18px; left: 0; right: 0;
-}
-#Info p.team{
-	height: 80px;
-	font-size: 16px; line-height: 80px; color: #fff;
-	position: absolute;
-	display: inline-block;
-}
-#Info p.team.host{
-	padding-left: 90px;
-	text-align: left;
-	left: 12%;
-}
-#Info p.team.away{
-	padding-right: 90px;
-	text-align: right;
-	right: 12%;
-}
-#Info p.team .img{
-	width: 70px; height: 70px;
-	padding: 5px;
-	border-radius: 50%;
+	height: 100px;
 	background: #fff;
-	position: absolute; top: 0;
+	position: absolute; top: 60px; left: 0; right: 0;
 	overflow: hidden;
-	behavior: url(css/PIE.htc);
 }
-#Info p.team.host .img{
+#Info:before, #Info:after{
+	width: 50%;
+	position: absolute; top: 0; bottom: 0;
+	content: '';
+}
+#Info:before{
+	background: #e0f0d9;
 	left: 0;
 }
-#Info p.team.away .img{
+#Info:after{
+	background: #f1e2da;
 	right: 0;
 }
-#Info p.team .img img{
-	width: 70px; height: 70px;
+#Info .mbox{
+	max-width: 1200px; min-width: 1000px; height: 100px;
+	padding: 0 130px; margin: 0 auto;
+	background: #fff;
+	position: relative; z-index: 1;
 }
-#Info p.team em{
-	min-width: 70px;
-	margin-top: 20px;
-	font-size: 12px; line-height: 12px; text-align: center;
-	position: absolute; top: 50%;
+#Info .mbox:before, #Info .mbox:after{
+	width: 156px; height: 156px;
+	margin-top: -78px;
+	-webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -o-transform: rotate(45deg); transform: rotate(45deg); 
+	position: absolute; top: 50%; z-index: 2;
+	content: '';
 }
-#Info p.team.host em{
-	left: 90px; right: 0;
+#Info .mbox:before{
+	background: url(../img/image_arrow_right.png) no-repeat right center\0/; background-color: rgba(224, 240, 217, 0.3);
+	left: 124px;
 }
-#Info p.team.away em{
-	left: 0; right: 90px;
+#Info .mbox:after{
+	background: url(../img/image_arrow_left.png) no-repeat left center\0/; background-color: rgba(241, 226, 218, 0.3);
+	right: 124px;
 }
-#Info p.score{
-	font-size: 24px; line-height: 80px; text-align: center; color: #fff;
+#Info .mbox div.adorn{
+	width: 200px;
+	position: absolute; top: 0; bottom: 0;
+	content: '';
 }
-#Info .odd{
-	height: 22px;
-	padding: 4px 0;
-	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#0Dffffff,endColorstr=#0Dffffff)\0/; background: rgba(255,255,255,0.2);
+#Info .mbox div.adorn.host{
+	background: #e0f0d9;
+	left: 0;
+}
+#Info .mbox div.adorn.away{
+	background: #f1e2da;
+	right: 0;
+}
+#Info .mbox div.adorn:before{
+	width: 72px; height: 72px;
+	margin-top: -36px;
+	-webkit-transform: rotate(45deg); -moz-transform: rotate(45deg); -o-transform: rotate(45deg); transform: rotate(45deg); 
+	position: absolute; top: 50%; z-index: 10;
+	content: '';
+}
+#Info .mbox div.adorn.host:before{
+	background: rgba(224,240,217,100);
+	right: -36px;
+}
+#Info .mbox div.adorn.away:before{
+	background: rgba(241,226,218,100);
+	left: -36px;
+}
+
+#Info .mbox dl{
 	text-align: center;
-	position: absolute; bottom: 0; left: 0; right: 0;
 }
-#Info .odd p{
-	height: 22px;
-	padding: 0 20px;
-	font-size: 12px; line-height: 22px; text-align: center; color: #fff;
+#Info .mbox dl dt{
+	width: 220px; height: 100px;
+	position: relative;
 	display: inline-block;
 }
-#Info .odd p + p{
-	border-left: 1px solid #fff;
+#Info .mbox dl dt p.time{
+	height: 12px; width: 100%;
+	font-size: 12px; line-height: 12px; color: #c52601;
+	position: absolute; top: 20px;
+}
+#Info .mbox dl dt p.time span{
+	position: absolute;
+}
+#Info .mbox dl dt p.score{
+	height: 24px; width: 100%;
+	font-size: 24px; line-height: 24px; font-weight: bold;
+	position: absolute; top: 40px;
+}
+#Info .mbox dl dt p.score.hid{
+	display: none;
+}
+#Info .mbox dl dt p.score:before{
+	width: 30px; height: 24px;
+	margin-left: -15px;
+	text-align: center;
+	position: absolute; top: 0; left: 50%;
+	content: '-'
+}
+#Info .mbox dl dt p.score span{
+	width: 90px;
+	display: inline-block;
+}
+#Info .mbox dl dt p.score span.host{
+	padding-right: 15px;
+	text-align: right;
+}
+#Info .mbox dl dt p.score span.away{
+	padding-left: 15px;
+	text-align: left;
+}
+#Info .mbox dl dt button{
+	width: 60px; height: 16px;
+	margin-left: -30px;
+	background: #fff;
+	font-size: 12px; color: #adadad;
+	position: absolute; top: 66px; left: 50%;
+}
+#Info .mbox dl dt p.score.hid + button{
+	width: 100px;
+	margin-left: -50px;
+	font-size: 16px; color: #c52601;
+	top: 44px;
+}
+#Info .mbox dl dd{
+	width: 170px; height: 100px;
+	font-size: 18px; line-height: 100px;
+	position: relative;
+	overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+	display: inline-block;
+}
+#Info .mbox dl dd.host{
+	padding-right: 70px;
+	text-align: right;
+}
+#Info .mbox dl dd.away{
+	padding-left: 70px;
+	text-align: left;
+}
+#Info .mbox dl dd img{
+	width: 60px; height: 60px;
+	margin-top: -30px;
+	position: absolute; top: 50%;
+}
+#Info .mbox dl dd.host img{
+	right: 0;
+}
+#Info .mbox dl dd.away img{
+	left: 0;
 }
 
 /*比赛赛况*/
@@ -382,57 +450,6 @@ body{
 /*数据分析*/
 #Data{
 	position: relative; z-index: 2;
-}
-
-/*指数*/
-#Data .odd{
-	padding: 12px 0 30px; margin-bottom: 20px;
-	background: #fff;
-}
-#Data .odd .title{
-	height: 30px;
-	padding-left: 20px;
-	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
-}
-#Data .odd .abox{
-	height: 30px;
-	margin: 0 20px 15px 0; padding: 0 10px 0 20px;
-	border-radius: 2px 2px 2px 28px;
-	background: #f6f6f6;
-	text-align: center;
-	float: right;
-}
-#Data .odd .abox a{
-	width: 40px;
-	font-size: 12px; line-height: 30px; color: #2b9968;
-	display: inline-block;
-}
-#Data .odd .abox a:hover{
-	text-decoration: underline;
-}
-#Data .odd table{
-	width: 100%;
-}
-#Data .odd table th{
-	height: 30px;
-	font-size: 12px; line-height: 20px; text-align: center; color: #adadad;
-}
-#Data .odd table tr:first-child th{
-	height: 28px;
-	font-size: 14px; color: #666;
-}
-#Data .odd table td{
-	height: 30px;
-	background: #fafafa;
-	text-align: center;
-}
-#Data .odd table tr:nth-child(4n + 1) td,
-#Data .odd table tr:nth-child(4n + 1) + tr td{
-	background: #f6f6f6;
-}
-#Data .odd table td[rowspan]:nth-child(1){
-	padding-left: 20px;
-	text-align: left; color: #c52601;
 }
 
 /*攻防能力*/
@@ -859,445 +876,555 @@ body{
 }
 
 /*统计比较*/
-#Total{
+#Odd{
 	position: relative; z-index: 2;
 }
 
 /*让分盘路比较*/
-#Total .asia{
+#Odd .asia{
 	padding: 20px 20px 22px; margin-bottom: 20px;
+	border-top: 2px solid #2b9968;
 	background: #fff;
 }
-#Total .asia:after{
+#Odd .asia:after{
 	display: block;
 	clear: both;
 	content: '';
 }
-#Total .asia .title{
+#Odd .asia .title{
 	height: 30px;
 	padding-bottom: 16px;
 	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
 }
-#Total .asia .part{
+#Odd .asia .part{
 	width: 49%;
 }
-#Total .asia .part.host{
+#Odd .asia .part.host{
 	text-align: left;
 	float: left;
 }
-#Total .asia .part.away{
+#Odd .asia .part.away{
 	text-align: right;
 	float: right;
 }
-#Total .asia .part p.name{
+#Odd .asia .part p.name{
 	padding-bottom: 20px;
 	font-size: 14px; line-height: 14px; text-align: center;
 }
-#Total .asia .part table + p.name{
+#Odd .asia .part table + p.name{
 	margin-top: 50px;
 }
-#Total .asia .part p.name span{
+#Odd .asia .part p.name span{
 	padding: 0 10px;
 	font-size: 12px; color: #adadad;
 }
-#Total .asia .part .fh{
+#Odd .asia .part .fh{
 	height: 30px;
 	padding-bottom: 10px;
 	text-align: center;
 	position: relative;
 }
-#Total .asia .part .fh button.full, #Total .asia .part .fh button.half{
+#Odd .asia .part .fh button.full, #Odd .asia .part .fh button.half{
 	width: 80px; height: 30px;
 	border: 1px solid #2b9968;
 	background: #fff;
 	font-size: 12px; text-align: center; color: #2b9968;
 }
-#Total .asia .part .fh button.full{
+#Odd .asia .part .fh button.full{
 	border-radius: 4px 0 0 4px;
 }
-#Total .asia .part .fh button.half{
+#Odd .asia .part .fh button.half{
 	border-radius: 0 4px 4px 0;
 }
-#Total .asia .part .fh button.full.on, #Total .asia .part .fh button.half.on{
+#Odd .asia .part .fh button.full.on, #Odd .asia .part .fh button.half.on{
 	background: #2b9968;
 	color: #fff;
 }
-#Total .asia .part .fh .num{
+#Odd .asia .part .fh .num{
 	height: 28px;
 	text-align: right;
 	position: absolute; right: 0px; top: 0px;
 }
-#Total .asia .part .fh .num button{
+#Odd .asia .part .fh .num button{
 	height: 26px; width: 46px;
 	margin-left: 16px;
 	background: #fff;
 	font-size: 14px; color: #adadad;
 }
-#Total .asia .part .fh .num button.on{
+#Odd .asia .part .fh .num button.on{
 	border-bottom: 2px solid #2b9968;
 	color: #2b9968;
 }
-#Total .asia .part .fh .num button:hover{
+#Odd .asia .part .fh .num button:hover{
 	color: #2b9968;
 }
-#Total .asia .part table{
+#Odd .asia .part table{
 	width: 100%;
 }
-#Total .asia .part table th{
+#Odd .asia .part table th{
 	height: 24px;
 	font-size: 12px; line-height: 18px; text-align: center; color: #adadad;
 }
-#Total .asia .part table td{
+#Odd .asia .part table td{
 	height: 30px;
 	background: #fafafa;
 	font-size: 12px; line-height: 14px; text-align: center;
 }
-#Total .asia .part table tr:nth-child(odd) td{
+#Odd .asia .part table tr:nth-child(odd) td{
 	background: #f6f6f6;
 }
-#Total .asia .part table p{
+#Odd .asia .part table p{
 	padding: 0 2px;
 	display: inline-block;
 }
-#Total .asia .part table .green{
+#Odd .asia .part table .green{
 	color: #2b9968;
 }
-#Total .asia .part table .gray{
+#Odd .asia .part table .gray{
 	color: #adadad;
 }
-#Total .asia .part table .blue{
+#Odd .asia .part table .blue{
 	color: #1661c7;
 }
 
 /*总分盘路比较*/
-#Total .goal{
+#Odd .goal{
 	padding: 20px 20px 22px; margin-bottom: 20px;
 	border-top: 2px solid #2b9968;
 	background: #fff;
 }
-#Total .goal:after{
+#Odd .goal:after{
 	display: block;
 	clear: both;
 	content: '';
 }
-#Total .goal .title{
+#Odd .goal .title{
 	height: 30px;
 	padding-bottom: 16px;
 	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
 }
-#Total .goal .part{
+#Odd .goal .part{
 	width: 49%;
 }
-#Total .goal .part.host{
+#Odd .goal .part.host{
 	text-align: left;
 	float: left;
 }
-#Total .goal .part.away{
+#Odd .goal .part.away{
 	text-align: right;
 	float: right;
 }
-#Total .goal .part p.name{
+#Odd .goal .part p.name{
 	padding-bottom: 20px;
 	font-size: 14px; line-height: 14px; text-align: center;
 }
-#Total .goal .part table + p.name{
+#Odd .goal .part table + p.name{
 	margin-top: 50px;
 }
-#Total .goal .part p.name span{
+#Odd .goal .part p.name span{
 	padding: 0 10px;
 	font-size: 12px; color: #adadad;
 }
-#Total .goal .part .fh{
+#Odd .goal .part .fh{
 	height: 30px;
 	padding-bottom: 10px;
 	text-align: center;
 	position: relative;
 }
-#Total .goal .part .fh button.full, #Total .goal .part .fh button.half{
+#Odd .goal .part .fh button.full, #Odd .goal .part .fh button.half{
 	width: 80px; height: 30px;
 	border: 1px solid #2b9968;
 	background: #fff;
 	font-size: 12px; text-align: center; color: #2b9968;
 }
-#Total .goal .part .fh button.full{
+#Odd .goal .part .fh button.full{
 	border-radius: 4px 0 0 4px;
 }
-#Total .goal .part .fh button.half{
+#Odd .goal .part .fh button.half{
 	border-radius: 0 4px 4px 0;
 }
-#Total .goal .part .fh button.full.on, #Total .goal .part .fh button.half.on{
+#Odd .goal .part .fh button.full.on, #Odd .goal .part .fh button.half.on{
 	background: #2b9968;
 	color: #fff;
 }
-#Total .goal .part .fh .num{
+#Odd .goal .part .fh .num{
 	height: 28px;
 	text-align: right;
 	position: absolute; right: 0px; top: 0px;
 }
-#Total .goal .part .fh .num button{
+#Odd .goal .part .fh .num button{
 	height: 26px; width: 46px;
 	margin-left: 16px;
 	font-size: 14px; color: #adadad;
 }
-#Total .goal .part .fh .num button.on{
+#Odd .goal .part .fh .num button.on{
 	border-bottom: 2px solid #2b9968;
 	color: #2b9968;
 }
-#Total .goal .part .fh .num button:hover{
+#Odd .goal .part .fh .num button:hover{
 	color: #2b9968;
 }
-#Total .goal .part table{
+#Odd .goal .part table{
 	width: 100%;
 }
-#Total .goal .part table th{
+#Odd .goal .part table th{
 	height: 24px;
 	font-size: 12px; line-height: 18px; text-align: center; color: #adadad;
 }
-#Total .goal .part table td{
+#Odd .goal .part table td{
 	height: 30px;
 	background: #fafafa;
 	font-size: 12px; line-height: 14px; text-align: center;
 }
-#Total .goal .part table tr:nth-child(odd) td{
+#Odd .goal .part table tr:nth-child(odd) td{
 	background: #f6f6f6;
 }
-#Total .goal .part table p{
+#Odd .goal .part table p{
 	padding: 0 2px;
 	display: inline-block;
 }
-#Total .goal .part table .green{
+#Odd .goal .part table .green{
 	color: #2b9968;
 }
-#Total .goal .part table .gray{
+#Odd .goal .part table .gray{
 	color: #adadad;
 }
-#Total .goal .part table .blue{
+#Odd .goal .part table .blue{
 	color: #1661c7;
 }
-#Total .goal .part table .yellow{
+#Odd .goal .part table .yellow{
 	color: #fabd36;
 }
 
 /*平均得分/失分对比*/
-#Total .average{
+#Odd .average{
 	padding: 20px 20px 22px; margin-bottom: 20px;
 	border-top: 2px solid #2b9968;
 	background: #fff;
 }
-#Total .average:after{
+#Odd .average:after{
 	display: block;
 	clear: both;
 	content: '';
 }
-#Total .average .title{
+#Odd .average .title{
 	height: 30px;
 	padding-bottom: 16px;
 	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
 }
-#Total .average .part{
+#Odd .average .part{
 	width: 49%;
 }
-#Total .average .part.host{
+#Odd .average .part.host{
 	text-align: left;
 	float: left;
 }
-#Total .average .part.away{
+#Odd .average .part.away{
 	text-align: right;
 	float: right;
 }
-#Total .average .part .name{
+#Odd .average .part .name{
 	height: 14px;
 	margin-bottom: 20px;
 	font-size: 14px; line-height: 14px; text-align: center;
 	position: relative;
 }
-#Total .average .part .name .num{
+#Odd .average .part .name .num{
 	height: 28px;
 	margin-top: -14px;
 	text-align: right;
 	position: absolute; right: 0px; top: 50%;
 }
-#Total .average .part .name .num button{
+#Odd .average .part .name .num button{
 	height: 26px; width: 46px;
 	margin-left: 16px;
 	background: #fff;
 	font-size: 14px; color: #adadad;
 }
-#Total .average .part .name .num button.on{
+#Odd .average .part .name .num button.on{
 	border-bottom: 2px solid #2b9968;
 	color: #2b9968;
 }
-#Total .average .part .name .num button:hover{
+#Odd .average .part .name .num button:hover{
 	color: #2b9968;
 }
-#Total .average .part table{
+#Odd .average .part table{
 	width: 100%;
 }
-#Total .average .part table th{
+#Odd .average .part table th{
 	height: 20px;
 	font-size: 12px; line-height: 20px; text-align: center; color: #adadad;
 }
-#Total .average .part table th[rowspan]{
+#Odd .average .part table th[rowspan]{
 	line-height: 30px;
 	vertical-align: bottom;
 }
-#Total .average .part table tr:first-child th{
+#Odd .average .part table tr:first-child th{
 	height: 30px;
 }
-#Total .average .part table tr:first-child + tr th{
+#Odd .average .part table tr:first-child + tr th{
 	background: #2b9968;
 	color: #fff;
 }
-#Total .average .part table tr:first-child + tr th:nth-child(4n - 3),
-#Total .average .part table tr:first-child + tr th:nth-child(4n - 2){
+#Odd .average .part table tr:first-child + tr th:nth-child(4n - 3),
+#Odd .average .part table tr:first-child + tr th:nth-child(4n - 2){
 	background: #fabd36;
 }
-#Total .average .part table td{
+#Odd .average .part table td{
 	height: 30px;
 	background: #fafafa;
 	font-size: 12px; line-height: 20px; text-align: center;
 }
-#Total .average .part table tr:nth-child(even) td{
+#Odd .average .part table tr:nth-child(even) td{
 	background: #f6f6f6;
 }
 
 /*总分统计*/
-#Total .total{
+#Odd .total{
 	padding: 20px 20px 22px; margin-bottom: 20px;
 	border-top: 2px solid #2b9968;
 	background: #fff;
 }
-#Total .total:after{
+#Odd .total:after{
 	display: block;
 	clear: both;
 	content: '';
 }
-#Total .total .title{
+#Odd .total .title{
 	height: 30px;
 	padding-bottom: 16px;
 	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
 }
-#Total .total .part{
+#Odd .total .part{
 	width: 49%;
 }
-#Total .total .part.host{
+#Odd .total .part.host{
 	text-align: left;
 	float: left;
 }
-#Total .total .part.away{
+#Odd .total .part.away{
 	text-align: right;
 	float: right;
 }
-#Total .total .part .name{
+#Odd .total .part .name{
 	height: 14px;
 	margin-bottom: 28px;
 	font-size: 14px; line-height: 14px; text-align: center;
 	position: relative;
 }
-#Total .total .part .name .num{
+#Odd .total .part .name .num{
 	height: 28px;
 	margin-top: -14px;
 	text-align: right;
 	position: absolute; right: 0px; top: 50%;
 }
-#Total .total .part .name .num button{
+#Odd .total .part .name .num button{
 	height: 26px; width: 46px;
 	margin-left: 16px;
 	background: #fff;
 	font-size: 14px; color: #adadad;
 }
-#Total .total .part .name .num button.on{
+#Odd .total .part .name .num button.on{
 	border-bottom: 2px solid #2b9968;
 	color: #2b9968;
 }
-#Total .total .part .name .num button:hover{
+#Odd .total .part .name .num button:hover{
 	color: #2b9968;
 }
-#Total .total .part table{
+#Odd .total .part table{
 	width: 100%;
 }
-#Total .total .part table th{
+#Odd .total .part table th{
 	height: 44px;
 	font-size: 12px; line-height: 13px; text-align: center; color: #adadad;
 }
-#Total .total .part table td{
+#Odd .total .part table td{
 	height: 30px;
 	background: #fafafa;
 	font-size: 12px; line-height: 20px; text-align: center;
 }
-#Total .total .part table tr:nth-child(even) td{
+#Odd .total .part table tr:nth-child(even) td{
 	background: #f6f6f6;
 }
 
 /*总分统计*/
-#Total .difference{
+#Odd .difference{
 	padding: 20px 20px 22px; margin-bottom: 20px;
 	border-top: 2px solid #2b9968;
 	background: #fff;
 }
-#Total .difference:after{
+#Odd .difference:after{
 	display: block;
 	clear: both;
 	content: '';
 }
-#Total .difference .title{
+#Odd .difference .title{
 	height: 30px;
 	padding-bottom: 16px;
 	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
 }
-#Total .difference .part{
+#Odd .difference .part{
 	width: 49%;
 }
-#Total .difference .part.host{
+#Odd .difference .part.host{
 	text-align: left;
 	float: left;
 }
-#Total .difference .part.away{
+#Odd .difference .part.away{
 	text-align: right;
 	float: right;
 }
-#Total .difference .part .name{
+#Odd .difference .part .name{
 	height: 14px;
 	margin-bottom: 28px;
 	font-size: 14px; line-height: 14px; text-align: center;
 	position: relative;
 }
-#Total .difference .part .name .num{
+#Odd .difference .part .name .num{
 	height: 28px;
 	margin-top: -14px;
 	text-align: right;
 	position: absolute; right: 0px; top: 50%;
 }
-#Total .difference .part .name .num button{
+#Odd .difference .part .name .num button{
 	height: 26px; width: 46px;
 	margin-left: 16px;
 	background: #fff;
 	font-size: 14px; color: #adadad;
 }
-#Total .difference .part .name .num button.on{
+#Odd .difference .part .name .num button.on{
 	border-bottom: 2px solid #2b9968;
 	color: #2b9968;
 }
-#Total .difference .part .name .num button:hover{
+#Odd .difference .part .name .num button:hover{
 	color: #2b9968;
 }
-#Total .difference .part table{
+#Odd .difference .part table{
 	width: 100%;
 }
-#Total .difference .part table th{
+#Odd .difference .part table th{
 	height: 30px;
 	font-size: 12px; line-height: 20px; text-align: center; color: #adadad;
 }
-#Total .difference .part table td{
+#Odd .difference .part table td{
 	height: 30px;
 	background: #fafafa;
 	font-size: 12px; line-height: 20px; text-align: center;
 }
-#Total .difference .part table tr:nth-child(even) td{
+#Odd .difference .part table tr:nth-child(even) td{
 	background: #f6f6f6;
 }
 
+/*赔率*/
+#Odd .tabLine {
+    height: 30px;
+    background: #2b9968;
+    font-size: 0px;
+}
+#Odd .tabLine button{
+	height: 30px; width: 100px;
+	background: #2b9968;
+	font-size: 14px; line-height: 30px; text-align: center; color: #fff; vertical-align: top;
+}
+#Odd .tabLine button.on{
+	background: #fff;
+	color: #2b9968;
+}
 
+#Odd .odd{
+	padding: 12px 0 30px; margin-bottom: 20px;
+	background: #fff;
+}
+#Odd .odd .title{
+	height: 30px;
+	padding-left: 20px;
+	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+}
+#Odd .odd table{
+	width: 100%;
+}
+#Odd .odd table th{
+	height: 30px;
+	font-size: 12px; line-height: 20px; text-align: center; color: #adadad;
+}
+#Odd .odd table tr:first-child th{
+	height: 28px;
+	font-size: 14px; color: #666;
+}
+#Odd .odd table td{
+	height: 30px;
+	background: #fafafa;
+	text-align: center;
+}
+#Odd .odd table tr:nth-child(4n + 1) td,
+#Odd .odd table tr:nth-child(4n + 1) + tr td{
+	background: #f6f6f6;
+}
+#Odd .odd table td[rowspan]:nth-child(1){
+	padding-left: 20px;
+	text-align: left; color: #c52601;
+}
+
+/*Odd表格*/
+#Odd .tableIn{
+	padding: 38px 50px;
+	background: #fff;
+	position: relative; z-index: 2;
+}
+#Odd .tableIn table{
+	width: 100%;
+}
+#Odd .tableIn table th{
+	height: 20px;
+	font-size: 12px; line-height: 20px; text-align: center; color: #adadad;
+}
+#Odd .tableIn table th.green{
+	background: #2b9968;
+	color: #fff;
+}
+#Odd .tableIn table th.yellow{
+	background: #fabd36;
+	color: #fff;
+}
+#Odd .tableIn table td{
+	height: 30px;
+	font-size: 12px; line-height: 20px; text-align: center;
+}
+#Odd .tableIn table tbody{
+	background: #fafafa;
+}
+#Odd .tableIn table tr:nth-child(odd) td{
+	background: #f6f6f6;
+}
+#Odd .tableIn table tr:hover td{
+	background: #e0ece7;
+}
+#Odd .tableIn table tr td:hover{
+	background: #b6d5c8 !important;
+}
+#Odd .tableIn table[choose='1'] td:nth-child(1),
+#Odd .tableIn table[choose='2'] td:nth-child(2),
+#Odd .tableIn table[choose='3'] td:nth-child(3),
+#Odd .tableIn table[choose='4'] td:nth-child(4),
+#Odd .tableIn table[choose='5'] td:nth-child(5),
+#Odd .tableIn table[choose='6'] td:nth-child(6),
+#Odd .tableIn table[choose='7'] td:nth-child(7),
+#Odd .tableIn table[choose='8'] td:nth-child(8),
+#Odd .tableIn table[choose='9'] td:nth-child(9),
+#Odd .tableIn table[choose='10'] td:nth-child(10),
+#Odd .tableIn table[choose='11'] td:nth-child(11),
+#Odd .tableIn table[choose='12'] td:nth-child(12),
+#Odd .tableIn table[choose='13'] td:nth-child(13),
+#Odd .tableIn table[choose='14'] td:nth-child(14),
+#Odd .tableIn table[choose='15'] td:nth-child(15){
+	background: #e0ece7;
+}
+#Odd .tableIn table tr td span.green{
+	color: #2b9968;
+}
+#Odd .tableIn table tr td span.blue{
+	color: #1661c7;
+}
 
 
 

@@ -49,16 +49,16 @@ class BasketMatch extends Model
         return $league_name;
     }
 
-    public static function getStatusTextCn($status) {
+    public static function getStatusTextCn($status, $system = 0) {
         switch ($status) {
             case 0:
                 return "未开始";
             case 1:
-                return "第一节";
+                return $system == 1 ? "上半场" : "第一节";
             case 2:
                 return "第二节";
             case 3:
-                return "第三节";
+                return $system == 1 ? "下半场" : "第三节";
             case 4:
                 return "第四节";
             case 5:
