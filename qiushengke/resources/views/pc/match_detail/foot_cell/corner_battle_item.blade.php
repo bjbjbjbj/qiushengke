@@ -88,11 +88,19 @@ if ($total > 0){
             $time = strtotime($match['time']);
             $time = date('Y.m.d',$time);
             $time = substr($time,2);
+            $lid = $match['lid'];
             //赛事背景色
-            $bgRgb = \App\Http\Controllers\PC\CommonTool::getLeagueBgRgb($match['lid']);
-            $r = $bgRgb['r'];
-            $g = $bgRgb['g'];
-            $b = $bgRgb['b'];
+            if(isset($match['color'])){
+                $r = hexdec(substr($match['color'],0,2));
+                $g = hexdec(substr($match['color'],2,2));
+                $b = hexdec(substr($match['color'],4,2));
+            }
+            else{
+                $bgRgb = \App\Http\Controllers\PC\CommonTool::getLeagueBgRgb($lid);
+                $r = $bgRgb['r'];
+                $g = $bgRgb['g'];
+                $b = $bgRgb['b'];
+            }
             ?>
             <tr>
                 <td><p class="line" style="background: rgb({{$r}}, {{$g}}, {{$b}});"></p>{{$match['league']}}</td>
