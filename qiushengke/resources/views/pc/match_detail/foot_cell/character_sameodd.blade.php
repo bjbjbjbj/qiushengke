@@ -34,22 +34,29 @@ else if($key == 'ou'){
 $win5 = 0;
 $draw5 = 0;
 $lose5 = 0;
-for($i = 0 ; $i < min(5,count($odds['result']));$i++){
-    $result = $odds['result'][$i];
-    if ($result == 3){
-        $win5++;
+if (isset($odds) && count($odds) > 0) {
+    $matchCount = count($odds['matches']);
+    $resultCount = count($odds['result']);
+    for($i = 0 ; $i < min(5,$resultCount);$i++){
+        $result = $odds['result'][$i];
+        if ($result == 3){
+            $win5++;
+        }
+        elseif ($result == 1){
+            $draw5++;
+        }
+        else{
+            $lose5++;
+        }
     }
-    elseif ($result == 1){
-        $draw5++;
+    if ($matchCount > 0){
+        $odds['win5'] = 100*$win5/min(5,$resultCount);
+        $odds['draw5'] = 100*$draw5/min(5,$resultCount);
+        $odds['lose5'] = 100*$lose5/min(5,$resultCount);
     }
-    else{
-        $lose5++;
-    }
-}
-if (count($odds['matches']) > 0){
-    $odds['win5'] = 100*$win5/min(5,count($odds['result']));
-    $odds['draw5'] = 100*$draw5/min(5,count($odds['result']));
-    $odds['lose5'] = 100*$lose5/min(5,count($odds['result']));
+} else {
+    $matchCount = 0;
+    $resultCount = 0;
 }
 ?>
 <div class="con {{$className}}" @if(!$show)  style="display: none;" @endif>
@@ -84,7 +91,7 @@ if (count($odds['matches']) > 0){
         </tr>
         </thead>
         <tbody>
-        @for($i = 0 ; $i < min(10,count($odds['matches'])); $i++)
+        @for($i = 0 ; $i < min(10,$matchCount); $i++)
             <?php
             $result = $odds['result'][$i];
             $match = $odds['matches'][$i];

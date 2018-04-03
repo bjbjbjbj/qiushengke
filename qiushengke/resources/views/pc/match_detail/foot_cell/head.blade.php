@@ -54,14 +54,14 @@ $aicon = strlen($match['aicon']) > 0 ? $match['aicon'] : '/pc/img/icon_teamDefau
         $hid = $match['hid'];
         $aid = $match['aid'];
         if (isset($analyse['historyBattle']['historyBattle']['nhnl'])){
-            foreach($analyse['historyBattle']['historyBattle']['nhnl'] as $match){
-                if($match['hscore'] > $match['ascore'])
-                    if($match['hid'] == $hid)
+            foreach($analyse['historyBattle']['historyBattle']['nhnl'] as $itemMatch){
+                if($itemMatch['hscore'] > $itemMatch['ascore'])
+                    if($itemMatch['hid'] == $hid)
                         $winh++;
                     else
                         $loseh++;
-                elseif($match['hscore'] < $match['ascore'])
-                    if($match['hid'] == $hid)
+                elseif($itemMatch['hscore'] < $itemMatch['ascore'])
+                    if($itemMatch['hid'] == $hid)
                         $loseh++;
                     else
                         $winh++;
@@ -69,14 +69,14 @@ $aicon = strlen($match['aicon']) > 0 ? $match['aicon'] : '/pc/img/icon_teamDefau
                     $drawh++;
             }
 
-            foreach($analyse['historyBattle']['historyBattle']['nhnl'] as $match){
-                if($match['hscore'] > $match['ascore'])
-                    if($match['hid'] == $aid)
+            foreach($analyse['historyBattle']['historyBattle']['nhnl'] as $itemMatch){
+                if($itemMatch['hscore'] > $itemMatch['ascore'])
+                    if($itemMatch['hid'] == $aid)
                         $wina++;
                     else
                         $losea++;
-                elseif($match['hscore'] < $match['ascore'])
-                    if($match['hid'] == $aid)
+                elseif($itemMatch['hscore'] < $itemMatch['ascore'])
+                    if($itemMatch['hid'] == $aid)
                         $losea++;
                     else
                         $wina++;
@@ -109,14 +109,14 @@ $aicon = strlen($match['aicon']) > 0 ? $match['aicon'] : '/pc/img/icon_teamDefau
         $losea = 0;
         $hid = $match['hid'];
         if (isset($analyse['recentBattle']['home'])){
-            foreach($analyse['recentBattle']['home']['all'] as $match){
-                if($match['hscore'] > $match['ascore'])
-                    if($match['hid'] == $hid)
+            foreach($analyse['recentBattle']['home']['all'] as $itemMatch){
+                if($itemMatch['hscore'] > $itemMatch['ascore'])
+                    if($itemMatch['hid'] == $hid)
                         $winh++;
                     else
                         $loseh++;
-                elseif($match['hscore'] < $match['ascore'])
-                    if($match['hid'] == $hid)
+                elseif($itemMatch['hscore'] < $itemMatch['ascore'])
+                    if($itemMatch['hid'] == $hid)
                         $loseh++;
                     else
                         $winh++;
@@ -125,14 +125,14 @@ $aicon = strlen($match['aicon']) > 0 ? $match['aicon'] : '/pc/img/icon_teamDefau
             }
         }
         if (isset($analyse['recentBattle']['away'])){
-            foreach($analyse['recentBattle']['away']['all'] as $match){
-                if($match['hscore'] > $match['ascore'])
-                    if($match['hid'] == $aid)
+            foreach($analyse['recentBattle']['away']['all'] as $itemMatch){
+                if($itemMatch['hscore'] > $itemMatch['ascore'])
+                    if($itemMatch['hid'] == $aid)
                         $wina++;
                     else
                         $losea++;
-                elseif($match['hscore'] < $match['ascore'])
-                    if($match['hid'] == $aid)
+                elseif($itemMatch['hscore'] < $itemMatch['ascore'])
+                    if($itemMatch['hid'] == $aid)
                         $losea++;
                     else
                         $wina++;
@@ -156,7 +156,7 @@ $aicon = strlen($match['aicon']) > 0 ? $match['aicon'] : '/pc/img/icon_teamDefau
         </div>
     </div>
     <?php
-    if (!is_null($match['oumiddle1'])){
+    if (isset($match['oumiddle1'])){
         if(!is_null($match['ouup1']) && !is_null($match['oumiddle1']) && !is_null($match['oudown1'])){
             $up = $match['ouup1'] > 0 ? round(90/$match['ouup1'],0) : 0;
             $middle = $match['oumiddle1'] > 0 ? round(90/$match['oumiddle1'],0) : 0;
