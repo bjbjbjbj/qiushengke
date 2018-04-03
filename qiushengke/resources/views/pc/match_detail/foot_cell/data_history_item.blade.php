@@ -121,9 +121,22 @@ for ($i = 0 ; $i < min(10,count($matches));$i++){
             $time = strtotime($match['time']);
             $time = date('Y.m.d',$time);
             $time = substr($time,2);
+            $lid = $match['lid'];
+            //赛事背景色
+            if(isset($match['color'])){
+                $r = hexdec(substr($match['color'],0,2));
+                $g = hexdec(substr($match['color'],2,2));
+                $b = hexdec(substr($match['color'],4,2));
+            }
+            else{
+                $bgRgb = \App\Http\Controllers\PC\CommonTool::getLeagueBgRgb($lid);
+                $r = $bgRgb['r'];
+                $g = $bgRgb['g'];
+                $b = $bgRgb['b'];
+            }
             ?>
             <tr>
-                <td><p class="line" style="background: #8652de;"></p>{{$match['league']}}</td>
+                <td><p class="line" style="background: rgb({{$r}}, {{$g}}, {{$b}});"></p>{{$match['league']}}</td>
                 <td>{{$time}}</td>
                 <td>{{$match['hname']}}</td>
                 <td>{{$match['hscore']}}-{{$match['ascore']}}

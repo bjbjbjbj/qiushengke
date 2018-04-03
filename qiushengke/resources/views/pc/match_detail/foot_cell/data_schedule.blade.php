@@ -36,9 +36,22 @@ $rank = $analyse['rank'];
                     $time = date('Y.m.d',$time);
                     $time = substr($time,2);
                             $isHome = $match['hid'] == $currmatch['hid'];
+                    $lid = $match['lid'];
+                    //赛事背景色
+                    if(isset($match['color'])){
+                        $r = hexdec(substr($match['color'],0,2));
+                        $g = hexdec(substr($match['color'],2,2));
+                        $b = hexdec(substr($match['color'],4,2));
+                    }
+                    else{
+                        $bgRgb = \App\Http\Controllers\PC\CommonTool::getLeagueBgRgb($lid);
+                        $r = $bgRgb['r'];
+                        $g = $bgRgb['g'];
+                        $b = $bgRgb['b'];
+                    }
                     ?>
                     <tr>
-                        <td><p class="line" style="background: #ea512d;"></p>{{$match['league']}}</td>
+                        <td><p class="line" style="background: rgb({{$r}}, {{$g}}, {{$b}});"></p>{{$match['league']}}</td>
                         <td>{{$time}}</td>
                         <td class="green">{{$isHome?'主':'客'}}</td>
                         <td>VS</td>
@@ -80,9 +93,22 @@ $rank = $analyse['rank'];
                     $time = date('Y.m.d',$time);
                     $time = substr($time,2);
                     $isHome = $match['hid'] == $currmatch['aid'];
+                    $lid = $match['lid'];
+                    //赛事背景色
+                    if(isset($match['color'])){
+                        $r = hexdec(substr($match['color'],0,2));
+                        $g = hexdec(substr($match['color'],2,2));
+                        $b = hexdec(substr($match['color'],4,2));
+                    }
+                    else{
+                        $bgRgb = \App\Http\Controllers\PC\CommonTool::getLeagueBgRgb($lid);
+                        $r = $bgRgb['r'];
+                        $g = $bgRgb['g'];
+                        $b = $bgRgb['b'];
+                    }
                     ?>
                     <tr>
-                        <td><p class="line" style="background: #ea512d;"></p>{{$match['league']}}</td>
+                        <td><p class="line" style="background: rgb({{$r}}, {{$g}}, {{$b}});"></p>{{$match['league']}}</td>
                         <td>{{$time}}</td>
                         <td class="green">{{$isHome?'主':'客'}}</td>
                         <td>VS</td>
