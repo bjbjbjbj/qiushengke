@@ -4,6 +4,7 @@ namespace App\Console;
 
 use App\Console\League\BasketballCommands;
 use App\Console\League\FootballCommands;
+use App\Console\Live\AKQCommands;
 use App\Console\Live\LiveCommands;
 use App\Console\Live\LiveDetailJsonCommands;
 use App\Console\Live\LivingCommands;
@@ -47,6 +48,8 @@ class Kernel extends ConsoleKernel
         //json
         LiveDetailJsonCommands::class,
         PlayerJsonCommands::class,
+        //爱看球同步直播数据
+        AKQCommands::class,
     ];
 
     /**
@@ -75,6 +78,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('league_foot:run')->dailyAt('14:10');
         $schedule->command('league_basket:run')->dailyAt('15:10');
         $schedule->command('league_basket:run')->dailyAt('11:10');
+
+        //拿爱看球数据
+        $schedule->command('akq_data:run')->everyFiveMinutes();
 
         //直播终端静态化
         $schedule->command('live_detail_cache:run')->everyTenMinutes();

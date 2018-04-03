@@ -15,6 +15,8 @@ use App\Http\Controllers\PC\Match\LiveController;
 use App\Http\Controllers\PC\Match\MatchController;
 use App\Http\Controllers\PC\Match\MatchDetailController;
 use App\Models\QSK\Anchor\AnchorRoomMatches;
+use App\Models\QSK\Match\MatchLive;
+use App\Models\QSK\Match\MatchLiveChannel;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -83,15 +85,40 @@ class PlayerJsonCommands extends Command
                 }
             }
         }
+
         //获取这些比赛id中有直播房间的比赛
         $ams = AnchorRoomMatches::whereIn('mid',$mids)
             ->select('room_id')
             ->get();
-        $mids = $ams;
         //生成这些直播id对应的直播间的json,直播player生成的时候用
-        foreach ($mids as $mid){
+        foreach ($ams as $mid){
             self::flushLiveDetailHtml($mid['room_id']);
         }
+
+        //爱看球频道
+        $ams = MatchLive::whereIn('match_id',$mids)
+            ->join('match_live_channels',function ($q){
+                $q->on('match_live_channels.live_id','match_lives.id');
+            })
+            ->where('sport',$sport)
+            ->select('match_live_channels.id as room_id')
+            ->get();
+        //生成这些直播id对应的直播间的json,直播player生成的时候用
+        foreach ($ams as $mid){
+            echo $mid['room_id'];
+            self::flushAKQLiveDetailHtml($mid['room_id']);
+        }
+    }
+
+    public static function flushAKQLiveDetailHtml($rid){
+        $ch = curl_init();
+        $url = asset('/api/static/live/akqchannel/detail/' . $rid);
+        echo $url . '<br>';
+        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 8);//8秒超时
+        curl_exec ($ch);
+        curl_close ($ch);
     }
 
     public static function flushLiveDetailHtml($rid){

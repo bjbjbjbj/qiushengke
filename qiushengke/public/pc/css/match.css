@@ -8,7 +8,7 @@ body{
 
 /*浮动区域*/
 #Play{
-	position: absolute; top: 580px; left: 0; right: 0;
+	position: fixed; top: 110px; left: 0; right: 0;
 }
 #Play.fixed{
 	position: fixed; top: 20px;

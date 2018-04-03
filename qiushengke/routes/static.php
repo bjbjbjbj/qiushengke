@@ -22,6 +22,7 @@ Route::group(['namespace'=>'PC\Match'], function () {
     Route::get('/live/{sport}/{mid}',"LiveController@staticLiveDetail");//静态化直播终端
     Route::get('/live/detail/{sport}/{mid}',"LiveController@staticLiveDetailJson");//静态化直播终端json(这个比赛有什么channel
     Route::get('/live/channel/detail/{cid}',"LiveController@staticChannelJson");//直播器终端json(这个channel是什么内容
+    Route::get('/live/akqchannel/detail/{cid}',"LiveController@staticAKQChannelJson");//直播器终端json(这个channel是什么内容 爱看球迁移的频道用
 });
 
 //专题

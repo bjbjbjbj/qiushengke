@@ -430,14 +430,14 @@ function setTab() {
         }
     })
 
-    window.onscroll = function () {
-        // console.log($('#Control').offset().top)
-        if ((document.documentElement.scrollTop || document.body.scrollTop) > 560) {
-            $('#Play').addClass('fixed')
-        }else{
-            $('#Play').removeClass('fixed')
-        }
-    }
+    // window.onscroll = function () {
+    //     // console.log($('#Control').offset().top)
+    //     if ((document.documentElement.scrollTop || document.body.scrollTop) > 560) {
+    //         $('#Play').addClass('fixed')
+    //     }else{
+    //         $('#Play').removeClass('fixed')
+    //     }
+    // }
 
 }
 

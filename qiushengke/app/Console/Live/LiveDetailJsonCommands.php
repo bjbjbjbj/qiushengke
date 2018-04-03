@@ -15,6 +15,8 @@ use App\Http\Controllers\PC\Match\LiveController;
 use App\Http\Controllers\PC\Match\MatchController;
 use App\Http\Controllers\PC\Match\MatchDetailController;
 use App\Models\QSK\Anchor\AnchorRoomMatches;
+use App\Models\QSK\Match\MatchLive;
+use App\Models\QSK\Match\MatchLiveChannel;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -84,14 +86,35 @@ class LiveDetailJsonCommands extends Command
             }
         }
         //获取这些比赛id中有直播房间的比赛
+        $resultMid = array();
         $ams = AnchorRoomMatches::whereIn('mid',$mids)
             ->select('mid')
             ->groupBy('mid')
             ->get();
-        $mids = $ams;
+        foreach ($ams as $mid){
+            $resultMid[] = $mid['mid'];
+        }
+
+        //再把爱看球有的写进去
+        //爱看球频道
+        $ams = MatchLive::whereIn('match_id',$mids)
+            ->join('match_live_channels',function ($q){
+                $q->where('match_live_channels.show',MatchLiveChannel::kShow);
+                $q->on('match_live_channels.live_id','match_lives.id');
+            })
+            ->where('sport',$sport)
+            ->select('match_live_channels.id as room_id')
+            ->get();
+        //拼到mids
+        foreach ($ams as $mid){
+            if (!in_array($mid['room_id'],$resultMid)) {
+                $resultMid[] = $mid['room_id'];
+            }
+        }
+
         //生成这些比赛id对应的有什么直播间的json,直播终端生成的时候用
-        foreach ($mids as $mid){
-            self::flushLiveDetailHtml($mid['mid'],$sport);
+        foreach ($resultMid as $mid){
+            self::flushLiveDetailHtml($mid,$sport);
         }
     }
 

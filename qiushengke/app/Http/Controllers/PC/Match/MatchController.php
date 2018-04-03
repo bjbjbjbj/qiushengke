@@ -161,6 +161,7 @@ class MatchController extends BaseController
         $lastDate = date('Ymd', strtotime('-1 day'));
 
         $pc_json = FileTool::matchListDataJson($startDate,$sport);
+
         if (!empty($pc_json)) {
             $result = array();
             $sortData = $this->sortMatch($pc_json,$sport,$order);
