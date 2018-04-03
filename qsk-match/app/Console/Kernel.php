@@ -90,7 +90,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('spider_win_ten:run')->everyTenMinutes();
 //        $schedule->command('match_tip:run')->hourly();
         $schedule->command('match_lineup:run')->everyTenMinutes();
-        $schedule->command('referee_calculate:run')->cron('* */2 * * * *');
+        $schedule->command('referee_calculate:run')->hourly();
 
         //篮球爬虫相关
         $schedule->call(function (){
