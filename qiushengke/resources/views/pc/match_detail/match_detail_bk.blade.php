@@ -2087,56 +2087,56 @@
                 'success':function (json) {
                     var keys = Object.keys(json);
                     if (keys.length > 0){
-                        $('div#Data div.odd')[0].style.display = '';
-                        var tbody = $('div#Data div.odd table tbody');
+                        $('div#AllOdd div.odd')[0].style.display = '';
+                        var tbody = $('div#AllOdd div.odd table tbody');
                         tbody.html('')
                         for (var i = 0 ; i < keys.length ; i++){
                             var item = json[keys[i]];
-                            if(2 != item['id'] && 5 != item['id'] && 12 != item['id']){
-                                continue;
-                            }
+//                            if(2 != item['id'] && 5 != item['id'] && 12 != item['id']){
+//                                continue;
+//                            }
                             var tr = '<tr>'+
-                                    '<td rowspan="2">'+item['name']+'</td>'+
-                                    '<td>初盘</td>';
+                                '<td rowspan="2">'+item['name']+'</td>'+
+                                '<td>初盘</td>';
                             if (item['ou']){
                                 tr = tr +
-                                        '<td>'+item['ou']['up1']+'</td>'+
-                                        '<td>'+item['ou']['middle1']+'</td>'+
-                                        '<td>'+item['ou']['down1']+'</td>';
+                                    '<td>'+item['ou']['up1']+'</td>'+
+                                    '<td>'+item['ou']['middle1']+'</td>'+
+                                    '<td>'+item['ou']['down1']+'</td>';
                             }
                             else{
                                 tr = tr +
-                                        '<td>-</td>'+
-                                        '<td>-</td>'+
-                                        '<td>-</td>';
+                                    '<td>-</td>'+
+                                    '<td>-</td>'+
+                                    '<td>-</td>';
                             }
                             if (item['asia']){
                                 tr = tr +
-                                        '<td>'+item['asia']['up1']+'</td>'+
-                                        '<td>'+panKouText(item['asia']['middle1'],false)+'</td>'+
-                                        '<td>'+item['asia']['down1']+'</td>'+
-                                        '<td>'+(parseFloat(item['asia']['up1'])+parseFloat(item['asia']['down1'])).toFixed(2)+'</td>';
+                                    '<td>'+item['asia']['up1']+'</td>'+
+                                    '<td>'+panKouText(item['asia']['middle1'],false)+'</td>'+
+                                    '<td>'+item['asia']['down1']+'</td>'+
+                                    '<td>'+(parseFloat(item['asia']['up1'])+parseFloat(item['asia']['down1'])).toFixed(2)+'</td>';
                             }
                             else{
                                 tr = tr +
-                                        '<td>-</td>'+
-                                        '<td>-</td>'+
-                                        '<td>-</td>'+
-                                        '<td>-</td>';
+                                    '<td>-</td>'+
+                                    '<td>-</td>'+
+                                    '<td>-</td>'+
+                                    '<td>-</td>';
                             }
                             if (item['goal']){
                                 tr = tr +
-                                        '<td>'+item['goal']['up1']+'</td>'+
-                                        '<td>'+panKouText(item['goal']['middle1'],false)+'</td>'+
-                                        '<td>'+item['goal']['down1']+'</td>'+
-                                        '<td>'+(parseFloat(item['goal']['up1'])+parseFloat(item['goal']['down1'])).toFixed(2)+'</td>';
+                                    '<td>'+item['goal']['up1']+'</td>'+
+                                    '<td>'+panKouText(item['goal']['middle1'],false)+'</td>'+
+                                    '<td>'+item['goal']['down1']+'</td>'+
+                                    '<td>'+(parseFloat(item['goal']['up1'])+parseFloat(item['goal']['down1'])).toFixed(2)+'</td>';
                             }
                             else{
                                 tr = tr +
-                                        '<td>-</td>'+
-                                        '<td>-</td>'+
-                                        '<td>-</td>'+
-                                        '<td>-</td>';
+                                    '<td>-</td>'+
+                                    '<td>-</td>'+
+                                    '<td>-</td>'+
+                                    '<td>-</td>';
                             }
 
                             tr = tr+'</tr>';
@@ -2144,50 +2144,162 @@
                             tbody.append(tr);
 
                             tr = '<tr>'+
-                                    '<td>终盘</td>';
+                                '<td>终盘</td>';
                             if (item['ou']){
                                 tr = tr +
-                                        '<td>'+item['ou']['up2']+'</td>'+
-                                        '<td>'+item['ou']['middle2']+'</td>'+
-                                        '<td>'+item['ou']['down2']+'</td>';
+                                    '<td>'+item['ou']['up2']+'</td>'+
+                                    '<td>'+item['ou']['middle2']+'</td>'+
+                                    '<td>'+item['ou']['down2']+'</td>';
                             }
                             else{
                                 tr = tr +
-                                        '<td>-</td>'+
-                                        '<td>-</td>'+
-                                        '<td>-</td>';
+                                    '<td>-</td>'+
+                                    '<td>-</td>'+
+                                    '<td>-</td>';
                             }
                             if (item['asia']){
                                 tr = tr +
-                                        '<td>'+item['asia']['up2']+'</td>'+
-                                        '<td>'+panKouText(item['asia']['middle2'],false)+'</td>'+
-                                        '<td>'+item['asia']['down2']+'</td>'+
-                                        '<td>'+(parseFloat(item['asia']['down2'])+parseFloat(item['asia']['up2'])).toFixed(2)+'</td>';
+                                    '<td>'+item['asia']['up2']+'</td>'+
+                                    '<td>'+panKouText(item['asia']['middle2'],false)+'</td>'+
+                                    '<td>'+item['asia']['down2']+'</td>'+
+                                    '<td>'+(parseFloat(item['asia']['down2'])+parseFloat(item['asia']['up2'])).toFixed(2)+'</td>';
                             }
                             else{
                                 tr = tr +
-                                        '<td>-</td>'+
-                                        '<td>-</td>'+
-                                        '<td>-</td>'+
-                                        '<td>-</td>';
+                                    '<td>-</td>'+
+                                    '<td>-</td>'+
+                                    '<td>-</td>'+
+                                    '<td>-</td>';
                             }
                             if (item['goal']){
                                 tr = tr +
-                                        '<td>'+item['goal']['up2']+'</td>'+
-                                        '<td>'+panKouText(item['goal']['middle2'],false)+'</td>'+
-                                        '<td>'+item['goal']['down2']+'</td>'+
-                                        '<td>'+(parseFloat(item['goal']['down2'])+parseFloat(item['goal']['up2'])).toFixed(2)+'</td>';
+                                    '<td>'+item['goal']['up2']+'</td>'+
+                                    '<td>'+panKouText(item['goal']['middle2'],false)+'</td>'+
+                                    '<td>'+item['goal']['down2']+'</td>'+
+                                    '<td>'+(parseFloat(item['goal']['down2'])+parseFloat(item['goal']['up2'])).toFixed(2)+'</td>';
                             }
                             else{
                                 tr = tr +
-                                        '<td>-</td>'+
-                                        '<td>-</td>'+
-                                        '<td>-</td>'+
-                                        '<td>-</td>';
+                                    '<td>-</td>'+
+                                    '<td>-</td>'+
+                                    '<td>-</td>'+
+                                    '<td>-</td>';
                             }
                             tr = tr+'</tr>';
                             //终盘
                             tbody.append(tr);
+                        }
+                    }
+
+                    //指数的刷新
+                    var sport = 1;
+                    var keys = Object.keys(json);
+                    if (keys.length > 0){
+                        var tbodya = $('div#AsiaOdd div.tableIn tbody');
+                        tbodya.html('');
+                        var tbodyg = $('div#GoalOdd div.tableIn tbody');
+                        tbodyg.html('');
+                        var tbodye = $('div#EuropeOdd div.tableIn tbody');
+                        tbodye.html('');
+                        for (var i = 0 ; i < keys.length ; i++){
+                            var item = json[keys[i]];
+                            var tr = '';
+                            //亚盘
+                            if (item['asia']){
+                                var data = item['asia'];
+                                tr = '<tr>'+
+                                    '<td>'+item['name']+'</td>';
+                                if(data['middle1']){
+                                    tr = tr + '<td>'+data['up1']+'</td>'+
+                                        '<td>'+getHandicapCn(data['middle1'],'',1,sport,true)+'</td>'+
+                                        '<td>'+data['down1']+'</td>';
+                                }
+                                else{
+                                    tr = tr +
+                                        '<td>-</td>'+
+                                        '<td>-</td>'+
+                                        '<td>-</td>';
+                                }
+                                if(data['middle2']){
+                                    tr = tr + '<td>'+data['up2']+'</td>'+
+                                        '<td>'+getHandicapCn(data['middle2'],'',1,sport,true)+'</td>'+
+                                        '<td>'+data['down2']+'</td>';
+                                }
+                                else{
+                                    tr = tr +
+                                        '<td>-</td>'+
+                                        '<td>-</td>'+
+                                        '<td>-</td>';
+                                }
+                                tr = tr + '</tr>';
+                                tbodya.append(tr);
+                            }
+
+                            //欧盘
+                            if (item['ou']){
+                                var data = item['ou'];
+                                tr = '<tr>'+
+                                    '<td>'+item['name']+'</td>';
+                                if(data['middle1']){
+                                    tr = tr + '<td>'+data['up1']+'</td>'+
+                                        '<td>'+data['middle1']+'</td>'+
+                                        '<td>'+data['down1']+'</td>';
+                                }
+                                else{
+                                    tr = tr +
+                                        '<td>-</td>'+
+                                        '<td>-</td>'+
+                                        '<td>-</td>';
+                                }
+                                if(data['middle2']){
+                                    tr = tr + '<td>'+data['up2']+'</td>'+
+                                        '<td>'+data['middle2']+'</td>'+
+                                        '<td>'+data['down2']+'</td>';
+                                }
+                                else{
+                                    tr = tr +
+                                        '<td>-</td>'+
+                                        '<td>-</td>'+
+                                        '<td>-</td>';
+                                }
+                                tr = tr + '</tr>';
+                                tbodye.append(tr);
+                            }
+
+                            //大小球
+                            if (item['goal']){
+                                var data = item['goal'];
+                                tr = '<tr>'+
+                                    '<td>'+item['name']+'</td>';
+                                if(data['middle1']){
+                                    var pankou = getHandicapCn(data['middle1'],'',2,sport,true) + '';
+                                    pankou = pankou.replace('让','');
+                                    tr = tr + '<td>'+data['up1']+'</td>'+
+                                        '<td>'+pankou+'</td>'+
+                                        '<td>'+data['down1']+'</td>';
+                                }
+                                else{
+                                    tr = tr +
+                                        '<td>-</td>'+
+                                        '<td>-</td>'+
+                                        '<td>-</td>';
+                                }
+                                if(data['middle2']){
+                                    var pankou = getHandicapCn(data['middle2'],'',2,sport,true) + '';
+                                    pankou = pankou.replace('让','');
+                                    tr = tr + '<td>'+data['up2']+'</td>'+
+                                        '<td>'+pankou+'</td>'+
+                                        '<td>'+data['down2']+'</td>';
+                                }
+                                else{
+                                    tr = tr +
+                                        '<td>-</td>'+
+                                        '<td>-</td>'+
+                                        '<td>-</td>';
+                                }
+                                tr = tr + '</tr>';
+                                tbodyg.append(tr);
+                            }
                         }
                     }
                 }
