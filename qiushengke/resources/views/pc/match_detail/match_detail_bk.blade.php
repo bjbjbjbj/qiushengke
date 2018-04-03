@@ -2,26 +2,163 @@
 @section('navContent')
     @component('pc.layout.nav_content',['type'=>1])
     @endcomponent
-    @component('pc.cell.top_leagues',['links'=>$basketLeagues])
-    @endcomponent
 @endsection
 @section('content')
+    @component('pc.match_detail.basket_cell.base_info', ['match'=>$match])
+    @endcomponent
     <div id="Con">
-        @component('pc.match_detail.basket_cell.base_info', ['match'=>$match])
-        @endcomponent
-        <div id="Match" style="display: ;">
+        @if(isset($showMatch))
+        <div id="Match" style="display: none;">
             {{--@component('pc.match_detail.basket_cell.match_first',['match'=>$match])--}}
             {{--@endcomponent--}}
             @component('pc.match_detail.basket_cell.match_score', ['match'=>$match])
             @endcomponent
-            @component('pc.match_detail.basket_cell.match_tech', ['tech'=>$tech])
-            @endcomponent
+            @if(isset($hasTotal))
+                <div class="total">
+                    <p class="title">技术统计</p>
+                    <ul>
+                        <li>
+                            得分
+                            <div class="line host">
+                                <p>108</p>
+                                <span style="width: 66%;"></span>
+                            </div>
+                            <div class="line away">
+                                <p>125</p>
+                                <span style="width: 34%;"></span>
+                            </div>
+                        </li>
+                        <li>
+                            篮板
+                            <div class="line host">
+                                <p>33</p>
+                                <span style="width: 66%;"></span>
+                            </div>
+                            <div class="line away">
+                                <p>46</p>
+                                <span style="width: 34%;"></span>
+                            </div>
+                        </li>
+                        <li>
+                            助攻
+                            <div class="line host">
+                                <p>20</p>
+                                <span style="width: 66%;"></span>
+                            </div>
+                            <div class="line away">
+                                <p>21</p>
+                                <span style="width: 34%;"></span>
+                            </div>
+                        </li>
+                        <li>
+                            抢断
+                            <div class="line host">
+                                <p>5</p>
+                                <span style="width: 66%;"></span>
+                            </div>
+                            <div class="line away">
+                                <p>4</p>
+                                <span style="width: 34%;"></span>
+                            </div>
+                        </li>
+                        <li>
+                            盖帽
+                            <div class="line host">
+                                <p>3</p>
+                                <span style="width: 66%;"></span>
+                            </div>
+                            <div class="line away">
+                                <p>2</p>
+                                <span style="width: 34%;"></span>
+                            </div>
+                        </li>
+                        <li>
+                            失误
+                            <div class="line host">
+                                <p>10</p>
+                                <span style="width: 66%;"></span>
+                            </div>
+                            <div class="line away">
+                                <p>11</p>
+                                <span style="width: 34%;"></span>
+                            </div>
+                        </li>
+                        <li>
+                            罚球
+                            <div class="line host">
+                                <p>20</p>
+                                <span style="width: 66%;"></span>
+                            </div>
+                            <div class="line away">
+                                <p>21</p>
+                                <span style="width: 34%;"></span>
+                            </div>
+                        </li>
+                        <li>
+                            三分
+                            <div class="line host">
+                                <p>12</p>
+                                <span style="width: 66%;"></span>
+                            </div>
+                            <div class="line away">
+                                <p>11</p>
+                                <span style="width: 34%;"></span>
+                            </div>
+                        </li>
+                        <li>
+                            犯规
+                            <div class="line host">
+                                <p>20</p>
+                                <span style="width: 66%;"></span>
+                            </div>
+                            <div class="line away">
+                                <p>17</p>
+                                <span style="width: 34%;"></span>
+                            </div>
+                        </li>
+                        <li>
+                            投篮命中率
+                            <div class="line host">
+                                <p>48%</p>
+                                <span style="width: 66%;"></span>
+                            </div>
+                            <div class="line away">
+                                <p>49%</p>
+                                <span style="width: 34%;"></span>
+                            </div>
+                        </li>
+                        <li>
+                            罚球命中率
+                            <div class="line host">
+                                <p>83%</p>
+                                <span style="width: 66%;"></span>
+                            </div>
+                            <div class="line away">
+                                <p>77%</p>
+                                <span style="width: 34%;"></span>
+                            </div>
+                        </li>
+                        <li>
+                            三分命中率
+                            <div class="line host">
+                                <p>42%</p>
+                                <span style="width: 66%;"></span>
+                            </div>
+                            <div class="line away">
+                                <p>41%</p>
+                                <span style="width: 34%;"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            @endif
             @component('pc.match_detail.basket_cell.match_players', ['match'=>$match,'players'=>$players])
             @endcomponent
         </div>
-        <div id="Data" style="display: none;">
-            @component('pc.match_detail.basket_cell.data_odd', ['odds'=>$odds])
-            @endcomponent
+        @endif
+        <div id="Data" style="display: ;">
+            {{--@component('pc.match_detail.basket_cell.match_tech', ['tech'=>$tech])--}}
+            {{--@endcomponent--}}
             @component('pc.match_detail.basket_cell.data_rank', ['match'=>$match,'analyse'=>$analyse])
             @endcomponent
             {{--@component('pc.match_detail.basket_cell.data_attack', ['match'=>$match])--}}
@@ -31,8 +168,17 @@
             @component('pc.match_detail.basket_cell.data_history', ['match'=>$match,'analyse'=>$analyse])
             @endcomponent
         </div>
-        @if(isset($hasTotal))
-            <div id="Total" style="display: none;">
+        <div id="Odd" style="display: none;">
+            <div class="tabLine">
+                <button class="on" value="AllOdd">三合一</button>
+                <button value="AsiaOdd">亚盘</button>
+                <button value="EuropeOdd">欧盘</button>
+                <button value="GoalOdd">大小球</button>
+            </div>
+            <div id="AllOdd">
+                @component('pc.match_detail.basket_cell.data_odd', ['odds'=>$odds])
+                @endcomponent
+                @if(isset($isHasOddResult))
                 <div class="asia">
                     <p class="title">让分盘路比较</p>
                     <div class="part host">
@@ -1460,17 +1606,93 @@
                         </table>
                     </div>
                 </div>
+                @endif
             </div>
-        @endif
+            <div id="AsiaOdd" style="display: none;">
+                <div class="tableIn">
+                    <table>
+                        <colgroup>
+                            <col num="1" width="19%">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th rowspan="2">公司</th>
+                            <th colspan="3">初盘</th>
+                            <th colspan="3">终盘</th>
+                        </tr>
+                        <tr>
+                            <th class="yellow">主队</th>
+                            <th class="yellow">盘口</th>
+                            <th class="yellow">客队</th>
+                            <th class="green">主队</th>
+                            <th class="green">盘口</th>
+                            <th class="green">客队</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="EuropeOdd" style="display: none;">
+                <div class="tableIn">
+                    <table>
+                        <colgroup>
+                            <col num="1" width="19%">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th rowspan="2">公司</th>
+                            <th colspan="2">初盘</th>
+                            <th colspan="2">终盘</th>
+                        </tr>
+                        <tr>
+                            <th class="yellow">主胜</th>
+                            <th class="yellow">客胜</th>
+                            <th class="green">主胜</th>
+                            <th class="green">客胜</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="GoalOdd" style="display: none;">
+                <div class="tableIn">
+                    <table>
+                        <colgroup>
+                            <col num="1" width="19%">
+                        </colgroup>
+                        <thead>
+                        <tr>
+                            <th rowspan="2">公司</th>
+                            <th colspan="3">初盘</th>
+                            <th colspan="3">终盘</th>
+                        </tr>
+                        <tr>
+                            <th class="yellow">大分</th>
+                            <th class="yellow">盘口</th>
+                            <th class="yellow">小分</th>
+                            <th class="green">大分</th>
+                            <th class="green">盘口</th>
+                            <th class="green">小分</th>
+                        </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        {{--@component('pc.match_detail.basket_cell.data_odd', ['odds'=>$odds])--}}
+        {{--@endcomponent--}}
     </div>
     <div id="Play">
         <div class="abox">
             <ul>
-                <li class="on" target="Match">比赛赛况</li>
-                <li target="Data">数据分析</li>
-                @if(isset($hasTotal))
-                    <li target="Total">统计比较</li>
-                @endif
+                <li class="on" target="Data">数据分析</li>
+                <li target="Odd">综合指数</li>
+                <?php $liveUrl = \App\Http\Controllers\PC\CommonTool::matchLivePathWithId($match['mid'], 2); ?>
+                <a href="{{$liveUrl}}" class="li">比赛直播</a>
             </ul>
         </div>
     </div>
@@ -1555,56 +1777,50 @@
                 'success':function (json) {
                     var keys = Object.keys(json);
                     if (keys.length > 0){
-                        $('div#Data div.odd')[0].style.display = '';
-                        var tbody = $('div#Data div.odd table tbody');
+                        $('div#AllOdd div.odd')[0].style.display = '';
+                        var tbody = $('div#AllOdd div.odd table tbody');
                         tbody.html('')
                         for (var i = 0 ; i < keys.length ; i++){
                             var item = json[keys[i]];
-                            if(2 != item['id'] && 5 != item['id'] && 12 != item['id']){
-                                continue;
-                            }
+//                            if(2 != item['id'] && 5 != item['id'] && 12 != item['id']){
+//                                continue;
+//                            }
                             var tr = '<tr>'+
-                                    '<td rowspan="2">'+item['name']+'</td>'+
-                                    '<td>初盘</td>';
+                                '<td rowspan="2">'+item['name']+'</td>'+
+                                '<td>初盘</td>';
                             if (item['ou']){
                                 tr = tr +
-                                        '<td>'+item['ou']['up1']+'</td>'+
-                                        '<td>'+item['ou']['middle1']+'</td>'+
-                                        '<td>'+item['ou']['down1']+'</td>';
+                                    '<td>'+item['ou']['up1']+'</td>'+
+                                    '<td>'+item['ou']['down1']+'</td>';
                             }
                             else{
                                 tr = tr +
-                                        '<td>-</td>'+
-                                        '<td>-</td>'+
-                                        '<td>-</td>';
+                                    '<td>-</td>'+
+                                    '<td>-</td>';
                             }
                             if (item['asia']){
                                 tr = tr +
-                                        '<td>'+item['asia']['up1']+'</td>'+
-                                        '<td>'+panKouText(item['asia']['middle1'],false)+'</td>'+
-                                        '<td>'+item['asia']['down1']+'</td>'+
-                                        '<td>'+(parseFloat(item['asia']['up1'])+parseFloat(item['asia']['down1'])).toFixed(2)+'</td>';
+                                    '<td>'+item['asia']['up1']+'</td>'+
+                                    '<td>'+BasketpanKouText(item['asia']['middle1'],false,false)+'</td>'+
+                                    '<td>'+item['asia']['down1']+'</td>';
                             }
                             else{
                                 tr = tr +
-                                        '<td>-</td>'+
-                                        '<td>-</td>'+
-                                        '<td>-</td>'+
-                                        '<td>-</td>';
+                                    '<td>-</td>'+
+                                    '<td>-</td>'+
+                                    '<td>-</td>';
                             }
                             if (item['goal']){
                                 tr = tr +
-                                        '<td>'+item['goal']['up1']+'</td>'+
-                                        '<td>'+panKouText(item['goal']['middle1'],false)+'</td>'+
-                                        '<td>'+item['goal']['down1']+'</td>'+
-                                        '<td>'+(parseFloat(item['goal']['up1'])+parseFloat(item['goal']['down1'])).toFixed(2)+'</td>';
+                                    '<td>'+item['goal']['up1']+'</td>'+
+                                    '<td>'+BasketpanKouText(item['goal']['middle1'],false,true)+'</td>'+
+                                    '<td>'+item['goal']['down1']+'</td>';
                             }
                             else{
                                 tr = tr +
-                                        '<td>-</td>'+
-                                        '<td>-</td>'+
-                                        '<td>-</td>'+
-                                        '<td>-</td>';
+                                    '<td>-</td>'+
+                                    '<td>-</td>'+
+                                    '<td>-</td>';
                             }
 
                             tr = tr+'</tr>';
@@ -1612,50 +1828,152 @@
                             tbody.append(tr);
 
                             tr = '<tr>'+
-                                    '<td>终盘</td>';
+                                '<td>终盘</td>';
                             if (item['ou']){
                                 tr = tr +
-                                        '<td>'+item['ou']['up2']+'</td>'+
-                                        '<td>'+item['ou']['middle2']+'</td>'+
-                                        '<td>'+item['ou']['down2']+'</td>';
+                                    '<td>'+item['ou']['up2']+'</td>'+
+                                    '<td>'+item['ou']['down2']+'</td>';
                             }
                             else{
                                 tr = tr +
-                                        '<td>-</td>'+
-                                        '<td>-</td>'+
-                                        '<td>-</td>';
+                                    '<td>-</td>'+
+                                    '<td>-</td>';
                             }
                             if (item['asia']){
                                 tr = tr +
-                                        '<td>'+item['asia']['up2']+'</td>'+
-                                        '<td>'+panKouText(item['asia']['middle2'],false)+'</td>'+
-                                        '<td>'+item['asia']['down2']+'</td>'+
-                                        '<td>'+(parseFloat(item['asia']['down2'])+parseFloat(item['asia']['up2'])).toFixed(2)+'</td>';
+                                    '<td>'+item['asia']['up2']+'</td>'+
+                                    '<td>'+BasketpanKouText(item['asia']['middle2'],false)+'</td>'+
+                                    '<td>'+item['asia']['down2']+'</td>';
                             }
                             else{
                                 tr = tr +
-                                        '<td>-</td>'+
-                                        '<td>-</td>'+
-                                        '<td>-</td>'+
-                                        '<td>-</td>';
+                                    '<td>-</td>'+
+                                    '<td>-</td>'+
+                                    '<td>-</td>';
                             }
                             if (item['goal']){
                                 tr = tr +
-                                        '<td>'+item['goal']['up2']+'</td>'+
-                                        '<td>'+panKouText(item['goal']['middle2'],false)+'</td>'+
-                                        '<td>'+item['goal']['down2']+'</td>'+
-                                        '<td>'+(parseFloat(item['goal']['down2'])+parseFloat(item['goal']['up2'])).toFixed(2)+'</td>';
+                                    '<td>'+item['goal']['up2']+'</td>'+
+                                    '<td>'+BasketpanKouText(item['goal']['middle2'],false,true)+'</td>'+
+                                    '<td>'+item['goal']['down2']+'</td>';
                             }
                             else{
                                 tr = tr +
-                                        '<td>-</td>'+
-                                        '<td>-</td>'+
-                                        '<td>-</td>'+
-                                        '<td>-</td>';
+                                    '<td>-</td>'+
+                                    '<td>-</td>'+
+                                    '<td>-</td>';
                             }
                             tr = tr+'</tr>';
                             //终盘
                             tbody.append(tr);
+                        }
+                    }
+
+                    //指数的刷新
+                    var sport = 2;
+                    var keys = Object.keys(json);
+                    if (keys.length > 0){
+                        var tbodya = $('div#AsiaOdd div.tableIn tbody');
+                        tbodya.html('');
+                        var tbodyg = $('div#GoalOdd div.tableIn tbody');
+                        tbodyg.html('');
+                        var tbodye = $('div#EuropeOdd div.tableIn tbody');
+                        tbodye.html('');
+                        for (var i = 0 ; i < keys.length ; i++){
+                            var item = json[keys[i]];
+                            var tr = '';
+                            //亚盘
+                            if (item['asia']){
+                                var data = item['asia'];
+                                tr = '<tr>'+
+                                    '<td>'+item['name']+'</td>';
+                                if(data['middle1']){
+                                    tr = tr + '<td>'+data['up1']+'</td>'+
+                                        '<td>'+getHandicapCn(data['middle1'],'',1,sport,true)+'</td>'+
+                                        '<td>'+data['down1']+'</td>';
+                                }
+                                else{
+                                    tr = tr +
+                                        '<td>-</td>'+
+                                        '<td>-</td>'+
+                                        '<td>-</td>';
+                                }
+                                if(data['middle2']){
+                                    tr = tr + '<td>'+data['up2']+'</td>'+
+                                        '<td>'+getHandicapCn(data['middle2'],'',1,sport,true)+'</td>'+
+                                        '<td>'+data['down2']+'</td>';
+                                }
+                                else{
+                                    tr = tr +
+                                        '<td>-</td>'+
+                                        '<td>-</td>'+
+                                        '<td>-</td>';
+                                }
+                                tr = tr + '</tr>';
+                                tbodya.append(tr);
+                            }
+
+                            //欧盘
+                            if (item['ou']){
+                                var data = item['ou'];
+                                tr = '<tr>'+
+                                    '<td>'+item['name']+'</td>';
+                                if(data['middle1']){
+                                    tr = tr + '<td>'+data['up1']+'</td>'+
+                                        '<td>'+data['down1']+'</td>';
+                                }
+                                else{
+                                    tr = tr +
+                                        '<td>-</td>'+
+                                        '<td>-</td>';
+                                }
+                                if(data['middle2']){
+                                    tr = tr + '<td>'+data['up2']+'</td>'+
+                                        '<td>'+data['down2']+'</td>';
+                                }
+                                else{
+                                    tr = tr +
+                                        '<td>-</td>'+
+                                        '<td>-</td>';
+                                }
+                                tr = tr + '</tr>';
+                                tbodye.append(tr);
+                            }
+
+                            //大小球
+                            if (item['goal']){
+                                var data = item['goal'];
+                                tr = '<tr>'+
+                                    '<td>'+item['name']+'</td>';
+                                if(data['middle1']){
+                                    var pankou = getHandicapCn(data['middle1'],'',2,sport,true) + '';
+                                    pankou = pankou.replace('让','');
+                                    tr = tr + '<td>'+data['up1']+'</td>'+
+                                        '<td>'+pankou+'分</td>'+
+                                        '<td>'+data['down1']+'</td>';
+                                }
+                                else{
+                                    tr = tr +
+                                        '<td>-</td>'+
+                                        '<td>-</td>'+
+                                        '<td>-</td>';
+                                }
+                                if(data['middle2']){
+                                    var pankou = getHandicapCn(data['middle2'],'',2,sport,true) + '';
+                                    pankou = pankou.replace('让','');
+                                    tr = tr + '<td>'+data['up2']+'</td>'+
+                                        '<td>'+pankou+'分</td>'+
+                                        '<td>'+data['down2']+'</td>';
+                                }
+                                else{
+                                    tr = tr +
+                                        '<td>-</td>'+
+                                        '<td>-</td>'+
+                                        '<td>-</td>';
+                                }
+                                tr = tr + '</tr>';
+                                tbodyg.append(tr);
+                            }
                         }
                     }
                 }
