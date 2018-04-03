@@ -13,6 +13,7 @@ use App\Http\Controllers\Statistic\Schedule\ScheduleDataController;
 use App\Http\Controllers\Statistic\Terminal\MatchTerminalController;
 use App\Models\LiaoGouModels\MatchLive;
 use Illuminate\Console\Command;
+use Illuminate\Http\Request;
 
 class BasketballNextTerminalCommand extends Command
 {
@@ -49,7 +50,7 @@ class BasketballNextTerminalCommand extends Command
     public function handle()
     {
         $controller = new MatchTerminalController();
-        $controller->onStatic(null,'date', MatchLive::kSportBasketball, date('Ymd', strtotime('+1 day')), 10);
+        $controller->onStatic(new Request(),'date', MatchLive::kSportBasketball, date('Ymd', strtotime('+1 day')), 6);
     }
 
 }

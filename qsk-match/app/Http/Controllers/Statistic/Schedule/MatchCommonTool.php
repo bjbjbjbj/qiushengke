@@ -355,7 +355,7 @@ trait MatchCommonTool
         }
 
         $query->join('leagues as l', 'lid', '=', 'l.id')
-            ->addSelect('m.id as mid', 'm.hid', 'm.aid', 'm.win_id as win_id', 'l.name as league');
+            ->addSelect('m.id as mid', 'm.hid', 'm.aid', 'm.win_id as win_id', 'l.name as league', 'l.color as color');
         //暂时没有点击进去的,这里可以先无视teamid
 //                ->whereNotNull("hid")
 //                ->whereNotNull("aid")

@@ -52,7 +52,7 @@ class MatchQueryTool
     public static function onMatchLeagueLeftJoin($query, $sport = MatchLive::kSportFootball) {
         $DBStrPre = self::getDBPreStrBySport($sport);
         $query->leftJoin($DBStrPre.'leagues as l', 'm.lid', '=', 'l.id')
-            ->addSelect('l.name as league');
+            ->addSelect('l.name as league', 'l.color as color');
         return $query;
     }
 

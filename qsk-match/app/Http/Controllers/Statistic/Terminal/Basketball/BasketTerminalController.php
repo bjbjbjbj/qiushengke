@@ -124,7 +124,7 @@ class BasketTerminalController
      * @param int $mid 比赛id
      * @param array $typeArray 1表示固定不变的部分，2表示可能会更改的部分（风格、同赔）
      */
-    public function analyseDataStatic($mid, $typeArray = [1, 2], $reset = true) {
+    public function analyseDataStatic($mid, $typeArray = [1, 2], $reset = false) {
         $match = BasketMatch::query()->find($mid);
         if (isset($match)) {
             $analyse = $this->getAnalyseData($match, $typeArray, $reset);
