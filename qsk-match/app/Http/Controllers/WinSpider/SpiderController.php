@@ -813,9 +813,6 @@ class SpiderController extends Controller
         $this->handicapChange(2);
         $this->handicapChange(3);
 
-        //实时比赛事件
-        $this->spiderLiveTimeEvent();
-
         dump(time() - $lastTime);
     }
 
@@ -1123,22 +1120,6 @@ class SpiderController extends Controller
             Redis::set($redisKey, $match->id);
         }
         dump("已经保存比赛：$count 场");
-    }
-
-    /**
-     * 实时爬取正在比赛的 时间事件（角球、进球、危险进攻）
-     * 5s一次
-     */
-    private function spiderLiveTimeEvent(Request $request = null) {
-        if (isset($request)) {
-            $matches = MatchLive::getLiveFootballMatches($request->input('table', 'matches_afters'), $request->input('diff', 3));
-        } else {
-            $matches = MatchLive::getLiveFootballMatches();
-        }
-        echo "live match count = ".count($matches). "<br>";
-        foreach ($matches as $match) {
-            $this->liveMatchTimeEvent($match->win_id);
-        }
     }
 
     const win_event_types = [

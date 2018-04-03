@@ -129,8 +129,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('static_basket_next_terminal:run')->everyFiveMinutes();
         $schedule->command('static_foot_next_terminal:run')->everyFiveMinutes();
         $schedule->command('static_foot_cur_terminal:run')->everyFiveMinutes();
-        $schedule->command('static_basket_roll_change:run')->everyMinute();
-        $schedule->command('static_foot_roll_change:run')->everyMinute();
+//        $schedule->command('static_basket_roll_change:run')->everyMinute();
+//        $schedule->command('static_foot_roll_change:run')->everyMinute();
         $schedule->command('static_basket_roll_list_change:run')->everyFiveMinutes();
         $schedule->command('static_foot_roll_list_change:run')->everyFiveMinutes();
         $schedule->command('static_basket_odd_days:run')->hourly();
