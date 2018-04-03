@@ -119,7 +119,7 @@ $show = false;
     <td id="date_{{$mid}}">{{date('H:i', $match['time'])}}
     </td>
     <td id="time_{{$mid}}">{!! $matchTime !!}</td>
-    <td id="h_team_{{$mid}}" class="host">
+    <td id="h_team_{{$mid}}" class="host" colspan="2">
         <a class="team" href="{{$matchUrl}}" target="_blank">
                 <span
                         @if($match['h_red'] > 0)
@@ -138,7 +138,6 @@ $show = false;
             <span class="name">{{$match['hname']}}</span>
         </a>
     </td>
-    <td><a href="{{$matchUrl}}" target="_blank"><img alt="{{$match['hname']}}" id="{{$mid}}_h_icon" class="icon" src="{{strlen($match['hicon'])>0?$match['hicon'] : (env('CDN_URL') . '/pc/img/icon_teamDefault.png')}}"></a></td>
     <td>
         <a href="{{$matchUrl}}" target="_blank"
            @if($match['status'] == -1 || $match['status'] > 0)
@@ -171,8 +170,8 @@ $show = false;
             </div>
         </div>
     </td>
-    <td><a href="{{$matchUrl}}" target="_blank"><img alt="{{$match['aname']}}"id="{{$mid}}_a_icon"  class="icon" src="{{strlen($match['aicon'])>0?$match['aicon'] : (env('CDN_URL') . '/pc/img/icon_teamDefault.png')}}"></a></td>
-    <td class="away">
+    {{--<td><a href="{{$matchUrl}}" target="_blank"><img alt="{{$match['aname']}}"id="{{$mid}}_a_icon"  class="icon" src="{{strlen($match['aicon'])>0?$match['aicon'] : (env('CDN_URL') . '/pc/img/icon_teamDefault.png')}}"></a></td>--}}
+    <td class="away" colspan="2">
         <a class="team" href="{{$matchUrl}}" target="_blank">
                 <span
                         @if($match['a_red'] > 0)
@@ -237,9 +236,7 @@ $show = false;
     </td>
     <td>
         <a target="_blank" href="{{$matchUrl}}">析</a>
-        <a target="_blank" href="/match/foot/odd.html?mid={{$mid}}&type=1">亚</a>
-        <a target="_blank" href="/match/foot/odd.html?mid={{$mid}}&type=2">欧</a>
-        <a target="_blank" href="/match/foot/odd.html?mid={{$mid}}&type=3">大</a>
+        <a target="_blank" href="/match/foot/odd.html?mid={{$mid}}&type=1">指数</a>
     </td>
     {{--<td><button class="top" value="{{$isTop}}"></button></td>--}}
 </tr>

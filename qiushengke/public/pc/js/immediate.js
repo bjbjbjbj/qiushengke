@@ -203,6 +203,17 @@ function getMousePos(obj,event) {
 var GoalArr = [], GoalAdd = false;
 
 function Goal(Host,Away,Hscore,Ascore,Icon,Time,Type,ID) {
+     var hiddenProperty = 'hidden' in document ? 'hidden' :    
+        'webkitHidden' in document ? 'webkitHidden' :    
+        'mozHidden' in document ? 'mozHidden' :    
+        'msHidden' in document ? 'msHidden' :    
+        null;
+    var visibilityChangeEvent = hiddenProperty.replace(/hidden/i, 'visibilitychange');
+    if (document[hiddenProperty]) {
+        // console.log('hidden');
+        return;
+    }
+
     var Target = {
         'ID': ID,
         'Host': Host,
@@ -309,11 +320,6 @@ function setBG () {
         }
     })
 }
-
-
-
-
-
 
 
 

@@ -115,7 +115,7 @@ $show = false;
 <tr isMatch="1" class="{{$show?'show':'hide'}}" id="m_tr_{{$mid}}" match="{{$mid}}" league="{{$lid}}" asiaOdd="{{$asiaOdd}}" ouOdd="{{$ouOdd}}" first="{{$isFirst?"first":""}}" lottery="{{$isLottery?"lottery":""}}" live="{{$hasLive?"live":""}}">
     <td><p class="leagueLine" style="background: rgb({{$r}}, {{$g}}, {{$b}});"></p>{{$match['league']}}</td>
     <td>{{date('H:i', $match['time'])}}</td>
-    <td class="host">
+    <td class="host" colspan="2">
         <a class="team" href="{{$matchUrl}}" target="_blank">
             @if($match['h_red'] > 0)
                 <span class="redCard">{{$match['h_red']}}</span>
@@ -126,7 +126,6 @@ $show = false;
             <span class="name">{{$match['hname']}}</span>
         </a>
     </td>
-    <td><a href="{{$matchUrl}}" target="_blank"><img class="icon" src="{{strlen($match['hicon'])>0?$match['hicon'] : (env('CDN_URL') . '/pc/img/icon_teamDefault.png')}}"></a></td>
     <td>
         <a href="{{$matchUrl}}" target="_blank"
            @if($match['status'] == -1 || $match['status'] > 0)
@@ -149,8 +148,7 @@ $show = false;
             </div>
         </div>
     </td>
-    <td><a href="{{$matchUrl}}" target="_blank"><img class="icon" src="{{strlen($match['aicon'])>0?$match['aicon'] : (env('CDN_URL') . '/pc/img/icon_teamDefault.png')}}"></a></td>
-    <td class="away">
+    <td class="away" colspan="2">
         <a class="team" href="{{$matchUrl}}" target="_blank">
             @if($match['a_red'] > 0)
                 <span class="redCard">{{$match['a_red']}}</span>
@@ -207,9 +205,7 @@ $show = false;
         @endif
     </td>
     <td>
-        <a href="">析</a>
-        <a href="">亚</a>
-        <a href="">欧</a>
-        <a href="">大</a>
+        <a target="_blank" href="{{$matchUrl}}">析</a>
+        <a target="_blank" href="/match/foot/odd.html?mid={{$mid}}&type=1">指数</a>
     </td>
 </tr>
