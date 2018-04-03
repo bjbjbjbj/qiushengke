@@ -144,6 +144,7 @@ $show = false;
                         id="{{$mid}}_h_yellow">{{$match['h_yellow']}}</span>
             <span class="name">{{$match['hname']}}</span>
         </a>
+        <img style="display: none" alt="{{$match['hname']}}" id="{{$mid}}_h_icon" class="icon" src="{{strlen($match['hicon'])>0?$match['hicon'] : (env('CDN_URL') . '/pc/img/icon_teamDefault.png')}}">
     </td>
     <td>
         <a href="{{$matchUrl}}" target="_blank"
@@ -181,7 +182,7 @@ $show = false;
             </div>
         </div>
     </td>
-    {{--<td><a href="{{$matchUrl}}" target="_blank"><img alt="{{$match['aname']}}"id="{{$mid}}_a_icon"  class="icon" src="{{strlen($match['aicon'])>0?$match['aicon'] : (env('CDN_URL') . '/pc/img/icon_teamDefault.png')}}"></a></td>--}}
+    <img style="display: none;" alt="{{$match['aname']}}"id="{{$mid}}_a_icon"  class="icon" src="{{strlen($match['aicon'])>0?$match['aicon'] : (env('CDN_URL') . '/pc/img/icon_teamDefault.png')}}">
     <td class="away" colspan="2">
         <a class="team" href="{{$matchUrl}}" target="_blank">
                 <span
@@ -246,7 +247,7 @@ $show = false;
         </a>
     </td>
     <td>
-        <a target="_blank" href="{{$matchUrl}}">析</a>&nbsp;&nbsp;<a target="_blank" href="/match/foot/odd.html?mid={{$mid}}&type=1">指数</a>
+        <a target="_blank" href="{{$matchUrl}}">析</a>&nbsp;&nbsp;<a target="_blank" href="{{$matchUrl}}#odd">指数</a>
     </td>
     {{--<td><button class="top" value="{{$isTop}}"></button></td>--}}
 </tr>
