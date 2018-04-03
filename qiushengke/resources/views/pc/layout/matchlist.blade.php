@@ -788,7 +788,7 @@
                             if(dataItem.status > 0){
                                 var tbody = $('tbody#Live')[0];
                                 var matchTr = document.getElementById('m_tr_' + ID);
-                                if(matchTr) {
+                                if(matchTr && $('tbody#Live tr#' + 'm_tr_' + ID).length == 0) {
                                     tbody.appendChild(matchTr);
                                 }
                                 _updateSection();

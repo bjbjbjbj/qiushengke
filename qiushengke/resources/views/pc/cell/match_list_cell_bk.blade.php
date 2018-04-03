@@ -176,7 +176,10 @@ $liveUrl = \App\Http\Controllers\PC\CommonTool::matchLivePathWithId($match['mid'
             <p class="">{{$ouUp}}</p>
         </td>
         <td rowspan="2">
-            <a target="_blank" href="{{\App\Http\Controllers\PC\CommonTool::matchPathWithId($mid,2)}}">析</a>&nbsp;&nbsp;<a target="_blank" href="/match/foot/odd.html?sport=2&mid={{$mid}}&type=1">指数</a>
+            <?php
+            $matchUrl = \App\Http\Controllers\PC\CommonTool::matchPathWithId($mid,2);
+            ?>
+            <a target="_blank" href="{{$matchUrl}}">析</a>&nbsp;&nbsp;<a target="_blank" href="{{$matchUrl}}#odd">指数</a>
         </td>
     </tr>
     <tr>

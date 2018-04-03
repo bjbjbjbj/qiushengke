@@ -128,9 +128,6 @@ $ouOdd = "ou_" . $ouOddArray['sort'];
         </p>
     </td>
     <td>
-        <a target="_blank" href="{{$matchUrl}}">析</a>
-        <a target="_blank" href="/match/foot/odd.html?mid={{$mid}}&type=1">亚</a>
-        <a target="_blank" href="/match/foot/odd.html?mid={{$mid}}&type=2">欧</a>
-        <a target="_blank" href="/match/foot/odd.html?mid={{$mid}}&type=3">大</a>
+        <a target="_blank" href="{{$matchUrl}}">析</a>  <a target="_blank" href="{{$matchUrl}}#odd">指数</a>
     </td>
 </tr>
