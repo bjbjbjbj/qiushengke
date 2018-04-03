@@ -14,6 +14,8 @@ use App\Http\Controllers\PC\CommonTool;
 use App\Http\Controllers\PC\FileTool;
 use App\Models\QSK\Anchor\AnchorRoom;
 use App\Models\QSK\Anchor\AnchorRoomMatches;
+use App\Models\QSK\Match\MatchLive;
+use App\Models\QSK\Match\MatchLiveChannel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -107,6 +109,40 @@ class LiveController extends BaseController{
     }
 
     /**
+     * 爱看球内容版
+     * 静态化rid对应房间json
+     * @param Request $request
+     * @param $rid
+     */
+    public function staticAKQChannelJson(Request $request,$rid){
+        //电脑
+        $room = MatchLiveChannel::query()->find($rid);
+        if (!isset($room) || $room->show == MatchLiveChannel::kShow) {
+            Storage::disk('public')->put('/json/live/AKQchannel/'.$rid.'.json',json_encode(array('code'=>-1, 'message'=>'no channel')));
+        }
+        $url = $room->content;
+        if ($url && strlen($url) > 0){
+            Storage::disk('public')->put('/json/live/AKQchannel/'.$rid.'.json',json_encode(array('code'=>0,'type'=>$room->type,'url'=>$url,'player'=>$room->player)));
+        }
+        else{
+            Storage::disk('public')->put('/json/live/AKQchannel/'.$rid.'.json',json_encode(array('code'=>-1, 'message'=>'no channel')));
+        }
+
+        //手机
+        $room = MatchLiveChannel::query()->find($rid);
+        if (!isset($room) || $room->show == MatchLiveChannel::kShow) {
+            Storage::disk('public')->put('/json/live/AKQchannel/mobile/'.$rid.'.json',json_encode(array('code'=>-1, 'message'=>'no channel')));
+        }
+        $url = $room->content;
+        if ($url && strlen($url) > 0){
+            Storage::disk('public')->put('/json/live/AKQchannel/mobile/'.$rid.'.json',json_encode(array('code'=>0,'type'=>$room->type,'url'=>$url,'player'=>$room->player)));
+        }
+        else{
+            Storage::disk('public')->put('/json/live/AKQchannel/mobile/'.$rid.'.json',json_encode(array('code'=>-1, 'message'=>'no channel')));
+        }
+    }
+
+    /**
      * 足球直播终端
      * @param Request $request
      * @param $first
@@ -180,6 +216,18 @@ class LiveController extends BaseController{
      * @return \Illuminate\Support\Collection
      */
     private function _getChannelsByMidWithDB($mid,$sport){
+        //爱看球频道
+        $ams = MatchLive::where('match_id',$mid)
+            ->join('match_live_channels',function ($q){
+                $q->where('match_live_channels.show',MatchLiveChannel::kShow);
+                $q->on('match_live_channels.live_id','match_lives.id');
+            })
+            ->where('sport',$sport)
+            ->select('match_live_channels.*')
+            ->get();
+        $ams = $ams->toArray();
+
+        //主播频道
         $room = AnchorRoomMatches::where('mid',$mid)
             ->where('sport',$sport)
             ->join('anchor_rooms',function ($q){
@@ -193,6 +241,8 @@ class LiveController extends BaseController{
                 'anchors.icon as anchor_icon',
                 'anchors.name as anchor_name')
             ->get();
-        return $room;
+        $room = $room->toArray();
+        $result = array_merge($ams,$room);
+        return $result;
     }
 }

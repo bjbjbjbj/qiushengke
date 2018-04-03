@@ -557,10 +557,16 @@
                     @for($i = 0 ; $i < count($lives); $i++)
                         <?php
                         $channel = $lives[$i];
+                        if(isset($channel['anchor_id'])){
+                            $type = 2;
+                        }
+                        else{
+                            $type = 1;
+                        }
                         ?>
                         <?php
                         $preUrl = str_replace("http://","http://",env('APP_URL'));
-                        $link = $preUrl.'/live/player/player-'.$channel['id'].'.html';
+                        $link = $preUrl.'/live/player/player-'.$channel['id'].'-'.$type.'.html';
                         ?>
                         @if($i == count($lives) - 1)
                             <a onclick="changeChannel('{{$link}}',this)" style="width: 25%;">{{$channel['name']}}</a>

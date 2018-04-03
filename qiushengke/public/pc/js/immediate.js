@@ -6,9 +6,6 @@ function setPage() {
             $(this).width($(this).attr('width'))
         })
     })
-    $('#Table .even').parent('').mouseout(function(){
-        $(this).find('dl.tbox span').removeAttr('style');
-    })
     $('#Table .odd').parent('').mouseover(function(){
         getMousePos(this);
     })

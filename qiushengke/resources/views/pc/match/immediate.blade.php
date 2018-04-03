@@ -92,22 +92,18 @@
             {{--@endif--}}
         </table>
         <div id="Simulation">
-            <table>
+            <table style="width: 1016px;">
                 <colgroup>
                     <col num="1" width="3.5%">
-                    <col num="2" width="7.5%">
+                    <col num="2" width="8%">
                     <col num="3" width="4.5%">
-                    <col num="4" width="5%">
+                    <col num="4" width="5.5%">
                     <col num="5">
-                    <col num="6" width="35px">
-                    <col num="7" width="60px">
-                    <col num="8" width="35px">
-                    <col num="9">
                     <col num="10" width="60px">
                     <col num="11" width="60px">
-                    <col num="12" width="206px">
+                    <col num="12" width="186px">
                     <col num="13" width="80px">
-                    {{--<col num="14" width="40px">--}}
+
                 </colgroup>
                 <thead>
                 <tr>
@@ -120,7 +116,7 @@
                     <th>直播</th>
                     <th>指数</th>
                     <th>分析</th>
-                    {{--<th>顶</th>--}}
+
                 </tr>
                 </thead>
             </table>

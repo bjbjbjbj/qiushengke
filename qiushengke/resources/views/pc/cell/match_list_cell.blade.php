@@ -145,7 +145,7 @@ $show = false;
            onmouseover="getMousePos(this); ct=window.setInterval('refreshMatchTech(\'{{$mid}}\')',200)" onmouseout="window.clearInterval(ct)"
                 @endif
         >
-            <p class="fullScore" id="score_{{$mid}}">
+            <p class="vs" id="score_{{$mid}}">
                 @if($status == 0)
                     VS
                 @elseif($status == -1 || $status > 0)

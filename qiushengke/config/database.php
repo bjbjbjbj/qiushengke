@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'mysql'),
+    'default' => env('DB_CONNECTION', 'qsk'),
 
     /*
     |--------------------------------------------------------------------------
@@ -47,6 +47,21 @@ return [
             'username' => env('DB_USERNAME_MATCH', 'root'),
             'password' => env('DB_PASSWORD_MATCH', ''),
             'charset'   => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => true,
+            'engine' => null,
+        ],
+
+        'mysql' => [
+            'driver' => 'mysql',
+            'host' => env('DB_QSK_HOST', '127.0.0.1'),
+            'port' => env('DB_QSK_PORT', '3306'),
+            'database' => env('DB_QSK_DATABASE', 'forge'),
+            'username' => env('DB_QSK_USERNAME', 'forge'),
+            'password' => env('DB_QSK_PASSWORD', ''),
+            'unix_socket' => env('DB_QSK_SOCKET', ''),
+            'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
             'prefix' => '',
             'strict' => true,

@@ -56,6 +56,12 @@ Route::group(['middleware' => 'admin_auth'], function () {
     Route::post('/anchor/matches/book', 'Anchor\MatchController@anchorBook');//主播预约比赛
     Route::post('/anchor/matches/cancel', 'Anchor\MatchController@cancelBook');//主播取消预约比赛
     //比赛相关 结束
+
+    //频道相关,爱看球的比赛直播
+    Route::any('/live-matches', 'Match\MatchController@todayMatch');//今天的足球赛事列表
+    Route::any('/live-matches/basketball', 'Match\MatchController@todayBasketMatch');//今天的篮球赛事列表
+    Route::post('/live-matches/channel/save', 'Match\MatchController@saveChannel');//设置赛事直播频道
+    Route::post('/live-matches/channel/del', 'Match\MatchController@delChannel');//删除赛事直播频道
 });
 
 /**

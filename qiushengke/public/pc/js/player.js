@@ -254,12 +254,21 @@ function countdown() {
     }
 }
 //获取播放地址
-function PlayVideoShare (cid){
+function PlayVideoShare (cid,channel_type){
     var url;
-    if (window.isMobile) {
-        url = GetHttp() + host + '/json/live/channel/mobile/' + cid + '.json';
-    } else {
-        url = GetHttp() + host + '/json/live/channel/' + cid + '.json';
+    if (channel_type == 1) {
+        if (window.isMobile) {
+            url = GetHttp() + host + '/json/live/AKQchannel/mobile/' + cid + '.json';
+        } else {
+            url = GetHttp() + host + '/json/live/AKQchannel/' + cid + '.json';
+        }
+    }
+    else if(channel_type == 2){
+        if (window.isMobile) {
+            url = GetHttp() + host + '/json/live/channel/mobile/' + cid + '.json';
+        } else {
+            url = GetHttp() + host + '/json/live/channel/' + cid + '.json';
+        }
     }
     url = url + '?time=' + (new Date()).getTime();
 	$.ajax({
@@ -268,36 +277,88 @@ function PlayVideoShare (cid){
 		dataType:'json',
 		success:function(data){
 			if (data.code == 0){
-				var type = data.type;
-                if (type == 6){
-                    var Link = getLink(data);
-                    LoadIframe(Link);
-                }
-                else if(type == 2){
-                    var Link = getLink(data);
-                    LoadCK(Link);
-                }
-                else if(type == 1){
-                    //龙珠
-                    var Link = getLink(data);
-                    if (isMobileWithJS())
-                        LoadCK(Link);
-                    else
-                        LoadFlv(Link);
-                }
-                return;
-				var show_live = match.show_live;
-                if (window.isMobile && data.platform && data.platform == 2 && (show_live || match.status == 0)) {//如果是PC端的线路，未开始比赛或者在直播中，则提示
-                    $('#MyFrame').html('<p class="noframe">该比赛暂无手机信号，请使用<b>电脑浏览器</b> 打开<img class="code" src="/img/pc/code.jpg">加微信 <b>fs188fs</b><br/>与球迷赛事交流，乐享高清精彩赛事！</p>')
-                    return;
-                }
-                if(!show_live){
-                    if (match.status && match.status == 0) {
-                        countdownHtml(match.hour_html, match.minute_html, match.second_html);
+				if (channel_type == 2){
+				    //主播频道
+                    var type = data.type;
+                    if (type == 6){
+                        var Link = getLink(data);
+                        LoadIframe(Link);
                     }
-                    return;
-                }else if(show_live){
-
+                    else if(type == 2){
+                        var Link = getLink(data);
+                        LoadCK(Link);
+                    }
+                    else if(type == 1){
+                        //龙珠
+                        var Link = getLink(data);
+                        if (isMobileWithJS())
+                            LoadCK(Link);
+                        else
+                            LoadFlv(Link);
+                    }
+                }
+                else{
+                    //爱看球 频道
+                    if (window.isMobile && data.platform && data.platform == 2) {//如果是PC端的线路，未开始比赛或者在直播中，则提示
+                        $('#MyFrame').html('<p class="noframe">该比赛暂无手机信号，请使用<b>电脑浏览器</b> 打开<img class="code" src="/img/pc/code.jpg">加微信 <b>fs188fs</b><br/>与球迷赛事交流，乐享高清精彩赛事！</p>')
+                        return;
+                    }
+                    //高清线路 处理
+                    if (data.type == 1) { //如果是365，直接播放，不使用链接
+                        var ID = data.id;
+                        LoadSports365(ID)
+                    } else if (data.type == 2) {
+                        var Link = getLink(data);
+                        if (data.playurl) {
+                            LoadIframe(Link);
+                        } else {
+                            CheckPlayerType(Link,0);
+                        }
+                    } else{ //其他，获取播放地址和播放方式
+                        var Link = getLink(data);
+                        var PlayType = data.player;
+                        if (PlayType == 11) { //iframe
+                            LoadIframe(Link)
+                        }else if (PlayType == 12) { //ckplayer
+                            CheckPlayerType(Link,1);
+                        }else if (PlayType == 13) { //m3u8
+                            LoadCK (Link)
+                        }else if (PlayType == 14) { //flv
+                            LoadFlv (Link);
+                        }else if (PlayType == 15) { //rtmp
+                            LoadRtmp (Link)
+                        } else if (PlayType == 17) {
+                            LoadClappr(Link);
+                        }else if(PlayType == 100){//腾讯体育专用
+                            $.ajax({
+                                url: Link,
+                                dataType: "jsonp",
+                                success: function (data) {
+                                    if(data.playurl) {
+                                        Link = data.playurl;
+                                        if (isMobileWithJS()) {
+                                            Link = Link.replace('.flv', '.m3u8');
+                                            LoadCK(Link);
+                                        }
+                                        else {
+                                            if (Link.indexOf('.flv') != -1) {
+                                                LoadFlv(Link);
+                                            }
+                                            else{
+                                                LoadCK(Link);
+                                            }
+                                        }
+                                    }
+                                    else{
+                                        document.getElementById('MyFrame').innerHTML = '<p class="loading">暂无直播信号</p>';
+                                    }
+                                }
+                            });
+                        }
+                        else{
+                            CheckPlayerType(Link,0)
+                        }
+                    }
                 }
             }else{
                 document.getElementById('MyFrame').innerHTML = '<p class="loading">暂无直播信号</p>';
@@ -480,12 +541,14 @@ function playerLink() {
     var param = getParam();
     var cid = param.cid;
     if (cid && cid != '') {
-        PlayVideoShare(cid);
+        PlayVideoShare(cid,param.type);
     }
 }
 
 function getParam() {
     var cid = GetQueryString('cid');
+    //来源 1频道 2主播
+    var type = 0;
     if (cid && cid != '') {  } else {
         var str = window.location.pathname;
         var index = str .lastIndexOf("\/");
@@ -495,8 +558,12 @@ function getParam() {
         if (params.length == 2) {
             cid = params[1];
         }
+        else if (params.length == 3) {
+            cid = params[1];
+            type = params[2];
+        }
     }
-    return {'cid': cid};
+    return {'cid': cid,'type':type};
 }
 
 function checkActive() {

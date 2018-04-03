@@ -53,8 +53,8 @@ class Handler extends ExceptionHandler
 //            }
         }
         else{
-            if (!env('APP_DEBUG'))
-                return redirect('/500.html');
+//            if (!env('APP_DEBUG'))
+//                return redirect('/500.html');
         }
         return parent::render($request, $exception);
     }
