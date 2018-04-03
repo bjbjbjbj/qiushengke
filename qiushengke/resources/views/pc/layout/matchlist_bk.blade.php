@@ -597,12 +597,15 @@
                                     var value = goal['middle'];
                                     var span = table.find('td.goal span')[0];
                                     changeSpanOdd(span, value, false, true);
-                                    $(span).html('大 ' + span.innerHTML);
+                                    var spanStr = span.innerHTML;
+                                    spanStr = spanStr.replace('大 ','');
+                                    $(span).html('大 ' + spanStr);
                                     //客队
                                     var value = goal['middle'];
                                     var span = table.find('td.goal span')[1];
                                     changeSpanOdd(span, value, false, true);
-                                    $(span).html('小 ' + span.innerHTML);
+                                    spanStr = spanStr.replace('小 ','');
+                                    $(span).html('小 ' + spanStr);
                                     var value = goal['down'];
                                     var span = table.find('td.goal p')[1];
                                     changeSpanOdd(span, value, false, false);

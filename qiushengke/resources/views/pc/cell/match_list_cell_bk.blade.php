@@ -24,7 +24,7 @@ $ouUp = "";
 $ouMiddle = "";
 $ouDown = "";
 //    $oddOu = $match->oddOU();
-if (isset($match['goalmiddle2'])) {
+if (isset($match['goalup2'])) {
     $ouUp = \App\Http\Controllers\PC\CommonTool::float2Decimal($match['goalup2']);
     $ouDown = \App\Http\Controllers\PC\CommonTool::float2Decimal($match['goaldown2']);
     $ouMiddle = \App\Http\Controllers\PC\CommonTool::float2Decimal($match['goalmiddle2'], true);
@@ -196,7 +196,7 @@ $liveUrl = \App\Http\Controllers\PC\CommonTool::matchLivePathWithId($match['mid'
         <td class="score fullScore" id="a_score_full_{{$mid}}">{{\App\Http\Controllers\PC\CommonTool::getBasketScore($match['ascore'])}}</td>
         <td id="score_whole_diff_{{$mid}}">{{$whole_diff}}</td>
         <td id="score_whole_total_{{$mid}}">{{$whole_total}}</td>
-        <td>{{\App\Http\Controllers\PC\CommonTool::float2Decimal($match['oudown2'])}}1</td>
+        <td>{{$asiaUp}}</td>
         <td class="asia">
             <p class="">{{$asiaDown}}</p>
         </td>

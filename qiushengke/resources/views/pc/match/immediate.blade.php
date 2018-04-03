@@ -8,13 +8,13 @@
                     <button id="column_first" class="on" onclick="matchFilter('first')">精简</button><button id="column_lottery" onclick="matchFilter('lottery')">竞彩</button><button id="column_live" onclick="matchFilter('live')">直播</button><button id="column_all" onclick="matchFilter('all')">完整</button>
                 </p>
                 <p class="number">共<b>{{$total}}</b>场&nbsp;隐藏<b id="hideMatchCount">-</b>场<span onclick="matchFilter('all')">【显示】</span></p>
-                {{--<div class="sound">--}}
-                    {{--<button onclick="SoundControl()">进球声</button>--}}
-                    {{--<ul>--}}
-                        {{--<li class="on">进球声</li>--}}
-                        {{--<li>静音</li>--}}
-                    {{--</ul>--}}
-                {{--</div>--}}
+                <div class="sound">
+                    <button onclick="SoundControl()">进球声</button>
+                    <ul>
+                        <li class="on">进球声</li>
+                        <li>静音</li>
+                    </ul>
+                </div>
                 <p class="filter"><button class="league">选择赛事</button><button class="odd">选择盘路</button></p>
             </div>
         </div>
@@ -126,6 +126,10 @@
             </table>
         </div>
     </div>
+    <audio id="GoalAudio">
+        <source src="{{$cdn}}/pc/song/song.wav" type="audio/wav">
+        <source src="{{$cdn}}/pc/song/song.mp3" type="audio/mpeg">
+    </audio>
 @endsection
 
 @section('match_list_date')
