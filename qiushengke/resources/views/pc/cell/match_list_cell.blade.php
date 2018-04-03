@@ -161,7 +161,7 @@ $show = false;
                     {{$match['hscore'] .' - '. $match['ascore']}}
                 </p>
                 @else
-                <p class="vs" id="score_{{$mid}}">
+                <p class="fullScore" id="score_{{$mid}}">
                     {{\App\Http\Controllers\PC\CommonTool::getStatusTextCn($status)}}
                 </p>
                 @endif

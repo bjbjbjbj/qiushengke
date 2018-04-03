@@ -113,11 +113,11 @@ if ($total > 0){
                 <td>{{$match['down2']}}</td>
                 @if(isset($match['middle2']))
                     @if($match['h_corner'] + $match['a_corner'] > $match['middle2'])
-                        <td class="green">大</td>
+                        <td class="red">大</td>
                     @elseif($match['h_corner'] + $match['a_corner'] < $match['middle2'])
                         <td class="blue">小</td>
                     @else
-                        <td class="gray">走</td>
+                        <td class="green">走</td>
                     @endif
                 @else
                     <td>-</td>

@@ -27,31 +27,31 @@ for ($i = 0 ; $i < min(10,count($matches));$i++){
     $goalResult = \App\Http\Controllers\PC\OddCalculateTool::getMatchSizeOddResult($match['hscore'],$match['ascore'],$match['goalmiddle1']);
     $ouResult = \App\Http\Controllers\PC\OddCalculateTool::getMatchResult($match['hscore'],$match['ascore'],$match['hid'] == $tid);
     if ($asiaResult == 3) {
-        $asiaCss = "green";
+        $asiaCss = "red";
         $asiaResultCn = "赢";
     } else if ($asiaResult == 0) {
         $asiaCss = "blue";
         $asiaResultCn = "输";
     } else {
-        $asiaCss = "gray";
+        $asiaCss = "green";
         $asiaResultCn = $asiaResult < 0 ? "-" : "走";
     }
     $match['asiaCss'] = $asiaCss;
     $match['asiaResultCn'] = $asiaResultCn;
     if ($goalResult == 3) {
-        $goalCss = "green";
+        $goalCss = "red";
         $goalResultCn = "大";
     } else if ($goalResult == 0) {
-        $goalCss = "yellow";
+        $goalCss = "blue";
         $goalResultCn = "小";
     } else {
-        $goalCss = "gray";
+        $goalCss = "green";
         $goalResultCn = $asiaResult < 0 ? "-" : "走";
     }
     $match['goalCss'] = $goalCss;
     $match['goalResultCn'] = $goalResultCn;
     if ($ouResult == 3){
-        $ouCss = "green";
+        $ouCss = "red";
         $ouResultCn = "胜";
         $h10WinCount++;
         if ($i < 5){
