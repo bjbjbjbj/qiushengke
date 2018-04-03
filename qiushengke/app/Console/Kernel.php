@@ -86,8 +86,9 @@ class Kernel extends ConsoleKernel
         $schedule->command('live_detail_cache:run')->everyTenMinutes();
         $schedule->command('living_detail_cache:run')->everyFiveMinutes();
         $schedule->command('live_detail_json_cache:run')->everyFiveMinutes();
-        $schedule->command('player_json_cache:run')->everyFiveMinutes();
+        $schedule->command('player_json_cache:run')->everyFiveMinutes();//播放的频道静态化
 
+        //其他
         $schedule->command('football_matches_in_db:run')->everyTenMinutes();
         $schedule->command('basketball_matches_in_db:run')->everyTenMinutes();
         $schedule->command('inspire')
