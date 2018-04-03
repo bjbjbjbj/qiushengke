@@ -10,6 +10,10 @@ function setPage() {
     setTotalDifference();
     setTab();
 
+    if (window.location.hash == '#Odd') {
+        $('#Play li[target="Odd"]').trigger('click');
+    }
+
     $('a.totop').click(function(){
         $("html,body").animate({scrollTop:0}, 500);
     })
@@ -186,7 +190,7 @@ function setHistory () {
 }
 
 function setTotalAsia() {
-    $('#Total .asia .fh button').click(function(){
+    $('#Odd .asia .fh button').click(function(){
         if (!$(this).hasClass('on')) {
             var Part = $(this).parents('.part');
             Part.find('.fh button').removeClass('on');
@@ -198,7 +202,7 @@ function setTotalAsia() {
 }
 
 function setTotalGoal() {
-    $('#Total .goal .fh button').click(function(){
+    $('#Odd .goal .fh button').click(function(){
         if (!$(this).hasClass('on')) {
             var Part = $(this).parents('.part');
             Part.find('.fh button').removeClass('on');
@@ -210,7 +214,7 @@ function setTotalGoal() {
 }
 
 function setTotalAverage() {
-    $('#Total .average .num button').click(function(){
+    $('#Odd .average .num button').click(function(){
         if (!$(this).hasClass('on')) {
             var Part = $(this).parents('.part');
             Part.find('.num button').removeClass('on');
@@ -222,7 +226,7 @@ function setTotalAverage() {
 }
 
 function setTotalTotal() {
-    $('#Total .total .num button').click(function(){
+    $('#Odd .total .num button').click(function(){
         if (!$(this).hasClass('on')) {
             var Part = $(this).parents('.part');
             Part.find('.num button').removeClass('on');
@@ -234,7 +238,7 @@ function setTotalTotal() {
 }
 
 function setTotalDifference() {
-    $('#Total .difference .num button').click(function(){
+    $('#Odd .difference .num button').click(function(){
         if (!$(this).hasClass('on')) {
             var Part = $(this).parents('.part');
             Part.find('.num button').removeClass('on');
@@ -253,21 +257,22 @@ function setTab() {
             }
 
             $('#Play li').removeClass('on');
-            $('#Match, #Data, #Total').css('display','none');
+            $('#Odd, #Data').css('display','none');
 
             $(this).addClass('on');
             $('#' + $(this).attr('target')).css('display','');
         }
     })
 
-    window.onscroll = function () {
-        // console.log($('#Control').offset().top)
-        if ((document.documentElement.scrollTop || document.body.scrollTop) > 330) {
-            $('#Play').addClass('fixed')
-        }else{
-            $('#Play').removeClass('fixed')
+    $('#Odd .tabLine button').click(function(){
+        if (!$(this).hasClass('on')) {
+            $('#Odd .tabLine button').removeClass('on');
+            $('#AllOdd, #AsiaOdd, #EuropeOdd, #GoalOdd, #Corner').css('display','none');
+
+            $(this).addClass('on');
+            $('#' + $(this).val()).css('display','');
         }
-    }
+    })
 
 }
 

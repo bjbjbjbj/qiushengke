@@ -212,7 +212,6 @@ $show = false;
         @endif
     </td>
     <td>
-        <a target="_blank" href="{{$matchUrl}}">析</a>
-        <a target="_blank" href="/match/foot/odd.html?mid={{$mid}}&type=1">指数</a>
+        <a target="_blank" href="{{$matchUrl}}">析</a>&nbsp;&nbsp;<a target="_blank" href="/match/foot/odd.html?mid={{$mid}}&type=1">指数</a>
     </td>
 </tr>

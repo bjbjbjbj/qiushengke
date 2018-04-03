@@ -3,6 +3,52 @@ body{
 	padding-top: 160px;
 }
 
+/*浮动区域*/
+#Play{
+	position: fixed; top: 180px; left: 0; right: 0;
+}
+#Play.fixed{
+	position: fixed; top: 20px;
+}
+#Play .abox{
+	max-width: 1460px; min-width: 1260px;
+	margin: 0 auto;
+}
+#Play .abox ul{
+	width: 90px;
+	margin-left: 20px;
+	border-radius: 8px;
+	background: #fff;
+	box-shadow: 0px 4px 5px 0px rgba(0, 64, 36, 0.4);
+	overflow: hidden;
+}
+#Play .abox ul li, #Play .abox a.li{
+	height: 50px;
+	font-size: 15px; line-height: 50px; text-align: center;
+	position: relative;
+	display: block;
+	cursor: pointer;
+}
+#Play .abox ul li:hover, #Play .abox ul a.li:hover{
+	color: #2b9968;
+}
+#Play .abox ul li + li:before, #Play .abox ul a.li + li:before, #Play .abox ul li + a.li:before, #Play .abox ul a.li + a.li:before{
+	height: 1px;
+	background: #e0e0e0;
+	position: absolute; top: 0; left: 15px; right: 15px;
+	content: '';
+}
+#Play .abox ul li.on{
+	background: #2b9968;
+	color: #fff;
+}
+#Play .abox ul li.on:hover{
+	color: #fff;
+}
+#Play .abox ul li.on:before, #Play .abox ul a.on + li:before{
+	display: none;
+}
+
 #Match{
 	height: 100px;
 	background: #fff;

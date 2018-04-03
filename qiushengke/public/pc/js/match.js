@@ -10,6 +10,10 @@ function setPage() {
     setCorHistory();
     setTab();
 
+    if (window.location.hash == '#Odd') {
+        $('#Play li[target="Odd"]').trigger('click');
+    }
+
     $('a.totop').click(function(){
         $("html,body").animate({scrollTop:0}, 500);
     })
@@ -49,28 +53,28 @@ function setPredictionCanvas () {
 }
 
 function setSameOdd () {
-    $('#Character .sameOdd .tabBox button').click(function(){
+    $('#Odd .sameOdd .tabBox button').click(function(){
         if (!$(this).hasClass('on')) {
-            $('#Character .sameOdd .tabBox button').removeClass('on');
-            $('#Character .sameOdd .con').css('display','none');
+            $('#Odd .sameOdd .tabBox button').removeClass('on');
+            $('#Odd .sameOdd .con').css('display','none');
 
             $(this).addClass('on')
-            $('#Character .sameOdd .' + $(this).val()).css('display','block');
+            $('#Odd .sameOdd .' + $(this).val()).css('display','block');
         }
     });
 
-    $('#Character .sameOdd .con button').click(function(){
+    $('#Odd .sameOdd .con button').click(function(){
         if (!$(this).hasClass('on')) {
-            $('#Character .sameOdd .con button').removeClass('on')
-            $('#Character .sameOdd .con .result').css('display','none');
+            $('#Odd .sameOdd .con button').removeClass('on')
+            $('#Odd .sameOdd .con .result').css('display','none');
 
-            $('#Character .sameOdd .con button[value="' + $(this).val() + '"]').addClass('on');
-            $('#Character .sameOdd .con .result[num="' + $(this).val() + '"]').css('display','block');
+            $('#Odd .sameOdd .con button[value="' + $(this).val() + '"]').addClass('on');
+            $('#Odd .sameOdd .con .result[num="' + $(this).val() + '"]').css('display','block');
 
             if ($(this).val() == 5 || $(this).val() == '5') {
-                $('#Character .sameOdd .asia tbody tr:gt(4), #Character .sameOdd .goal tbody tr:gt(4), #Character .sameOdd .europe tbody tr:gt(4)').css('display','none');
+                $('#Odd .sameOdd .asia tbody tr:gt(4), #Odd .sameOdd .goal tbody tr:gt(4), #Odd .sameOdd .europe tbody tr:gt(4)').css('display','none');
             }else{
-                $('#Character .sameOdd .con tbody tr').css('display','');
+                $('#Odd .sameOdd .con tbody tr').css('display','');
             }
         }
     })
@@ -91,13 +95,13 @@ function setSameOdd () {
     }
 
     function cleanTB (obj) {
-        $('#Character .sameOdd table').removeAttr('choose');
+        $('#Odd .sameOdd table').removeAttr('choose');
     }
 
-    $('#Character .sameOdd td').mouseover(function(){
+    $('#Odd .sameOdd td').mouseover(function(){
         setTB(this);
     })
-    $('#Character .sameOdd table').mouseout(function(){
+    $('#Odd .sameOdd table').mouseout(function(){
         cleanTB(this);
     })
 }
@@ -418,15 +422,26 @@ function setCorHistory () {
 function setTab() {
     $('#Play li').click(function(){
         if (!$(this).hasClass('on')) {
-            if ((document.documentElement.scrollTop || document.body.scrollTop) > 560) {
-                $("html,body").animate({scrollTop:560}, 0);
+            if ((document.documentElement.scrollTop || document.body.scrollTop) > 180) {
+                alert((document.documentElement.scrollTop || document.body.scrollTop))
+                $("html,body").animate({scrollTop:180}, 0);
             }
 
             $('#Play li').removeClass('on');
-            $('#Match, #Character, #Data, #Corner').css('display','none');
+            $('#Data, #Odd').css('display','none');
 
             $(this).addClass('on');
             $('#' + $(this).attr('target')).css('display','');
+        }
+    })
+
+    $('#Odd .tabLine button').click(function(){
+        if (!$(this).hasClass('on')) {
+            $('#Odd .tabLine button').removeClass('on');
+            $('#AllOdd, #AsiaOdd, #EuropeOdd, #GoalOdd, #Corner').css('display','none');
+
+            $(this).addClass('on');
+            $('#' + $(this).val()).css('display','');
         }
     })
 

@@ -1,5 +1,5 @@
 <div id="Corner" style="display: none;">
-    <div class="odd" style="display: none">
+    <div class="odd" style="">
         <p class="title">角球指数</p>
         <table>
             <tr>

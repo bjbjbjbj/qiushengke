@@ -151,15 +151,19 @@ $show = false;
            onmouseover="getMousePos(this); ct=window.setInterval('refreshMatchTech(\'{{$mid}}\')',200)" onmouseout="window.clearInterval(ct)"
                 @endif
         >
-            <p class="vs" id="score_{{$mid}}">
                 @if($status == 0)
+                <p class="vs" id="score_{{$mid}}">
                     VS
+                </p>
                 @elseif($status == -1 || $status > 0)
+                <p class="fullScore" id="score_{{$mid}}">
                     {{$match['hscore'] .' - '. $match['ascore']}}
+                </p>
                 @else
+                <p class="vs" id="score_{{$mid}}">
                     {{\App\Http\Controllers\PC\CommonTool::getStatusTextCn($status)}}
+                </p>
                 @endif
-            </p>
             @if($status == -1 || $status > 0)
                 <p class="halfScore" id="half_score_{{$mid}}">半 {{$match['hscorehalf'] .' - '. $match['ascorehalf']}}</p>
             @endif
@@ -242,8 +246,7 @@ $show = false;
         </a>
     </td>
     <td>
-        <a target="_blank" href="{{$matchUrl}}">析</a>
-        <a target="_blank" href="/match/foot/odd.html?mid={{$mid}}&type=1">指数</a>
+        <a target="_blank" href="{{$matchUrl}}">析</a>&nbsp;&nbsp;<a target="_blank" href="/match/foot/odd.html?mid={{$mid}}&type=1">指数</a>
     </td>
     {{--<td><button class="top" value="{{$isTop}}"></button></td>--}}
 </tr>

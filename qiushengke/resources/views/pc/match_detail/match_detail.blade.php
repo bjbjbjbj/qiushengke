@@ -2,32 +2,35 @@
 @section('navContent')
     @component('pc.layout.nav_content',['type'=>0])
     @endcomponent
-    @component('pc.cell.top_leagues',['links'=>$footLeagues])
-    @endcomponent
 @endsection
 @section('content')
+    <?php
+    $rank = isset($analyse['rank']) ? $analyse['rank'] : null;
+    ?>
+    @component('pc.match_detail.foot_cell.head',['match'=>$match,'analyse'=>$analyse,'rank'=>$rank])
+    @endcomponent
     <div id="Con">
-        <?php
-        $rank = isset($analyse['rank']) ? $analyse['rank'] : null;
-        ?>
-        @component('pc.match_detail.foot_cell.head',['match'=>$match,'analyse'=>$analyse,'rank'=>$rank])
-        @endcomponent
-        @component('pc.match_detail.foot_cell.base',['match'=>$match,'rank'=>$rank,'tech'=>$tech,'lineup'=>$lineup])
-        @endcomponent
-        @component('pc.match_detail.foot_cell.character',['match'=>$match,'analyse'=>$analyse])
-        @endcomponent
+        {{--@component('pc.match_detail.foot_cell.base',['match'=>$match,'rank'=>$rank,'tech'=>$tech,'lineup'=>$lineup])--}}
+        {{--@endcomponent--}}
+        {{--@component('pc.match_detail.foot_cell.character',['match'=>$match,'analyse'=>$analyse])--}}
+        {{--@endcomponent--}}
         @component('pc.match_detail.foot_cell.data',['match'=>$match,'analyse'=>$analyse])
         @endcomponent
-        @component('pc.match_detail.foot_cell.corner',['match'=>$match,'analyse'=>$analyse])
+        @component('pc.match_detail.foot_cell.odd_data',['cur_match'=>$match,'analyse'=>$analyse])
         @endcomponent
     </div>
     <div id="Play">
         <div class="abox">
             <ul>
-                <li class="on" target="Match">比赛赛况</li>
-                <li target="Character">特色数据</li>
-                <li target="Data">数据分析</li>
-                <li target="Corner">角球数据</li>
+                <li class="on" target="Data">数据分析</li>
+                <li target="Odd">综合指数</li>
+                <?php
+                $liveUrl = \App\Http\Controllers\PC\CommonTool::matchLivePathWithId($match['mid'],1);
+                ?>
+                <a class="li" href="{{$liveUrl}}">比赛直播</a>
+                <!-- <li target="Match">比赛赛况</li> -->
+                <!-- <li target="Character">特色数据</li> -->
+                <!-- <li target="Corner">角球数据</li> -->
             </ul>
         </div>
     </div>
@@ -104,14 +107,14 @@
                 'success':function (json) {
                     var keys = Object.keys(json);
                     if (keys.length > 0){
-                        $('div#Data div.odd')[0].style.display = '';
-                        var tbody = $('div#Data div.odd table tbody');
+                        $('div#AllOdd div.odd')[0].style.display = '';
+                        var tbody = $('div#AllOdd div.odd table tbody');
                         tbody.html('')
                         for (var i = 0 ; i < keys.length ; i++){
                             var item = json[keys[i]];
-                            if(2 != item['id'] && 5 != item['id'] && 12 != item['id']){
-                                continue;
-                            }
+//                            if(2 != item['id'] && 5 != item['id'] && 12 != item['id']){
+//                                continue;
+//                            }
                             var tr = '<tr>'+
                                     '<td rowspan="2">'+item['name']+'</td>'+
                                     '<td>初盘</td>';
@@ -205,6 +208,118 @@
                             tr = tr+'</tr>';
                             //终盘
                             tbody.append(tr);
+                        }
+                    }
+
+                    //指数的刷新
+                    var sport = 1;
+                    var keys = Object.keys(json);
+                    if (keys.length > 0){
+                        var tbodya = $('div#AsiaOdd div.tableIn tbody');
+                        tbodya.html('');
+                        var tbodyg = $('div#GoalOdd div.tableIn tbody');
+                        tbodyg.html('');
+                        var tbodye = $('div#EuropeOdd div.tableIn tbody');
+                        tbodye.html('');
+                        for (var i = 0 ; i < keys.length ; i++){
+                            var item = json[keys[i]];
+                            var tr = '';
+                            //亚盘
+                            if (item['asia']){
+                                var data = item['asia'];
+                                tr = '<tr>'+
+                                        '<td>'+item['name']+'</td>';
+                                if(data['middle1']){
+                                    tr = tr + '<td>'+data['up1']+'</td>'+
+                                            '<td>'+getHandicapCn(data['middle1'],'',1,sport,true)+'</td>'+
+                                            '<td>'+data['down1']+'</td>';
+                                }
+                                else{
+                                    tr = tr +
+                                            '<td>-</td>'+
+                                            '<td>-</td>'+
+                                            '<td>-</td>';
+                                }
+                                if(data['middle2']){
+                                    tr = tr + '<td>'+data['up2']+'</td>'+
+                                            '<td>'+getHandicapCn(data['middle2'],'',1,sport,true)+'</td>'+
+                                            '<td>'+data['down2']+'</td>';
+                                }
+                                else{
+                                    tr = tr +
+                                            '<td>-</td>'+
+                                            '<td>-</td>'+
+                                            '<td>-</td>';
+                                }
+                                tr = tr + '</tr>';
+                                tbodya.append(tr);
+                            }
+
+                            //欧盘
+                            if (item['ou']){
+                                var data = item['ou'];
+                                tr = '<tr>'+
+                                        '<td>'+item['name']+'</td>';
+                                if(data['middle1']){
+                                    tr = tr + '<td>'+data['up1']+'</td>'+
+                                            '<td>'+data['middle1']+'</td>'+
+                                            '<td>'+data['down1']+'</td>';
+                                }
+                                else{
+                                    tr = tr +
+                                            '<td>-</td>'+
+                                            '<td>-</td>'+
+                                            '<td>-</td>';
+                                }
+                                if(data['middle2']){
+                                    tr = tr + '<td>'+data['up2']+'</td>'+
+                                            '<td>'+data['middle2']+'</td>'+
+                                            '<td>'+data['down2']+'</td>';
+                                }
+                                else{
+                                    tr = tr +
+                                            '<td>-</td>'+
+                                            '<td>-</td>'+
+                                            '<td>-</td>';
+                                }
+                                tr = tr + '</tr>';
+                                tbodye.append(tr);
+                            }
+
+                            //大小球
+                            if (item['goal']){
+                                var data = item['goal'];
+                                tr = '<tr>'+
+                                        '<td>'+item['name']+'</td>';
+                                if(data['middle1']){
+                                    var pankou = getHandicapCn(data['middle1'],'',2,sport,true) + '';
+                                    pankou = pankou.replace('让','');
+                                    tr = tr + '<td>'+data['up1']+'</td>'+
+                                            '<td>'+pankou+'</td>'+
+                                            '<td>'+data['down1']+'</td>';
+                                }
+                                else{
+                                    tr = tr +
+                                            '<td>-</td>'+
+                                            '<td>-</td>'+
+                                            '<td>-</td>';
+                                }
+                                if(data['middle2']){
+                                    var pankou = getHandicapCn(data['middle2'],'',2,sport,true) + '';
+                                    pankou = pankou.replace('让','');
+                                    tr = tr + '<td>'+data['up2']+'</td>'+
+                                            '<td>'+pankou+'</td>'+
+                                            '<td>'+data['down2']+'</td>';
+                                }
+                                else{
+                                    tr = tr +
+                                            '<td>-</td>'+
+                                            '<td>-</td>'+
+                                            '<td>-</td>';
+                                }
+                                tr = tr + '</tr>';
+                                tbodyg.append(tr);
+                            }
                         }
                     }
                 }
