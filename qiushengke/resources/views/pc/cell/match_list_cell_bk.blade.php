@@ -39,10 +39,17 @@ if (isset($match['oumiddle2'])) {
 }
 
 //赛事背景色
-$bgRgb = \App\Http\Controllers\PC\CommonTool::getLeagueBgRgb($lid);
-$r = $bgRgb['r'];
-$g = $bgRgb['g'];
-$b = $bgRgb['b'];
+if(isset($match['color'])){
+    $r = hexdec(substr($match['color'],0,2));
+    $g = hexdec(substr($match['color'],2,2));
+    $b = hexdec(substr($match['color'],4,2));
+}
+else{
+    $bgRgb = \App\Http\Controllers\PC\CommonTool::getLeagueBgRgb($lid);
+    $r = $bgRgb['r'];
+    $g = $bgRgb['g'];
+    $b = $bgRgb['b'];
+}
 
 //是否是NBA
 $isNBA = $lid == 1;

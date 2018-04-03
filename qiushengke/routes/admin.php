@@ -62,6 +62,10 @@ Route::group(['middleware' => 'admin_auth'], function () {
     Route::any('/live-matches/basketball', 'Match\MatchController@todayBasketMatch');//今天的篮球赛事列表
     Route::post('/live-matches/channel/save', 'Match\MatchController@saveChannel');//设置赛事直播频道
     Route::post('/live-matches/channel/del', 'Match\MatchController@delChannel');//删除赛事直播频道
+    //赛事设置
+    Route::any('/leagues', 'Match\LeagueController@footballLeague');//今天的足球赛事列表
+    Route::any('/leagues/basketball', 'Match\LeagueController@basketballLeague');//今天的篮球赛事列表
+    Route::post('/leagues/save', 'Match\LeagueController@saveLeague');//设置赛事
 });
 
 /**

@@ -97,10 +97,17 @@ $cell_odd['all']['3']['middle2'] = $match['oumiddle2'];
 $cell_odd['all']['3']['down2'] = $match['oudown2'];
 
 //赛事背景色
-$bgRgb = \App\Http\Controllers\PC\CommonTool::getLeagueBgRgb($lid);
-$r = $bgRgb['r'];
-$g = $bgRgb['g'];
-$b = $bgRgb['b'];
+if(isset($match['color'])){
+    $r = hexdec(substr($match['color'],0,2));
+    $g = hexdec(substr($match['color'],2,2));
+    $b = hexdec(substr($match['color'],4,2));
+}
+else{
+    $bgRgb = \App\Http\Controllers\PC\CommonTool::getLeagueBgRgb($lid);
+    $r = $bgRgb['r'];
+    $g = $bgRgb['g'];
+    $b = $bgRgb['b'];
+}
 
 $asiaOddArray = \App\Http\Controllers\PC\CommonTool::getMatchOdds($match['asiamiddle2'], \App\Http\Controllers\PC\CommonTool::k_odd_type_asian);
 $typeCn = $asiaOddArray['typeCn'];
