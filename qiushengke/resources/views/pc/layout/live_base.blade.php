@@ -8,6 +8,13 @@
         .show{
             display: block;
         }
+
+        #Odd table td.up:after{
+            background: url({{$cdn}}/pc/img/handicap_icon_up_n@2x.png) no-repeat center; background: url({{$cdn}}/pc/img/handicap_icon_up_n.png) no-repeat center\0/; background-size: 12px;
+        }
+        #Odd table td.down:after{
+            background: url({{$cdn}}/pc/img/handicap_icon_down_n@2x.png) no-repeat center; background: url({{$cdn}}/pc/img/handicap_icon_down_n.png) no-repeat center\0/; background-size: 12px;
+        }
     </style>
 @endsection
 @section('js')
@@ -192,11 +199,11 @@
                 _updateOdd(tbody, 'o', '1', json[key]['3'], '1');
                 _updateOdd(tbody, 'g', '1', json[key]['2'], '1');
                 if(json[key]['1'])
-                    _updateOdd(tbody, 'a', '2', json[key]['1'], json[key]['1']['middle'] == null ? '2' : '');
+                    _updateOdd(tbody, 'a', '2', json[key]['1'], (json[key]['1']['middle'] == null || '{{$match['status']}}' == -1) ? '2' : '');
                 if(json[key]['2'])
-                    _updateOdd(tbody, 'o', '2', json[key]['3'], json[key]['2']['middle'] == null ? '2' : '');
+                    _updateOdd(tbody, 'o', '2', json[key]['3'], (json[key]['2']['middle'] == null || '{{$match['status']}}' == -1) ? '2' : '');
                 if(json[key]['3'])
-                    _updateOdd(tbody, 'g', '2', json[key]['2'], json[key]['3']['middle'] == null ? '2' : '');
+                    _updateOdd(tbody, 'g', '2', json[key]['2'], (json[key]['3']['middle'] == null || '{{$match['status']}}' == -1) ? '2' : '');
             }
         }
 
@@ -233,10 +240,10 @@
                 }
                 var p = tbody.find('td.' + key + 'mid' + key2)[0];
                 if ('a' == key) {
-                    middle = getHandicapCn(middle, '', 1, 1, true);
+                    middle = getHandicapCn(middle, '', 1, '{{$sport}}', true);
                 }
                 else if ('g' == key) {
-                    middle = getHandicapCn(middle, '', 2, 1, true);
+                    middle = getHandicapCn(middle, '', 2, '{{$sport}}', true);
                 }
                 if (p) {
                     p.innerHTML = middle;
@@ -354,7 +361,7 @@
                             @endif
                             @if(isset($roll['half']['1']) && isset($roll['half']['1']['up']))
                                 <td class=" odd aup2" value="{{$roll['half']['1']['up']}}">{{$roll['half']['1']['up']}}</td>
-                                <td class=" odd amid2" value="{{$roll['half']['1']['middle']}}">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['half']['1']['middle'])}}</td>
+                                <td class=" odd amid2" value="{{$roll['half']['1']['middle']}}">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['half']['1']['middle'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_asian,$sport)}}</td>
                                 <td class=" odd adown2" value="{{$roll['half']['1']['down']}}">{{$roll['half']['1']['down']}}</td>
                             @else
                                 <td class=" odd aup2">-</td>
@@ -363,7 +370,7 @@
                             @endif
                             @if(isset($roll['half']['2']) && isset($roll['half']['2']['up']))
                                 <td class="green odd gup2" value="{{$roll['half']['2']['up']}}">{{$roll['half']['2']['up']}}</td>
-                                <td class="green odd gmid2" value="{{$roll['half']['2']['middle']}}">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['half']['2']['middle'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou)}}</td>
+                                <td class="green odd gmid2" value="{{$roll['half']['2']['middle']}}">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['half']['2']['middle'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou,$sport)}}</td>
                                 <td class="green odd gdown2" value="{{$roll['half']['2']['down']}}">{{$roll['half']['2']['down']}}</td>
                             @else
                                 <td class="green odd gup2">-</td>
@@ -403,7 +410,7 @@
                             @endif
                             @if(isset($roll['all']['1']) && isset($roll['all']['1']['up']))
                                 <td class="green odd aup2" value="{{$roll['all']['1']['up']}}">{{$roll['all']['1']['up']}}</td>
-                                <td class="green odd amid2" value="{{$roll['all']['1']['middle']}}">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['1']['middle'])}}</td>
+                                <td class="green odd amid2" value="{{$roll['all']['1']['middle']}}">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['1']['middle'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_asian,$sport)}}</td>
                                 <td class="green odd adown2" value="{{$roll['all']['1']['down']}}">{{$roll['all']['1']['down']}}</td>
                             @else
                                 <td class="green odd aup2">-</td>
@@ -412,7 +419,7 @@
                             @endif
                             @if(isset($roll['all']['2']) && isset($roll['all']['2']['up']))
                                 <td class=" odd gup2" value="{{$roll['all']['2']['up']}}">{{$roll['all']['2']['up']}}</td>
-                                <td class=" odd gmid2" value="{{$roll['all']['2']['middle']}}">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['2']['middle'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou)}}</td>
+                                <td class=" odd gmid2" value="{{$roll['all']['2']['middle']}}">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['2']['middle'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou,$sport)}}</td>
                                 <td class=" odd gdown2" value="{{$roll['all']['2']['down']}}">{{$roll['all']['2']['down']}}</td>
                             @else
                                 <td class=" odd gup2">-</td>
@@ -453,7 +460,7 @@
                             @endif
                             @if(isset($roll['all']['1']) && isset($roll['all']['1']['up1']))
                                 <td class=" odd aup1" value="{{$roll['all']['1']['up1']}}">{{$roll['all']['1']['up1']}}</td>
-                                <td class=" odd amid1" value="{{$roll['all']['1']['middle1']}}">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['1']['middle1'])}}</td>
+                                <td class=" odd amid1" value="{{$roll['all']['1']['middle1']}}">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['1']['middle1'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_asian,$sport)}}</td>
                                 <td class=" odd adown1" value="{{$roll['all']['1']['down1']}}">{{$roll['all']['1']['down1']}}</td>
                             @else
                                 <td class=" odd aup1">-</td>
@@ -462,7 +469,7 @@
                             @endif
                             @if(isset($roll['all']['2']) && isset($roll['all']['2']['up1']))
                                 <td class="green odd gup1" value="{{$roll['all']['2']['up1']}}">{{$roll['all']['2']['up1']}}</td>
-                                <td class="green odd gmid1" value="{{$roll['all']['2']['middle1']}}">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['2']['middle1'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou)}}</td>
+                                <td class="green odd gmid1" value="{{$roll['all']['2']['middle1']}}">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['2']['middle1'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou,$sport)}}</td>
                                 <td class="green odd gdown1" value="{{$roll['all']['2']['down1']}}">{{$roll['all']['2']['down1']}}</td>
                             @else
                                 <td class="green odd gup1">-</td>
@@ -487,7 +494,7 @@
                             @endif
                             @if(isset($roll['all']['1']) && isset($roll['all']['1']['up1']))
                                 <td class="green odd aup2" value="{{$roll['all']['1']['up2']}}">{{$roll['all']['1']['up2']}}</td>
-                                <td class="green odd amid2" value="{{$roll['all']['1']['middle2']}}">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['1']['middle2'])}}</td>
+                                <td class="green odd amid2" value="{{$roll['all']['1']['middle2']}}">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['1']['middle2'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_asian,$sport)}}</td>
                                 <td class="green odd adown2" value="{{$roll['all']['1']['down2']}}">{{$roll['all']['1']['down2']}}</td>
                             @else
                                 <td class="green odd aup2">-</td>
@@ -496,7 +503,7 @@
                             @endif
                             @if(isset($roll['all']['2']) && isset($roll['all']['2']['up1']))
                                 <td class=" odd gup2" value="{{$roll['all']['2']['up2']}}">{{$roll['all']['2']['up2']}}</td>
-                                <td class=" odd gmid2" value="{{$roll['all']['2']['middle2']}}">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['2']['middle2'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou)}}</td>
+                                <td class=" odd gmid2" value="{{$roll['all']['2']['middle2']}}">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($roll['all']['2']['middle2'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou,$sport)}}</td>
                                 <td class=" odd gdown2" value="{{$roll['all']['2']['down2']}}">{{$roll['all']['2']['down2']}}</td>
                             @else
                                 <td class=" odd gup2">-</td>
@@ -530,7 +537,7 @@
                             @endif
                             @if(isset($match['asiaup1']))
                                 <td class=" odd aup1" value="{{$match['asiaup1']}}">{{$match['asiaup1']}}</td>
-                                <td class=" odd amid1" value="{{$match['asiamiddle1']}}">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($match['asiamiddle1'])}}</td>
+                                <td class=" odd amid1" value="{{$match['asiamiddle1']}}">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($match['asiamiddle1'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_asian,$sport)}}</td>
                                 <td class=" odd adown1" value="{{$match['asiadown1']}}">{{$match['asiadown1']}}</td>
                             @else
                                 <td class=" odd aup1">-</td>
@@ -539,7 +546,7 @@
                             @endif
                             @if(isset($match['goalup1']))
                                 <td class="green odd gup1" value="{{$match['goalup1']}}">{{$match['goalup1']}}</td>
-                                <td class="green odd gmid1" value="{{$match['goalmiddle1']}}">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($match['goalmiddle1'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou)}}</td>
+                                <td class="green odd gmid1" value="{{$match['goalmiddle1']}}">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($match['goalmiddle1'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou,$sport)}}</td>
                                 <td class="green odd gdown1" value="{{$match['goaldown1']}}">{{$match['goaldown1']}}</td>
                             @else
                                 <td class="green odd gup1">-</td>
@@ -564,7 +571,7 @@
                             @endif
                             @if(isset($match['asiaup2']))
                                 <td class="green odd aup2" value="{{$match['asiaup2']}}">{{$match['asiaup2']}}</td>
-                                <td class="green odd amid2" value="{{$match['asiamiddle2']}}">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($match['asiamiddle2'])}}</td>
+                                <td class="green odd amid2" value="{{$match['asiamiddle2']}}">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($match['asiamiddle2'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_asian,$sport)}}</td>
                                 <td class="green odd adown2" value="{{$match['asiadown2']}}">{{$match['asiadown2']}}</td>
                             @else
                                 <td class="green odd aup2">-</td>
@@ -573,7 +580,7 @@
                             @endif
                             @if(isset($match['goalup2']))
                                 <td class=" odd gup2" value="{{$match['goalup2']}}">{{$match['goalup2']}}</td>
-                                <td class=" odd gmid2" value="{{$match['goalmiddle2']}}">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($match['goalmiddle2'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou)}}</td>
+                                <td class=" odd gmid2" value="{{$match['goalmiddle2']}}">{{\App\Http\Controllers\PC\CommonTool::getHandicapCn($match['goalmiddle2'],'-',\App\Http\Controllers\PC\CommonTool::k_odd_type_ou,$sport)}}</td>
                                 <td class=" odd gdown2" value="{{$match['goaldown2']}}">{{$match['goaldown2']}}</td>
                             @else
                                 <td class=" odd gup2">-</td>

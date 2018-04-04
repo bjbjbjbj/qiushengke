@@ -1376,6 +1376,27 @@ body{
 	padding-left: 20px;
 	text-align: left; color: #c52601;
 }
+#Odd .odd table td.up{
+	color: #c52601;
+}
+#Odd .odd table td.down{
+	color: #9ace4a;
+}
+#Odd .odd table td.up:after, #Odd .odd table td.down:after{
+	width: 12px; height: 12px;
+	margin: 3px 0 0 5px;
+	position: absolute;
+	content: '';
+}
+#Odd .odd table td.up:after{
+	background: url(../img/handicap_icon_up_n@2x.png) no-repeat center; background: url(../img/handicap_icon_up_n.png) no-repeat center\0/; background-size: 12px;
+}
+#Odd .odd table td.down:after{
+	background: url(../img/handicap_icon_down_n@2x.png) no-repeat center; background: url(../img/handicap_icon_down_n.png) no-repeat center\0/; background-size: 12px;
+}
+#Odd .odd table td.gambling:after{
+	display: none;
+}
 
 /*Odd表格*/
 #Odd .tableIn{
@@ -1437,7 +1458,27 @@ body{
 #Odd .tableIn table tr td span.blue{
 	color: #1661c7;
 }
-
+#Odd .tableIn table td.up{
+	color: #c52601;
+}
+#Odd .tableIn table td.down{
+	color: #9ace4a;
+}
+#Odd .tableIn table td.up:after, #Odd .tableIn table td.down:after{
+	width: 12px; height: 12px;
+	margin: 3px 0 0 5px;
+	position: absolute;
+	content: '';
+}
+#Odd .tableIn table td.up:after{
+	background: url(../img/handicap_icon_up_n@2x.png) no-repeat center; background: url(../img/handicap_icon_up_n.png) no-repeat center\0/; background-size: 12px;
+}
+#Odd .tableIn table td.down:after{
+	background: url(../img/handicap_icon_down_n@2x.png) no-repeat center; background: url(../img/handicap_icon_down_n.png) no-repeat center\0/; background-size: 12px;
+}
+#Odd .tableIn table td.gambling:after{
+	display: none;
+}
 
 
 

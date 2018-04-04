@@ -94,6 +94,16 @@
                 }
             });
         }
+
+        function _getClassOfUPDOWN(o2,o1,isMiddle) {
+            if (isMiddle){
+                return parseFloat(o2) > parseFloat(o1) ? 'gambling up':(parseFloat(o2) < parseFloat(o1) ? 'gambling down':'');
+            }
+            else{
+                return parseFloat(o2) > parseFloat(o1) ? 'up':(parseFloat(o2) < parseFloat(o1) ? 'down':'');
+            }
+        }
+
         //刷新赔率
         function refreshOdd() {
             var mid = '{{$match['mid']}}';
@@ -166,10 +176,18 @@
                             tr = '<tr>'+
                                     '<td>终盘</td>';
                             if (item['ou']){
+                                var className1 = '';
+                                var className2 = '';
+                                var className3 = '';
+                                if (item['ou']['middle1']){
+                                    className1 = _getClassOfUPDOWN(item['ou']['up2'],item['ou']['up1'],false);
+                                    className2 = _getClassOfUPDOWN(item['ou']['middle2'],item['ou']['middle1'],true);
+                                    className3 = _getClassOfUPDOWN(item['ou']['down2'],item['ou']['down1'],false);
+                                }
                                 tr = tr +
-                                        '<td>'+item['ou']['up2']+'</td>'+
-                                        '<td>'+item['ou']['middle2']+'</td>'+
-                                        '<td>'+item['ou']['down2']+'</td>';
+                                        '<td class="' + className1 + '">'+item['ou']['up2']+'</td>'+
+                                        '<td class="' + className2 + '">'+item['ou']['middle2']+'</td>'+
+                                        '<td class="' + className3 + '">'+item['ou']['down2']+'</td>';
                             }
                             else{
                                 tr = tr +
@@ -178,10 +196,18 @@
                                         '<td>-</td>';
                             }
                             if (item['asia']){
+                                var className1 = '';
+                                var className2 = '';
+                                var className3 = '';
+                                if (item['asia']['middle1']){
+                                    className1 = _getClassOfUPDOWN(item['asia']['up2'],item['asia']['up1'],false);
+                                    className2 = _getClassOfUPDOWN(item['asia']['middle2'],item['asia']['middle1'],true);
+                                    className3 = _getClassOfUPDOWN(item['asia']['down2'],item['asia']['down1'],false);
+                                }
                                 tr = tr +
-                                        '<td>'+item['asia']['up2']+'</td>'+
-                                        '<td>'+panKouText(item['asia']['middle2'],false)+'</td>'+
-                                        '<td>'+item['asia']['down2']+'</td>'+
+                                        '<td class="' + className1 + '">'+item['asia']['up2']+'</td>'+
+                                        '<td class="' + className2 + '">'+panKouText(item['asia']['middle2'],false)+'</td>'+
+                                        '<td class="' + className3 + '">'+item['asia']['down2']+'</td>'+
                                         '<td>'+(parseFloat(item['asia']['down2'])+parseFloat(item['asia']['up2'])).toFixed(2)+'</td>';
                             }
                             else{
@@ -192,10 +218,18 @@
                                         '<td>-</td>';
                             }
                             if (item['goal']){
+                                var className1 = '';
+                                var className2 = '';
+                                var className3 = '';
+                                if (item['goal']['middle1']){
+                                    className1 = _getClassOfUPDOWN(item['goal']['up2'],item['goal']['up1'],false);
+                                    className2 = _getClassOfUPDOWN(item['goal']['middle2'],item['goal']['middle1'],true);
+                                    className3 = _getClassOfUPDOWN(item['goal']['down2'],item['goal']['down1'],false);
+                                }
                                 tr = tr +
-                                        '<td>'+item['goal']['up2']+'</td>'+
-                                        '<td>'+panKouText(item['goal']['middle2'],false)+'</td>'+
-                                        '<td>'+item['goal']['down2']+'</td>'+
+                                        '<td class="' + className1 + '">'+item['goal']['up2']+'</td>'+
+                                        '<td class="' + className2 + '">'+panKouText(item['goal']['middle2'],false)+'</td>'+
+                                        '<td class="' + className3 + '">'+item['goal']['down2']+'</td>'+
                                         '<td>'+(parseFloat(item['goal']['down2'])+parseFloat(item['goal']['up2'])).toFixed(2)+'</td>';
                             }
                             else{
@@ -241,9 +275,17 @@
                                             '<td>-</td>';
                                 }
                                 if(data['middle2']){
-                                    tr = tr + '<td>'+data['up2']+'</td>'+
-                                            '<td>'+getHandicapCn(data['middle2'],'',1,sport,true)+'</td>'+
-                                            '<td>'+data['down2']+'</td>';
+                                    var className1 = '';
+                                    var className2 = '';
+                                    var className3 = '';
+                                    if (data['middle1']){
+                                        className1 = _getClassOfUPDOWN(data['up2'],data['up1'],false);
+                                        className2 = _getClassOfUPDOWN(data['middle2'],data['middle1'],true);
+                                        className3 = _getClassOfUPDOWN(data['down2'],data['down1'],false);
+                                    }
+                                    tr = tr + '<td class="' + className1 + '">'+data['up2']+'</td>'+
+                                            '<td class="' + className2 + '">'+getHandicapCn(data['middle2'],'',1,sport,true)+'</td>'+
+                                            '<td class="' + className3 + '">'+data['down2']+'</td>';
                                 }
                                 else{
                                     tr = tr +
@@ -272,9 +314,17 @@
                                             '<td>-</td>';
                                 }
                                 if(data['middle2']){
-                                    tr = tr + '<td>'+data['up2']+'</td>'+
-                                            '<td>'+data['middle2']+'</td>'+
-                                            '<td>'+data['down2']+'</td>';
+                                    var className1 = '';
+                                    var className2 = '';
+                                    var className3 = '';
+                                    if (data['middle1']){
+                                        className1 = _getClassOfUPDOWN(data['up2'],data['up1'],false);
+                                        className2 = _getClassOfUPDOWN(data['middle2'],data['middle1'],true);
+                                        className3 = _getClassOfUPDOWN(data['down2'],data['down1'],false);
+                                    }
+                                    tr = tr + '<td class="' + className1 + '">'+data['up2']+'</td>'+
+                                            '<td class="' + className2 + '">'+data['middle2']+'</td>'+
+                                            '<td class="' + className3 + '">'+data['down2']+'</td>';
                                 }
                                 else{
                                     tr = tr +
@@ -305,11 +355,19 @@
                                             '<td>-</td>';
                                 }
                                 if(data['middle2']){
+                                    var className1 = '';
+                                    var className2 = '';
+                                    var className3 = '';
+                                    if (data['middle1']){
+                                        className1 = _getClassOfUPDOWN(data['up2'],data['up1'],false);
+                                        className2 = _getClassOfUPDOWN(data['middle2'],data['middle1'],true);
+                                        className3 = _getClassOfUPDOWN(data['down2'],data['down1'],false);
+                                    }
                                     var pankou = getHandicapCn(data['middle2'],'',2,sport,true) + '';
                                     pankou = pankou.replace('让','');
-                                    tr = tr + '<td>'+data['up2']+'</td>'+
-                                            '<td>'+pankou+'</td>'+
-                                            '<td>'+data['down2']+'</td>';
+                                    tr = tr + '<td class="' + className1 + '">'+data['up2']+'</td>'+
+                                            '<td class="' + className2 + '">'+pankou+'</td>'+
+                                            '<td class="' + className3 + '">'+data['down2']+'</td>';
                                 }
                                 else{
                                     tr = tr +

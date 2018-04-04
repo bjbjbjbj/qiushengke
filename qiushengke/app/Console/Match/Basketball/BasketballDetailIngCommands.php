@@ -49,8 +49,6 @@ class BasketballDetailIngCommands extends Command
      */
     public function handle()
     {
-        echo '33333';
-        return;
         $startDate = date('Ymd');
         $pc_json = FileTool::matchListDataJson($startDate,2);
         if (!isset($pc_json)) {
