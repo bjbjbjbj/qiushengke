@@ -9,6 +9,7 @@ use App\Console\Live\LiveCommands;
 use App\Console\Live\LiveDetailJsonCommands;
 use App\Console\Live\LivingCommands;
 use App\Console\Live\PlayerJsonCommands;
+use App\Console\Match\Basketball\BasketballCurDetailCommands;
 use App\Console\Match\Basketball\BasketballDetailCommands;
 use App\Console\Match\Basketball\BasketballDetailIngCommands;
 use App\Console\Match\BasketballMatchCommands;
@@ -39,6 +40,7 @@ class Kernel extends ConsoleKernel
         //篮球终端
         BasketballDetailCommands::class,
         BasketballDetailIngCommands::class,
+        BasketballCurDetailCommands::class,
         //专题
         FootballCommands::class,
         BasketballCommands::class,
