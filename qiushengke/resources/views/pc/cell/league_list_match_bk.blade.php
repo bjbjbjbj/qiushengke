@@ -64,9 +64,6 @@ $aicon = strlen($match['aicon'])>0?$match['aicon'] : (env('CDN_URL') . '/pc/img/
     <td>{{$asiaMiddle}}</td>
     <td>{{$goalMiddle}}</td>
     <td>
-        <a href="">析</a>
-        <a href="">亚</a>
-        <a href="">欧</a>
-        <a href="">大</a>
+        <a target="_blank" href="{{$matchUrl}}">析</a>  <a target="_blank" href="{{$matchUrl}}#odd">指数</a>
     </td>
 </tr>
