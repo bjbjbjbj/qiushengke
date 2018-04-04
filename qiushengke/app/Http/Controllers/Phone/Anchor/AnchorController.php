@@ -65,7 +65,7 @@ class AnchorController extends BaseController{
 
         foreach ($lives as $live) {
             $sport = $live->sport;
-            $mid = $live->id;
+            $mid = $live->mid;
             if ($sport == 2) {
                 $live['match'] = $this->liveBasketMatches[$mid];
             } else {
