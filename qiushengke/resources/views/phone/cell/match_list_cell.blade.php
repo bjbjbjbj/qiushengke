@@ -6,6 +6,10 @@ $lid = $match['lid'];
 $matchTime = \App\Http\Controllers\PC\CommonTool::getMatchWapCurrentTime($match['time'],$match['timehalf'],$match['status']);;
 
 $matchUrl = \App\Http\Controllers\PC\CommonTool::matchWapPathWithId($mid,$sport);
+
+if($status > 0)
+    $matchUrl = $matchUrl.'#Match';
+
 if (empty($matchTime)) {
     $lineup = $match['has_lineup'];//首发 \App\Models\Match\MatchLineup::query()->find($match->id);//
 }

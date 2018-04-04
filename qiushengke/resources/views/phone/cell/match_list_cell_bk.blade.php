@@ -8,6 +8,8 @@ $isHalfFormat = $match['system'] == 1;
 $matchTime = \App\Http\Controllers\PC\CommonTool::getBasketCurrentTime($status, $match['live_time_str'], $isHalfFormat);
 $matchTime = explode(' ',$matchTime)[0];
 $matchUrl = \App\Http\Controllers\PC\CommonTool::matchWapPathWithId($mid,2);
+if($status > 0)
+    $matchUrl = $matchUrl.'#Match';
 
 //亚赔
 $asiaUp = "-";

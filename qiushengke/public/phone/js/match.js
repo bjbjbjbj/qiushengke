@@ -37,6 +37,10 @@ function setPage(){
     Hale.change(function(){
         $(this).parents('.default').attr(this.value,this.checked?1:0)
     })
+
+    if (window.location.hash && window.location.hash != '') {
+        $('#Tab input[value="' + window.location.hash.replace('#','') + '"]').trigger('click');
+    }
 }
 
 function setHead () {
