@@ -192,10 +192,10 @@ class CommonTool
      */
     public static function colorOfWapUpDown($up1, $up2) {
         if ($up2 > $up1){
-            return 'green';
+            return 'up';
         }
         elseif ($up2 < $up1){
-            return 'blue';
+            return 'down';
         }
         return '';
     }

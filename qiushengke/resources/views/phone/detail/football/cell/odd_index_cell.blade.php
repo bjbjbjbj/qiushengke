@@ -22,22 +22,22 @@
                     <td>
                         <p>{{$odd['asia']['up1']}}</p>
                         <p
-                                @if($odd['asia']['up2'] > $odd['asia']['up1']) class="red" @endif
-                        @if($odd['asia']['up2'] < $odd['asia']['up1']) class="green" @endif
+                                @if($odd['asia']['up2'] > $odd['asia']['up1']) class="up" @endif
+                        @if($odd['asia']['up2'] < $odd['asia']['up1']) class="down" @endif
                         >{{$odd['asia']['up2']}}</p>
                     </td>
                     <td>
                         <p>{{$odd['asia']['middle1']}}</p>
                         <p
-                                @if($odd['asia']['middle2'] > $odd['asia']['middle1']) class="red" @endif
-                        @if($odd['asia']['middle2'] < $odd['asia']['middle1']) class="green" @endif
+                                @if($odd['asia']['middle2'] > $odd['asia']['middle1']) class="gambling up" @endif
+                        @if($odd['asia']['middle2'] < $odd['asia']['middle1']) class="gambling down" @endif
                         >{{$odd['asia']['middle2']}}</p>
                     </td>
                     <td>
                         <p>{{$odd['asia']['down1']}}</p>
                         <p
-                                @if($odd['asia']['down2'] > $odd['asia']['down1']) class="red" @endif
-                        @if($odd['asia']['down2'] < $odd['asia']['down1']) class="green" @endif
+                                @if($odd['asia']['down2'] > $odd['asia']['down1']) class="up" @endif
+                        @if($odd['asia']['down2'] < $odd['asia']['down1']) class="down" @endif
                         >{{$odd['asia']['down2']}}</p>
                     </td>
                 </tr>
@@ -70,24 +70,24 @@
                     <td>
                         <p>{{$odd['ou']['up1']}}</p>
                         <p
-                                @if($odd['ou']['up2'] > $odd['ou']['up1']) class="red" @endif
-                        @if($odd['ou']['up2'] < $odd['ou']['up1']) class="green" @endif
+                                @if($odd['ou']['up2'] > $odd['ou']['up1']) class="up" @endif
+                        @if($odd['ou']['up2'] < $odd['ou']['up1']) class="down" @endif
                         >{{$odd['ou']['up2']}}</p>
                     </td>
                     @if(!isset($isBasket))
                         <td>
                             <p>{{number_format($odd['ou']['middle1'],2)}}</p>
                             <p
-                                    @if($odd['ou']['middle2'] > $odd['ou']['middle1']) class="red" @endif
-                            @if($odd['ou']['middle2'] < $odd['ou']['middle1']) class="green" @endif
+                                    @if($odd['ou']['middle2'] > $odd['ou']['middle1']) class="gambling up" @endif
+                            @if($odd['ou']['middle2'] < $odd['ou']['middle1']) class="gambling down" @endif
                             >{{number_format($odd['ou']['middle2'],2)}}</p>
                         </td>
                     @endif
                     <td>
                         <p>{{$odd['ou']['down1']}}</p>
                         <p
-                                @if($odd['ou']['down2'] > $odd['ou']['down1']) class="red" @endif
-                        @if($odd['ou']['down2'] < $odd['ou']['down1']) class="green" @endif
+                                @if($odd['ou']['down2'] > $odd['ou']['down1']) class="up" @endif
+                        @if($odd['ou']['down2'] < $odd['ou']['down1']) class="down" @endif
                         >{{$odd['ou']['down2']}}</p>
                     </td>
                 </tr>
@@ -118,22 +118,22 @@
                     <td>
                         <p>{{$odd['goal']['up1']}}</p>
                         <p
-                                @if($odd['goal']['up2'] > $odd['goal']['up1']) class="red" @endif
-                        @if($odd['goal']['up2'] < $odd['goal']['up1']) class="green" @endif
+                                @if($odd['goal']['up2'] > $odd['goal']['up1']) class="up" @endif
+                        @if($odd['goal']['up2'] < $odd['goal']['up1']) class="down" @endif
                         >{{$odd['goal']['up2']}}</p>
                     </td>
                     <td>
                         <p>{{\App\Http\Controllers\PC\CommonTool::getOddMiddleString($odd['goal']['middle1'])}}</p>
                         <p
-                                @if($odd['goal']['middle2'] > $odd['goal']['middle1']) class="red" @endif
-                        @if($odd['goal']['middle2'] < $odd['goal']['middle1']) class="green" @endif
+                                @if($odd['goal']['middle2'] > $odd['goal']['middle1']) class="up" @endif
+                        @if($odd['goal']['middle2'] < $odd['goal']['middle1']) class="down" @endif
                         >{{\App\Http\Controllers\PC\CommonTool::getOddMiddleString($odd['goal']['middle2'])}}</p>
                     </td>
                     <td>
                         <p>{{$odd['goal']['down1']}}</p>
                         <p
-                                @if($odd['goal']['down2'] > $odd['goal']['down1']) class="red" @endif
-                        @if($odd['goal']['down2'] < $odd['goal']['down1']) class="green" @endif
+                                @if($odd['goal']['down2'] > $odd['goal']['down1']) class="up" @endif
+                        @if($odd['goal']['down2'] < $odd['goal']['down1']) class="down" @endif
                         >{{$odd['goal']['down2']}}</p>
                     </td>
                 </tr>
