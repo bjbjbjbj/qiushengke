@@ -140,7 +140,7 @@ $show = false;
                 @endif
         >
             <p class="fullScore">{{$match['hscore'] .' - '. $match['ascore']}}</p>
-            <p class="halfScore">半 {{$match['hscorehalf'] .' - '. $match['ascorehalf']}}</p>
+            <p class="halfScore" style="display: none;">半 {{$match['hscorehalf'] .' - '. $match['ascorehalf']}}</p>
         </a>
         <div class="even">
             <p class="team">

@@ -135,8 +135,11 @@
 	position: absolute; top: 50%; left: 0; right: 0;
 	content: '(半)';
 }
+#List .match .halfScore.none:after{
+	display: none;
+}
 #List .match .fullScore p{
-	font-size: 26px; line-height: 70px; text-align: center;
+	font-size: 26px; line-height: 70px; text-align: center; color: #c52601; font-weight: bold;
 }
 #List .match .halfScore p{
 	font-size: 26px; line-height: 70px; text-align: center; color: #c1c1c1;

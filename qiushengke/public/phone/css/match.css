@@ -1214,7 +1214,7 @@ div#Trait .prediction dl dd.teamStr .part[level="1"]:after{
 
 /*角球*/
 div#Corner{
-	margin-bottom: 120px;
+	/*margin-bottom: 120px;*/
 }
 div#Corner .odd{
 
