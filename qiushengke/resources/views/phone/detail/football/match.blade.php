@@ -6,16 +6,16 @@
     @component("phone.detail.football.cell.info_cell", ['cdn'=>$cdn, 'match'=>$match]) {{-- Navigation Info 模块 --}}
     @endcomponent
     <div id="Tab" class="tab">
-        <input type="radio" name="tab_type" id="Type_Match" value="Match" checked>
+        <input type="radio" name="tab_type" id="Type_Match" value="Match">
         <label for="Type_Match"><span>赛况</span></label>
-        <input type="radio" name="tab_type" id="Type_Data" value="Data">
+        <input type="radio" name="tab_type" id="Type_Data" value="Data" checked>
         <label for="Type_Data"><span>分析</span></label>
-        <input type="radio" name="tab_type" id="Type_Team" value="Team">
-        <label for="Type_Team"><span>球队</span></label>
         <input type="radio" name="tab_type" id="Type_Odd" value="Odd">
         <label for="Type_Odd"><span>指数</span></label>
         <input type="radio" name="tab_type" id="Type_SameOdd" value="SameOdd">
         <label for="Type_SameOdd"><span>同赔</span></label>
+        <input type="radio" name="tab_type" id="Type_Team" value="Team">
+        <label for="Type_Team"><span>角球</span></label>
     </div>
     @component("phone.detail.football.cell.match_cell", ['cdn'=>$cdn, 'lineup'=>$lineup, 'tech'=>$tech, 'match'=>$match ]) {{-- Match 模块 --}}
     @endcomponent

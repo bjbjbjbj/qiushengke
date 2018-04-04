@@ -89,12 +89,12 @@
         @endcomponent
         @endif
     </div>
-    <div class="bottom">
-        <div class="btn">
-            <input type="radio" name="Team" id="Team_Trait" value="Trait" checked>
-            <label for="Team_Trait">特点</label>
-            <input type="radio" name="Team" id="Team_Corner" value="Corner">
-            <label for="Team_Corner">角球</label>
-        </div>
-    </div>
+    {{--<div class="bottom">--}}
+        {{--<div class="btn">--}}
+            {{--<input type="radio" name="Team" id="Team_Trait" value="Trait" checked>--}}
+            {{--<label for="Team_Trait">特点</label>--}}
+            {{--<input type="radio" name="Team" id="Team_Corner" value="Corner">--}}
+            {{--<label for="Team_Corner">角球</label>--}}
+        {{--</div>--}}
+    {{--</div>--}}
 </div>

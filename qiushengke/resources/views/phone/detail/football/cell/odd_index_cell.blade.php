@@ -125,8 +125,8 @@
                     <td>
                         <p>{{\App\Http\Controllers\PC\CommonTool::getOddMiddleString($odd['goal']['middle1'])}}</p>
                         <p
-                                @if($odd['goal']['middle2'] > $odd['goal']['middle1']) class="up" @endif
-                        @if($odd['goal']['middle2'] < $odd['goal']['middle1']) class="down" @endif
+                                @if($odd['goal']['middle2'] > $odd['goal']['middle1']) class="gambling up" @endif
+                        @if($odd['goal']['middle2'] < $odd['goal']['middle1']) class="gambling down" @endif
                         >{{\App\Http\Controllers\PC\CommonTool::getOddMiddleString($odd['goal']['middle2'])}}</p>
                     </td>
                     <td>

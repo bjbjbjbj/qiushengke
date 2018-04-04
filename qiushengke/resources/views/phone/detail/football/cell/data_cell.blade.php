@@ -1,4 +1,4 @@
-<div id="Data" class="content" style="display: none;">
+<div id="Data" class="content" style="">
     <div class="odd default"></div>
     @if(isset($analyse['rank']))
         <?php
