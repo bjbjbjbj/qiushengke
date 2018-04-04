@@ -70,6 +70,18 @@
         <!--li的数量必须是3的倍数，不够使用空li-->
         </ul>
     </div>
+    <?php
+    $matchUrl = \App\Http\Controllers\PC\CommonTool::matchPathWithId($match['mid'],2);
+    ?>
+    <div id="Play">
+        <div class="abox">
+            <ul>
+                <a class="li" href="{{$matchUrl}}">数据分析</a>
+                <a class="li" href="{{$matchUrl}}#odd">综合指数</a>
+                <li class="on" target="Data">比赛直播</li>
+            </ul>
+        </div>
+    </div>
 @endsection
 
 @section('live_content')

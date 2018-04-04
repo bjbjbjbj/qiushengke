@@ -177,7 +177,7 @@ body{
 }
 #Info .mbox dl dd{
 	width: 170px; height: 100px;
-	font-size: 18px; line-height: 100px;
+	font-size: 18px; line-height: 100px; vertical-align: top;
 	position: relative;
 	overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 	display: inline-block;
@@ -205,18 +205,19 @@ body{
 /*预测*/
 #Prediction{
 	height: 210px;
-	padding: 12px 290px 0; margin-bottom: 20px;
-	border-top: 2px solid #2b9968;
-	background: #fff;
+	padding: 0 290px; margin-bottom: 20px;
 	position: relative; z-index: 2;
 }
+#Prediction:before{
+	border-top: 2px solid #2b9968;
+	background: #fff;
+	position: absolute; top: 40px; left: 0; bottom: 0; right: 0;
+	content: '';
+}
 #Prediction p.name{
-	height: 30px;
-	margin: 0 -270px 20px;
-    font-size: 14px;
-    line-height: 30px;
-    text-align: left;
-    color: #2b9968;
+	height: 40px;
+	margin: 0 -270px 30px;
+    font-size: 14px; line-height: 40px; text-align: center; color: #2b9968;
     /*position: absolute; top: 12px; left: 20px; right: 0;*/
 }
 #Prediction .pbox{
@@ -897,19 +898,24 @@ body{
 
 /*攻防能力*/
 #Data .attack{
-	padding: 12px 0 30px; margin-bottom: 20px;
+	padding: 0 0 30px; margin-bottom: 20px;
+	position: relative;
+}
+#Data .attack:before{
 	border-top: 2px solid #2b9968;
 	background: #fff;
+	position: absolute; top: 40px; bottom: 0; left: 0; right: 0;
+	content: '';
 }
 #Data .attack .title{
-	height: 30px;
-	padding-left: 20px;
-	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+	height: 40px;
+	padding-left: 20px; margin-bottom: 60px;
+	font-size: 14px; line-height: 40px; text-align: center; color: #2b9968;
 }
 #Data .attack .tabBox{
 	height: 28px; width: 160px;
-	margin: 10px auto;
 	border-radius: 2px; border: 1px solid #2b9968;
+	position: absolute; top: 6px; right: 20px;
 }
 #Data .attack .tabBox button{
 	width: 80px; height: 28px;
@@ -922,6 +928,7 @@ body{
 }
 #Data .attack table{
 	width: 100%;
+	position: relative; z-index: 1;
 }
 #Data .attack table th{
 	height: 38px;
@@ -962,9 +969,14 @@ body{
 
 /*联赛排名*/
 #Data .league{
-	padding: 12px 20px 30px; margin-bottom: 20px;
+	padding: 0 20px 30px; margin-bottom: 20px;
+	position: relative;
+}
+#Data .league:before{
 	border-top: 2px solid #2b9968;
 	background: #fff;
+	position: absolute; top: 40px; bottom: 0; left: 0; right: 0;
+	content: '';
 }
 #Data .league:after{
 	display: block;
@@ -972,13 +984,14 @@ body{
 	content: '';
 }
 #Data .league .title{
-	height: 30px;
-	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+	height: 40px;
+	font-size: 14px; line-height: 40px; text-align: center; color: #2b9968;
 }
 #Data .league .part{
 	width: 48.5%;
-	padding-top: 8px;
+	padding-top: 20px;
 	text-align: center;
+	position: relative; z-index: 1;
 }
 #Data .league .part.host{
 	float: left;
@@ -1018,33 +1031,37 @@ body{
 
 /*对赛往绩*/
 #Data .battle{
-	padding-top: 12px; margin-bottom: 20px;
+	margin-bottom: 20px;
+	position: relative;
+}
+#Data .battle:before{
 	border-top: 2px solid #2b9968;
 	background: #fff;
+	position: absolute; top: 40px; bottom: 0; left: 0; right: 0;
+	content: '';
 }
 #Data .battle .title{
-	height: 30px;
-	padding-left: 20px;
-	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+	height: 40px;
+	font-size: 14px; line-height: 40px; text-align: center; color: #2b9968;
 }
 #Data .battle .cbox{
 	height: 14px;
-	margin: 8px 0 36px;
+	margin: 0 0 36px;
 	line-height: 14px; text-align: center;
-	position: relative;
+	position: absolute; top: 13px; right: 20px; z-index: 1
 }
 #Data .battle .cbox button[name=ha], #Data .battle .cbox button[name=ma]{
 	height: 14px;
 	padding-left: 22px;
-	background: #fff;
-	font-size: 12px; line-height: 14px; color: #adadad;
+	background: none;
+	font-size: 12px; line-height: 14px; color: #666;
 	position: relative;
 }
 #Data .battle .cbox button[name=ha]:hover, #Data .battle .cbox button[name=ma]:hover{
 	color: #2b9968;
 }
 #Data .battle .cbox button[name=ha]{
-	margin-left: 40px;
+	margin-left: 20px;
 }
 #Data .battle .cbox button[name=ha]:before, #Data .battle .cbox button[name=ma]:before{
 	width: 12px; height: 12px;
@@ -1057,13 +1074,15 @@ body{
 }
 #Data .battle .cbox .num{
 	height: 28px;
+	margin-left: 30px;
 	text-align: right;
-	position: absolute; right: 43px; top: -14px;
+	float: right;
+	position: relative; top: -8px;
 }
 #Data .battle .cbox .num button{
 	height: 28px; width: 50px;
-	margin-left: 35px;
-	background: #fff;
+	margin-left: 20px;
+	background: none;
 	font-size: 14px; color: #adadad;
 }
 #Data .battle .cbox .num button.on{
@@ -1084,7 +1103,7 @@ body{
 }
 #Data .battle .con .canBox{
 	height: 80px;
-	padding: 5px 0 30px 50px;
+	padding: 35px 0 30px 50px;
 	text-align: center;
 }
 #Data .battle .con .canBox dl{
@@ -1146,6 +1165,7 @@ body{
 }
 #Data .battle table{
 	width: 100%;
+	position: relative; z-index: 1;
 }
 #Data .battle table th{
 	height: 20px;
@@ -1230,19 +1250,25 @@ body{
 
 /*最近战绩*/
 #Data .history{
-	padding-top: 12px; margin-bottom: 20px;
+	margin-bottom: 20px;
+	position: relative;
+}
+#Data .history:before{
 	border-top: 2px solid #2b9968;
 	background: #fff;
+	position: absolute; top: 40px; bottom: 0; left: 0; right: 0;
+	content: '';
 }
 #Data .history .title{
-	height: 30px;
+	height: 40px;
 	padding-left: 20px;
-	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+	font-size: 14px; line-height: 40px; text-align: center; color: #2b9968;
 }
 #Data .history .team{
 	height: 40px;
-	padding-bottom: 10px;
+	padding: 10px 0 25px;
 	text-align: center;
+	position: relative; z-index: 1;
 }
 #Data .history .team button{
 	min-width: 200px; height: 40px;
@@ -1260,22 +1286,22 @@ body{
 }
 #Data .history .cbox{
 	height: 14px;
-	margin: 8px 0 36px;
+	margin: 0 0 36px;
 	line-height: 14px; text-align: center;
-	position: relative;
+	position: absolute; top: 13px; right: 20px; z-index: 1
 }
 #Data .history .cbox button[name=ha], #Data .history .cbox button[name=ma]{
 	height: 14px;
 	padding-left: 22px;
-	background: #fff;
-	font-size: 12px; line-height: 14px; color: #adadad;
+	background: none;
+	font-size: 12px; line-height: 14px; color: #666;
 	position: relative;
 }
 #Data .history .cbox button[name=ha]:hover, #Data .history .cbox button[name=ma]:hover{
 	color: #2b9968;
 }
 #Data .history .cbox button[name=ha]{
-	margin-left: 40px;
+	margin-left: 20px;
 }
 #Data .history .cbox button[name=ha]:before, #Data .history .cbox button[name=ma]:before{
 	width: 12px; height: 12px;
@@ -1288,13 +1314,15 @@ body{
 }
 #Data .history .cbox .num{
 	height: 28px;
+	margin-left: 30px;
 	text-align: right;
-	position: absolute; right: 43px; top: -14px;
+	float: right;
+	position: relative; top: -8px;
 }
 #Data .history .cbox .num button{
 	height: 28px; width: 50px;
-	margin-left: 35px;
-	background: #fff;
+	margin-left: 20px;
+	background: none;
 	font-size: 14px; color: #adadad;
 }
 #Data .history .cbox .num button.on{
@@ -1396,6 +1424,7 @@ body{
 }
 #Data .history table{
 	width: 100%;
+	position: relative; z-index: 1;
 }
 #Data .history table th{
 	height: 20px;
@@ -1480,9 +1509,14 @@ body{
 
 /*赛事盘路*/
 #Data .trend{
-	padding: 12px 20px 30px; margin-bottom: 20px;
+	padding: 0 20px 30px; margin-bottom: 20px;
+	position: relative;
+}
+#Data .trend:before{
 	border-top: 2px solid #2b9968;
 	background: #fff;
+	position: absolute; top: 40px; left: 0; right: 0; bottom: 0;
+	content: '';
 }
 #Data .trend:after{
 	display: block;
@@ -1490,13 +1524,14 @@ body{
 	content: '';
 }
 #Data .trend .title{
-	height: 30px;
-	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+	height: 40px;
+	font-size: 14px; line-height: 40px; text-align: center; color: #2b9968;
 }
 #Data .trend .part{
 	width: 48.5%;
-	padding-top: 8px;
+	padding-top: 20px;
 	text-align: center;
+	position: relative; z-index: 1;
 }
 #Data .trend .part.host{
 	float: left;
@@ -1533,9 +1568,14 @@ body{
 
 /*未来赛程*/
 #Data .future{
-	padding: 12px 20px 30px; margin-bottom: 20px;
+	padding: 0 20px 30px; margin-bottom: 20px;
+	position: relative;
+}
+#Data .future:before{
 	border-top: 2px solid #2b9968;
 	background: #fff;
+	position: absolute; top: 40px; left: 0; right: 0; bottom: 0;
+	content: '';
 }
 #Data .future:after{
 	display: block;
@@ -1543,13 +1583,14 @@ body{
 	content: '';
 }
 #Data .future .title{
-	height: 30px;
-	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+	height: 40px;
+	font-size: 14px; line-height: 40px; text-align: center; color: #2b9968;
 }
 #Data .future .part{
 	width: 48.5%;
-	padding-top: 8px;
+	padding-top: 20px;
 	text-align: center;
+	position: relative; z-index: 1;
 }
 #Data .future .part.host{
 	float: left;
@@ -1626,6 +1667,7 @@ body{
 	height: 30px;
 	padding-left: 20px;
 	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+	display: none;
 }
 #Odd .odd .abox{
 	height: 30px;
@@ -1667,23 +1709,50 @@ body{
 	padding-left: 10px;
 	text-align: left; color: #c52601;
 }
+#Odd .odd table td.up{
+	color: #c52601;
+}
+#Odd .odd table td.down{
+	color: #9ace4a;
+}
+#Odd .odd table td.up:after, #Odd .odd table td.down:after{
+	width: 12px; height: 12px;
+	margin: 3px 0 0 5px;
+	position: absolute;
+	content: '';
+}
+#Odd .odd table td.up:after{
+	background: url(../img/handicap_icon_up_n@2x.png) no-repeat center; background: url(../img/handicap_icon_up_n.png) no-repeat center\0/; background-size: 12px;
+}
+#Odd .odd table td.down:after{
+	background: url(../img/handicap_icon_down_n@2x.png) no-repeat center; background: url(../img/handicap_icon_down_n.png) no-repeat center\0/; background-size: 12px;
+}
+#Odd .odd table td.gambling:after{
+	display: none;
+}
 
 
 /*同赔*/
 #Odd .sameOdd{
-	padding-top: 12px; margin-bottom: 20px;
+	margin-bottom: 20px;
+	position: relative;
+}
+#Odd .sameOdd:before{
 	border-top: 2px solid #2b9968;
 	background: #fff;
+	position: absolute; top: 40px; left: 0; right: 0; bottom: 0;
+	content: '';
 }
 #Odd .sameOdd .title{
-	height: 30px;
+	height: 40px;
 	padding-left: 20px;
-	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+	font-size: 14px; line-height: 40px; text-align: center; color: #2b9968;
 }
 #Odd .sameOdd .tabBox{
 	height: 28px; width: 240px;
-	margin: 10px auto 20px;
+	margin: 20px auto;
 	border-radius: 2px; border: 1px solid #2b9968;
+	position: relative; z-index: 1;
 }
 #Odd .sameOdd .tabBox button{
 	width: 80px; height: 28px;
@@ -1766,6 +1835,27 @@ body{
 #Odd .sameOdd table td.gray{
 	color: #adadad;
 }
+#Odd .sameOdd table td.up{
+	color: #c52601;
+}
+#Odd .sameOdd table td.down{
+	color: #9ace4a;
+}
+#Odd .sameOdd table td.up:after, #Odd .sameOdd table td.down:after{
+	width: 12px; height: 12px;
+	margin: 3px 0 0 5px;
+	position: absolute;
+	content: '';
+}
+#Odd .sameOdd table td.up:after{
+	background: url(../img/handicap_icon_up_n@2x.png) no-repeat center; background: url(../img/handicap_icon_up_n.png) no-repeat center\0/; background-size: 12px;
+}
+#Odd .sameOdd table td.down:after{
+	background: url(../img/handicap_icon_down_n@2x.png) no-repeat center; background: url(../img/handicap_icon_down_n.png) no-repeat center\0/; background-size: 12px;
+}
+#Odd .sameOdd table td.gambling:after{
+	display: none;
+}
 
 /*Odd表格*/
 #Odd .tableIn{
@@ -1830,6 +1920,36 @@ body{
 #Odd .tableIn table tr td span.blue{
 	color: #1661c7;
 }
+#Odd .tableIn table td.up{
+	color: #c52601;
+}
+#Odd .tableIn table td.down{
+	color: #9ace4a;
+}
+#Odd .tableIn table td.up:after, #Odd .tableIn table td.down:after{
+	width: 12px; height: 12px;
+	margin: 3px 0 0 5px;
+	position: absolute;
+	content: '';
+}
+#Odd .tableIn table td.up:after{
+	background: url(../img/handicap_icon_up_n@2x.png) no-repeat center; background: url(../img/handicap_icon_up_n.png) no-repeat center\0/; background-size: 12px;
+}
+#Odd .tableIn table td.down:after{
+	background: url(../img/handicap_icon_down_n@2x.png) no-repeat center; background: url(../img/handicap_icon_down_n.png) no-repeat center\0/; background-size: 12px;
+}
+#Odd .tableIn table td.gambling:after{
+	display: none;
+}
+#EuropeOdd tbody tr:last-child td, #EuropeOdd tbody td[rowspan]{
+	border-bottom: 1px solid #dbdbdb;
+}
+#EuropeOdd tbody:last-child tr td{
+	border-bottom: none;
+}
+#EuropeOdd td[rowspan]{
+	background: #f6f6f6 !important;
+}
 
 /*角球数据*/
 #Corner{
@@ -1862,22 +1982,48 @@ body{
 #Corner .odd table tr:nth-child(even) td{
 	background: #f6f6f6;
 }
+#Corner .odd table td.up{
+	color: #c52601;
+}
+#Corner .odd table td.down{
+	color: #9ace4a;
+}
+#Corner .odd table td.up:after, #Corner .odd table td.down:after{
+	width: 12px; height: 12px;
+	margin: 3px 0 0 5px;
+	position: absolute;
+	content: '';
+}
+#Corner .odd table td.up:after{
+	background: url(../img/handicap_icon_up_n@2x.png) no-repeat center; background: url(../img/handicap_icon_up_n.png) no-repeat center\0/; background-size: 12px;
+}
+#Corner .odd table td.down:after{
+	background: url(../img/handicap_icon_down_n@2x.png) no-repeat center; background: url(../img/handicap_icon_down_n.png) no-repeat center\0/; background-size: 12px;
+}
+#Corner .odd table td.gambling:after{
+	display: none;
+}
 
 /*数据统计*/
 #Corner .data{
-	padding: 12px 50px 30px; margin-bottom: 20px;
+	padding: 0 50px 30px; margin-bottom: 20px;
+	position: relative;
+}
+#Corner .data:before{
 	border-top: 2px solid #2b9968;
 	background: #fff;
+	position: absolute; top: 40px; left: 0; right: 0; bottom: 0;
+	content: '';
 }
 #Corner .data .title{
-	height: 30px;
-	padding-bottom: 20px; margin-left: -30px;
-	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+	height: 40px;
+	margin-left: -30px;
+	font-size: 14px; line-height: 40px; text-align: center; color: #2b9968;
 }
 #Corner .data .tabBox{
 	height: 28px; width: 160px;
-	margin: 10px auto 28px;
 	border-radius: 2px; border: 1px solid #2b9968;
+	position: absolute; top: 6px; right: 20px;
 }
 #Corner .data .tabBox button{
 	width: 80px; height: 28px;
@@ -1890,6 +2036,8 @@ body{
 }
 #Corner .data table{
 	width: 100%;
+	margin-top: 20px;
+	position: relative; z-index: 1;
 }
 #Corner .data table th{
 	height: 30px;
@@ -1909,26 +2057,31 @@ body{
 
 /*对赛往绩*/
 #Corner .battle{
-	padding: 12px 50px 30px; margin-bottom: 20px;
+	padding: 0 50px 30px; margin-bottom: 20px;
+	position: relative;
+}
+#Corner .battle:before{
 	border-top: 2px solid #2b9968;
 	background: #fff;
+	position: absolute; top: 40px; left: 0; right: 0; bottom: 0;
+	content: '';
 }
 #Corner .battle .title{
 	height: 30px;
 	padding-bottom: 20px; margin-left: -30px;
-	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+	font-size: 14px; line-height: 30px; text-align: center; color: #2b9968;
 }
 #Corner .battle .cbox{
 	height: 14px;
-	margin: 8px 0 20px;
+	margin: 0 0 36px;
 	line-height: 14px; text-align: center;
-	position: relative;
+	position: absolute; top: 13px; right: 20px; z-index: 1;
 }
 #Corner .battle .cbox button[name=ha], #Corner .battle .cbox button[name=ma]{
 	height: 14px;
 	padding-left: 22px;
-	background: #fff;
-	font-size: 12px; line-height: 14px; color: #adadad;
+	background: none;
+	font-size: 12px; line-height: 14px; color: #666;
 	position: relative;
 }
 #Corner .battle .cbox button[name=ha]:hover, #Corner .battle .cbox button[name=ma]:hover{
@@ -1948,14 +2101,15 @@ body{
 }
 #Corner .battle .cbox .num{
 	height: 28px;
-	margin-right: -50px;
+	margin-left: 30px;
 	text-align: right;
-	position: absolute; right: 43px; top: -14px;
+	float: right;
+	position: relative; top: -8px;
 }
 #Corner .battle .cbox .num button{
 	height: 28px; width: 50px;
-	margin-left: 35px;
-	background: #fff;
+	margin-left: 20px;
+	background: none;
 	font-size: 14px; color: #adadad;
 }
 #Corner .battle .cbox .num button.on{
@@ -1976,7 +2130,7 @@ body{
 }
 #Corner .battle .con dl{
 	width: 360px;
-	margin: 0 auto 20px; padding-top: 18px;
+	margin: 10px auto 30px; padding-top: 18px;
 	position: relative;
 }
 #Corner .battle .con dl dt{
@@ -2019,6 +2173,7 @@ body{
 }
 #Corner .battle table{
 	width: 100%;
+	position: relative; z-index: 1;
 }
 #Corner .battle table th{
 	height: 24px;
@@ -2064,19 +2219,25 @@ body{
 
 /*对赛往绩*/
 #Corner .history{
-	padding: 12px 50px 30px; margin-bottom: 20px;
+	margin-bottom: 20px;
+	position: relative;
+}
+#Corner .history:before{
 	border-top: 2px solid #2b9968;
 	background: #fff;
+	position: absolute; top: 40px; bottom: 0; left: 0; right: 0;
+	content: '';
 }
 #Corner .history .title{
-	height: 30px;
+	height: 40px;
 	padding-bottom: 20px; margin-left: -30px;
-	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+	font-size: 14px; line-height: 40px; text-align: center; color: #2b9968;
 }
 #Corner .history .team{
 	height: 40px;
 	padding-bottom: 10px;
 	text-align: center;
+	position: relative; z-index: 1;
 }
 #Corner .history .team button{
 	min-width: 200px; height: 40px;
@@ -2094,15 +2255,15 @@ body{
 }
 #Corner .history .cbox{
 	height: 14px;
-	margin: 8px 0 20px;
+	margin: 0 0 36px;
 	line-height: 14px; text-align: center;
-	position: relative;
+	position: absolute; top: 13px; right: 20px; z-index: 1
 }
 #Corner .history .cbox button[name=ha], #Corner .history .cbox button[name=ma]{
 	height: 14px;
 	padding-left: 22px;
-	background: #fff;
-	font-size: 12px; line-height: 14px; color: #adadad;
+	background: none;
+	font-size: 12px; line-height: 14px; color: #666;
 	position: relative;
 }
 #Corner .history .cbox button[name=ha]:hover, #Corner .history .cbox button[name=ma]:hover{
@@ -2122,14 +2283,15 @@ body{
 }
 #Corner .history .cbox .num{
 	height: 28px;
-	margin-right: -50px;
+	margin-left: 30px;
 	text-align: right;
-	position: absolute; right: 43px; top: -14px;
+	float: right;
+	position: relative; top: -8px;
 }
 #Corner .history .cbox .num button{
 	height: 28px; width: 50px;
-	margin-left: 35px;
-	background: #fff;
+	margin-left: 20px;
+	background: none;
 	font-size: 14px; color: #adadad;
 }
 #Corner .history .cbox .num button.on{
@@ -2150,7 +2312,7 @@ body{
 }
 #Corner .history .con dl{
 	width: 360px;
-	margin: 0 auto 20px; padding-top: 18px;
+	margin: 10px auto 20px; padding-top: 18px;
 	position: relative;
 }
 #Corner .history .con dl dt{
@@ -2193,6 +2355,7 @@ body{
 }
 #Corner .history table{
 	width: 100%;
+	position: relative; z-index: 1;
 }
 #Corner .history table th{
 	height: 24px;
