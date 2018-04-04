@@ -42,9 +42,9 @@
             <td>欧赔</td>
             <td><p>{{$odd['ou']['up1']}}</p>@if(isset($odd['ou']['middle1']))<p>{{$odd['ou']['middle1']}}</p>@endif<p>{{$odd['ou']['down1']}}</p></td>
             <td>
-                <p class="{{\App\Http\Controllers\PC\CommonTool::colorOfWapUpDown($odd['ou']['middle1'], $odd['ou']['middle2'])}}">{{$odd['ou']['up2']}}</p>
+                <p class="{{\App\Http\Controllers\PC\CommonTool::colorOfWapUpDown($odd['ou']['up1'], $odd['ou']['up2'])}}">{{$odd['ou']['up2']}}</p>
                 @if(isset($odd['ou']['middle1']))<p class="gambling {{\App\Http\Controllers\PC\CommonTool::colorOfWapUpDown($odd['ou']['middle1'], $odd['ou']['middle2'])}}">{{$odd['ou']['middle2']}}</p>@endif
-                <p class="{{\App\Http\Controllers\PC\CommonTool::colorOfWapUpDown($odd['ou']['middle1'], $odd['ou']['middle2'])}}">{{$odd['ou']['down2']}}</p>
+                <p class="{{\App\Http\Controllers\PC\CommonTool::colorOfWapUpDown($odd['ou']['down1'], $odd['ou']['down2'])}}">{{$odd['ou']['down2']}}</p>
             </td>
         </tr>
     @else
