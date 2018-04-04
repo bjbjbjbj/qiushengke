@@ -34,7 +34,7 @@ if (isset($match['goalmiddle2'])) {
 $europeUp = "-";
 $europeDown = "-";
 //    $oddOu = $match->oddOU();
-if (isset($match['oumiddle2'])) {
+if (isset($match['ouup2'])) {
     $europeUp = \App\Http\Controllers\PC\CommonTool::float2Decimal($match['ouup2']);
     $europeDown = \App\Http\Controllers\PC\CommonTool::float2Decimal($match['oudown2']);
 }
