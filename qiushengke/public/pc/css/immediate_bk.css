@@ -370,7 +370,7 @@
 	background: #e8efec;
 }
 #Con table tbody td.score.fullScore{
-	color: #2b9968;
+	color: #b5493c; font-weight: bold;
 }
 #Con table tbody td.fullScore ~ td:before{
 	width: 1px; height: 20px;

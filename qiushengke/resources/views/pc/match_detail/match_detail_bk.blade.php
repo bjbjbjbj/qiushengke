@@ -1800,20 +1800,34 @@
                                 '<td rowspan="2">'+item['name']+'</td>'+
                                 '<td>初盘</td>';
                             if (item['ou']){
+                                var className1 = '';
+                                var className3 = '';
+                                if (item['ou']['up1']){
+                                    className1 = _getClassOfUPDOWN(item['ou']['up2'],item['ou']['up1'],false);
+                                    className3 = _getClassOfUPDOWN(item['ou']['down2'],item['ou']['down1'],false);
+                                }
                                 tr = tr +
-                                    '<td>2'+item['ou']['up1']+'</td>'+
-                                    '<td>3'+item['ou']['down1']+'</td>';
+                                    '<td class="'+''+'">2'+item['ou']['up1']+'</td>'+
+                                    '<td class="'+''+'">3'+item['ou']['down1']+'</td>';
                             }
                             else{
                                 tr = tr +
-                                    '<td>4-</td>'+
-                                    '<td>3-</td>';
+                                    '<td>-</td>'+
+                                    '<td>-</td>';
                             }
                             if (item['asia']){
+                                var className1 = '';
+                                var className2 = '';
+                                var className3 = '';
+                                if (item['asia']['middle1']){
+                                    className1 = _getClassOfUPDOWN(item['asia']['up2'],item['asia']['up1'],false);
+                                    className2 = _getClassOfUPDOWN(item['asia']['middle2'],item['asia']['middle1'],true);
+                                    className3 = _getClassOfUPDOWN(item['asia']['down2'],item['asia']['down1'],false);
+                                }
                                 tr = tr +
-                                    '<td>'+item['asia']['up1']+'</td>'+
-                                    '<td>'+BasketpanKouText(item['asia']['middle1'],false,false)+'</td>'+
-                                    '<td>'+item['asia']['down1']+'</td>';
+                                    '<td class="'+''+'">'+item['asia']['up1']+'</td>'+
+                                    '<td class="'+''+'">'+BasketpanKouText(item['asia']['middle1'],false,false)+'</td>'+
+                                    '<td class="'+''+'">'+item['asia']['down1']+'</td>';
                             }
                             else{
                                 tr = tr +
@@ -1822,10 +1836,18 @@
                                     '<td>-</td>';
                             }
                             if (item['goal']){
+                                var className1 = '';
+                                var className2 = '';
+                                var className3 = '';
+                                if (item['goal']['middle1']){
+                                    className1 = _getClassOfUPDOWN(item['goal']['up2'],item['goal']['up1'],false);
+                                    className2 = _getClassOfUPDOWN(item['goal']['middle2'],item['goal']['middle1'],true);
+                                    className3 = _getClassOfUPDOWN(item['goal']['down2'],item['goal']['down1'],false);
+                                }
                                 tr = tr +
-                                    '<td>'+item['goal']['up1']+'</td>'+
-                                    '<td>'+BasketpanKouText(item['goal']['middle1'],false,true)+'</td>'+
-                                    '<td>'+item['goal']['down1']+'</td>';
+                                    '<td class="'+''+'">'+item['goal']['up1']+'</td>'+
+                                    '<td class="'+''+'">'+BasketpanKouText(item['goal']['middle1'],false,true)+'</td>'+
+                                    '<td class="'+''+'">'+item['goal']['down1']+'</td>';
                             }
                             else{
                                 tr = tr +

@@ -140,7 +140,7 @@ $aicon = isset($match['aicon']) && strlen($match['aicon']) > 0 ? $match['aicon']
         </div>
         @if($status == 0)
             <div class="fullScore"><p>-</p><p>-</p></div>
-            <div class="halfScore"><p>-</p><p>-</p></div>
+            <div class="halfScore none"><p></p><p></p></div>
         @elseif($status == -1 || $status > 0)
             <div class="fullScore"><p>{{$match['hscore']}}</p><p>{{$match['ascore']}}</p></div>
             <div class="halfScore"><p>{{$match['hscorehalf']}}</p><p>{{$match['ascorehalf']}}</p></div>

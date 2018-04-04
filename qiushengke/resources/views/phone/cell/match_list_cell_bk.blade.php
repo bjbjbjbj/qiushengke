@@ -106,7 +106,7 @@ $liveUrl = \App\Http\Controllers\PC\CommonTool::matchWapLivePathWithId($match['m
         @if($status > 0)
             <div
                     @if($status == 1)
-                    class="part"
+                    class="part on"
                     @else
                     class="part end"
                     @endif
@@ -117,7 +117,7 @@ $liveUrl = \App\Http\Controllers\PC\CommonTool::matchWapLivePathWithId($match['m
             @if(!$isHalfFormat)
                 <div
                         @if($status == 2)
-                        class="part"
+                        class="part on"
                         @else
                         class="part end"
                         @endif
@@ -128,7 +128,7 @@ $liveUrl = \App\Http\Controllers\PC\CommonTool::matchWapLivePathWithId($match['m
             @endif
             <div
                     @if($status == 3)
-                    class="part"
+                    class="part on"
                     @else
                     class="part end"
                     @endif
@@ -139,7 +139,7 @@ $liveUrl = \App\Http\Controllers\PC\CommonTool::matchWapLivePathWithId($match['m
             @if(!$isHalfFormat)
                 <div
                         @if($status == 4)
-                        class="part"
+                        class="part on"
                         @else
                         class="part end"
                         @endif

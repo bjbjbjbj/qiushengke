@@ -1,4 +1,4 @@
-<div id="Event" class="childNode" style="display: ;">
+<div id="Event" class="childNode" style="display: none;">
     <div class="score default">
         <div class="title">比分统计
             <button class="close"></button>
@@ -127,7 +127,7 @@
     @endif
 </div>
 @if(isset($players) && count($players) > 0)
-    <div id="Player" class="childNode default" style="display: none;">
+    <div id="Player" class="childNode default" style="display: ;">
         <div class="title">球员数据 - {{$match['hname']}}</div>
         <div class="score default">
             <table>
@@ -297,10 +297,10 @@
     </div>
     <div class="bottom">
         <div class="btn">
-            <input type="radio" name="Match" id="Match_Event" value="Event" checked>
-            <label for="Match_Event">比分统计</label>
-            <input type="radio" name="Match" id="Match_Player" value="Player">
+            <input type="radio" name="Match" id="Match_Player" value="Player" checked>
             <label for="Match_Player">球员数据</label>
+            <input type="radio" name="Match" id="Match_Event" value="Event">
+            <label for="Match_Event">比分统计</label>
         </div>
     </div>
 @endif

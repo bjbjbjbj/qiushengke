@@ -166,7 +166,7 @@ $show = false;
                 </p>
                 @endif
             @if($status == -1 || $status > 0)
-                <p class="halfScore" id="half_score_{{$mid}}">半 {{$match['hscorehalf'] .' - '. $match['ascorehalf']}}</p>
+                <p class="halfScore hide" id="half_score_{{$mid}}">半 {{$match['hscorehalf'] .' - '. $match['ascorehalf']}}</p>
             @endif
         </a>
         <div class="even">
