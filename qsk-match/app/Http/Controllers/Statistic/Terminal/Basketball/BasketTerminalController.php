@@ -88,12 +88,9 @@ class BasketTerminalController
             $isToday = $time - time() <= 6*60;
 
             $mid = $match['mid'];
+
             if (!in_array($mid, $savedMids)) {
-                if ($isToday) {//如果是当天的数据，则只刷新球队风格和同赔数据
-                    $this->analyseDataStatic($mid, [2], true);
-                } else {
-                    $this->analyseDataStatic($mid);
-                }
+                $this->analyseDataStatic($mid);
                 $savedMids[] = $mid;
                 $count++;
             }
@@ -154,7 +151,6 @@ class BasketTerminalController
             //未来赛程 schedule
             $analyse['schedule'] = $this->matchSchedule($match, $this->getJsonItemByName($analyse, 'schedule'), $reset);
         }
-
         return $analyse;
     }
 

@@ -42,8 +42,6 @@ class StatisticFileTool
 
     //============比赛列表静态化===========================
     public static function putFileToSchedule($data, $sport, $type, $date = null) {
-        if (!isset($data)) return;
-
         if (isset($date)) {
             $date = date("Ymd", strtotime($date));
         } else {
@@ -63,8 +61,6 @@ class StatisticFileTool
 
     //=============比赛详情新版的位置==========
     public static function putFileToTerminal($data, $sport, $mid, $name) {
-        if (!isset($data)) return;
-
         $firstTag = substr($mid, 0, 2);
         $secondTag = substr($mid, 2, 2);
         self::putFile('terminal', "/$sport/$firstTag/$secondTag/$mid/$name.json", $data);
@@ -78,8 +74,6 @@ class StatisticFileTool
 
     //=================赛事相关的静态文件=======================
     public static function putFileToLeague($data, $sport, $lid) {
-        if (!isset($data)) return;
-
         self::putFile('league', "/$sport/$lid.json", $data);
     }
 
