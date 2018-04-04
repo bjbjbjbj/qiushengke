@@ -50,7 +50,7 @@ $aicon = strlen($match['aicon'])>0?$match['aicon'] : (env('CDN_URL') . '/pc/img/
 ?>
 <tr>
     <td>{{date('m.d', $match['time'])}}<br/>{{date('H:i', $match['time'])}}</td>
-    <td><a href="team_bk.html" class="team">{{$match['hname']}}</a></td>
+    <td><a href="" class="team">{{$match['hname']}}</a></td>
     <td><a href=""><img src="{{$hicon}}"></a></td>
     <td><a href=""><p class="fullScore">
                 @if($status == 0)
@@ -60,7 +60,7 @@ $aicon = strlen($match['aicon'])>0?$match['aicon'] : (env('CDN_URL') . '/pc/img/
                 @endif
             </p></a></td>
     <td><a href=""><img src="{{$aicon}}"></a></td>
-    <td><a href="team_bk.html" class="team">{{$match['aname']}}</a></td>
+    <td><a href="" class="team">{{$match['aname']}}</a></td>
     <td>{{$asiaMiddle}}</td>
     <td>{{$goalMiddle}}</td>
     <td>
