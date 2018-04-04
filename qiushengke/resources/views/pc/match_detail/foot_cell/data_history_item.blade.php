@@ -189,27 +189,27 @@ for ($i = 0 ; $i < min(10,count($matches));$i++){
                 $resultg2 = \App\Http\Controllers\PC\OddCalculateTool::getMatchSizeOddResult($match['hscore'],$match['ascore'],$match['goalmiddle2'],$match['hid'] == $tid);
                 $resulto = \App\Http\Controllers\PC\OddCalculateTool::getMatchResult($match['hscore'],$match['ascore'],$match['hid'] == $tid);
                 ?>
-                <td class="{{$resulto == 3?'red':($resulto == 1 ? 'green' :'blue')}}">{{$resulto == 3?'胜':($resulto == 1 ? '平' :'负')}}</td>
+                <td class="{{$resulto == 3?'red':($resulto == 1 ? 'blue' :'green')}}">{{$resulto == 3?'胜':($resulto == 1 ? '平' :'负')}}</td>
                 <td class="asia">
                     @if(isset($match['asiamiddle1']))
-                        <p class="start {{$resulta1 == 3?'red':($resulta1 == 1 ? 'green' :'blue')}}">{{$resulta1 == 3?'赢':($resulta1 == 1 ? '走' :'输')}}</p>
+                        <p class="start {{$resulta1 == 3?'red':($resulta1 == 1 ? 'blue' :'green')}}">{{$resulta1 == 3?'赢':($resulta1 == 1 ? '走' :'输')}}</p>
                     @else
                         <p class="start"></p>
                     @endif
                     @if(isset($match['asiamiddle2']))
-                        <p class="end {{$resulta2 == 3?'red':($resulta2 == 1 ? 'green' :'blue')}}" style="display: none;">{{$resulta2 == 3?'赢':($resulta2 == 1 ? '走' :'输')}}</p>
+                        <p class="end {{$resulta2 == 3?'red':($resulta2 == 1 ? 'blue' :'green')}}" style="display: none;">{{$resulta2 == 3?'赢':($resulta2 == 1 ? '走' :'输')}}</p>
                     @else
                         <p class="endstart"></p>
                     @endif
                 </td>
                 <td class="goal">
                     @if(isset($match['goalmiddle1']))
-                        <p class="start {{$resultg1 == 3?'red':($resultg1 == 1 ? 'green' :'blue')}}">{{$resultg1 == 3?'大':($resultg1 == 1 ? '走' :'小')}}</p>
+                        <p class="start {{$resultg1 == 3?'red':($resultg1 == 1 ? 'blue' :'green')}}">{{$resultg1 == 3?'大':($resultg1 == 1 ? '走' :'小')}}</p>
                     @else
                         <p class="start"></p>
                     @endif
                     @if(isset($match['goalmiddle2']))
-                        <p class="end {{$resultg2 == 3?'red':($resultg2 == 1 ? 'green' :'blue')}}" style="display: none;">{{$resultg2 == 3?'大':($resultg2 == 1 ? '走' :'小')}}</p>
+                        <p class="end {{$resultg2 == 3?'red':($resultg2 == 1 ? 'blue' :'green')}}" style="display: none;">{{$resultg2 == 3?'大':($resultg2 == 1 ? '走' :'小')}}</p>
                     @else
                         <p class="end"></p>
                     @endif

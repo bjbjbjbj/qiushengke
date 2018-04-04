@@ -29,10 +29,10 @@ for ($i = 0 ; $i < min(10,$count);$i++){
         $asiaCss = "red";
         $asiaResultCn = "赢";
     } else if ($asiaResult == 0) {
-        $asiaCss = "blue";
+        $asiaCss = "green";
         $asiaResultCn = "输";
     } else {
-        $asiaCss = "green";
+        $asiaCss = "blue";
         $asiaResultCn = $asiaResult < 0 ? "-" : "走";
     }
     $match['asiaCss'] = $asiaCss;
@@ -41,10 +41,10 @@ for ($i = 0 ; $i < min(10,$count);$i++){
         $goalCss = "red";
         $goalResultCn = "大";
     } else if ($goalResult == 0) {
-        $goalCss = "blue";
+        $goalCss = "green";
         $goalResultCn = "小";
     } else {
-        $goalCss = "green";
+        $goalCss = "blue";
         $goalResultCn = $asiaResult < 0 ? "-" : "走";
     }
     $match['goalCss'] = $goalCss;
@@ -57,7 +57,7 @@ for ($i = 0 ; $i < min(10,$count);$i++){
             $h5WinCount++;
         }
     } else{
-        $ouCss = "blue";
+        $ouCss = "green";
         $ouResultCn = "负";
         $a10WinCount++;
         if ($i < 5){

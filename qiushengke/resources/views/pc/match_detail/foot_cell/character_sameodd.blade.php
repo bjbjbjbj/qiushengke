@@ -97,7 +97,7 @@ if (isset($odds) && count($odds) > 0) {
             $match = $odds['matches'][$i];
             $time = strtotime($match['time']);
             $time = date('Y.m.d',$time);
-            $resultCss = $result == 3 ? 'red' : ($result == 1 ? 'green':'blue');
+            $resultCss = $result == 3 ? 'red' : ($result == 1 ? 'blue':'green');
             $resultCn = $result == 3 ? $winTm : ($result == 1 ? $drawTm : $loseTm);
             $middle1 = $match['middle1'];
             $middle2 = $match['middle2'];
