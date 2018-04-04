@@ -49,7 +49,7 @@
             setPage();
         }
         function clickDate(date) {
-            var value = date.value.replace(/\//g,"");
+            var value = date.value.replace(/-/g,"");
             var url = '{{env('APP_URL')}}' + '/match/basket/schedule/'+value+'/result_t.html';
             window.location.href = url;
         }
