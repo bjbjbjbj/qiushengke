@@ -50,21 +50,23 @@
         </dl>
         <ul>
             <button class="open"></button>
-            @foreach($tech as $t)
-                @if((strlen($t['name']) < 10) && ($t['h'] > 0 || $t['a'] > 0))
-                    <li>
-                        <p class="host">
-                            <b>{{$t['h']}}</b>
-                            <span><em></em></span>
-                        </p>
-                        <p class="item">{{$t['name']}}</p>
-                        <p class="away">
-                            <b>{{$t['a']}}</b>
-                            <span><em></em></span>
-                        </p>
-                    </li>
-            @endif
-        @endforeach
+            @if(isset($tech))
+                @foreach($tech as $t)
+                    @if((strlen($t['name']) < 10) && ($t['h'] > 0 || $t['a'] > 0))
+                        <li>
+                            <p class="host">
+                                <b>{{$t['h']}}</b>
+                                <span><em></em></span>
+                            </p>
+                            <p class="item">{{$t['name']}}</p>
+                            <p class="away">
+                                <b>{{$t['a']}}</b>
+                                <span><em></em></span>
+                            </p>
+                        </li>
+                @endif
+            @endforeach
+        @endif
         <!--li的数量必须是3的倍数，不够使用空li-->
         </ul>
     </div>

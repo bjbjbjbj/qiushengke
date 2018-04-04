@@ -101,7 +101,7 @@ class PlayerJsonCommands extends Command
                 $q->on('match_live_channels.live_id','match_lives.id');
             })
             ->where('sport',$sport)
-            ->select('match_lives.match_id as match_id')
+            ->select('match_live_channels.live_id as match_id')
             ->get();
         //生成这些直播id对应的直播间的json,直播player生成的时候用
         foreach ($ams as $mid){

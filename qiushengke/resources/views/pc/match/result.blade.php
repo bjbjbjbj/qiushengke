@@ -106,7 +106,7 @@
             setPage();
         }
         function clickDate(date) {
-            var value = date.value.replace(/\//g,"");
+            var value = date.value.replace(/-/g,"");
             var url = '{{env('APP_URL')}}' + '/match/foot/schedule/'+value+'/result.html';
             window.location.href = url;
         }
