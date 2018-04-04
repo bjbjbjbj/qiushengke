@@ -3,8 +3,8 @@
     <script type="text/javascript">
         function changeDate(input) {
             var timeStr = '';
-            var params = input.value.split('/');
-            timeStr = params[2]+'-'+params[0]+'-'+params[1];
+            var params = input.value.split('-');
+            timeStr = params[0]+'-'+params[1]+'-'+params[2];
             $.ajax({
                 'url':'/league/basket/schedule/'+'{{$lid}}'+'.html?date='+timeStr,
                 'success':function (html) {

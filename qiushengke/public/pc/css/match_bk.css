@@ -178,7 +178,7 @@ body{
 }
 #Info .mbox dl dd{
 	width: 170px; height: 100px;
-	font-size: 18px; line-height: 100px;
+	font-size: 18px; line-height: 100px; vertical-align: top;
 	position: relative;
 	overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 	display: inline-block;
@@ -454,9 +454,14 @@ body{
 
 /*攻防能力*/
 #Data .attack{
-	padding: 12px 20px 30px; margin-bottom: 20px;
+	padding: 0 20px 30px; margin-bottom: 20px;
+	position: relative;
+}
+#Data .attack:before{
 	border-top: 2px solid #2b9968;
 	background: #fff;
+	position: absolute; top: 40px; bottom: 0; left: 0; right: 0;
+	content: '';
 }
 #Data .attack:after{
 	display: block;
@@ -464,13 +469,14 @@ body{
 	content: '';
 }
 #Data .attack .title{
-	height: 30px;
-	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+	height: 40px;
+	font-size: 14px; line-height: 40px; text-align: center; color: #2b9968;
 }
 #Data .attack .part{
 	width: 48.5%;
-	padding-top: 8px;
+	padding-top: 20px;
 	text-align: center;
+	position: relative; z-index: 1;
 }
 #Data .attack .part.host{
 	float: left;
@@ -510,26 +516,30 @@ body{
 
 /*对赛往绩*/
 #Data .battle{
-	padding: 12px 50px 30px; margin-bottom: 20px;
+	margin-bottom: 20px;
+	position: relative;
+}
+#Data .battle:before{
 	border-top: 2px solid #2b9968;
 	background: #fff;
+	position: absolute; top: 40px; bottom: 0; left: 0; right: 0;
+	content: '';
 }
 #Data .battle .title{
-	height: 30px;
-	padding-bottom: 20px; margin-left: -30px;
-	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+	height: 40px;
+	font-size: 14px; line-height: 40px; text-align: center; color: #2b9968;
 }
 #Data .battle .cbox{
 	height: 14px;
-	margin: 8px 0 20px;
+	margin: 0 0 36px;
 	line-height: 14px; text-align: center;
-	position: relative;
+	position: absolute; top: 13px; right: 20px; z-index: 1;
 }
 #Data .battle .cbox button[name=ha], #Data .battle .cbox button[name=ma]{
 	height: 14px;
 	padding-left: 22px;
-	background: #fff;
-	font-size: 12px; line-height: 14px; color: #adadad;
+	background: none;
+	font-size: 12px; line-height: 14px; color: #666;
 	position: relative;
 }
 #Data .battle .cbox button[name=ha]:hover, #Data .battle .cbox button[name=ma]:hover{
@@ -549,14 +559,15 @@ body{
 }
 #Data .battle .cbox .num{
 	height: 28px;
-	margin-right: -50px;
+	margin-left: 30px;
 	text-align: right;
-	position: absolute; right: 43px; top: -14px;
+	float: right;
+	position: relative; top: -8px;
 }
 #Data .battle .cbox .num button{
 	height: 28px; width: 50px;
-	margin-left: 35px;
-	background: #fff;
+	margin-left: 20px;
+	background: none;
 	font-size: 14px; color: #adadad;
 }
 #Data .battle .cbox .num button.on{
@@ -577,7 +588,7 @@ body{
 }
 #Data .battle .con dl{
 	width: 360px;
-	margin: 0 auto 24px; padding-top: 18px;
+	margin: 20px auto 24px; padding-top: 18px;
 	position: relative;
 }
 #Data .battle .con dl dt{
@@ -634,6 +645,7 @@ body{
 }
 #Data .battle table{
 	width: 100%;
+	position: relative; z-index: 1;
 }
 #Data .battle table th{
 	height: 24px;
@@ -687,19 +699,25 @@ body{
 
 /*最近战绩*/
 #Data .history{
-	padding: 12px 50px 30px; margin-bottom: 20px;
+	margin-bottom: 20px;
+	position: relative;
+}
+#Data .history:before{
 	border-top: 2px solid #2b9968;
 	background: #fff;
+	position: absolute; top: 40px; bottom: 0; left: 0; right: 0;
+	content: '';
 }
 #Data .history .title{
-	height: 30px;
-	margin-left: -30px;
-	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+	height: 40px;
+	padding-left: 20px;
+	font-size: 14px; line-height: 40px; text-align: center; color: #2b9968;
 }
 #Data .history .team{
 	height: 40px;
-	padding-bottom: 10px;
+	padding: 20px 0;
 	text-align: center;
+	position: relative; z-index: 1;
 }
 #Data .history .team button{
 	min-width: 200px; height: 40px;
@@ -717,15 +735,15 @@ body{
 }
 #Data .history .cbox{
 	height: 14px;
-	margin: 28px 0 20px;
+	margin: 0 0 36px;
 	line-height: 14px; text-align: center;
-	position: relative;
+	position: absolute; top: 13px; right: 20px; z-index: 1;
 }
 #Data .history .cbox button[name=ha], #Data .history .cbox button[name=ma]{
 	height: 14px;
 	padding-left: 22px;
-	background: #fff;
-	font-size: 12px; line-height: 14px; color: #adadad;
+	background: none;
+	font-size: 12px; line-height: 14px; color: #666;
 	position: relative;
 }
 #Data .history .cbox button[name=ha]:hover, #Data .history .cbox button[name=ma]:hover{
@@ -745,14 +763,15 @@ body{
 }
 #Data .history .cbox .num{
 	height: 28px;
-	margin-right: -50px;
+	margin-left: 30px;
 	text-align: right;
-	position: absolute; right: 43px; top: -14px;
+	float: right;
+	position: relative; top: -8px;
 }
 #Data .history .cbox .num button{
 	height: 28px; width: 50px;
-	margin-left: 35px;
-	background: #fff;
+	margin-left: 20px;
+	background: none;
 	font-size: 14px; color: #adadad;
 }
 #Data .history .cbox .num button.on{
@@ -773,7 +792,7 @@ body{
 }
 #Data .history .con dl{
 	width: 360px;
-	margin: 0 auto 24px; padding-top: 18px;
+	margin: 10px auto 24px; padding-top: 18px;
 	position: relative;
 }
 #Data .history .con dl dt{
@@ -830,6 +849,7 @@ body{
 }
 #Data .history table{
 	width: 100%;
+	position: relative; z-index: 1;
 }
 #Data .history table th{
 	height: 24px;
@@ -888,9 +908,14 @@ body{
 
 /*让分盘路比较*/
 #Odd .asia{
-	padding: 20px 20px 22px; margin-bottom: 20px;
+	padding: 0 20px 22px; margin-bottom: 20px;
+	position: relative;
+}
+#Odd .asia:before{
 	border-top: 2px solid #2b9968;
 	background: #fff;
+	position: absolute; top: 40px; bottom: 0; left: 0; right: 0;
+	content: '';
 }
 #Odd .asia:after{
 	display: block;
@@ -898,9 +923,9 @@ body{
 	content: '';
 }
 #Odd .asia .title{
-	height: 30px;
+	height: 40px;
 	padding-bottom: 16px;
-	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+	font-size: 14px; line-height: 40px; text-align: center; color: #2b9968;
 }
 #Odd .asia .part{
 	width: 49%;
@@ -916,9 +941,10 @@ body{
 #Odd .asia .part p.name{
 	padding-bottom: 20px;
 	font-size: 14px; line-height: 14px; text-align: center;
+	position: relative; z-index: 1;
 }
 #Odd .asia .part table + p.name{
-	margin-top: 50px;
+	margin-top: 30px;
 }
 #Odd .asia .part p.name span{
 	padding: 0 10px;
@@ -966,6 +992,7 @@ body{
 }
 #Odd .asia .part table{
 	width: 100%;
+	position: relative; z-index: 1;
 }
 #Odd .asia .part table th{
 	height: 24px;
@@ -998,9 +1025,14 @@ body{
 
 /*总分盘路比较*/
 #Odd .goal{
-	padding: 20px 20px 22px; margin-bottom: 20px;
+	padding: 0 20px 22px; margin-bottom: 20px;
+	position: relative;
+}
+#Odd .goal:before{
 	border-top: 2px solid #2b9968;
 	background: #fff;
+	position: absolute; top: 40px; left: 0; right: 0; bottom: 0;
+	content: '';
 }
 #Odd .goal:after{
 	display: block;
@@ -1008,9 +1040,9 @@ body{
 	content: '';
 }
 #Odd .goal .title{
-	height: 30px;
+	height: 40px;
 	padding-bottom: 16px;
-	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+	font-size: 14px; line-height: 40px; text-align: center; color: #2b9968;
 }
 #Odd .goal .part{
 	width: 49%;
@@ -1026,9 +1058,10 @@ body{
 #Odd .goal .part p.name{
 	padding-bottom: 20px;
 	font-size: 14px; line-height: 14px; text-align: center;
+	position: relative; z-index: 1;
 }
 #Odd .goal .part table + p.name{
-	margin-top: 50px;
+	margin-top: 30px;
 }
 #Odd .goal .part p.name span{
 	padding: 0 10px;
@@ -1075,6 +1108,7 @@ body{
 }
 #Odd .goal .part table{
 	width: 100%;
+	position: relative; z-index: 1;
 }
 #Odd .goal .part table th{
 	height: 24px;
@@ -1110,9 +1144,14 @@ body{
 
 /*平均得分/失分对比*/
 #Odd .average{
-	padding: 20px 20px 22px; margin-bottom: 20px;
+	padding: 0 20px 22px; margin-bottom: 20px;
+	position: relative;
+}
+#Odd .average:before{
 	border-top: 2px solid #2b9968;
 	background: #fff;
+	position: absolute; top: 40px; left: 0; right: 0; bottom: 0;
+	content: '';
 }
 #Odd .average:after{
 	display: block;
@@ -1120,12 +1159,14 @@ body{
 	content: '';
 }
 #Odd .average .title{
-	height: 30px;
+	height: 40px;
 	padding-bottom: 16px;
-	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+	font-size: 14px; line-height: 40px; text-align: center; color: #2b9968;
 }
 #Odd .average .part{
 	width: 49%;
+	padding-top: 10px;
+	position: relative; z-index: 1;
 }
 #Odd .average .part.host{
 	text-align: left;
@@ -1193,9 +1234,14 @@ body{
 
 /*总分统计*/
 #Odd .total{
-	padding: 20px 20px 22px; margin-bottom: 20px;
+	padding: 0 20px 22px; margin-bottom: 20px;
+	position: relative;
+}
+#Odd .total:before{
 	border-top: 2px solid #2b9968;
 	background: #fff;
+	position: absolute; top: 40px; left: 0; right: 0; bottom: 0;
+	content: '';
 }
 #Odd .total:after{
 	display: block;
@@ -1203,12 +1249,13 @@ body{
 	content: '';
 }
 #Odd .total .title{
-	height: 30px;
-	padding-bottom: 16px;
-	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+	height: 40px;
+	font-size: 14px; line-height: 40px; text-align: center; color: #2b9968;
 }
 #Odd .total .part{
 	width: 49%;
+	padding-top: 20px;
+	position: relative; z-index: 1;
 }
 #Odd .total .part.host{
 	text-align: left;
@@ -1351,6 +1398,7 @@ body{
 	height: 30px;
 	padding-left: 20px;
 	font-size: 14px; line-height: 30px; text-align: left; color: #2b9968;
+	display: none;
 }
 #Odd .odd table{
 	width: 100%;

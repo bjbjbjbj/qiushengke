@@ -307,16 +307,16 @@ div.content .default .title .labelbox input:checked + span{
 	border-radius: 50%;
 }
 .matchTable table td p.win{
-	background: #34b45d;
+	background: #bc1c25;
 }
 .matchTable table td p.draw{
-	background: #9e9e9e;
-}
-.matchTable table td p.lose{
 	background: #1974bd;
 }
+.matchTable table td p.lose{
+	background: #34b45d;
+}
 .matchTable table td p.small{
-	background: #e55c00;
+	background: #34b45d;
 }
 
 /*公用队名效果*/
@@ -735,6 +735,31 @@ div#Data .odd table td p{
 	width: 80px;
 	display: inline-block;
 }
+div#Data .odd .up{
+	color: #bc1c25;
+}
+div#Data .odd .down{
+	color: #9ace4a;
+}
+div#Data .odd .up:after, div#Data .odd .down:after{
+	width: 24px; height: 24px;
+    margin: 5px 0 0 4px;
+    position: absolute;
+    content: '';
+}
+div#Data .odd .up:after{
+	background: url(../img/handicap_icon_up_n.png) no-repeat center; background-size: 24px;
+}
+div#Data .odd .down:after{
+    background: url(../img/handicap_icon_down_n.png) no-repeat center; background-size: 24px;
+}
+div#Data .odd .gambling{
+	width: 35%;
+}
+div#Data .odd .gambling:after{
+	display: none;
+}
+
 div#Data .rank{
 
 }
@@ -870,19 +895,19 @@ div#Data .track td[colspan] p.asia{
 }
 div#Data .track td[colspan] p.win,
 div#Data .track td[colspan] p.big{
-	background: #34b45d;
+	background: #bc1c25;
 }
 div#Data .track td[colspan] p.draw{
-	background: #9e9e9e;
+	background: #1974bd;
 }
 div#Data .track td[colspan] p.lose{
-	background: #1974bd;	
+	background: #34b45d;	
 }
 div#Data .track td[colspan] p.goal{
 	border-radius: 50%;
 }
 div#Data .track td[colspan] p.small{
-	background: #e55c00;	
+	background: #34b45d;	
 }
 
 /*指数*/
@@ -931,7 +956,27 @@ div#Europe table th:nth-child(5),div#Kaili table th:nth-child(5){
 div#Europe table th:nth-child(6),div#Kaili table th:nth-child(6){
 	width: 150px;
 }
-
+div#Odd .up{
+	color: #bc1c25;
+}
+div#Odd .down{
+	color: #9ace4a;
+}
+div#Odd .up:after, div#Odd .down:after{
+	width: 24px; height: 24px;
+	margin: 10px 0 0 8px;
+	position: absolute;
+	content: '';
+}
+div#Odd .up:after{
+	background: url(../img/handicap_icon_up_n.png) no-repeat center; background-size: 24px;
+}
+div#Odd .down:after{
+	background: url(../img/handicap_icon_down_n.png) no-repeat center; background-size: 24px;
+}
+div#Odd .gambling:after{
+	display: none;
+}
 
 
 
