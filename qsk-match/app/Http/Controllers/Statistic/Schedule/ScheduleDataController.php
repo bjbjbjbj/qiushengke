@@ -408,7 +408,7 @@ class ScheduleDataController
                     break;
                 case "all":
                 default:
-                    $result = ['filter' => $filterData, 'matches' => $allMatches];
+                    $result = ['filter' => $filterData, 'matches' => $allMatches, 'l_matches'=>$leagueMatches];
                     break;
             }
             return $result;

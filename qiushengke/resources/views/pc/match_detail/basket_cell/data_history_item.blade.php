@@ -1,6 +1,6 @@
 <?php
 //先处理数据
-$count = count($matches);
+$count = (isset($matches) && is_array($matches)) ? count($matches) : 0;
 $tempMatches = array();
 $h10WinCount = 0;
 $h10TotalScore = 0;
@@ -11,7 +11,7 @@ $a10TotalScore = 0;
 $a5WinCount = 0;
 $a5TotalScore = 0;
 //逻辑没做优惠,先完成功能
-for ($i = 0 ; $i < min(10,count($matches));$i++){
+for ($i = 0 ; $i < min(10,$count);$i++){
     $match = $matches[$i];
     //胜负
     $hscore = $match['hid'] == $tid ? $match['hscore'] : $match['ascore'];
