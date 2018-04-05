@@ -32,7 +32,7 @@
                 <span class="away">{{$match['ascore']}}</span>
             @endif
         </p>
-        @if($match['status'] > 0 && $match['live'])<a href="{{$liveUrl}}" class="live">正在直播</a>@endif
+            <a href="{{$liveUrl}}" class="live" style="display: none">正在直播</a>
     </div>
     <div class="team">
         <p class="img"><img src="{{$match['aicon']}}" onerror="this.src='{{$cdn}}/pc/img/icon_teamDefault.png'"></p>

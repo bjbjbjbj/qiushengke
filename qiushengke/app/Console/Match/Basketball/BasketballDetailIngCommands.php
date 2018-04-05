@@ -12,6 +12,7 @@ use App\Http\Controllers\CacheInterface\FootballInterface;
 use App\Http\Controllers\PC\FileTool;
 use App\Http\Controllers\PC\Index\FootballController;
 use App\Http\Controllers\PC\Match\MatchDetailController;
+use App\Http\Controllers\Phone\Detail\BasketballController;
 use App\Http\Controllers\StaticHtml\FootballDetailController;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
@@ -61,6 +62,7 @@ class BasketballDetailIngCommands extends Command
             if ($status > 0 && $index < 30) {//每次只做30个正在进行得比赛终端，其他随缘。
                 $id = $match['mid'];
                 MatchDetailController::curlToHtml($id,2);
+                BasketballController::curlToHtml($id);
                 $index++;
             }
         }

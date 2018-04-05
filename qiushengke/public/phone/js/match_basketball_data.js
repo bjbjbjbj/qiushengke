@@ -12,6 +12,13 @@ function getMatchData (ID) {
         type: 'GET',
         dataType: 'jsonp',
         success: function (data) {
+            if (data.status != 0){
+                var live = $('a.live');
+                if (live.length > 0){
+                    live[0].style.display = '';
+                }
+            }
+
         	if (parseInt(data.status) != 0) {
         		/*
         		0-未开始
