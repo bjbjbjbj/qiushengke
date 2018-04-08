@@ -5,7 +5,7 @@
             <a href="/wap/match/foot/schedule/immediate.html">即时比分</a>
             <a class="on">完场赛果</a>
             <a href="/wap/match/foot/schedule/{{$nextDate}}/schedule.html">未来赛程</a>
-            {{--<a href="hotleague.html">热门赛事</a>--}}
+            <a href="/wap/match/foot/hotleague.html">热门赛事</a>
         </div>
         <div class="filter">
             <p class="in league">重要赛事</p>

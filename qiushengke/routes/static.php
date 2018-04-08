@@ -39,7 +39,7 @@ Route::group(['namespace'=>'PC\Anchor'], function () {
     Route::get('/anchor/index',"AnchorController@staticIndex");//首页
 });
 
-//wap
+/***************** wap ***************/
 Route::group(['namespace'=>'Phone\Match'], function () {
     Route::get('/wap/football/one',"MatchController@staticOneMin");//静态化PC足球、篮球列表
     Route::get('/wap/football/five',"MatchController@staticFiveMin");//静态化PC足球、篮球列表(赛程赛果 5分钟一次)
@@ -50,4 +50,10 @@ Route::group(['namespace'=>'Phone\Match'], function () {
 Route::group(['namespace'=>'Phone\Detail'], function () {
     Route::get('/wap/football/detail/{id}',"FootballController@staticMatchDetail");//静态化PC足球终端
     Route::get('/wap/basketball/detail/{id}',"BasketballController@staticMatchDetailBK");//静态化PC篮球终端
+});
+
+//专题
+Route::group(['namespace'=>'Phone\League'], function () {
+    Route::get('/wap/league/{sport}/{id}',"LeagueController@staticLeague");//专题终端
+    Route::get('/wap/league/foot',"LeagueController@staticFoot");//专题终端足球
 });

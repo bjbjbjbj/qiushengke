@@ -40,6 +40,13 @@ Route::group(['namespace'=>'Detail'], function () {
 
 });
 
+Route::group(['namespace'=>'League'], function () {
+    Route::get("/league/foot/hot_league.html", "LeagueController@hotLeague");//首页
+    //赛事专题
+    Route::get("/league/foot/{lid}.html", "LeagueController@league");//联赛
+    Route::get("/cup_league/foot/{lid}.html", "LeagueController@league");//杯赛
+});
+
 Route::group(['namespace'=>'Anchor'], function () {
     Route::get("/anchor/index.html", "AnchorController@anchorIndex");//首页
 

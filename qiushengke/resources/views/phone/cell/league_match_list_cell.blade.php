@@ -119,7 +119,7 @@ $liveUrl = \App\Http\Controllers\PC\CommonTool::matchWapLivePathWithId($match['m
 $hicon = isset($match['hicon']) && strlen($match['hicon']) > 0 ? $match['hicon'] : '/phone/img/icon_teamDefault.png';
 $aicon = isset($match['aicon']) && strlen($match['aicon']) > 0 ? $match['aicon'] : '/phone/img/icon_teamDefault.png';
 ?>
-<a href="{{$matchUrl}}" isMatch="1" class="default {{$show?'show':'hide'}}" id="m_tr_{{$mid}}" match="{{$mid}}" league="{{$lid}}" asiaOdd="{{$asiaOdd}}" ouOdd="{{$ouOdd}}" first="{{$isFirst?"first":""}}" lottery="{{$isLottery?"lottery":""}}" live="{{$hasLive?"live":""}}">
+<a href="{{$matchUrl}}" round="{{$round}}" class="default {{$isCurr?'show':'hide'}}" isMatch="1" class="default {{$show?'show':'hide'}}" id="m_tr_{{$mid}}" match="{{$mid}}" league="{{$lid}}" asiaOdd="{{$asiaOdd}}" ouOdd="{{$ouOdd}}" first="{{$isFirst?"first":""}}" lottery="{{$isLottery?"lottery":""}}" live="{{$hasLive?"live":""}}">
     <div class="odd">
         <p>欧：{{$ouUp}} {{$ouMiddle}} {{$ouDown}}</p>
         <p>亚：{{$asiaUp}} {{$asiaMiddle}} {{$asiaDown}}</p>
@@ -127,12 +127,7 @@ $aicon = isset($match['aicon']) && strlen($match['aicon']) > 0 ? $match['aicon']
     </div>
     <div class="match">
         <div class="time">
-            <p class="league">{{$match['league']}}</p>
-            @if($status > 0)
-                <p class="live">{!! $matchTime !!}</p>
-            @else
-                <p>{!! $matchTime !!}</p>
-            @endif
+            <p>{{substr(date('Y.m.d',$match['time']),2,8)}}<br>{{date('H:i',$match['time'])}}</p>
         </div>
         <div class="team">
             <p><img src="{{$hicon}}" onerror="this.src='{{$cdn}}/phone/img/icon_teamDefault.png'">{{$match['hname']}}</p>
@@ -144,34 +139,6 @@ $aicon = isset($match['aicon']) && strlen($match['aicon']) > 0 ? $match['aicon']
         @elseif($status == -1 || $status > 0)
             <div class="fullScore"><p>{{$match['hscore']}}</p><p>{{$match['ascore']}}</p></div>
             <div class="halfScore"><p>{{$match['hscorehalf']}}</p><p>{{$match['ascorehalf']}}</p></div>
-        @endif
-        <div class="card">
-            @if($status == 0)
-            @else
-                <p>
-                    <span class="red" id="{{$mid}}_h_red">{{$match['h_red']}}</span>
-                    <span class="yellow" id="{{$mid}}_h_yellow">{{$match['h_yellow']}}</span>
-                </p>
-                <p>
-                    <span class="red" id="{{$mid}}_a_red">{{$match['a_red']}}</span>
-                    <span class="yellow" id="{{$mid}}_a_yellow">{{$match['a_yellow']}}</span>
-                </p>
-            @endif
-        </div>
-        @if($status == 0)
-            @if($hasLive)
-                <div class="live"><img src="{{$cdn}}/phone/img/soccer_icon_living_n.png"></div>
-            @else
-
-            @endif
-        @elseif($status == -1)
-            <div class="live"></div>
-        @else
-            @if($hasLive)
-                <div class="live video"><p href="{{$liveUrl}}">直播中</p></div>
-            @else
-                <div class="live">暂无直播</div>
-            @endif
         @endif
     </div>
 </a>
