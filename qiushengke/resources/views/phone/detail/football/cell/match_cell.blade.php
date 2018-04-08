@@ -1,16 +1,16 @@
 <div id="Match" class="content" style="display: none;">
     @if(isset($lineup) && count($lineup) > 0)
-    <div id="First" class="childNode" style="display: none;">
-        @if(isset($lineup['home']))
-        @component('phone.detail.football.cell.match_lineup_cell', ['class'=>'host', 'lineup'=>$lineup['home'] ]) @endcomponent
-        @endif
-        @if($lineup['away'])
-        @component('phone.detail.football.cell.match_lineup_cell', ['class'=>'away', 'lineup'=>$lineup['away'] ]) @endcomponent
-        @endif
-    </div>
-        @else
-        <div id="First" class="childNode" style="display: ;">
-        <div class="nolist"></div>
+        <div id="First" class="childNode" style="display: none;">
+            @if(isset($lineup['home']))
+                @component('phone.detail.football.cell.match_lineup_cell', ['class'=>'host', 'lineup'=>$lineup['home'] ]) @endcomponent
+            @endif
+            @if($lineup['away'])
+                @component('phone.detail.football.cell.match_lineup_cell', ['class'=>'away', 'lineup'=>$lineup['away'] ]) @endcomponent
+            @endif
+        </div>
+    @else
+        <div id="First" class="childNode" style="display: none;">
+            <div class="nolist"></div>
         </div>
     @endif
     <div id="Event" class="childNode" style="display: ;">
