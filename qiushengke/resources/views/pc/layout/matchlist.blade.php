@@ -827,6 +827,7 @@
                                     Goal(dataItem.hname, dataItem.aname, dataItem.hscore, dataItem.ascore, icon, timeStr, isHost ? 'host' : 'away',ID);
                                 }
                             }
+                            scoreItem.className = 'fullScore';
                             scoreItem.html(currentScore);
                         }
                         if (chScoreItem) {
