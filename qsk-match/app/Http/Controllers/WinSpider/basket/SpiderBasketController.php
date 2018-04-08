@@ -195,6 +195,29 @@ class SpiderBasketController extends Controller
     }
 
     /**
+     * 重置盘口填充的标识
+     */
+    private function resetMatchIsOdd(Request $request)
+    {
+        $lid = $request->input('lid');
+        $count = $request->input('count', 1000);
+        $startTime = $request->input('start', '2004-01-01');
+        $endTime = $request->input('end', date('Y-m-d'));
+        $matches = \App\Models\LiaoGouModels\BasketMatch::query()
+            ->where('lid', $lid)
+            ->whereBetween('time', [$startTime, $endTime])
+            ->where('status', -1)
+            ->where('is_odd', 1)
+            ->orderBy('time', 'asc')
+            ->take($count)
+            ->get();
+        foreach ($matches as $match) {
+            $match->is_odd = 0;
+            $match->save();
+        }
+    }
+
+    /**
      * 专门用来删除冗余比赛表的多余数据的接口（包括matches_afters, odds_afters, baskets_afters）
      */
     private function deleteUselessAllAfters(Request $request) {

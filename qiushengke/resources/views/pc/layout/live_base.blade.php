@@ -607,7 +607,7 @@
                             <td class=" odd omid2">-</td>
                             <td class=" odd odown2">-</td>
                             <td class="green odd aup2">-</td>
-                            <td class="green odd amid1">-</td>
+                            <td class="green odd amid2">-</td>
                             <td class="green odd adown2">-</td>
                             <td class=" odd gup2">-</td>
                             <td class=" odd gmid2">-</td>
