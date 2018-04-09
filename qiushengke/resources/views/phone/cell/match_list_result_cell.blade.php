@@ -112,8 +112,8 @@ $hasLive = $match['pc_live'];
 
 $liveUrl = \App\Http\Controllers\PC\CommonTool::matchWapLivePathWithId($match['mid']);
 
-$hicon = isset($match['hicon'])?$match['hicon']:'/phone/img/icon_teamDefault.png';
-$aicon = isset($match['aicon'])?$match['aicon']:'/phone/img/icon_teamDefault.png';
+$hicon = isset($match['hicon'])?$match['hicon']:'';
+$aicon = isset($match['aicon'])?$match['aicon']:'';
 
 if (isset($match['asiamiddle2'])){
     $ra = \App\Http\Controllers\PC\OddCalculateTool::getMatchAsiaOddResult($match['hscore'],$match['ascore'],$match['asiamiddle2'],true);
@@ -141,8 +141,8 @@ else
             <p class="league">{{$match['league']}}</p>
         </div>
         <div class="team">
-            <p><img src="{{$hicon}}">{{$match['hname']}}</p>
-            <p><img src="{{$aicon}}">{{$match['aname']}}</p>
+            <p><img src="{{$hicon}}" onerror="this.src='{{$cdn}}/phone/img/icon_teamDefault.png'">{{$match['hname']}}</p>
+            <p><img src="{{$aicon}}" onerror="this.src='{{$cdn}}/phone/img/icon_teamDefault.png'">{{$match['aname']}}</p>
         </div>
         <div class="fullScore"><p>{{$match['hscore']}}</p><p>{{$match['ascore']}}</p></div>
         <div class="halfScore"><p>{{$match['hscorehalf']}}</p><p>{{$match['ascorehalf']}}</p></div>

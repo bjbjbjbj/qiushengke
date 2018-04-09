@@ -817,7 +817,7 @@
                             }
                             //已结束
                             if (liveItem.find('img').length > 0 && dataItem.status == -1){
-                                liveItem.html('<img src="/pc/img/icon_living.png">');
+                                liveItem.html('<img src="/pc/img/icon_lived.png">');
                             }
                         }
                         //分差

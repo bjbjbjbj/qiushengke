@@ -207,20 +207,20 @@ $show = false;
         {{--比赛状态 直播方式--}}
         @if($status == 0)
             @if($hasLive)
-                <a class="live" href="{{$liveUrl}}" target="_blank"><img id="live_{{$match['mid']}}" src="{{env('CDN_URL')}}/pc/img/icon_living.png"></a>
+                <a id="live_{{$match['mid']}}" class="live" href="{{$liveUrl}}" target="_blank"><img src="{{env('CDN_URL')}}/pc/img/icon_living.png"></a>
             @else
                 <span class="" style="color: lightgray">暂无直播</span>
                 {{--<a class="live" href="{{$liveUrl}}" target="_blank"><img id="live_{{$match['mid']}}" src="{{env('CDN_URL')}}/pc/img/icon_action_light.png"></a>--}}
             @endif
         @elseif($status == -1)
             @if($hasLive)
-                <a class="live" href="{{$matchUrl}}" target="_blank"><img id="live_{{$match['mid']}}" src="{{env('CDN_URL')}}/pc/img/icon_lived.png"></a>
+                <a id="live_{{$match['mid']}}" class="live" href="{{$matchUrl}}" target="_blank"><img src="{{env('CDN_URL')}}/pc/img/icon_lived.png"></a>
             @else
-                <a class="live" href="{{$matchUrl}}" target="_blank"><img id="live_{{$match['mid']}}" src="{{env('CDN_URL')}}/pc/img/icon_action_grey.png"></a>
+                <a id="live_{{$match['mid']}}" class="live" href="{{$matchUrl}}" target="_blank"><img src="{{env('CDN_URL')}}/pc/img/icon_action_grey.png"></a>
             @endif
         @else
             @if($hasLive)
-                <a class="live video" href="{{$liveUrl}}" target="_blank">直播中</a>
+                <a id="live_{{$match['mid']}}" class="live video" href="{{$liveUrl}}" target="_blank">直播中</a>
             @else
                 {{--<a class="live flash" href="{{$liveUrl}}" target="_blank">动画</a>--}}
                 <span class="" style="color: lightgray">暂无直播</span>

@@ -38,7 +38,7 @@ function getMatchData (ID) {
 
             	//更新比分
             	$('#Info .score').html('<span class="host">' + data.hscore + '</span><span class="away">' + data.ascore + '</span>');
-            	$('#Navigation p.score').html(data.hscore + ' - ' + data.ascore + (parseInt(data.live) == 1 ? '<span>[直播]</span>' : ''));
+            	$('#Navigation p.score').html(data.hscore + ' - ' + data.ascore + ((parseInt(data.status) > 0 && parseInt(data.live) == 1) ? '<span>[直播]</span>' : ''));
 
             	//进入更新比赛数据事件
             	getEventData (ID,data.status);
