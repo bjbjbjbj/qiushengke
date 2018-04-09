@@ -45,6 +45,7 @@ Route::group(['namespace'=>'League'], function () {
     //赛事专题
     Route::get("/league/foot/{lid}.html", "LeagueController@league");//联赛
     Route::get("/cup_league/foot/{lid}.html", "LeagueController@league");//杯赛
+    Route::get("/cup_league/foot/{lid}/{key}.html", "LeagueController@cupLeagueGroup");//杯赛
 });
 
 Route::group(['namespace'=>'Anchor'], function () {
