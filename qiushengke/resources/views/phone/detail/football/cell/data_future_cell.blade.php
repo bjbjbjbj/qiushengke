@@ -35,8 +35,8 @@
         <tr>
             <th>日期</th>
             <th>赛事</th>
-            <th colspan="3">比分</th>
-            <th>主让</th>
+            <th colspan="3">主客球队</th>
+            <th>相隔</th>
         </tr>
         </thead>
         <tbody>
