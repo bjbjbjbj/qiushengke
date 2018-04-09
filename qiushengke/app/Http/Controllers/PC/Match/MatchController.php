@@ -192,16 +192,16 @@ class MatchController extends BaseController
      */
     public function result(Request $request,$sport, $dateStr,$order = 't'){
         //如果传入的时间大于今天 则跳转到schedule
-        if (strtotime(date('Y-m-d')) < strtotime($dateStr)) {
+        if (strtotime(date('Ymd')) < strtotime($dateStr)) {
             $url = $request->getPathInfo();
-            $commonStr = "/match/".($sport == 2 ? 'basket' : 'foot')."/schedule/";
+            $commonStr = "/match/$sport/schedule/";
             $paramStr = str_replace($commonStr, '', $url);
             $paramStr = str_replace("result", "schedule", $paramStr);
             return redirect($commonStr.$paramStr);
         } //如果传入的时间是今天 则跳转到immediate
-        else if (strtotime(date('Y-m-d')) == strtotime($dateStr)) {
+        else if (strtotime(date('Ymd')) == strtotime($dateStr)) {
             $url = $request->getPathInfo();
-            $commonStr = "/match/".($sport == 2 ? 'basket' : 'foot')."/schedule/";
+            $commonStr = "/match/$sport/schedule/";
             $paramStr = str_replace($commonStr, '', $url);
             $paramStr = str_replace($dateStr.'/', '', $paramStr);
             $paramStr = str_replace("result", "immediate", $paramStr);
@@ -266,17 +266,17 @@ class MatchController extends BaseController
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function schedule(Request $request,$sport, $dateStr,$order = 't'){
-        //如果传入的时间大于今天 则跳转到schedule
-        if (strtotime(date('Y-m-d')) > strtotime($dateStr)) {
+        //如果传入的时间小于今天 则跳转到result
+        if (strtotime(date('Ymd')) > strtotime($dateStr)) {
             $url = $request->getPathInfo();
-            $commonStr = "/match/".($sport == 2 ? 'basket' : 'foot')."/schedule/";
+            $commonStr = "/match/$sport/schedule/";
             $paramStr = str_replace($commonStr, '', $url);
             $paramStr = str_replace("schedule", "result", $paramStr);
             return redirect($commonStr.$paramStr);
         } //如果传入的时间是今天 则跳转到immediate
-        else if (strtotime(date('Y-m-d')) == strtotime($dateStr)) {
+        else if (strtotime(date('Ymd')) == strtotime($dateStr)) {
             $url = $request->getPathInfo();
-            $commonStr = "/match/".($sport == 2 ? 'basket' : 'foot')."/schedule/";
+            $commonStr = "/match/$sport/schedule/";
             $paramStr = str_replace($commonStr, '', $url);
             $paramStr = str_replace($dateStr.'/', '', $paramStr);
             $paramStr = str_replace("schedule", "immediate", $paramStr);
