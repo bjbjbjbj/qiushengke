@@ -139,6 +139,8 @@ $liveUrl = \App\Http\Controllers\PC\CommonTool::matchLivePathWithId($match['mid'
             @if($hasLive)
                 @if($match['status'] > 0)
                     <a id="live_{{$mid}}" class="live" href="{{$liveUrl}}" target="_blank"><span>直播中</span></a>
+                @elseif($match['status'] == -1)
+                    <a id="live_{{$mid}}" class="live" href="{{$liveUrl}}" target="_blank"><img src="/pc/img/icon_lived.png"></a>
                 @else
                     <a id="live_{{$mid}}" class="live" href="{{$liveUrl}}" target="_blank"><img src="/pc/img/icon_living.png"></a>
                 @endif
