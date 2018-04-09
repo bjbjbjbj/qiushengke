@@ -5,7 +5,7 @@
 @endsection
 @section('content')
     <div id="Navigation">
-        <div class="banner">亚冠</div>
+        <div class="banner">{{$league['name']}}</div>
         <div class="tab">
             <input type="radio" name="tab" id="Tab_Match" value="List" checked><label for="Tab_Match">赛程赛果</label><!--都有-->
             <input type="radio" name="tab" id="Tab_Rank" value="Rank"><label for="Tab_Rank">积分榜</label><!--联赛-->

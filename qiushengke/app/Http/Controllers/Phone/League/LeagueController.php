@@ -43,6 +43,11 @@ class LeagueController extends BaseController{
                 foreach ($footLeague as $item){
                     LeagueController::flushLiveDetailHtml($item['id'],1);
                 }
+
+                $html = $this->hotLeague($request);
+                if ($html && strlen($html) > 0){
+                    Storage::disk("public")->put("/wap/league/foot/hot_league.html", $html);
+                }
             }
         }
     }
@@ -186,7 +191,7 @@ class LeagueController extends BaseController{
             }
             else {
                 $this->html_var = array_merge($this->html_var,$result);
-                return view('phone.football.league.cup_league', $this->html_var);
+                return view('phone.league.football.cup_league', $this->html_var);
             }
         }
         else {
@@ -200,5 +205,25 @@ class LeagueController extends BaseController{
         $this->html_var['lastDate'] = $lastDate;
         $this->html_var['nextDate'] = $nextDate;
         return view('phone.league.football.hot_league', $this->html_var);
+    }
+
+    public function cupLeagueGroup(Request $request,$lid,$key){
+        $pc_json = $this->getLeagueData($lid);
+        if (!empty($pc_json)) {
+            $result = $pc_json;
+            $result['sport'] = 1;
+            //联赛,杯赛
+            if ($pc_json['league']['type'] == 1) {
+
+            }
+            else {
+                $this->html_var = array_merge($this->html_var,$result);
+                $this->html_var['key'] = $key;
+                return view('phone.league.football.cup_league_group', $this->html_var);
+            }
+        }
+        else {
+            return abort(404);
+        }
     }
 }

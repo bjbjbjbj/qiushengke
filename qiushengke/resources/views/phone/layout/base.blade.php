@@ -20,7 +20,7 @@
     <script type="text/javascript" src="{{$cdn}}/phone/js/public.js"></script>
     <title>球胜客</title>
 </head>
-<body>
+<body @yield('body')>
 @yield('content')
 </body>
 <script type="text/javascript">
