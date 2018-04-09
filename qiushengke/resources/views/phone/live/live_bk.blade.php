@@ -21,6 +21,7 @@
             </div>
         </div>
         <ul>
+            @if(isset($tech))
             @foreach($tech as $item)
                 @if($item['h_p'] != 0 || $item['a_p'] != 0)
                     <?php
@@ -42,6 +43,7 @@
                     </li>
                 @endif
             @endforeach
+                @endif
         </ul>
     </div>
     @if(isset($players))
