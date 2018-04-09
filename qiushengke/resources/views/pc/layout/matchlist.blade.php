@@ -753,7 +753,9 @@
                     }
 
                     for (var ID in json) {
+
                         var dataItem = json[ID];
+                        console.log(dataItem);
                         var timeItem = $('#time_' + ID);
                         var scoreItem = $('#score_' + ID);
                         var halfScoreItem = $('#half_score_' + ID);
@@ -827,7 +829,7 @@
                                     Goal(dataItem.hname, dataItem.aname, dataItem.hscore, dataItem.ascore, icon, timeStr, isHost ? 'host' : 'away',ID);
                                 }
                             }
-                            scoreItem.className = 'fullScore';
+                            scoreItem[0].className = 'fullScore';
                             scoreItem.html(currentScore);
                         }
                         if (chScoreItem) {
@@ -836,12 +838,14 @@
                         if (halfScoreItem) {
                             halfScoreItem.html('半 ' + dataItem.hscorehalf + ' - ' + dataItem.ascorehalf);
                         }
-                        if (liveItem && liveItem.length > 0){
-                            if(liveItem[0].src == "{{env('CDN_URL')}}/pc/img/icon_living.png") {
-                                liveItem[0].src = "{{env('CDN_URL')}}/pc/img/icon_living.gif";
+                        if (liveItem && liveItem.length > 0 && liveItem[0].hasChildNodes()){
+                            if (dataItem.status > 0 && !liveItem.hasClass('video')) {
+                                liveItem.addClass("video");
+                                liveItem.html('直播中');
                             }
                             if (timeItem == '已结束'){
-                                liveItem[0].src = "{{env('CDN_URL')}}/pc/img/icon_lived.png";
+                                liveItem.removeClass('video');
+                                liveItem.html('<img src="{{env('CDN_URL')}}/pc/img/icon_lived.png">');
                             }
                         }
 
@@ -852,9 +856,9 @@
                             if(matchTr) {
                                 tbody.appendChild(matchTr);
                             }
-                            var liveItem = $('#live_' + ID);
                             if (liveItem && liveItem.length > 0){
-                                liveItem[0].src = "{{env('CDN_URL')}}/pc/img/icon_lived.png";
+                                liveItem.removeClass('video');
+                                liveItem.html('<img src="{{env('CDN_URL')}}/pc/img/icon_lived.png">');
                             }
                             _updateSection();
                         }
