@@ -755,7 +755,6 @@
                     for (var ID in json) {
 
                         var dataItem = json[ID];
-                        console.log(dataItem);
                         var timeItem = $('#time_' + ID);
                         var scoreItem = $('#score_' + ID);
                         var halfScoreItem = $('#half_score_' + ID);

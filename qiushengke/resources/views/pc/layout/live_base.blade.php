@@ -67,8 +67,10 @@
             document.getElementById('MyFrame').src = Link;
         }
 
+        @if((isset($match) ? $match['status'] : 0) >= 0)
         //选第一个
-        $("div#Live a:first").trigger("click");
+            $("div#Live a:first").trigger("click");
+        @endif
 
 
         //时间格式化

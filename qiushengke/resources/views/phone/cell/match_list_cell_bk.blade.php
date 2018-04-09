@@ -103,7 +103,7 @@ $liveUrl = \App\Http\Controllers\PC\CommonTool::matchWapLivePathWithId($match['m
             <p><img src="{{\App\Http\Controllers\PC\CommonTool::getIconBK($match['aicon'])}}" onerror="this.src='{{$cdn}}/phone/img/icon_teamDefault.png'">{{$match['aname']}}</p>
         </div>
 
-        @if($status > 0)
+        @if($status > 0 || $status <= -1)
             <div
                     @if($status == 1)
                     class="part on"
