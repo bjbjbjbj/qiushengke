@@ -55,5 +55,5 @@ Route::group(['namespace'=>'Phone\Detail'], function () {
 //专题
 Route::group(['namespace'=>'Phone\League'], function () {
     Route::get('/wap/league/{sport}/{id}',"LeagueController@staticLeague");//专题终端
-    Route::get('/wap/league/foot',"LeagueController@staticFoot");//专题终端足球
+    Route::get('/wap/league/foot',"LeagueController@staticFoot");//专题终端足球,含足球专题页
 });

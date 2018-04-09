@@ -43,6 +43,11 @@ class LeagueController extends BaseController{
                 foreach ($footLeague as $item){
                     LeagueController::flushLiveDetailHtml($item['id'],1);
                 }
+
+                $html = $this->hotLeague($request);
+                if ($html && strlen($html) > 0){
+                    Storage::disk("public")->put("/wap/league/foot/hot_league.html", $html);
+                }
             }
         }
     }
