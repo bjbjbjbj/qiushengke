@@ -53,7 +53,7 @@ function getMatchData (ID) {
 
             	//更新比分
             	$('#Info .score').html('<span class="host">' + data.hscore + '</span><span class="away">' + data.ascore + '</span>');
-            	$('#Navigation p.score').html(data.hscore + ' - ' + data.ascore + (parseInt(data.live) == 1 ? '<span>[直播]</span>' : ''));
+            	$('#Navigation p.score').html(data.hscore + ' - ' + data.ascore + ((parseInt(data.status) > 0 && parseInt(data.live) == 1) ? '<span>[直播]</span>' : ''));
 
                 $('#Event .score tbody tr:first').html('<td>' + $('#Event .score tbody tr:first td:first').html() + '</td>' + 
                                                        '<td>' + (data.hscore_1st ? data.hscore_1st : '/') + '</td>' +
