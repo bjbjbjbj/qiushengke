@@ -51,4 +51,28 @@
             </table>
         </div>
     </div>
+
+    @if(isset($score))
+        <div class="lbox" id="Rank">
+            <div class="title">
+                <p>积分排名</p>
+            </div>
+            <div class="con" type="direction">
+                @if(count($score) == 1)
+                    @component('pc.league.league_rank_bk', ['scores'=>$score[0]])
+                    @endcomponent
+                @else
+                    @foreach($score as $key=>$item)
+                        @if($key == 0)
+                            <p class="area">西部排名</p>
+                        @else
+                            <p class="area west">东部排名</p>
+                        @endif
+                        @component('pc.league.league_rank_bk', ['scores'=>$score[0], 'zone'=>$key])
+                        @endcomponent
+                    @endforeach
+                @endif
+            </div>
+        </div>
+    @endif
 @endsection
