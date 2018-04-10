@@ -6,15 +6,18 @@ use App\Http\Controllers\Utils\DateUtils;
 use App\Http\Controllers\WinSpider\SpiderTools;
 use App\Models\LiaoGouModels\BasketMatchesAfter;
 use App\Models\LiaoGouModels\BasketOddsAfter;
+use App\Models\WinModels\BasketLeague;
 use App\Models\WinModels\BasketMatch;
+use App\Models\WinModels\BasketSeason;
 use Hamcrest\BaseMatcher;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Redis;
 
 class SpiderBasketController extends Controller
 {
-    use SpiderTools, SpiderBasketOnce, SpiderBasketSchedule,
+    use SpiderTools, SpiderBasketOnce, SpiderBasketSchedule, SpiderBasketScore,
         SpiderBasketOdds, SpiderBasketLeague,SpiderBasketMatch,SpiderBasketTeam;
 
     const SPIDER_ERROR_LIMIT = 4;
@@ -24,7 +27,7 @@ class SpiderBasketController extends Controller
         if (method_exists($this, $action)) {
             $this->$action($request);
         } else {
-            echo "Error: Not Found action 'SpiderController->$action()'";
+            echo "Error: Not Found action 'SpiderBasketController->$action()'";
         }
     }
 
@@ -229,5 +232,73 @@ class SpiderBasketController extends Controller
         BasketMatchesAfter::deleteUselessData($count);
         //odds_afters表
         BasketOddsAfter::deleteUselessData($count);
+    }
+
+    /**
+     * 刷新当天的赛事积分
+     * 每小时执行一次
+     */
+    private function spiderCurrentLeagueRank(Request $request)
+    {
+        $type = $request->input("type", -1);
+
+        $keyHead = "basket_league_rank_" . $type;
+        $lids = $this->getRecentLids($keyHead, 1, 5, 24, true);
+        foreach ($lids as $lid) {
+            $league = BasketLeague::find($lid);
+            if ($league) {
+                if ($league->type == 1) {
+                    $request->merge(['lid'=>$lid]);
+                    $this->leagueScore($request);
+                } elseif ($league->type == 2) {
+                    $request->merge(['lid'=>$lid]);
+                    $this->cupLeagueScore($request);
+                }
+            }
+        }
+    }
+
+    private function getRecentLids($keyHead, $leagueType = -1, $count = 10, $timeHours = 36, $isSub = false)
+    {
+        $date = date_create();
+        $key = $keyHead . "_" . date_format($date, "Y-m-d");
+        $value = Redis::get($key);
+        $redisLis = array();
+        if (isset($value)) {
+            $redisLis = array_merge($redisLis, json_decode($value));
+        }
+        $lids = array();
+        if (count($redisLis) <= 0) {
+            $query = BasketMatch::query()->select("basket_matches.*");
+            if ($leagueType > 0) {
+                $query->join("basket_leagues", function ($join) use($leagueType) {
+                    $join->on("basket_leagues.id", "=", "basket_matches.lid")
+                        ->where("basket_leagues.type", $leagueType);
+                });
+            }
+            $startDate = date_format($isSub ? date_sub(date_create(), date_interval_create_from_date_string((2 + $timeHours) . ' hour')) : date_add($date, date_interval_create_from_date_string('2 hour')), 'Y-m-d H:i:s');
+            $endDate = date_format($isSub ? date_sub(date_create(), date_interval_create_from_date_string('2 hour')) : date_add($date, date_interval_create_from_date_string((2 + $timeHours) . ' hour')), 'Y-m-d H:i:s');
+
+            dump($startDate, $endDate);
+
+            $query->where("time", ">=", $startDate)
+                ->where("time", "<=", $endDate)
+                ->orderby('time', $isSub ? 'desc' : "asc");
+            $matches = $query->get()->unique("lid");
+            foreach ($matches as $match) {
+                array_push($lids, $match->lid);
+            }
+            Redis::setEx($key, 24 * 60 * 60, json_encode($lids));
+            $redisLis = array_merge($redisLis, $lids);
+        }
+        $lids = array_slice($redisLis, 0, $count);
+
+        dump('lids count = ' . count($redisLis));
+
+        //删除redis中将要爬取的lid
+        $redisLis = array_slice($redisLis, count($lids));
+        Redis::set($key, json_encode($redisLis));
+
+        return $lids;
     }
 }

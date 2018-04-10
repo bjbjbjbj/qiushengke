@@ -147,6 +147,7 @@ trait SpiderBasketLeague
                 $tmp->lid = $lid;
                 $tmp->season = $season;
                 $tmp->stage = $currentKind == 2 ? (isset($isCurrentPid)?$isCurrentPid:$currentKind) :$currentKind;
+                $tmp->kind = $kind;
                 $tmp->hname = $hname;
                 $tmp->aname = $aname;
                 $tmp->hscore = $hscore == '' ? null : $hscore;
@@ -336,7 +337,7 @@ trait SpiderBasketLeague
                     echo '格式不对 ' . $match . ' ' . count(explode("^", $match)).'</br>';
                     continue;
                 }
-                list($c,$dateStr,$hname,$aname,$status,$hscore,$ascore,$a,$b, $mid) = explode("^", $match);
+                list($groupName,$dateStr,$hname,$aname,$status,$hscore,$ascore,$a,$b, $mid) = explode("^", $match);
                 //20171201083000^-1^亚特兰大老鹰^克里夫兰骑士^114^121^290160
                 $tmp = BasketMatch::find($mid);
                 if (is_null($tmp)){
@@ -344,6 +345,10 @@ trait SpiderBasketLeague
                     $tmp->id = $mid;
                 }
                 $date = date('Y-m-d H:i:s', strtotime($dateStr));
+                //小组名称
+                if (isset($groupName) && strlen($groupName) > 0) {
+                    $tmp->group = $groupName;
+                }
                 $tmp->time = $date;
                 $tmp->lid = $lid;
                 $tmp->season = $seasonName;
