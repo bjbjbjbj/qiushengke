@@ -21,6 +21,7 @@
             </div>
         </div>
         <ul>
+            @if(isset($tech))
             @foreach($tech as $item)
                 @if((isset($item['h_p']) && $item['h_p'] != 0) || (isset($item['a_p']) && $item['a_p'] != 0))
                     <?php
@@ -42,6 +43,7 @@
                     </li>
                 @endif
             @endforeach
+                @endif
         </ul>
     </div>
     <div id="Event" style="display: none;">
