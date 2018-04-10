@@ -120,7 +120,7 @@ trait SpiderBasketScore
                                     $scoreStr = $scoreData[1][0];
                                     $scoreStrs = explode("],[", $scoreStr);
                                     foreach ($scoreStrs as $key=>$itemStr) {
-                                        $this->onCupLeagueScoreItemSave($win_lid, $lid, $groupName, $key+1, $itemStr, $season);
+                                        $this->onCupLeagueScoreItemSave($win_lid, $lid, $lg_stage_id, $stageId, $groupName, $key+1, $itemStr, $season);
                                     }
                                 }
                             }
@@ -131,7 +131,7 @@ trait SpiderBasketScore
         }
     }
 
-    private function onCupLeagueScoreItemSave($win_lid, $lid, $groupName, $rank, $itemStr, $season) {
+    private function onCupLeagueScoreItemSave($win_lid, $lid, $stage, $win_stage, $groupName, $rank, $itemStr, $season) {
         if (isset($itemStr) && strlen($itemStr) > 0 && count(explode(",", $itemStr)) >= 12) {
             list($tid, $count, $win, $lose, $win_p,
                 $lose_p, $goal, $fumble, $diff, $win_status,
@@ -139,13 +139,15 @@ trait SpiderBasketScore
             $lg_team = BasketTeam::query()->where('win_id', $tid)->first();
             if (isset($lg_team)) {
                 $lg_tid = $lg_team->id;
-                $score = BasketScore::query()->where(['lid' => $lid, 'tid' =>$lg_tid, 'season'=>$season])->first();
+                $score = BasketScore::query()->where(['lid' => $lid, 'tid' =>$lg_tid, 'season'=>$season, 'stage'=>$stage])->first();
                 if (!isset($score)) {
                     $score = new BasketScore();
                     $score->lid = $lid;
                     $score->tid = $lg_tid;
                     $score->season = $season;
+                    $score->stage = $stage;
                 }
+                $score->win_stage = $win_stage;
                 $score->group = $groupName;
                 $score->win_lid = $win_lid;
                 $score->win_tid = $tid;
