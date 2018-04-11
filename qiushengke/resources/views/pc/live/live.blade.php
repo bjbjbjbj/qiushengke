@@ -1,8 +1,8 @@
 @extends('pc.layout.live_base')
 @section('live_data')
     <?php
-    $hicon = strlen($match['hicon']) > 0 ? $match['hicon'] : '/pc/img/icon_teamDefault.png';
-    $aicon = strlen($match['aicon']) > 0 ? $match['aicon'] : '/pc/img/icon_teamDefault.png';
+    $hicon = (isset($match['hicon']) && strlen($match['hicon']) > 0) ? $match['hicon'] : '/pc/img/icon_teamDefault.png';
+    $aicon = (isset($match['aicon']) && strlen($match['aicon']) > 0) ? $match['aicon'] : '/pc/img/icon_teamDefault.png';
     ?>
     <div class="data">
         <dl>

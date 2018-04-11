@@ -92,7 +92,7 @@ class Kernel extends ConsoleKernel
 
         //其他
         $schedule->command('football_matches_in_db:run')->everyTenMinutes();
-        $schedule->command('basketball_matches_in_db:run')->everyTenMinutes();
+        $schedule->command('bb_matches_in_db:run')->everyTenMinutes();
         $schedule->command('inspire')
             ->hourly();
     }
