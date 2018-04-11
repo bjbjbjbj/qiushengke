@@ -1156,16 +1156,19 @@ a.team span.name{
 	#Con table tbody td p.asia, #Con table tbody td p.goal{
 		font-size: 12px;
 	}
-	#Con > .ConInner > table > colgroup > col:nth-child(4){
+	#Con > .ConInner > table > colgroup > col:nth-child(4), #Simulation table col:nth-child(4){
 		width: 60px !important;
 	}
-	#Con > .ConInner > table > colgroup > col:nth-child(9){
+	#Con > .ConInner > table > colgroup > col:nth-child(7){
 		width: 70px !important;
 	}
-	#Con > .ConInner > table > colgroup > col:nth-child(10){
+	#Con > .ConInner > table > colgroup > col:nth-child(11), #Simulation table col:nth-child(7){
+		width: 80px !important;
+	}
+	#Con > .ConInner > table > colgroup > col:nth-child(12), #Simulation table col:nth-child(8){
 		width: 206px !important;
 	}
-	#Con > .ConInner > table > colgroup > col:nth-child(11){
+	#Con > .ConInner > table > colgroup > col:nth-child(13), #Simulation table col:nth-child(9){
 		width: 100px !important;
 	}
 }

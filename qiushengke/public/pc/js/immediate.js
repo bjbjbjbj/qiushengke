@@ -266,9 +266,9 @@ function CheckGoal() {
         //对应TD加底色
         var TD;
         if (Target.Type == 'host') {
-            TD = $('tr[match=' + Target.ID + '] td.host, tr[match=' + Target.ID + '] td.host + td');
+            TD = $('tr[match=' + Target.ID + '] td.host');
         }else{
-            TD = $('tr[match=' + Target.ID + '] td.away, tr[match=' + Target.ID + '] td.host + td + td + td');
+            TD = $('tr[match=' + Target.ID + '] td.away');
         }
         TD.addClass('goal');
 

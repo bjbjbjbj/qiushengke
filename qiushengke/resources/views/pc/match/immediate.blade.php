@@ -94,9 +94,9 @@
             <table style="width: 1016px;">
                 <colgroup>
                     <col num="1" width="3.5%">
-                    <col num="2" width="8%">
+                    <col num="2" width="7.5%">
                     <col num="3" width="4.5%">
-                    <col num="4" width="5.5%">
+                    <col num="4" width="5%">
                     <col num="5">
                     <col num="10" width="60px">
                     <col num="11" width="60px">
