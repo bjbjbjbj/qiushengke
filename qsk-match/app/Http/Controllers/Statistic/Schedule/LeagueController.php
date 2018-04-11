@@ -133,7 +133,123 @@ class LeagueController{
             $array[] = $stage;
         }
 
-        return $array;
+        //重新排序
+        //处理数据,因为无直接标识16强之类,用小组赛后面的都当16强做
+        $afterGroup = false;
+        //16强
+        $sixth = array();
+        //8强
+        $eightth = array();
+        //4强
+        $fouth = array();
+        //总决赛
+        $final = array();
+        for ($i = 0 ; $i < count($array) ; $i++){
+            $stage = $array[$i];
+            if (isset($stage['group'])){
+                $afterGroup = true;
+            }
+            //小组赛后
+            if ($afterGroup){
+                if (isset($stage['combo'])){
+                    if (count($sixth) == 0){
+                        $sixth = $stage['combo'];
+                    }
+                    else if (count($eightth) == 0){
+                        $eightth = $stage['combo'];
+                    }
+                    else if (count($fouth) == 0){
+                        $fouth = $stage['combo'];
+                    }
+                    else if (count($final) == 0){
+                        $final = $stage['combo'];
+                    }
+                }
+            }
+        }
+        //排序整理,从总决赛开始
+        if (count($final) > 0){
+            $tmp = $fouth;
+            $fouth = array();
+            foreach ($final as $o_key=>$item){
+                $hid = explode('_',$o_key)[0];
+                $aid = explode('_',$o_key)[1];
+                foreach ($tmp as $key=>$value){
+                    if (stristr($key,$hid)){
+                        $fouth[$key] = $value;
+                        break;
+                    }
+                }
+                foreach ($tmp as $key=>$value){
+                    if (stristr($key,$aid)){
+                        $fouth[$key] = $value;
+                        break;
+                    }
+                }
+            }
+        }
+        if (count($fouth) > 0){
+            $tmp = $eightth;
+            $eightth = array();
+            foreach ($fouth as $o_key => $item){
+                $hid = explode('_',$o_key)[0];
+                $aid = explode('_',$o_key)[1];
+                foreach ($tmp as $key=>$value){
+                    if (stristr($key,$hid)){
+                        $eightth[$key] = $value;
+                        break;
+                    }
+                }
+                foreach ($tmp as $key=>$value){
+                    if (stristr($key,$aid)){
+                        $eightth[$key] = $value;
+                        break;
+                    }
+                }
+            }
+        }
+        if (count($eightth) > 0){
+            $tmp = $sixth;
+            $sixth = array();
+            foreach ($eightth as $o_key=>$item){
+                $hid = explode('_',$o_key)[0];
+                $aid = explode('_',$o_key)[1];
+                foreach ($tmp as $key=>$value){
+                    if (stristr($key,$hid)){
+                        $sixth[$key] = $value;
+                        break;
+                    }
+                }
+                foreach ($tmp as $key=>$value){
+                    if (stristr($key,$aid)){
+                        $sixth[$key] = $value;
+                        break;
+                    }
+                }
+            }
+        }
+
+        $groupKey = -1;
+        $outArray = array();
+        foreach ($array as $key=>$stage) {
+            if (isset($stage['group'])) {
+                $groupKey = $key;
+            }
+            if ($groupKey > 0) {
+                if ($groupKey + 1 == $key) { //16强
+                    $stage['combo'] = $sixth;
+                } else if ($groupKey + 2 == $key) {//8强
+                    $stage['combo'] = $eightth;
+                } else if ($groupKey + 3 == $key) {//4强
+                    $stage['combo'] = $fouth;
+                } else if ($groupKey + 4 == $key) {//决赛
+                    $stage['combo'] = $final;
+                }
+            }
+            $outArray[$key] = $stage;
+        }
+
+        return $outArray;
     }
 
     //获取比赛赛程对弈比赛列表
@@ -194,8 +310,9 @@ class LeagueController{
                 if (array_key_exists($key2,$result)) {
                     $key = $key2;
                 }
+                $isHome = $hid == explode('_', $key)[0];
                 //先看看是否有之前的比赛是主客互换
-                if (!array_key_exists($key, $result) && !array_key_exists($key2, $result)) {
+                if (!array_key_exists($key, $result)) {
                     $hname = $match->hname;
                     $aname = $match->aname;
                     $result[$key] = array();
@@ -206,14 +323,14 @@ class LeagueController{
                     $result[$key]['matches'] = array();
                     $result[$key]['matches'][] = $match;
                     if ($match->status == -1){
-                        $result[$key]['hscore'] = $match->hscore;
-                        $result[$key]['ascore'] = $match->ascore;
+                        $result[$key]['hscore'] = $isHome ? $match->hscore : $match->ascore;
+                        $result[$key]['ascore'] = $isHome ? $match->ascore : $match->hscore;
                     }
                 } else {
-                    $result[$key2]['matches'][] = $match;
+                    $result[$key]['matches'][] = $match;
                     if ($match->status == -1){
-                        $result[$key2]['hscore'] += $match->ascore;
-                        $result[$key2]['ascore'] += $match->hscore;
+                        $result[$key]['hscore'] += $isHome ? $match->hscore : $match->ascore;
+                        $result[$key]['ascore'] += $isHome ? $match->ascore : $match->hscore;
                     }
                 }
             }
