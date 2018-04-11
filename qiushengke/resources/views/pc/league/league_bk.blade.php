@@ -68,7 +68,7 @@
                         @else
                             <p class="area west">东部排名</p>
                         @endif
-                        @component('pc.league.league_rank_bk', ['scores'=>$score[0], 'zone'=>$key])
+                        @component('pc.league.league_rank_bk', ['scores'=>$item, 'zone'=>$key])
                         @endcomponent
                     @endforeach
                 @endif
