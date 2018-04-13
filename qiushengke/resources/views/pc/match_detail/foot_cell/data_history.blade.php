@@ -19,6 +19,7 @@ $rank = $analyse['rank'];
         <button name="ha">相同主客</button>
         <p class="num"><button class="on" name="number" value="10">近10场</button><button name="number" value="5">近5场</button></p>
     </div>
+    @if(isset($recentBattle['away']))
     @component('pc.match_detail.foot_cell.data_history_item',['tid'=>$match['hid'],'matches'=>$recentBattle['home']['all'],'className'=>'host','ma'=>0,'ha'=>0,'show'=>1,'fill_key'=>1])
     @endcomponent
     @component('pc.match_detail.foot_cell.data_history_item',['tid'=>$match['hid'],'matches'=>$recentBattle['home']['sameL'],'className'=>'host','ma'=>1,'ha'=>0,'show'=>1,'fill_key'=>2])
@@ -27,6 +28,8 @@ $rank = $analyse['rank'];
     @endcomponent
     @component('pc.match_detail.foot_cell.data_history_item',['tid'=>$match['hid'],'matches'=>$recentBattle['home']['sameHAL'],'className'=>'host','ma'=>1,'ha'=>1,'show'=>1,'fill_key'=>4])
     @endcomponent
+    @endif
+    @if(isset($recentBattle['away']))
     @component('pc.match_detail.foot_cell.data_history_item',['tid'=>$match['aid'],'matches'=>$recentBattle['away']['all'],'className'=>'away','ma'=>0,'ha'=>0,'show'=>0,'fill_key'=>5])
     @endcomponent
     @component('pc.match_detail.foot_cell.data_history_item',['tid'=>$match['aid'],'matches'=>$recentBattle['away']['sameL'],'className'=>'away','ma'=>1,'ha'=>0,'show'=>0,'fill_key'=>6])
@@ -35,4 +38,5 @@ $rank = $analyse['rank'];
     @endcomponent
     @component('pc.match_detail.foot_cell.data_history_item',['tid'=>$match['aid'],'matches'=>$recentBattle['away']['sameHAL'],'className'=>'away','ma'=>1,'ha'=>1,'show'=>0,'fill_key'=>8])
     @endcomponent
+        @endif
 </div>
