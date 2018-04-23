@@ -19,7 +19,7 @@ class BasketballController extends BaseController
 {
     //足球比赛终端
     public function detail(Request $request) {
-        $cdn = $this->html_var['cdn'];
+        $cdn = env('HOST');
 
         $mid = $request->input("id");
         $match = MatchDetailController::matchDetailData($mid, 'match', 2);

@@ -97,6 +97,7 @@ class BasketballController extends BaseController
         switch ($tab) {
             case "base":
                 $result['tech'] = MatchDetailController::matchDetailData($mid, 'tech', 2);
+                $result['players'] = MatchDetailController::matchDetailData($mid, 'player', 2);
                 $views = 'phone.detail.basketball.cell.match_cell';
                 break;
             case "analyse":
