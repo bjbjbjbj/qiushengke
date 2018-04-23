@@ -1,4 +1,4 @@
-<div id="Match" class="content" style="display: none;">
+<div id="Match" class="content" style="display: @if(!isset($show)) none @endif;">
     @if(isset($lineup) && count($lineup) > 0)
         <div id="First" class="childNode" style="display: none;">
             @if(isset($lineup['home']))

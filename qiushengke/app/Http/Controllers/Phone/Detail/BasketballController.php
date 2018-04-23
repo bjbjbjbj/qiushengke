@@ -15,7 +15,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class BasketballController extends BaseController
-{/**
+{
+    const tabs = ["base", "analyse", "odd"];
+/**
  * 通过请求自己的链接静态化pc终端，主要是解决 文件权限问题。
  * @param $mid
  */
@@ -41,8 +43,16 @@ class BasketballController extends BaseController
         $first = substr($mid,0,2);
         $second = substr($mid,2,2);
         $html = $this->detail($request,$first,$second,$mid);
-        if (isset($html))
-            Storage::disk("public")->put("/wap/match/basket/detail/".$first."/".$second."/".$mid.".html", $html);
+        if (isset($html)) {
+            Storage::disk("public")->put("/wap/match/basket/detail/" . $first . "/" . $second . "/" . $mid . ".html", $html);
+        }
+        //比赛详情cell
+        foreach (self::tabs as $tab) {
+            $tabHtml = $this->detailCell($request, $first, $second, $mid, $tab);
+            if (isset($tabHtml)) {
+                Storage::disk("public")->put("/wap/match/basket/detail/" . $first . "/" . $second . "/" . $mid . "/". $tab .".html", $tabHtml);
+            }
+        }
     }
 
     /**
@@ -74,6 +84,39 @@ class BasketballController extends BaseController
         $this->html_var = array_merge($this->html_var,$result);
 
         return view('phone.detail.basketball.match_bk', $this->html_var);
+    }
+
+    public function detailCell(Request $request, $sub1, $sub2, $mid, $tab) {
+        $match = MatchDetailController::matchDetailData($mid, 'match', 2);
+        if (empty($match)) {
+            abort(404);
+        }
+        $result = array();
+        $result['match'] = $match;
+        $views = "";
+        switch ($tab) {
+            case "base":
+                $result['tech'] = MatchDetailController::matchDetailData($mid, 'tech', 2);
+                $views = 'phone.detail.basketball.cell.match_cell';
+                break;
+            case "analyse":
+                $result['analyse'] = MatchDetailController::matchDetailData($mid, 'analyse', 2);
+                $result['odds'] = MatchDetailController::matchDetailData($mid, 'odd', 2);
+                $views = 'phone.detail.basketball.cell.data_cell';
+                break;
+            case "odd":
+                $result['odds'] = MatchDetailController::matchDetailData($mid, 'odd', 2);
+                $views = 'phone.detail.football.cell.odd_cell';
+                break;
+        }
+        $result['first'] = substr($mid, 0, 2);
+        $result['second'] = substr($mid, 2, 2);
+        $result['mid'] = $mid;
+        $result['show'] = true;
+        $this->html_var = array_merge($this->html_var,$result);
+
+        $this->html_var['views'] = view($views, $this->html_var);
+        return view("phone.detail.basketball.match_bk_cell", $this->html_var);
     }
 
     /**

@@ -1,4 +1,4 @@
-<div id="Team" class="content" style="display: none;">
+<div id="Team" class="content" style="display: @if(!isset($show)) none @endif;">
     @component('phone.detail.football.cell.team_trait_cell',
         ['match'=>$match, 'attribute'=>(isset($analyse['attribute']) ? $analyse['attribute'] : null)
             , 'ws'=> (isset($analyse['ws']) ? $analyse['ws'] : null)

@@ -44,6 +44,7 @@ class RouteServiceProvider extends ServiceProvider
         $this->mapStaticRoutes();
 
         $this->mapWapRoutes();
+        $this->mapAppApiRoutes100();
     }
 
     protected function mapPCRoutes()
@@ -101,5 +102,16 @@ class RouteServiceProvider extends ServiceProvider
         Route::prefix('wap')
             ->namespace($this->namespace.'\Phone')
             ->group(base_path('routes/phone.php'));
+    }
+
+    /**
+     * app 1.0.1版本接口
+     */
+    protected function mapAppApiRoutes100()
+    {
+        Route::prefix('app/v100')
+            ->middleware('api')
+            ->namespace($this->namespace. '\App')
+            ->group(base_path('routes/app/v100.php'));
     }
 }

@@ -1,4 +1,4 @@
-<div id="SameOdd" class="content" style="display: none;">
+<div id="SameOdd" class="content" style="display: @if(!isset($show)) none @endif;">
     @if(isset($sameOdd))
         @component("phone.detail.football.cell.same_odd_item_cell", ['type'=>1, 'odd'=> (isset($sameOdd['asia']) ? $sameOdd['asia'] : null) ]) @endcomponent
         @component("phone.detail.football.cell.same_odd_item_cell", ['type'=>3, 'odd'=> (isset($sameOdd['asia']) ? $sameOdd['ou'] : null) ]) @endcomponent

@@ -13,15 +13,12 @@
         <input type="radio" name="tab_type" id="Type_Odd" value="Odd">
         <label for="Type_Odd"><span>指数</span></label>
     </div>
-    <div id="Match" class="content" style="display: ;">
-        @component("phone.detail.basketball.cell.match_cell", ['cdn'=>$cdn, 'match'=>$match,'tech'=>$tech,'players'=>$players]) {{-- Match 模块 --}}
-        @endcomponent
-    </div>
-    <div id="Data" class="content" style="display: none;">
-        @component("phone.detail.basketball.cell.data_cell", ['cdn'=>$cdn, 'match'=>$match,'odds'=>$odds,'analyse'=>$analyse]) {{-- Data 模块 --}}
-        @endcomponent
-    </div>
-    <div id="Odd" class="content" style="display: none;"></div>
+    @component("phone.detail.basketball.cell.match_cell", ['cdn'=>$cdn, 'match'=>$match,'tech'=>$tech,'players'=>$players]) {{-- Match 模块 --}}
+    @endcomponent
+    @component("phone.detail.basketball.cell.data_cell", ['cdn'=>$cdn, 'match'=>$match,'odds'=>$odds,'analyse'=>$analyse]) {{-- Data 模块 --}}
+    @endcomponent
+    @component("phone.detail.football.cell.odd_cell")
+    @endcomponent
 @endsection
 @section("js")
 <script type="text/javascript" src="/phone/js/match.js"></script>

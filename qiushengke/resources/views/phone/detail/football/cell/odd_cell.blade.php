@@ -1,0 +1,1 @@
+<div id="Odd" class="content" style="display: @if(!isset($show)) none @endif;"></div>

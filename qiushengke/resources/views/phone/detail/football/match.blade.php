@@ -23,7 +23,8 @@
     @endcomponent
     @component("phone.detail.football.cell.team_cell", ['cdn'=>$cdn, 'match'=>$match, 'analyse'=>$analyse] ) {{-- Team 模块 --}}
     @endcomponent
-    <div id="Odd" class="content" style="display: none;"></div>
+    @component("phone.detail.football.cell.odd_cell")
+    @endcomponent
     @component("phone.detail.football.cell.same_odd_cell", ['cdn'=>$cdn, 'match'=>$match, 'sameOdd'=>(isset($analyse['sameOdd']) ? $analyse['sameOdd'] : null) ]) {{-- SameOdd 模块 --}}
     @endcomponent
 @endsection
