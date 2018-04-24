@@ -19,7 +19,7 @@ $rank = $analyse['rank'];
         <button name="ha">相同主客</button>
         <p class="num"><button class="on" name="number" value="10">近10场</button><button name="number" value="5">近5场</button></p>
     </div>
-    @if(isset($recentBattle['away']))
+    @if(isset($recentBattle['home']))
     @component('pc.match_detail.foot_cell.data_history_item',['tid'=>$match['hid'],'matches'=>$recentBattle['home']['all'],'className'=>'host','ma'=>0,'ha'=>0,'show'=>1,'fill_key'=>1])
     @endcomponent
     @component('pc.match_detail.foot_cell.data_history_item',['tid'=>$match['hid'],'matches'=>$recentBattle['home']['sameL'],'className'=>'host','ma'=>1,'ha'=>0,'show'=>1,'fill_key'=>2])
