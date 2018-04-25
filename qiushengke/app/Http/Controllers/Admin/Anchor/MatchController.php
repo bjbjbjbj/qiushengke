@@ -203,6 +203,7 @@ class MatchController extends Controller
         $room_id = $request->input('room_id');
         $match_id = $request->input('match_id');//比赛ID
         $sport = $request->input('sport');//竞技类型
+        $od = $request->input('od');//排序
 
         if (!is_numeric($room_id) || !is_numeric($match_id) || !in_array($sport, [AnchorRoomMatches::kSportFootball, AnchorRoomMatches::kSportBasketball])) {
             return response()->json(['code'=>401, 'msg'=>'参数错误']);
@@ -214,6 +215,9 @@ class MatchController extends Controller
         }
         if ($room->status == AnchorRoom::kStatusHide) {
             return response()->json(['code'=>403, 'msg'=>'直播间已被隐藏，请刷新后重新选择']);
+        }
+        if (!empty($od) && !is_numeric($od)) {
+            return response()->json(['code'=>403, 'msg'=>'直播间排序只能填写正整数']);
         }
         $match = self::getMatch($match_id, $sport);
         if (!isset($match)) {
@@ -239,6 +243,7 @@ class MatchController extends Controller
         $anm->room_id = $room_id;
         $anm->mid = $match_id;
         $anm->sport = $sport;
+        $anm->od = $od;
         $anm->save();
 
         AnchorController::updateJson($room_id,$sport,$match_id);
