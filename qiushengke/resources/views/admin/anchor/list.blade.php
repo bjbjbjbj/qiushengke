@@ -12,7 +12,7 @@
                             <input type="text" name="name" class="form-control" placeholder="主播名" value="{{ session('name','') }}" required>
                         </th>
                         <th><textarea name="intro" class="form-control"></textarea></th>
-                        <th><input type="file" name="icon"></th>
+                        <th><input type="file" name="icon" required></th>
                         <th>
                             <button type="submit" class="btn btn-sm btn-primary">
                                 <span class="glyphicon glyphicon-plus"></span>新建

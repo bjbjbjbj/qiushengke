@@ -204,6 +204,7 @@ class MatchController extends Controller
         $match_id = $request->input('match_id');//比赛ID
         $sport = $request->input('sport');//竞技类型
         $od = $request->input('od');//排序
+        $start_time = $request->input('start_time');//开播时间
 
         if (!is_numeric($room_id) || !is_numeric($match_id) || !in_array($sport, [AnchorRoomMatches::kSportFootball, AnchorRoomMatches::kSportBasketball])) {
             return response()->json(['code'=>401, 'msg'=>'参数错误']);
@@ -244,6 +245,7 @@ class MatchController extends Controller
         $anm->mid = $match_id;
         $anm->sport = $sport;
         $anm->od = $od;
+        $anm->start_time = $start_time;
         $anm->save();
 
         AnchorController::updateJson($room_id,$sport,$match_id);

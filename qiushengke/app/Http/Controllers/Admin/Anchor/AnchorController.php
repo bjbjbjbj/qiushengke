@@ -29,7 +29,11 @@ class AnchorController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function anchors(Request $request) {
+        $status = $request->input('status', Anchor::kStatusValid);
         $query = Anchor::query();
+        if (is_numeric($status)) {
+            $query->where('anchors.status', $status);
+        }
         $page = $query->paginate(self::default_page_size);
         return view('admin.anchor.list', ['page'=>$page]);
     }
@@ -112,6 +116,9 @@ class AnchorController extends Controller
      */
     public function rooms(Request $request) {
         $query = AnchorRoom::query();
+        $query->join('anchors', 'anchors.id', '=', 'anchor_rooms.anchor_id');
+        $query->where('anchors.status', Anchor::kStatusValid);
+        $query->selectRaw('anchor_rooms.*');
         $page = $query->paginate(self::default_page_size);
 
         $anchors = Anchor::query()->where('status', Anchor::kStatusValid)->get();

@@ -10,6 +10,10 @@ namespace App\Http\Controllers\PC\Anchor;
 
 
 use App\Models\QSK\Anchor\AnchorRoom;
+use App\Models\QSK\Anchor\AnchorRoomMatches;
+use App\Models\QSK\Match\BasketMatch;
+use App\Models\QSK\Match\Match;
+use App\Models\QSK\Match\MatchLive;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
@@ -23,17 +27,48 @@ class AnchorRoomController extends Controller
      * @return \Illuminate\Http\JsonResponse
      */
     public function liveUrl(Request $request, $id) {
-        $room = AnchorRoom::query()->find($id);
+        $param = explode('-', $id);
+
+        if (count($param) != 3) {
+            return response()->json(['code'=>-1, 'message'=>'param error']);
+        }
+
+        $room_id = $param[0];
+        $mid = $param[1];
+        $sport = $param[2];
+
+        $armQuery = AnchorRoomMatches::query()->where('room_id', $room_id)->where('mid', $mid)->where('sport', $sport);
+        $arm = $armQuery->first();
+        if (!isset($arm)) {
+            return response()->json(['code'=>-1, 'message'=>'no room']);
+        }
+
+        $room = AnchorRoom::query()->find($room_id);
         $mobile = $request->input('mobile', 0);
         if (!isset($room) || $room->status == AnchorRoom::kStatusHide) {
             return response()->json(['code'=>-1, 'message'=>'no room']);
         }
+
         $isMobile = $mobile == 1 || self::isMobile($request);
         $url = $room->getResource($isMobile);
         if (empty($url)) {
             return response()->json(['code'=>-1, 'message'=>'no channel']);
         }
-        return response()->json(['code'=>0, 'url'=>$url]);
+        $match = null;
+        if ($sport == MatchLive::kSportFootball) {
+            $match = Match::query()->find($mid);
+        } else if ($sport == MatchLive::kSportBasketball) {
+            $match = BasketMatch::query()->find($mid);
+        }
+        $match_time = null;
+        $start_time = null;
+        if (isset($arm->start_time)) {
+            $start_time = strtotime($arm->start_time);
+        }
+        if (isset($match)) {
+            $match_time = strtotime($match->time);
+        }
+        return response()->json(['code'=>0, 'url'=>$url, 'start_time'=>$start_time, 'match_time'=>$match_time]);
     }
 
 

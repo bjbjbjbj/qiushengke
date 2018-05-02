@@ -96,10 +96,10 @@
                                 <p>
                                     <button type="submit" class="btn btn-xs btn-info">保存</button>
                                     <?php
-                                    $msg = $anchor->status == 1 ? "隐藏" : "显示";
-                                    $status = $anchor->status == 1 ? -1 : 1;
+                                    $msg = isset($anchor) && $anchor->status == 1 ? "隐藏" : "显示";
+                                    $status = isset($anchor) && $anchor->status == 1 ? -1 : 1;
                                     ?>
-                                    <a class="btn btn-xs btn-danger" href="javascript:if (confirm('是否{{$msg}}主播')) { location.href = '/admin/anchor/change?status={{$status}}&id={{ $anchor->id }}';}">
+                                    <a class="btn btn-xs btn-danger" href="javascript:if (confirm('是否{{$msg}}主播')) { location.href = '/admin/anchor/change?status={{$status}}&id={{ $anchor->id or '' }}';}">
                                         {{$msg}}
                                     </a>
                                 </p>

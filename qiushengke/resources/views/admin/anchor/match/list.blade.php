@@ -90,7 +90,7 @@
                                 {{$match['hname'] . ' VS ' . $match['aname']}}
                             </p>
                             <p>
-                                <button name="add" class="btn btn-sm btn-primary" mid="{{$match->id}}">添加主播</button>
+                                <button name="add" class="btn btn-sm btn-primary" mid="{{$match->id}}">添加房间</button>
                             </p>
                         </td>
                         <td>
@@ -123,10 +123,22 @@
             form.lid.value = lid;
             form.submit();
         });
+
         $("button[name='add']").click(function () {
             var html = $("#book_anchor_div").html();
             var mid = this.getAttribute('mid');
             $('tr[mid=' + mid + '] td:last').append(html);
+
+            $('tr[mid=' + mid + '] td:last p:last input.form_datetime').datetimepicker({
+                "language": 'zh-CN',
+                "weekStart": 1,
+                "todayBtn": 1,
+                "autoclose": 1,
+                "todayHighlight": 1,
+                "startView": 2,
+                "minView": 0,
+                "forceParse": 0
+            });
         });
 
         /**
@@ -149,13 +161,15 @@
                 return;
             }
             thisObj.setAttribute('disabled', 'disabled');
+
             var match_id = $(thisObj).parent().parent().parent().attr('mid');
+            var start_time = parent.find("input[name=start_time]").val();
 
             $.ajax({
                 "url": "/admin/anchor/matches/book",
                 "type": "post",
                 "dataType": "json",
-                "data": {"id": id, "match_id": match_id, "sport": sport, 'room_id': room_id, 'od': od},
+                "data": {"id": id, "match_id": match_id, "sport": sport, 'room_id': room_id, 'od': od, 'start_time': start_time},
                 "success": function (json) {
                     if (json) {
                         alert(json.msg);
@@ -206,5 +220,21 @@
                 }
             });
         }
+    </script>
+
+    <link href="/css/admin/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    <script type="text/javascript" src="/js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <script>
+        $(".form_datetime").datetimepicker({
+            "language": 'zh-CN',
+            "weekStart": 1,
+            "todayBtn": 1,
+            "autoclose": 1,
+            "todayHighlight": 1,
+            "startView": 2,
+            "minView": 0,
+            "forceParse": 0
+        });
     </script>
 @endsection
