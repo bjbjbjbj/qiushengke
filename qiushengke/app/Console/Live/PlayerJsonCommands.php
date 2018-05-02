@@ -88,11 +88,11 @@ class PlayerJsonCommands extends Command
 
         //获取这些比赛id中有直播房间的比赛
         $ams = AnchorRoomMatches::whereIn('mid',$mids)
-            ->select('room_id')
+            ->select('room_id','mid')
             ->get();
         //生成这些直播id对应的直播间的json,直播player生成的时候用
         foreach ($ams as $mid){
-            self::flushLiveDetailHtml($mid['room_id']);
+            self::flushLiveDetailHtml($mid['room_id'].'-'.$mid['mid'].'-'.$sport);
         }
 
         //爱看球频道

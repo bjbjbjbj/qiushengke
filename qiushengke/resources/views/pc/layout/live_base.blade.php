@@ -633,10 +633,11 @@
                         else{
                             $type = 1;
                         }
+                        $matchId = $match['mid'];
                         ?>
                         <?php
                         $preUrl = str_replace("http://","http://",env('APP_URL'));
-                        $link = $preUrl.'/live/player/player-'.$channel['id'].'-'.$type.'.html';
+                        $link = $preUrl.'/live/player/player-'.$channel['id'].'-'.$type.'-'.$sport.'-'.$matchId.'.html';
                         ?>
                         @if($i == count($lives) - 1)
                             <a onclick="changeChannel('{{$link}}',this)" style="width: 25%;">{{$channel['name']}}</a>

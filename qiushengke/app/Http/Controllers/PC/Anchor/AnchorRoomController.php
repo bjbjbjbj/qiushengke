@@ -68,7 +68,7 @@ class AnchorRoomController extends Controller
         if (isset($match)) {
             $match_time = strtotime($match->time);
         }
-        return response()->json(['code'=>0, 'url'=>$url, 'start_time'=>$start_time, 'match_time'=>$match_time]);
+        return response()->json(['code'=>0, 'type'=>$room['type'] , 'url'=>$url, 'start_time'=>$start_time, 'match_time'=>$match_time]);
     }
 
 

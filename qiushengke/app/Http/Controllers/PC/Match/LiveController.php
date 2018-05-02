@@ -78,33 +78,26 @@ class LiveController extends BaseController{
     /**
      * 静态化rid对应房间json
      * @param Request $request
-     * @param $rid
+     * @param $rid roomid-matchid-sport
      */
     public function staticChannelJson(Request $request,$rid){
-        //电脑
-        $room = AnchorRoom::query()->find($rid);
-        if (!isset($room) || $room->status == AnchorRoom::kStatusHide) {
-            Storage::disk('public')->put('/json/live/channel/'.$rid.'.json',json_encode(array('code'=>-1, 'message'=>'no channel')));
-        }
-        $url = $room->getResource(false);
-        if ($url && strlen($url) > 0){
-            Storage::disk('public')->put('/json/live/channel/'.$rid.'.json',json_encode(array('code'=>0,'type'=>$room->type,'url'=>$url)));
-        }
-        else{
-            Storage::disk('public')->put('/json/live/channel/'.$rid.'.json',json_encode(array('code'=>-1, 'message'=>'no channel')));
+        $controller = new AnchorRoomController();
+        $json = $controller->liveUrl($request,$rid);
+        if ($json && $json->getStatusCode() == 200) {
+            $json = $json->getData();
+            if (isset($json)) {
+                Storage::disk('public')->put('/json/live/channel/' . $rid . '.json', json_encode($json));
+            }
         }
 
         //手机
-        $room = AnchorRoom::query()->find($rid);
-        if (!isset($room) || $room->status == AnchorRoom::kStatusHide) {
-            Storage::disk('public')->put('/json/live/channel/mobile/'.$rid.'.json',json_encode(array('code'=>-1, 'message'=>'no channel')));
-        }
-        $url = $room->getResource(true);
-        if ($url && strlen($url) > 0){
-            Storage::disk('public')->put('/json/live/channel/mobile/'.$rid.'.json',json_encode(array('code'=>0,'type'=>$room->type,'url'=>$url)));
-        }
-        else{
-            Storage::disk('public')->put('/json/live/channel/mobile/'.$rid.'.json',json_encode(array('code'=>-1, 'message'=>'no channel')));
+        $request->merge(['mobile'=>1]);
+        $json = $controller->liveUrl($request,$rid);
+        if ($json && $json->getStatusCode() == 200) {
+            $json = $json->getData();
+            if (isset($json)) {
+                Storage::disk('public')->put('/json/live/channel/mobile/' . $rid . '.json', json_encode($json));
+            }
         }
     }
 
