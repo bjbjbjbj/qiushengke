@@ -256,6 +256,7 @@ function countdown() {
 //获取播放地址
 function PlayVideoShare (cid,channel_type){
     var url;
+    host = host.replace('http://','');
     if (channel_type == 1) {
         if (window.isMobile) {
             url = GetHttp() + host + '/json/live/AKQchannel/mobile/' + cid + '.json';
