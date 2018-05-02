@@ -96,16 +96,7 @@
                         <td>
                             <?php $arms = \App\Models\QSK\Anchor\AnchorRoomMatches::getRooms($match->id, $sport); ?>
                             @foreach($arms as $arm)
-                            <p>
-                                <select name="room_id" class="form-control form-input-css" style="width: 360px;">
-                                    <option value="">请选择主播</option>
-                                    @foreach($rooms as $room_id=>$room)
-                                        <option value="{{$room_id}}" @if($room_id == $arm->room_id) selected @endif >{{$room['typeCn'] . '：' . $room['roomName'] . '（' . $room['anchorName'] . '）'}}</option>
-                                    @endforeach
-                                </select>
-                                <button class="btn btn-success form-input-css" onclick="book(this, '{{$arm->id}}', '{{$sport or 1}}')">预约</button>
-                                <button class="btn btn-danger form-input-css" onclick="cancelBook(this, '{{$arm->id}}');">取消</button>
-                            </p>
+                                @component("admin.anchor.match.list_book_cell", ['rooms'=>$rooms, 'arm'=>$arm]) @endcomponent
                             @endforeach
                         </td>
                     </tr>
@@ -118,16 +109,7 @@
 @endsection
 @section("extra_content")
     <div id="book_anchor_div" style="display: none;">
-        <p>
-        <select name="room_id" class="form-control form-input-css" style="width: 360px;">
-            <option value="">请选择主播</option>
-            @foreach($rooms as $room_id=>$room)
-            <option value="{{$room_id}}">{{$room['typeCn'] . '：' . $room['roomName'] . '（' . $room['anchorName'] . '）'}}</option>
-            @endforeach
-        </select>
-        <button class="btn btn-success form-input-css" onclick="book(this, '', '{{$sport or 1}}')">预约</button>
-        <button class="btn btn-danger form-input-css" onclick="cancelBook(this);">取消</button>
-        </p>
+        @component("admin.anchor.match.list_book_cell", ['rooms'=>$rooms]) @endcomponent
     </div>
 @endsection
 @section('js')
@@ -154,11 +136,14 @@
          * @param sport
          */
         function book(thisObj, id, sport) {
-            var room_id = $(thisObj).prev().val();
+            var parent = $(thisObj).parent();
+
+            var room_id = parent.find('select[name=room_id]').val();
             if (room_id == "") {
                 alert("请选择主播直播间");
                 return;
             }
+            var od = parent.find('input[name=od]').val();
 
             if (!confirm('是否确认预约比赛')) {
                 return;
@@ -170,7 +155,7 @@
                 "url": "/admin/anchor/matches/book",
                 "type": "post",
                 "dataType": "json",
-                "data": {"id": id, "match_id": match_id, "sport": sport, 'room_id': room_id},
+                "data": {"id": id, "match_id": match_id, "sport": sport, 'room_id': room_id, 'od': od},
                 "success": function (json) {
                     if (json) {
                         alert(json.msg);
