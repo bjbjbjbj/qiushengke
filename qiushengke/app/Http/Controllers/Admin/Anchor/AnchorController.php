@@ -195,7 +195,7 @@ class AnchorController extends Controller
         //因为一个直播间可以对应多个比赛,而静态化又要比赛id和sport,所以只能for一下
         $roomMatches = AnchorRoomMatches::where('room_id',$room->id)->get();
         foreach ($roomMatches as $roomMatch){
-            $this->updateJson($room->id.'-'.$roomMatch['mid'].'-'.$roomMatch['sport']);
+            $this->updateJson($room->id.'-'.$roomMatch['mid'].'-'.$roomMatch['sport'],$roomMatch['sport'],$roomMatch['mid']);
         }
 
         return back()->with('success', '保存成功');

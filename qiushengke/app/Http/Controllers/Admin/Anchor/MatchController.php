@@ -249,7 +249,7 @@ class MatchController extends Controller
         $anm->match_time = $match->time;
         $anm->save();
 
-        AnchorController::updateJson($room_id,$sport,$match_id);
+        AnchorController::updateJson($room_id.'-'.$match_id.'-'.$sport,$sport,$match_id);
 
         return response()->json(['code'=>200, 'msg'=>'预约成功']);
     }
