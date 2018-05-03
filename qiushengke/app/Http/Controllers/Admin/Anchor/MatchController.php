@@ -246,6 +246,7 @@ class MatchController extends Controller
         $anm->sport = $sport;
         $anm->od = $od;
         $anm->start_time = $start_time;
+        $anm->match_time = $match->time;
         $anm->save();
 
         AnchorController::updateJson($room_id,$sport,$match_id);
