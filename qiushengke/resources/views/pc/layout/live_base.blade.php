@@ -68,11 +68,16 @@
             document.getElementById('share_text').value = Link;
         }
 
-        @if((isset($match) ? $match['status'] : 0) >= 0)
-        //选第一个
-        $("div#Live a:first").trigger("click");
-        @endif
-
+        var anchorId = GetQueryString('anchorId');
+        if(anchorId.length > 0 && $("div#Live a[anchorId="+anchorId+"]").length>0){
+            $("div#Live a[anchorId="+anchorId+"]").trigger("click");
+        }
+        else{
+            @if((isset($match) ? $match['status'] : 0) >= 0)
+            //选第一个
+            $("div#Live a:first").trigger("click");
+            @endif
+        }
 
         //时间格式化
         function add0(m){return m<10?'0'+m:m }
@@ -628,9 +633,11 @@
                         <?php
                         $channel = $lives[$i];
                         if(isset($channel['anchor_id'])){
+                            $anchorId = $channel['id'];
                             $type = 2;
                         }
                         else{
+                            $anchorId = 0;
                             $type = 1;
                         }
                         $matchId = $match['mid'];
@@ -640,9 +647,9 @@
                         $link = $preUrl.'/live/player/player-'.$channel['id'].'-'.$type.'-'.$sport.'-'.$matchId.'.html';
                         ?>
                         @if($i == count($lives) - 1)
-                            <a onclick="changeChannel('{{$link}}',this)" style="width: 25%;">{{$channel['name']}}</a>
+                            <a anchorId="{{$anchorId}}" onclick="changeChannel('{{$link}}',this)" style="width: 25%;">{{$channel['name']}}</a>
                         @else
-                            <a onclick="changeChannel('{{$link}}',this)" style="width: 25%;">{{$channel['name']}}</a>
+                            <a anchorId="{{$anchorId}}" onclick="changeChannel('{{$link}}',this)" style="width: 25%;">{{$channel['name']}}</a>
                         @endif
                     @endfor
                 </div>

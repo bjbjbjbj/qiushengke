@@ -108,6 +108,7 @@ class AnchorController extends BaseController{
             })
             ->addselect('anchor_room_matches.sport as sport')
             ->addselect('anchor_room_matches.mid as mid')
+            ->addselect('anchor_room_matches.room_id as room_id')
             ->addselect('anchor_rooms.*')->get();
         ;
         return $livings;
