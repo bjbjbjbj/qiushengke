@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin\Anchor;
 use App\Http\Controllers\UploadTrait;
 use App\Models\QSK\Anchor\Anchor;
 use App\Models\QSK\Anchor\AnchorRoom;
+use App\Models\QSK\Anchor\AnchorRoomMatches;
 use App\Models\QSK\Anchor\LivePlatform;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -190,7 +191,12 @@ class AnchorController extends Controller
             return back()->with('error', '保存失败');
         }
 
-        $this->updateJson($room->id);
+        //roomid-mid-sport
+        //因为一个直播间可以对应多个比赛,而静态化又要比赛id和sport,所以只能for一下
+        $roomMatches = AnchorRoomMatches::where('room_id',$room->id)->get();
+        foreach ($roomMatches as $roomMatch){
+            $this->updateJson($room->id.'-'.$roomMatch['mid'].'-'.$roomMatch['sport']);
+        }
 
         return back()->with('success', '保存成功');
     }

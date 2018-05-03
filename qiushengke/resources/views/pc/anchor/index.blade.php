@@ -78,16 +78,28 @@
             <div class="lbox" id="Live">
                 <div class="title"><p>正在直播</p></div>
                 <ul>
-                    @foreach($livings as $living)
+                    @foreach($f_livings as $living)
                         <?php
                         $anchor = $living->anchor;
+                        $liveUrl = \App\Http\Controllers\PC\CommonTool::matchLivePathWithId($living['mid'],$living['sport']);
                         ?>
-                        <a class="li" target="_blank" href="{{$living['link']}}">
+                        <a class="li" target="_blank" href="{{$liveUrl}}">
                             <div class="img"><img src="{{isset($living['cover']) ? $living['cover'] : '/pc/img/img_demo.png'}}"></div>
                             <img alt="{{$anchor['name']}}" src="{{isset($anchor['icon'])?$anchor['icon']:'/pc/img/icon_teamDefault.png'}}" class="face">
                             <p>{{$anchor['name']}}</p>
                         </a>
                     @endforeach
+                        @foreach($b_livings as $living)
+                            <?php
+                            $anchor = $living->anchor;
+                            $liveUrl = \App\Http\Controllers\PC\CommonTool::matchLivePathWithId($living['mid'],$living['sport']);
+                            ?>
+                            <a class="li" target="_blank" href="{{$liveUrl}}">
+                                <div class="img"><img src="{{isset($living['cover']) ? $living['cover'] : '/pc/img/img_demo.png'}}"></div>
+                                <img alt="{{$anchor['name']}}" src="{{isset($anchor['icon'])?$anchor['icon']:'/pc/img/icon_teamDefault.png'}}" class="face">
+                                <p>{{$anchor['name']}}</p>
+                            </a>
+                        @endforeach
                 </ul>
             </div>
         @endif
