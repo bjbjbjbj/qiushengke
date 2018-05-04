@@ -205,7 +205,7 @@ $liveUrl = \App\Http\Controllers\PC\CommonTool::matchLivePathWithId($match['mid'
         <td class="score fullScore" id="a_score_full_{{$mid}}">{{\App\Http\Controllers\PC\CommonTool::getBasketScore($match['ascore'])}}</td>
         <td id="score_whole_diff_{{$mid}}">{{$whole_diff}}</td>
         <td id="score_whole_total_{{$mid}}">{{$whole_total}}</td>
-        <td>{{$asiaUp}}</td>
+        <td>{{\App\Http\Controllers\PC\CommonTool::float2Decimal($match['oudown2'])}}</td>
         <td class="asia">
             <p class="">{{$asiaDown}}</p>
         </td>

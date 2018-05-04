@@ -569,6 +569,7 @@
                         var dataItem = json[ID];
                         var asia = dataItem['all']['1'];
                         var goal = dataItem['all']['2'];
+                        var ou = dataItem['all']['3'];
                         var table = $('#m_table_' + ID);
 
                         if (table && table.length > 0) {
@@ -578,6 +579,14 @@
 
                             }
                             else {
+                                if(ou){
+                                    var value = ou['up'];
+                                    var span = table.find('td.ou p')[0];
+                                    changeSpanOdd(span, value, true, false);
+                                    var value = ou['down'];
+                                    var span = table.find('td.ou p')[1];
+                                    changeSpanOdd(span, value, true, false);
+                                }
                                 if (asia) {
                                     var value = asia['up'];
                                     var span = table.find('td.asia p')[0];
@@ -677,7 +686,8 @@
                     var th1 = $('#m_table_' + ID + ' th[name=ot_1]');
                     var th2 = $('#m_table_' + ID + ' th[name=ot_2]');
                     ot1.html(ots[0]);
-                    ot1[0].className = 'score';
+                    if (ot1)
+                        ot1[0].className = 'score';
                     th1[0].className = '';
                     if (otCount > 1) {
                         var ot2 = $('#' + key + '_ot2_' + ID);
