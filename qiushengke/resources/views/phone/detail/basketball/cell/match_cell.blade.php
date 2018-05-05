@@ -1,3 +1,7 @@
+<?php
+    $h_ot = isset($match['h_ot']) && is_array($match['h_ot']) && count($match['h_ot']) > 0 ? $match['h_ot'] : [];
+    $a_ot = isset($match['a_ot']) && is_array($match['a_ot']) && count($match['a_ot']) > 0 ? $match['a_ot'] : [];
+?>
 <div id="Match" class="content" style="display: ;">
     <div id="Event" class="childNode" style="display: none;">
         <div class="score default">
@@ -12,11 +16,11 @@
                     <th>2nd</th>
                     <th>3rd</th>
                     <th>4th</th>
-                    @if((isset($match['h_ot']) && count($match['h_ot']) > 0)||(isset($match['a_ot']) && count($match['a_ot']) > 0))
-                        @if(count($match['h_ot']) == 1)
+                    @if(count($h_ot) > 0)
+                        @if(count($h_ot) == 1)
                             <th>OT</th>
                         @else
-                            @foreach($match['h_ot'] as $key=>$ot)
+                            @foreach($h_ot as $key=>$ot)
                                 <th>OT{{$key+1}}</th>
                             @endforeach
                         @endif
@@ -47,8 +51,8 @@
                             class="now"
                             @endif
                     >{{$match['hscore_4th'] or '/'}}</td>
-                    @if(isset($match['h_ot']) && is_array($match['h_ot']) && count($match['h_ot']) > 0)
-                        @foreach($match['h_ot'] as $ot)
+                    @if(count($h_ot) > 0)
+                        @foreach($h_ot as $ot)
                             <td>{{$ot or '/'}}</td>
                         @endforeach
                     @endif
@@ -76,8 +80,8 @@
                             class="now"
                             @endif
                     >{{$match['ascore_4th'] or '/'}}</td>
-                    @if(isset($match['a_ot']) && is_array($match['a_ot']) && count($match['a_ot']) > 0)
-                        @foreach($match['a_ot'] as $ot)
+                    @if(count($h_ot) > 0)
+                        @foreach($h_ot as $ot)
                             <td>{{$ot or '/'}}</td>
                         @endforeach
                     @endif

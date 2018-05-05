@@ -1,8 +1,8 @@
 <div id="SameOdd" class="content" style="display: @if(!isset($show)) none @endif;">
     @if(isset($sameOdd))
         @component("phone.detail.football.cell.same_odd_item_cell", ['type'=>1, 'odd'=> (isset($sameOdd['asia']) ? $sameOdd['asia'] : null) ]) @endcomponent
-        @component("phone.detail.football.cell.same_odd_item_cell", ['type'=>3, 'odd'=> (isset($sameOdd['asia']) ? $sameOdd['ou'] : null) ]) @endcomponent
-        @component("phone.detail.football.cell.same_odd_item_cell", ['type'=>2, 'odd'=> (isset($sameOdd['asia']) ? $sameOdd['goal'] : null) ]) @endcomponent
+        @component("phone.detail.football.cell.same_odd_item_cell", ['type'=>3, 'odd'=> (isset($sameOdd['ou']) ? $sameOdd['ou'] : null) ]) @endcomponent
+        @component("phone.detail.football.cell.same_odd_item_cell", ['type'=>2, 'odd'=> (isset($sameOdd['goal']) ? $sameOdd['goal'] : null) ]) @endcomponent
     @endif
     @if(isset($sameOdd['asia']) || isset($sameOdd['ou']) || isset($sameOdd['goal']))
     <div class="bottom">

@@ -77,7 +77,7 @@ class FootballController extends BaseController
         //阵容;
         $result['lineup'] = MatchDetailController::matchDetailData($mid, 'lineup');
         $result['first'] = substr($mid, 0, 2);
-        $result['second'] = substr($mid, 2, 4);
+        $result['second'] = substr($mid, 2, 2);
         $result['mid'] = $mid;
         $this->html_var = array_merge($this->html_var,$result);
         return view('phone.detail.football.match', $this->html_var);

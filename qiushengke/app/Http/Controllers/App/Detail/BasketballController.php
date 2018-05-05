@@ -28,7 +28,7 @@ class BasketballController extends BaseController
         }
 
         $first = substr($mid, 0, 2);
-        $second = substr($mid, 2, 4);
+        $second = substr($mid, 2, 2);
 
         $reset = $match;
         //终端底部tab
