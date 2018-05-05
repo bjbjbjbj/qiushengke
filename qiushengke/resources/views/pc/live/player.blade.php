@@ -20,6 +20,7 @@
 </head>
 <body scroll="no">
 <div class="player_content" id="MyFrame">
+    <p class="noframe" style="display: none;">距离比赛还有 <b>08:23</b></p>
 </div>
 </body>
 <script type="text/javascript" src="//apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>

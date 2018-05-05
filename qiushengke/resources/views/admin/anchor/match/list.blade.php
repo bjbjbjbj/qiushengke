@@ -90,22 +90,13 @@
                                 {{$match['hname'] . ' VS ' . $match['aname']}}
                             </p>
                             <p>
-                                <button name="add" class="btn btn-sm btn-primary" mid="{{$match->id}}">添加主播</button>
+                                <button name="add" class="btn btn-sm btn-primary" mid="{{$match->id}}">添加房间</button>
                             </p>
                         </td>
                         <td>
                             <?php $arms = \App\Models\QSK\Anchor\AnchorRoomMatches::getRooms($match->id, $sport); ?>
                             @foreach($arms as $arm)
-                            <p>
-                                <select name="room_id" class="form-control form-input-css" style="width: 360px;">
-                                    <option value="">请选择主播</option>
-                                    @foreach($rooms as $room_id=>$room)
-                                        <option value="{{$room_id}}" @if($room_id == $arm->room_id) selected @endif >{{$room['typeCn'] . '：' . $room['roomName'] . '（' . $room['anchorName'] . '）'}}</option>
-                                    @endforeach
-                                </select>
-                                <button class="btn btn-success form-input-css" onclick="book(this, '{{$arm->id}}', '{{$sport or 1}}')">预约</button>
-                                <button class="btn btn-danger form-input-css" onclick="cancelBook(this, '{{$arm->id}}');">取消</button>
-                            </p>
+                                @component("admin.anchor.match.list_book_cell", ['rooms'=>$rooms, 'arm'=>$arm]) @endcomponent
                             @endforeach
                         </td>
                     </tr>
@@ -118,16 +109,7 @@
 @endsection
 @section("extra_content")
     <div id="book_anchor_div" style="display: none;">
-        <p>
-        <select name="room_id" class="form-control form-input-css" style="width: 360px;">
-            <option value="">请选择主播</option>
-            @foreach($rooms as $room_id=>$room)
-            <option value="{{$room_id}}">{{$room['typeCn'] . '：' . $room['roomName'] . '（' . $room['anchorName'] . '）'}}</option>
-            @endforeach
-        </select>
-        <button class="btn btn-success form-input-css" onclick="book(this, '', '{{$sport or 1}}')">预约</button>
-        <button class="btn btn-danger form-input-css" onclick="cancelBook(this);">取消</button>
-        </p>
+        @component("admin.anchor.match.list_book_cell", ['rooms'=>$rooms]) @endcomponent
     </div>
 @endsection
 @section('js')
@@ -141,10 +123,22 @@
             form.lid.value = lid;
             form.submit();
         });
+
         $("button[name='add']").click(function () {
             var html = $("#book_anchor_div").html();
             var mid = this.getAttribute('mid');
             $('tr[mid=' + mid + '] td:last').append(html);
+
+            $('tr[mid=' + mid + '] td:last p:last input.form_datetime').datetimepicker({
+                "language": 'zh-CN',
+                "weekStart": 1,
+                "todayBtn": 1,
+                "autoclose": 1,
+                "todayHighlight": 1,
+                "startView": 2,
+                "minView": 0,
+                "forceParse": 0
+            });
         });
 
         /**
@@ -154,23 +148,28 @@
          * @param sport
          */
         function book(thisObj, id, sport) {
-            var room_id = $(thisObj).prev().val();
+            var parent = $(thisObj).parent();
+
+            var room_id = parent.find('select[name=room_id]').val();
             if (room_id == "") {
                 alert("请选择主播直播间");
                 return;
             }
+            var od = parent.find('input[name=od]').val();
 
             if (!confirm('是否确认预约比赛')) {
                 return;
             }
             thisObj.setAttribute('disabled', 'disabled');
+
             var match_id = $(thisObj).parent().parent().parent().attr('mid');
+            var start_time = parent.find("input[name=start_time]").val();
 
             $.ajax({
                 "url": "/admin/anchor/matches/book",
                 "type": "post",
                 "dataType": "json",
-                "data": {"id": id, "match_id": match_id, "sport": sport, 'room_id': room_id},
+                "data": {"id": id, "match_id": match_id, "sport": sport, 'room_id': room_id, 'od': od, 'start_time': start_time},
                 "success": function (json) {
                     if (json) {
                         alert(json.msg);
@@ -221,5 +220,21 @@
                 }
             });
         }
+    </script>
+
+    <link href="/css/admin/bootstrap-datetimepicker.min.css" rel="stylesheet" media="screen">
+    <script type="text/javascript" src="/js/bootstrap-datetimepicker.min.js" charset="UTF-8"></script>
+    <script type="text/javascript" src="/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+    <script>
+        $(".form_datetime").datetimepicker({
+            "language": 'zh-CN',
+            "weekStart": 1,
+            "todayBtn": 1,
+            "autoclose": 1,
+            "todayHighlight": 1,
+            "startView": 2,
+            "minView": 0,
+            "forceParse": 0
+        });
     </script>
 @endsection

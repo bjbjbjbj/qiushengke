@@ -12,6 +12,7 @@ namespace App\Http\Controllers\Admin\Anchor;
 use App\Http\Controllers\UploadTrait;
 use App\Models\QSK\Anchor\Anchor;
 use App\Models\QSK\Anchor\AnchorRoom;
+use App\Models\QSK\Anchor\AnchorRoomMatches;
 use App\Models\QSK\Anchor\LivePlatform;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -29,7 +30,11 @@ class AnchorController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function anchors(Request $request) {
+        $status = $request->input('status', Anchor::kStatusValid);
         $query = Anchor::query();
+        if (is_numeric($status)) {
+            $query->where('anchors.status', $status);
+        }
         $page = $query->paginate(self::default_page_size);
         return view('admin.anchor.list', ['page'=>$page]);
     }
@@ -112,6 +117,9 @@ class AnchorController extends Controller
      */
     public function rooms(Request $request) {
         $query = AnchorRoom::query();
+        $query->join('anchors', 'anchors.id', '=', 'anchor_rooms.anchor_id');
+        $query->where('anchors.status', Anchor::kStatusValid);
+        $query->selectRaw('anchor_rooms.*');
         $page = $query->paginate(self::default_page_size);
 
         $anchors = Anchor::query()->where('status', Anchor::kStatusValid)->get();
@@ -183,7 +191,12 @@ class AnchorController extends Controller
             return back()->with('error', '保存失败');
         }
 
-        $this->updateJson($room->id);
+        //roomid-mid-sport
+        //因为一个直播间可以对应多个比赛,而静态化又要比赛id和sport,所以只能for一下
+        $roomMatches = AnchorRoomMatches::where('room_id',$room->id)->get();
+        foreach ($roomMatches as $roomMatch){
+            $this->updateJson($room->id.'-'.$roomMatch['mid'].'-'.$roomMatch['sport'],$roomMatch['sport'],$roomMatch['mid']);
+        }
 
         return back()->with('success', '保存成功');
     }

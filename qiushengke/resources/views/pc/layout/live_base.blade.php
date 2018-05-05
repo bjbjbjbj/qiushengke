@@ -65,13 +65,19 @@
                 $('div.line a.on')[0].className = '';
             obj.className = 'on';
             document.getElementById('MyFrame').src = Link;
+            document.getElementById('share_text').value = Link;
         }
 
-        @if((isset($match) ? $match['status'] : 0) >= 0)
-        //选第一个
+        var anchorId = GetQueryString('anchorId');
+        if(anchorId.length > 0 && $("div#Live a[anchorId="+anchorId+"]").length>0){
+            $("div#Live a[anchorId="+anchorId+"]").trigger("click");
+        }
+        else{
+            @if((isset($match) ? $match['status'] : 0) >= 0)
+            //选第一个
             $("div#Live a:first").trigger("click");
-        @endif
-
+            @endif
+        }
 
         //时间格式化
         function add0(m){return m<10?'0'+m:m }
@@ -563,7 +569,7 @@
                                 @if($sport == 1)
                                     <td class=" odd omid2" value={{$match['oumiddle2']}}">{{$match['oumiddle2']}}</td>
                                 @else
-                                    <td class=" odd omid2">-</td>
+                                            <td class=" odd omid2">-</td>
                                 @endif
                                 <td class=" odd odown2" value="{{$match['oudown2']}}">{{$match['oudown2']}}</td>
                             @else
@@ -627,20 +633,23 @@
                         <?php
                         $channel = $lives[$i];
                         if(isset($channel['anchor_id'])){
+                            $anchorId = $channel['id'];
                             $type = 2;
                         }
                         else{
+                            $anchorId = 0;
                             $type = 1;
                         }
+                        $matchId = $match['mid'];
                         ?>
                         <?php
                         $preUrl = str_replace("http://","http://",env('APP_URL'));
-                        $link = $preUrl.'/live/player/player-'.$channel['id'].'-'.$type.'.html';
+                        $link = $preUrl.'/live/player/player-'.$channel['id'].'-'.$type.'-'.$sport.'-'.$matchId.'.html';
                         ?>
                         @if($i == count($lives) - 1)
-                            <a onclick="changeChannel('{{$link}}',this)" style="width: 25%;">{{$channel['name']}}</a>
+                            <a anchorId="{{$anchorId}}" onclick="changeChannel('{{$link}}',this)" style="width: 25%;">{{$channel['name']}}</a>
                         @else
-                            <a onclick="changeChannel('{{$link}}',this)" style="width: 25%;">{{$channel['name']}}</a>
+                            <a anchorId="{{$anchorId}}" onclick="changeChannel('{{$link}}',this)" style="width: 25%;">{{$channel['name']}}</a>
                         @endif
                     @endfor
                 </div>
@@ -650,6 +659,26 @@
                 <div class="flash"></div>
             </div>
             @yield('live_data')
+            <div class="line" style="
+            padding-left: 10px;
+            font-size: 14px;
+            line-height: 30px;
+            position: relative;
+            z-index: 51;">
+                分享播放地址
+                <input style="width: 70%" type="text" name="text" id="share_text" value="" readonly="readonly">
+                <div class="copy cPbtn" onclick="copy()" style="
+                float: right;
+                padding-right: 10px;">复制地址</div>
+                <script type="text/javascript">
+                    function copy() {
+                        var Url2=document.getElementById('share_text');
+                        Url2.select(); // 选择对象
+                        document.execCommand("Copy"); // 执行浏览器复制命令
+                        alert(Url2.value + " 已复制好，可贴粘。");
+                    }
+                </script>
+            </div>
             <div id="Chatroom">
                 <p class="title">聊天室<button>清除</button></p>
                 <ul>

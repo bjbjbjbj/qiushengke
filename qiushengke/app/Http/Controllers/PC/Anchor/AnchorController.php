@@ -32,12 +32,19 @@ class AnchorController extends BaseController{
         //推荐
         $anchors = Anchor::where('status', 1)->get();
         $result['anchors'] = $anchors;
-        //正在直播
-        $livings = AnchorRoom::where('status', 2)->get();
-        $result['livings'] = $livings;
 
+        //正在直播和右侧的推荐都依赖这堆比赛
         $FResult = $this->_matches(1);
         $BResult = $this->_matches(2);
+
+        //正在直播,分开足球篮球
+        //比赛正在进行或预约开播时间已经开始的
+
+        $livings = $this->_livingAnchor($FResult,1);
+        $result['f_livings'] = $livings;
+        $livings = $this->_livingAnchor($BResult,2);
+        $result['b_livings'] = $livings;
+
         $m_Result = array_merge($BResult,$FResult);
         //构建推荐比赛数据(足球篮球合并)
         $resultMatch = array_sort($m_Result, function ($a, $b) {
@@ -76,6 +83,38 @@ class AnchorController extends BaseController{
         return view('pc.anchor.index',$result);
     }
 
+    //获取正在开播主播
+    private function _livingAnchor($FResult,$sport){
+        $livingMids = array();
+        $readyMids = array();
+        foreach ($FResult as $match){
+            if ($match['status'] == 0){
+                $readyMids[] = $match['mid'];
+            }
+            else if ($match['status'] > 0){
+                $livingMids[] = $match['mid'];
+            }
+        }
+        $livings = AnchorRoom::join('anchor_room_matches',function ($q) use($sport){
+            $q->on('anchor_rooms.id','=','anchor_room_matches.room_id');
+            $q->where('anchor_room_matches.sport',$sport);
+        })
+            ->where(function ($q) use($livingMids){
+                $q->whereIn('anchor_room_matches.mid',$livingMids);
+            })
+            ->orwhere(function ($q) use($readyMids){
+                $q->whereIn('anchor_room_matches.mid',$readyMids)
+                    ->where('anchor_room_matches.start_time','<',date('Y-m-d H:i:s'));
+            })
+            ->addselect('anchor_room_matches.sport as sport')
+            ->addselect('anchor_room_matches.mid as mid')
+            ->addselect('anchor_room_matches.room_id as room_id')
+            ->addselect('anchor_rooms.*')->get();
+        ;
+        return $livings;
+    }
+
+    //获取今天未开始或者正在打的比赛
     private function _matches($sport){
         $matchStr = $sport == 1 ? 'matches' : 'basket_matches';
         $teamStr = $sport == 1 ? 'teams' : 'basket_teams';

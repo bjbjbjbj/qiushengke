@@ -201,6 +201,7 @@ function GetHttp () {
 		return 'http://';
 	}
 }
+
 function countdownHtml(hour_html, minute_html, second_html) {
     var hour = '00';
     var minute = '00';
@@ -254,8 +255,12 @@ function countdown() {
     }
 }
 //获取播放地址
-function PlayVideoShare (cid,channel_type){
+function PlayVideoShare (cid,params){
     var url;
+    var channel_type = params.type;
+    var matchId = params.matchId;
+    var sport = params.sport;
+    host = host.replace('http://','');
     if (channel_type == 1) {
         if (window.isMobile) {
             url = GetHttp() + host + '/json/live/AKQchannel/mobile/' + cid + '.json';
@@ -265,9 +270,9 @@ function PlayVideoShare (cid,channel_type){
     }
     else if(channel_type == 2){
         if (window.isMobile) {
-            url = GetHttp() + host + '/json/live/channel/mobile/' + cid + '.json';
+            url = GetHttp() + host + '/json/live/channel/mobile/' + cid + '-' + matchId + '-' + sport + '.json';
         } else {
-            url = GetHttp() + host + '/json/live/channel/' + cid + '.json';
+            url = GetHttp() + host + '/json/live/channel/' + cid + '-' + matchId + '-' + sport + '.json';
         }
     }
     url = url + '?time=' + (new Date()).getTime();
@@ -278,6 +283,20 @@ function PlayVideoShare (cid,channel_type){
 		success:function(data){
 			if (data.code == 0){
 				if (channel_type == 2){
+                    var matchTime = data.start_time ? data.start_time :data.match_time;
+                    var now = Date.parse(new Date())/1000;
+				    if (now < matchTime) {
+                        var hour = Math.floor((matchTime - now) / (60 * 60));
+                        var minute = Math.floor((matchTime - now - (hour * 60 * 60)) / 60);
+                        var second = matchTime - now - (hour * 60 * 60) - (minute * 60);
+                        var hour_html = hour > 0 ? '<i id="hour">' + hour + '</i>小时' : '';
+                        var minute_html = hour > 0 ? '<i id="minute">' + minute + '</i>分钟' : ((minute > 0 ? '<i id="minute">' + minute + '</i>分钟' : ''));
+                        var second_html = '<i id="second">' + second + '</i>秒';
+                        countdownHtml(hour_html, minute_html, second_html);
+                        console.log('here');
+                        return;
+                    }
+
 				    //主播频道
                     var type = data.type;
                     if (type == 6){
@@ -459,30 +478,30 @@ function countDown() {
 }
 
 function countDownMinute() {
-        var minutes = $("#minute");
-        var hours = $("#hour");
-        if (minutes.length == 0) {
-            return;
+    var minutes = $("#minute");
+    var hours = $("#hour");
+    if (minutes.length == 0) {
+        return;
+    }
+    var minute = parseInt(minutes.html());
+    minute = minute - 1;
+    if (hours.length == 1) {
+        if (minute < 0) {
+            minute = 59;
+            countDownHour();
         }
-        var minute = parseInt(minutes.html());
-        minute = minute - 1;
-        if (hours.length == 1) {
-            if (minute < 0) {
-                minute = 59;
-                countDownHour();
-            }
-            minutes.html(minute);
+        minutes.html(minute);
+    } else {
+        if (minute < 1) {
+            minutes.remove();
+            var divHtml = $("#p.noframe").html();
+            divHtml = divHtml.replace('分钟', '');
+            $("#p.noframe").html(divHtml);
         } else {
-            if (minute < 1) {
-                minutes.remove();
-                var divHtml = $("#p.noframe").html();
-                divHtml = divHtml.replace('分钟', '');
-                $("#p.noframe").html(divHtml);
-            } else {
-                minutes.html(minute);
-            }
+            minutes.html(minute);
         }
     }
+}
 
 function countDownHour() {
     var hours = $("#hour");
@@ -541,7 +560,7 @@ function playerLink() {
     var param = getParam();
     var cid = param.cid;
     if (cid && cid != '') {
-        PlayVideoShare(cid,param.type);
+        PlayVideoShare(cid,param);
     }
 }
 
@@ -549,21 +568,22 @@ function getParam() {
     var cid = GetQueryString('cid');
     //来源 1频道 2主播
     var type = 0;
+    var matchId = 0;
+    var sport = 0;
     if (cid && cid != '') {  } else {
         var str = window.location.pathname;
         var index = str .lastIndexOf("\/");
         str  = str .substring(index + 1, str .length);
         str = str.replace('.html','');
         var params = str.split("-");
-        if (params.length == 2) {
-            cid = params[1];
-        }
-        else if (params.length == 3) {
+        if (params.length == 5) {
             cid = params[1];
             type = params[2];
+            sport = params[3];
+            matchId = params[4];
         }
     }
-    return {'cid': cid,'type':type};
+    return {'cid': cid,'type':type,'matchId':matchId,'sport':sport};
 }
 
 function checkActive() {

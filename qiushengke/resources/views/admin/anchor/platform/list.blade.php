@@ -47,7 +47,7 @@
                             <td>
                                 <select name="status" class="form-control" required>
                                     <option value="1" {{ $platform->status==1?'selected':'' }}>显示</option>
-                                    <option value="0" {{ $platform->status==2?'selected':'' }}>隐藏</option>
+                                    <option value="2" {{ $platform->status==2?'selected':'' }}>隐藏</option>
                                 </select>
                             </td>
                             <td>
