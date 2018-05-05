@@ -47,7 +47,7 @@
                             class="now"
                             @endif
                     >{{$match['hscore_4th'] or '/'}}</td>
-                    @if(isset($match['h_ot']) && count($match['h_ot']) > 0)
+                    @if(isset($match['h_ot']) && is_array($match['h_ot']) && count($match['h_ot']) > 0)
                         @foreach($match['h_ot'] as $ot)
                             <td>{{$ot or '/'}}</td>
                         @endforeach
@@ -76,7 +76,7 @@
                             class="now"
                             @endif
                     >{{$match['ascore_4th'] or '/'}}</td>
-                    @if(isset($match['a_ot']) && count($match['a_ot']) > 0)
+                    @if(isset($match['a_ot']) && is_array($match['a_ot']) && count($match['a_ot']) > 0)
                         @foreach($match['a_ot'] as $ot)
                             <td>{{$ot or '/'}}</td>
                         @endforeach
