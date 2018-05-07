@@ -42,7 +42,9 @@
                 <dt class="end">比赛结束</dt>
                 @if(isset($tech['event']) && isset($tech['event']['events']) )
                 @for($eIndex = count($tech['event']['events']) - 1; $eIndex > 0; $eIndex--)
-                    <?php $event = $tech['event']['events'][$eIndex]; $kind = $event['kind']; $eClass = $event['is_home'] ? 'host' : 'away' ?>
+                    <?php
+                        $event = $tech['event']['events'][$eIndex]; $kind = $event['kind']; $eClass = $event['is_home'] ? 'host' : 'away';
+                    ?>
                     @if($kind == 11)
                         <dd class="{{$eClass}}">
                             <p class="minute">{{$event['happen_time']}}<span>'</span></p>
@@ -60,7 +62,7 @@
                         </dd>
                     @elseif ($kind == 3)
                         <dd class="{{$eClass}}">
-                            <p class="minute">42<span>'</span></p>
+                            <p class="minute">{{$event['happen_time']}}<span>'</span></p>
                             <ul>
                                 <li><img src="{{$cdn}}/phone/img/icon_video_yellow.png">{{$event['player_name_j']}}</li>
                             </ul>

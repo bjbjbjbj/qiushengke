@@ -13,7 +13,7 @@ function setPage(){
 
 
     var BottomTab = $('.bottom input');
-    BottomTab.change(function(){
+    BottomTab.off('click').change(function(){
         $(this).parents('.content').children('.childNode').css('display','none');
         $('#' + this.value).css('display','');
     })
