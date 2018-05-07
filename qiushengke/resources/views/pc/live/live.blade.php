@@ -11,13 +11,13 @@
                 <p class="item corner">{{isset($match['h_corner'])?$match['h_corner']:0}}</p>
                 <p class="item yellow">{{isset($match['h_yellow'])?$match['h_yellow']:0}}</p>
                 <p class="item red">{{isset($match['h_red'])?$match['h_red']:0}}</p>
-                <p class="team"><img src="{{$hicon}}">{{$match['hname']}}</p>
+                <p class="team"><img src="{{$hicon}}">{{isset($match['hname'])?$match['hname']:''}}</p>
             </dd>
             <dd class="away">
                 <p class="item corner">{{isset($match['a_corner'])?$match['a_corner']:0}}</p>
                 <p class="item yellow">{{isset($match['a_yellow'])?$match['a_yellow']:0}}</p>
                 <p class="item red">{{isset($match['a_red'])?$match['a_red']:0}}</p>
-                <p class="team"><img src="{{$aicon}}">{{$match['aname']}}</p>
+                <p class="team"><img src="{{$aicon}}">{{isset($match['aname'])?$match['aname']:''}}</p>
             </dd>
         </dl>
         <ul>
