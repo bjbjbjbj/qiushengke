@@ -1,4 +1,4 @@
-<div class="home"><p class="abox"><a href="index.html"><img src="/pc/img/logo_image_n.png"></a></p></div>
+<div class="home"><p class="abox"><a href="/match/foot/schedule/immediate.html"><img src="/pc/img/logo_image_n.png"></a></p></div>
 <div class="Column">
     <a
             @if($type == 0)

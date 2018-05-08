@@ -11,6 +11,7 @@ use App\Console\Live\LivingCommands;
 use App\Console\Live\PlayerJsonCommands;
 use App\Console\Match\Basketball\BasketballCurDetailCommands;
 use App\Console\Match\Basketball\BasketballDetailCommands;
+use App\Console\Match\Basketball\BasketballDetailEndCommands;
 use App\Console\Match\Basketball\BasketballDetailIngCommands;
 use App\Console\Match\BasketballMatchCommands;
 use App\Console\Match\Football\FootballDetailCommands;
@@ -41,6 +42,7 @@ class Kernel extends ConsoleKernel
         BasketballDetailCommands::class,
         BasketballDetailIngCommands::class,
         BasketballCurDetailCommands::class,
+        BasketballDetailEndCommands::class,
         //专题
         FootballCommands::class,
         BasketballCommands::class,
@@ -74,6 +76,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('fb_detail_cache:run')->everyTenMinutes();//每10分钟执行一次 每次缓存15个页面(赛程赛果各15)
         $schedule->command('bb_ing_detail_cache:run')->everyFiveMinutes();//正在比赛的篮球赛事终端每分五种静态化一次。
         $schedule->command('bb_detail_cache:run')->everyTenMinutes();//每10分钟执行一次 每次缓存15个页面(赛程赛果各15)
+        $schedule->command('bb_detail_end_cache:run')->everyTenMinutes();//每10分钟执行一次 更新比赛结束的比赛终端
 
         //专题静态化
         $schedule->command('league_foot:run')->dailyAt('7:10');
