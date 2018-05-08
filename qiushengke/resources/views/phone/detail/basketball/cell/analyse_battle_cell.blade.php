@@ -28,6 +28,22 @@
             </div>
         </div>
 
+        <?php
+        if (is_null($recent['home'])){
+            $recent['home'] = array();
+            $recent['home']['all'] = array();
+            $recent['home']['sameHA'] = array();
+            $recent['home']['sameL'] = array();
+            $recent['home']['sameHAL'] = array();
+        }
+        if (is_null($recent['away'])){
+            $recent['away'] = array();
+            $recent['away']['all'] = array();
+            $recent['away']['sameHA'] = array();
+            $recent['away']['sameL'] = array();
+            $recent['away']['sameHAL'] = array();
+        }
+        ?>
         @component("phone.detail.basketball.cell.basketball_detail_recenet_battle_head", ['cdn'=>$cdn,'base'=>$match,'ha'=>0, 'le'=>0, 'hmatch'=>$recent['home']['all'], 'hid'=>$match['hid'],'amatch'=>$recent['away']['all'], 'aid'=>$match['aid']])
         @endcomponent
         @component("phone.detail.basketball.cell.basketball_detail_recenet_battle_head", ['cdn'=>$cdn,'base'=>$match,'ha'=>1, 'le'=>0, 'hmatch'=>$recent['home']['sameHA'], 'hid'=>$match['hid'],'amatch'=>$recent['away']['sameHA'], 'aid'=>$match['aid']])
