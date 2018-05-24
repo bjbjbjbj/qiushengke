@@ -98,7 +98,7 @@ trait SpiderBasketTeam
                         $team->name_china_short = str_replace('\'','',$datas[4]);
                         $team->name_hk_short = str_replace('\'','',$datas[5]);
                         $team->name_en_short = str_replace('\'','',$datas[6]);
-                        $team->icon = str_replace('\'','',$datas[9]);
+                        $team->icon = str_replace('\'', '', $datas[9]);
                         $team->city = str_replace('\'','',$datas[11]);
                         $team->establish = str_replace('\'','',$datas[14]);
                         $team->gym = str_replace('\'','',$datas[12]);

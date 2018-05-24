@@ -19,7 +19,12 @@ class BasketTeam extends Model
             if (str_contains($icon, '.gif') && str_contains($icon, 'team/images/2005')) {
                 return "";
             }
-            return 'http://nba.win007.com'.$icon;
+            if (str_contains($icon, 'nba_icon_'))
+                return 'http://qiushengke.com/teamicon/nba/'.$icon.'.png';
+            else if (str_contains($icon, 'http'))
+                return $icon;
+            else
+                return 'http://nba.win007.com'.$icon;
         } else {
             return "";
         }
@@ -30,7 +35,12 @@ class BasketTeam extends Model
             if (str_contains($icon, '.gif') && str_contains($icon, 'team/images/2005')) {
                 return "";
             }
-            return 'http://nba.win007.com'.$icon;
+            if (str_contains($icon, 'nba_icon_'))
+                return 'http://qiushengke.com/teamicon/nba/'.$icon.'.png';
+            else if (str_contains($icon, 'http'))
+                return $icon;
+            else
+                return 'http://nba.win007.com'.$icon;
         } else {
             return "";
         }
