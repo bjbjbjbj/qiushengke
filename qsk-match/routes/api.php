@@ -54,3 +54,8 @@ Route::group(["namespace" => "Statistic"], function () {
     //篮球赛程,按日期拿
     Route::get("/schedule/2/{lid}.json", "Schedule\\LeagueController@getLeagueScheduleBK");
 });
+
+Route::group(['namespace'=>'Statistic'], function () {
+    //发聊天
+    Route::post("/chat/post", "ChatController@postChat");
+});
