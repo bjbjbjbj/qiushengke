@@ -57,5 +57,5 @@ Route::group(["namespace" => "Statistic"], function () {
 
 Route::group(['namespace'=>'Statistic'], function () {
     //发聊天
-    Route::post("/chat/post", "ChatController@postChat");
+    Route::any("/chat/post", "ChatController@postChat");
 });
